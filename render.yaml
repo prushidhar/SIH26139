@@ -31,4 +31,4 @@ services:
       - key: NEXT_PUBLIC_API_URL
         value: https://quresight-backend.onrender.com
       - key: NEXT_PUBLIC_GOOGLE_CLIENT_ID
-        value: quresight_dev_client_id.apps.googleusercontent.com
+        value: 903190452851-l6p03q6mo7vs5234cluhjs6enotpnamh.apps.googleusercontent.com

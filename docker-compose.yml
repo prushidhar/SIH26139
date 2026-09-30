@@ -29,7 +29,7 @@ services:
       - PORT=3000
       - NEXT_PUBLIC_API_URL=http://localhost:8000
       - BACKEND_INTERNAL_URL=http://backend:8000
-      - NEXT_PUBLIC_GOOGLE_CLIENT_ID=quresight_dev_client_id.apps.googleusercontent.com
+      - NEXT_PUBLIC_GOOGLE_CLIENT_ID=903190452851-l6p03q6mo7vs5234cluhjs6enotpnamh.apps.googleusercontent.com
     depends_on:
       - backend
     restart: unless-stopped

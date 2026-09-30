@@ -220,7 +220,7 @@ export default function RegisterPage() {
   responseCallbackRef.current = handleGoogleCredentialResponse;
 
   useEffect(() => {
-    const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+    const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "903190452851-l6p03q6mo7vs5234cluhjs6enotpnamh.apps.googleusercontent.com";
     if (!googleClientId) return;
 
     window.handleGoogleCredentialResponse = (response: { credential: string }) => {
