@@ -29,9 +29,6 @@ services:
       - key: NODE_VERSION
         value: 20.11.0
       - key: NEXT_PUBLIC_API_URL
-        fromService:
-          type: web
-          name: quresight-backend
-          property: host
+        value: https://quresight-backend.onrender.com
       - key: NEXT_PUBLIC_GOOGLE_CLIENT_ID
         value: quresight_dev_client_id.apps.googleusercontent.com
