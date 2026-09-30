@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { Eye, EyeOff, Loader2, Check, X, Sparkles } from "lucide-react";
+import { Eye, EyeOff, Loader2, Check, X } from "lucide-react";
 import { AuthService } from "@/services/auth.service";
 import { useBackendStatus } from "@/services/backend-warmer.service";
 import BrandLogo from "@/components/common/BrandLogo";
@@ -168,7 +168,7 @@ export default function RegisterPage() {
     }
   };
 
-  const handleGoogleClick = async () => {
+  const handleGoogleClick = () => {
     setIsGoogleLoading(true);
     setErrorMessage("");
 
@@ -178,37 +178,14 @@ export default function RegisterPage() {
       setTimeout(() => {
         setIsGoogleLoading(false);
       }, 3000);
-      return;
-    }
-
-    if (typeof window !== "undefined" && window.google?.accounts?.id) {
+    } else if (typeof window !== "undefined" && window.google?.accounts?.id) {
       window.google.accounts.id.prompt((notification) => {
         if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-          authenticateWithDefaultGoogle();
+          setIsGoogleLoading(false);
         }
       });
-      return;
-    }
-
-    await authenticateWithDefaultGoogle();
-  };
-
-  const authenticateWithDefaultGoogle = async (customEmail?: string, customName?: string) => {
-    try {
-      const email = customEmail || "prushidhar@gmail.com";
-      const name = customName || "P Rushidhar";
-      const header = btoa(JSON.stringify({ alg: "RS256", typ: "JWT" })).replace(/=+$/, "");
-      const payload = btoa(unescape(encodeURIComponent(JSON.stringify({
-        iss: "https://accounts.google.com",
-        email,
-        name,
-        picture: "https://lh3.googleusercontent.com/a/default-user=s96-c"
-      })))).replace(/=+$/, "");
-      const credential = `${header}.${payload}.quresight_verified_sig`;
-      await handleGoogleCredentialResponse({ credential });
-    } catch {
+    } else {
       setIsGoogleLoading(false);
-      setErrorMessage("Google registration encountered an error. Please try again.");
     }
   };
 
@@ -556,19 +533,6 @@ export default function RegisterPage() {
                     <span>Sign up with Google</span>
                   </>
                 )}
-              </motion.button>
-
-              {/* Instant 1-Click Access for verified account */}
-              <motion.button
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.98 }}
-                type="button"
-                onClick={() => authenticateWithDefaultGoogle("prushidhar@gmail.com", "P Rushidhar")}
-                disabled={isLoading || isGoogleLoading}
-                className="w-full py-2.5 rounded-xl border border-quantum/30 bg-quantum/10 hover:bg-quantum/20 text-ink font-semibold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-2xs mt-2"
-              >
-                <Sparkles size={13} className="text-quantum" />
-                <span>Instant 1-Click Access (prushidhar@gmail.com)</span>
               </motion.button>
 
               <div id="g_id_signin_hidden_reg" style={{ position: "absolute", top: "-9999px", left: "-9999px", opacity: 0.001, pointerEvents: "none" }} aria-hidden="true" />
