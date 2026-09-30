@@ -172,21 +172,68 @@ export default function RegisterPage() {
     setIsGoogleLoading(true);
     setErrorMessage("");
 
-    const hiddenBtn = document.getElementById("g_id_signin_hidden_reg")?.querySelector("div[role=button]") as HTMLElement | null;
-    if (hiddenBtn) {
-      hiddenBtn.click();
-      setTimeout(() => {
-        setIsGoogleLoading(false);
-      }, 3000);
-    } else if (typeof window !== "undefined" && window.google?.accounts?.id) {
-      window.google.accounts.id.prompt((notification) => {
-        if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-          setIsGoogleLoading(false);
-        }
-      });
-    } else {
-      setIsGoogleLoading(false);
+    const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "903190452851-l6p03q6mo7vs5234cluhjs6enotpnamh.apps.googleusercontent.com";
+    const redirectUri = typeof window !== "undefined" ? window.location.origin + "/register" : "http://localhost:3000/register";
+
+    // 1. Check if rendered GIS button exists and click it
+    const container = document.getElementById("g_id_signin_hidden_reg");
+    const renderedBtn = container?.querySelector("div[role=button], iframe") as HTMLElement | null;
+    if (renderedBtn) {
+      try {
+        renderedBtn.click();
+        setTimeout(() => setIsGoogleLoading(false), 3000);
+        return;
+      } catch {}
     }
+
+    // 2. Open standard, trusted Google OAuth2 window
+    const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?` + new URLSearchParams({
+      client_id: googleClientId,
+      redirect_uri: redirectUri,
+      response_type: "token id_token",
+      scope: "openid email profile",
+      nonce: Math.random().toString(36).substring(2),
+      prompt: "select_account",
+    }).toString();
+
+    const width = 500;
+    const height = 650;
+    const left = typeof window !== "undefined" ? window.screenX + (window.outerWidth - width) / 2 : 100;
+    const top = typeof window !== "undefined" ? window.screenY + (window.outerHeight - height) / 2 : 100;
+    const popup = window.open(
+      googleAuthUrl,
+      "GoogleSignIn",
+      `width=${width},height=${height},left=${left},top=${top},status=no,resizable=yes`
+    );
+
+    if (!popup) {
+      window.location.href = googleAuthUrl;
+      return;
+    }
+
+    const pollInterval = setInterval(() => {
+      try {
+        if (!popup || popup.closed) {
+          clearInterval(pollInterval);
+          setIsGoogleLoading(false);
+          return;
+        }
+        if (popup.location && popup.location.origin === window.location.origin) {
+          const hash = popup.location.hash;
+          popup.close();
+          clearInterval(pollInterval);
+          if (hash) {
+            const params = new URLSearchParams(hash.substring(1));
+            const idToken = params.get("id_token");
+            if (idToken) {
+              handleGoogleCredentialResponse({ credential: idToken });
+            }
+          }
+        }
+      } catch {
+        // Cross-origin before redirect is expected
+      }
+    }, 400);
   };
 
   const handleGoogleCredentialResponse = useCallback(async (response: { credential: string }) => {
@@ -218,6 +265,18 @@ export default function RegisterPage() {
 
   const responseCallbackRef = React.useRef(handleGoogleCredentialResponse);
   responseCallbackRef.current = handleGoogleCredentialResponse;
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const params = new URLSearchParams(window.location.hash.substring(1));
+      const idToken = params.get("id_token");
+      if (idToken) {
+        window.history.replaceState(null, "", window.location.pathname);
+        setIsGoogleLoading(true);
+        handleGoogleCredentialResponse({ credential: idToken });
+      }
+    }
+  }, [handleGoogleCredentialResponse]);
 
   useEffect(() => {
     const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "903190452851-l6p03q6mo7vs5234cluhjs6enotpnamh.apps.googleusercontent.com";
