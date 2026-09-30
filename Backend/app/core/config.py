@@ -39,7 +39,7 @@ class Settings(BaseSettings):
     # GOOGLE OAUTH
     # =========================================================
 
-    GOOGLE_CLIENT_ID: str = "quresight_dev_client_id.apps.googleusercontent.com"
+    GOOGLE_CLIENT_ID: str = "903190452851-l6p03q6mo7vs5234cluhjs6enotpnamh.apps.googleusercontent.com"
     GOOGLE_CLIENT_SECRET: str = "quresight_dev_client_secret"
 
     GOOGLE_REDIRECT_URI: str = (
