@@ -8,8 +8,16 @@ import axios, { AxiosError, InternalAxiosRequestConfig, AxiosResponse } from 'ax
 // ============================================================================
 
 export function resolveApiBaseUrl(): string {
+  if (typeof window !== 'undefined') {
+    const host = window.location.hostname;
+    if (host.includes('onrender.com') || host.includes('vercel.app')) {
+      return 'https://quresight-backend.onrender.com';
+    }
+  }
   if (process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL.trim() !== '') {
-    return process.env.NEXT_PUBLIC_API_URL.trim();
+    const url = process.env.NEXT_PUBLIC_API_URL.trim();
+    if (url.startsWith('http://') || url.startsWith('https://')) return url;
+    return `https://${url}`;
   }
   return 'http://localhost:8000';
 }
@@ -108,6 +116,12 @@ export function isAuthenticated(): boolean {
 // ----------------------------------------------------------------------------
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
+    if (typeof window !== 'undefined') {
+      const host = window.location.hostname;
+      if (host.includes('onrender.com') || host.includes('vercel.app')) {
+        config.baseURL = 'https://quresight-backend.onrender.com';
+      }
+    }
     const token = getAccessToken();
     
     if (token && config.headers) {
