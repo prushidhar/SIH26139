@@ -1,0 +1,1316 @@
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "motion/react";
+import {
+  LayoutDashboard,
+  Stethoscope,
+  History,
+  Activity,
+  Cpu,
+  Zap,
+  LogOut,
+  ChevronRight,
+  Menu,
+  X,
+  User,
+  Bell,
+  Camera,
+  Check,
+  CheckCircle2,
+  Sparkles,
+  HelpCircle,
+  Settings,
+  TrendingUp,
+  Lock,
+} from "lucide-react";
+import BrandLogo from "@/components/common/BrandLogo";
+import { AuthService } from "@/services/auth.service";
+import { NotificationService, type NotificationItem } from "@/services/notification.service";
+import { useQuantumBackend } from "@/hooks/useQuantumBackend";
+import QuantumChatbot from "@/components/chat/QuantumChatbot";
+import WelcomeModal from "@/components/common/WelcomeModal";
+import ToastContainer from "@/components/common/ToastNotification";
+
+interface AppLayoutProps {
+  children: React.ReactNode;
+}
+
+interface NavSection {
+  title: string;
+  items: {
+    label: string;
+    href: string;
+    icon: any;
+    description: string;
+  }[];
+}
+
+const NAV_SECTIONS: NavSection[] = [
+  {
+    title: "Patient Screening",
+    items: [
+      {
+        label: "Dashboard Overview",
+        href: "/home",
+        icon: LayoutDashboard,
+        description: "Summary and quick screening links",
+      },
+      {
+        label: "Patient Diagnosis",
+        href: "/predict",
+        icon: Stethoscope,
+        description: "Run single-patient quantum screening",
+      },
+      {
+        label: "Past Screening History",
+        href: "/history",
+        icon: History,
+        description: "Review previous patient results and reports",
+      },
+    ],
+  },
+  {
+    title: "System & Science",
+    items: [
+      {
+        label: "Model Analysis",
+        href: "/analysis",
+        icon: TrendingUp,
+        description: "Real-time accuracy, precision, and validation",
+      },
+      {
+        label: "Model Benchmarks",
+        href: "/benchmarks",
+        icon: Activity,
+        description: "Compare quantum vs standard computer models",
+      },
+      {
+        label: "Quantum Hardware",
+        href: "/hardware",
+        icon: Cpu,
+        description: "IBM Quantum computer and simulator status",
+      },
+    ],
+  },
+];
+
+export default function AppLayout({ children }: AppLayoutProps) {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  // Sidebar toggle state (persisted across refreshes)
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showAlephCard, setShowAlephCard] = useState(false);
+
+  // Distinct open vs close transitions
+  const sidebarTransition = sidebarOpen
+    ? {
+      type: "spring" as const,
+      stiffness: 280,
+      damping: 26,
+      mass: 0.8,
+    } // OPEN ANIMATION: Smooth, elastic spring expansion
+    : {
+      duration: 0.2,
+      ease: [0.4, 0, 0.2, 1] as const,
+    }; // CLOSE ANIMATION: Crisp, rapid cubic-bezier collapse
+
+  const toggleSidebar = () => {
+    setSidebarOpen((prev) => {
+      const next = !prev;
+      if (typeof window !== "undefined") {
+        localStorage.setItem("quantumx_sidebar_open", String(next));
+      }
+      return next;
+    });
+  };
+
+  // User state & session verification (100% Real Live Auth)
+  const [userName, setUserName] = useState<string>("");
+  const [userEmail, setUserEmail] = useState<string>("");
+  const [userAvatar, setUserAvatar] = useState<string | null>(null);
+  const [isAuthChecking, setIsAuthChecking] = useState<boolean>(true);
+
+  // Hardware Selector with Global Synchronization
+  const { backend: quantumBackend, setBackend: handleBackendChange } = useQuantumBackend();
+
+  // Notifications and Account Modals
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [accountModalOpen, setAccountModalOpen] = useState(false);
+  const [notifications, setNotifications] = useState<NotificationItem[]>([]);
+
+  // File upload input ref
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const lastActiveRef = useRef<number>(Date.now());
+
+  // Bootstrap session and setup sliding activity keep-alive
+  useEffect(() => {
+    let isMounted = true;
+
+    // Check cached user synchronously to immediately display real logged-in name
+    const cachedUser = AuthService.getCachedUser();
+    if (cachedUser) {
+      setUserName(cachedUser.fullName || cachedUser.username || "");
+      setUserEmail(cachedUser.email || "");
+      if (cachedUser.profileImageUrl) {
+        setUserAvatar(cachedUser.profileImageUrl);
+      }
+      setIsAuthChecking(false);
+    }
+
+    async function verifyAndLoadSession() {
+      try {
+        const user = await AuthService.bootstrapSession();
+        if (!isMounted) return;
+
+        if (user) {
+          setUserName(user.fullName || user.username || "");
+          setUserEmail(user.email || "");
+          if (user.profileImageUrl) {
+            setUserAvatar(user.profileImageUrl);
+          }
+          setIsAuthChecking(false);
+        } else if (!cachedUser) {
+          // If completely unauthenticated, redirect to login
+          setIsAuthChecking(false);
+          router.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
+        }
+      } catch (err) {
+        if (!isMounted) return;
+        if (!cachedUser) {
+          setIsAuthChecking(false);
+          router.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
+        }
+      }
+    }
+
+    verifyAndLoadSession();
+
+    if (typeof window !== "undefined") {
+      const storedSidebar = localStorage.getItem("quantumx_sidebar_open");
+      if (storedSidebar !== null) {
+        setSidebarOpen(storedSidebar === "true");
+      }
+
+      // Fetch real notifications from Supabase
+      NotificationService.getNotifications()
+        .then((notifs) => {
+          setNotifications(notifs || []);
+        })
+        .catch(() => {});
+    }
+
+    // Keep session active with 7-day sliding window on user interaction (throttled to 5 mins)
+    const handleUserActivity = () => {
+      const now = Date.now();
+      const FIVE_MINUTES_MS = 5 * 60 * 1000;
+      if (now - lastActiveRef.current > FIVE_MINUTES_MS) {
+        lastActiveRef.current = now;
+        AuthService.getCurrentUser().catch(() => { });
+      }
+    };
+
+    window.addEventListener("click", handleUserActivity, { passive: true });
+    window.addEventListener("keydown", handleUserActivity, { passive: true });
+
+    return () => {
+      isMounted = false;
+      window.removeEventListener("click", handleUserActivity);
+      window.removeEventListener("keydown", handleUserActivity);
+    };
+  }, [pathname, router]);
+
+  const handleLogout = async () => {
+    await AuthService.logout();
+    router.push("/login");
+  };
+
+  // Image Upload Handler
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64 = reader.result as string;
+        setUserAvatar(base64);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("quantumx_user_avatar", base64);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const markAllNotificationsAsRead = async () => {
+    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+    await NotificationService.markAllAsRead();
+  };
+
+  const handleToggleNotifications = async () => {
+    const nextState = !notificationsOpen;
+    setNotificationsOpen(nextState);
+    setAccountModalOpen(false);
+    if (nextState) {
+      try {
+        const fresh = await NotificationService.getNotifications();
+        if (fresh && fresh.length > 0) {
+          setNotifications(fresh);
+        }
+      } catch {}
+    }
+  };
+
+  const unreadCount = notifications.filter((n) => !n.read).length;
+
+  return (
+    <div className="min-h-screen w-full bg-cream text-ink font-sans selection:bg-ink selection:text-parchment flex flex-col">
+      {/* Hidden File Input for Avatar Upload */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleImageUpload}
+        accept="image/*"
+        className="hidden"
+      />
+
+      {/* ========================================================================= */}
+      {/* FIXED TOP HEADER */}
+      {/* ========================================================================= */}
+      <header className="fixed top-0 left-0 right-0 h-14 z-50 bg-parchment/95 backdrop-blur-md border-b border-hairline px-3 sm:px-6 lg:px-8">
+        {/* --------------------------------------------------------------------- */}
+        {/* DESKTOP HEADER (MD AND ABOVE - 100% UNTOUCHED PC EXPERIENCE) */}
+        {/* --------------------------------------------------------------------- */}
+        <div className="hidden md:flex items-center justify-between w-full h-full">
+          {/* Left: 3-Line Toggle + Brand */}
+          <div className="flex items-center gap-3">
+            {/* 3-Line Hamburger Button */}
+            <motion.button
+              whileTap={{ scale: 0.92 }}
+              type="button"
+              onClick={toggleSidebar}
+              aria-label="Toggle navigation sidebar"
+              title="Toggle Sidebar Menu"
+              className="w-8 h-8 rounded-lg bg-cream-deep/60 hover:bg-cream border border-hairline flex items-center justify-center text-ink-soft hover:text-ink cursor-pointer transition-colors"
+            >
+              <Menu size={16} />
+            </motion.button>
+
+            <Link href="/home" className="cursor-pointer hover:opacity-85 transition-opacity flex items-center gap-3">
+              <BrandLogo href={false} />
+              <div className="h-4 w-[1px] bg-hairline" />
+              <span className="text-xs font-serif tracking-tight text-ink font-medium">
+                Medical Workbench
+              </span>
+            </Link>
+          </div>
+
+          {/* Right: Quantum System Selector + Notification Icon + Account Icon */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Quantum Processing System Selector (Consistent Locked Nomenclature) */}
+            <div className="flex items-center p-0.5 bg-cream-deep/60 rounded-xl border border-hairline text-xs font-sans">
+              <button
+                type="button"
+                onClick={() => handleBackendChange("gpu_simulator")}
+                className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer text-[11px] font-medium ${
+                  quantumBackend === "gpu_simulator"
+                    ? "bg-parchment text-ink shadow-2xs border border-hairline/80 font-bold text-quantum"
+                    : "text-ink-soft hover:text-ink"
+                }`}
+              >
+                <Sparkles size={12} className="text-quantum" />
+                <span>Transfinite-1 (Simulator)</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowAlephCard(true)}
+                className="px-2.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 text-ink-soft hover:text-ink text-[11px] font-medium cursor-pointer opacity-90 hover:opacity-100"
+                title="Aleph-1 (IBM QPU) — Real Quantum Hardware"
+              >
+                <Cpu size={12} className="text-amber-500" />
+                <span className="hidden sm:inline">Aleph-1 (IBM QPU)</span>
+                <span className="sm:hidden">Aleph-1</span>
+                <span className="text-[9px] font-mono text-amber-700 bg-amber-50 px-1 py-0.2 rounded border border-amber-200">Locked</span>
+              </button>
+            </div>
+
+            {/* Notification Icon (Left of Account) */}
+            <div className="relative">
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                type="button"
+                onClick={handleToggleNotifications}
+                aria-label="Notifications"
+                title="Notifications"
+                className="w-8 h-8 rounded-full bg-cream-deep/60 hover:bg-cream border border-hairline flex items-center justify-center text-ink-soft hover:text-ink cursor-pointer transition-colors relative"
+              >
+                <Bell size={14} />
+                {unreadCount > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-quantum text-parchment rounded-full text-[9px] font-mono flex items-center justify-center font-bold">
+                    {unreadCount}
+                  </span>
+                )}
+              </motion.button>
+
+              {/* Notification Dropdown */}
+              <AnimatePresence>
+                {notificationsOpen && (
+                  <>
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setNotificationsOpen(false)}
+                    />
+                    <motion.div
+                      initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute right-0 top-10 w-80 bg-parchment rounded-2xl border border-hairline shadow-xl z-50 p-3.5 space-y-2.5"
+                    >
+                      <div className="flex items-center justify-between border-b border-hairline pb-2">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-serif font-medium text-ink">Notifications</span>
+                          {notifications.length > 0 && (
+                            <span className="text-[10px] font-mono text-ink-soft">({notifications.length})</span>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          {unreadCount > 0 ? (
+                            <button
+                              type="button"
+                              onClick={markAllNotificationsAsRead}
+                              className="text-[10px] text-quantum hover:underline cursor-pointer font-medium"
+                            >
+                              Mark all read
+                            </button>
+                          ) : (
+                            <span className="text-[9px] font-mono text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+                              All Read
+                            </span>
+                          )}
+                          <Link
+                            href="/notifications"
+                            onClick={() => setNotificationsOpen(false)}
+                            className="text-[10px] text-ink hover:underline cursor-pointer font-medium"
+                          >
+                            View all
+                          </Link>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1.5 max-h-64 overflow-y-auto">
+                        {unreadCount === 0 ? (
+                          <div className="py-6 text-center text-xs text-ink-soft space-y-1">
+                            <p className="font-medium text-ink">No unread notifications</p>
+                            <p className="text-[10px] text-ink-soft">You are all caught up. Patient reports will appear here.</p>
+                          </div>
+                        ) : (
+                          notifications
+                            .filter((n) => !n.read)
+                            .map((n) => (
+                              <Link
+                                key={n.id}
+                                href={n.actionUrl || "/notifications"}
+                                onClick={() => {
+                                  NotificationService.markAsRead(n.id);
+                                  setNotifications((prev) =>
+                                    prev.map((item) => (item.id === n.id ? { ...item, read: true } : item))
+                                  );
+                                  setNotificationsOpen(false);
+                                }}
+                                className="block p-2.5 rounded-xl text-xs space-y-0.5 transition-colors cursor-pointer bg-quantum/10 border border-quantum/20 shadow-2xs hover:bg-quantum/15"
+                              >
+                                <div className="flex items-center justify-between">
+                                  <span className="text-[11px] font-bold text-ink flex items-center gap-1.5">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-quantum shrink-0" />
+                                    {n.title}
+                                  </span>
+                                  <span className="text-[9px] text-ink-soft font-mono">{n.time}</span>
+                                </div>
+                                <p className="text-[11px] text-ink-soft font-light leading-snug">{n.message}</p>
+                              </Link>
+                            ))
+                        )}
+                      </div>
+
+                      <div className="pt-2 border-t border-hairline text-center">
+                        <Link
+                          href="/notifications"
+                          onClick={() => setNotificationsOpen(false)}
+                          className="text-xs font-medium text-quantum hover:underline"
+                        >
+                          Open Notification Center →
+                        </Link>
+                      </div>
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Account Icon in Header (Routes to /account) */}
+            <Link
+              href="/account"
+              aria-label="User Account Settings"
+              title={`Account Settings: ${userName}`}
+              className="w-8 h-8 rounded-full bg-ink text-parchment border border-hairline flex items-center justify-center cursor-pointer overflow-hidden shadow-2xs hover:ring-2 hover:ring-quantum/40 transition-all shrink-0"
+            >
+              {userAvatar ? (
+                <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
+              ) : (
+                <User size={14} className="text-parchment" />
+              )}
+            </Link>
+          </div>
+        </div>
+
+        {/* --------------------------------------------------------------------- */}
+        {/* DEDICATED SEPARATE MOBILE HEADER (< MD) */}
+        {/* --------------------------------------------------------------------- */}
+        <div className="flex md:hidden items-center justify-between w-full h-full">
+          {/* Left: Mobile 3-Line Menu + Clean Brand */}
+          <div className="flex items-center gap-2">
+            <motion.button
+              whileTap={{ scale: 0.92 }}
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle navigation sidebar"
+              title="Toggle Menu"
+              className="w-8 h-8 rounded-lg bg-cream-deep/60 hover:bg-cream border border-hairline flex items-center justify-center text-ink-soft hover:text-ink cursor-pointer transition-colors shrink-0"
+            >
+              <Menu size={16} />
+            </motion.button>
+
+            <Link href="/home" className="flex items-center cursor-pointer">
+              <BrandLogo href={false} />
+            </Link>
+          </div>
+
+          {/* Right: Toggleable Model Selector (Transfinite-1 / Aleph-1) + Notifications + Account */}
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            {/* Mobile Model Toggle Selector */}
+            <div className="flex items-center p-0.5 bg-cream-deep/60 rounded-lg border border-hairline text-[10px] font-mono shrink-0">
+              {/* Transfinite-1 (Simulator Active) */}
+              <button
+                type="button"
+                onClick={() => handleBackendChange("gpu_simulator")}
+                className={`px-1.5 py-0.5 rounded-md transition-all flex items-center gap-1 font-semibold cursor-pointer ${
+                  quantumBackend === "gpu_simulator"
+                    ? "bg-parchment text-quantum shadow-2xs border border-hairline/80 font-bold"
+                    : "text-ink-soft hover:text-ink"
+                }`}
+                title="Transfinite-1 (Quantum Simulator Active)"
+              >
+                <Sparkles size={10} className="text-quantum shrink-0" />
+                <span className="hidden xs:inline">Transfinite-1</span>
+                <span className="xs:hidden">TF-1</span>
+              </button>
+
+              {/* Aleph-1 (IBM QPU Locked) */}
+              <button
+                type="button"
+                onClick={() => setShowAlephCard(true)}
+                className="px-1.5 py-0.5 rounded-md transition-all flex items-center gap-1 text-ink-soft hover:text-ink font-medium cursor-pointer opacity-90 hover:opacity-100"
+                title="Aleph-1 (IBM QPU) — Real Quantum Hardware"
+              >
+                <Cpu size={10} className="text-amber-500 shrink-0" />
+                <span>Aleph-1</span>
+                <span className="hidden xs:inline text-[8px] font-mono text-amber-700 bg-amber-50 px-0.5 py-0.1 rounded border border-amber-200">Locked</span>
+              </button>
+            </div>
+
+            {/* Mobile Notification Bell */}
+            <div className="relative">
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                type="button"
+                onClick={handleToggleNotifications}
+                aria-label="Notifications"
+                title="Notifications"
+                className="w-8 h-8 rounded-full bg-cream-deep/60 hover:bg-cream border border-hairline flex items-center justify-center text-ink-soft hover:text-ink cursor-pointer transition-colors relative shrink-0"
+              >
+                <Bell size={14} />
+                {unreadCount > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-quantum text-parchment rounded-full text-[8px] font-mono flex items-center justify-center font-bold">
+                    {unreadCount}
+                  </span>
+                )}
+              </motion.button>
+
+              {/* Mobile Notifications Dropdown (Responsive width to prevent screen edge overflow) */}
+              <AnimatePresence>
+                {notificationsOpen && (
+                  <>
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setNotificationsOpen(false)}
+                    />
+                    <motion.div
+                      initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute right-0 top-11 w-72 max-w-[calc(100vw-1.5rem)] bg-parchment rounded-2xl border border-hairline shadow-xl z-50 p-3 space-y-2"
+                    >
+                      <div className="flex items-center justify-between border-b border-hairline pb-2">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-serif font-medium text-ink">Notifications</span>
+                          {notifications.length > 0 && (
+                            <span className="text-[10px] font-mono text-ink-soft">({notifications.length})</span>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          {unreadCount > 0 ? (
+                            <button
+                              type="button"
+                              onClick={markAllNotificationsAsRead}
+                              className="text-[10px] text-quantum hover:underline cursor-pointer font-medium"
+                            >
+                              Mark all read
+                            </button>
+                          ) : (
+                            <span className="text-[9px] font-mono text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+                              All Read
+                            </span>
+                          )}
+                          <Link
+                            href="/notifications"
+                            onClick={() => setNotificationsOpen(false)}
+                            className="text-[10px] text-ink hover:underline cursor-pointer font-medium"
+                          >
+                            View all
+                          </Link>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1.5 max-h-56 overflow-y-auto">
+                        {unreadCount === 0 ? (
+                          <div className="py-6 text-center text-xs text-ink-soft space-y-1">
+                            <p className="font-medium text-ink">No unread notifications</p>
+                            <p className="text-[10px] text-ink-soft">You are all caught up. Patient reports will appear here.</p>
+                          </div>
+                        ) : (
+                          notifications
+                            .filter((n) => !n.read)
+                            .map((n) => (
+                              <Link
+                                key={n.id}
+                                href={n.actionUrl || "/notifications"}
+                                onClick={() => {
+                                  NotificationService.markAsRead(n.id);
+                                  setNotifications((prev) =>
+                                    prev.map((item) => (item.id === n.id ? { ...item, read: true } : item))
+                                  );
+                                  setNotificationsOpen(false);
+                                }}
+                                className="block p-2 rounded-xl text-xs space-y-0.5 transition-colors cursor-pointer bg-quantum/10 border border-quantum/20 shadow-2xs hover:bg-quantum/15"
+                              >
+                                <div className="flex items-center justify-between">
+                                  <span className="text-[11px] font-bold text-ink flex items-center gap-1.5">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-quantum shrink-0" />
+                                    {n.title}
+                                  </span>
+                                  <span className="text-[9px] text-ink-soft font-mono">{n.time}</span>
+                                </div>
+                                <p className="text-[10px] text-ink-soft font-light leading-snug">{n.message}</p>
+                              </Link>
+                            ))
+                        )}
+                      </div>
+
+                      <div className="pt-2 border-t border-hairline text-center">
+                        <Link
+                          href="/notifications"
+                          onClick={() => setNotificationsOpen(false)}
+                          className="text-xs font-medium text-quantum hover:underline"
+                        >
+                          Open Notification Center →
+                        </Link>
+                      </div>
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Mobile Account Avatar */}
+            <Link
+              href="/account"
+              aria-label="User Account Settings"
+              title={`Account: ${userName}`}
+              className="w-8 h-8 rounded-full bg-ink text-parchment border border-hairline flex items-center justify-center cursor-pointer overflow-hidden shadow-2xs hover:ring-2 hover:ring-quantum/40 transition-all shrink-0"
+            >
+              {userAvatar ? (
+                <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
+              ) : (
+                <span className="font-serif font-medium text-xs">
+                  {userName.charAt(0).toUpperCase()}
+                </span>
+              )}
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      {/* ========================================================================= */}
+      {/* BODY WITH FIXED SIDEBAR AND SCROLLABLE CONTENT */}
+      {/* ========================================================================= */}
+      <div className="flex flex-1 pt-14 relative min-w-0 max-w-full overflow-x-hidden">
+        {/* FIXED DESKTOP SIDEBAR */}
+        <motion.aside
+          initial={false}
+          animate={{ width: sidebarOpen ? 240 : 64 }}
+          transition={sidebarTransition}
+          className="hidden md:flex flex-col fixed top-14 bottom-0 left-0 bg-parchment/85 backdrop-blur-md border-r border-hairline z-40 p-3 justify-between overflow-hidden"
+        >
+          {/* Top Nav Sections */}
+          <div className="space-y-4 overflow-y-auto no-scrollbar">
+            {(() => {
+              let itemCounter = 0;
+              return NAV_SECTIONS.map((section, sIdx) => (
+                <div key={sIdx} className="space-y-1">
+                  <AnimatePresence>
+                    {sidebarOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, x: -6 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -6 }}
+                        transition={{ duration: 0.2, delay: sIdx * 0.12, ease: "easeOut" }}
+                        className="px-3 py-1"
+                      >
+                        <span className="text-[9px] font-mono uppercase tracking-wider text-ink-soft font-semibold">
+                          {section.title}
+                        </span>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {section.items.map((item) => {
+                    const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+                    const Icon = item.icon;
+                    const animDelay = itemCounter++ * 0.05;
+
+                    return (
+                      <motion.div
+                        key={item.href}
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.28, delay: animDelay, ease: "easeOut" }}
+                      >
+                        <Link
+                          href={item.href}
+                          title={!sidebarOpen ? item.label : undefined}
+                          className={`group flex items-center ${sidebarOpen ? "justify-between px-3 py-2" : "justify-center p-2.5"
+                            } rounded-xl text-xs font-medium transition-all ${isActive
+                              ? "bg-ink text-parchment shadow-xs font-semibold"
+                              : "text-ink-soft hover:text-ink hover:bg-cream-deep/50"
+                            }`}
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <div className="relative flex items-center justify-center shrink-0">
+                              {isActive && (
+                                <div className="absolute -inset-[2px] rounded-full overflow-hidden opacity-95">
+                                  <div
+                                    className="w-full h-full animate-rainbow-spin"
+                                    style={{
+                                      background:
+                                        "conic-gradient(from 0deg, #ff4545, #00ffcc, #0070f3, #7928ca, #ff007a, #ffbb00, #00ffcc, #ff4545)",
+                                    }}
+                                  />
+                                </div>
+                              )}
+                              <div className={`relative ${isActive ? "w-6 h-6 rounded-full bg-ink flex items-center justify-center z-10" : ""}`}>
+                                <Icon
+                                  size={isActive ? 13 : 15}
+                                  className={isActive ? "text-white" : "text-ink-soft group-hover:text-ink"}
+                                />
+                              </div>
+                            </div>
+                            <AnimatePresence>
+                              {sidebarOpen && (
+                                <motion.span
+                                  initial={{ opacity: 0, x: -8 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  exit={{ opacity: 0, x: -8 }}
+                                  transition={{ duration: 0.22, delay: animDelay + 0.05, ease: "easeOut" }}
+                                  className="truncate font-medium"
+                                >
+                                  {item.label}
+                                </motion.span>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              ));
+            })()}
+          </div>
+
+          {/* Bottom Sidebar: Clean borderless Account row + Settings + Red Sign Out row */}
+          <div className="space-y-0.5 pt-2 border-t border-hairline">
+            {/* Account Row (Unbordered, sleek) */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.28, delay: 0.32, ease: "easeOut" }}
+            >
+              <Link
+                href="/account"
+                title={!sidebarOpen ? `Account: ${userName}` : undefined}
+                className={`w-full flex items-center ${sidebarOpen ? "justify-start gap-2.5 px-3 py-2" : "justify-center p-2.5"
+                  } rounded-xl text-xs font-medium ${pathname === "/account"
+                    ? "bg-ink text-parchment shadow-xs font-semibold"
+                    : "text-ink hover:bg-cream-deep/50"
+                  } transition-all cursor-pointer`}
+              >
+                <div className="relative flex items-center justify-center shrink-0">
+                  {pathname === "/account" && (
+                    <div className="absolute -inset-[2px] rounded-full overflow-hidden opacity-95">
+                      <div
+                        className="w-full h-full animate-rainbow-spin"
+                        style={{
+                          background:
+                            "conic-gradient(from 0deg, #ff4545, #00ffcc, #0070f3, #7928ca, #ff007a, #ffbb00, #00ffcc, #ff4545)",
+                        }}
+                      />
+                    </div>
+                  )}
+                  <div className="relative w-6 h-6 rounded-full bg-parchment text-ink flex items-center justify-center font-serif text-[11px] overflow-hidden shrink-0 z-10">
+                    {userAvatar ? (
+                      <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
+                    ) : (
+                      userName.charAt(0).toUpperCase()
+                    )}
+                  </div>
+                </div>
+                <AnimatePresence>
+                  {sidebarOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -8 }}
+                      transition={{ duration: 0.22, delay: 0.35, ease: "easeOut" }}
+                      className="flex flex-col text-left overflow-hidden"
+                    >
+                      <span
+                        className={`text-xs font-semibold leading-tight truncate ${pathname === "/account" ? "text-parchment" : "text-ink"
+                          }`}
+                      >
+                        {userName}
+                      </span>
+                      <span
+                        className={`text-[10px] truncate ${pathname === "/account" ? "text-parchment/75 font-light" : "text-ink-soft"
+                          }`}
+                      >
+                        {userEmail}
+                      </span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </Link>
+            </motion.div>
+
+            {/* Settings Row (In between User and Sign Out) */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.28, delay: 0.37, ease: "easeOut" }}
+            >
+              <Link
+                href="/settings"
+                title={!sidebarOpen ? "Settings" : undefined}
+                className={`w-full flex items-center ${sidebarOpen ? "justify-start gap-2.5 px-3 py-2" : "justify-center p-2.5"
+                  } rounded-xl text-xs font-medium ${pathname === "/settings"
+                    ? "bg-ink text-parchment shadow-xs font-semibold"
+                    : "text-ink-soft hover:text-ink hover:bg-cream-deep/50"
+                  } transition-all cursor-pointer`}
+              >
+                <div className="relative flex items-center justify-center shrink-0">
+                  {pathname === "/settings" && (
+                    <div className="absolute -inset-[2px] rounded-full overflow-hidden opacity-95">
+                      <div
+                        className="w-full h-full animate-rainbow-spin"
+                        style={{
+                          background:
+                            "conic-gradient(from 0deg, #ff4545, #00ffcc, #0070f3, #7928ca, #ff007a, #ffbb00, #00ffcc, #ff4545)",
+                        }}
+                      />
+                    </div>
+                  )}
+                  <div className={`relative ${pathname === "/settings" ? "w-6 h-6 rounded-full bg-ink flex items-center justify-center z-10" : ""}`}>
+                    <Settings
+                      size={pathname === "/settings" ? 13 : 15}
+                      className={pathname === "/settings" ? "text-white" : "text-ink-soft shrink-0"}
+                    />
+                  </div>
+                </div>
+                <AnimatePresence>
+                  {sidebarOpen && (
+                    <motion.span
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -8 }}
+                      transition={{ duration: 0.22, delay: 0.4, ease: "easeOut" }}
+                      className={pathname === "/settings" ? "text-parchment font-semibold" : "text-ink"}
+                    >
+                      Settings
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </Link>
+            </motion.div>
+
+            {/* Red Sign Out Row (Unbordered, clean red text) */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.28, delay: 0.42, ease: "easeOut" }}
+            >
+              <button
+                type="button"
+                onClick={handleLogout}
+                title={!sidebarOpen ? "Sign Out" : undefined}
+                className={`w-full flex items-center ${sidebarOpen ? "justify-start gap-2.5 px-3 py-2" : "justify-center p-2.5"
+                  } rounded-xl text-xs font-medium text-red-600 hover:text-red-700 hover:bg-red-50/70 transition-all cursor-pointer`}
+              >
+                <LogOut size={14} className="shrink-0 text-red-600" />
+                <AnimatePresence>
+                  {sidebarOpen && (
+                    <motion.span
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -8 }}
+                      transition={{ duration: 0.22, delay: 0.45, ease: "easeOut" }}
+                      className="font-semibold"
+                    >
+                      Sign Out
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </button>
+            </motion.div>
+          </div>
+        </motion.aside>
+
+        {/* MOBILE DRAWER SIDEBAR */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setMobileMenuOpen(false)}
+                className="fixed inset-0 bg-ink/30 backdrop-blur-xs z-40 md:hidden"
+              />
+
+              <motion.aside
+                initial={{ x: -280 }}
+                animate={{ x: 0 }}
+                exit={{ x: -280 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                className="fixed top-14 bottom-0 left-0 w-64 bg-parchment border-r border-hairline z-50 p-4 flex flex-col justify-between md:hidden shadow-xl"
+              >
+                <div className="space-y-4 overflow-y-auto">
+                  {NAV_SECTIONS.map((section, sIdx) => (
+                    <div key={sIdx} className="space-y-1">
+                      <div className="px-3 py-1">
+                        <span className="text-[9px] font-mono uppercase tracking-wider text-ink-soft font-semibold">
+                          {section.title}
+                        </span>
+                      </div>
+
+                      {section.items.map((item) => {
+                        const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+                        const Icon = item.icon;
+
+                        return (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all ${isActive
+                              ? "bg-ink text-parchment shadow-xs font-semibold"
+                              : "text-ink-soft hover:text-ink hover:bg-cream-deep/40"
+                              }`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="relative flex items-center justify-center shrink-0">
+                                {isActive && (
+                                  <div className="absolute -inset-[2px] rounded-full overflow-hidden opacity-95">
+                                    <div
+                                      className="w-full h-full animate-rainbow-spin"
+                                      style={{
+                                        background:
+                                          "conic-gradient(from 0deg, #ff4545, #00ffcc, #0070f3, #7928ca, #ff007a, #ffbb00, #00ffcc, #ff4545)",
+                                      }}
+                                    />
+                                  </div>
+                                )}
+                                <div className={`relative ${isActive ? "w-6 h-6 rounded-full bg-ink flex items-center justify-center z-10" : ""}`}>
+                                  <Icon size={isActive ? 13 : 16} className={isActive ? "text-white" : "text-ink-soft"} />
+                                </div>
+                              </div>
+                              <span>{item.label}</span>
+                            </div>
+                            {isActive && <ChevronRight size={14} className="text-quantum" />}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Mobile Bottom: Clean Account & Settings & Red Sign Out */}
+                <div className="space-y-1 pt-3 border-t border-hairline">
+                  <Link
+                    href="/account"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`p-2.5 rounded-xl flex items-center gap-2.5 cursor-pointer transition-colors ${pathname === "/account"
+                      ? "bg-ink text-parchment shadow-xs font-semibold"
+                      : "hover:bg-cream-deep/50 text-ink"
+                      }`}
+                  >
+                    <div className="relative flex items-center justify-center shrink-0">
+                      {pathname === "/account" && (
+                        <div className="absolute -inset-[2px] rounded-full overflow-hidden opacity-95">
+                          <div
+                            className="w-full h-full animate-rainbow-spin"
+                            style={{
+                              background:
+                                "conic-gradient(from 0deg, #ff4545, #00ffcc, #0070f3, #7928ca, #ff007a, #ffbb00, #00ffcc, #ff4545)",
+                            }}
+                          />
+                        </div>
+                      )}
+                      <div className="relative w-8 h-8 rounded-full bg-parchment text-ink flex items-center justify-center font-serif text-xs overflow-hidden shrink-0 z-10">
+                        {userAvatar ? (
+                          <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
+                        ) : (
+                          userName.charAt(0).toUpperCase()
+                        )}
+                      </div>
+                    </div>
+                    <div className="overflow-hidden">
+                      <span
+                        className={`text-xs font-semibold block truncate ${pathname === "/account" ? "text-parchment" : "text-ink"
+                          }`}
+                      >
+                        {userName}
+                      </span>
+                      <span
+                        className={`text-[10px] block truncate ${pathname === "/account" ? "text-parchment/75" : "text-ink-soft"
+                          }`}
+                      >
+                        {userEmail}
+                      </span>
+                    </div>
+                  </Link>
+
+                  <Link
+                    href="/settings"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium transition-colors ${pathname === "/settings"
+                      ? "bg-ink text-parchment shadow-xs font-semibold"
+                      : "text-ink-soft hover:text-ink hover:bg-cream-deep/40"
+                      }`}
+                  >
+                    <div className="relative flex items-center justify-center shrink-0">
+                      {pathname === "/settings" && (
+                        <div className="absolute -inset-[2px] rounded-full overflow-hidden opacity-95">
+                          <div
+                            className="w-full h-full animate-rainbow-spin"
+                            style={{
+                              background:
+                                "conic-gradient(from 0deg, #ff4545, #00ffcc, #0070f3, #7928ca, #ff007a, #ffbb00, #00ffcc, #ff4545)",
+                            }}
+                          />
+                        </div>
+                      )}
+                      <div className={`relative ${pathname === "/settings" ? "w-6 h-6 rounded-full bg-ink flex items-center justify-center z-10" : ""}`}>
+                        <Settings size={pathname === "/settings" ? 13 : 15} />
+                      </div>
+                    </div>
+                    <span>Settings</span>
+                  </Link>
+
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="w-full flex items-center justify-start gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-red-600 hover:text-red-700 hover:bg-red-50/70 transition-colors cursor-pointer"
+                  >
+                    <LogOut size={14} />
+                    <span className="font-semibold">Sign Out</span>
+                  </button>
+                </div>
+              </motion.aside>
+            </>
+          )}
+        </AnimatePresence>
+
+        {/* MAIN CONTENT CANVAS (Smooth margin offset) */}
+        <motion.main
+          initial={false}
+          animate={{ marginLeft: sidebarOpen ? 240 : 64 }}
+          transition={sidebarTransition}
+          className="flex-1 min-w-0 max-w-full min-h-[calc(100vh-3.5rem)] px-4 sm:px-6 lg:px-8 py-5 max-md:!ml-0 overflow-x-hidden"
+        >
+          {children}
+        </motion.main>
+      </div>
+
+      {/* ========================================================================= */}
+      {/* ACCOUNT & PHOTO UPLOAD MODAL */}
+      {/* ========================================================================= */}
+      <AnimatePresence>
+        {accountModalOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setAccountModalOpen(false)}
+              className="fixed inset-0 bg-ink/30 backdrop-blur-xs z-50"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-parchment rounded-2xl border border-hairline shadow-2xl z-50 p-5 space-y-4"
+            >
+              <div className="flex items-center justify-between border-b border-hairline pb-3">
+                <div className="flex items-center gap-2">
+                  <User size={16} className="text-quantum" />
+                  <h3 className="font-serif text-lg font-medium text-ink">User Account</h3>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setAccountModalOpen(false)}
+                  className="w-7 h-7 rounded-full bg-cream-deep/60 border border-hairline flex items-center justify-center text-ink-soft hover:text-ink cursor-pointer"
+                >
+                  <X size={14} />
+                </button>
+              </div>
+
+              <div className="space-y-4 text-xs">
+                {/* Avatar with Click to Upload Image */}
+                <div className="flex items-center gap-4 p-3.5 rounded-xl bg-cream/50 border border-hairline">
+                  <div className="relative group">
+                    <div className="w-14 h-14 rounded-full bg-ink text-parchment flex items-center justify-center font-serif text-xl font-light shrink-0 overflow-hidden shadow-xs">
+                      {userAvatar ? (
+                        <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
+                      ) : (
+                        userName.charAt(0).toUpperCase()
+                      )}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      title="Upload Profile Picture"
+                      className="absolute inset-0 bg-ink/60 rounded-full flex items-center justify-center text-parchment opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                    >
+                      <Camera size={16} />
+                    </button>
+                  </div>
+
+                  <div className="space-y-1 overflow-hidden flex-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold text-ink text-sm block truncate">{userName}</span>
+                      <button
+                        type="button"
+                        onClick={() => fileInputRef.current?.click()}
+                        className="text-[10px] text-quantum font-medium hover:underline cursor-pointer flex items-center gap-1"
+                      >
+                        <Camera size={11} /> Upload Photo
+                      </button>
+                    </div>
+                    <span className="text-ink-soft block truncate">{userEmail}</span>
+                    <span className="text-[10px] font-mono text-emerald-700 font-medium flex items-center gap-1">
+                      <CheckCircle2 size={11} /> Active Account
+                    </span>
+                  </div>
+                </div>
+
+                {/* Account Details Form */}
+                <div className="space-y-2">
+                  <label className="text-[11px] font-medium text-ink-soft">Display Name</label>
+                  <input
+                    type="text"
+                    value={userName}
+                    onChange={(e) => {
+                      setUserName(e.target.value);
+                      if (typeof window !== "undefined") {
+                        localStorage.setItem("quantumx_user_name", e.target.value);
+                      }
+                    }}
+                    placeholder="Enter your name"
+                    className="w-full h-9 px-3 rounded-lg bg-parchment border border-hairline text-xs text-ink focus:outline-none focus:border-quantum font-sans shadow-2xs"
+                  />
+                </div>
+
+                <div className="p-3 rounded-xl bg-cream-deep/30 border border-hairline space-y-1.5 font-mono text-[11px]">
+                  <div className="flex justify-between">
+                    <span className="text-ink-soft">Processing Mode:</span>
+                    <span className="text-quantum font-semibold">
+                      {quantumBackend === "ibmq_eagle" ? "IBM Quantum Cloud" : "GPU Simulator"}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-ink-soft">Access Status:</span>
+                    <span className="text-emerald-700 font-semibold">Ready for Screening</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-2 border-t border-hairline flex items-center justify-between">
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="px-3.5 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <LogOut size={13} /> Sign Out
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAccountModalOpen(false)}
+                  className="px-4 py-1.5 rounded-lg bg-ink text-parchment text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer"
+                >
+                  Save &amp; Close
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* ========================================================================= */}
+      {/* ALEPH-1 REAL QUANTUM HARDWARE CENTER CARD MODAL (WHITE) */}
+      {/* ========================================================================= */}
+      <AnimatePresence>
+        {showAlephCard && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowAlephCard(false)}
+              className="fixed inset-0 bg-ink/35 backdrop-blur-xs z-50"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-white rounded-2xl border border-hairline shadow-2xl z-50 p-6 space-y-4"
+            >
+              {/* Header */}
+              <div className="flex items-start justify-between border-b border-hairline pb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 border border-amber-200/60 flex items-center justify-center shrink-0">
+                    <Cpu size={20} />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-serif text-lg font-medium text-ink">Aleph-1 — IBM Quantum QPU</h3>
+                      <span className="text-[10px] font-mono text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded-full border border-amber-300 font-bold">
+                        Physical Hardware
+                      </span>
+                    </div>
+                    <p className="text-xs text-ink-soft">
+                      127-Qubit Eagle r3 Superconducting Transmon Processor
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowAlephCard(false)}
+                  className="w-8 h-8 rounded-full bg-cream hover:bg-cream-deep border border-hairline flex items-center justify-center text-ink-soft hover:text-ink transition-colors cursor-pointer"
+                  aria-label="Close"
+                >
+                  <X size={15} />
+                </button>
+              </div>
+
+              {/* Hardware KPI Badges */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                <div className="p-3 rounded-xl bg-cream/60 border border-hairline text-center space-y-1">
+                  <span className="text-[10px] font-mono uppercase text-ink-soft block font-bold">Qubits</span>
+                  <span className="font-serif text-xl font-light text-ink">127</span>
+                  <span className="text-[9px] font-mono text-ink-soft block">Eagle r3 Transmon</span>
+                </div>
+                <div className="p-3 rounded-xl bg-cream/60 border border-hairline text-center space-y-1">
+                  <span className="text-[10px] font-mono uppercase text-ink-soft block font-bold">Cryo Temp</span>
+                  <span className="font-serif text-xl font-light text-ink">15 mK</span>
+                  <span className="text-[9px] font-mono text-ink-soft block">Dilution Cryostat</span>
+                </div>
+                <div className="p-3 rounded-xl bg-cream/60 border border-hairline text-center space-y-1">
+                  <span className="text-[10px] font-mono uppercase text-ink-soft block font-bold">Gate Fidelity</span>
+                  <span className="font-serif text-xl font-light text-emerald-600">99.1%</span>
+                  <span className="text-[9px] font-mono text-ink-soft block">T1 ≈ 300 μs</span>
+                </div>
+                <div className="p-3 rounded-xl bg-cream/60 border border-hairline text-center space-y-1">
+                  <span className="text-[10px] font-mono uppercase text-ink-soft block font-bold">Mitigation</span>
+                  <span className="font-serif text-sm font-semibold text-quantum">ZNE + M3</span>
+                  <span className="text-[9px] font-mono text-ink-soft block">Qiskit Runtime</span>
+                </div>
+              </div>
+
+              {/* Technical Architecture Details */}
+              <div className="p-3.5 rounded-xl bg-cream/40 border border-hairline space-y-2 text-xs text-ink-soft leading-relaxed">
+                <p>
+                  <strong className="text-ink">Physical System Architecture:</strong> Real superconducting circuits housed inside a Bluefors LD400 dilution refrigerator at IBM Quantum datacenter. Supports parameterized quantum circuits (PQC) executed via IBM Qiskit Runtime Sampler &amp; Estimator primitives.
+                </p>
+                <p>
+                  <strong className="text-ink">Active Noise Suppression:</strong> Quantum circuits employ Matrix-free Measurement Mitigation (M3) for readout calibration, Zero-Noise Extrapolation (ZNE) for unitary gate error scaling, and Dynamical Decoupling (DD) pulse sequences during idle qubit delays.
+                </p>
+              </div>
+
+              {/* Clinical Deployment Status Notice */}
+              <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-200 flex items-start gap-3 text-xs">
+                <Lock size={16} className="text-amber-700 shrink-0 mt-0.5" />
+                <div className="space-y-1 text-ink">
+                  <p className="font-semibold text-amber-900">
+                    Restricted Clinical Deployment Tier (Locked)
+                  </p>
+                  <p className="text-[11px] text-ink-soft leading-relaxed">
+                    Physical IBM QPU circuit execution is reserved for verified clinical partner hospitals under IRB diagnostic protocols. Active patient screening runs transparently on our 1:1 statevector quantum simulator (<strong>Transfinite-1</strong>), delivering identical mathematical probability distributions at sub-second latency.
+                  </p>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="pt-2 flex items-center justify-between gap-3 border-t border-hairline">
+                <span className="text-[11px] text-ink-soft font-mono">
+                  IBM Qiskit Runtime Service • v2 Architecture
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setShowAlephCard(false)}
+                  className="px-5 py-2 rounded-xl bg-ink text-parchment hover:bg-ink/90 font-medium text-xs transition-colors cursor-pointer"
+                >
+                  Understood
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Floating AI Clinical Assistant Chatbot */}
+      <QuantumChatbot />
+
+      {/* New User Registration & Onboarding Welcome Modal */}
+      <WelcomeModal />
+
+      {/* Top-Right Floating Popup Toast Notifications */}
+      <ToastContainer />
+    </div>
+  );
+}

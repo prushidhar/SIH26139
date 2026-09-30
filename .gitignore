@@ -1,0 +1,92 @@
+# General
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+*.log
+
+# Backend (Python / FastAPI / Data Science)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.venv
+venv/
+ENV/
+env.bak/
+venv.bak/
+.idea/
+.vscode/
+
+# Frontend (Next.js / Node)
+node_modules/
+.pnp
+.pnp.js
+.next/
+out/
+build/
+.vercel
+
+.offline-markdown-preview/
+.offline-markdown-preview
+.agents
+.claude/
+Plan/Notes (Personal)
+PROBLEM.md
+SCRATCHPAD.md
+SKILL.md
+Goal.md
+Competitor Videos/
+Test Cases/
+
+# Models & Internal Research Documents (Ignored from GitHub)
+Models/v2/
+Models/v1 - Heart Attack (ECG Image) - Claude/
+Models/v1 - Heart Attack (ECG Image) - Gemini/
+Models/v1 - Cardiovascular Disease/
+Models/Archieved/
+Models/**/data/
+data/
+Models/Heart Model Final/Dataset/
+Models/breast_cancer_quantum_pipeline_deep_dive_and_circuit_mechanics.md
+Models/quantum_pipeline_deep_dive_and_circuit_mechanics.md
+Models/v1 - Breast Cancer/INSIGHTS.md
+INSIGHTS.md
+Models/v1/
+Test_Reports_Demo/
+Test/
+Tests/
+test_*.py
+*.zip
+*.dat
+*.hea
+*.pt
+!Backend/models_v1/heart_v1/artifacts/cardiac_cnn_production.pt
+!Backend/models_v1/heart_v1/artifacts/cardiac_hybrid_production.pt
+!Backend/models_v1/heart_v2/artifacts/*.pt
+*.pkl
+Plan/
+Research/
+Team Data/Architectures/
+Team Data/Copies/
+Team Data/No Github Push/
+Team Data/Questions/Question - Lead & Quantum Architect (Anshul).md
+Team Data/Questions/*Anshul*
+Z-Discuss/
+Copies/
+/PPT/
+.remember/
+Notes on Model Pipeline.md
+QuantumX_Final_Architecture_v3.md
+Ruthless Audit.md
+Thoughts.md
+
