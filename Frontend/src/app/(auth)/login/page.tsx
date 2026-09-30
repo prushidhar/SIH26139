@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { Eye, EyeOff, Loader2, X } from "lucide-react";
+import { Eye, EyeOff, Loader2, X, Sparkles } from "lucide-react";
 import { AuthService } from "@/services/auth.service";
 import { useBackendStatus } from "@/services/backend-warmer.service";
 import BrandLogo from "@/components/common/BrandLogo";
@@ -157,8 +157,8 @@ export default function LoginPage() {
 
   const authenticateWithDefaultGoogle = async (customEmail?: string, customName?: string) => {
     try {
-      const email = customEmail || "dr.rushidhar@gmail.com";
-      const name = customName || "Dr. P Rushidhar";
+      const email = customEmail || "prushidhar@gmail.com";
+      const name = customName || "P Rushidhar";
       const header = btoa(JSON.stringify({ alg: "RS256", typ: "JWT" })).replace(/=+$/, "");
       const payload = btoa(unescape(encodeURIComponent(JSON.stringify({
         iss: "https://accounts.google.com",
@@ -509,6 +509,20 @@ export default function LoginPage() {
                   </>
                 )}
               </motion.button>
+
+              {/* Instant 1-Click Access for verified account */}
+              <motion.button
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
+                type="button"
+                onClick={() => authenticateWithDefaultGoogle("prushidhar@gmail.com", "P Rushidhar")}
+                disabled={isAnyLoading}
+                className="w-full py-2.5 rounded-xl border border-quantum/30 bg-quantum/10 hover:bg-quantum/20 text-ink font-semibold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-2xs mt-2"
+              >
+                <Sparkles size={13} className="text-quantum" />
+                <span>Instant 1-Click Access (prushidhar@gmail.com)</span>
+              </motion.button>
+
               <div id="g_id_signin_hidden" style={{ position: "absolute", top: "-9999px", left: "-9999px", opacity: 0.001, pointerEvents: "none" }} aria-hidden="true" />
             </form>
           </div>
