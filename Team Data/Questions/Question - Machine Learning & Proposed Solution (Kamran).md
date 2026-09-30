@@ -18,7 +18,7 @@
 6. How did you structure your Repeated Stratified 5-Fold Cross-Validation across 10 random seeds (50 folds total) to guarantee zero data leakage?
 7. What classical machine learning baseline models did you build (XGBoost, LightGBM, Random Forest, SVM-RBF, and MLP)?
 8. How did you use Optuna Bayesian Optimization (100+ trials per fold) to tune the hyperparameters of classical baselines?
-9. Why did you include a parameter-matched Multi-Layer Perceptron (MLP) as a direct neural baseline against QuantumX?
+9. Why did you include a parameter-matched Multi-Layer Perceptron (MLP) as a direct neural baseline against QureSight?
 10. How does TreeSHAP compute Shapley values from cooperative game theory on classical models?
 11. Which specific cytological features (e.g., concave points worst, perimeter worst, radius mean) emerged as top risk drivers?
 12. What primary statistical metrics did you track across all 50 folds (Sensitivity/Recall, Specificity, F1-Score, and ROC-AUC)?
@@ -42,6 +42,6 @@
 25. How does the emerald green decision boundary in Hilbert space separate overlapping cells without adding thousands of weights?
 26. How does quantum measurement convert the entangled quantum state back into classical observables for final classification?
 27. What are the core pillars of the Proposed Solution listed in `Slide 2 - Proposed Solutions.png`?
-28. How does QuantumX support end-to-end data ingestion, feature selection, hybrid training, explainability, and benchmarking?
+28. How does QureSight support end-to-end data ingestion, feature selection, hybrid training, explainability, and benchmarking?
 29. How does the hybrid architecture ensure full compatibility with both fast quantum simulators and near-term physical QPUs?
-30. How does QuantumX benchmark hybrid models against classical baselines across accuracy, sensitivity, efficiency, and generalization?
+30. How does QureSight benchmark hybrid models against classical baselines across accuracy, sensitivity, efficiency, and generalization?

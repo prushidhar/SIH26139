@@ -4,14 +4,14 @@ import { LegalPageLayout } from "@/components/common/LegalPageLayout";
 export const metadata: Metadata = {
   title: "Cookie Policy",
   description:
-    "Information on cookie usage, session tokens, and local storage on the QuantumX platform.",
+    "Information on cookie usage, session tokens, and local storage on the QureSight platform.",
 };
 
 export default function CookiesPage() {
   return (
     <LegalPageLayout
       title="Cookie & Storage Policy"
-      subtitle="Details regarding the strict essential cookies, secure session tokens, and client-side storage mechanisms employed on QuantumX."
+      subtitle="Details regarding the strict essential cookies, secure session tokens, and client-side storage mechanisms employed on QureSight."
       badge="Client Storage & Session Policy"
       iconType="cookie"
     >
@@ -20,7 +20,7 @@ export default function CookiesPage() {
           1. What Technologies We Use
         </h2>
         <p>
-          QuantumX uses strictly necessary cookies and browser local storage mechanisms to authenticate researchers, secure REST API transactions, and maintain user interface preferences (such as dark/light themes and dashboard configurations).
+          QureSight uses strictly necessary cookies and browser local storage mechanisms to authenticate researchers, secure REST API transactions, and maintain user interface preferences (such as dark/light themes and dashboard configurations).
         </p>
       </section>
 
@@ -39,17 +39,17 @@ export default function CookiesPage() {
             </thead>
             <tbody className="divide-y divide-white/10 text-white/70">
               <tr>
-                <td className="p-3 text-quantum font-semibold">quantumx_access_token</td>
+                <td className="p-3 text-quantum font-semibold">quresight_access_token</td>
                 <td className="p-3">JWT Bearer authentication for encrypted API routes</td>
                 <td className="p-3">15 minutes</td>
               </tr>
               <tr>
-                <td className="p-3 text-quantum font-semibold">quantumx_refresh_token</td>
+                <td className="p-3 text-quantum font-semibold">quresight_refresh_token</td>
                 <td className="p-3">Automatic 7-day sliding session renewal</td>
                 <td className="p-3">7 days</td>
               </tr>
               <tr>
-                <td className="p-3 text-quantum font-semibold">quantumx_user_data</td>
+                <td className="p-3 text-quantum font-semibold">quresight_user_data</td>
                 <td className="p-3">Caches user profile role and display preferences</td>
                 <td className="p-3">Session</td>
               </tr>
@@ -63,7 +63,7 @@ export default function CookiesPage() {
           3. Zero Third-Party Advertising Trackers
         </h2>
         <p>
-          QuantumX does NOT deploy invasive third-party cross-site advertising trackers, behavioral marketing beacons, or data broker cookies.
+          QureSight does NOT deploy invasive third-party cross-site advertising trackers, behavioral marketing beacons, or data broker cookies.
         </p>
       </section>
     </LegalPageLayout>

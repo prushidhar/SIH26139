@@ -13,12 +13,12 @@ The proposed solution can be developed using PennyLane and Qiskit simulators, so
 We use a hybrid quantum-classical approach, where quantum circuits work together with classical machine learning. Our 8-qubit VQC keeps the model compact, while classical models like XGBoost, SVM, Random Forest, and MLP provide strong baselines for comparison.    
     
 ### *Third, functional Feasibility.*      
-QuantumX is designed to support multiple diseases, including Breast Cancer, Heart Disease, and Neurological Disease. Each disease has its own feature set, preprocessing pipeline and Model Architecture, so the system can handle different complex medical data properly.    
+QureSight is designed to support multiple diseases, including Breast Cancer, Heart Disease, and Neurological Disease. Each disease has its own feature set, preprocessing pipeline and Model Architecture, so the system can handle different complex medical data properly.    
      
 ### *Finally, Noise Feasibility.*       
 Quantum computers are highly sensitive to physical disturbances, which can introduce calculation errors known as "noise." To tackle this, we plan to use error mitigation techniques (such as Zero-Noise Extrapolation) in the future to ensure reliable results on real hardware.
 
-In short, QuantumX is fully feasible today because we can develop on simulators without expensive infrastructure, validate on real quantum processors, and deploy easily through a web platform.
+In short, QureSight is fully feasible today because we can develop on simulators without expensive infrastructure, validate on real quantum processors, and deploy easily through a web platform.
 
 Let us see how our solution can be practically useful and valuable in the real world.
 
@@ -41,12 +41,12 @@ Feasibility का simple मतलब है: क्या यह solution आ�
 हम Classical AI और Quantum computing को combine करके train करते हैं। Classical part heavy data संभालता है और Quantum part patterns सीखता है—जिससे model fast train होता है और system पर भारी load नहीं पड़ता।
 
 3. Functional Feasibility:
-QuantumX multiple diseases को support करता है—Breast Cancer, Heart Disease, और Dementia। हर disease के लिए dedicated preprocessing pipeline और architecture है, जो complex medical data को smoothly handle करती है।
+QureSight multiple diseases को support करता है—Breast Cancer, Heart Disease, और Dementia। हर disease के लिए dedicated preprocessing pipeline और architecture है, जो complex medical data को smoothly handle करती है।
 
 4. Noise Feasibility:
 Quantum computers बहुत sensitive होते हैं, जिसकी वजह से minor disturbance या errors आ सकते हैं—इसे 'noise' कहते हैं। इसे tackle करने के लिए हम future में error mitigation techniques use करने का plan कर रहे हैं, ताकि real hardware पर results reliable रहें।
 
-In short: बिना expensive setup के simulators पर build करना, real quantum processors पर test करना, और web के through use करना—QuantumX को आज के resources में fully feasible बनाता है।
+In short: बिना expensive setup के simulators पर build करना, real quantum processors पर test करना, और web के through use करना—QureSight को आज के resources में fully feasible बनाता है।
 
 अब देखते हैं कि यह solution commercially और practically कितना viable है।
 Over to Prem.”

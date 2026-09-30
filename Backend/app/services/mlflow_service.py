@@ -13,12 +13,12 @@ REPORT_PATH = ARTIFACTS_DIR / "benchmark_report.json"
 
 class MLflowTelemetryService:
     """
-    Integrates live MLflow experiment tracking for QuantumX dual-engine models.
+    Integrates live MLflow experiment tracking for QureSight dual-engine models.
     Logs authentic hyperparameters, cross-validation metrics, circuit telemetry,
     and scarce-data experiments with complete audit provenance.
     """
 
-    _experiment_name: str = "QuantumX-MultiDisease-Clinical"
+    _experiment_name: str = "QureSight-MultiDisease-Clinical"
 
     @classmethod
     def get_or_create_experiment(cls) -> Optional[str]:
@@ -54,7 +54,7 @@ class MLflowTelemetryService:
                 mlflow.log_metrics(metrics)
                 if tags:
                     mlflow.set_tags(tags)
-                mlflow.set_tag("framework", "QuantumX-Core")
+                mlflow.set_tag("framework", "QureSight-Core")
                 mlflow.set_tag("data_authenticity", "100%_REAL_CLINICAL")
                 return run.info.run_id
         except Exception as e:
@@ -91,7 +91,7 @@ class MLflowTelemetryService:
             }
 
             params = {
-                "protocol": data.get("protocol", "QuantumX TM-BVP"),
+                "protocol": data.get("protocol", "QureSight TM-BVP"),
                 "dataset": data.get("dataset", "WDBC"),
                 "features_count": len(data.get("selected_biomarkers", [])),
                 "geometric_difference_s_K": data.get("geometric_difference_s_K", 2.079),

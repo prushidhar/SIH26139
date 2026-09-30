@@ -1,9 +1,9 @@
 """
 ====================================================================================================
-QuantumX Quantum Circuits: ZZ Feature Map, VQC, QSVM Kernel & PyTorch HQNN
+QureSight Quantum Circuits: ZZ Feature Map, VQC, QSVM Kernel & PyTorch HQNN
 ====================================================================================================
 This module implements the complete suite of PennyLane quantum machine learning architectures
-and quantum kernel methods for QuantumX v1.
+and quantum kernel methods for QureSight v1.
 
 Architectures Implemented:
 1. 8-Qubit ZZ Feature Map (U_Φ(x)): Second-order non-linear Pauli-Z data encoding with 
@@ -30,7 +30,7 @@ from sklearn.metrics import accuracy_score, roc_auc_score, f1_score, precision_s
 import pennylane as qml
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
-logger = logging.getLogger("QuantumX.QuantumCircuits")
+logger = logging.getLogger("QureSight.QuantumCircuits")
 
 
 # ==================================================================================================

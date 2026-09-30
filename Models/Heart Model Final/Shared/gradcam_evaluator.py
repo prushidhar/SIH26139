@@ -1,4 +1,4 @@
-"""QuantumX Cohort-Wide Grad-CAM++ & Anatomical Explainability Evaluator
+"""QureSight Cohort-Wide Grad-CAM++ & Anatomical Explainability Evaluator
 Implements Grad-CAM++ for 12-lead ECG convolutional backbones.
 Quantifies Lead Waveform Energy Ratio (LWER) to evaluate whether model attention
 focuses on clinical waveforms vs. spurious background borders and grid lines (Paper 2 protocol).

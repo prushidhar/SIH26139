@@ -2,7 +2,7 @@ import { apiClient, setTokens, setUserData, clearAuth, getRefreshToken, getAcces
 import { isLiveRenderPlatform } from './backend-warmer.service';
 
 // ============================================================================
-// QUANTUMX — AUTHENTICATION & SESSION SERVICE
+// QURESIGHT — AUTHENTICATION & SESSION SERVICE
 // ============================================================================
 
 export interface UserProfile {
@@ -303,9 +303,9 @@ export class AuthService {
     } finally {
       clearAuth();
       if (typeof window !== 'undefined') {
-        localStorage.removeItem('quantumx_prediction_history');
-        localStorage.removeItem('quantumx_notifications');
-        localStorage.removeItem('quantumx_is_new_registration');
+        localStorage.removeItem('quresight_prediction_history');
+        localStorage.removeItem('quresight_notifications');
+        localStorage.removeItem('quresight_is_new_registration');
       }
     }
   }
@@ -331,7 +331,7 @@ export class AuthService {
   static getCachedUser(): UserProfile | null {
     if (typeof window === 'undefined') return null;
     try {
-      const raw = localStorage.getItem('quantumx_user_data');
+      const raw = localStorage.getItem('quresight_user_data');
       return raw ? (JSON.parse(raw) as UserProfile) : null;
     } catch {
       return null;

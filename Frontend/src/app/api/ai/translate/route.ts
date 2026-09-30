@@ -76,7 +76,7 @@ ${text}
           const res = await fetch(
             `https://api.mymemory.translated.net/get?q=${enc}&langpair=en|${targetLanguage}`,
             {
-              headers: { "User-Agent": "QuantumX-Platform/1.0" },
+              headers: { "User-Agent": "QureSight-Platform/1.0" },
             }
           );
 

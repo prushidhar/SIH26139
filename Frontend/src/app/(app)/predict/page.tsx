@@ -341,7 +341,7 @@ export default function PredictHubPage() {
         <div className="flex items-center justify-between border-b border-hairline pb-3">
           <div>
             <h2 className="font-serif text-lg font-medium text-ink">
-              QuantumX Multi-Disease Screening Architecture
+              QureSight Multi-Disease Screening Architecture
             </h2>
             <p className="text-xs text-ink-soft">
               How dual-engine classical and variational quantum models evaluate clinical risk

@@ -13,9 +13,9 @@ export interface NotificationItem {
 }
 
 function getUserNotificationKey(): string {
-  if (typeof window === "undefined") return "quantumx_user_notifications";
-  const email = localStorage.getItem("quantumx_user_email") || "default";
-  return `quantumx_notifications_${email}`;
+  if (typeof window === "undefined") return "quresight_user_notifications";
+  const email = localStorage.getItem("quresight_user_email") || "default";
+  return `quresight_notifications_${email}`;
 }
 
 export class NotificationService {
@@ -178,7 +178,7 @@ export class NotificationService {
     if (typeof window !== "undefined") {
       const storageKey = getUserNotificationKey();
       localStorage.removeItem(storageKey);
-      localStorage.removeItem("quantumx_notifications");
+      localStorage.removeItem("quresight_notifications");
     }
   }
 }

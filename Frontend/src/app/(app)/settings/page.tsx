@@ -50,10 +50,10 @@ export default function SettingsPage() {
   // Load settings & database screening counts
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const savedAutoSave = localStorage.getItem("quantumx_setting_autosave");
-      const savedAutoDl = localStorage.getItem("quantumx_setting_autodl");
-      const savedHighContrast = localStorage.getItem("quantumx_setting_highcontrast");
-      const savedAudio = localStorage.getItem("quantumx_setting_audio");
+      const savedAutoSave = localStorage.getItem("quresight_setting_autosave");
+      const savedAutoDl = localStorage.getItem("quresight_setting_autodl");
+      const savedHighContrast = localStorage.getItem("quresight_setting_highcontrast");
+      const savedAudio = localStorage.getItem("quresight_setting_audio");
 
       if (savedAutoSave !== null) setAutoSaveHistory(savedAutoSave === "true");
       if (savedAutoDl !== null) setAutoDownloadReport(savedAutoDl === "true");
@@ -102,7 +102,7 @@ export default function SettingsPage() {
   const handleToggleAutoSave = (val: boolean) => {
     setAutoSaveHistory(val);
     if (typeof window !== "undefined") {
-      localStorage.setItem("quantumx_setting_autosave", String(val));
+      localStorage.setItem("quresight_setting_autosave", String(val));
     }
     triggerAutoSaveFeedback("Auto-Save Screenings", val ? "Enabled" : "Disabled");
   };
@@ -110,7 +110,7 @@ export default function SettingsPage() {
   const handleToggleAutoDownload = (val: boolean) => {
     setAutoDownloadReport(val);
     if (typeof window !== "undefined") {
-      localStorage.setItem("quantumx_setting_autodl", String(val));
+      localStorage.setItem("quresight_setting_autodl", String(val));
     }
     triggerAutoSaveFeedback("Auto-Generate Report", val ? "Enabled" : "Disabled");
   };
@@ -119,7 +119,7 @@ export default function SettingsPage() {
     setHighContrastMode(val);
     applyHighContrast(val);
     if (typeof window !== "undefined") {
-      localStorage.setItem("quantumx_setting_highcontrast", String(val));
+      localStorage.setItem("quresight_setting_highcontrast", String(val));
     }
     triggerAutoSaveFeedback("High-Contrast Mode", val ? "Active" : "Standard");
   };
@@ -128,7 +128,7 @@ export default function SettingsPage() {
     setSoundEffects(val);
     if (val) playQuantumCompletionSound(true);
     if (typeof window !== "undefined") {
-      localStorage.setItem("quantumx_setting_audio", String(val));
+      localStorage.setItem("quresight_setting_audio", String(val));
     }
     triggerAutoSaveFeedback("Quantum Audio Cues", val ? "Enabled" : "Muted");
   };
@@ -142,7 +142,7 @@ export default function SettingsPage() {
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = `quantumx_clinical_audit_${Date.now()}.json`;
+      link.download = `quresight_clinical_audit_${Date.now()}.json`;
       link.click();
       URL.revokeObjectURL(url);
       showToast({
@@ -419,7 +419,7 @@ export default function SettingsPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
           <div>
             <div className="font-serif text-sm font-medium text-ink">{userName}</div>
-            <div className="text-ink-soft font-mono text-[11px]">{userEmail || "investigator@quantumx.internal"}</div>
+            <div className="text-ink-soft font-mono text-[11px]">{userEmail || "investigator@quresight.internal"}</div>
           </div>
 
           <button
@@ -568,7 +568,7 @@ export default function SettingsPage() {
               {/* Warning Content */}
               <div className="space-y-2 text-xs text-ink-soft leading-relaxed">
                 <p className="text-red-900 font-medium bg-red-50 p-3 rounded-2xl border border-red-200">
-                  ⚠️ This action is catastrophic and irreversible. All your login credentials, profile data, patient screenings, QXplain gate attributions, and notifications will be wiped from Supabase immediately.
+                  ⚠️ This action is catastrophic and irreversible. All your login credentials, profile data, patient screenings, QureExplain gate attributions, and notifications will be wiped from Supabase immediately.
                 </p>
                 <p>
                   Target Account: <strong className="text-ink">{userEmail || userName}</strong>

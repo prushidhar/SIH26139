@@ -3,7 +3,7 @@
 ================================================================================
 ALEPH-1: DEDICATED FINE-TUNED REAL IBM QUANTUM HARDWARE PIPELINE
 ================================================================================
-The hardware-calibrated quantum hybrid model for QuantumX.
+The hardware-calibrated quantum hybrid model for QureSight.
 Engineered for deployment on 127-qubit superconducting transmon processors
 (e.g., ibm_brisbane / ibm_osaka). Supports live Qiskit Runtime SamplerV2 jobs
 with M3 readout error mitigation and dynamical decoupling (XY4).
@@ -94,7 +94,7 @@ class Aleph1QpuPipeline:
             'include "stdgates.inc";',
             'qubit[8] q;',
             'bit[8] c;',
-            '// 1. QuantumX ZZ Feature Encoding'
+            '// 1. QureSight ZZ Feature Encoding'
         ]
         for i in range(8):
             lines.append(f'h q[{i}];')
@@ -182,7 +182,7 @@ class Aleph1QpuPipeline:
         return p_mal, expval, hardware_receipt
 
     def compute_quantum_saliency(self, raw_8: List[float], x_q: np.ndarray) -> List[Dict[str, Any]]:
-        """Computes QXplain gate ablation saliency gradients S(G_k)."""
+        """Computes QureExplain gate ablation saliency gradients S(G_k)."""
         feature_labels = [
             "Nuclear Size & Radius", "Surface Texture & Chromatin", "Cell Perimeter", "Nuclear Area",
             "Border Smoothness", "Compactness Index", "Indentation Depth (Concavity)", "Contour Indentation Count"

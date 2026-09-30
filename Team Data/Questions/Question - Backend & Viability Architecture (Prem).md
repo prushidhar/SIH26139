@@ -31,10 +31,10 @@
 ## 🎯 Part 2: Slide 5 Image Defense (Viability: Deployment Path, Economics, Clinical Risks & Mitigations)
 
 16. What is the 4-part viability framework presented in `Slide 5 - Viability.png` (Deployment Path, Economic, Clinical, Risks)?
-17. Under **Viable Research & Deployment Path**, how does QuantumX progress from external datasets to classical baselines, simulator validation, and IBM QPU validation?
+17. Under **Viable Research & Deployment Path**, how does QureSight progress from external datasets to classical baselines, simulator validation, and IBM QPU validation?
 18. What three disease domains are shown in the deployment path table (Breast Cancer, Heart Diseases, and Lung Disorders)?
 19. Under **Operational & Economic Viability**, what is the resource and cost profile that makes the platform viable for pilot clinic research?
-20. Why does QuantumX have a "low hardware need and high deployment fit" for standard diagnostic laboratories?
+20. Why does QureSight have a "low hardware need and high deployment fit" for standard diagnostic laboratories?
 21. Under **Clinical & Generalization Viability**, what key evaluation metrics are tracked (PR-AUC, ROC-AUC, Calibration, Multi-center validation)?
 22. Why is clinical viability described as "promising, but conditional on multi-center external and prospective validation"?
 23. Under **Key Risks & Mitigation Strategies**, what is the risk of **Overfitting / Data Imbalance**, and what is the mitigation (Stratified CV, SMOTE, Robust testing)?
@@ -43,5 +43,5 @@
 26. What is the risk of **Dataset Translation**, and what is the mitigation (Multi-dataset external cohorts and prospective validation)?
 27. How does the "Simulator-first with selective QPU validation" strategy minimize expensive cloud quantum compute costs?
 28. How does connecting via standard healthcare protocols (like HL7/FHIR and DICOM) ensure seamless hospital adoption?
-29. Why does QuantumX offer zero learning curve for practicing doctors (translating quantum states into standard risk scores)?
-30. Can you summarize why QuantumX has a viable path to clinical deployment in 3 simple sentences?
+29. Why does QureSight offer zero learning curve for practicing doctors (translating quantum states into standard risk scores)?
+30. Can you summarize why QureSight has a viable path to clinical deployment in 3 simple sentences?

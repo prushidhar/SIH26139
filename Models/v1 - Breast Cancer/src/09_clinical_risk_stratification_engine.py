@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-QUANTUMX: EMPIRICAL RISK STRATIFICATION & MORPHOMETRIC EVIDENCE ENGINE
+QURESIGHT: EMPIRICAL RISK STRATIFICATION & MORPHOMETRIC EVIDENCE ENGINE
 ================================================================================
 Calculates continuous, data-driven Clinical Risk Scores (0.0 to 100.0) based on
 empirical class-conditional quantiles of the Wisconsin Diagnostic Breast Cancer
@@ -160,8 +160,8 @@ if __name__ == "__main__":
     case_c = {"radius_mean": 22.418, "texture_mean": 27.631, "perimeter_mean": 151.274, "area_mean": 1578.642, "smoothness_mean": 0.103, "compactness_mean": 0.284, "concavity_mean": 0.318, "concave_points_mean": 0.174}
 
     res_a = compute_calibrated_clinical_risk(0.07, case_a, "Aegis-Classical-v1")
-    res_b = compute_calibrated_clinical_risk(0.55, case_b, "QuantumX-Hybrid-v1")
-    res_c = compute_calibrated_clinical_risk(0.99, case_c, "QuantumX-Hybrid-v1")
+    res_b = compute_calibrated_clinical_risk(0.55, case_b, "QureSight-Hybrid-v1")
+    res_c = compute_calibrated_clinical_risk(0.99, case_c, "QureSight-Hybrid-v1")
 
     print(f"Case A: Score={res_a['composite_risk_score']:.1f}% | Tier={res_a['risk_tier']}")
     print(f"Case B: Score={res_b['composite_risk_score']:.1f}% | Tier={res_b['risk_tier']}")

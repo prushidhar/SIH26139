@@ -1,6 +1,6 @@
 /**
  * ====================================================================================================
- * QuantumX — Batch Screening Orchestration Service
+ * QureSight — Batch Screening Orchestration Service
  * ====================================================================================================
  * Manages batch execution lifecycle: dispatches records to inference APIs, tracks progress,
  * persists results, and generates exportable datasets.
@@ -96,7 +96,7 @@ async function inferBreastCancer(record: ParsedRecord): Promise<any> {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       biomarkers: record.data,
-      model_family: "quantumx_hybrid_v1",
+      model_family: "quresight_hybrid_v1",
       execution_mode: "simulator",
       patient_info: {
         patient_id: record.patientId,
@@ -383,8 +383,8 @@ export async function executeBatch(
 function saveBatchSession(session: BatchSession): void {
   if (typeof window === "undefined") return;
   try {
-    const email = localStorage.getItem("quantumx_user_email") || "default";
-    const key = `quantumx_batch_sessions_${email}`;
+    const email = localStorage.getItem("quresight_user_email") || "default";
+    const key = `quresight_batch_sessions_${email}`;
     const existing = localStorage.getItem(key);
     const sessions: BatchSession[] = existing ? JSON.parse(existing) : [];
 
@@ -410,8 +410,8 @@ function saveBatchSession(session: BatchSession): void {
 export function getBatchSessions(): BatchSession[] {
   if (typeof window === "undefined") return [];
   try {
-    const email = localStorage.getItem("quantumx_user_email") || "default";
-    const key = `quantumx_batch_sessions_${email}`;
+    const email = localStorage.getItem("quresight_user_email") || "default";
+    const key = `quresight_batch_sessions_${email}`;
     const raw = localStorage.getItem(key);
     return raw ? JSON.parse(raw) : [];
   } catch {
@@ -486,7 +486,7 @@ export function exportBatchAsCSV(session: BatchSession): void {
 
   const csvContent = [headers.join(","), ...rows.map((r) => r.map((c) => `"${c}"`).join(","))].join("\n");
   const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8" });
-  saveAs(blob, `QuantumX_Batch_${session.batchId}.csv`);
+  saveAs(blob, `QureSight_Batch_${session.batchId}.csv`);
 }
 
 // ── Export: JSON ─────────────────────────────────────────────────────────────────
@@ -525,7 +525,7 @@ export function exportBatchAsJSON(session: BatchSession): void {
   };
 
   const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: "application/json" });
-  saveAs(blob, `QuantumX_Batch_${session.batchId}.json`);
+  saveAs(blob, `QureSight_Batch_${session.batchId}.json`);
 }
 
 // ── Export: PDF ZIP ──────────────────────────────────────────────────────────────
@@ -659,5 +659,5 @@ export async function exportBatchAsPdfZip(
 
   // 3. Save ZIP
   const zipBlob = await zip.generateAsync({ type: "blob" });
-  saveAs(zipBlob, `QuantumX_Batch_${session.batchId}_Reports.zip`);
+  saveAs(zipBlob, `QureSight_Batch_${session.batchId}_Reports.zip`);
 }

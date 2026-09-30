@@ -4,8 +4,8 @@ import { useState, useEffect, useCallback } from "react";
 
 export type QuantumBackendType = "ibmq_eagle" | "gpu_simulator";
 
-const STORAGE_KEY = "quantumx_backend";
-const EVENT_NAME = "quantumx_backend_change";
+const STORAGE_KEY = "quresight_backend";
+const EVENT_NAME = "quresight_backend_change";
 
 export function useQuantumBackend() {
   const [backend, setBackendState] = useState<QuantumBackendType>("ibmq_eagle");

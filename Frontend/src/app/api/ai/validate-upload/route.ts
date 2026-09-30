@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 /**
- * QuantumX Upload Content Validation API
+ * QureSight Upload Content Validation API
  *
  * Uses Gemini Vision to classify uploaded images/documents for disease relevance.
  * - For cardiac ECG: determines if an image is actually a 12-lead ECG strip.

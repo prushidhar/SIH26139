@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "QuantumX — Hybrid Quantum-Classical Machine Learning Platform",
-    short_name: "QuantumX",
+    name: "QureSight — Hybrid Quantum-Classical Machine Learning Platform",
+    short_name: "QureSight",
     description:
-      "QuantumX applies hybrid quantum-classical models to multi-omics and clinical data for early disease detection with mathematical rigor.",
+      "QureSight applies hybrid quantum-classical models to multi-omics and clinical data for early disease detection with mathematical rigor.",
     start_url: "/",
     display: "standalone",
     background_color: "#0a0d14",

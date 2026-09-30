@@ -21,9 +21,9 @@ export default function WelcomeModal() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const isNewReg = localStorage.getItem("quantumx_is_new_registration");
-      const dismissed = localStorage.getItem("quantumx_welcome_modal_dismissed");
-      const storedName = localStorage.getItem("quantumx_user_name");
+      const isNewReg = localStorage.getItem("quresight_is_new_registration");
+      const dismissed = localStorage.getItem("quresight_welcome_modal_dismissed");
+      const storedName = localStorage.getItem("quresight_user_name");
       const cached = AuthService.getCachedUser();
 
       let resolvedName = storedName || cached?.fullName || cached?.username || "";
@@ -38,7 +38,7 @@ export default function WelcomeModal() {
       if (isNewReg === "true" && !dismissed) {
         setIsOpen(true);
         NotificationService.createNotification({
-          title: "Welcome to QuantumX Workbench",
+          title: "Welcome to QureSight Workbench",
           category: "system",
           message: "Your quantum medical workspace is active and ready to use.",
           actionUrl: "/predict",
@@ -50,8 +50,8 @@ export default function WelcomeModal() {
   const handleDismiss = () => {
     setIsOpen(false);
     if (typeof window !== "undefined") {
-      localStorage.removeItem("quantumx_is_new_registration");
-      localStorage.setItem("quantumx_welcome_modal_dismissed", "true");
+      localStorage.removeItem("quresight_is_new_registration");
+      localStorage.setItem("quresight_welcome_modal_dismissed", "true");
     }
   };
 
@@ -100,7 +100,7 @@ export default function WelcomeModal() {
                 </span>
               </div>
               <h2 className="font-serif text-2xl sm:text-3xl font-light text-foreground tracking-tight">
-                Welcome to QuantumX, {userName}
+                Welcome to QureSight, {userName}
               </h2>
               <p className="text-xs sm:text-sm text-muted-foreground font-light mt-1.5 leading-relaxed max-w-xl">
                 Your medical research workspace is active and ready to run quantum screenings and AI diagnostics.
@@ -212,7 +212,7 @@ export default function WelcomeModal() {
                 onClick={handleDismiss}
                 className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-foreground text-background hover:opacity-90 transition-all text-xs font-medium flex items-center justify-center gap-2 cursor-pointer shadow-sm"
               >
-                Get Started with QuantumX <ArrowRight size={13} />
+                Get Started with QureSight <ArrowRight size={13} />
               </button>
             </div>
           </motion.div>

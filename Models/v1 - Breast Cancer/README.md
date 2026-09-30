@@ -1,19 +1,19 @@
-# ⚛️ QuantumX v1: End-to-End Hybrid Quantum & Classical ML Training Engine (Breast Cancer Diagnostic Pipeline)
+# ⚛️ QureSight v1: End-to-End Hybrid Quantum & Classical ML Training Engine (Breast Cancer Diagnostic Pipeline)
 
-> **System Designation**: QuantumX Platform — Clinical Biomarker & Variational Quantum Classifier Pipeline  
+> **System Designation**: QureSight Platform — Clinical Biomarker & Variational Quantum Classifier Pipeline  
 > **Target Pathology**: Malignant vs. Benign Neoplasm Stratification (Wisconsin Diagnostic Breast Cancer — WDBC)  
 > **Architecture Class**: 8-Qubit Variational Quantum Classifier (VQC) & Classical Benchmark Ensemble  
-> **Primary Interactive Artifact**: [`QuantumX_v1_Training_Pipeline.ipynb`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/v1%20-%20Breast%20Cancer/QuantumX_v1_Training_Pipeline.ipynb)  
-> **Source Directory**: [`Models/v1 - Breast Cancer/src/`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/v1%20-%20Breast%20Cancer/src/) (Sequentially Numbered Engines 01 to 10)  
-> **Benchmark Artifacts**: [`Models/v1 - Breast Cancer/benchmarks/`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/v1%20-%20Breast%20Cancer/benchmarks/)  
-> **Production Weights**: [`Models/v1 - Breast Cancer/artifacts_v1/`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/v1%20-%20Breast%20Cancer/artifacts_v1/)  
+> **Primary Interactive Artifact**: [`QureSight_v1_Training_Pipeline.ipynb`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/QureSight_v1_Training_Pipeline.ipynb)  
+> **Source Directory**: [`Models/v1 - Breast Cancer/src/`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/src/) (Sequentially Numbered Engines 01 to 10)  
+> **Benchmark Artifacts**: [`Models/v1 - Breast Cancer/benchmarks/`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/benchmarks/)  
+> **Production Weights**: [`Models/v1 - Breast Cancer/artifacts_v1/`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/artifacts_v1/)  
 > **Compliance & Protocol**: Smart India Hackathon 2026 (SIH26139) — Zero-Data-Leakage Tri-Model Benchmark Verification Protocol (TM-BVP)
 
 ---
 
 ## 1. System Overview & Clinical Problem Formulation
 
-QuantumX v1 is an enterprise-grade medical machine learning and quantum computing framework engineered for high-precision diagnostic cytopathology triage. Using fine-needle aspirate (FNA) cellular morphometry from the Wisconsin Diagnostic Breast Cancer (WDBC) dataset ($N = 569$ patients, 30 continuous nuclear characteristics), QuantumX v1 addresses the challenge of resolving ambiguous, borderline cellular dysplasia where classical linear boundaries experience elevated false-negative rates.
+QureSight v1 is an enterprise-grade medical machine learning and quantum computing framework engineered for high-precision diagnostic cytopathology triage. Using fine-needle aspirate (FNA) cellular morphometry from the Wisconsin Diagnostic Breast Cancer (WDBC) dataset ($N = 569$ patients, 30 continuous nuclear characteristics), QureSight v1 addresses the challenge of resolving ambiguous, borderline cellular dysplasia where classical linear boundaries experience elevated false-negative rates.
 
 The platform executes a parallel benchmarking protocol: high-performance classical champions (XGBoost, SVM-RBF, Random Forest, PyTorch MLP) are evaluated side-by-side with an 8-Qubit Parameterized Quantum Circuit operating in a $2^8 = 256$-dimensional complex Hilbert state space ($\mathbb{C}^{256}$).
 
@@ -63,7 +63,7 @@ The platform executes a parallel benchmarking protocol: high-performance classic
 
 ```
 Models/v1 - Breast Cancer/
-├── QuantumX_v1_Training_Pipeline.ipynb   # Primary interactive research notebook
+├── QureSight_v1_Training_Pipeline.ipynb   # Primary interactive research notebook
 ├── INSIGHTS.md                            # Comprehensive telemetry, saliency & circuit pruning report
 ├── README.md                              # Complete system architecture documentation (this file)
 ├── artifacts_v1/                          # Serialized model weights and production checkpoints
@@ -76,15 +76,15 @@ Models/v1 - Breast Cancer/
 │   ├── vqc_config.json                    # Quantum circuit hyperparameters and ansatz configuration
 │   ├── feature_metadata.json              # Canonical selected feature names and indices
 │   ├── benchmark_report.json              # Comprehensive 50-fold statistical evaluation summary
-│   └── QuantumX_v1_Trained_Models_Bundle.zip # Compressed offline weights archive
+│   └── QureSight_v1_Trained_Models_Bundle.zip # Compressed offline weights archive
 ├── benchmarks/                            # Publication-grade figures, ROC curves, and reports
 │   ├── Figure1_MultiMetric_Comparison.png # Multi-metric comparative bar chart with error bars
 │   ├── Figure2_ROC_Curves.png             # Receiver Operating Characteristic (ROC) curves & AUROC
-│   ├── Figure3_Quantum_Saliency_Heatmap.png # QXplain causal gate ablation saliency heatmaps
+│   ├── Figure3_Quantum_Saliency_Heatmap.png # QureExplain causal gate ablation saliency heatmaps
 │   ├── Figure4_Quantum_Circuit_Architecture.png # Rendered 8-qubit PennyLane circuit diagram
 │   ├── Figure_Master_Benchmark_Dashboard.png # Master 4-panel publication benchmark dashboard
-│   ├── QuantumX_v1_Training_Convergence_and_Saliency_Execution.png # VQC loss descent & convergence plot
-│   └── QuantumX_v1_Comprehensive_Scientific_Report.md # Formal report with signed OpenQASM 3.0 receipts
+│   ├── QureSight_v1_Training_Convergence_and_Saliency_Execution.png # VQC loss descent & convergence plot
+│   └── QureSight_v1_Comprehensive_Scientific_Report.md # Formal report with signed OpenQASM 3.0 receipts
 ├── Test Cases - Breast Cancer/            # Multi-modal demo test cases partitioned by diagnosis
 │   ├── Benign/                            # 5 Benign patient test cases (Case 01 to 05) across 6 modalities
 │   │   ├── csv/                           # Comma-separated values format
@@ -105,7 +105,7 @@ Models/v1 - Breast Cancer/
     ├── 02_classical_benchmark_suite.py    # Step 02: Classical classifiers (XGBoost, SVM, RF, MLP)
     ├── 03_quantum_circuits_and_ansatz.py  # Step 03: PennyLane quantum state embeddings and VQC
     ├── 04_quantum_noise_and_error_mitigation.py # Step 04: Superconducting noise emulation & ZNE
-    ├── 05_quantum_explainability_xai.py   # Step 05: QXplain gate saliency & OpenQASM 3.0 export
+    ├── 05_quantum_explainability_xai.py   # Step 05: QureExplain gate saliency & OpenQASM 3.0 export
     ├── 06_train_and_verification_pipeline.py # Step 06: Master 50-fold training loop & stats
     ├── 07_classical_inference_engine.py   # Step 07: Dedicated classical inference service (CX-01)
     ├── 08_quantum_hybrid_inference_engine.py # Step 08: Dedicated quantum inference service (QX-01)
@@ -118,46 +118,46 @@ Models/v1 - Breast Cancer/
 
 ## 4. Detailed Specification of Source Modules (`src/`)
 
-### [`01_data_preprocessing_engine.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/v1%20-%20Breast%20Cancer/src/01_data_preprocessing_engine.py)
+### [`01_data_preprocessing_engine.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/src/01_data_preprocessing_engine.py)
 * **Purpose**: Ingests WDBC cytopathology data, enforces strict fold isolation (zero leakage), applies 1st/99th percentile Winsorization, scales features to the rotational interval $[0, \pi]$, and executes Simulated Annealing feature selection.
 * **Key Classes & Methods**: `load_wdbc_dataset`, `FoldPreprocessor`, `ImprovedSimulatedAnnealingSelector`, `GeometricDifferenceCalculator`.
 
-### [`02_classical_benchmark_suite.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/v1%20-%20Breast%20Cancer/src/02_classical_benchmark_suite.py)
+### [`02_classical_benchmark_suite.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/src/02_classical_benchmark_suite.py)
 * **Purpose**: Defines and tunes the classical champion classifier suite: XGBoost (`n_estimators=100, max_depth=3`), Support Vector Machine (`kernel='rbf', C=10.0, gamma='scale'`), Random Forest (`n_estimators=1000`), ElasticNet Logistic Regression, and PyTorch Deep MLP.
 * **Key Classes & Methods**: `XGBoostChampion`, `SVMRBFChampion`, `RandomForestChampion`, `ElasticNetLogisticChampion`, `PyTorchMLPChampion`, `evaluate_classifier`.
 
-### [`03_quantum_circuits_and_ansatz.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/v1%20-%20Breast%20Cancer/src/03_quantum_circuits_and_ansatz.py)
+### [`03_quantum_circuits_and_ansatz.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/src/03_quantum_circuits_and_ansatz.py)
 * **Purpose**: Constructs PennyLane quantum circuits across 8 wires: Hadamard superposition $H^{\otimes 8}$, single-qubit phase rotations $R_z(2x_i)$, second-order entangling blocks $\text{CNOT} \to R_z(2(\pi-x_i)(\pi-x_j)) \to \text{CNOT}$, $L=2$ Strongly Entangling Layers with circular CNOTs, and Pauli-$Z$ observable expectation measurements $\langle \sigma_z^{(i)} \rangle$.
 * **Key Classes & Methods**: `zz_feature_map`, `strongly_entangling_ansatz`, `VariationalQuantumClassifier`, `QuantumKernelSVM`, `HQNNChampion`.
 
-### [`04_quantum_noise_and_error_mitigation.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/v1%20-%20Breast%20Cancer/src/04_quantum_noise_and_error_mitigation.py)
+### [`04_quantum_noise_and_error_mitigation.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/src/04_quantum_noise_and_error_mitigation.py)
 * **Purpose**: Emulates physical superconducting quantum processor noise (depolarizing, amplitude/phase damping, readout SPAM) and implements Richardson polynomial Zero-Noise Extrapolation across noise scale factors $\lambda \in \{1.0, 1.5, 2.0, 3.0\}$.
 * **Key Classes & Methods**: `NoisyQuantumDevice`, `ZeroNoiseExtrapolator`.
 
-### [`05_quantum_explainability_xai.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/v1%20-%20Breast%20Cancer/src/05_quantum_explainability_xai.py)
-* **Purpose**: Implements QXplain Level 2 causal gate ablation saliency $\mathcal{S}(G_k)$, Level 3 subsystem Von Neumann entanglement entropy, and generates cryptographically signed OpenQASM 3.0 circuit receipts with SHA-256 validation hashes.
+### [`05_quantum_explainability_xai.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/src/05_quantum_explainability_xai.py)
+* **Purpose**: Implements QureExplain Level 2 causal gate ablation saliency $\mathcal{S}(G_k)$, Level 3 subsystem Von Neumann entanglement entropy, and generates cryptographically signed OpenQASM 3.0 circuit receipts with SHA-256 validation hashes.
 * **Key Classes & Methods**: `compute_input_feature_importance`, `QuantumGateAblator`, `compute_von_neumann_entropy`, `CryptographicQuantumReceiptGenerator`.
 
-### [`06_train_and_verification_pipeline.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/v1%20-%20Breast%20Cancer/src/06_train_and_verification_pipeline.py)
+### [`06_train_and_verification_pipeline.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/src/06_train_and_verification_pipeline.py)
 * **Purpose**: Master orchestrator executing 50-fold repeated stratified cross-validation, Parameter-Shift gradient computation, Adam optimization, model serialization, McNemar's $\chi^2$ discordance contingency matrix calculation, and Wilcoxon signed-rank verification.
-* **Key Classes & Methods**: `StatisticalSignificanceEngine`, `QuantumXMasterPipeline`.
+* **Key Classes & Methods**: `StatisticalSignificanceEngine`, `QureSightMasterPipeline`.
 
-### [`07_classical_inference_engine.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/v1%20-%20Breast%20Cancer/src/07_classical_inference_engine.py)
+### [`07_classical_inference_engine.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/src/07_classical_inference_engine.py)
 * **Purpose**: Dedicated standalone inference service for classical models (`CX-01`). Loads production weights from `artifacts_v1/`, expands 8 canonical features to 30 baseline dimensions, computes a weighted ensemble probability ($0.50 \cdot P_{\text{SVM}} + 0.35 \cdot P_{\text{XGB}} + 0.15 \cdot P_{\text{RF}}$), evaluates directional SHAP attributions, and returns calibrated clinical risk tiers in $<5\text{ ms}$.
 * **Key Classes & Methods**: `AegisClassicalEngine`, `aegis_engine`.
 
-### [`08_quantum_hybrid_inference_engine.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/v1%20-%20Breast%20Cancer/src/08_quantum_hybrid_inference_engine.py)
+### [`08_quantum_hybrid_inference_engine.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/src/08_quantum_hybrid_inference_engine.py)
 * **Purpose**: Dedicated standalone inference service for the hybrid quantum model (`QX-01`). Executes the 8-qubit VQC on local CPU statevector simulators ($<15\text{ ms}$) or compiles to real IBM Quantum superconducting QPUs via Qiskit Runtime, calculating live gate ablation saliencies and OpenQASM 3.0 receipts.
-* **Key Classes & Methods**: `QuantumXHybridEngine`, `quantumx_engine`.
+* **Key Classes & Methods**: `QureSightHybridEngine`, `quresight_engine`.
 
-### [`09_clinical_risk_stratification_engine.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/v1%20-%20Breast%20Cancer/src/09_clinical_risk_stratification_engine.py)
+### [`09_clinical_risk_stratification_engine.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/src/09_clinical_risk_stratification_engine.py)
 * **Purpose**: Synthesizes model output probabilities with the empirical Morphometric Evidence Index (MEI) derived from WDBC class-conditional quantiles, mapping predictions into continuous Risk Scores ($0.0$ to $100.0$) and four actionable triage tiers: `LOW RISK`, `BORDERLINE`, `HIGH RISK`, and `CRITICAL`.
 * **Key Classes & Methods**: `compute_calibrated_clinical_risk`, `calculate_morphometric_evidence_index`.
 
-### [`10_generate_benchmark_graphs.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/v1%20-%20Breast%20Cancer/src/10_generate_benchmark_graphs.py)
-* **Purpose**: Standalone scientific plotting script rendering high-resolution ($300\ \text{DPI}$) publication figures and dashboards directly into [`Models/v1 - Breast Cancer/benchmarks/`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/v1%20-%20Breast%20Cancer/benchmarks/).
+### [`10_generate_benchmark_graphs.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/src/10_generate_benchmark_graphs.py)
+* **Purpose**: Standalone scientific plotting script rendering high-resolution ($300\ \text{DPI}$) publication figures and dashboards directly into [`Models/v1 - Breast Cancer/benchmarks/`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/benchmarks/).
 
-### [`__init__.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/v1%20-%20Breast%20Cancer/src/__init__.py)
+### [`__init__.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/src/__init__.py)
 * **Purpose**: Package initialization script providing dynamic module loading and exposing all pipeline classes and singletons for clean external imports.
 
 ---
@@ -165,7 +165,7 @@ Models/v1 - Breast Cancer/
 ## 5. Execution Instructions
 
 ### Option A: Interactive Jupyter Notebook (Recommended)
-1. Open [`QuantumX_v1_Training_Pipeline.ipynb`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/v1%20-%20Breast%20Cancer/QuantumX_v1_Training_Pipeline.ipynb).
+1. Open [`QureSight_v1_Training_Pipeline.ipynb`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/QureSight_v1_Training_Pipeline.ipynb).
 2. If executing on Google Colab, select **Runtime > Change runtime type > T4 GPU**.
 3. Run all cells sequentially. The notebook executes data ingestion, simulated annealing feature selection, model training, noise simulation, gate saliency heatmap generation, and OpenQASM 3.0 export.
 
@@ -173,7 +173,7 @@ Models/v1 - Breast Cancer/
 
 ```powershell
 # Navigate to repository root
-cd c:\Users\anshu\OneDrive\Desktop\QuantumX
+cd c:\Users\anshu\OneDrive\Desktop\QureSight
 
 # --- Core Modules & Quantum Pipeline Engines ---
 # 01. Run Data Preprocessing & Simulated Annealing (ISA) Self-Test
@@ -188,7 +188,7 @@ cd c:\Users\anshu\OneDrive\Desktop\QuantumX
 # 04. Run Superconducting Quantum Noise & Richardson ZNE Self-Test
 .\Backend\.venv\Scripts\python.exe "Models/v1 - Breast Cancer/src/04_quantum_noise_and_error_mitigation.py"
 
-# 05. Run QXplain Gate Saliency & OpenQASM 3.0 Receipt Generator
+# 05. Run QureExplain Gate Saliency & OpenQASM 3.0 Receipt Generator
 .\Backend\.venv\Scripts\python.exe "Models/v1 - Breast Cancer/src/05_quantum_explainability_xai.py"
 
 # 06. Execute Master 50-Fold Repeated CV Training & Statistical Verification

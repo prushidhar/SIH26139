@@ -1,4 +1,4 @@
-"""QuantumX Production Balanced Q-SHAP Explainer for Hybrid Quantum Cardiac Model
+"""QureSight Production Balanced Q-SHAP Explainer for Hybrid Quantum Cardiac Model
 Mathematical Principle: Dual-Manifold Path-Shapley on Quantum Observables & Classical Context
 Readout: 8 Single-Qubit Polarizations + 8 Circular Entanglement Correlations + 64 Classical Context Factors
 """
@@ -173,7 +173,7 @@ class HybridQuantumShapExplainer:
         
         report = []
         report.append("================================================================================")
-        report.append(f"QUANTUMX HYBRID QUANTUM Q-SHAP EXPLANATION: DIAGNOSIS = {pred_cls.upper()} ({conf:.2f}%)")
+        report.append(f"QURESIGHT HYBRID QUANTUM Q-SHAP EXPLANATION: DIAGNOSIS = {pred_cls.upper()} ({conf:.2f}%)")
         report.append("================================================================================")
         report.append("1. MATHEMATICAL LOGIT RECONSTRUCTION:")
         report.append(f"   • Expected Population Base Value E[f(x)]: {base_v:+.4f}")

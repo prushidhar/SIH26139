@@ -29,9 +29,9 @@ import { ScreeningService } from "@/services/screening.service";
 
 export default function BreastCancerAnalysisPage() {
   const router = useRouter();
-  // 4 Focused Tabs: 1. Key Risk Factors, 2. QuantumX AI, 3. Model Comparison, 4. Real-Time Graphs
+  // 4 Focused Tabs: 1. Key Risk Factors, 2. QureSight AI, 3. Model Comparison, 4. Real-Time Graphs
   const [activeTab, setActiveTab] = useState<
-    "key_risk_factors" | "quantumx_ai" | "model_comparison" | "realtime_graphs"
+    "key_risk_factors" | "quresight_ai" | "model_comparison" | "realtime_graphs"
   >("key_risk_factors");
 
   // Model selection switch: "transfinite_1" (Hybrid Quantum) vs "cx_01" (Classical Baseline)
@@ -58,7 +58,7 @@ export default function BreastCancerAnalysisPage() {
 
   const [screeningResult, setScreeningResult] = useState<any>({
     engine: "Transfinite-1",
-    model_family: "quantumx_hybrid_v1",
+    model_family: "quresight_hybrid_v1",
     execution_mode: "simulator",
     prediction_label: "Benign",
     confidence: 50.6,
@@ -81,7 +81,7 @@ export default function BreastCancerAnalysisPage() {
   useEffect(() => {
     // 1. Load active session analysis payload if navigated from Screening Form
     try {
-      const stored = sessionStorage.getItem("quantumx_active_analysis");
+      const stored = sessionStorage.getItem("quresight_active_analysis");
       if (stored) {
         const parsed = JSON.parse(stored);
         if (parsed.patientInfo) setPatientInfo(parsed.patientInfo);
@@ -124,45 +124,27 @@ export default function BreastCancerAnalysisPage() {
   const tfData = dc?.transfinite_1;
   const cxData = dc?.cx_01;
 
-  // Real-time calculated baseline fallbacks for this specific patient
-  const rVal = biomarkers.radius_mean || 12.2;
-  const cVal = biomarkers.concavity_mean || 0.037;
-  const aVal = biomarkers.area_mean || 458.7;
-  const pVal = biomarkers.perimeter_mean || 78.2;
-
-  const rNorm = (rVal - 12.2) / 4.0;
-  const cNorm = (cVal - 0.04) / 0.08;
-  const aNorm = (aVal - 458.7) / 400.0;
-  const scoreLogit = 0.45 * rNorm + 0.35 * cNorm + 0.2 * aNorm;
-
-  const cx01CalculatedProb = Math.max(
-    0.5,
-    Math.min(99.5, (1.0 / (1.0 + Math.exp(-(scoreLogit * 4.0)))) * 100.0)
-  );
-  const tfCalculatedProb = Math.max(
-    0.5,
-    Math.min(99.5, (1.0 / (1.0 + Math.exp(-(scoreLogit * 3.5)))) * 100.0)
-  );
+  // Authentic model outputs from backend
+  const cx01CalculatedProb = Number(cxData?.risk_score ?? screeningResult.composite_risk_score ?? 50.0);
+  const tfCalculatedProb = Number(tfData?.risk_score ?? screeningResult.composite_risk_score ?? 50.0);
 
   // ACTIVE MODEL SELECTION
   const isHybrid = selectedModel === "transfinite_1";
 
   const activeRiskScore = isHybrid
-    ? (tfData?.risk_score ?? screeningResult.composite_risk_score ?? tfCalculatedProb)
-    : (cxData?.risk_score ?? cx01CalculatedProb);
+    ? (tfData?.risk_score ?? screeningResult.composite_risk_score ?? 50.0)
+    : (cxData?.risk_score ?? screeningResult.composite_risk_score ?? 50.0);
 
   const activePrediction = isHybrid
-    ? (tfData?.prediction_label ??
-      screeningResult.prediction_label ??
-      (tfCalculatedProb >= 50 ? "Malignant" : "Benign"))
-    : (cxData?.prediction_label ?? (cx01CalculatedProb >= 50 ? "Malignant" : "Benign"));
+    ? (tfData?.prediction_label ?? screeningResult.prediction_label ?? "Benign")
+    : (cxData?.prediction_label ?? screeningResult.prediction_label ?? "Benign");
 
   const activeConfidence = isHybrid
-    ? (tfData?.confidence ?? screeningResult.confidence ?? 50.6)
-    : (cxData?.confidence ?? 70.5);
+    ? (tfData?.confidence ?? screeningResult.confidence ?? 50.0)
+    : (cxData?.confidence ?? screeningResult.confidence ?? 70.0);
 
   const activeLatency = isHybrid
-    ? (tfData?.latency_ms ?? 17.7)
+    ? (tfData?.latency_ms ?? screeningResult.latency_ms ?? 17.7)
     : (cxData?.latency_ms ?? 1.5);
 
   const activeEngineName = isHybrid ? "Transfinite-1" : "CX-01";
@@ -326,7 +308,7 @@ export default function BreastCancerAnalysisPage() {
         downloadCombinedReport(payload);
         showToast({
           title: "Report Download Complete",
-          message: `Saved QuantumX_Report_${payload.patient.patientId}_Combined.pdf`,
+          message: `Saved QureSight_Report_${payload.patient.patientId}_Combined.pdf`,
           type: "quantum",
         });
       } catch (err: any) {
@@ -372,7 +354,7 @@ export default function BreastCancerAnalysisPage() {
                 </span>
               </div>
               <p className="text-xs text-ink-soft font-light">
-                Comprehensive biopsy cell analysis, QuantumX AI summary, and multi-engine diagnostic comparison.
+                Comprehensive biopsy cell analysis, QureSight AI summary, and multi-engine diagnostic comparison.
               </p>
             </div>
           </div>
@@ -558,17 +540,17 @@ export default function BreastCancerAnalysisPage() {
             <span>📊 1. Key Risk Factors</span>
           </button>
 
-          {/* Tab 2: QuantumX AI */}
+          {/* Tab 2: QureSight AI */}
           <button
-            onClick={() => setActiveTab("quantumx_ai")}
+            onClick={() => setActiveTab("quresight_ai")}
             className={`py-2 px-4 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-              activeTab === "quantumx_ai"
+              activeTab === "quresight_ai"
                 ? "bg-white text-ink font-bold shadow-xs border border-hairline"
                 : "text-ink-soft hover:text-ink"
             }`}
           >
-            <Sparkles size={14} className={activeTab === "quantumx_ai" ? "text-quantum" : ""} />
-            <span>✨ 2. QuantumX AI</span>
+            <Sparkles size={14} className={activeTab === "quresight_ai" ? "text-quantum" : ""} />
+            <span>✨ 2. QureSight AI</span>
           </button>
 
           {/* Tab 3: Model Comparison */}
@@ -610,7 +592,7 @@ export default function BreastCancerAnalysisPage() {
           />
         )}
 
-        {activeTab === "quantumx_ai" && (
+        {activeTab === "quresight_ai" && (
           <AiDoctorConsultationTab
             patientInfo={patientInfo}
             biomarkers={biomarkers}

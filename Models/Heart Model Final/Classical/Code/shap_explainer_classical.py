@@ -1,4 +1,4 @@
-"""QuantumX Production Balanced SHAP Explainer for Classical 12-Lead ECG Model (ECGConVT)
+"""QureSight Production Balanced SHAP Explainer for Classical 12-Lead ECG Model (ECGConVT)
 Mathematical Principle: Path-Shapley / Gradient-SHAP with Stratified Multi-Class Reference
 Anatomical Decomposition: Symmetrical 12-Lead Grid + Rhythm Strip Attribution
 """
@@ -193,7 +193,7 @@ class ClassicalECGShapExplainer:
         
         report = []
         report.append("================================================================================")
-        report.append(f"QUANTUMX CLASSICAL ECG SHAP EXPLANATION: DIAGNOSIS = {pred_cls.upper()} ({conf:.2f}%)")
+        report.append(f"QURESIGHT CLASSICAL ECG SHAP EXPLANATION: DIAGNOSIS = {pred_cls.upper()} ({conf:.2f}%)")
         report.append("================================================================================")
         report.append(f"1. MATHEMATICAL LOGIT DECOMPOSITION:")
         report.append(f"   • Expected Population Base Logit E[f(x)]: {base_v:+.4f}")

@@ -3,7 +3,7 @@
 ================================================================================
 CX-01: DEDICATED CLASSICAL BENCHMARK PIPELINE
 ================================================================================
-The isolated, standalone classical baseline engine for QuantumX.
+The isolated, standalone classical baseline engine for QureSight.
 Trained on zero-leakage 30-feature WDBC cytopathology vectors using RBF Support
 Vector Machines and Gradient Boosted Decision Trees (XGBoost).
 ================================================================================

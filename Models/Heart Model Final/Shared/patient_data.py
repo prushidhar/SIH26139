@@ -1,4 +1,4 @@
-"""QuantumX Patient-Isolated Clinical ECG Dataset Module
+"""QureSight Patient-Isolated Clinical ECG Dataset Module
 Guarantees 0% intra-patient data leakage between Train, Validation, and Test sets.
 Extracts true patient identifiers from clinical filenames, eliminates image duplications,
 and verifies strict isolation against absolute holdout test cases.

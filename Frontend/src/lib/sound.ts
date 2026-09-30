@@ -1,5 +1,5 @@
 /**
- * QuantumX Bespoke Medical Audio Engine
+ * QureSight Bespoke Medical Audio Engine
  * Uses Web Audio API to synthesize a multi-harmonic quantum completion acoustic chord.
  */
 
@@ -8,7 +8,7 @@ export function playQuantumCompletionSound(force: boolean = false): void {
 
   // Check if user has audio feedback enabled (default: true)
   if (!force) {
-    const audioSetting = localStorage.getItem("quantumx_setting_audio");
+    const audioSetting = localStorage.getItem("quresight_setting_audio");
     if (audioSetting === "false") return;
   }
 

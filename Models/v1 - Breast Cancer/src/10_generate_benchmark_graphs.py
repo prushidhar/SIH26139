@@ -1,5 +1,5 @@
 # ====================================================================================================
-# CELL: QuantumX Publication-Grade Benchmark Visualizer & Performance Analytics
+# CELL: QureSight Publication-Grade Benchmark Visualizer & Performance Analytics
 # ====================================================================================================
 import os
 import warnings
@@ -162,7 +162,7 @@ ax_mc.set_title(
 
 # Overall Title
 fig.suptitle(
-    "QuantumX v1: Tri-Model Diagnostic Verification & Quantum Complementarity",
+    "QureSight v1: Tri-Model Diagnostic Verification & Quantum Complementarity",
     fontsize=15,
     fontweight="bold",
     y=0.99

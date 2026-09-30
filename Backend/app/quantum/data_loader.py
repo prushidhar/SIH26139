@@ -1,5 +1,5 @@
 """
-QuantumX — Breast Cancer Oncology (WDBC) Data Ingestion & Preprocessing
+QureSight — Breast Cancer Oncology (WDBC) Data Ingestion & Preprocessing
 Strictly implements Section 5 & 12 of the Master Architecture Blueprint.
 Zero-Leakage Fold-Internal Scaler & Winsorization.
 """

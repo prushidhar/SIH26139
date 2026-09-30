@@ -1,6 +1,6 @@
-# ⚛️ QuantumX Machine Learning & Quantum Model Registry
+# ⚛️ QureSight Machine Learning & Quantum Model Registry
 
-> **Platform Architecture**: QuantumX Hybrid Quantum-Classical Clinical Intelligence Platform  
+> **Platform Architecture**: QureSight Hybrid Quantum-Classical Clinical Intelligence Platform  
 > **Primary Repository**: Medical AI, Quantum Machine Learning (QML), and Tri-Model Verification Protocols  
 > **Compliance Standard**: Zero-Data-Leakage Tri-Model Benchmark Verification Protocol (TM-BVP)  
 > **Active Production Suite**: [`Models/v1 - Breast Cancer/`](./v1%20-%20Breast%20Cancer/)  
@@ -9,7 +9,7 @@
 
 ## 1. Multi-Disease Hierarchical Architecture & Taxonomy
 
-The QuantumX platform is structured across three primary clinical disease pillars. Each disease domain is categorized by its specific diagnostic test modality, progressing from initial working baseline implementations (`v1`) to advanced, enhanced iterations (`v2`, `v3`):
+The QureSight platform is structured across three primary clinical disease pillars. Each disease domain is categorized by its specific diagnostic test modality, progressing from initial working baseline implementations (`v1`) to advanced, enhanced iterations (`v2`, `v3`):
 
 ```
 Models/
@@ -58,15 +58,15 @@ Models/
 * **Feature Selection**: Improved Simulated Annealing (ISA) selecting $d = 8$ canonical nuclear biomarkers with geometric kernel difference verification ($s_K$).
 * **Quantum Circuit**: 8-Wire Second-Order Pauli-$Z$ ($ZZ$) Feature Map with $L = 2$ Strongly Entangling Layers ($48$ variational rotation parameters).
 * **Noise Mitigation**: Calibrated Superconducting Quantum Noise Channels (Depolarizing, Thermal Relaxation, SPAM) with Richardson Polynomial Zero-Noise Extrapolation (ZNE).
-* **Explainability**: QXplain Multi-Level XAI (Level 1 SHAP, Level 2 Gate Ablation Saliency $\mathcal{S}(G_k)$, Level 3 Subsystem Entanglement Entropy) and Cryptographically Signed OpenQASM 3.0 Receipts.
-* **Master Interactive Artifact**: [`QuantumX_v1_Training_Pipeline.ipynb`](./v1%20-%20Breast%20Cancer/QuantumX_v1_Training_Pipeline.ipynb).
+* **Explainability**: QureExplain Multi-Level XAI (Level 1 SHAP, Level 2 Gate Ablation Saliency $\mathcal{S}(G_k)$, Level 3 Subsystem Entanglement Entropy) and Cryptographically Signed OpenQASM 3.0 Receipts.
+* **Master Interactive Artifact**: [`QureSight_v1_Training_Pipeline.ipynb`](./v1%20-%20Breast%20Cancer/QureSight_v1_Training_Pipeline.ipynb).
 * **Complete System Documentation**: [`Models/v1 - Breast Cancer/README.md`](./v1%20-%20Breast%20Cancer/README.md).
 
 ### Component Layout
 ```
 Models/v1 - Breast Cancer/
 ├── README.md                              # Complete v1 platform architecture documentation
-├── QuantumX_v1_Training_Pipeline.ipynb    # Primary interactive research notebook (Colab / GPU)
+├── QureSight_v1_Training_Pipeline.ipynb    # Primary interactive research notebook (Colab / GPU)
 ├── artifacts_v1/                          # Pretrained model weights, scalers, and JSON configs
 ├── benchmarks/                            # Publication-grade figures, ROC curves, and reports
 ├── Test Cases - Breast Cancer/            # 9 multi-modal clinical test cases (5 Benign, 4 Malignant)
@@ -75,7 +75,7 @@ Models/v1 - Breast Cancer/
     ├── 02_classical_benchmark_suite.py    # Classical classifiers (XGBoost, SVM, RF, MLP)
     ├── 03_quantum_circuits_and_ansatz.py  # PennyLane state embeddings & VQC circuits
     ├── 04_quantum_noise_and_error_mitigation.py # Superconducting noise emulation & ZNE
-    ├── 05_quantum_explainability_xai.py   # QXplain gate saliency & OpenQASM receipts
+    ├── 05_quantum_explainability_xai.py   # QureExplain gate saliency & OpenQASM receipts
     ├── 06_train_and_verification_pipeline.py # Master 50-fold training loop & stats
     ├── 07_classical_inference_engine.py   # Dedicated classical inference service (CX-01)
     ├── 08_quantum_hybrid_inference_engine.py # Dedicated quantum inference service (QX-01)
@@ -107,7 +107,7 @@ cd <path-to-repository-root>
 # 04. Run Superconducting Quantum Noise & Richardson ZNE Self-Test
 .\Backend\.venv\Scripts\python.exe "Models/v1 - Breast Cancer/src/04_quantum_noise_and_error_mitigation.py"
 
-# 05. Run QXplain Gate Saliency & OpenQASM 3.0 Receipt Generator
+# 05. Run QureExplain Gate Saliency & OpenQASM 3.0 Receipt Generator
 .\Backend\.venv\Scripts\python.exe "Models/v1 - Breast Cancer/src/05_quantum_explainability_xai.py"
 
 # 06. Execute Master 50-Fold Repeated CV Training & Statistical Verification

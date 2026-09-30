@@ -440,7 +440,7 @@ class AuthService:
         except Exception as e:
             logger.warning(f"[EMAIL NOTICE] Could not send via SMTP: {e}. Fallback console OTP for {user.email} is: {otp}")
             print(f"\n==========================================")
-            print(f" [QUANTUMX AUTH OTP] {user.email} -> {otp}")
+            print(f" [QURESIGHT AUTH OTP] {user.email} -> {otp}")
             print(f"==========================================\n")
 
         return user
@@ -514,7 +514,7 @@ class AuthService:
             logger.info(f"[RESEND OTP] Successfully resent verification code to {user.email}")
         except Exception as e:
             logger.warning(f"[RESEND OTP] SMTP dispatch notice: {e}. Console OTP: {otp}")
-            print(f"\n[QUANTUMX RESEND OTP] {user.email} -> {otp}\n")
+            print(f"\n[QURESIGHT RESEND OTP] {user.email} -> {otp}\n")
 
         return {
             "message": f"A new verification code was sent to {user.email}.",
@@ -775,7 +775,7 @@ class AuthService:
             logger.info(f"[PASSWORD RESET] Instructions sent to {user.email}")
         except Exception as e:
             logger.warning(f"[PASSWORD RESET] SMTP error: {e}. Console Token: {reset_token}")
-            print(f"\n[QUANTUMX RESET TOKEN] {user.email} -> {reset_token}\n")
+            print(f"\n[QURESIGHT RESET TOKEN] {user.email} -> {reset_token}\n")
 
     @staticmethod
     async def reset_password(

@@ -139,7 +139,7 @@ export default function KeyRiskFactorsTab({
   // Fetch real-time guideline advice
   const fetchClinicalAdvice = async (forceRefresh: boolean = false) => {
     setIsLoadingAdvice(true);
-    const cacheKey = `quantumx_clinical_advice_v4_${rawClassName}_${tier}`;
+    const cacheKey = `quresight_clinical_advice_v4_${rawClassName}_${tier}`;
 
     if (!forceRefresh) {
       try {

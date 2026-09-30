@@ -1,6 +1,6 @@
 /**
  * ====================================================================================================
- * QuantumX Medical Report Multi-Format Ingestion & AI Semantic Normalization Engine
+ * QureSight Medical Report Multi-Format Ingestion & AI Semantic Normalization Engine
  * ====================================================================================================
  * Ingests, parses, derives, and normalizes single-patient medical and laboratory reports across:
  * - .CSV / .TSV (Tabular lab sheets)

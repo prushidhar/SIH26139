@@ -4,14 +4,14 @@ import { LegalPageLayout } from "@/components/common/LegalPageLayout";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description:
-    "Terms and conditions governing the use of the QuantumX Hybrid Quantum-Classical Machine Learning Platform.",
+    "Terms and conditions governing the use of the QureSight Hybrid Quantum-Classical Machine Learning Platform.",
 };
 
 export default function TermsPage() {
   return (
     <LegalPageLayout
       title="Terms of Service"
-      subtitle="Governing the use of QuantumX hybrid quantum-classical algorithms, benchmarking pipelines, and biomedical analytical services."
+      subtitle="Governing the use of QureSight hybrid quantum-classical algorithms, benchmarking pipelines, and biomedical analytical services."
       badge="Legal & Licensing"
       iconType="file"
     >
@@ -20,7 +20,7 @@ export default function TermsPage() {
           1. Acceptance of Terms & Research Mandate
         </h2>
         <p>
-          By accessing or utilizing the QuantumX platform, its REST APIs, quantum statevector simulators, or physical quantum processing unit (QPU) dispatch integrations (collectively, the &ldquo;Services&rdquo;), you agree to be bound by these Terms of Service. If you are accessing the Services on behalf of an academic institution, clinical laboratory, or enterprise entity, you represent that you hold full legal authority to bind that entity.
+          By accessing or utilizing the QureSight platform, its REST APIs, quantum statevector simulators, or physical quantum processing unit (QPU) dispatch integrations (collectively, the &ldquo;Services&rdquo;), you agree to be bound by these Terms of Service. If you are accessing the Services on behalf of an academic institution, clinical laboratory, or enterprise entity, you represent that you hold full legal authority to bind that entity.
         </p>
       </section>
 
@@ -29,7 +29,7 @@ export default function TermsPage() {
           2. Investigational & Research Use Only
         </h2>
         <p>
-          QuantumX is an investigational scientific computing platform designed to evaluate parameterized quantum circuits (Variational Quantum Classifiers), Hilbert-space feature mappings, and classical gradient boosted baselines.
+          QureSight is an investigational scientific computing platform designed to evaluate parameterized quantum circuits (Variational Quantum Classifiers), Hilbert-space feature mappings, and classical gradient boosted baselines.
         </p>
         <div className="rounded-xl border border-quantum/30 bg-quantum/5 p-4 text-sm text-white/90">
           <strong>Mandatory Notice:</strong> The Services are NOT cleared, approved, or classified as medical devices or diagnostic software by the US FDA, EMA, or any national health authority. The predictions, state vectors, and ablation scores produced by the platform must not be used as the sole basis for direct clinical intervention, surgery, or medication without independent verification by licensed medical professionals.
@@ -61,7 +61,7 @@ export default function TermsPage() {
           4. Algorithmic Reproducibility & Cryptographic Receipts
         </h2>
         <p>
-          QuantumX issues cryptographically signed execution receipts (containing SHA-256 digests of input tensors, parameterized angles and expectation values). You agree not to forge, tamper with, or misrepresent verification signatures or statistical test outcomes (including McNemar&apos;s chi-squared significance metrics or s_K geometric distance metrics).
+          QureSight issues cryptographically signed execution receipts (containing SHA-256 digests of input tensors, parameterized angles and expectation values). You agree not to forge, tamper with, or misrepresent verification signatures or statistical test outcomes (including McNemar&apos;s chi-squared significance metrics or s_K geometric distance metrics).
         </p>
       </section>
 
@@ -79,7 +79,7 @@ export default function TermsPage() {
           6. Limitation of Liability
         </h2>
         <p>
-          To the maximum extent permitted by applicable law, the QuantumX development team, contributors, and affiliated research partners shall not be held liable for any direct, indirect, incidental, or consequential damages arising from algorithmic variance, quantum hardware decoherence, or downstream clinical interpretations.
+          To the maximum extent permitted by applicable law, the QureSight development team, contributors, and affiliated research partners shall not be held liable for any direct, indirect, incidental, or consequential damages arising from algorithmic variance, quantum hardware decoherence, or downstream clinical interpretations.
         </p>
       </section>
     </LegalPageLayout>

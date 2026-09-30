@@ -1,6 +1,6 @@
 """
 ================================================================================
-QuantumX Production Cardiac Diagnostic Engine v2 (SOTA Publication Pipeline)
+QureSight Production Cardiac Diagnostic Engine v2 (SOTA Publication Pipeline)
 ================================================================================
 Production real-time inference pipeline executing:
   1. Clinical Grid Suppression Preprocessing & Waveform Extraction
@@ -34,7 +34,7 @@ import torch.nn.functional as F
 from torchvision import models, transforms
 import pennylane as qml
 
-logger = logging.getLogger("QuantumX.CardiacEngineV2")
+logger = logging.getLogger("QureSight.CardiacEngineV2")
 
 BASE_DIR = Path(__file__).resolve().parent
 ARTIFACTS_DIR = BASE_DIR / "artifacts"

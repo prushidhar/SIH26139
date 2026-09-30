@@ -22,8 +22,8 @@ interface Message {
   timestamp: string;
 }
 
-// QuantumX Nexus Website Logo Icon
-function QuantumXLogo({ size = 26 }: { size?: number }) {
+// QureSight Nexus Website Logo Icon
+function QureSightLogo({ size = 26 }: { size?: number }) {
   return (
     <div
       style={{ width: size, height: size }}
@@ -120,7 +120,7 @@ export default function AiDoctorConsultationTab({
   // Load user profile avatar from localStorage
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const storedAvatar = localStorage.getItem("quantumx_user_avatar");
+      const storedAvatar = localStorage.getItem("quresight_user_avatar");
       if (storedAvatar) {
         setUserAvatar(storedAvatar);
       }
@@ -256,10 +256,10 @@ ${recommendationText}`;
 
   return (
     <div className="w-full bg-white rounded-2xl border border-hairline shadow-xs flex flex-col h-[650px] overflow-hidden">
-      {/* Header: Strictly "QuantumX AI" with Website Logo */}
+      {/* Header: Strictly "QureSight AI" with Website Logo */}
       <div className="px-5 py-3.5 border-b border-hairline/80 flex items-center gap-2.5 bg-cream/15">
-        <QuantumXLogo size={26} />
-        <h3 className="text-sm font-bold text-ink tracking-tight font-serif">QuantumX AI</h3>
+        <QureSightLogo size={26} />
+        <h3 className="text-sm font-bold text-ink tracking-tight font-serif">QureSight AI</h3>
       </div>
 
       {/* Conversation Stream Container (Clean & Centered) */}
@@ -274,8 +274,8 @@ ${recommendationText}`;
                   isAssistant ? "justify-start" : "justify-end"
                 }`}
               >
-                {/* Left Side: QuantumX AI Logo */}
-                {isAssistant && <QuantumXLogo size={24} />}
+                {/* Left Side: QureSight AI Logo */}
+                {isAssistant && <QureSightLogo size={24} />}
 
                 {/* Message Bubble: Snug, readable width wrapping into next lines */}
                 <div
@@ -320,7 +320,7 @@ ${recommendationText}`;
           {/* Thinking Indicator */}
           {isLoading && (
             <div className="flex items-center gap-2.5">
-              <QuantumXLogo size={24} />
+              <QureSightLogo size={24} />
               <div className="bg-white border border-hairline rounded-2xl px-3.5 py-2 text-xs text-ink-soft flex items-center gap-2 shadow-2xs">
                 <span className="w-1.5 h-1.5 rounded-full bg-quantum animate-pulse" />
                 <span className="font-mono text-xs text-ink-soft">thinking...</span>
@@ -340,7 +340,7 @@ ${recommendationText}`;
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Ask QuantumX AI about these findings..."
+              placeholder="Ask QureSight AI about these findings..."
               disabled={isLoading}
               className="flex-1 bg-transparent border-none outline-none text-xs text-ink placeholder:text-ink-muted"
             />

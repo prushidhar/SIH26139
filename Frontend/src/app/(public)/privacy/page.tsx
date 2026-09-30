@@ -4,14 +4,14 @@ import { LegalPageLayout } from "@/components/common/LegalPageLayout";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Privacy and data protection policy for QuantumX biomedical data handling and cryptographic audit protocols.",
+    "Privacy and data protection policy for QureSight biomedical data handling and cryptographic audit protocols.",
 };
 
 export default function PrivacyPage() {
   return (
     <LegalPageLayout
       title="Privacy & Data Protection Policy"
-      subtitle="How QuantumX safeguards biomedical data, protects analytical workflows, and guarantees zero data-leakage during hybrid quantum processing."
+      subtitle="How QureSight safeguards biomedical data, protects analytical workflows, and guarantees zero data-leakage during hybrid quantum processing."
       badge="Data Security & HIPAA Alignment"
       iconType="lock"
     >
@@ -20,7 +20,7 @@ export default function PrivacyPage() {
           1. Data Minimization & Zero-Leakage Architecture
         </h2>
         <p>
-          QuantumX operates under strict data minimization principles. We do not collect, store, or sell personal identifiers or raw patient biological specimens. All computational workloads entering the preprocessing autoencoder are normalized into bounded feature vectors prior to quantum angle encoding.
+          QureSight operates under strict data minimization principles. We do not collect, store, or sell personal identifiers or raw patient biological specimens. All computational workloads entering the preprocessing autoencoder are normalized into bounded feature vectors prior to quantum angle encoding.
         </p>
       </section>
 

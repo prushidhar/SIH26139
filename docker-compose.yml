@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: quresight-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - HOST=0.0.0.0
+      - DATABASE_URL=sqlite+aiosqlite:///./quresight.db
+      - JWT_SECRET_KEY=quresight_super_secret_development_jwt_key_2026_sih
+      - CORS_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+    volumes:
+      - ./Backend/quresight.db:/app/quresight.db
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    container_name: quresight-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - BACKEND_INTERNAL_URL=http://backend:8000
+      - NEXT_PUBLIC_GOOGLE_CLIENT_ID=quresight_dev_client_id.apps.googleusercontent.com
+    depends_on:
+      - backend
+    restart: unless-stopped

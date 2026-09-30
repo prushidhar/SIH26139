@@ -1,4 +1,4 @@
-"""QuantumX Production Classical Evaluator with TTA, Calibration Metrics, and Grad-CAM++
+"""QureSight Production Classical Evaluator with TTA, Calibration Metrics, and Grad-CAM++
 Evaluates best_classical_cardiac_model.pt on Dataset/test and exports results to Test/ and Diagram/
 """
 
@@ -122,7 +122,7 @@ def evaluate_classical():
     test_out_dir.mkdir(exist_ok=True)
     report_file = test_out_dir / "classical_test_report.txt"
     with open(report_file, "w") as fp:
-        fp.write(f"QuantumX Multi-Scale CBAM Classical Classifier Evaluation\n")
+        fp.write(f"QureSight Multi-Scale CBAM Classical Classifier Evaluation\n")
         fp.write(f"Test Accuracy: {acc:.2f}%\n")
         fp.write(f"Macro ROC-AUC: {macro_auc:.4f}\n")
         fp.write(f"Calibration ECE: {ece:.4f}\n\n")

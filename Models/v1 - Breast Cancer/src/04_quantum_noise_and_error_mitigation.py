@@ -1,9 +1,9 @@
 """
 ====================================================================================================
-QuantumX Quantum Noise Engine: Physical NISQ Noise Emulation & Zero-Noise Extrapolation
+QureSight Quantum Noise Engine: Physical NISQ Noise Emulation & Zero-Noise Extrapolation
 ====================================================================================================
 This module implements the quantum hardware noise emulation framework and active error mitigation
-protocols for QuantumX v1, based on the calibrated superconducting qubit specifications from 
+protocols for QureSight v1, based on the calibrated superconducting qubit specifications from 
 Paper 30 (Bravo-Montes et al., Nature Scientific Reports 2026 / PMC13111684).
 
 Noise Channels Implemented:
@@ -31,7 +31,7 @@ from typing import Dict, Any, Optional, Tuple, List, Union
 import pennylane as qml
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
-logger = logging.getLogger("QuantumX.QuantumNoise")
+logger = logging.getLogger("QureSight.QuantumNoise")
 
 
 # ==================================================================================================

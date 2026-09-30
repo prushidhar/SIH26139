@@ -31,7 +31,7 @@
 ## 🎯 Part 2: Slide 5 Image Defense (Feasibility: Hardware, Training, Deployment, Noise)
 
 16. What is the 4-part feasibility structure shown in `Slide 5 - Feasibility.png` (Hardware, Training, Deployment, Noise)?
-17. Under **Hardware Feasibility**, how does QuantumX run on IBM Quantum Eagle (127 qubits) and Heron (133 qubits) processors?
+17. Under **Hardware Feasibility**, how does QureSight run on IBM Quantum Eagle (127 qubits) and Heron (133 qubits) processors?
 18. How do Qiskit Runtime Primitives (Sampler V2 and Estimator V2) manage physical quantum execution?
 19. Why does our 8-qubit variational circuit execute today with **zero fault-tolerance requirement** on NISQ hardware?
 20. Under **Training Feasibility**, what is the RealAmplitudes variational ansatz ($R_Y, R_Z$) shown in the circuit diagram?
@@ -44,4 +44,4 @@
 27. What is the Huang geometric difference filter ($s_K$) shown in the decision flow on Slide 5?
 28. How does the Huang filter pre-screen whether a patient sample has genuine quantum advantage before dispatching to hardware?
 29. What happens if a sample does not meet the $s_K$ threshold (does it route to the fast classical fallback path)?
-30. Can you summarize why QuantumX is technically, computationally, and operationally feasible today in 3 simple sentences?
+30. Can you summarize why QureSight is technically, computationally, and operationally feasible today in 3 simple sentences?

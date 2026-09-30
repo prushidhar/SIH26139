@@ -1,6 +1,6 @@
 """
 ================================================================================
-QuantumX — Cardiac Arrhythmia ECG Signal Data Ingestion & Preprocessing
+QureSight — Cardiac Arrhythmia ECG Signal Data Ingestion & Preprocessing
 MIT-BIH Arrhythmia Database (Kaggle Heartbeat Categorization)
 ================================================================================
 

@@ -26,7 +26,7 @@ export interface ToastItem {
 }
 
 // Global Event Emitter for Toast Notifications
-const TOAST_EVENT = "quantumx_show_toast";
+const TOAST_EVENT = "quresight_show_toast";
 
 export function showToast(toast: Omit<ToastItem, "id">) {
   if (typeof window !== "undefined") {

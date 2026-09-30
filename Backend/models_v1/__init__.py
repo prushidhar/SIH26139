@@ -1,6 +1,6 @@
 """
 ================================================================================
-QUANTUMX MODELS V1 PACKAGE
+QURESIGHT MODELS V1 PACKAGE
 ================================================================================
 Exposes the three canonical inference pipelines:
   - CX-01: Dedicated Classical Baseline Benchmark Pipeline

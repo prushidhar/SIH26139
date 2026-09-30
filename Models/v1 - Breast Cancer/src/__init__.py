@@ -1,13 +1,13 @@
 """
 ====================================================================================================
-QuantumX v1 Modular Pipeline Package
+QureSight v1 Modular Pipeline Package
 ====================================================================================================
 Provides unified access to the sequential execution pipeline:
 - 01_data_preprocessing_engine.py          : Ingestion, Zero-Leakage Preprocessing, ISA Feature Selection, s_K Metric
 - 02_classical_benchmark_suite.py          : Classical SOTA Suite (XGBoost, SVM-RBF, Random Forest, PyTorch MLP)
 - 03_quantum_circuits_and_ansatz.py        : PennyLane Circuits (ZZ Map, Strongly Entangling Ansatz, VQC, QSVM, HQNN)
 - 04_quantum_noise_and_error_mitigation.py : Superconducting Noise Channels (Paper 30) & Zero-Noise Extrapolation
-- 05_quantum_explainability_xai.py         : QXplain Saliency S(G_k), Von Neumann Entropy & OpenQASM 3.0 Receipts
+- 05_quantum_explainability_xai.py         : QureExplain Saliency S(G_k), Von Neumann Entropy & OpenQASM 3.0 Receipts
 - 06_train_and_verification_pipeline.py    : 50-Fold Repeated Stratified CV & Statistical Significance Testing
 - 07_classical_inference_engine.py         : Dedicated Standalone Classical Inference Service (CX-01)
 - 08_quantum_hybrid_inference_engine.py    : Dedicated Standalone Quantum Hybrid Inference Service (QX-01)
@@ -69,14 +69,14 @@ compute_von_neumann_entropy = quantum_xai.compute_von_neumann_entropy
 CryptographicQuantumReceiptGenerator = quantum_xai.CryptographicQuantumReceiptGenerator
 
 StatisticalSignificanceEngine = train_engine.StatisticalSignificanceEngine
-QuantumXMasterPipeline = train_engine.QuantumXMasterPipeline
+QureSightMasterPipeline = train_engine.QureSightMasterPipeline
 
 AegisClassicalEngine = classical_inference.AegisClassicalEngine
 aegis_engine = classical_inference.aegis_engine
 
-QuantumXHybridEngine = quantum_inference.QuantumXHybridEngine
-quantumx_engine = quantum_inference.quantumx_engine
-quantum_engine = quantumx_engine
+QureSightHybridEngine = quantum_inference.QureSightHybridEngine
+quresight_engine = quantum_inference.quresight_engine
+quantum_engine = quresight_engine
 
 compute_calibrated_clinical_risk = risk_engine.compute_calibrated_clinical_risk
 calculate_morphometric_evidence_index = risk_engine.calculate_morphometric_evidence_index

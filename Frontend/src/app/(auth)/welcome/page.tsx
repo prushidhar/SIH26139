@@ -67,7 +67,7 @@ export default function WelcomeTransitionPage() {
     let resolvedName = "";
     if (typeof window !== "undefined") {
       const urlParamName = new URLSearchParams(window.location.search).get("name");
-      const storedName = localStorage.getItem("quantumx_user_name");
+      const storedName = localStorage.getItem("quresight_user_name");
       resolvedName = urlParamName || storedName || "";
     }
     resolvedName = resolvedName.replace(/_/g, " ").trim();
@@ -165,7 +165,7 @@ export default function WelcomeTransitionPage() {
           <p className="text-[11px] font-mono tracking-[0.25em] uppercase text-emerald-600 dark:text-emerald-500 font-semibold flex items-center justify-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             <Typewriter
-              text="QUANTUMX PLATFORM"
+              text="QURESIGHT PLATFORM"
               speed={20}
               active={shown[0]}
             />

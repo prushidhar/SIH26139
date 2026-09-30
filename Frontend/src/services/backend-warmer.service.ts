@@ -1,7 +1,7 @@
 "use client";
 
 // ============================================================================
-// QUANTUMX — CLOUD BACKEND WARMER & COLD-START ORCHESTRATOR
+// QURESIGHT — CLOUD BACKEND WARMER & COLD-START ORCHESTRATOR
 // ============================================================================
 // Proactively sends wake-up heartbeats to the Render cloud backend upon site entry.
 // Tracks cold-start boot duration and notifies components ONLY when the remote
@@ -63,7 +63,7 @@ class BackendWarmerService {
     if (typeof window !== "undefined") {
       this.status.isRenderLive = isLiveRenderPlatform();
       try {
-        if (sessionStorage.getItem("quantumx_backend_awake") === "true") {
+        if (sessionStorage.getItem("quresight_backend_awake") === "true") {
           this.status.isOnline = true;
           this.status.isRenderSleeping = false;
         }
@@ -176,7 +176,7 @@ class BackendWarmerService {
         this.status.lastChecked = Date.now();
         this.status.error = null;
         try {
-          sessionStorage.setItem("quantumx_backend_awake", "true");
+          sessionStorage.setItem("quresight_backend_awake", "true");
         } catch {}
         this.notify();
         this.isPinging = false;

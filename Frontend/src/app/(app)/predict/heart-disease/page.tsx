@@ -403,7 +403,7 @@ export default function HeartDiseaseStudioPage() {
           },
         },
       };
-      sessionStorage.setItem("quantumx_active_cardiac_analysis", JSON.stringify(activeCardiacPayload));
+      sessionStorage.setItem("quresight_active_cardiac_analysis", JSON.stringify(activeCardiacPayload));
       router.push("/predict/heart-disease/analysis");
     } catch (err) {
       console.warn("Could not route to cardiac analysis:", err);
@@ -426,7 +426,7 @@ export default function HeartDiseaseStudioPage() {
         aiSynthesis: aiSynthesis,
         selectedReferenceKey: selectedReferenceKey,
       };
-      sessionStorage.setItem("quantumx_active_cardiac_analysis", JSON.stringify(payload));
+      sessionStorage.setItem("quresight_active_cardiac_analysis", JSON.stringify(payload));
     } catch (e) {
       console.warn("Could not save cardiac analysis payload to sessionStorage:", e);
     }
@@ -839,14 +839,22 @@ export default function HeartDiseaseStudioPage() {
               <span>Transfinite-IM1 (Simulator)</span>
             </button>
             <button
-              onClick={() => setIsIbmModalOpen(true)}
-              className="px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-ink-soft hover:text-ink cursor-pointer opacity-80"
-              title="Aleph-1 (IBM QPU) - Superconducting Hardware"
+              onClick={() => setExecutionMode("real_ibm_qpu")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
+                executionMode === "real_ibm_qpu"
+                  ? "bg-amber-500 text-black shadow-xs font-bold"
+                  : "text-ink-soft hover:text-ink"
+              } cursor-pointer`}
+              title="Aleph-1 (IBM QPU) — Superconducting Quantum Hardware"
             >
-              <Lock size={12} className="text-amber-500" />
+              <Cpu size={13} className={executionMode === "real_ibm_qpu" ? "text-black" : "text-amber-500"} />
               <span>Aleph-1 (IBM QPU)</span>
-              <span className="text-[9px] font-mono text-amber-700 bg-amber-50 px-1 py-0.2 rounded border border-amber-200">
-                Locked
+              <span className={`text-[9px] font-mono px-1 py-0.2 rounded border ${
+                executionMode === "real_ibm_qpu"
+                  ? "bg-amber-100 text-amber-900 border-amber-300 font-bold"
+                  : "bg-amber-50 text-amber-700 border-amber-200"
+              }`}>
+                {executionMode === "real_ibm_qpu" ? "Active" : "QPU"}
               </span>
             </button>
           </div>
@@ -1092,7 +1100,7 @@ export default function HeartDiseaseStudioPage() {
                     {validationError}
                   </p>
                   <p className="text-ink-soft text-[11px] pt-1">
-                    To maintain strict medical safety and regulatory standards, the QuantumX dual-engine pipeline only executes diagnostic inference on verified 12-lead electrocardiograms matching our trained clinical distribution. Please select a verified test case from the <strong className="text-ink font-mono text-[10px]">Test Cases/Heart_Disease_ECG</strong> folder or upload a standard horizontal 12-lead ECG printout.
+                    To maintain strict medical safety and regulatory standards, the QureSight dual-engine pipeline only executes diagnostic inference on verified 12-lead electrocardiograms matching our trained clinical distribution. Please select a verified test case from the <strong className="text-ink font-mono text-[10px]">Test Cases/Heart_Disease_ECG</strong> folder or upload a standard horizontal 12-lead ECG printout.
                   </p>
                 </div>
               </div>
@@ -1233,7 +1241,7 @@ export default function HeartDiseaseStudioPage() {
                         Executing Dual-Engine Hilbert Space Inference
                       </p>
                       <p className="text-xs font-mono text-ink-soft">
-                        QuantumX ECGConVT (ResNet-34) &amp; PennyLane 8-Qubit Universal PQC...
+                        QureSight ECGConVT (ResNet-34) &amp; PennyLane 8-Qubit Universal PQC...
                       </p>
                     </div>
                   </div>
@@ -1624,7 +1632,7 @@ export default function HeartDiseaseStudioPage() {
               </div>
             </div>
 
-            {/* 3. QUANTUMX AI SUMMARY (TYPEWRITER & TRANSLATION) */}
+            {/* 3. QURESIGHT AI SUMMARY (TYPEWRITER & TRANSLATION) */}
             <div className="p-4 sm:p-5 rounded-2xl bg-white border border-hairline shadow-xs space-y-3.5 relative overflow-hidden">
               {/* Header Row */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-hairline pb-3">
@@ -1634,7 +1642,7 @@ export default function HeartDiseaseStudioPage() {
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-ink uppercase tracking-wider">
-                      QuantumX AI Summary
+                      QureSight AI Summary
                     </h4>
                     <p className="text-[11px] text-ink-soft">
                       Evaluation for {patientName || "Patient"} ({patientId})

@@ -1,7 +1,7 @@
 import axios, { AxiosError, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 
 // ============================================================================
-// QUANTUMX — ENTERPRISE API INTEGRATION LAYER
+// QURESIGHT — ENTERPRISE API INTEGRATION LAYER
 // ============================================================================
 // Production Axios client with JWT session management, automatic 7-day sliding
 // refresh on 401, HTTPOnly cookie credentials, and seamless queue replay.
@@ -9,32 +9,22 @@ import axios, { AxiosError, InternalAxiosRequestConfig, AxiosResponse } from 'ax
 
 export function resolveApiBaseUrl(): string {
   if (process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL.trim() !== '') {
-    // If running on an HTTPS domain (like Vercel), don't allow http://localhost
-    if (typeof window !== 'undefined' && window.location.protocol === 'https:' && process.env.NEXT_PUBLIC_API_URL.startsWith('http://localhost')) {
-      return 'https://quantumx-34qu.onrender.com';
-    }
     return process.env.NEXT_PUBLIC_API_URL.trim();
-  }
-  if (typeof window !== 'undefined') {
-    const hostname = window.location.hostname;
-    if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-      return 'https://quantumx-34qu.onrender.com';
-    }
   }
   return 'http://localhost:8000';
 }
 
 const API_BASE_URL = resolveApiBaseUrl();
-const TIMEOUT_MS = 120000; // 2 minutes (accommodates free-tier cloud cold starts)
+const TIMEOUT_MS = 120000;
 
 // Token storage keys
 export const TOKEN_KEYS = {
-  ACCESS_TOKEN: 'quantumx_access_token',
-  REFRESH_TOKEN: 'quantumx_refresh_token',
-  USER_DATA: 'quantumx_user_data',
-  USER_EMAIL: 'quantumx_user_email',
-  USER_NAME: 'quantumx_user_name',
-  USER_AVATAR: 'quantumx_user_avatar',
+  ACCESS_TOKEN: 'quresight_access_token',
+  REFRESH_TOKEN: 'quresight_refresh_token',
+  USER_DATA: 'quresight_user_data',
+  USER_EMAIL: 'quresight_user_email',
+  USER_NAME: 'quresight_user_name',
+  USER_AVATAR: 'quresight_user_avatar',
 } as const;
 
 export const apiClient = axios.create({
@@ -45,17 +35,6 @@ export const apiClient = axios.create({
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   },
-});
-
-// Dynamically ensure HTTPS live backend on any deployed environment
-apiClient.interceptors.request.use((config) => {
-  if (typeof window !== 'undefined') {
-    const hostname = window.location.hostname;
-    if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-      config.baseURL = 'https://quantumx-34qu.onrender.com';
-    }
-  }
-  return config;
 });
 
 // ----------------------------------------------------------------------------
@@ -106,8 +85,8 @@ export function clearAuth(): void {
   if (typeof window === 'undefined') return;
   const userEmail = localStorage.getItem(TOKEN_KEYS.USER_EMAIL);
   if (userEmail) {
-    localStorage.removeItem(`quantumx_screenings_${userEmail}`);
-    localStorage.removeItem(`quantumx_notifications_${userEmail}`);
+    localStorage.removeItem(`quresight_screenings_${userEmail}`);
+    localStorage.removeItem(`quresight_notifications_${userEmail}`);
   }
   localStorage.removeItem(TOKEN_KEYS.ACCESS_TOKEN);
   localStorage.removeItem(TOKEN_KEYS.REFRESH_TOKEN);
@@ -115,9 +94,9 @@ export function clearAuth(): void {
   localStorage.removeItem(TOKEN_KEYS.USER_EMAIL);
   localStorage.removeItem(TOKEN_KEYS.USER_NAME);
   localStorage.removeItem(TOKEN_KEYS.USER_AVATAR);
-  localStorage.removeItem('quantumx_prediction_history');
-  localStorage.removeItem('quantumx_notifications');
-  localStorage.removeItem('quantumx_is_new_registration');
+  localStorage.removeItem('quresight_prediction_history');
+  localStorage.removeItem('quresight_notifications');
+  localStorage.removeItem('quresight_is_new_registration');
 }
 
 export function isAuthenticated(): boolean {

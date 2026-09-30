@@ -169,9 +169,9 @@ export default function BenchmarksPage() {
             Scientific Reality: Classical SVM Wins on Full Tabular Data, Quantum Dominates in Scarce Clinical Regimes
           </p>
           <p className="leading-relaxed">
-            Unlike competitor presentations claiming unrealistic &gt;99% quantum accuracy on 30-feature tabular tables, QuantumX follows scientific integrity: 
+            Unlike competitor presentations claiming unrealistic &gt;99% quantum accuracy on 30-feature tabular tables, QureSight follows scientific integrity: 
             Classical <strong className="text-foreground">SVM-RBF reaches 98.24%</strong> on the full dataset, outperforming our 8-qubit VQC (<strong className="text-foreground">87.87%</strong>). 
-            However, when clinical data is restricted to <strong className="text-foreground">15% scarce samples</strong> (rare pathology cohorts), classical SVM overfits and collapses to <strong className="text-amber-600 dark:text-amber-400">68.2%</strong> while QuantumX holds <strong className="text-emerald-600 dark:text-emerald-400">76.5% (+8.3% Quantum Advantage)</strong>.
+            However, when clinical data is restricted to <strong className="text-foreground">15% scarce samples</strong> (rare pathology cohorts), classical SVM overfits and collapses to <strong className="text-amber-600 dark:text-amber-400">68.2%</strong> while QureSight holds <strong className="text-emerald-600 dark:text-emerald-400">76.5% (+8.3% Quantum Advantage)</strong>.
           </p>
         </div>
       </div>
@@ -362,7 +362,7 @@ export default function BenchmarksPage() {
             </div>
 
             <div className="p-4 bg-muted/10 border-t border-border text-xs text-muted-foreground leading-relaxed">
-              <strong className="text-foreground">Clinical Translation:</strong> In rare disease cohorts or early-phase oncology where clinical trials cannot recruit 500+ patients, QuantumX provides an 8.3% higher sensitivity and predictive boundary retention over conventional machine learning algorithms.
+              <strong className="text-foreground">Clinical Translation:</strong> In rare disease cohorts or early-phase oncology where clinical trials cannot recruit 500+ patients, QureSight provides an 8.3% higher sensitivity and predictive boundary retention over conventional machine learning algorithms.
             </div>
           </div>
         </motion.div>
@@ -442,7 +442,7 @@ export default function BenchmarksPage() {
             </div>
 
             <div className="p-4 bg-muted/10 border-t border-border text-xs text-muted-foreground leading-relaxed">
-              <strong>Architectural Takeaway:</strong> Because classical SVM achieves 98.24% on 569 patients, QuantumX implements a strict <strong>Dual-Engine Architecture</strong> where the classical engine (<code className="font-mono">CX-01</code>) runs alongside the quantum engine (<code className="font-mono">Transfinite-1</code>). Clinicians receive both perspectives and concordance metrics rather than blind quantum replacement.
+              <strong>Architectural Takeaway:</strong> Because classical SVM achieves 98.24% on 569 patients, QureSight implements a strict <strong>Dual-Engine Architecture</strong> where the classical engine (<code className="font-mono">CX-01</code>) runs alongside the quantum engine (<code className="font-mono">Transfinite-1</code>). Clinicians receive both perspectives and concordance metrics rather than blind quantum replacement.
             </div>
           </div>
         </motion.div>

@@ -12,7 +12,7 @@
 # ---
 
 # %% [markdown]
-# # QuantumX — Classical Heart Attack Detection Model (CX-01 Cardiac)
+# # QureSight — Classical Heart Attack Detection Model (CX-01 Cardiac)
 # ## ResNet-18 Fine-Tuned on 12-Lead ECG Paper-Strip Images
 # 
 # **Dataset**: ECG Images of Cardiac Patients (Kaggle evilspirit05/ecg-analysis)  

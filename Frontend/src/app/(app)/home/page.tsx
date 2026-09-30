@@ -166,7 +166,7 @@ export default function HomePage() {
               coordinates: { peak_x: 650, peak_y: 420, rel_x: 0.29, rel_y: 0.35 },
             },
             quantum_engine: {
-              signature: "QuantumX Transfinite-1",
+              signature: "QureSight Transfinite-1",
               qubits: 8,
               ansatz: "8-Qubit AngleEmbedding + StronglyEntanglingLayers (2 Layers)",
               statevector_backend: "PennyLane default.qubit",
@@ -197,7 +197,7 @@ export default function HomePage() {
             },
           },
         };
-        sessionStorage.setItem("quantumx_active_cardiac_analysis", JSON.stringify(activeCardiacPayload));
+        sessionStorage.setItem("quresight_active_cardiac_analysis", JSON.stringify(activeCardiacPayload));
         router.push("/predict/heart-disease/analysis");
         return;
       }
@@ -241,7 +241,7 @@ export default function HomePage() {
           },
         },
       };
-      sessionStorage.setItem("quantumx_active_analysis", JSON.stringify(activePayload));
+      sessionStorage.setItem("quresight_active_analysis", JSON.stringify(activePayload));
       router.push("/predict/breast-cancer/analysis");
     } catch (err) {
       console.warn("Could not route to analysis:", err);

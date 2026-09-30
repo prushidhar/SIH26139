@@ -1,4 +1,4 @@
-"""QuantumX Production Hybrid Quantum Evaluator
+"""QureSight Production Hybrid Quantum Evaluator
 Evaluates best_hybrid_quantum_cardiac_model.pt on Dataset/test and exports metrics to Test/ and Diagram/
 """
 

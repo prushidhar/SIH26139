@@ -1,4 +1,4 @@
-"""QuantumX Universal Data Re-Uploading 8-Qubit Parameterized Quantum Circuit
+"""QureSight Universal Data Re-Uploading 8-Qubit Parameterized Quantum Circuit
 Architecture: Universal Data Re-Uploading (Pérez-Salinas et al., Quantum 2020)
 Ansatz: Strongly Entangling Layers (Sim et al., Adv. Quantum Tech. 2019)
 Readout: 8 Single-Qubit <Z_i> + 8 Circular Two-Qubit <Z_i Z_j> Correlations (16 Observables)

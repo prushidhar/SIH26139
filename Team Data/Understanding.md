@@ -1,4 +1,4 @@
-# QuantumX: First-Principles Understanding & Viva Guide
+# QureSight: First-Principles Understanding & Viva Guide
 *A complete, plain-language reference for the disease, the biology, the 10 biomarkers, the quantum engine, and our real-world mission in India.*
 
 ---
@@ -27,7 +27,7 @@
 1. **The Glass Slide & Staining**: The cell droplet is wiped onto a small glass slide and stained with purple dye (Hematoxylin & Eosin). The dye binds to the DNA, turning the control center of each cell (the **nucleus**) dark purple.
 2. **Digital Pathology Imaging**: The laboratory places the slide under a digital slide scanner (400x optical zoom).
 3. **Automated Morphometry Extraction**: Standard digital pathology software (like QuPath, ImageJ, or scanner software) traces the purple cell outlines and calculates the 10 physical dimensions in microns ($\mu m$).
-4. **Ingestion into QuantumX**: These 10 extracted numbers are then sent into **QuantumX** (via API or manual web studio inputs) to run quantum-classical risk classification.
+4. **Ingestion into QureSight**: These 10 extracted numbers are then sent into **QureSight** (via API or manual web studio inputs) to run quantum-classical risk classification.
 
 ---
 
@@ -131,9 +131,9 @@ When digital pathology software measures the purple cell nuclei under a 400x mic
 
 ---
 
-### Q: How does QuantumX actually work across all real-world users? (Current Practice vs. QuantumX)
+### Q: How does QureSight actually work across all real-world users? (Current Practice vs. QureSight)
 
-Here is exactly how real patients, diagnostic laboratories, cancer specialists, and rural health clinics currently operate, and how QuantumX transforms their workflow:
+Here is exactly how real patients, diagnostic laboratories, cancer specialists, and rural health clinics currently operate, and how QureSight transforms their workflow:
 
 ---
 
@@ -143,10 +143,10 @@ Here is exactly how real patients, diagnostic laboratories, cancer specialists, 
   * A patient gets a 2-page printed PDF or paper report from a diagnostic lab (like Dr. Lal PathLabs, Apollo, or Metropolis).
   * The report is packed with terrifying, incomprehensible medical jargon: *"Yokohama Category 4, marked pleomorphism, high N:C ratio, hyperchromasia, Nottingham Grade 2, BI-RADS 4C"*.
   * The patient does not understand a single word. They frantically Google their symptoms, get terrified by worst-case forum posts, or suffer weeks of agonizing anxiety waiting for a busy oncologist's appointment just to ask: *"Do I have cancer or not?"*
-* **How they use QuantumX (The Solution)**:
+* **How they use QureSight (The Solution)**:
   * The patient **never touches any math sliders or numbers**.
   * They simply snap a photo or upload their PDF lab report using their mobile phone.
-  * QuantumX's **Multimodal Medical Vision AI (Gemini)** scans the document, reads the doctor's qualitative English text and scores, and instantly delivers:
+  * QureSight's **Multimodal Medical Vision AI (Gemini)** scans the document, reads the doctor's qualitative English text and scores, and instantly delivers:
     * A clear, compassionate plain-language summary of what the report actually says.
     * An instant translation into their native regional language (**Hindi, Tamil, Telugu, Marathi, Bengali, Kannada, Gujarati, etc.**).
     * An objective risk tier (**Low, Borderline, High**) and a prepared list of specific medical questions to ask their doctor during their next visit.
@@ -160,11 +160,11 @@ Here is exactly how real patients, diagnostic laboratories, cancer specialists, 
   * A senior pathologist has to sit in a dark room with microscope eyepieces, manually inspecting 50 to 150 glass slides every single day.
   * **Human Fatigue & Subjectivity**: After staring at purple dots for 6 hours, human error rates and diagnostic fatigue spike.
   * **The Rural Delay**: In Tier-2/Tier-3 towns and rural districts across India, there are **zero onco-pathologists**. Physical glass slides are packed into courier boxes and shipped across state borders to metro cities. It takes **15 to 20 days** for the report to return, during which an early-stage cancer can progress into an invasive tumor.
-* **How they use QuantumX (The Solution)**:
+* **How they use QureSight (The Solution)**:
   * The lab's own digital slide software (like QuPath, Aperio, or ImageJ) measures the cell boundaries and generates the 10 numerical metrics (**radius, texture, perimeter, concavity, etc.**).
-  * The lab software automatically sends this **10-number feature vector** to the **QuantumX REST API**.
-  * QuantumX runs the numbers through the **Hybrid Quantum Engine (`Transfinite-1`)** and **Classical Baseline (`CX-01`)** in milliseconds.
-  * **Automated Emergency Triaging**: If QuantumX detects an aggressive malignant pattern, it instantly returns an emergency flag to the lab dashboard, moving that critical patient to the very top of the senior doctor's review queue on the same day.
+  * The lab software automatically sends this **10-number feature vector** to the **QureSight REST API**.
+  * QureSight runs the numbers through the **Hybrid Quantum Engine (`Transfinite-1`)** and **Classical Baseline (`CX-01`)** in milliseconds.
+  * **Automated Emergency Triaging**: If QureSight detects an aggressive malignant pattern, it instantly returns an emergency flag to the lab dashboard, moving that critical patient to the very top of the senior doctor's review queue on the same day.
 
 ---
 
@@ -174,10 +174,10 @@ Here is exactly how real patients, diagnostic laboratories, cancer specialists, 
   * When a biopsy result is borderline or ambiguous (*"Yokohama Category 3: Atypical Cells of Undetermined Significance"*), doctors are stuck in a gray zone.
   * They either have to guess, wait 3 months for another scan, or subject the patient to another painful, invasive surgical biopsy.
   * They have no tool to mathematically simulate disease trajectory or see which exact physical abnormality is driving the cancer risk.
-* **How they use QuantumX (The 10 Interactive Sliders)**:
-  * This is where the **10 interactive sliders in the QuantumX Studio** come in. It serves as a **digital simulation and decision support tool for oncologists**:
+* **How they use QureSight (The 10 Interactive Sliders)**:
+  * This is where the **10 interactive sliders in the QureSight Studio** come in. It serves as a **digital simulation and decision support tool for oncologists**:
     * **Simulate "What-If" Disease Progression**: A doctor can adjust a slider (*"If this tumor's cell radius swells from 12 $\mu m$ to 16 $\mu m$ or membrane concavity deepens by 15%, does the quantum confidence flip from Benign to Malignant?"*).
-    * **Explainability (SHAP Biological Drivers)**: QuantumX shows the doctor an exact mathematical breakdown of which cellular feature is driving the risk (e.g., *"+32% risk increase driven by abnormal cell membrane concavity"*).
+    * **Explainability (SHAP Biological Drivers)**: QureSight shows the doctor an exact mathematical breakdown of which cellular feature is driving the risk (e.g., *"+32% risk increase driven by abnormal cell membrane concavity"*).
     * **Multi-Engine Consensus**: The doctor sees both the **Quantum Model (`Transfinite-1`)** and the **Classical Baseline (`CX-01`)** side-by-side. If both agree, diagnostic confidence is nearly 100%. If they disagree (Discordant), it warns the oncologist to perform a deeper molecular genetic test (like HER2/IHC).
 
 ---
@@ -187,16 +187,16 @@ Here is exactly how real patients, diagnostic laboratories, cancer specialists, 
 * **What they currently do (The Problem)**:
   * Community health workers (ASHA / ANM workers) in rural villages only have physical touch exams (Clinical Breast Examination).
   * They cannot diagnose anything. They have to refer thousands of women to overcrowded government district hospitals hundreds of kilometers away, resulting in high travel costs, lost wages, and missed early-stage diagnoses.
-* **How they use QuantumX (The Solution)**:
+* **How they use QureSight (The Solution)**:
   * Health workers and district clinic staff can enter patient screening measurements or upload printed lab report sheets on a standard mobile tablet.
-  * QuantumX provides an immediate, objective risk index at the point of care.
+  * QureSight provides an immediate, objective risk index at the point of care.
   * High-risk women are immediately fast-tracked for free advanced treatment under the **Ayushman Bharat (PM-JAY)** scheme, saving lives before tumors reach inoperable Stage IV.
 
 ---
 
 ### Summary of Who Inputs What:
 
-| User Type | What They Give to QuantumX | How QuantumX Solves Their Exact Pain Point |
+| User Type | What They Give to QureSight | How QureSight Solves Their Exact Pain Point |
 | :--- | :--- | :--- |
 | **Everyday Patient / Family** | Photo / PDF of their paper lab report | Multimodal AI reads the report text & translates scary medical jargon into simple Hindi/regional languages with calm risk guidance. |
 | **Pathology Diagnostic Lab** | 10-feature numerical vector (via REST API from lab software) | Runs instant Quantum (`Transfinite-1`) vs. Classical (`CX-01`) analysis in milliseconds & flags emergency cancer cases automatically. |
@@ -216,7 +216,7 @@ Imagine you have a piece of paper (a 2D graph).
 
 The AI's job is simply to **draw a dividing line** between the healthy cluster and the cancer cluster. When a new patient comes along, the AI plots their numbers and checks which side of the line they fall on.
 
-Now, instead of just 2 numbers, QuantumX takes **10 numbers at once** (a 10-dimensional space). Here is how our two engines solve this:
+Now, instead of just 2 numbers, QureSight takes **10 numbers at once** (a 10-dimensional space). Here is how our two engines solve this:
 
 ---
 
@@ -281,16 +281,16 @@ Here is the exact step-by-step quantum physics process—completely demystified:
 
 ---
 
-### Part C: Why Run Both Models Side-by-Side in QuantumX? (The Dual-Engine Advantage)
+### Part C: Why Run Both Models Side-by-Side in QureSight? (The Dual-Engine Advantage)
 
-In real hospitals, a single AI model can have blind spots. QuantumX runs **`Transfinite-1` (Quantum)** and **`CX-01` (Classical)** in parallel on every single patient:
+In real hospitals, a single AI model can have blind spots. QureSight runs **`Transfinite-1` (Quantum)** and **`CX-01` (Classical)** in parallel on every single patient:
 
 1. **When Both Agree (Concordant — ~94% of cases)**:
    * Both the Quantum Engine and the Classical Baseline output "Benign" or both output "Malignant".
    * The doctor has **dual-architecture confirmation** and can trust the diagnosis with near-100% confidence.
 2. **When They Disagree (Discordant — ~6% of edge cases)**:
    * For example: Classical says "Benign (44% risk)", but Quantum detects subtle multi-feature entanglement and flags "Malignant (68% risk)".
-   * **Why this saves lives**: QuantumX immediately flags this case with an amber warning: *"Discordant Consensus — High Complexity Sample"*.
+   * **Why this saves lives**: QureSight immediately flags this case with an amber warning: *"Discordant Consensus — High Complexity Sample"*.
    * This warns the oncologist that the tumor is sitting right on the diagnostic boundary, prompting the doctor to immediately order an advanced molecular biopsy (like HER2/IHC) instead of mistakenly sending a cancer patient home with a false negative.
 
 ---
@@ -304,9 +304,9 @@ In real hospitals, a single AI model can have blind spots. QuantumX runs **`Tran
                        ↓
 [Lab Digital Slide Scanner & Software traces cell outlines & computes 10 numbers]
                        ↓
-[10-Number Feature Vector (or Uploaded Report) sent into QuantumX]
+[10-Number Feature Vector (or Uploaded Report) sent into QureSight]
                        ↓
-[QuantumX Engine evaluates data: Transfinite-1 (Quantum) + CX-01 (Classical)]
+[QureSight Engine evaluates data: Transfinite-1 (Quantum) + CX-01 (Classical)]
                        ↓
 [Instant Consensus Risk Index + SHAP Explanations showing top warning feature]
                        ↓
@@ -352,18 +352,18 @@ In real hospitals, a single AI model can have blind spots. QuantumX runs **`Tran
    * India has only **~1 pathologist per 100,000 citizens**, and over **80% of top oncologists are concentrated in Tier-1 metro cities**.
    * In rural Indian district hospitals and PHCs under **Ayushman Bharat**, biopsy slides take **2 to 3 weeks** to be transported to metro centers for manual review.
    * Because of this delay, **over 60% of Indian breast cancer cases are detected late at Stage III or IV**, leading to a devastating **~50% mortality rate in India** (compared to <20% in the West).
-   * **QuantumX solves India's rural bottleneck**: By enabling digital slide scanners at district centers to compute automated quantum risk triage in seconds, high-risk patients are escalated immediately.
+   * **QureSight solves India's rural bottleneck**: By enabling digital slide scanners at district centers to compute automated quantum risk triage in seconds, high-risk patients are escalated immediately.
 
-4. **QuantumX is an Engine Architecture, Not Just a Fixed Dataset**:
+4. **QureSight is an Engine Architecture, Not Just a Fixed Dataset**:
    * The feature embedding pipeline ($\vert \psi(x) \rangle = \bigotimes R_y(\theta) \vert 0 \rangle$) is modular.
-   * When whole-slide digital repositories from the **National Cancer Grid (NCG)** or **Tata Memorial Hospital** are connected, QuantumX ingests those digital features directly into this exact quantum-classical pipeline.
+   * When whole-slide digital repositories from the **National Cancer Grid (NCG)** or **Tata Memorial Hospital** are connected, QureSight ingests those digital features directly into this exact quantum-classical pipeline.
 
 ---
 
-### Q: "Quantum computers are giant, multimillion-dollar machines cooled near absolute zero. Does a clinic in rural India need a quantum computer to run QuantumX?"
+### Q: "Quantum computers are giant, multimillion-dollar machines cooled near absolute zero. Does a clinic in rural India need a quantum computer to run QureSight?"
 
 **Answer**:
-* **No, absolutely not.** QuantumX is built on a **Cloud-Native Hybrid Quantum Architecture**.
+* **No, absolutely not.** QureSight is built on a **Cloud-Native Hybrid Quantum Architecture**.
 * The local clinic, district hospital, or mobile screening van only needs a **basic web browser or Android tablet** connected to normal 4G/5G mobile internet.
 * The heavy quantum state calculations run either on **cloud-hosted quantum processing units (QPUs)** (via AWS Braket / IBM Quantum APIs) or on **statevector tensor simulators** hosted on high-speed cloud servers.
 * To the local nurse or doctor, it feels as fast and simple as opening a standard website, while the quantum mechanics run entirely in the background on the cloud.
@@ -383,7 +383,7 @@ In real hospitals, a single AI model can have blind spots. QuantumX runs **`Tran
 
 ---
 
-### Q: "What if your quantum model makes a mistake? What if it says 'Benign' (safe), but the patient actually has cancer (False Negative)? How does QuantumX protect patients from this catastrophe?"
+### Q: "What if your quantum model makes a mistake? What if it says 'Benign' (safe), but the patient actually has cancer (False Negative)? How does QureSight protect patients from this catastrophe?"
 
 **Answer**:
 
@@ -391,7 +391,7 @@ In clinical oncology, a **False Negative** is the absolute worst-case medical ca
 * If an AI makes a *False Positive* (classifying a benign cyst as cancer), the patient undergoes a secondary test and is relieved to find out they are healthy.
 * If an AI makes a **False Negative** (classifying an aggressive early-stage carcinoma as benign/safe), the patient is sent home with a false sense of security. Months later, the untreated tumor metastasizes to the lymph nodes, turning a treatable Stage I tumor into a fatal Stage IV disease.
 
-This is precisely why QuantumX was engineered with a **Dual-Engine Multi-Model Consensus Architecture** governed by an automated **Discordant Fail-Safe Safety Protocol**.
+This is precisely why QureSight was engineered with a **Dual-Engine Multi-Model Consensus Architecture** governed by an automated **Discordant Fail-Safe Safety Protocol**.
 
 ---
 
@@ -400,7 +400,7 @@ Standard clinical AI products rely on a single model (e.g. just a Convolutional 
 * **Classical Linear/Kernel Models (`CX-01`)** excel at detecting gross macroscopic abnormalities (large cell radius, extreme perimeter expansion), but they can miss subtle, high-order non-linear correlations where cell size is only marginally elevated.
 * **Quantum Variational Classifiers (`Transfinite-1`)** excel at detecting entangled multidimensional phase relationships (e.g. subtle membrane concavity interacting with localized chromatin clump density), but can occasionally exhibit sensitivity shifts near narrow decision hyperplanes.
 
-**QuantumX's Golden Rule**: *No single algorithm is ever allowed to clear a patient in isolation.*
+**QureSight's Golden Rule**: *No single algorithm is ever allowed to clear a patient in isolation.*
 
 ---
 
@@ -459,13 +459,13 @@ To understand how this saves lives in clinical practice, let us examine a real-w
   * *If an oncology clinic relied only on this classical AI, Ananya would be sent home with a False Negative!*
 
 **Step 2: Quantum Hilbert Space Evaluation (`Transfinite-1`)**
-* Simultaneously, QuantumX's $U_{\Phi(x)}$ circuit embeds all 8 features into 8 entangled qubits.
+* Simultaneously, QureSight's $U_{\Phi(x)}$ circuit embeds all 8 features into 8 entangled qubits.
 * The multi-qubit CNOT entangling gates calculate the non-linear cross-product between `concavity_mean` ($0.068$) and `compactness_mean` ($0.082$).
 * In the 256-dimensional Hilbert state space, this phase interference reveals that the cell borders exhibit high-order atypical dysplasia (early intraductal micro-invasion).
 * **Quantum Prediction**: `Malignant` (68.4% Calculated Risk).
 
 **Step 3: Automated Discordant Safety Activation**
-* The QuantumX consensus engine detects that `CX-01` (`Benign`) and `Transfinite-1` (`Malignant`) diverge.
+* The QureSight consensus engine detects that `CX-01` (`Benign`) and `Transfinite-1` (`Malignant`) diverge.
 * The system instantly sets `consensusStatus = "Discordant"`.
 * **Fail-Safe Protocol Activated**:
   1. Automated benign sign-off is permanently locked.
@@ -480,7 +480,7 @@ To understand how this saves lives in clinical practice, let us examine a real-w
 ---
 
 #### 4. How the Frontend UI Visually Represents Discordant Results
-Doctors and pathologists do not need to read code; the QuantumX frontend communicates this status instantly across multiple views:
+Doctors and pathologists do not need to read code; the QureSight frontend communicates this status instantly across multiple views:
 
 1. **Screening Studio Page (`/predict/breast-cancer`)**:
    * After real-time inference finishes, the UI presents a dual telemetry card comparing **Classical CX-01** against **Hybrid Quantum Transfinite-1**.
@@ -498,7 +498,7 @@ Doctors and pathologists do not need to read code; the QuantumX frontend communi
 
 ---
 
-### Q: "Patient health data is extremely sensitive. How does QuantumX protect patient privacy and comply with Indian and global laws (DPDP Act / HIPAA)?"
+### Q: "Patient health data is extremely sensitive. How does QureSight protect patient privacy and comply with Indian and global laws (DPDP Act / HIPAA)?"
 
 **Answer**:
 1. **Zero Raw Identity Storage on Quantum Compute Nodes**:
@@ -510,10 +510,10 @@ Doctors and pathologists do not need to read code; the QuantumX frontend communi
 
 ---
 
-### Q: "Doctors usually don't trust black-box AI. If QuantumX predicts '89% Malignant', how does an experienced oncologist know WHY it made that decision?"
+### Q: "Doctors usually don't trust black-box AI. If QureSight predicts '89% Malignant', how does an experienced oncologist know WHY it made that decision?"
 
 **Answer**:
-* QuantumX incorporates **SHAP (Shapley Additive exPlanations) & Quantum Gate Attribution**:
+* QureSight incorporates **SHAP (Shapley Additive exPlanations) & Quantum Gate Attribution**:
 * Instead of outputting an unexplainable number, the dashboard visually presents the exact clinical reasoning to the doctor:
   * *"Primary Driver: Cell Radius (+34% risk contribution due to nuclear enlargement)"*
   * *"Secondary Driver: Concave Points (+22% risk contribution due to irregular membrane notches)"*
@@ -521,12 +521,12 @@ Doctors and pathologists do not need to read code; the QuantumX frontend communi
 
 ---
 
-### Q: "Is QuantumX limited strictly to breast cancer, or can it screen for other diseases?"
+### Q: "Is QureSight limited strictly to breast cancer, or can it screen for other diseases?"
 
 **Answer**:
-* **QuantumX is an extensible, multi-disease health intelligence platform.**
+* **QureSight is an extensible, multi-disease health intelligence platform.**
 * The underlying mathematical pipeline (continuous angle embedding into multi-qubit Hilbert space) is completely disease-agnostic.
-* In the live QuantumX platform, we have already built and integrated working screening modules for:
+* In the live QureSight platform, we have already built and integrated working screening modules for:
   1. **Breast Cytopathology Screening** (WDBC cellular morphometry).
   2. **Cardiovascular Disease Risk** (Blood pressure, cholesterol, glucose, vascular biomarkers).
   3. **Neurological & Brain Health** (Multi-channel electrophysiological EEG, cognitive latency, spectral power bands).
@@ -538,13 +538,13 @@ Doctors and pathologists do not need to read code; the QuantumX frontend communi
 **Answer**:
 * **It costs fractions of an Indian rupee per screening.**
 * Pre-trained variational quantum circuits execute in milliseconds on cloud tensor nodes or quantum hardware.
-* Because the compute overhead per screening is negligible, QuantumX can be deployed at near-zero marginal cost across thousands of rural Primary Health Centres (PHCs) and mobile screening camps, making it 100% viable for mass public health screening under the **Ayushman Bharat (PM-JAY)** scheme.
+* Because the compute overhead per screening is negligible, QureSight can be deployed at near-zero marginal cost across thousands of rural Primary Health Centres (PHCs) and mobile screening camps, making it 100% viable for mass public health screening under the **Ayushman Bharat (PM-JAY)** scheme.
 
 ---
 
 ## 9. Global State-of-the-Art (SOTA) Classical & Deep Learning Models Benchmark (Ranked from Latest to Oldest)
 
-When presenting QuantumX to judges, research oncologists, or technical evaluators, you must demonstrate a profound awareness of the **existing global state-of-the-art (SOTA) classical machine learning and deep learning ecosystem**. Below is a curated, deeply researched repository of the world's leading classical models, foundation systems, and deployed clinical AI platforms across **Breast Cancer, Cardiovascular Disease, Neurological Disorders, and Biomedical Vision/Tabular Frameworks**, structured in **strict chronological order from the latest (2026 / 2025 / 2024) to established baselines**, complete with exact links, architectural details, and clinical functions.
+When presenting QureSight to judges, research oncologists, or technical evaluators, you must demonstrate a profound awareness of the **existing global state-of-the-art (SOTA) classical machine learning and deep learning ecosystem**. Below is a curated, deeply researched repository of the world's leading classical models, foundation systems, and deployed clinical AI platforms across **Breast Cancer, Cardiovascular Disease, Neurological Disorders, and Biomedical Vision/Tabular Frameworks**, structured in **strict chronological order from the latest (2026 / 2025 / 2024) to established baselines**, complete with exact links, architectural details, and clinical functions.
 
 ---
 
@@ -603,15 +603,15 @@ When presenting QuantumX to judges, research oncologists, or technical evaluator
 
 ---
 
-### E. Architectural Positioning: How QuantumX Differs from and Complements Classical SOTA
+### E. Architectural Positioning: How QureSight Differs from and Complements Classical SOTA
 
-When judges ask: *"How does QuantumX compare against these giant foundation models (like Prov-GigaPath, EchoNet, or Mirai)?"*, you can articulate the exact architectural positioning:
+When judges ask: *"How does QureSight compare against these giant foundation models (like Prov-GigaPath, EchoNet, or Mirai)?"*, you can articulate the exact architectural positioning:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────────┐
 │                             THE MODERN MEDICAL AI TAXONOMY                                  │
 ├──────────────────────────────────────────────┬──────────────────────────────────────────────┤
-│    CLASSICAL FOUNDATION MODELS (WSI / IMAGING)│      QUANTUMX HYBRID MULTI-MODEL ENGINE       │
+│    CLASSICAL FOUNDATION MODELS (WSI / IMAGING)│      QURESIGHT HYBRID MULTI-MODEL ENGINE       │
 ├──────────────────────────────────────────────┼──────────────────────────────────────────────┤
 │ 1. Input Modality:                           │ 1. Input Modality:                           │
 │    Gigapixel raw images, 3D MRI scans, video │    Extracted cellular morphometry, molecular │
@@ -636,7 +636,7 @@ When judges ask: *"How does QuantumX compare against these giant foundation mode
 ```
 
 #### Key Takeaway for Judges:
-* **Symbiotic Integration**: In a modern clinical pipeline, classical vision models (like *TotalSegmentator* or *Prov-GigaPath*) extract quantitative cellular/organ contours. **QuantumX then ingests those high-dimensional numerical vectors into its quantum Hilbert space, computing ultra-fast, fail-safe consensus risk triage that can be deployed anywhere at zero marginal cost.**
+* **Symbiotic Integration**: In a modern clinical pipeline, classical vision models (like *TotalSegmentator* or *Prov-GigaPath*) extract quantitative cellular/organ contours. **QureSight then ingests those high-dimensional numerical vectors into its quantum Hilbert space, computing ultra-fast, fail-safe consensus risk triage that can be deployed anywhere at zero marginal cost.**
 
 ---
 
@@ -655,13 +655,13 @@ For comparison and presentation context, here is a concise list of established c
 | **Cloud Digital Pathology** | **Paige.ai Portal** | Paige.ai | Whole-slide digital biopsy images | Automated tumor grading, biomarker quantification, and diagnostic reports | [paige.ai](https://paige.ai) |
 | **Cloud 3D Hemodynamics** | **HeartFlow Portal** | HeartFlow Inc. | Coronary CT Angiography scans | Interactive 3D coronary artery tree with fractional flow reserve ($FFR_{ct}$) | [heartflow.com](https://www.heartflow.com) |
 
-> **Key Difference for QuantumX**: While these existing platforms rely strictly on single classical equations or classical neural networks, **QuantumX is the first platform to combine a multi-disease web workflow with a Cloud Hybrid Quantum Hilbert-Space Inference Engine and a Dual-Engine Discordant Consensus Protocol** to prevent False Negatives.
+> **Key Difference for QureSight**: While these existing platforms rely strictly on single classical equations or classical neural networks, **QureSight is the first platform to combine a multi-disease web workflow with a Cloud Hybrid Quantum Hilbert-Space Inference Engine and a Dual-Engine Discordant Consensus Protocol** to prevent False Negatives.
 
 ---
 
 ## 11. Cardiovascular Intelligence Engine: Real-World Multi-Modal Datasets & India Accessibility Analysis
 
-When expanding QuantumX to cardiovascular disease (the world's #1 killer), we reject trivial 14-column toy spreadsheets (such as UCI-1988 or flat survey tables) where classical models easily memorize the data. In accordance with the SIH26139 problem statement, QuantumX is engineered for high-dimensional, noisy, multi-modal biomedical vectors.
+When expanding QureSight to cardiovascular disease (the world's #1 killer), we reject trivial 14-column toy spreadsheets (such as UCI-1988 or flat survey tables) where classical models easily memorize the data. In accordance with the SIH26139 problem statement, QureSight is engineered for high-dimensional, noisy, multi-modal biomedical vectors.
 
 Below is the exhaustive architectural breakdown of the datasets, the 3 clinical tests, their widespread availability across India, and how everyday patients and rural Primary Health Centres (PHCs) access this data.
 
@@ -684,9 +684,9 @@ Below is the exhaustive architectural breakdown of the datasets, the 3 clinical 
 
 ---
 
-### B. The 3 Clinical Cardiovascular Tests in QuantumX
+### B. The 3 Clinical Cardiovascular Tests in QureSight
 
-To ensure QuantumX is immediately usable across Indian healthcare without requiring unobtainable expensive equipment, the platform ingests 3 standard clinical tests:
+To ensure QureSight is immediately usable across Indian healthcare without requiring unobtainable expensive equipment, the platform ingests 3 standard clinical tests:
 
 ---
 
@@ -697,7 +697,7 @@ To ensure QuantumX is immediately usable across Indian healthcare without requir
 * **Is It Common in India?**
   * **Universal Availability**: Present in virtually every Primary Health Centre (PHC), Community Health Centre (CHC), district hospital, private nursing home, and emergency clinic across India. Portable digital 12-lead machines (e.g. BPL, Tricog, SanketLife) are widely deployed in rural ambulances and mobile screening camps.
 * **Can a Normal Citizen / Patient Get This Data?**
-  * **Yes, 100% Accessible**: Patients receive a physical printed paper strip or a digital PDF sent directly to their phone. They can upload the image or input the digital waveform values into QuantumX.
+  * **Yes, 100% Accessible**: Patients receive a physical printed paper strip or a digital PDF sent directly to their phone. They can upload the image or input the digital waveform values into QureSight.
 * **Average Cost in India**:
   * **Government PHCs / Hospitals under Ayushman Bharat (PM-JAY)**: **₹0 (Free)**.
   * **Private Diagnostic Labs / Clinics**: **₹100 to ₹300** (~$1.20 to $3.50 USD).
@@ -752,7 +752,7 @@ To ensure QuantumX is immediately usable across Indian healthcare without requir
 ### D. Why This Multi-Modal Setup Creates True Quantum Advantage
 
 * **The Classical Failure Mode**: Classical machine learning models (XGBoost, standard CNNs) treat the 60,000-point ECG signal and the non-linear blood chemistry as isolated inputs. In real-world cardiology, early-stage heart attacks often present with **borderline-normal ECG waveforms but elevated molecular Troponin and unstable pulse pressure**. Classical models frequently produce fatal False Negatives in these complex atypical presentations.
-* **The QuantumX Advantage**: QuantumX embeds the compressed latent representations from all 3 tests into an **8-to-12 Qubit Entangled Hilbert State Space ($2^N = 256\text{--}4096$ dimensions)**. Parameterized quantum CNOT entangling gates evaluate the non-linear phase cross-interference between electrical conduction and molecular necrosis simultaneously. This enables QuantumX to detect silent, high-complexity cardiac events with near-zero latency while remaining 100% affordable and accessible to every Indian citizen.
+* **The QureSight Advantage**: QureSight embeds the compressed latent representations from all 3 tests into an **8-to-12 Qubit Entangled Hilbert State Space ($2^N = 256\text{--}4096$ dimensions)**. Parameterized quantum CNOT entangling gates evaluate the non-linear phase cross-interference between electrical conduction and molecular necrosis simultaneously. This enables QureSight to detect silent, high-complexity cardiac events with near-zero latency while remaining 100% affordable and accessible to every Indian citizen.
 
 ---
 

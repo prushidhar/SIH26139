@@ -51,11 +51,11 @@ function VerifyEmailForm() {
       const response = await AuthService.verifyEmail(email, token.trim());
 
       if (typeof window !== "undefined") {
-        localStorage.setItem("quantumx_user_name", response.user.username);
-        localStorage.setItem("quantumx_user_email", response.user.email);
-        localStorage.setItem("quantumx_is_new_registration", "true");
+        localStorage.setItem("quresight_user_name", response.user.username);
+        localStorage.setItem("quresight_user_email", response.user.email);
+        localStorage.setItem("quresight_is_new_registration", "true");
         if (response.user.profileImageUrl) {
-          localStorage.setItem("quantumx_user_avatar", response.user.profileImageUrl);
+          localStorage.setItem("quresight_user_avatar", response.user.profileImageUrl);
         }
       }
 

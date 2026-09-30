@@ -157,7 +157,7 @@ const EFFICIENCY_METRICS = [
   },
 ];
 
-// REAL WDBC CYTOPATHOLOGY CELLULAR FEATURES FOR 8-QUBIT QXPLAIN MATRIX
+// REAL WDBC CYTOPATHOLOGY CELLULAR FEATURES FOR 8-QUBIT QUREEXPLAIN MATRIX
 const WDBC_QUBIT_FEATURES = [
   { qubit: "q[0]", name: "Mean Nuclear Radius", importance: 0.82 },
   { qubit: "q[1]", name: "Mean Nuclear Texture", importance: 0.74 },
@@ -1272,7 +1272,7 @@ export default function DeepAnalyticsChartsPage() {
           </div>
 
           {/* ==================================================================== */}
-          {/* SECTION 3: QXPLAIN QUANTUM GATE ATTRIBUTION & ENTANGLEMENT HEATMAP   */}
+          {/* SECTION 3: QUREEXPLAIN QUANTUM GATE ATTRIBUTION & ENTANGLEMENT HEATMAP*/}
           {/* ==================================================================== */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Quantum Gate Attribution Heatmap (7 cols) */}
@@ -1282,7 +1282,7 @@ export default function DeepAnalyticsChartsPage() {
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-quantum" />
                     <h3 className="font-serif text-base font-medium text-ink">
-                      QXplain: Quantum Gate Attribution &amp; Entanglement Heatmap
+                      QureExplain: Quantum Gate Attribution &amp; Entanglement Heatmap
                     </h3>
                   </div>
                   <p className="text-[11px] text-ink-soft">
@@ -1583,7 +1583,7 @@ export default function DeepAnalyticsChartsPage() {
                 {/* ZNE Mitigated Quantum */}
                 <div className="p-3.5 rounded-2xl bg-teal-50/60 border border-teal-200 space-y-1">
                   <span className="text-[10px] text-teal-900 uppercase block font-semibold">
-                    QuantumX ZNE Mitigated
+                    QureSight ZNE Mitigated
                   </span>
                   <div className="font-serif text-2xl font-bold text-teal-900">
                     {Math.max(76.0, 87.87 * Math.exp(-0.035 * noiseRate)).toFixed(1)}%
@@ -1652,7 +1652,7 @@ export default function DeepAnalyticsChartsPage() {
                   <span>Why Physical Hardware Noise Matters for SIH26139:</span>
                 </div>
                 <p className="text-[11px] text-ink-soft font-light leading-relaxed">
-                  Competitors frequently run simulations with zero noise and claim 99% accuracy on theoretical statevectors. QuantumX models real physical depolarizing channels (&epsilon; = 0.5% to 2.5% on IBM Quantum Eagle/Brisbane) and incorporates Zero-Noise Extrapolation (ZNE) with Richardson polynomial curve fitting to recover true noiseless clinical expectations.
+                  Competitors frequently run simulations with zero noise and claim 99% accuracy on theoretical statevectors. QureSight models real physical depolarizing channels (&epsilon; = 0.5% to 2.5% on IBM Quantum Eagle/Brisbane) and incorporates Zero-Noise Extrapolation (ZNE) with Richardson polynomial curve fitting to recover true noiseless clinical expectations.
                 </p>
               </div>
             </div>

@@ -12,7 +12,7 @@
 # ---
 
 # %% [markdown]
-# # QuantumX — Hybrid Quantum Heart Attack Detection Model (Transfinite-1 Cardiac)
+# # QureSight — Hybrid Quantum Heart Attack Detection Model (Transfinite-1 Cardiac)
 # ## Frozen ResNet-18 Encoder → 8-Qubit Variational Quantum Classifier
 # 
 # **Dataset**: ECG Images of Cardiac Patients (Kaggle evilspirit05/ecg-analysis)  

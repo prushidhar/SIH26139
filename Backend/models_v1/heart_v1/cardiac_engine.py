@@ -1,13 +1,13 @@
 """
 ================================================================================
-QuantumX Cardiac Diagnostic Engine: Dual-Engine CX-01 & Transfinite-1 (ECG)
+QureSight Cardiac Diagnostic Engine: Dual-Engine CX-01 & Transfinite-1 (ECG)
 ================================================================================
 Production inference pipeline executing:
   1. CX-01 Classical ResNet-18 with Grad-CAM visual heatmap localization
   2. Transfinite-1 8-Qubit Variational Quantum Circuit (VQC) with PennyLane
   3. Continuous Cardiac Risk Score (0-100) & Clinical Urgency Stratification
   4. Anatomical Lead Localization (Anterior, Inferior, Lateral ST changes)
-  5. Quantum Circuit Signature: 'QuantumX Transfinite-1'
+  5. Quantum Circuit Signature: 'QureSight Transfinite-1'
 ================================================================================
 """
 
@@ -19,7 +19,7 @@ import logging
 from pathlib import Path
 from typing import Dict, Any, Optional, Tuple, List
 
-logger = logging.getLogger("QuantumX.CardiacEngine")
+logger = logging.getLogger("QureSight.CardiacEngine")
 
 import numpy as np
 
@@ -599,7 +599,7 @@ class CardiacDualEngine:
                 }
             },
             "quantum_engine": {
-                "signature": "QuantumX Transfinite-1",
+                "signature": "QureSight Transfinite-1",
                 "qubits": N_QUBITS,
                 "ansatz": "8-Qubit AngleEmbedding + StronglyEntanglingLayers (2 Layers)",
                 "statevector_backend": "PennyLane default.qubit (Analytical)",

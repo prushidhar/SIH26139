@@ -1,10 +1,10 @@
 r"""
 ====================================================================================================
-QuantumX Explainability Engine (QXplain): Multi-Level Quantum-Native Interpretability
+QureSight Explainability Engine (QureExplain): Multi-Level Quantum-Native Interpretability
 ====================================================================================================
-This module implements the multi-level explainability framework for QuantumX v1, based on
+This module implements the multi-level explainability framework for QureSight v1, based on
 Paper 17 (QuantumNeuroXAI, Nature Scientific Reports 2026 / PMC13111684) and Stage 10 of
-the QuantumX Pipeline Blueprint.
+the QureSight Pipeline Blueprint.
 
 Explainability Levels:
 1. Level 1: Classical Feature Attribution (Permutation Importance & Input Gradient Jacobian)
@@ -24,7 +24,7 @@ from typing import Dict, Any, Optional, Tuple, List, Union
 import pennylane as qml
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
-logger = logging.getLogger("QuantumX.QuantumXAI")
+logger = logging.getLogger("QureSight.QureSightAI")
 
 
 # ==================================================================================================
@@ -249,7 +249,7 @@ if __name__ == "__main__":
     import os
     import sys
     import importlib.util
-    logger.info("Executing QuantumX Explainability Engine self-test...")
+    logger.info("Executing QureSight Explainability Engine self-test...")
     _cur_dir = os.path.dirname(os.path.abspath(__file__))
     spec = importlib.util.spec_from_file_location("quantum_circuits", os.path.join(_cur_dir, "03_quantum_circuits_and_ansatz.py"))
     _qc = importlib.util.module_from_spec(spec)

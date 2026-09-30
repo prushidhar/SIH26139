@@ -50,7 +50,7 @@ export function LegalPageLayout({
           <Link href="/home" className="flex items-center gap-2.5 group">
             <span className="h-2 w-2 rounded-full bg-quantum animate-pulse" />
             <span className="font-serif text-xl font-medium tracking-tight text-white group-hover:opacity-90 transition-opacity">
-              QuantumX
+              QureSight
             </span>
             <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/40 hidden sm:inline-block">
               · Medical Platform
@@ -115,7 +115,7 @@ export function LegalPageLayout({
                 <span>Cryptographic Provenance</span>
               </div>
               <p className="text-xs text-white/50 leading-relaxed max-w-lg">
-                All QuantumX diagnostic executions produce immutable, SHA-256 hashed provenance receipts linking the exact input tensor, VQC state, and gate ablation metrics.
+                All QureSight diagnostic executions produce immutable, SHA-256 hashed provenance receipts linking the exact input tensor, VQC state, and gate ablation metrics.
               </p>
             </div>
             <Link
@@ -135,7 +135,7 @@ export function LegalPageLayout({
             <strong className="text-white/70 font-semibold">INVESTIGATIONAL RESEARCH DISCLAIMER:</strong> This platform is a clinical research prototype. It is not intended for primary autonomous medical diagnosis or clinical classification without licensed medical professional oversight. Delivered &ldquo;AS IS&rdquo; for translational research protocols.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/5 uppercase tracking-[0.2em]">
-            <span>© 2026 QUANTUMX RESEARCH PLATFORM</span>
+            <span>© 2026 QURESIGHT RESEARCH PLATFORM</span>
             <div className="flex items-center gap-6">
               <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
               <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>

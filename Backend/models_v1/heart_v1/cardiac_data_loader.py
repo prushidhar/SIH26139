@@ -1,6 +1,6 @@
 """
 ================================================================================
-QuantumX — Cardiac ECG Image Data Loader & Preprocessor
+QureSight — Cardiac ECG Image Data Loader & Preprocessor
 ECG Images Dataset of Cardiac Patients (Kaggle: evilspirit05/ecg-analysis)
 ================================================================================
 

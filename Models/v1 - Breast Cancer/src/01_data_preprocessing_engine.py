@@ -1,9 +1,9 @@
 """
 ====================================================================================================
-QuantumX Data Engine: Multi-Modal Ingestion, Zero-Leakage Preprocessing & Quantum Screening
+QureSight Data Engine: Multi-Modal Ingestion, Zero-Leakage Preprocessing & Quantum Screening
 ====================================================================================================
 This module implements the production-grade data ingestion, validation, preprocessing, and 
-quantum-readiness screening pipeline for QuantumX v1.
+quantum-readiness screening pipeline for QureSight v1.
 
 Key Scientific Implementations:
 1. Multi-Modal Medical Ingestion:
@@ -40,7 +40,7 @@ from scipy import linalg
 
 # Configure high-signal logger
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
-logger = logging.getLogger("QuantumX.DataEngine")
+logger = logging.getLogger("QureSight.DataEngine")
 
 
 # ==================================================================================================
@@ -59,7 +59,7 @@ def load_wdbc_dataset() -> Tuple[pd.DataFrame, pd.Series, List[str]]:
     raw_data = load_breast_cancer(as_frame=True)
     X = raw_data.data.copy()
     # In scikit-learn load_breast_cancer: 0 = malignant, 1 = benign.
-    # In QuantumX oncology standard: 1 = Malignant (positive class), 0 = Benign (negative class).
+    # In QureSight oncology standard: 1 = Malignant (positive class), 0 = Benign (negative class).
     y = pd.Series(1 - raw_data.target, name="target")
     feature_names = list(X.columns)
     logger.info(f"Loaded WDBC Dataset: {X.shape[0]} samples, {X.shape[1]} features. "
@@ -454,7 +454,7 @@ class GeometricDifferenceCalculator:
 # ==================================================================================================
 
 if __name__ == "__main__":
-    logger.info("Executing QuantumX Data Engine self-test...")
+    logger.info("Executing QureSight Data Engine self-test...")
     X, y, feats = load_wdbc_dataset()
     assert X.shape == (569, 30), f"Expected (569, 30), got {X.shape}"
     assert len(y) == 569, "Labels length mismatch"

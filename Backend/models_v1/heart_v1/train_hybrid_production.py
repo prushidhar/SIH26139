@@ -1,6 +1,6 @@
 """
 ================================================================================
-QuantumX: Authentic Hybrid Quantum-Classical Cardiac Classifier Training
+QureSight: Authentic Hybrid Quantum-Classical Cardiac Classifier Training
 ================================================================================
 Trains genuine PennyLane 8-Qubit Variational Quantum Circuit (VQC) with:
   1. Frozen trained ResNet-18 feature encoder (512-dim latent space)
@@ -278,7 +278,7 @@ def main():
 
     # Save artifact
     production_payload = {
-        "model_signature": "QuantumX Transfinite-1 Cardiac",
+        "model_signature": "QureSight Transfinite-1 Cardiac",
         "architecture": "Bottleneck(512->64->8) -> 8-Qubit VQC (AngleEmbedding + 2x StronglyEntanglingLayers) -> Readout(8->32->4)",
         "n_qubits": N_QUBITS,
         "n_layers": N_LAYERS,

@@ -1,0 +1,35 @@
+services:
+  # Backend API Service
+  - type: web
+    name: quresight-backend
+    runtime: python
+    rootDir: Backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: DATABASE_URL
+        value: sqlite+aiosqlite:///./quresight.db
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: "*"
+
+  # Frontend Web Service
+  - type: web
+    name: quresight-frontend
+    runtime: node
+    rootDir: Frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm run start -- -p $PORT
+    envVars:
+      - key: NODE_VERSION
+        value: 20.11.0
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: quresight-backend
+          property: host
+      - key: NEXT_PUBLIC_GOOGLE_CLIENT_ID
+        value: quresight_dev_client_id.apps.googleusercontent.com

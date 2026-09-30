@@ -1,4 +1,4 @@
-# QuantumX Platform: Comprehensive Scientific Architecture & Benchmark Report
+# QureSight Platform: Comprehensive Scientific Architecture & Benchmark Report
 **System Version:** v1.0.0-PROD
 **Evaluation Protocol:** Stratified Out-of-Fold Verification (Zero Data Leakage)
 **Hardware Topology:** 8-Qubit Second-Order Pauli-Z Entangling Topology
@@ -9,7 +9,7 @@
 OPENQASM 3.0;
 include "stdgates.inc";
 
-// QuantumX 8-Qubit 2nd-Order Pauli-Z Entangling VQC
+// QureSight 8-Qubit 2nd-Order Pauli-Z Entangling VQC
 qubit[8] q;
 bit[8] c;
 

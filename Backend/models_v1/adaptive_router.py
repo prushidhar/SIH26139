@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-QUANTUMX ADAPTIVE CLINICAL MODEL ROUTER (SIH26139)
+QURESIGHT ADAPTIVE CLINICAL MODEL ROUTER (SIH26139)
 ================================================================================
 An intelligent clinical routing engine that dynamically evaluates predictions
 from both Classical Ensembles (XGBoost, SVM, RF) and Hybrid Quantum Classifiers

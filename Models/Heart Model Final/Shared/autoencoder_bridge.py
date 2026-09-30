@@ -1,4 +1,4 @@
-"""QuantumX Latent Cardiac Autoencoder Module
+"""QureSight Latent Cardiac Autoencoder Module
 Bridges 1024-dimensional classical CNN backbone representations to 8-dimensional
 quantum phase space. Pre-trained with reconstruction loss to guarantee preservation
 of fine cardiac morphology (ST elevation, T-wave inversion) without gradient starvation.

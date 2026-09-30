@@ -1,6 +1,6 @@
 <div align="center">
 
-# Frontend — QuantumX
+# Frontend — QureSight
 
 [![Status](https://img.shields.io/badge/status-active%20development-yellow)]()
 [![Python](https://img.shields.io/badge/backend-Python%203.12%2B-3776AB?logo=python&logoColor=white)]()
@@ -10,7 +10,7 @@
 
 </div>
 
-This folder owns the entire user interface and client-side experience for QuantumX. It is designed not just as a generic dashboard, but as a premium, research-grade medical workspace where clinicians and researchers can visualize the impact of quantum machine learning on high-dimensional biomedical data.
+This folder owns the entire user interface and client-side experience for QureSight. It is designed not just as a generic dashboard, but as a premium, research-grade medical workspace where clinicians and researchers can visualize the impact of quantum machine learning on high-dimensional biomedical data.
 
 ## Language & Framework: Next.js (App Router) & TypeScript
 

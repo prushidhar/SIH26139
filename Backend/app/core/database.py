@@ -20,7 +20,7 @@ def resolve_db_url() -> str:
     url = os.getenv("DATABASE_URL") or settings.DATABASE_URL
     # If using the defunct / paused Supabase tenant reference or empty, default to resilient local SQLite
     if not url or "vknujqpzwbxmfhdcgxpa" in url:
-        return "sqlite+aiosqlite:///./quantumx.db"
+        return "sqlite+aiosqlite:///./quresight.db"
     return url
 
 
@@ -59,7 +59,7 @@ AsyncSessionLocal = async_sessionmaker(
 
 # Resilient SQLite fallback engine if primary connection ever drops
 fallback_engine = create_async_engine(
-    "sqlite+aiosqlite:///./quantumx.db",
+    "sqlite+aiosqlite:///./quresight.db",
     connect_args={"check_same_thread": False},
 )
 FallbackSessionLocal = async_sessionmaker(
@@ -75,7 +75,7 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
         async with AsyncSessionLocal() as session:
             yield session
     except Exception as exc:
-        print(f"[QuantumX Database] Session error ({exc}), activating local session fallback...")
+        print(f"[QureSight Database] Session error ({exc}), activating local session fallback...")
         async with FallbackSessionLocal() as session:
             yield session
 
@@ -93,7 +93,7 @@ async def init_db() -> None:
         async with fallback_engine.begin() as fconn:
             await fconn.run_sync(Base.metadata.create_all)
     except Exception as e:
-        print(f"[QuantumX Database] Fallback schema init note: {e}")
+        print(f"[QureSight Database] Fallback schema init note: {e}")
 
     try:
         async def _connect_primary():
@@ -101,12 +101,12 @@ async def init_db() -> None:
                 await conn.run_sync(Base.metadata.create_all)
 
         await asyncio.wait_for(_connect_primary(), timeout=4.0)
-        print(f"[QuantumX Backend] Database connected ({'SQLite' if ACTIVE_DB_URL.startswith('sqlite') else 'PostgreSQL'}) and schema initialized.")
+        print(f"[QureSight Backend] Database connected ({'SQLite' if ACTIVE_DB_URL.startswith('sqlite') else 'PostgreSQL'}) and schema initialized.")
     except Exception as db_err:
-        print(f"[QuantumX Backend] Remote DB connection note: {db_err}")
-        print("[QuantumX Backend] Activating resilient local storage fallback (quantumx.db)...")
+        print(f"[QureSight Backend] Remote DB connection note: {db_err}")
+        print("[QureSight Backend] Activating resilient local storage fallback (quresight.db)...")
         engine = fallback_engine
         AsyncSessionLocal = FallbackSessionLocal
         async with engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
-        print("[QuantumX Backend] Local database fallback initialized and operational.")
+        print("[QureSight Backend] Local database fallback initialized and operational.")

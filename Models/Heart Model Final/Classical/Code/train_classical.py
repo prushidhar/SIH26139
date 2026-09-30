@@ -1,4 +1,4 @@
-"""QuantumX State-of-the-Art Classical 12-Lead ECG Image Classifier
+"""QureSight State-of-the-Art Classical 12-Lead ECG Image Classifier
 Architecture: ECGConVT (Multi-Scale Dilated ResNet + Multi-Head Self-Attention + CBAM)
 Clinical Enhancements: CLAHE Preprocessing, Adaptive Concat Pooling (1024d), Focal Loss + Label Smoothing, Temperature Calibration
 """
@@ -420,7 +420,7 @@ def train_classical(epochs=18, batch_size=32, lr=3e-4):
     ckpt_path = out_models_dir / "best_classical_cardiac_model.pt"
     
     torch.save({
-        'model_name': 'QuantumX ECGConVT (CNN-Vision Transformer Hybrid)',
+        'model_name': 'QureSight ECGConVT (CNN-Vision Transformer Hybrid)',
         'classes': CLASSES,
         'num_classes': len(CLASSES),
         'best_val_acc': float(best_val_acc),

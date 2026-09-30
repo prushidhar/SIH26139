@@ -10,7 +10,7 @@
 
 ## 📋 Part 1: Documentation, Validation & Testing Questions (Technical Pipeline)
 
-1. What was your primary role in structuring, documenting, and validating the QuantumX codebase?
+1. What was your primary role in structuring, documenting, and validating the QureSight codebase?
 2. How did you document the model training benchmarks, loss curves, and 50-fold cross-validation logs?
 3. Where can judges and reviewers inspect the technical documentation, model architectures, and data schemas in the repo?
 4. How did you verify that the recorded benchmark metrics matched the actual output logs of the trained models?
@@ -43,5 +43,5 @@
 26. What high-impact research is cited from **PubMed** (60+ papers on medical AI, disease detection, and clinical studies)?
 27. What research is cited from **arXiv** (80+ papers on Quantum ML surveys, hybrid models, and quantum kernels)?
 28. What research is cited from **IEEE Xplore**, **SpringerLink**, and **Nature** (on VQCs, quantum noise, and biological AI)?
-29. How does this comprehensive foundation of 180+ peer-reviewed papers scientifically validate the QuantumX platform?
-30. Can you summarize the key clinical benefits and research rigor of QuantumX in 3 simple sentences?
+29. How does this comprehensive foundation of 180+ peer-reviewed papers scientifically validate the QureSight platform?
+30. Can you summarize the key clinical benefits and research rigor of QureSight in 3 simple sentences?

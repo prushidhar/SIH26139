@@ -1,5 +1,5 @@
 # Comprehensive Technical Report: Cardiac Vision Models (Classical vs. Hybrid Quantum-Classical)
-## Literature Breakdown, Model Mechanics, and Brutal Code Audit of QuantumX Notebooks
+## Literature Breakdown, Model Mechanics, and Brutal Code Audit of QureSight Notebooks
 
 ---
 
@@ -198,8 +198,8 @@ Paper 4 deployed a heart disease classifier directly onto physical hardware: the
 ## 3. Unglazed Code Audit: What Our 2 Notebooks Lack
 
 We conducted an audit comparing our notebooks:
-- Classical Notebook: [`01_Best_Classical_Cardiac_Model.ipynb`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/Heart%20Model%20Final/Classical/Notebooks/01_Best_Classical_Cardiac_Model.ipynb)
-- Hybrid Notebook: [`02_Best_Hybrid_Quantum_Cardiac_Model.ipynb`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/Heart%20Model%20Final/Hybrid/Notebooks/02_Best_Hybrid_Quantum_Cardiac_Model.ipynb)
+- Classical Notebook: [`01_Best_Classical_Cardiac_Model.ipynb`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/Heart%20Model%20Final/Classical/Notebooks/01_Best_Classical_Cardiac_Model.ipynb)
+- Hybrid Notebook: [`02_Best_Hybrid_Quantum_Cardiac_Model.ipynb`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/Heart%20Model%20Final/Hybrid/Notebooks/02_Best_Hybrid_Quantum_Cardiac_Model.ipynb)
 against the published research standards.
 
 ---
@@ -219,7 +219,7 @@ against the published research standards.
 ### Detailed Analysis of Code Weaknesses
 
 #### Weakness 1: Patient-Level Data Leakage (Critical)
-*Our Current Code ([`train_classical.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/Heart%20Model%20Final/Classical/Code/train_classical.py), lines 62–84)*:
+*Our Current Code ([`train_classical.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/Heart%20Model%20Final/Classical/Code/train_classical.py), lines 62–84)*:
 ```python
 def scan_dataset(dir_path, blacklist=None):
     records = []
@@ -245,7 +245,7 @@ def scan_dataset(dir_path, blacklist=None):
 ---
 
 #### Weakness 2: Zero Hardware Noise Simulation (Critical)
-*Our Current Code ([`quantum_circuit.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/Heart%20Model%20Final/Hybrid/Code/quantum_circuit.py), lines 14–20)*:
+*Our Current Code ([`quantum_circuit.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/Heart%20Model%20Final/Hybrid/Code/quantum_circuit.py), lines 14–20)*:
 ```python
 NUM_QUBITS = 8
 NUM_LAYERS = 3
@@ -265,7 +265,7 @@ def data_reuploading_cardiac_circuit(inputs, weights):
 ---
 
 #### Weakness 3: The 1024 $\to$ 8 Feature Bottleneck (High)
-*Our Current Code ([`quantum_circuit.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/Heart%20Model%20Final/Hybrid/Code/quantum_circuit.py), lines 79–87)*:
+*Our Current Code ([`quantum_circuit.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/Heart%20Model%20Final/Hybrid/Code/quantum_circuit.py), lines 79–87)*:
 ```python
 self.pre_net = nn.Sequential(
     nn.BatchNorm1d(in_features),
@@ -288,7 +288,7 @@ self.pre_net = nn.Sequential(
 ---
 
 #### Weakness 4: Processing 1D Voltage Signals as Paper Photos (High)
-*Our Current Code ([`train_classical.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/Heart%20Model%20Final/Classical/Code/train_classical.py), lines 89–100)*:
+*Our Current Code ([`train_classical.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/Heart%20Model%20Final/Classical/Code/train_classical.py), lines 89–100)*:
 ```python
 class AdaptiveECGPreprocessor:
     def __init__(self, target_size=(224, 224)):
@@ -333,7 +333,7 @@ flowchart LR
     F --> G["Classification Head: 64 -> 32 -> 4 Classes"]
 ```
 
-1. **Universal Data Re-Uploading ([`quantum_circuit.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/Heart%20Model%20Final/Hybrid/Code/quantum_circuit.py), lines 25–30)**:
+1. **Universal Data Re-Uploading ([`quantum_circuit.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/Heart%20Model%20Final/Hybrid/Code/quantum_circuit.py), lines 25–30)**:
    ```python
    for l in range(NUM_LAYERS):
        qml.AngleEmbedding(inputs, wires=range(NUM_QUBITS), rotation="Y")
@@ -341,17 +341,17 @@ flowchart LR
    ```
    Re-uploading features at each layer allows the circuit to act as a higher-order Fourier approximator, avoiding the single-frequency expressivity bottleneck of standard single-pass designs.
 
-2. **16-Observable Readout ([`quantum_circuit.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/Heart%20Model%20Final/Hybrid/Code/quantum_circuit.py), lines 31–36)**:
+2. **16-Observable Readout ([`quantum_circuit.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/Heart%20Model%20Final/Hybrid/Code/quantum_circuit.py), lines 31–36)**:
    Measuring 8 individual Pauli-Z expectations alongside 8 circular two-qubit correlation pairs ($\langle \hat{Z}_i \hat{Z}_{i+1} \rangle$) extracts 16 features from 8 qubits using only local observables, helping mitigate barren plateaus.
 
-3. **ResQNet Context Highway & Bilinear Gated Fusion ([`quantum_circuit.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/Heart%20Model%20Final/Hybrid/Code/quantum_circuit.py), lines 47–70)**:
+3. **ResQNet Context Highway & Bilinear Gated Fusion ([`quantum_circuit.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/Heart%20Model%20Final/Hybrid/Code/quantum_circuit.py), lines 47–70)**:
    ```python
    g = self.gate(torch.cat([q_feats, c_feats], dim=-1))
    fused = g * h_bilinear + (1.0 - g) * h_c
    ```
    This architecture provides a safeguard against quantum gradient vanishing. If the quantum circuit's gradients attenuate, the classical context highway guarantees that the CNN backbone continues to receive non-vanishing gradients $\mathcal{O}(1)$.
 
-4. **Multi-Head Self-Attention Across Leads ([`train_classical.py`](file:///c:/Users/anshu/OneDrive/Desktop/QuantumX/Models/Heart%20Model%20Final/Classical/Code/train_classical.py), lines 143–160)**:
+4. **Multi-Head Self-Attention Across Leads ([`train_classical.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/Heart%20Model%20Final/Classical/Code/train_classical.py), lines 143–160)**:
    Computing self-attention across the feature map allows the model to learn reciprocal lead dynamics (such as ST-elevation in leads II, III, and aVF paired with reciprocal depression in leads I and aVL), which is clinically important for detecting inferior myocardial infarctions.
 
 ---

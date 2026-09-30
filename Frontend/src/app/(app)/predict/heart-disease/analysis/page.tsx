@@ -32,7 +32,7 @@ export default function HeartDiseaseAnalysisPage() {
 
   // 4 Focused Tabs matching Breast Cancer structure
   const [activeTab, setActiveTab] = useState<
-    "key_risk_factors" | "quantumx_ai" | "model_comparison" | "realtime_graphs"
+    "key_risk_factors" | "quresight_ai" | "model_comparison" | "realtime_graphs"
   >("key_risk_factors");
 
   // Model selection switch: "transfinite_1" (Hybrid Quantum) vs "cx_01" (Classical Baseline)
@@ -113,7 +113,7 @@ export default function HeartDiseaseAnalysisPage() {
 
   useEffect(() => {
     try {
-      const stored = sessionStorage.getItem("quantumx_active_cardiac_analysis");
+      const stored = sessionStorage.getItem("quresight_active_cardiac_analysis");
       if (stored) {
         const parsed = JSON.parse(stored);
         if (parsed.patientInfo) setPatientInfo(parsed.patientInfo);
@@ -281,7 +281,7 @@ export default function HeartDiseaseAnalysisPage() {
         downloadCombinedReport(payload);
         showToast({
           title: "Report Download Complete",
-          message: `Saved QuantumX_Report_${payload.patient.patientId}_Combined.pdf`,
+          message: `Saved QureSight_Report_${payload.patient.patientId}_Combined.pdf`,
           type: "quantum",
         });
       } catch (err: any) {
@@ -327,7 +327,7 @@ export default function HeartDiseaseAnalysisPage() {
                 </span>
               </div>
               <p className="text-xs text-ink-soft font-light">
-                Comprehensive 12-lead ECG analysis, QuantumX AI cardiologist review, and multi-engine diagnostic comparison.
+                Comprehensive 12-lead ECG analysis, QureSight AI cardiologist review, and multi-engine diagnostic comparison.
               </p>
             </div>
           </div>
@@ -513,17 +513,17 @@ export default function HeartDiseaseAnalysisPage() {
             <span>📊 1. Key Risk Factors &amp; Lead Pinpointing</span>
           </button>
 
-          {/* Tab 2: QuantumX AI */}
+          {/* Tab 2: QureSight AI */}
           <button
-            onClick={() => setActiveTab("quantumx_ai")}
+            onClick={() => setActiveTab("quresight_ai")}
             className={`py-2 px-4 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-              activeTab === "quantumx_ai"
+              activeTab === "quresight_ai"
                 ? "bg-white text-ink font-bold shadow-xs border border-hairline"
                 : "text-ink-soft hover:text-ink"
             }`}
           >
-            <Sparkles size={14} className={activeTab === "quantumx_ai" ? "text-quantum" : ""} />
-            <span>✨ 2. QuantumX AI Cardiologist</span>
+            <Sparkles size={14} className={activeTab === "quresight_ai" ? "text-quantum" : ""} />
+            <span>✨ 2. QureSight AI Cardiologist</span>
           </button>
 
           {/* Tab 3: Model Comparison */}
@@ -573,7 +573,7 @@ export default function HeartDiseaseAnalysisPage() {
           />
         )}
 
-        {activeTab === "quantumx_ai" && (
+        {activeTab === "quresight_ai" && (
           <AiDoctorConsultationTab
             patientInfo={patientInfo}
             telemetry={telemetry}

@@ -137,7 +137,7 @@ export default function BatchResultsTable({
       });
       showToast({
         title: "Batch ZIP Downloaded",
-        message: `Downloaded QuantumX_Batch_${session.batchId}_Reports.zip`,
+        message: `Downloaded QureSight_Batch_${session.batchId}_Reports.zip`,
         type: "quantum",
       });
     } catch (err: any) {
@@ -231,7 +231,7 @@ export default function BatchResultsTable({
       downloadCombinedReport(payload);
       showToast({
         title: "Report Downloaded",
-        message: `Saved QuantumX_Report_${payload.patient.patientId}_Combined.pdf`,
+        message: `Saved QureSight_Report_${payload.patient.patientId}_Combined.pdf`,
         type: "quantum",
       });
     } catch (err: any) {
@@ -379,7 +379,7 @@ export default function BatchResultsTable({
               exportBatchAsCSV(session);
               showToast({
                 title: "CSV Exported",
-                message: `Exported QuantumX_Batch_${session.batchId}.csv`,
+                message: `Exported QureSight_Batch_${session.batchId}.csv`,
                 type: "quantum",
               });
             }}
@@ -393,7 +393,7 @@ export default function BatchResultsTable({
               exportBatchAsJSON(session);
               showToast({
                 title: "JSON Exported",
-                message: `Exported QuantumX_Batch_${session.batchId}.json`,
+                message: `Exported QureSight_Batch_${session.batchId}.json`,
                 type: "quantum",
               });
             }}

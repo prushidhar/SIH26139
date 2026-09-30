@@ -115,7 +115,7 @@ async def get_benchmark_summary():
 
         return {
             "status": "success",
-            "protocol": report.get("protocol", "QuantumX TM-BVP"),
+            "protocol": report.get("protocol", "QureSight TM-BVP"),
             "dataset": report.get("dataset", "WDBC"),
             "selected_biomarkers": report.get("selected_biomarkers", []),
             "geometric_difference_s_K": report.get("geometric_difference_s_K", 2.0790),
@@ -127,7 +127,7 @@ async def get_benchmark_summary():
             "provenance": {
                 "verified": True,
                 "source": "Backend/models_v1/artifacts_v1/benchmark_report.json",
-                "mlflow_experiment": "QuantumX-MultiDisease-Clinical-V1",
+                "mlflow_experiment": "QureSight-MultiDisease-Clinical-V1",
                 "timestamp": "2026-09-18T17:26:00Z"
             }
         }

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-QUANTUMX: EMPIRICAL RISK STRATIFICATION & MORPHOMETRIC EVIDENCE ENGINE
+QURESIGHT: EMPIRICAL RISK STRATIFICATION & MORPHOMETRIC EVIDENCE ENGINE
 ================================================================================
 Calculates continuous, data-driven Clinical Risk Scores (0.0 to 100.0) based on
 empirical class-conditional quantiles of the Wisconsin Diagnostic Breast Cancer

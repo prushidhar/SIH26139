@@ -140,7 +140,7 @@ export default function RealTimeGraphsTab({
         zExpectation = Math.max(-1.0, Math.min(1.0, zExpectation));
       }
 
-      // Quantum QXplain Saliency from perturbation ablation
+      // Quantum QureExplain Saliency from perturbation ablation
       let saliency: number;
       const salObj = Array.isArray(rawQuantumSaliencies)
         ? rawQuantumSaliencies.find((s: any) => s.wire_index === idx || s.feature_key === key)

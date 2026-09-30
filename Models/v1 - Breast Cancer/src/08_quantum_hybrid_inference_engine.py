@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-QUANTUMX-HYBRID-V1: DEDICATED QUANTUM-ENHANCED HYBRID INFERENCE ENGINE
+QURESIGHT-HYBRID-V1: DEDICATED QUANTUM-ENHANCED HYBRID INFERENCE ENGINE
 ================================================================================
-The isolated, standalone quantum-classical hybrid model for QuantumX.
+The isolated, standalone quantum-classical hybrid model for QureSight.
 Combines 8-Qubit Second-Order Pauli-Z Feature Map, Parameterized Variational
-Quantum Circuit (VQC), and QXplain gate ablation saliency.
+Quantum Circuit (VQC), and QureExplain gate ablation saliency.
 
 Supports Dual Execution Targets:
   1. Simulator Mode (Default): High-speed PennyLane CPU statevector (<15ms latency)
@@ -85,12 +85,12 @@ except ImportError:
     HAVE_PENNYLANE = False
 
 
-class QuantumXHybridEngine:
-    """Dedicated Quantum-Enhanced Hybrid Inference Engine (QuantumX-Hybrid-v1)"""
+class QureSightHybridEngine:
+    """Dedicated Quantum-Enhanced Hybrid Inference Engine (QureSight-Hybrid-v1)"""
 
     def __init__(self):
         self.version = "1.0.0-PROD"
-        self.engine_name = "QuantumX-Hybrid-v1"
+        self.engine_name = "QureSight-Hybrid-v1"
         self.qubit_count = 8
         self._load_artifacts()
 
@@ -152,7 +152,7 @@ class QuantumXHybridEngine:
 
     def compute_quantum_saliency(self, raw_8: List[float], x_q: np.ndarray) -> List[Dict[str, Any]]:
         """
-        Computes QXplain gate ablation saliency gradients S(G_k) to explain the quantum decision.
+        Computes QureExplain gate ablation saliency gradients S(G_k) to explain the quantum decision.
         """
         feature_labels = [
             "Nuclear Size & Radius", "Surface Texture & Chromatin", "Cell Perimeter", "Nuclear Area",
@@ -197,7 +197,7 @@ class QuantumXHybridEngine:
         ibm_token: str = None
     ) -> Dict[str, Any]:
         """
-        Executes QuantumX Hybrid inference in either 'simulator' or 'real_ibm_qpu' mode.
+        Executes QureSight Hybrid inference in either 'simulator' or 'real_ibm_qpu' mode.
         """
         t0 = time.perf_counter()
         
@@ -222,7 +222,7 @@ class QuantumXHybridEngine:
         pred_label = "Malignant" if p_mal >= 0.50 else "Benign"
         confidence = float((p_mal if pred_label == "Malignant" else (1.0 - p_mal)) * 100.0)
 
-        # Compute QXplain Quantum Saliency Attributions
+        # Compute QureExplain Quantum Saliency Attributions
         quantum_saliency = self.compute_quantum_saliency(raw_8, x_q)
 
         active_engine = "Aleph-1" if execution_mode == "real_ibm_qpu" else "Transfinite-1"
@@ -255,22 +255,22 @@ class QuantumXHybridEngine:
 
 
 # Singleton instance
-quantumx_engine = QuantumXHybridEngine()
+quresight_engine = QureSightHybridEngine()
 
 if __name__ == "__main__":
     test_case = {
         "radius_mean": 22.418, "texture_mean": 27.631, "perimeter_mean": 151.274, "area_mean": 1578.642,
         "smoothness_mean": 0.103, "compactness_mean": 0.284, "concavity_mean": 0.318, "concave_points_mean": 0.174
     }
-    res_sim = quantumx_engine.predict(test_case, execution_mode="simulator")
-    print("QuantumX-Hybrid-v1 (Simulator Mode):")
+    res_sim = quresight_engine.predict(test_case, execution_mode="simulator")
+    print("QureSight-Hybrid-v1 (Simulator Mode):")
     print(f"  Prediction: {res_sim['prediction_label']} ({res_sim['confidence_percentage']:.1f}%)")
     print(f"  Risk Score: {res_sim['composite_risk_score']:.1f}/100 -> {res_sim['risk_tier']}")
     print(f"  Top Driver: {res_sim['quantum_saliency'][0]['feature_name']} ({res_sim['quantum_saliency'][0]['quantum_impact']})")
     print(f"  Latency:    {res_sim['latency_ms']:.2f} ms\n")
 
-    res_qpu = quantumx_engine.predict(test_case, execution_mode="real_ibm_qpu")
-    print("QuantumX-Hybrid-v1 (Real IBM Hardware Mode):")
+    res_qpu = quresight_engine.predict(test_case, execution_mode="real_ibm_qpu")
+    print("QureSight-Hybrid-v1 (Real IBM Hardware Mode):")
     print(f"  Target:     {res_qpu['hardware_receipt']['qpu_target']}")
     print(f"  Job ID:     {res_qpu['hardware_receipt']['job_id']}")
     print(f"  Shots:      {res_qpu['hardware_receipt']['shots']}")

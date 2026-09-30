@@ -1,6 +1,6 @@
 """
 ====================================================================================================
-QuantumX Classical Models: State-of-the-Art Baseline Suite & PyTorch Deep MLP
+QureSight Classical Models: State-of-the-Art Baseline Suite & PyTorch Deep MLP
 ====================================================================================================
 This module implements the complete suite of highly-tuned classical machine learning models used
 in Tier 2 of the Tri-Model Benchmark Verification Protocol (TM-BVP).
@@ -29,7 +29,7 @@ from sklearn.metrics import accuracy_score, roc_auc_score, f1_score, precision_s
 import xgboost as xgb
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
-logger = logging.getLogger("QuantumX.ClassicalModels")
+logger = logging.getLogger("QureSight.ClassicalModels")
 
 
 # ==================================================================================================

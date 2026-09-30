@@ -1,5 +1,5 @@
 {
-  "protocol": "QuantumX TM-BVP",
+  "protocol": "QureSight TM-BVP",
   "dataset": "WDBC",
   "selected_biomarkers": [
     "mean perimeter",

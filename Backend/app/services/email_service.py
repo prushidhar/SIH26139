@@ -52,18 +52,18 @@ class EmailService:
         otp: str,
     ) -> None:
         """Sends a branded HTML verification email with 6-digit OTP."""
-        subject = f"QuantumX — Verification Code: {otp}"
+        subject = f"QureSight — Verification Code: {otp}"
 
         text_body = f"""Hello,
 
-Your QuantumX verification code is: {otp}
+Your QureSight verification code is: {otp}
 
 This code is valid for {settings.OTP_EXPIRE_MINUTES} minutes.
 
 If you did not request this verification, you can safely ignore this email.
 
 Best regards,
-The QuantumX Engineering Team
+The QureSight Engineering Team
 """
 
         html_body = f"""
@@ -83,12 +83,12 @@ The QuantumX Engineering Team
 </head>
 <body>
   <div class="container">
-    <div class="logo">QuantumX <span style="font-size: 12px; font-weight: 400; color: #0070f3; text-transform: uppercase; letter-spacing: 1px;">Platform</span></div>
+    <div class="logo">QureSight <span style="font-size: 12px; font-weight: 400; color: #0070f3; text-transform: uppercase; letter-spacing: 1px;">Platform</span></div>
     <div class="title">Verify Your Institutional Identity</div>
     <div class="desc">Please use the verification code below to confirm your account and grant access to the hybrid quantum diagnostic engine.</div>
     <div class="otp-box">{otp}</div>
     <div class="desc" style="font-size: 13px; color: #777;">This code is valid for {settings.OTP_EXPIRE_MINUTES} minutes. Never share this code with anyone.</div>
-    <div class="footer">QuantumX — NISQ-Optimized Hybrid Classical-Quantum Diagnostics</div>
+    <div class="footer">QureSight — NISQ-Optimized Hybrid Classical-Quantum Diagnostics</div>
   </div>
 </body>
 </html>
@@ -107,12 +107,12 @@ The QuantumX Engineering Team
         token: str,
     ) -> None:
         """Sends password reset link & token."""
-        subject = "QuantumX — Password Reset Instructions"
+        subject = "QureSight — Password Reset Instructions"
         reset_link = f"{settings.FRONTEND_URL}/reset-password?token={token}"
 
         text_body = f"""Hello,
 
-A password reset request was initiated for your QuantumX account.
+A password reset request was initiated for your QureSight account.
 
 To reset your password, visit the link below:
 {reset_link}
@@ -123,7 +123,7 @@ Alternatively, use your reset token directly:
 This link is valid for 1 hour. If you did not request this, please ignore this email.
 
 Best regards,
-The QuantumX Engineering Team
+The QureSight Engineering Team
 """
 
         html_body = f"""
@@ -144,14 +144,14 @@ The QuantumX Engineering Team
 </head>
 <body>
   <div class="container">
-    <div class="logo">QuantumX</div>
+    <div class="logo">QureSight</div>
     <div class="title">Reset Your Research Passkey</div>
-    <div class="desc">A password reset request was initiated for your QuantumX workspace. Click the button below to choose a new password:</div>
+    <div class="desc">A password reset request was initiated for your QureSight workspace. Click the button below to choose a new password:</div>
     <a href="{reset_link}" class="btn" target="_blank">Reset My Password</a>
     <div class="desc" style="font-size: 13px; color: #777;">If the button above does not work, copy and paste this token into the reset form:</div>
     <div class="token-box">{token}</div>
     <div class="desc" style="font-size: 13px; color: #777;">This request is valid for 1 hour. If you did not make this request, you can safely ignore this email.</div>
-    <div class="footer">QuantumX — Translational Oncology & Quantum ML</div>
+    <div class="footer">QureSight — Translational Oncology & Quantum ML</div>
   </div>
 </body>
 </html>

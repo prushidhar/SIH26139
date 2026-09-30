@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-QUANTUMX HEPATOLOGY PILLAR: HEPATITIS C & LIVER FIBROSIS DIAGNOSTIC PIPELINE
+QURESIGHT HEPATOLOGY PILLAR: HEPATITIS C & LIVER FIBROSIS DIAGNOSTIC PIPELINE
 ================================================================================
 A tri-model clinical inference pipeline for Hepatitis C / Liver Disease (HCV).
 Evaluates patient serum blood panel chemistry across:

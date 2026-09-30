@@ -120,7 +120,7 @@ function Nav() {
           }`}
       >
         <a href="#top" className="flex items-baseline gap-2 shrink-0">
-          <span className="font-serif text-[17px] sm:text-[19px] tracking-tight text-ink font-normal">QuantumX</span>
+          <span className="font-serif text-[17px] sm:text-[19px] tracking-tight text-ink font-normal">QureSight</span>
           <span className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground sm:inline">
             Research Platform
           </span>
@@ -204,7 +204,7 @@ function Hero() {
 
         <Reveal delay={0.12}>
           <p className="mt-8 max-w-2xl text-[17px] leading-[1.7] text-ink-soft">
-            QuantumX encodes multi-omics panels, longitudinal labs, and structured clinical records into
+            QureSight encodes multi-omics panels, longitudinal labs, and structured clinical records into
             quantum feature spaces where higher-order interactions stay intact. The objective is narrow and
             measurable: recover diagnostic signal at the pre-symptomatic stage that linear projections and
             tree ensembles smooth away — and prove it against the classical baseline every time.
@@ -340,10 +340,10 @@ const STAGES = [
     meta: ["Qiskit Runtime", "Zero-noise extrapolation", "Simulator / hardware parity"],
   },
   {
-    id: "qxplain",
+    id: "qureexplain",
     label: "Stage 04",
-    title: "QXplain attribution engine",
-    body: "SHAP assumes a classical additive decomposition that a entangled circuit does not satisfy. QXplain instead ablates individual gates and entangling blocks, measuring the shift in decision margin to attribute the prediction to specific feature interactions. Attribution is propagated back through the autoencoder loadings to named genes, analytes, and clinical variables.",
+    title: "QureExplain attribution engine",
+    body: "SHAP assumes a classical additive decomposition that a entangled circuit does not satisfy. QureExplain instead ablates individual gates and entangling blocks, measuring the shift in decision margin to attribute the prediction to specific feature interactions. Attribution is propagated back through the autoencoder loadings to named genes, analytes, and clinical variables.",
     meta: ["Gate ablation", "Entanglement attribution", "Traced to source features"],
   },
 ];
@@ -587,7 +587,7 @@ function Footer() {
       items: [
         { name: "Geometric Advantage (s_K)", path: "/benchmarks" },
         { name: "Tri-Model Protocol (BVP)", path: "/benchmarks" },
-        { name: "QXplain Gate Saliency", path: "/analysis" },
+        { name: "Q-Explain Gate Saliency", path: "/analysis" },
         { name: "Classical Ensembles", path: "/benchmarks" },
         { name: "Reproducibility Suite", path: "/benchmarks" },
       ],
@@ -595,10 +595,10 @@ function Footer() {
     {
       title: "System & Company",
       items: [
-        { name: "Research Documentation", path: "https://github.com/Anshul-A7/QuantumX" },
+        { name: "Research Documentation", path: "/benchmarks" },
         {
           name: "API Reference",
-          path: `${process.env.NEXT_PUBLIC_API_URL || "https://quantumx-34qu.onrender.com"}/docs`,
+          path: `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/docs`,
         },
         { name: "Terms of Service", path: "/terms" },
         { name: "Privacy Policy", path: "/privacy" },
@@ -635,7 +635,7 @@ function Footer() {
           >
             <div className="flex items-center gap-2.5">
               <span className="h-2 w-2 rounded-full bg-quantum animate-pulse" />
-              <span className="font-serif text-xl font-medium tracking-tight text-white">QuantumX</span>
+              <span className="font-serif text-xl font-medium tracking-tight text-white">QureSight</span>
               <span className="text-white/40">· Enterprise Diagnostic Platform</span>
             </div>
           </motion.div>
@@ -651,7 +651,7 @@ function Footer() {
 
         <div className="col-span-12 md:col-span-4 flex flex-col justify-end gap-4 mt-8 md:mt-0">
           <motion.a
-            href="https://github.com/Anshul-A7/QuantumX"
+            href="https://github.com/prushidhar/SIH26139"
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, x: 30 }}
@@ -671,18 +671,16 @@ function Footer() {
           </motion.a>
 
           <motion.a
-            href="https://aexotrex.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/home"
             initial={{ opacity: 0, x: 30 }}
             animate={heroInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.55 }}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="rounded-full px-6 h-14 flex items-center justify-between gap-3 group bg-white/[0.05] border border-white/10 hover:bg-white hover:text-black transition-colors backdrop-blur-md"
+            className="rounded-full px-6 h-14 flex items-center justify-between gap-3 group bg-white/[0.05] border border-white/10 hover:bg-white hover:text-black transition-colors backdrop-blur-md cursor-pointer"
           >
             <span className="font-mono text-xs uppercase tracking-widest font-semibold flex items-center gap-2">
-              <Sparkles size={14} className="text-quantum" /> AEXOTREX
+              <Sparkles size={14} className="text-quantum" /> QURESIGHT
             </span>
             <ArrowUpRight
               size={16}
@@ -771,7 +769,7 @@ function Footer() {
             transition={{ duration: 0.5, delay: 0.8 }}
             className="mt-6 text-xs text-white/45 leading-relaxed max-w-md"
           >
-            QuantumX rigorously evaluates parameterized quantum circuits against classical baselines on identical stratified splits. All benchmarks, noise-mitigation protocols, and explainability attributions adhere to open research standards.
+            QureSight rigorously evaluates parameterized quantum circuits against classical baselines on identical stratified splits. All benchmarks, noise-mitigation protocols, and explainability attributions adhere to open research standards.
           </motion.p>
         </motion.div>
       </div>
@@ -782,7 +780,7 @@ function Footer() {
           <div
             className="leading-[0.82] tracking-tighter select-none text-[clamp(80px,21vw,340px)] flex text-[#FDFBF7] font-serif"
           >
-            {"QuantumX".split("").map((char, i) => (
+            {"QureSight".split("").map((char, i) => (
               <motion.span
                 key={i}
                 initial={{ opacity: 0, y: 40 }}
@@ -829,7 +827,7 @@ function Footer() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="flex items-center gap-4"
           >
-            <span>© {new Date().getFullYear()} QUANTUMX — ALL RIGOR, ALL VERIFIABLE.</span>
+            <span>© {new Date().getFullYear()} QURESIGHT — ALL RIGOR, ALL VERIFIABLE.</span>
             <Link href="/terms" className="hover:text-white transition-colors hidden md:inline-block border-l border-white/10 pl-4">
               Terms
             </Link>
@@ -1111,7 +1109,7 @@ function GateAblationView() {
         <div className="flex items-center justify-between border-b border-hairline pb-4">
           <div>
             <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-              QXplain · Circuit Gate Ablation
+              QureExplain · Circuit Gate Ablation
             </span>
             <div className="mt-1 font-serif text-[18px] text-ink">Entanglement Attribution Engine</div>
           </div>
@@ -1214,7 +1212,7 @@ function TranslationalWorkflow() {
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mt-6 text-[16px] leading-[1.7] text-ink-soft">
-                QuantumX connects directly to clinical pipelines. Explore the interactive research views below to see how our hybrid framework ingests cohorts, verifies geometric advantage in Hilbert space, and attributes predictions to biological drivers.
+                QureSight connects directly to clinical pipelines. Explore the interactive research views below to see how our hybrid framework ingests cohorts, verifies geometric advantage in Hilbert space, and attributes predictions to biological drivers.
               </p>
             </Reveal>
 

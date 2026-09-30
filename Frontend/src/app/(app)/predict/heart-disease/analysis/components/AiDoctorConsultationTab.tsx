@@ -21,7 +21,7 @@ interface Message {
   timestamp: string;
 }
 
-function QuantumXLogo({ size = 26 }: { size?: number }) {
+function QureSightLogo({ size = 26 }: { size?: number }) {
   return (
     <div
       style={{ width: size, height: size }}
@@ -117,7 +117,7 @@ export default function AiDoctorConsultationTab({
 
   useEffect(() => {
     const summaryText = aiSynthesis?.summary_paragraph || aiSynthesis?.summary || "";
-    const introMessage = `Hello. I am your **QuantumX AI Cardiologist**, providing second-opinion clinical decision support for **${pName}** (${pId}, ${pAge}y ${pGender}).
+    const introMessage = `Hello. I am your **QureSight AI Cardiologist**, providing second-opinion clinical decision support for **${pName}** (${pId}, ${pAge}y ${pGender}).
 
 ---
 
@@ -220,10 +220,10 @@ ${summaryText || recommendation}
       {/* Consultation Header */}
       <div className="p-4 border-b border-hairline flex items-center justify-between bg-cream/20">
         <div className="flex items-center gap-3">
-          <QuantumXLogo size={32} />
+          <QureSightLogo size={32} />
           <div>
             <h3 className="text-xs font-bold text-ink uppercase tracking-wider flex items-center gap-1.5">
-              <span>QuantumX AI Cardiologist</span>
+              <span>QureSight AI Cardiologist</span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             </h3>
             <p className="text-[11px] text-ink-soft">
@@ -252,7 +252,7 @@ ${summaryText || recommendation}
                   <UserIcon size={14} />
                 </div>
               ) : (
-                <QuantumXLogo size={28} />
+                <QureSightLogo size={28} />
               )}
 
               <div
@@ -277,7 +277,7 @@ ${summaryText || recommendation}
 
         {isTyping && (
           <div className="flex gap-3 max-w-xl mr-auto">
-            <QuantumXLogo size={28} />
+            <QureSightLogo size={28} />
             <div className="p-3.5 rounded-2xl bg-white border border-hairline text-xs font-mono text-ink-soft flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-quantum animate-bounce [animation-delay:-0.3s]" />
               <span className="w-1.5 h-1.5 rounded-full bg-quantum animate-bounce [animation-delay:-0.15s]" />

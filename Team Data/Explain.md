@@ -1,21 +1,21 @@
-# QuantumX — The Complete Explanation
+# QureSight — The Complete Explanation
 
 **Hybrid Quantum-Classical Machine Learning Platform for Early Disease Detection**
 
-*SIH26139 | Team QuantumX | Smart India Hackathon 2026*
+*SIH26139 | Team QureSight | Smart India Hackathon 2026*
 
 ---
 
 > **Who is this document for?**
-> Every single member of Team QuantumX. If you are on this team, read this document end to end. It assumes zero prior knowledge of quantum computing. Every technical term is defined the first time it appears. By the end, you will understand what we are building, why it matters, how every piece connects, what your role is, and exactly what to do first.
+> Every single member of Team QureSight. If you are on this team, read this document end to end. It assumes zero prior knowledge of quantum computing. Every technical term is defined the first time it appears. By the end, you will understand what we are building, why it matters, how every piece connects, what your role is, and exactly what to do first.
 
 ---
 
 ## Table of Contents
 
 1. [The Problem — What Exists Today and Why It Fails](#1-the-problem--what-exists-today-and-why-it-fails)
-2. [Our Solution — What QuantumX Actually Is](#2-our-solution--what-quantumx-actually-is)
-3. [Why Us? — What Makes QuantumX Win Against Other Teams](#3-why-us--what-makes-quantumx-win-against-other-teams)
+2. [Our Solution — What QureSight Actually Is](#2-our-solution--what-quresight-actually-is)
+3. [Why Us? — What Makes QureSight Win Against Other Teams](#3-why-us--what-makes-quresight-win-against-other-teams)
 4. [The Diseases We Are Targeting](#4-the-diseases-we-are-targeting)
 5. [The Datasets We Will Use](#5-the-datasets-we-will-use)
 6. [The Full System — Bird's Eye View](#6-the-full-system--birds-eye-view)
@@ -101,9 +101,9 @@ This honesty is itself a competitive advantage. The problem statement (SIH26139)
 
 ---
 
-## 2. Our Solution — What QuantumX Actually Is
+## 2. Our Solution — What QureSight Actually Is
 
-QuantumX is **not** a single model. It is a **platform** — an integrated software system with five major engines:
+QureSight is **not** a single model. It is a **platform** — an integrated software system with five major engines:
 
 ```mermaid
 flowchart LR
@@ -113,7 +113,7 @@ flowchart LR
     D --> E["📊 Benchmarking"]
 ```
 
-**In one sentence:** QuantumX takes biomedical data, prepares it for quantum processing, trains both classical and quantum models under identical conditions, explains why each model made its prediction, and honestly reports which approach worked better — all through a professional web interface that a clinician or a judge can use.
+**In one sentence:** QureSight takes biomedical data, prepares it for quantum processing, trains both classical and quantum models under identical conditions, explains why each model made its prediction, and honestly reports which approach worked better — all through a professional web interface that a clinician or a judge can use.
 
 **What makes it a platform and not just a model:**
 - It supports **multiple diseases** (not just one dataset).
@@ -124,7 +124,7 @@ flowchart LR
 
 ---
 
-## 3. Why Us? — What Makes QuantumX Win Against Other Teams
+## 3. Why Us? — What Makes QureSight Win Against Other Teams
 
 ### What 90% of Teams Will Build
 
@@ -152,7 +152,7 @@ The Generic Solution (what everyone else will do):
 - No statistical testing means reported accuracy differences are meaningless noise.
 - A Streamlit app with 3 buttons will not impress judges who see 50 teams all using Streamlit.
 
-### What QuantumX Does Differently — Our 7 Unique Differentiators
+### What QureSight Does Differently — Our 7 Unique Differentiators
 
 | # | Differentiator | What It Means | Why Others Won't Do It |
 |---|---|---|---|
@@ -160,7 +160,7 @@ The Generic Solution (what everyone else will do):
 | **2** | **Quantum Circuit Architecture Search (Q-CAS)** | Instead of copying one fixed circuit from a tutorial, we evaluate multiple circuit designs and pick the one best suited to each dataset's geometry. | Requires custom code to measure expressibility, entangling capability, and barren plateau risk. Most teams use whatever the first tutorial shows. |
 | **3** | **Non-Linear Feature Preservation** | Instead of PCA (which linearizes data), we use autoencoders (neural network-based compression) that preserve the non-linear structure quantum models need. | Requires understanding *why* PCA hurts quantum models — a subtlety most teams miss entirely. |
 | **4** | **Multi-Disease, Multi-Dataset Evaluation** | We don't just classify one disease. We test across breast cancer, cardiovascular disease, and neurological disorders — showing where quantum helps and where it doesn't. | Requires building a flexible pipeline, not a one-off notebook. More work, more impressive. |
-| **5** | **Quantum-Native Explainability (QXplain)** | Beyond standard SHAP (which treats the quantum model as a black box), we implement gate ablation and entanglement attribution — showing *which quantum operations* drove the prediction. | Original research-level contribution. No existing library does this. |
+| **5** | **Quantum-Native Explainability (QureExplain)** | Beyond standard SHAP (which treats the quantum model as a black box), we implement gate ablation and entanglement attribution — showing *which quantum operations* drove the prediction. | Original research-level contribution. No existing library does this. |
 | **6** | **Real IBM Quantum Hardware Execution** | We run inference and benchmarking on actual IBM QPUs (real superconducting quantum processors), not just simulators. | Most teams won't even try this. We will show verifiable results from real quantum hardware. |
 | **7** | **Honest, Statistically Rigorous Benchmarking** | We use McNemar's test and paired t-tests to report *whether the difference between quantum and classical is statistically significant*. | Requires statistical literacy beyond "compare two accuracy numbers." Shows genuine research maturity. |
 
@@ -237,7 +237,7 @@ Here is the complete system, from the moment a user opens our website to the mom
 flowchart TB
     subgraph FRONTEND["🖥️ FRONTEND — Next.js (What the User Sees)"]
         direction TB
-        LP["Landing Page<br/>What is QuantumX?"]
+        LP["Landing Page<br/>What is QureSight?"]
         AUTH["Auth Pages<br/>Login / Register"]
         DASH["Dashboard<br/>The Workspace"]
         INPUT["Patient Input Form<br/>Clinical Values"]
@@ -250,7 +250,7 @@ flowchart TB
         PIPE["Data Pipeline<br/>Clean, Encode, Prepare"]
         SCREEN["Geometric Screener<br/>Should we use quantum?"]
         TRAIN["Hybrid Training Engine<br/>Classical + Quantum"]
-        EXPLAIN["QXplain Engine<br/>SHAP + Gate Ablation"]
+        EXPLAIN["QureExplain Engine<br/>SHAP + Gate Ablation"]
         BENCH["Benchmarking Engine<br/>Statistical Comparison"]
     end
 
@@ -425,7 +425,7 @@ Think of it as having **four main tabs/sections:**
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  QUANTUMX Dashboard                     [Profile] [Logout]  │
+│  QURESIGHT Dashboard                     [Profile] [Logout]  │
 ├──────┬──────────────────────────────────────────────────────┤
 │      │                                                      │
 │  📊  │   Welcome back, Dr. Sharma                           │
@@ -907,9 +907,9 @@ The SHAP values show that the patient's high cholesterol was the single biggest 
 | **Force Plot** | A single prediction broken down into feature contributions, visualized as forces pushing the prediction left (healthy) or right (diseased). |
 | **Dependence Plot** | How a single feature's value affects the prediction across all patients. Reveals non-linear relationships. |
 
-### Quantum-Native Explainability — Our Secret Weapon (QXplain)
+### Quantum-Native Explainability — Our Secret Weapon (QureExplain)
 
-Standard SHAP treats the quantum model as a **black box** — it doesn't know or care that there's a quantum circuit inside. Our QXplain engine goes deeper:
+Standard SHAP treats the quantum model as a **black box** — it doesn't know or care that there's a quantum circuit inside. Our QureExplain engine goes deeper:
 
 #### Gate Ablation Attribution
 
@@ -1240,12 +1240,12 @@ This is *far* more impressive than a team that only shows "we got 95% on a simul
 
 ## 22. How We Satisfy Every Objective from the Problem Statement
 
-| SIH26139 Objective | How QuantumX Achieves It |
+| SIH26139 Objective | How QureSight Achieves It |
 |---|---|
 | **Design a hybrid quantum-classical ML architecture** | ✅ Five-engine architecture: Data Pipeline → Geometric Screening → Hybrid Training → Explainability → Benchmarking. Quantum and classical models train in parallel. |
 | **Develop quantum-enhanced models that process high-dimensional biomedical data** | ✅ QK-SVM, VQC, and Hybrid Transfer Learning models. Non-linear autoencoder preserves high-dimensional structure. Data re-uploading encodes more features than qubits. |
 | **Improve detection accuracy, sensitivity, specificity vs. classical baselines** | ✅ Rigorous benchmarking with statistical significance testing. Geometric pre-screening identifies datasets where quantum genuinely helps. Where quantum doesn't help, we honestly report it. |
-| **Ensure platform is scalable, interpretable, compatible with near-term hardware** | ✅ Modular architecture supports new diseases/datasets. QXplain engine provides interpretability. Runs on simulators AND real IBM QPUs. |
+| **Ensure platform is scalable, interpretable, compatible with near-term hardware** | ✅ Modular architecture supports new diseases/datasets. QureExplain engine provides interpretability. Runs on simulators AND real IBM QPUs. |
 | **Incorporate data pre-processing, feature selection, model explainability** | ✅ Full data pipeline with quantum-aware preprocessing. SHAP + quantum gate ablation + entanglement attribution. |
 | **Benchmark hybrid approach against classical models** | ✅ Same data splits, same metrics, statistical significance tests, effect size reporting. Honest reporting of where quantum helps and where it doesn't. |
 
@@ -1255,7 +1255,7 @@ This is *far* more impressive than a team that only shows "we got 95% on a simul
 
 > **Expected Solution (SIH26139):** "A fully functional hybrid quantum machine learning software platform capable of performing early disease detection on real or benchmark biomedical datasets."
 
-| Requirement | QuantumX Delivers |
+| Requirement | QureSight Delivers |
 |---|---|
 | **Data handling pipelines** | ✅ Multi-format ingestion (CSV, upload), validation, cleaning, quantum-aware encoding |
 | **Hybrid quantum-classical model implementation** | ✅ QK-SVM, VQC, Hybrid Transfer Learning + SVM, RF, XGBoost, NN baselines |
@@ -1268,13 +1268,13 @@ This is *far* more impressive than a team that only shows "we got 95% on a simul
 
 ## 24. A Simple End-to-End Example
 
-Here is the *entire journey* of a single patient through QuantumX, step by step:
+Here is the *entire journey* of a single patient through QureSight, step by step:
 
 ---
 
 **Meet Rajesh.** He's 52 years old. His doctor just gave him a routine check-up report. He wants to know his heart disease risk.
 
-**Step 1: Rajesh opens QuantumX** (https://quantumx.example.com)
+**Step 1: Rajesh opens QureSight** (https://quresight.example.com)
 
 He sees the landing page. The hero says "Quantum-Enhanced Disease Detection." He clicks "Try Live Demo."
 
@@ -1418,7 +1418,7 @@ He clicks "Download Full Report." A PDF is generated with all charts, SHAP plots
 ## 26. Repository Folder Structure
 
 ```
-QuantumX/
+QureSight/
 ├── .agents/                  # AI agent instructions (DO NOT MODIFY manually)
 │   ├── AGENT.md               # Mandatory reading for any AI agent
 │   ├── CLAUDE.md              # Claude-specific instructions
@@ -1531,7 +1531,7 @@ QuantumX/
 | `R3-ML` | ML Engineer | Member 3 | ✅ Yes | Classical ML, data pipeline, SHAP, metrics |
 | `R4-INTEGRATION` | Integration & QA Tester | Member 4 | ✅ Yes | E2E testing, hardware validation, deployment |
 | `R5-DOCS` | Documentation, Research & Presentation Lead | Member 5 | ❌ No Laptop | All documentation, SIH submission, PPT, pitch, research |
-| `R6-LEADER` | Team Lead + Quantum ML Architect | Anshul (Leader) | ✅ Yes | Entire quantum pipeline, core architecture, integration of all parts |
+| `R6-LEADER` | Team Lead + Quantum ML Architect | Rushidhar (Leader) | ✅ Yes | Entire quantum pipeline, core architecture, integration of all parts |
 
 ---
 
@@ -1736,14 +1736,14 @@ All written documentation, the SIH submission document, research literature summ
 | **Week 1** | **Read and fully understand** this document (Explain.md). Ask questions. | This document |
 | **Week 1** | **Research literature** — find and summarize 10-15 key papers on quantum ML in healthcare. Create a "Research Summary" doc. | Web access (phone OK) |
 | **Week 1** | Write the **SIH Idea Submission** (due September 20, 2026). Problem understanding, proposed approach, innovation, feasibility. | Understanding this document |
-| **Week 2** | Create the **Project Overview Poster** — a one-page visual summary of QuantumX. | Understanding system architecture |
+| **Week 2** | Create the **Project Overview Poster** — a one-page visual summary of QureSight. | Understanding system architecture |
 | **Week 2** | Write **landing page copy** — hero text, section descriptions, team bios. Share with `R1-FRONTEND`. | Landing page design |
 | **Week 3** | Create the **SIH Grand Finale Presentation** (PPT) — problem, solution, architecture, demo plan, results (placeholder). | System architecture understood |
 | **Week 3** | Write **clinical interpretation guides** for each disease — what do the SHAP values mean in medical terms? | Consult medical literature |
-| **Week 4** | Write **User Guide** — how to use the QuantumX platform (screenshots will be added later). | Dashboard design finalized |
+| **Week 4** | Write **User Guide** — how to use the QureSight platform (screenshots will be added later). | Dashboard design finalized |
 | **Week 4** | Prepare the **Demo Script** — exactly what to show, in what order, what to say at each step. | Demo flow agreed with `R6-LEADER` |
 | **Week 5** | Update **presentation with real results** — replace placeholders with actual benchmark numbers and screenshots. | `R3-ML` + `R6-LEADER` results available |
-| **Week 5** | Write the **Comparison Section** — how QuantumX differs from generic approaches. What makes us unique. | Research + actual results |
+| **Week 5** | Write the **Comparison Section** — how QureSight differs from generic approaches. What makes us unique. | Research + actual results |
 | **Week 6** | **Practice the pitch.** Time it. Rehearse Q&A. | Demo rehearsal |
 | **Week 6** | Final review of ALL documentation — README, Explain.md, user guide, presentation. | All docs written |
 
@@ -1759,7 +1759,7 @@ All written documentation, the SIH submission document, research literature summ
 
 ---
 
-### Role R6-LEADER — Team Lead + Quantum ML Architect (Anshul)
+### Role R6-LEADER — Team Lead + Quantum ML Architect (Rushidhar)
 
 **Has Laptop: ✅ Yes**
 
@@ -1786,7 +1786,7 @@ Everything. But specifically: the entire quantum pipeline (all files in `Backend
 | # | Task | Role | Status |
 |---|---|---|---|
 | 0.1 | Read this entire document (Explain.md) thoroughly | ALL | ☐ |
-| 0.2 | Clone the repository: `git clone https://github.com/Anshul-A7/QuantumX.git` | R1, R2, R3, R4, R6 | ☐ |
+| 0.2 | Clone the repository: `git clone https://github.com/prushidhar/SIH26139.git` | R1, R2, R3, R4, R6 | ☐ |
 | 0.3 | Set up development environment following SETUP.md | R1, R2, R3, R4, R6 | ☐ |
 | 0.4 | Read the Explain-Hinglish.md version if preferred | ALL | ☐ |
 | 0.5 | Create shared Google Drive folder for R5-DOCS collaboration | R5, R6 | ☐ |
@@ -1897,7 +1897,7 @@ Everything. But specifically: the entire quantum pipeline (all files in `Backend
 
 ## Final Words
 
-QuantumX is not just another hackathon project. It is a platform that honestly investigates the most important question at the intersection of quantum computing and healthcare: **where does quantum machine learning actually help in disease detection?**
+QureSight is not just another hackathon project. It is a platform that honestly investigates the most important question at the intersection of quantum computing and healthcare: **where does quantum machine learning actually help in disease detection?**
 
 We don't claim quantum is always better. We build the tools to find out — rigorously, honestly, and with the transparency that both clinicians and competition judges respect.
 
@@ -1907,6 +1907,6 @@ The team that treats the quantum advantage question as a *research problem to in
 
 ---
 
-*Document authored for Team QuantumX | SIH26139 | Smart India Hackathon 2026*
+*Document authored for Team QureSight | SIH26139 | Smart India Hackathon 2026*
 *Last updated: August 2026*
 ]]>

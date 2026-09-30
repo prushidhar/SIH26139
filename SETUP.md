@@ -1,18 +1,18 @@
-# QuantumX Setup Guide
+# QureSight Setup Guide
 
-This guide details the setup instructions for the QuantumX project, tailored for each team member's role and the tech stack outlined in our project documentation.
+This guide details the setup instructions for the QureSight project, tailored for each team member's role and the tech stack outlined in our project documentation.
 
 ## Prerequisites for All Roles
 
 Before starting, ensure you have the following installed:
 - Git
 - VS Code (or your preferred IDE)
-- A GitHub account with access to the QuantumX repository
+- A GitHub account with access to the QureSight repository
 
 Clone the repository:
 ```bash
 git clone <repository_url>
-cd QuantumX
+cd QureSight
 ```
 
 ---
@@ -48,7 +48,7 @@ cd QuantumX
 
 **Setup Instructions:**
 1. Install Python 3.12+.
-2. Install PostgreSQL and create a database named `quantumx`.
+2. Install PostgreSQL and create a database named `quresight`.
 3. Navigate to the Backend directory:
    ```bash
    cd Backend

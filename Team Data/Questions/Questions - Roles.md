@@ -1,4 +1,4 @@
-# QuantumX - Team Role Assignments & Judge Defense Master Matrix
+# QureSight - Team Role Assignments & Judge Defense Master Matrix
 
 ### Team Information
 * **Problem Statement ID:** SIH26139

@@ -35,9 +35,9 @@ export interface StoredPrediction {
 }
 
 function getUserScreeningKey(): string {
-  if (typeof window === "undefined") return "quantumx_user_screenings";
-  const email = localStorage.getItem("quantumx_user_email") || "default";
-  return `quantumx_screenings_${email}`;
+  if (typeof window === "undefined") return "quresight_user_screenings";
+  const email = localStorage.getItem("quresight_user_email") || "default";
+  return `quresight_screenings_${email}`;
 }
 
 export class ScreeningService {
@@ -59,20 +59,7 @@ export class ScreeningService {
           /^(Normal|MI|PMI|HB)\(/.test(s.patientName || "");
 
         const qRisk = Number(s.quantumRiskScore ?? s.risk_score ?? s.riskScore ?? 42.4);
-        let cRisk = Number(s.classicalRiskScore ?? s.risk_score ?? s.riskScore ?? 44.1);
-
-        if (isCardiac && cRisk === qRisk) {
-          const pred = s.classicalPrediction || s.quantumPrediction || "Normal";
-          if (pred.includes("Normal")) {
-            cRisk = Number(Math.max(1.5, qRisk * 1.12).toFixed(1));
-          } else if (pred.includes("Infarction")) {
-            cRisk = Number(Math.max(76.0, qRisk - 4.2).toFixed(1));
-          } else if (pred.includes("History")) {
-            cRisk = Number(Math.max(45.0, qRisk - 3.8).toFixed(1));
-          } else {
-            cRisk = Number(Math.max(68.0, qRisk - 5.0).toFixed(1));
-          }
-        }
+        const cRisk = Number(s.classicalRiskScore ?? s.risk_score ?? s.riskScore ?? 44.1);
 
         return {
           ...s,
@@ -113,20 +100,7 @@ export class ScreeningService {
             /^(Normal|MI|PMI|HB)\(/.test(s.patientName || "");
 
           const qRisk = Number(s.quantumRiskScore ?? s.risk_score ?? s.riskScore ?? 42.4);
-          let cRisk = Number(s.classicalRiskScore ?? s.risk_score ?? s.riskScore ?? 44.1);
-
-          if (isCardiac && cRisk === qRisk) {
-            const pred = s.classicalPrediction || s.quantumPrediction || "Normal";
-            if (pred.includes("Normal")) {
-              cRisk = Number(Math.max(1.5, qRisk * 1.12).toFixed(1));
-            } else if (pred.includes("Infarction")) {
-              cRisk = Number(Math.max(76.0, qRisk - 4.2).toFixed(1));
-            } else if (pred.includes("History")) {
-              cRisk = Number(Math.max(45.0, qRisk - 3.8).toFixed(1));
-            } else {
-              cRisk = Number(Math.max(68.0, qRisk - 5.0).toFixed(1));
-            }
-          }
+          const cRisk = Number(s.classicalRiskScore ?? s.risk_score ?? s.riskScore ?? 44.1);
 
           return {
             id: s.id || s.patientId || s.patient_id,
@@ -296,7 +270,7 @@ export class ScreeningService {
     if (typeof window !== "undefined") {
       const storageKey = getUserScreeningKey();
       localStorage.removeItem(storageKey);
-      localStorage.removeItem("quantumx_prediction_history");
+      localStorage.removeItem("quresight_prediction_history");
     }
     try {
       await apiClient.delete("/screenings");

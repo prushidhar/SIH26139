@@ -3,7 +3,7 @@
 ================================================================================
 TRANSFINITE-1: DEDICATED QUANTUM HYBRID BASELINE SIMULATOR PIPELINE
 ================================================================================
-The baseline quantum-classical hybrid inference engine for QuantumX.
+The baseline quantum-classical hybrid inference engine for QureSight.
 Executes 8-Qubit Second-Order Pauli-Z Feature Map and 2-layer Parameterized
 Variational Quantum Circuit (VQC) on high-speed CPU statevector simulation (<15ms).
 ================================================================================
@@ -99,7 +99,7 @@ class Transfinite1Pipeline:
             return p_mal, expval, all_expvals
 
     def compute_quantum_saliency(self, raw_8: List[float], x_q: np.ndarray, morph_idx: float = 50.0) -> List[Dict[str, Any]]:
-        """Computes QXplain quantum gate ablation saliency gradients S(G_k)."""
+        """Computes QureExplain quantum gate ablation saliency gradients S(G_k)."""
         feature_labels = [
             "Nuclear Size & Radius", "Surface Texture & Chromatin", "Cell Perimeter", "Nuclear Area",
             "Border Smoothness", "Compactness Index", "Indentation Depth (Concavity)", "Contour Indentation Count"

@@ -36,7 +36,7 @@ def build_classical_notebook():
     
     # Title
     cells.append(md_cell([
-        "# QuantumX: State-of-the-Art Classical Cardiac Classifier (ECGConVT)",
+        "# QureSight: State-of-the-Art Classical Cardiac Classifier (ECGConVT)",
         "## Rigorous Inter-Patient Clinical Pipeline with Anatomical Lead Attention & Grid Suppression",
         "---",
         "**Core Scientific & Architectural Foundations**:",
@@ -703,7 +703,7 @@ def build_hybrid_notebook():
     
     # Title
     cells.append(md_cell([
-        "# QuantumX: State-of-the-Art Hybrid Quantum-Classical Cardiac Classifier",
+        "# QureSight: State-of-the-Art Hybrid Quantum-Classical Cardiac Classifier",
         "## 8-Qubit Universal Data Re-Uploading PQC + Latent Autoencoder Bridge + Calibrated IBM Hardware Noise & M3 Mitigation",
         "---",
         "**Core Scientific & Quantum Architectural Advancements**:",

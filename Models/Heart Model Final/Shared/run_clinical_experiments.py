@@ -1,4 +1,4 @@
-"""QuantumX Scientific Experiment Orchestrator
+"""QureSight Scientific Experiment Orchestrator
 Executes the 4 Core Clinical & Quantum Experiments:
 1. Patient Leakage Benchmark: File-Level Random Split vs. Strict Inter-Patient Split
 2. NISQ Hardware Noise Benchmark: Ideal Statevector vs. Calibrated IBM Sherbrooke Noise vs. M3 Mitigation

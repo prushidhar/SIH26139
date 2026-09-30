@@ -1,6 +1,6 @@
 <div align="center">
 
-# Backend — QuantumX
+# Backend — QureSight
 
 [![Status](https://img.shields.io/badge/status-active%20development-yellow)]()
 [![Python](https://img.shields.io/badge/backend-Python%203.12%2B-3776AB?logo=python&logoColor=white)]()

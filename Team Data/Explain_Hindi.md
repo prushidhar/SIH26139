@@ -1,20 +1,20 @@
-# QuantumX — Poori Explanation (Hinglish Mein)
+# QureSight — Poori Explanation (Hinglish Mein)
 
 **Hybrid Quantum-Classical Machine Learning Platform for Early Disease Detection**
-*SIH26139 | Team QuantumX | Smart India Hackathon 2026*
+*SIH26139 | Team QureSight | Smart India Hackathon 2026*
 
 
 ---
 
 > **Ye document kiske liye hai?**
-> Team QuantumX ke har ek member ke liye. Agar tum is team mein ho, toh ye poora document padho — start se end tak. Ye document assume karta hai ki tumhe quantum computing ka zero knowledge hai. Har technical term ko pehli baar use hone par define kiya gaya hai. Document ke end tak tumhe samajh aa jayega ki hum kya bana rahe hain, kyun bana rahe hain, har piece kaise connect hota hai, tumhara role kya hai, aur sabse pehle kya karna hai.
+> Team QureSight ke har ek member ke liye. Agar tum is team mein ho, toh ye poora document padho — start se end tak. Ye document assume karta hai ki tumhe quantum computing ka zero knowledge hai. Har technical term ko pehli baar use hone par define kiya gaya hai. Document ke end tak tumhe samajh aa jayega ki hum kya bana rahe hain, kyun bana rahe hain, har piece kaise connect hota hai, tumhara role kya hai, aur sabse pehle kya karna hai.
 
 ---
 
 ## Table of Contents
 
 1. [Problem — Aaj Kya Hai Aur Kyun Fail Hota Hai](#1-problem--aaj-kya-hai-aur-kyun-fail-hota-hai)
-2. [Humara Solution — QuantumX Actually Hai Kya](#2-humara-solution--quantumx-actually-hai-kya)
+2. [Humara Solution — QureSight Actually Hai Kya](#2-humara-solution--quresight-actually-hai-kya)
 3. [Hum Kyun Jeetenge? — Doosri Teams Se Kya Alag Hai](#3-hum-kyun-jeetenge--doosri-teams-se-kya-alag-hai)
 4. [Kaun Si Diseases Target Kar Rahe Hain](#4-kaun-si-diseases-target-kar-rahe-hain)
 5. [Kaun Se Datasets Use Karenge](#5-kaun-se-datasets-use-karenge)
@@ -101,9 +101,9 @@ Ye honesty khud mein ek competitive advantage hai. Problem statement (SIH26139) 
 
 ---
 
-## 2. Humara Solution — QuantumX Actually Hai Kya
+## 2. Humara Solution — QureSight Actually Hai Kya
 
-QuantumX ek **single model nahi** hai. Ye ek **platform** hai — ek integrated software system jismein paanch major engines hain:
+QureSight ek **single model nahi** hai. Ye ek **platform** hai — ek integrated software system jismein paanch major engines hain:
 
 ```mermaid
 flowchart LR
@@ -113,7 +113,7 @@ flowchart LR
     D --> E["📊 Benchmarking"]
 ```
 
-**Ek line mein:** QuantumX biomedical data leta hai, quantum processing ke liye prepare karta hai, classical aur quantum dono models ko identical conditions mein train karta hai, explain karta hai ki har model ne apni prediction kyun di, aur honestly report karta hai ki kaun sa approach better kaam kiya — sab ek professional web interface ke through jo clinician ya judge use kar sake.
+**Ek line mein:** QureSight biomedical data leta hai, quantum processing ke liye prepare karta hai, classical aur quantum dono models ko identical conditions mein train karta hai, explain karta hai ki har model ne apni prediction kyun di, aur honestly report karta hai ki kaun sa approach better kaam kiya — sab ek professional web interface ke through jo clinician ya judge use kar sake.
 
 **Ye platform hai, sirf model nahi, kyunki:**
 - Ye **multiple diseases** support karta hai (sirf ek dataset nahi).
@@ -152,7 +152,7 @@ Generic Solution (jo baaki sab karenge):
 - Statistical testing nahi toh reported accuracy differences meaningless noise hain.
 - Streamlit app jismein 3 buttons hain judges ko impress nahi karegi jo 50 teams ko Streamlit use karte dekhenge.
 
-### QuantumX Alag Kya Karta Hai — Humare 7 Unique Differentiators
+### QureSight Alag Kya Karta Hai — Humare 7 Unique Differentiators
 
 | # | Differentiator | Iska Matlab | Doosre Kyun Nahi Karenge |
 |---|---|---|---|
@@ -160,7 +160,7 @@ Generic Solution (jo baaki sab karenge):
 | **2** | **Quantum Circuit Architecture Search (Q-CAS)** | Tutorial se ek fixed circuit copy karne ki jagah, hum multiple circuit designs evaluate karte hain aur har dataset ke geometry ke liye best wala pick karte hain. | Custom code chahiye expressibility, entangling capability, aur barren plateau risk measure karne ke liye. Zyaadatar teams pehli tutorial ka circuit use karti hain. |
 | **3** | **Non-Linear Feature Preservation** | PCA ki jagah (jo data ko linearize karta hai), hum autoencoders use karte hain (neural network-based compression) jo non-linear structure preserve karti hai jo quantum models ko chahiye. | Ye samajhna padta hai ki PCA quantum models ko kyun hurt karta hai — ek subtlety jo zyaadatar teams completely miss karti hain. |
 | **4** | **Multi-Disease, Multi-Dataset Evaluation** | Hum sirf ek disease classify nahi karte. Hum breast cancer, cardiovascular disease, aur neurological disorders pe test karte hain — dikhate hain ki quantum kahan help karta hai aur kahan nahi. | Flexible pipeline banana padta hai, one-off notebook nahi. Zyada kaam, lekin zyada impressive. |
-| **5** | **Quantum-Native Explainability (QXplain)** | Standard SHAP se aage (jo quantum model ko black box treat karta hai), hum gate ablation aur entanglement attribution implement karte hain — dikhate hain *kaun si quantum operations* ne prediction drive ki. | Original research-level contribution. Koi existing library ye nahi karti. |
+| **5** | **Quantum-Native Explainability (QureExplain)** | Standard SHAP se aage (jo quantum model ko black box treat karta hai), hum gate ablation aur entanglement attribution implement karte hain — dikhate hain *kaun si quantum operations* ne prediction drive ki. | Original research-level contribution. Koi existing library ye nahi karti. |
 | **6** | **Real IBM Quantum Hardware Execution** | Hum inference aur benchmarking actual IBM QPUs (real superconducting quantum processors) pe chalate hain, sirf simulators pe nahi. | Zyaadatar teams ye try bhi nahi karengi. Hum real quantum hardware se verifiable results dikhayenge. |
 | **7** | **Honest, Statistically Rigorous Benchmarking** | Hum McNemar's test aur paired t-tests use karte hain ye report karne ke liye ki *quantum aur classical ke beech ka difference statistically significant hai ya nahi*. | Statistical literacy chahiye "do accuracy numbers compare karo" se aage ki. Genuine research maturity dikhata hai. |
 
@@ -223,7 +223,7 @@ Yahan poora system hai, jab se user humari website kholta hai tab se lekar jab t
 flowchart TB
     subgraph FRONTEND["🖥️ FRONTEND — Next.js (User Kya Dekhega)"]
         direction TB
-        LP["Landing Page<br/>QuantumX Kya Hai?"]
+        LP["Landing Page<br/>QureSight Kya Hai?"]
         AUTH["Auth Pages<br/>Login / Register"]
         DASH["Dashboard<br/>Workspace"]
         INPUT["Patient Input Form<br/>Clinical Values"]
@@ -236,7 +236,7 @@ flowchart TB
         PIPE["Data Pipeline<br/>Clean, Encode, Prepare"]
         SCREEN["Geometric Screener<br/>Quantum Use Karein Ya Nahi?"]
         TRAIN["Hybrid Training Engine<br/>Classical + Quantum"]
-        EXPLAIN["QXplain Engine<br/>SHAP + Gate Ablation"]
+        EXPLAIN["QureExplain Engine<br/>SHAP + Gate Ablation"]
         BENCH["Benchmarking Engine<br/>Statistical Comparison"]
     end
 
@@ -701,9 +701,9 @@ Feature Contributions (SHAP values):
 
 SHAP values dikhate hain ki patient ka high cholesterol "High Risk" prediction ka sabse bada factor tha.
 
-### Quantum-Native Explainability — Humara Secret Weapon (QXplain)
+### Quantum-Native Explainability — Humara Secret Weapon (QureExplain)
 
-Standard SHAP quantum model ko **black box** treat karta hai — use nahi pata aur na hi parwah hai ki andar quantum circuit hai. Humara QXplain engine deeper jaata hai:
+Standard SHAP quantum model ko **black box** treat karta hai — use nahi pata aur na hi parwah hai ki andar quantum circuit hai. Humara QureExplain engine deeper jaata hai:
 
 #### Gate Ablation Attribution
 
@@ -887,12 +887,12 @@ Ye *bahut zyada* impressive hai ek team se jo sirf "humne simulator pe 95% liya"
 
 ## 22. Problem Statement Ke Har Objective Ko Kaise Poora Karenge
 
-| SIH26139 Objective | QuantumX Kaise Achieve Karta Hai |
+| SIH26139 Objective | QureSight Kaise Achieve Karta Hai |
 |---|---|
 | **Hybrid quantum-classical ML architecture design karo** | ✅ Five-engine architecture: Data Pipeline → Geometric Screening → Hybrid Training → Explainability → Benchmarking. Quantum aur classical models parallel mein train hote hain. |
 | **Quantum-enhanced models develop karo jo high-dimensional biomedical data process karein** | ✅ QK-SVM, VQC, aur Hybrid Transfer Learning models. Non-linear autoencoder high-dimensional structure preserve karta hai. |
 | **Classical baselines ke mukable detection accuracy, sensitivity, specificity improve karo** | ✅ Statistical significance testing ke saath rigorous benchmarking. Geometric pre-screening identify karta hai datasets jahan quantum genuinely help karta hai. |
-| **Platform scalable, interpretable, aur near-term hardware ke saath compatible ho** | ✅ Modular architecture naye diseases/datasets support karta hai. QXplain engine interpretability deta hai. Simulators AUR real IBM QPUs pe chalta hai. |
+| **Platform scalable, interpretable, aur near-term hardware ke saath compatible ho** | ✅ Modular architecture naye diseases/datasets support karta hai. QureExplain engine interpretability deta hai. Simulators AUR real IBM QPUs pe chalta hai. |
 | **Data pre-processing, feature selection, model explainability include karo** | ✅ Full data pipeline quantum-aware preprocessing ke saath. SHAP + quantum gate ablation + entanglement attribution. |
 | **Hybrid approach ko classical models ke against benchmark karo** | ✅ Same data splits, same metrics, statistical significance tests, effect size reporting. Honest reporting jahan quantum help karta hai aur jahan nahi. |
 
@@ -900,7 +900,7 @@ Ye *bahut zyada* impressive hai ek team se jo sirf "humne simulator pe 95% liya"
 
 ## 23. Expected Solution Ko Kaise Poora Karenge
 
-| Requirement | QuantumX Deliver Karta Hai |
+| Requirement | QureSight Deliver Karta Hai |
 |---|---|
 | **Data handling pipelines** | ✅ Multi-format ingestion (CSV, upload), validation, cleaning, quantum-aware encoding |
 | **Hybrid quantum-classical model implementation** | ✅ QK-SVM, VQC, Hybrid Transfer Learning + SVM, RF, XGBoost, NN baselines |
@@ -913,13 +913,13 @@ Ye *bahut zyada* impressive hai ek team se jo sirf "humne simulator pe 95% liya"
 
 ## 24. Ek Simple End-to-End Example
 
-Yahan ek *single patient ki poori journey* hai QuantumX ke through, step by step:
+Yahan ek *single patient ki poori journey* hai QureSight ke through, step by step:
 
 ---
 
 **Rajesh se milo.** Woh 52 saal ka hai. Uske doctor ne abhi routine check-up report diya hai. Woh apna heart disease risk jaanna chahta hai.
 
-**Step 1: Rajesh QuantumX kholta hai**
+**Step 1: Rajesh QureSight kholta hai**
 
 Woh landing page dekhta hai. Hero kehta hai "Quantum-Enhanced Disease Detection." Woh "Try Live Demo" click karta hai.
 
@@ -1042,7 +1042,7 @@ Woh "Download Full Report" click karta hai. Sab charts, SHAP plots, quantum circ
 ## 26. Repository Folder Structure
 
 ```
-QuantumX/
+QureSight/
 ├── .agents/                  # AI agent instructions
 ├── Frontend/                 # 🖥️ Next.js application [R1-FRONTEND, R6-LEADER]
 │   ├── src/app/
@@ -1086,7 +1086,7 @@ QuantumX/
 | `R3-ML` | ML Engineer | Member 3 | ✅ Haan | Classical ML, data pipeline, SHAP, metrics |
 | `R4-INTEGRATION` | Integration & QA Tester | Member 4 | ✅ Haan | E2E testing, hardware validation, deployment |
 | `R5-DOCS` | Documentation, Research & Presentation Lead | Member 5 | ❌ Nahi | Documentation, SIH submission, PPT, pitch, research |
-| `R6-LEADER` | Team Lead + Quantum ML Architect | Anshul (Leader) | ✅ Haan | Poora quantum pipeline, core architecture, sab parts ka integration |
+| `R6-LEADER` | Team Lead + Quantum ML Architect | Rushidhar (Leader) | ✅ Haan | Poora quantum pipeline, core architecture, sab parts ka integration |
 
 ---
 
@@ -1238,11 +1238,11 @@ Sab written documentation, SIH submission document, research literature summarie
 | **Week 1** | **Ye document padho aur poora samjho** (Explain.md ya Explain-Hinglish.md). Sawal poochho. | Ye document |
 | **Week 1** | **Research literature** — quantum ML in healthcare pe 10-15 key papers dhoondho aur summarize karo. "Research Summary" doc banao. | Web access (phone OK) |
 | **Week 1** | **SIH Idea Submission** likho (due September 20, 2026). Problem understanding, proposed approach, innovation, feasibility. | Ye document samjhna |
-| **Week 2** | **Project Overview Poster** banao — QuantumX ka one-page visual summary. | System architecture samjhna |
+| **Week 2** | **Project Overview Poster** banao — QureSight ka one-page visual summary. | System architecture samjhna |
 | **Week 2** | **Landing page copy** likho — hero text, section descriptions, team bios. `R1-FRONTEND` ke saath share karo. | Landing page design |
 | **Week 3** | **SIH Grand Finale Presentation** (PPT) banao — problem, solution, architecture, demo plan, results (placeholder). | System architecture understood |
 | **Week 3** | Har disease type ke liye **clinical interpretation guides** likho — SHAP values ka medical terms mein kya matlab hai? | Medical literature consult karo |
-| **Week 4** | **User Guide** likho — QuantumX platform kaise use karna hai (screenshots baad mein add honge). | Dashboard design finalized |
+| **Week 4** | **User Guide** likho — QureSight platform kaise use karna hai (screenshots baad mein add honge). | Dashboard design finalized |
 | **Week 4** | **Demo Script** prepare karo — exactly kya dikhana hai, kis order mein, har step pe kya bolna hai. | `R6-LEADER` ke saath demo flow agree |
 | **Week 5** | **Presentation update karo real results ke saath** — placeholders hataao, actual benchmark numbers aur screenshots lagao. | `R3-ML` + `R6-LEADER` results available |
 | **Week 6** | **Pitch practice.** Time karo. Q&A rehearse karo. | Demo rehearsal |
@@ -1254,7 +1254,7 @@ Sab written documentation, SIH submission document, research literature summarie
 
 ---
 
-### Role R6-LEADER — Team Lead + Quantum ML Architect (Anshul)
+### Role R6-LEADER — Team Lead + Quantum ML Architect (Rushidhar)
 
 **Laptop Hai: ✅ Haan**
 
@@ -1279,7 +1279,7 @@ Sab kuch. Specifically: poora quantum pipeline (`Backend/app/quantum/` mein sab 
 | # | Task | Role | Status |
 |---|---|---|---|
 | 0.1 | Ye poora document padho (Explain.md ya Explain-Hinglish.md) | ALL | ☐ |
-| 0.2 | Repository clone karo: `git clone https://github.com/Anshul-A7/QuantumX.git` | R1, R2, R3, R4, R6 | ☐ |
+| 0.2 | Repository clone karo: `git clone https://github.com/prushidhar/SIH26139.git` | R1, R2, R3, R4, R6 | ☐ |
 | 0.3 | SETUP.md follow karke development environment setup karo | R1, R2, R3, R4, R6 | ☐ |
 | 0.4 | Shared Google Drive folder banao R5-DOCS collaboration ke liye | R5, R6 | ☐ |
 | 0.5 | IBM Quantum accounts setup karo (Open Plan ya Classroom) | R4, R6 | ☐ |
@@ -1389,7 +1389,7 @@ Sab kuch. Specifically: poora quantum pipeline (`Backend/app/quantum/` mein sab 
 
 ## Final Words
 
-QuantumX sirf ek aur hackathon project nahi hai. Ye ek platform hai jo honestly investigate karta hai quantum computing aur healthcare ke intersection pe sabse important question: **quantum machine learning disease detection mein actually kahan help karta hai?**
+QureSight sirf ek aur hackathon project nahi hai. Ye ek platform hai jo honestly investigate karta hai quantum computing aur healthcare ke intersection pe sabse important question: **quantum machine learning disease detection mein actually kahan help karta hai?**
 
 Hum claim nahi karte quantum hamesha better hai. Hum tools banate hain ye pata lagane ke liye — rigorously, honestly, aur us transparency ke saath jo clinicians aur competition judges dono respect karte hain.
 
@@ -1399,6 +1399,6 @@ Woh team jo quantum advantage question ko ek *research problem investigate karne
 
 ---
 
-*Document authored for Team QuantumX | SIH26139 | Smart India Hackathon 2026*
+*Document authored for Team QureSight | SIH26139 | Smart India Hackathon 2026*
 *Last updated: August 2026*
 ]]>

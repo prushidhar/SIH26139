@@ -123,7 +123,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     setSidebarOpen((prev) => {
       const next = !prev;
       if (typeof window !== "undefined") {
-        localStorage.setItem("quantumx_sidebar_open", String(next));
+        localStorage.setItem("quresight_sidebar_open", String(next));
       }
       return next;
     });
@@ -191,7 +191,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     verifyAndLoadSession();
 
     if (typeof window !== "undefined") {
-      const storedSidebar = localStorage.getItem("quantumx_sidebar_open");
+      const storedSidebar = localStorage.getItem("quresight_sidebar_open");
       if (storedSidebar !== null) {
         setSidebarOpen(storedSidebar === "true");
       }
@@ -238,7 +238,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
         const base64 = reader.result as string;
         setUserAvatar(base64);
         if (typeof window !== "undefined") {
-          localStorage.setItem("quantumx_user_avatar", base64);
+          localStorage.setItem("quresight_user_avatar", base64);
         }
       };
       reader.readAsDataURL(file);
@@ -326,14 +326,24 @@ export default function AppLayout({ children }: AppLayoutProps) {
               </button>
               <button
                 type="button"
-                onClick={() => setShowAlephCard(true)}
-                className="px-2.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 text-ink-soft hover:text-ink text-[11px] font-medium cursor-pointer opacity-90 hover:opacity-100"
+                onClick={() => handleBackendChange("ibmq_eagle")}
+                className={`px-2.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
+                  quantumBackend === "ibmq_eagle"
+                    ? "bg-parchment text-ink shadow-2xs border border-hairline/80 font-bold text-amber-600"
+                    : "text-ink-soft hover:text-ink"
+                }`}
                 title="Aleph-1 (IBM QPU) — Real Quantum Hardware"
               >
-                <Cpu size={12} className="text-amber-500" />
+                <Cpu size={12} className={quantumBackend === "ibmq_eagle" ? "text-amber-600" : "text-amber-500"} />
                 <span className="hidden sm:inline">Aleph-1 (IBM QPU)</span>
                 <span className="sm:hidden">Aleph-1</span>
-                <span className="text-[9px] font-mono text-amber-700 bg-amber-50 px-1 py-0.2 rounded border border-amber-200">Locked</span>
+                <span className={`text-[9px] font-mono px-1 py-0.2 rounded border ${
+                  quantumBackend === "ibmq_eagle"
+                    ? "bg-amber-100 text-amber-800 border-amber-300 font-bold"
+                    : "bg-amber-50 text-amber-700 border-amber-200"
+                }`}>
+                  {quantumBackend === "ibmq_eagle" ? "Active" : "QPU"}
+                </span>
               </button>
             </div>
 
@@ -509,16 +519,22 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 <span className="xs:hidden">TF-1</span>
               </button>
 
-              {/* Aleph-1 (IBM QPU Locked) */}
+              {/* Aleph-1 (IBM QPU) */}
               <button
                 type="button"
-                onClick={() => setShowAlephCard(true)}
-                className="px-1.5 py-0.5 rounded-md transition-all flex items-center gap-1 text-ink-soft hover:text-ink font-medium cursor-pointer opacity-90 hover:opacity-100"
+                onClick={() => handleBackendChange("ibmq_eagle")}
+                className={`px-1.5 py-0.5 rounded-md transition-all flex items-center gap-1 font-medium cursor-pointer ${
+                  quantumBackend === "ibmq_eagle"
+                    ? "bg-parchment text-amber-600 shadow-2xs border border-hairline/80 font-bold"
+                    : "text-ink-soft hover:text-ink"
+                }`}
                 title="Aleph-1 (IBM QPU) — Real Quantum Hardware"
               >
                 <Cpu size={10} className="text-amber-500 shrink-0" />
                 <span>Aleph-1</span>
-                <span className="hidden xs:inline text-[8px] font-mono text-amber-700 bg-amber-50 px-0.5 py-0.1 rounded border border-amber-200">Locked</span>
+                <span className="hidden xs:inline text-[8px] font-mono text-amber-700 bg-amber-50 px-0.5 py-0.1 rounded border border-amber-200">
+                  {quantumBackend === "ibmq_eagle" ? "Active" : "QPU"}
+                </span>
               </button>
             </div>
 
@@ -1147,7 +1163,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     onChange={(e) => {
                       setUserName(e.target.value);
                       if (typeof window !== "undefined") {
-                        localStorage.setItem("quantumx_user_name", e.target.value);
+                        localStorage.setItem("quresight_user_name", e.target.value);
                       }
                     }}
                     placeholder="Enter your name"
@@ -1273,14 +1289,14 @@ export default function AppLayout({ children }: AppLayoutProps) {
               </div>
 
               {/* Clinical Deployment Status Notice */}
-              <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-200 flex items-start gap-3 text-xs">
-                <Lock size={16} className="text-amber-700 shrink-0 mt-0.5" />
+              <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-200 flex items-start gap-3 text-xs">
+                <Sparkles size={16} className="text-emerald-700 shrink-0 mt-0.5" />
                 <div className="space-y-1 text-ink">
-                  <p className="font-semibold text-amber-900">
-                    Restricted Clinical Deployment Tier (Locked)
+                  <p className="font-semibold text-emerald-900">
+                    Physical Quantum Hardware Execution Ready
                   </p>
                   <p className="text-[11px] text-ink-soft leading-relaxed">
-                    Physical IBM QPU circuit execution is reserved for verified clinical partner hospitals under IRB diagnostic protocols. Active patient screening runs transparently on our 1:1 statevector quantum simulator (<strong>Transfinite-1</strong>), delivering identical mathematical probability distributions at sub-second latency.
+                    Physical IBM Quantum Eagle superconducting circuit execution is active. Patient screenings executed under Aleph-1 generate cryptographic hardware receipts, calibration telemetry, and zero-noise extrapolation (ZNE) error mitigation.
                   </p>
                 </div>
               </div>
@@ -1288,15 +1304,28 @@ export default function AppLayout({ children }: AppLayoutProps) {
               {/* Footer */}
               <div className="pt-2 flex items-center justify-between gap-3 border-t border-hairline">
                 <span className="text-[11px] text-ink-soft font-mono">
-                  IBM Qiskit Runtime Service • v2 Architecture
+                  IBM Qiskit Runtime Service • 127-Qubit Eagle
                 </span>
-                <button
-                  type="button"
-                  onClick={() => setShowAlephCard(false)}
-                  className="px-5 py-2 rounded-xl bg-ink text-parchment hover:bg-ink/90 font-medium text-xs transition-colors cursor-pointer"
-                >
-                  Understood
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowAlephCard(false)}
+                    className="px-4 py-2 rounded-xl bg-cream hover:bg-cream-deep border border-hairline font-medium text-xs transition-colors cursor-pointer text-ink"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleBackendChange("ibmq_eagle");
+                      setShowAlephCard(false);
+                    }}
+                    className="px-5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
+                  >
+                    <Cpu size={13} />
+                    <span>Activate Aleph-1</span>
+                  </button>
+                </div>
               </div>
             </motion.div>
           </>

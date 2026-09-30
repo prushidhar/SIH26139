@@ -1,4 +1,4 @@
-# ⚛️ QuantumX Machine Learning Pipeline: Quantum Subsystem Architecture & Circuit Mechanics (v4.0)
+# ⚛️ QureSight Machine Learning Pipeline: Quantum Subsystem Architecture & Circuit Mechanics (v4.0)
 ## The Complete Master Engineering Blueprint, Circuit Mechanics, Mathematical Proofs & Production Code
 
 > **Document Classification**: Master Architecture Specification (v4.0) — Single Source of Truth  
@@ -28,7 +28,7 @@
 5. [Stage 6 & 7: Quantum Measurement, Dual-Mode Gradients & Hybrid Backpropagation](#5-stage-6--7-quantum-measurement-dual-mode-gradients--hybrid-backpropagation)
 6. [Stage 8: Physical IBM QPU Transpilation & Quantum Noise Mitigation (ZNE / M3)](#6-stage-8-physical-ibm-qpu-transpilation--quantum-noise-mitigation-zne--m3)
 7. [Stage 9: Tri-Model Benchmark Verification Protocol (BVP)](#7-stage-9-tri-model-benchmark-verification-protocol-bvp)
-8. [Stage 10: Quantum-Aware Mechanistic Explainability (QXplain & Gate Ablation)](#8-stage-10-quantum-aware-mechanistic-explainability-qxplain--gate-ablation)
+8. [Stage 10: Quantum-Aware Mechanistic Explainability (QureExplain & Gate Ablation)](#8-stage-10-quantum-aware-mechanistic-explainability-qureexplain--gate-ablation)
 9. [Complete End-to-End Hybrid Quantum Diagnostic Engine: Deep System Mechanics & Execution Specification](#9-complete-end-to-end-hybrid-quantum-diagnostic-engine-deep-system-mechanics--execution-specification)
 10. [Addressing the 569-Sample Memorization vs. Learning Concern](#10-addressing-the-569-sample-memorization-vs-learning-concern)
 11. [Verified Primary Bibliography & Literature Citations](#11-verified-primary-bibliography--literature-citations)
@@ -38,7 +38,7 @@
 
 # 1. The Complete 10-Stage Classical vs. Quantum Pipeline Architecture
 
-Below is the complete 10-stage QuantumX hybrid workflow, showing exact computational domain boundaries, fold-internal preprocessing, hardware execution paths, and dual explainability.
+Below is the complete 10-stage QureSight hybrid workflow, showing exact computational domain boundaries, fold-internal preprocessing, hardware execution paths, and dual explainability.
 
 ```
 ================================================================================
@@ -133,13 +133,13 @@ HYBRID OPTIMIZATION, DEPLOYMENT & EXPLAINABILITY (HYBRID INTERFACE)
 │ STAGE 9: TRI-MODEL BENCHMARK VERIFICATION PROTOCOL (BVP)                     │
 │ 1. Classical SOTA Champion : Optuna-Tuned XGBoost & SVM-RBF (100+ trials)    │
 │ 2. Classical Deep Baseline : 3-Layer Deep Multi-Layer Perceptron (MLP)       │
-│ 3. QuantumX Hybrid Champion: Autoencoder + 8-Qubit VQC + Temperature Head    │
+│ 3. QureSight Hybrid Champion: Autoencoder + 8-Qubit VQC + Temperature Head    │
 │ • Statistical Significance: McNemar's Chi-Squared Test across all 50 folds.  │
 └──────────────────────────────────────┬───────────────────────────────────────┘
                                        │
                                        ▼
 ┌──────────────────────────────────────────────────────────────────────────────┐
-│ STAGE 10: QUANTUM-AWARE MECHANISTIC EXPLAINABILITY (QXplain)                 │
+│ STAGE 10: QUANTUM-AWARE MECHANISTIC EXPLAINABILITY (QureExplain)                 │
 │ • Dual-Level Attribution: TreeSHAP (Classical) vs KernelSHAP-on-VQC (Quantum)│
 │ • Quantum Gate Causal Saliency: S(G_k) = D_KL( P_original || P_ablated )     │
 │ • Cryptographic Quantum Receipt: Signed PDF/JSON with OpenQASM 3.0 & Job ID. │
@@ -351,7 +351,7 @@ Wire 7: ──[ ⟨Z_7⟩ Meter ] ──► e_7 ∈ [-1, +1]
 ## 4.2 Barren Plateau Immunity & One-Time Ansatz Comparison
 1. **Local Observables**: Measuring local $Z_i$ guarantees polynomial gradient scaling $\mathcal{O}(1/\text{poly}(N))$ (*Cerezo et al., 2021*).
 2. **Near-Zero Initialization**: $\boldsymbol{\theta}_0 \sim \mathcal{N}(0, 0.01^2)$ starts all gates near the Identity ($\mathbb{I}$), avoiding flat Haar space (*Grant et al., 2019*).
-3. **One-Time Ansatz Comparison**: Before training, QuantumX evaluates 3 candidate ansatze (Strongly Entangling vs. Hardware Efficient vs. Basic Entangler) over 50 parameter draws on WDBC to confirm maximum gradient variance.
+3. **One-Time Ansatz Comparison**: Before training, QureSight evaluates 3 candidate ansatze (Strongly Entangling vs. Hardware Efficient vs. Basic Entangler) over 50 parameter draws on WDBC to confirm maximum gradient variance.
 
 ---
 
@@ -406,7 +406,7 @@ Mitigated Expectation = Limit as lambda -> 0 of <O>(lambda) = c_0
 │ 2. Classical Deep    │ 3-Layer Deep MLP      │ Parameter-matched classical   │
 │    Baseline          │ (64 -> 32 -> 16 units)│ neural network baseline.      │
 ├──────────────────────┼───────────────────────┼───────────────────────────────┤
-│ 3. QuantumX Hybrid   │ Autoencoder + 8-Qubit │ Flagship model utilizing      │
+│ 3. QureSight Hybrid   │ Autoencoder + 8-Qubit │ Flagship model utilizing      │
 │    Champion          │ VQC + Softmax Head    │ Hilbert space representations.│
 └──────────────────────┴───────────────────────┴───────────────────────────────┘
 ```
@@ -418,7 +418,7 @@ Chi_Square = (|b - c| - 1)^2 / (b + c) > 3.841   (p < 0.05, 1 Degree of Freedom)
 
 ---
 
-# 8. Stage 10: Quantum-Aware Mechanistic Explainability (QXplain & Gate Ablation)
+# 8. Stage 10: Quantum-Aware Mechanistic Explainability (QureExplain & Gate Ablation)
 
 1. **Dual-Level Feature Attribution**:
    - **TreeSHAP**: Explains raw clinical features on the XGBoost baseline.
@@ -434,13 +434,13 @@ Saliency: S(G_k) = D_KL( P_original || P_ablated ) = Sum P(c) * ln( P(c) / P_abl
 
 # 9. Complete End-to-End Hybrid Quantum Diagnostic Engine: Deep System Mechanics & Execution Specification
 
-Rather than presenting an isolated code block, this section details the complete, end-to-end mechanical execution pipeline of the QuantumX diagnostic engine. It traces every mathematical transformation, tensor manipulation, interface boundary, gradient pathway, and explainability algorithm across the hybrid stack.
+Rather than presenting an isolated code block, this section details the complete, end-to-end mechanical execution pipeline of the QureSight diagnostic engine. It traces every mathematical transformation, tensor manipulation, interface boundary, gradient pathway, and explainability algorithm across the hybrid stack.
 
 ---
 
 ## 9.1 The Hybrid Architectural Interface & Tensor Flow Pipeline
 
-The QuantumX diagnostic engine operates across a continuous, dual-domain computation graph. The classical PyTorch engine and the PennyLane quantum node communicate seamlessly through a shared computational tape that tracks every forward operation and backward gradient without data type degradation or graph severing.
+The QureSight diagnostic engine operates across a continuous, dual-domain computation graph. The classical PyTorch engine and the PennyLane quantum node communicate seamlessly through a shared computational tape that tracks every forward operation and backward gradient without data type degradation or graph severing.
 
 ```
 [ Raw Patient Tensor x in R^30 ]
@@ -525,7 +525,7 @@ The classical compression module acts as a non-linear information distillation b
 
 In standard hybrid quantum architectures, developers frequently make the critical error of extracting numerical floats from tensors inside custom gates using `.item()` or `float()` calls. Doing so breaks the PyTorch computation graph, completely halting backpropagation to the upstream classical layers.
 
-QuantumX maintains a **pure PyTorch tensor graph** across every single quantum operation:
+QureSight maintains a **pure PyTorch tensor graph** across every single quantum operation:
 
 ### 1. Stage 4: Superposition & $ZZFeatureMap$ Encoding
 * **Hadamard Initialization**: An 8-qubit register initialized in $|00000000\rangle$ is transformed into an equal superposition of all 256 computational basis states:
@@ -576,7 +576,7 @@ The variational layers perform trainable unitary transformations $U(\boldsymbol{
 ## 9.4 Measurement, Expectation Value Extraction & Classical Head
 
 ### 1. Stage 6: Local Pauli-$Z$ Expectation Readout
-Instead of measuring a global $N$-qubit observable (which causes exponential gradient vanishing), QuantumX performs 8 local Hermitian measurements:
+Instead of measuring a global $N$-qubit observable (which causes exponential gradient vanishing), QureSight performs 8 local Hermitian measurements:
 ```
 e_q(x, θ) = ⟨ψ(x, θ)| Z_q |ψ(x, θ)⟩ = Trace( ρ(x, θ) * Z_q )
 ```
@@ -611,7 +611,7 @@ The quantum expectation vector `e` passes into a two-layer classical classificat
 
 ## 9.5 Dual-Mode Gradient Backpropagation Mechanics
 
-The optimization of QuantumX relies on a bifurcated gradient computation pipeline designed for maximum simulator training velocity and hardware execution fidelity:
+The optimization of QureSight relies on a bifurcated gradient computation pipeline designed for maximum simulator training velocity and hardware execution fidelity:
 
 | Mode Attribute | Local Simulator Training Mode | Physical IBM QPU Hardware Mode |
 | :--- | :--- | :--- |
@@ -629,7 +629,7 @@ Loss_BCE = - (1 / B) * Sum_{i=1}^B [ y_i * ln(y_hat_i) + (1 - y_i) * ln(1 - y_ha
 
 ## 9.6 Stage 10 Mechanistic Explainability: Causal Gate Ablation Algorithm
 
-To explain the exact internal causal contribution of each variational quantum layer to a patient's diagnostic outcome, QuantumX implements the **Causal Gate Ablation Saliency Engine**:
+To explain the exact internal causal contribution of each variational quantum layer to a patient's diagnostic outcome, QureSight implements the **Causal Gate Ablation Saliency Engine**:
 
 ```
 Algorithm: Causal Quantum Gate Ablation Saliency
@@ -698,7 +698,7 @@ Step 6: Evaluation & Routing:
 
 # 10. Addressing the 569-Sample Memorization vs. Learning Concern
 
-To guarantee that the hybrid model learns true generalizable clinical pathology rather than memorizing the 569 WDBC samples, QuantumX incorporates **4 architectural safeguards**:
+To guarantee that the hybrid model learns true generalizable clinical pathology rather than memorizing the 569 WDBC samples, QureSight incorporates **4 architectural safeguards**:
 
 | Safeguard Pillar | Technical Mechanism | Why Memorization Is Impossible |
 | :--- | :--- | :--- |

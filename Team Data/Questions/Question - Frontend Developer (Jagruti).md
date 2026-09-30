@@ -31,17 +31,17 @@
 ## 🎯 Part 2: Slide 6 Image Defense (Clinical Impact, Model Efficiency & Target Audience)
 
 16. What are the four core impact pillars illustrated in `Slide 6 - Impact.png` (Clinical, Performance, Efficiency, Resource/System)?
-17. Under **Clinical Impact**, what is the False Negative Rate comparison shown between Classical ML (15–20%) and QuantumX (3.5%)?
+17. Under **Clinical Impact**, what is the False Negative Rate comparison shown between Classical ML (15–20%) and QureSight (3.5%)?
 18. Why does reducing missed malignant cases from 15–20% down to 3.5% directly support curative early interventions?
-19. Under **Performance Impact**, how does QuantumX's accuracy compare against classical models across small, medium, and large dataset sizes?
-20. Why does QuantumX achieve superior accuracy specifically on small training cohorts where classical models struggle?
+19. Under **Performance Impact**, how does QureSight's accuracy compare against classical models across small, medium, and large dataset sizes?
+20. Why does QureSight achieve superior accuracy specifically on small training cohorts where classical models struggle?
 21. Under **Model Efficiency Impact**, what is the trainable parameter comparison shown (10,000+ classical weights vs. 48 quantum parameters)?
 22. Why do 48 compact quantum parameters drastically reduce overfitting risk on clinical patient cohorts?
 23. Under **Resource & System Impact**, what are the 5 axes shown in the Radar Chart of SIH Objectives (Scalability, Interpretability, Hardware Compatibility, Generalization, Computational Efficiency)?
-24. How does QuantumX outperform classical baselines across the radar chart dimensions?
+24. How does QureSight outperform classical baselines across the radar chart dimensions?
 25. In `Slide 6 - Target Audience.png`, who are the primary stakeholder groups identified?
-26. How does QuantumX impact **Healthcare Professionals** by providing subtle risk insights for clinical decision support?
-27. How does QuantumX impact **Healthcare & AI Researchers** by enabling head-to-head quantum vs. classical benchmarking?
+26. How does QureSight impact **Healthcare Professionals** by providing subtle risk insights for clinical decision support?
+27. How does QureSight impact **Healthcare & AI Researchers** by enabling head-to-head quantum vs. classical benchmarking?
 28. How does the platform impact **Patients** through personalized, evidence-driven early healthcare screening?
 29. How does the frontend make quantum computing accessible and understandable for **Students & Developers**?
-30. Can you summarize the overall clinical and system impact of QuantumX shown on Slide 6 in 3 simple sentences?
+30. Can you summarize the overall clinical and system impact of QureSight shown on Slide 6 in 3 simple sentences?

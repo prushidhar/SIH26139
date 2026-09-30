@@ -337,17 +337,28 @@ export default function HardwarePage() {
           </div>
         </div>
 
-        {/* Aleph-1 (IBM Quantum QPU Hardware - LOCKED) */}
+        {/* Aleph-1 (IBM Quantum QPU Hardware - UNLOCKED) */}
         <div
           onClick={() => {
-            alert("Aleph-1 (Physical 127-Qubit IBM Quantum QPU) is currently locked and reserved for verified clinical partner access.");
+            setActiveBackend("ibmq_eagle");
+            showToast({
+              title: "Hardware Activated",
+              message: "Aleph-1 Superconducting IBM Quantum Hardware activated.",
+              type: "success",
+            });
           }}
-          className="p-5 rounded-2xl border transition-all cursor-not-allowed space-y-3 relative overflow-hidden bg-parchment/60 hover:bg-parchment border-hairline opacity-90"
+          className={`p-5 rounded-2xl border transition-all cursor-pointer space-y-3 relative overflow-hidden bg-parchment hover:bg-parchment/80 border-hairline ${
+            activeBackend === "ibmq_eagle" ? "ring-2 ring-amber-500 shadow-md" : ""
+          }`}
         >
           <div className="absolute top-3 right-3 flex items-center gap-1">
-            <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-50 text-amber-700 border border-amber-200 flex items-center gap-1">
-              <Lock size={10} className="text-amber-600" />
-              <span>PARTNER LOCKED</span>
+            <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold flex items-center gap-1 border ${
+              activeBackend === "ibmq_eagle"
+                ? "bg-amber-100 text-amber-800 border-amber-300"
+                : "bg-emerald-50 text-emerald-700 border-emerald-200"
+            }`}>
+              <CheckCircle2 size={10} className={activeBackend === "ibmq_eagle" ? "text-amber-700" : "text-emerald-600"} />
+              <span>{activeBackend === "ibmq_eagle" ? "ACTIVE TARGET" : "HARDWARE READY"}</span>
             </span>
           </div>
 
@@ -513,9 +524,9 @@ export default function HardwarePage() {
               Error mitigation algorithms designed for physical superconducting quantum cryostats (Aleph-1).
             </p>
           </div>
-          <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-amber-50 text-amber-700 border border-amber-200 self-start sm:self-auto flex items-center gap-1">
-            <Lock size={11} className="text-amber-600" />
-            <span>BETA — UPCOMING ON ALEPH-1 HARDWARE</span>
+          <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 self-start sm:self-auto flex items-center gap-1">
+            <CheckCircle2 size={11} className="text-emerald-600" />
+            <span>CONFIGURED ON ALEPH-1 QPU</span>
           </span>
         </div>
 

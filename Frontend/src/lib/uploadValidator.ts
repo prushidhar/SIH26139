@@ -1,6 +1,6 @@
 /**
  * ====================================================================================================
- * QuantumX — Smart Upload Validation Engine
+ * QureSight — Smart Upload Validation Engine
  * ====================================================================================================
  * Multi-layer content validation for all uploads across disease screening studios.
  *

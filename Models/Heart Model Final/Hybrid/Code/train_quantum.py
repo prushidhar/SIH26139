@@ -1,4 +1,4 @@
-"""QuantumX Production Hybrid Quantum Cardiac Classifier Trainer
+"""QureSight Production Hybrid Quantum Cardiac Classifier Trainer
 Architecture: 8-Qubit Universal Data Re-Uploading VQC + ResQNet Residual Highway + Bilinear Gated Fusion
 """
 
@@ -220,7 +220,7 @@ def train_quantum(epochs=20, lr=1e-3):
     out_path = out_models_dir / "best_hybrid_quantum_cardiac_model.pt"
     
     torch.save({
-        'model_name': 'QuantumX 8-Qubit Universal Data Re-Uploading Hybrid Cardiac Classifier',
+        'model_name': 'QureSight 8-Qubit Universal Data Re-Uploading Hybrid Cardiac Classifier',
         'classes': CLASSES,
         'num_qubits': NUM_QUBITS,
         'num_layers': NUM_LAYERS,

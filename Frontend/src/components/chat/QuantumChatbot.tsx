@@ -30,7 +30,7 @@ const ALL_PROMPTS = [
   "How does Zero-Noise Extrapolation (ZNE) mitigate noise?",
   "Explain the primary shape factors in breast cancer screening",
   "What are the McNemar χ² statistical significance results?",
-  "How does QXplain calculate gate ablation saliency maps?",
+  "How does QureExplain calculate gate ablation saliency maps?",
   "What is the role of the ZZ-feature map in data encoding?",
   "How does Parameter-Shift compute quantum gradients?",
 ];
@@ -274,7 +274,7 @@ export default function QuantumChatbot() {
       });
 
       const data = await res.json();
-      const replyText = data.reply || "QuantumX AI received your query. Please refer to the benchmark and screening dashboards.";
+      const replyText = data.reply || "QureSight AI received your query. Please refer to the benchmark and screening dashboards.";
 
       const newBotId = `b-${Date.now()}`;
       const botMsg: ChatMessage = {
@@ -341,7 +341,7 @@ export default function QuantumChatbot() {
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "Close Quantum AI Assistant" : "Open Quantum AI Assistant"}
-          title="QuantumX Clinical AI Assistant"
+          title="QureSight Clinical AI Assistant"
           className="relative w-12 h-12 rounded-full bg-black text-white shadow-xl flex items-center justify-center cursor-pointer transition-all z-10"
         >
           <AnimatePresence mode="wait">
@@ -391,7 +391,7 @@ export default function QuantumChatbot() {
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-serif text-sm font-medium text-ink tracking-tight">QuantumX</span>
+                    <span className="font-serif text-sm font-medium text-ink tracking-tight">QureSight</span>
                     <span className="text-[9px] font-mono uppercase tracking-widest text-quantum bg-quantum/10 border border-quantum/20 px-1.5 py-0.5 rounded-full font-semibold">
                       Clinical AI
                     </span>

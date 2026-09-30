@@ -1,4 +1,4 @@
-"""QuantumX Production Inference Pipeline for External Clinical ECG Images
+"""QureSight Production Inference Pipeline for External Clinical ECG Images
 Loads the trained state-of-the-art models:
 - Classical ECGConVT (best_classical_cardiac_model.pt)
 - Hybrid Quantum 8-Qubit Model (best_hybrid_quantum_cardiac_model.pt)

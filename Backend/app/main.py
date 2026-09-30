@@ -58,12 +58,12 @@ def humanize_validation_error(err: dict) -> str:
 async def lifespan(app: FastAPI):
     # Initialize all database tables on startup
     await init_db()
-    print("[QuantumX Backend] Database Initialized & Connected.")
+    print("[QureSight Backend] Database Initialized & Connected.")
     yield
 
 
 app = FastAPI(
-    title="Quantum ML Platform Backend",
+    title="QureSight Hybrid Quantum ML Platform Backend",
     version="1.0.0",
     lifespan=lifespan,
 )
@@ -116,7 +116,7 @@ app.include_router(benchmarks_router)
 @app.get("/")
 async def root():
     return {
-        "service": "QuantumX Hybrid Quantum ML Platform Backend",
+        "service": "QureSight Hybrid Quantum ML Platform Backend",
         "status": "online",
         "version": "1.0.0",
         "documentation": "/docs",
@@ -128,5 +128,5 @@ async def root():
 async def health_check():
     return {
         "status": "healthy",
-        "service": "quantum-ml-platform-backend",
+        "service": "quresight-ml-platform-backend",
     }

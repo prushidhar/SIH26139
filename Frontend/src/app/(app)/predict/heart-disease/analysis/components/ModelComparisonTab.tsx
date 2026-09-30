@@ -179,7 +179,7 @@ export default function ModelComparisonTab({
                 <Sparkles size={16} />
               </div>
               <div>
-                <h4 className="text-xs font-bold text-ink">{tfData.signature || "QuantumX Transfinite-1"}</h4>
+                <h4 className="text-xs font-bold text-ink">{tfData.signature || "QureSight Transfinite-1"}</h4>
                 <p className="text-[10px] font-mono text-ink-soft">8-Qubit Strongly Entangled VQC</p>
               </div>
             </div>

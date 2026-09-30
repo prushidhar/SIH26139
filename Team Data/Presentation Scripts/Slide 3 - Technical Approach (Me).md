@@ -1,4 +1,4 @@
-## *Slide 3: Technical Approach & Architecture (Anshul)*
+## *Slide 3: Technical Approach & Architecture (Rushidhar)*
 
 Thank you, Kamran.
 
@@ -14,11 +14,11 @@ In modern hospitals and diagnostic labs, standard tests produce detailed numeric
 
 Historically, diagnostic labs relied entirely on manual evaluation and rigid, single-cutoff thresholds on paper reports. But in early-stage disease, individual measurements almost always sit inside borderline-normal ranges, making single-parameter thresholds blind to developing illness. To solve this, modern healthcare began deploying classical machine learning—bringing in models like Random Forest, Support Vector Machines, and XGBoost to evaluate complex multi-parameter interactions simultaneously. This was a major leap forward, but it hit a mathematical ceiling: because classical models evaluate these features in flat Euclidean space, overlapping biological signals still cause the dangerous 15% to 20% false-negative rate that Kamran described.
 
-QuantumX directly interfaces with these standard hospital lab outputs, taking those raw clinical numbers and processing them through our hybrid architecture.
+QureSight directly interfaces with these standard hospital lab outputs, taking those raw clinical numbers and processing them through our hybrid architecture.
 
 ---
 
-Looking at the left side of our architecture diagram, the pipeline begins with **Diagnostic Cases and Data Ingestion**. When a clinician or hospital lab accesses QuantumX, they select the diagnostic use case—for example, breast cancer screening—and enter the patient's clinical tabular data. This can be an uploaded lab report or direct numerical inputs, such as 30 fine-needle biopsy measurements capturing cell radius, perimeter, and concavity.
+Looking at the left side of our architecture diagram, the pipeline begins with **Diagnostic Cases and Data Ingestion**. When a clinician or hospital lab accesses QureSight, they select the diagnostic use case—for example, breast cancer screening—and enter the patient's clinical tabular data. This can be an uploaded lab report or direct numerical inputs, such as 30 fine-needle biopsy measurements capturing cell radius, perimeter, and concavity.
 
 Once entered, our platform immediately checks the data for errors, protects patient privacy, and cleans up real-world hospital noise. In real clinics, lab data is messy—machines produce occasional extreme glitches, missing readings, or skewed scales. Our preprocessing pipeline automatically handles missing values, filters out lab errors, and scales the numbers cleanly, ensuring our models learn genuine disease patterns without any data leakage.
 
@@ -54,7 +54,7 @@ Instead of wasting expensive hardware time training from scratch, we use our ded
 
 With our models ready, the platform delivers the **Final Diagnostic Prediction** (Box 12). A doctor receives an instant, calibrated risk score—showing the exact percentage probability of whether a tumor is benign or malignant, along with statistical confidence intervals.
 
-To eliminate the AI black-box, our **QXplain Engine** (Box 11) shows clinicians exactly which biological features and quantum gates drove that decision, complete with a verifiable clinical receipt and IBM Quantum Job ID.
+To eliminate the AI black-box, our **QureExplain Engine** (Box 11) shows clinicians exactly which biological features and quantum gates drove that decision, complete with a verifiable clinical receipt and IBM Quantum Job ID.
 
 Finally, we validate our platform through **Unified Benchmarking** (Box 10). On the exact same patient data splits, we rigorously compare all three: our classical baselines, our quantum simulator, and physical IBM quantum hardware. This statistically proves our hybrid model's superior accuracy and sensitivity on identical medical cohorts.
 

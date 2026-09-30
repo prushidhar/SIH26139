@@ -1,9 +1,9 @@
 """
 ====================================================================================================
-QuantumX Master Training Engine: 50-Fold Repeated CV, Statistical Testing & Serialization
+QureSight Master Training Engine: 50-Fold Repeated CV, Statistical Testing & Serialization
 ====================================================================================================
 This module implements the master training, benchmarking, and statistical verification orchestrator
-for QuantumX v1, realizing the Tri-Model Benchmark Verification Protocol (TM-BVP).
+for QureSight v1, realizing the Tri-Model Benchmark Verification Protocol (TM-BVP).
 
 Key Implementations:
 1. 50-Fold Repeated Stratified Cross-Validation (10 Folds × 5 Random Seeds) with Zero-Leakage Preprocessing.
@@ -59,7 +59,7 @@ except Exception:
     QuantumGateAblator, CryptographicQuantumReceiptGenerator = _qx.QuantumGateAblator, _qx.CryptographicQuantumReceiptGenerator
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
-logger = logging.getLogger("QuantumX.TrainEngine")
+logger = logging.getLogger("QureSight.TrainEngine")
 
 
 # ==================================================================================================
@@ -69,7 +69,7 @@ logger = logging.getLogger("QuantumX.TrainEngine")
 class StatisticalSignificanceEngine:
     """
     Executes rigorous hypothesis testing to verify whether performance differences
-    between Classical Champions and QuantumX Hybrid models are statistically significant.
+    between Classical Champions and QureSight Hybrid models are statistically significant.
     """
     @staticmethod
     def mcnemar_test(y_true: np.ndarray, y_pred_classical: np.ndarray, y_pred_quantum: np.ndarray) -> Dict[str, Any]:
@@ -155,7 +155,7 @@ class StatisticalSignificanceEngine:
 # 2. MASTER CROSS-VALIDATION ORCHESTRATOR
 # ==================================================================================================
 
-class QuantumXMasterPipeline:
+class QureSightMasterPipeline:
     """
     Master Orchestrator executing data preparation, feature selection, multi-model training,
     50-fold cross-validation, and statistical significance analysis.
@@ -181,7 +181,7 @@ class QuantumXMasterPipeline:
 
     def run_full_pipeline(self) -> Dict[str, Any]:
         """Executes the complete end-to-end benchmark and returns detailed performance statistics."""
-        logger.info(f"Initiating QuantumX Master Pipeline ({self.total_folds} Total Validation Folds)...")
+        logger.info(f"Initiating QureSight Master Pipeline ({self.total_folds} Total Validation Folds)...")
         
         # 1. Ingestion
         X_df, y_series, feature_names = load_wdbc_dataset()
@@ -323,7 +323,7 @@ class QuantumXMasterPipeline:
         
         # 7. Package and Serialize Final Artifacts
         full_report = {
-            "benchmark_protocol": "QuantumX Tri-Model Benchmark Verification Protocol (TM-BVP)",
+            "benchmark_protocol": "QureSight Tri-Model Benchmark Verification Protocol (TM-BVP)",
             "dataset": "Wisconsin Diagnostic Breast Cancer (WDBC)",
             "total_folds": self.total_folds,
             "n_qubits": self.n_qubits,
@@ -348,5 +348,5 @@ class QuantumXMasterPipeline:
 
 if __name__ == "__main__":
     _default_artifacts = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "artifacts_v1"))
-    pipeline = QuantumXMasterPipeline(n_splits=5, n_repeats=1, n_qubits=8, target_dir=_default_artifacts)
+    pipeline = QureSightMasterPipeline(n_splits=5, n_repeats=1, n_qubits=8, target_dir=_default_artifacts)
     results = pipeline.run_full_pipeline()

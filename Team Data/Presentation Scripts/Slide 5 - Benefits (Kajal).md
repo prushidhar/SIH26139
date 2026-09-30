@@ -1,12 +1,12 @@
-**BENEFITS — QuantumX**
+**BENEFITS — QureSight**
 
 Before looking at the benefits, let us take a simple real-world example.
 
 "Suppose a patient’s test contains a subtle pattern that classical AI misses, returning a normal report. The patient goes home believing everything is fine, while the disease silently progresses.
 
-QuantumX uses a hybrid classical-quantum approach to catch these hidden patterns earlier—enabling timely treatment before reaching an advanced, far more expensive stage."
+QureSight uses a hybrid classical-quantum approach to catch these hidden patterns earlier—enabling timely treatment before reaching an advanced, far more expensive stage."
 
-So, the benefits of QuantumX come in three major areas.
+So, the benefits of QureSight come in three major areas.
 
 1. Clinical Benefit
  It catches hidden warning signs early when treatment is easiest and most effective, giving doctors reliable insights before symptoms become severe.
@@ -22,14 +22,14 @@ So, the benefits of QuantumX come in three major areas.
 
 
 
-BENEFITS — QuantumX
+BENEFITS — QureSight
 “Benefits समझने से पहले, एक simple real-world example देखते हैं।
 
 Assume, किसी patient की report borderline है। Classical AI overlapping data की वजह से confuse हो जाता है और report 'normal' दे देता है।
 
 Patient निश्चिंत होकर घर चला जाता है, लेकिन disease अंदर ही अंदर silently grow करती है।
 
-यहीं QuantumX काम आता है—जहाँ Classical AI flat data में fail होता है, वहाँ Quantum approach subtle patterns को untangle करके disease को early stage में ही पकड़ लेता है। Timely detection से patient समय पर treat होता है और advanced stage का भारी खर्च बच जाता है।
+यहीं QureSight काम आता है—जहाँ Classical AI flat data में fail होता है, वहाँ Quantum approach subtle patterns को untangle करके disease को early stage में ही पकड़ लेता है। Timely detection से patient समय पर treat होता है और advanced stage का भारी खर्च बच जाता है।
 
 इसके three major benefits हैं:
 
@@ -42,4 +42,4 @@ Second, Technological Benefit:
 Third, Economic Benefit:
 हाँ, quantum computing की initial cost जरूर होती है, लेकिन late या missed diagnosis का खर्च—emergency surgeries, prolonged chemotherapy और ICU care—कहीं ज्यादा महंगा होता है। Disease को early पकड़ना compute cost से कहीं ज्यादा बचत देता है और families को heavy medical debt से बचाता है।
 
-यानी, Classical AI जहाँ confuse होता है, QuantumX वहाँ clarity देता है—ताकि disease late नहीं, early stage में cure हो सके।”
+यानी, Classical AI जहाँ confuse होता है, QureSight वहाँ clarity देता है—ताकि disease late नहीं, early stage में cure हो सके।”

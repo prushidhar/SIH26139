@@ -1,4 +1,4 @@
-"""QuantumX Clinical ECG Preprocessing & Waveform Extraction Module
+"""QureSight Clinical ECG Preprocessing & Waveform Extraction Module
 Overcomes the flat RGB raster trap by attenuating pink/red background paper grid lines
 and enhancing black-ink electrical conduction tracings (QRS spikes and ST segments).
 """

@@ -1,6 +1,6 @@
 /**
  * ====================================================================================================
- * QuantumX — Batch File Processor
+ * QureSight — Batch File Processor
  * ====================================================================================================
  * Parses, validates, and chunks multi-record uploads for batch screening.
  *

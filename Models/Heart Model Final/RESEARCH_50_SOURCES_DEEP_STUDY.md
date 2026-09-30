@@ -1,4 +1,4 @@
-# QuantumX: Comprehensive 50-Source State-of-the-Art Research Dossier
+# QureSight: Comprehensive 50-Source State-of-the-Art Research Dossier
 ## 12-Lead Diagnostic Electrocardiogram (ECG) Image Recognition & Hybrid Quantum Machine Learning
 
 ---

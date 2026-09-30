@@ -78,160 +78,12 @@ function calculateMorphometricIndex(biomarkers: Record<string, number>) {
   };
 }
 
-function computeCalibratedRisk(pMal: number, morphIndex: number, biomarkers: Record<string, number>) {
-  const p = Math.max(0.001, Math.min(0.999, pMal));
-  const rawScore = (0.65 * (p * 100)) + (0.35 * morphIndex);
-  const compositeRiskScore = Math.max(0, Math.min(100, rawScore));
-
-  const radius = Number(biomarkers.radius_mean ?? 12.2);
-  const concavity = Number(biomarkers.concavity_mean ?? 0.037);
-  const area = Number(biomarkers.area_mean ?? 458.7);
-  const inOverlap = (radius >= 13.6 && radius <= 14.95) ||
-                    (concavity >= 0.08 && concavity <= 0.11) ||
-                    (area >= 560 && area <= 690);
-
-  if (compositeRiskScore < 25.0) {
-    return {
-      compositeRiskScore,
-      riskTier: "LOW RISK (BENIGN / NON-NEOPLASTIC)",
-      riskTag: "LOW_RISK",
-      severity: "low",
-      icon: "🟢",
-      iacCategory: "IAC Category 2 (Benign)",
-      romEstimate: "< 3%",
-      clinicalAction: "Routine annual screening mammography and regular clinical breast examination.",
-      morphSummary: "Standard cellular dimensions and smooth nuclear borders well within normal benign limits.",
-      inOverlap
-    };
-  } else if (compositeRiskScore < 45.0) {
-    return {
-      compositeRiskScore,
-      riskTier: "MILD SUSPICION (PROBABLY BENIGN ATYPIA)",
-      riskTag: "MILD_SUSPICION",
-      severity: "low_moderate",
-      icon: "🟢",
-      iacCategory: "IAC Category 2-3 Borderline",
-      romEstimate: "3% - 15%",
-      clinicalAction: "Short-interval 6-month diagnostic ultrasound or repeat FNA to confirm cytological stability.",
-      morphSummary: "Mild architectural irregularity or slight size variation, favoring benign reactive changes.",
-      inOverlap
-    };
-  } else if (compositeRiskScore < 65.0) {
-    return {
-      compositeRiskScore,
-      riskTier: "INDETERMINATE / BORDERLINE (ATYPICAL DYSPLASIA)",
-      riskTag: "BORDERLINE",
-      severity: "indeterminate",
-      icon: "🟡",
-      iacCategory: "IAC Category 3 (Atypical)",
-      romEstimate: "15% - 50%",
-      clinicalAction: "Diagnostic ultrasound follow-up and image-guided core needle biopsy (CNB) recommended due to intermediate atypia.",
-      morphSummary: "Intermediate nuclear atypia and contour irregularities occupying the empirical benign-malignant transition zone.",
-      inOverlap
-    };
-  } else if (compositeRiskScore < 85.0) {
-    return {
-      compositeRiskScore,
-      riskTier: "HIGH RISK (SUSPICIOUS FOR CARCINOMA)",
-      riskTag: "HIGH_RISK",
-      severity: "high",
-      icon: "🔴",
-      iacCategory: "IAC Category 4 (Suspicious)",
-      romEstimate: "50% - 85%",
-      clinicalAction: "Immediate core needle biopsy and urgent surgical oncology consultation for definitive histologic grading.",
-      morphSummary: "Pronounced nuclear pleomorphism, marked contour indentations, and elevated cellular density.",
-      inOverlap
-    };
-  } else {
-    return {
-      compositeRiskScore,
-      riskTier: "CRITICAL RISK (DIAGNOSTIC OF MALIGNANCY)",
-      riskTag: "CRITICAL_RISK",
-      severity: "critical",
-      icon: "🔴",
-      iacCategory: "IAC Category 5 (Malignant)",
-      romEstimate: "> 85% (Empirical > 99%)",
-      clinicalAction: "Urgent comprehensive oncology workup, receptor profiling (ER/PR/HER2), and surgical staging.",
-      morphSummary: "Severe nuclear pleomorphism, deep concavity indentations, and high nuclear-cytoplasmic ratio characteristic of invasive carcinoma.",
-      inOverlap
-    };
-  }
-}
-
-function computeQuantumAttributions(biomarkers: Record<string, number>) {
-  const baselines: Record<string, number> = {
-    radius_mean: 12.15, texture_mean: 17.91, perimeter_mean: 78.08, area_mean: 462.79,
-    smoothness_mean: 0.0925, compactness_mean: 0.0801, concavity_mean: 0.0461, concave_points_mean: 0.0257
-  };
-  // Quantum weights highlight non-linear contour complexity & concavity interaction
-  const quantumWeights: Record<string, number> = {
-    concavity_mean: 0.30, concave_points_mean: 0.25, compactness_mean: 0.18, radius_mean: 0.11,
-    perimeter_mean: 0.07, texture_mean: 0.04, smoothness_mean: 0.03, area_mean: 0.02
-  };
-
-  const attributions = Object.keys(FEATURE_LABELS).map((key) => {
-    const measured = Number(biomarkers[key] ?? baselines[key]);
-    const base = baselines[key];
-    const dev = (measured - base) / (base + 1e-6);
-    const impact = Math.max(-100, Math.min(100, dev * quantumWeights[key] * 100));
-    const isRisk = impact > 0;
-
-    return {
-      featureKey: key,
-      featureName: FEATURE_LABELS[key],
-      measuredValue: measured,
-      baselineValue: base,
-      impactPercentage: Math.abs(impact),
-      rawImpact: impact,
-      direction: isRisk ? "risk_elevating" : "protective",
-      quantumImpact: `${isRisk ? "+" : "-"}${Math.abs(impact).toFixed(1)}% impact`,
-      description: `${FEATURE_LABELS[key]} has non-linear ${isRisk ? "high-risk" : "low-risk"} quantum weight.`
-    };
-  });
-
-  return attributions.sort((a, b) => b.impactPercentage - a.impactPercentage);
-}
-
-function computeClassicalAttributions(biomarkers: Record<string, number>) {
-  const baselines: Record<string, number> = {
-    radius_mean: 12.15, texture_mean: 17.91, perimeter_mean: 78.08, area_mean: 462.79,
-    smoothness_mean: 0.0925, compactness_mean: 0.0801, concavity_mean: 0.0461, concave_points_mean: 0.0257
-  };
-  // Classical weights prioritize linear Euclidean dimensions
-  const classicalWeights: Record<string, number> = {
-    radius_mean: 0.34, area_mean: 0.26, perimeter_mean: 0.18, texture_mean: 0.10,
-    compactness_mean: 0.05, concavity_mean: 0.03, concave_points_mean: 0.02, smoothness_mean: 0.02
-  };
-
-  const attributions = Object.keys(FEATURE_LABELS).map((key) => {
-    const measured = Number(biomarkers[key] ?? baselines[key]);
-    const base = baselines[key];
-    const dev = (measured - base) / (base + 1e-6);
-    const impact = Math.max(-100, Math.min(100, dev * classicalWeights[key] * 100));
-    const isRisk = impact > 0;
-
-    return {
-      featureKey: key,
-      featureName: FEATURE_LABELS[key],
-      measuredValue: measured,
-      baselineValue: base,
-      impactPercentage: Math.abs(impact),
-      rawImpact: impact,
-      direction: isRisk ? "risk_elevating" : "protective",
-      quantumImpact: `${isRisk ? "+" : "-"}${Math.abs(impact).toFixed(1)}% impact`,
-      description: `${FEATURE_LABELS[key]} contributes ${isRisk ? "risk elevation" : "protective effect"} to classical hyperplane.`
-    };
-  });
-
-  return attributions.sort((a, b) => b.impactPercentage - a.impactPercentage);
-}
-
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const {
       biomarkers = {},
-      model_family = "quantumx_hybrid_v1", // 'aegis_classical_v1' | 'quantumx_hybrid_v1'
+      model_family = "quresight_hybrid_v1", // 'aegis_classical_v1' | 'quresight_hybrid_v1'
       execution_mode = "simulator",       // 'simulator' | 'real_ibm_qpu'
       patient_info = {}
     } = body;
@@ -252,9 +104,6 @@ export async function POST(req: NextRequest) {
     };
 
     const { morphometricIndex, dimensionDetails } = calculateMorphometricIndex(b);
-    const quantumAttributions = computeQuantumAttributions(b);
-    const classicalAttributions = computeClassicalAttributions(b);
-    const shapAttributions = isClassicalPrimary ? classicalAttributions : quantumAttributions;
 
     // Connect to real Python Backend (Port 8000) running trained PyTorch, PennyLane & Scikit-Learn pipelines
     const backendUrl = process.env.BACKEND_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
@@ -269,7 +118,7 @@ export async function POST(req: NextRequest) {
             model_name: "transfinite_1",
             biomarkers: b,
           }),
-          signal: AbortSignal.timeout(6000),
+          signal: AbortSignal.timeout(10000),
         }),
         fetch(`${backendUrl}/inference/breast-cancer`, {
           method: "POST",
@@ -278,7 +127,7 @@ export async function POST(req: NextRequest) {
             model_name: "cx_01",
             biomarkers: b,
           }),
-          signal: AbortSignal.timeout(6000),
+          signal: AbortSignal.timeout(10000),
         }),
       ]);
 
@@ -293,127 +142,173 @@ export async function POST(req: NextRequest) {
         }
       }
     } catch (backendErr) {
-      console.warn("Python backend live connection note:", backendErr);
+      console.warn("Python backend connection note:", backendErr);
     }
 
-    // =========================================================================
-    // PIPELINE 1: STANDALONE CX-01 (Classical SVM-RBF + XGBoost Ensemble)
-    // =========================================================================
-    const pMalignant_cx01 = livePythonData?.cx
-      ? (livePythonData.cx.calibrated_malignancy_prob / 100.0)
-      : Math.max(0.005, Math.min(0.995, 1.0 / (1.0 + Math.exp(-(((0.45 * (b.radius_mean - 12.2) / 4.0) + (0.35 * (b.concavity_mean - 0.04) / 0.08) + (0.20 * (b.area_mean - 458.7) / 400.0)) * 4.0)))));
-    const label_cx01 = livePythonData?.cx ? livePythonData.cx.prediction_label : (pMalignant_cx01 >= 0.5 ? "Malignant" : "Benign");
-    const conf_cx01 = livePythonData?.cx ? livePythonData.cx.confidence_percentage : ((label_cx01 === "Malignant" ? pMalignant_cx01 : (1.0 - pMalignant_cx01)) * 100);
-    const riskData_cx01 = computeCalibratedRisk(pMalignant_cx01, morphometricIndex, b);
-    const latency_cx01 = livePythonData?.cx?.latency_ms ? parseFloat(livePythonData.cx.latency_ms.toFixed(2)) : parseFloat((Math.random() * 2.5 + 1.2).toFixed(2));
+    if (!livePythonData) {
+      return NextResponse.json(
+        { error: "Python ML backend inference unreachable. Please ensure the backend is running on port 8000." },
+        { status: 503 }
+      );
+    }
 
-    // =========================================================================
-    // PIPELINE 2: STANDALONE Transfinite-1 (8-Qubit ZZ Feature Map + VQC)
-    // =========================================================================
-    const pMalignant_transfinite1 = livePythonData?.tf
-      ? (livePythonData.tf.calibrated_malignancy_prob / 100.0)
-      : Math.max(0.005, Math.min(0.995, 1.0 / (1.0 + Math.exp(-(((0.45 * (b.radius_mean - 12.2) / 4.0) + (0.35 * (b.concavity_mean - 0.04) / 0.08) + (0.20 * (b.area_mean - 458.7) / 400.0)) * 3.5)))));
-    const label_transfinite1 = livePythonData?.tf ? livePythonData.tf.prediction_label : (pMalignant_transfinite1 >= 0.5 ? "Malignant" : "Benign");
-    const conf_transfinite1 = livePythonData?.tf ? livePythonData.tf.confidence_percentage : ((label_transfinite1 === "Malignant" ? pMalignant_transfinite1 : (1.0 - pMalignant_transfinite1)) * 100);
-    const riskData_transfinite1 = computeCalibratedRisk(pMalignant_transfinite1, morphometricIndex, b);
-    const quantumExpectation = livePythonData?.tf?.quantum_expectation_val ?? (1.0 - (2.0 * pMalignant_transfinite1));
-    const latency_transfinite1 = livePythonData?.tf?.latency_ms ? parseFloat(livePythonData.tf.latency_ms.toFixed(2)) : parseFloat((Math.random() * 6.0 + 12.5).toFixed(2));
+    const cxTelemetry = livePythonData.cx;
+    const tfTelemetry = livePythonData.tf;
 
-    // =========================================================================
-    // PIPELINE 3: STANDALONE Aleph-1 (Real IBM Superconducting Hardware Mode)
-    // =========================================================================
-    let hardwareReceipt = null;
-    let pMalignant_aleph1 = pMalignant_transfinite1;
-    if (execution_mode === "real_ibm_qpu") {
-      const noise = (Math.random() - 0.5) * 0.03;
-      pMalignant_aleph1 = Math.max(0.01, Math.min(0.99, pMalignant_transfinite1 + noise));
-      hardwareReceipt = {
-        qpuTarget: "ibm_brisbane (127-Qubit Eagle r3)",
-        jobId: `ibm-qpu-job-${Math.random().toString(36).substring(2, 10)}${Math.random().toString(36).substring(2, 8)}`,
-        shots: 1024,
-        readoutErrorMitigation: "M3 (Matrix Inversion)",
-        dynamicalDecoupling: "XY4 Sequence Enabled",
-        physicalQubitsMapped: [14, 15, 16, 17, 18, 19, 20, 21],
-        circuitDepth: 36,
-        cxGateCount: 28,
-        timestamp: new Date().toISOString(),
-        status: "COMPLETED_VERIFIED",
-        qasmHash: "SHA256:8f4c92b10a7e3d64"
+    // Real Classical SHAP Attributions from trained SVM-RBF / XGBoost pipeline
+    const classicalAttributions = (cxTelemetry.shap_attributions || []).map((attr: any) => {
+      const impactVal = Number(attr.impact_percentage ?? 0);
+      return {
+        featureKey: attr.feature_key,
+        feature_key: attr.feature_key,
+        featureName: attr.feature_name || FEATURE_LABELS[attr.feature_key] || attr.feature_key,
+        feature_name: attr.feature_name || FEATURE_LABELS[attr.feature_key] || attr.feature_key,
+        measuredValue: Number(attr.measured_value ?? b[attr.feature_key] ?? 0),
+        measured_value: Number(attr.measured_value ?? b[attr.feature_key] ?? 0),
+        baselineValue: Number(attr.baseline_value ?? 0),
+        baseline_value: Number(attr.baseline_value ?? 0),
+        impactPercentage: Math.abs(impactVal),
+        impact_percentage: Math.abs(impactVal),
+        rawImpact: impactVal / 100.0,
+        direction: attr.direction || (impactVal >= 0 ? "risk_elevating" : "protective"),
+        quantumImpact: `${impactVal >= 0 ? "+" : "-"}${Math.abs(impactVal).toFixed(1)}% impact`,
+        description: attr.description || `${attr.feature_name || attr.feature_key} classical attribution`,
       };
+    });
+
+    // Real Quantum Saliency from trained PennyLane 8-Qubit VQC circuit
+    const quantumAttributions = (tfTelemetry.quantum_saliency || []).map((sal: any) => {
+      const saliencyVal = Number(sal.saliency_percentage ?? 0);
+      return {
+        featureKey: sal.feature_key,
+        feature_key: sal.feature_key,
+        featureName: sal.feature_name || FEATURE_LABELS[sal.feature_key] || sal.feature_key,
+        feature_name: sal.feature_name || FEATURE_LABELS[sal.feature_key] || sal.feature_key,
+        wire_index: sal.wire_index,
+        qubit_label: sal.qubit_label || `Qubit q[${sal.wire_index}]`,
+        rotation_angle_rad: sal.rotation_angle_rad,
+        saliency_percentage: saliencyVal,
+        impactPercentage: Math.abs(saliencyVal),
+        impact_percentage: Math.abs(saliencyVal),
+        rawImpact: saliencyVal / 100.0,
+        direction: "risk_elevating",
+        importance_rank: sal.importance_rank,
+        quantumImpact: sal.quantum_impact || `+${saliencyVal.toFixed(1)}% impact`,
+        quantum_impact: sal.quantum_impact || `+${saliencyVal.toFixed(1)}% impact`,
+        measuredValue: Number(b[sal.feature_key] ?? 0),
+        measured_value: Number(b[sal.feature_key] ?? 0),
+        baselineValue: Number(WDBC_BENIGN[sal.feature_key as keyof typeof WDBC_BENIGN]?.med ?? 0),
+        baseline_value: Number(WDBC_BENIGN[sal.feature_key as keyof typeof WDBC_BENIGN]?.med ?? 0),
+        description: `${sal.qubit_label || 'Qubit'} Pauli rotation angle: ${Number(sal.rotation_angle_rad).toFixed(3)} rad`,
+      };
+    });
+
+    // PIPELINE 3: Aleph-1 Real IBM Hardware QPU (if requested)
+    let hardwareReceipt = null;
+    let alephTelemetry = null;
+    if (execution_mode === "real_ibm_qpu") {
+      try {
+        const alephResp = await fetch(`${backendUrl}/inference/breast-cancer`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            model_name: "aleph_1",
+            biomarkers: b,
+            ibm_token: patient_info?.ibm_token || null,
+          }),
+          signal: AbortSignal.timeout(10000),
+        });
+        if (alephResp.ok) {
+          const alephData = await alephResp.json();
+          if (alephData?.telemetry) {
+            alephTelemetry = alephData.telemetry;
+            hardwareReceipt = alephData.telemetry.hardware_receipt || null;
+          }
+        }
+      } catch (alephErr) {
+        console.warn("Aleph-1 live QPU note:", alephErr);
+      }
     }
 
     // Active Selected Primary Evaluation
-    const pMalignantPrimary = isClassicalPrimary ? pMalignant_cx01 : (execution_mode === "real_ibm_qpu" ? pMalignant_aleph1 : pMalignant_transfinite1);
-    const predictionLabel = pMalignantPrimary >= 0.5 ? "Malignant" : "Benign";
-    const confidence = (predictionLabel === "Malignant" ? pMalignantPrimary : (1.0 - pMalignantPrimary)) * 100;
-    const primaryRiskData = computeCalibratedRisk(pMalignantPrimary, morphometricIndex, b);
-
-    const latencyMs = performance.now() - t0;
-    const isConcordant = label_cx01 === label_transfinite1;
-
-    const dualComparison = {
-      consensus: isConcordant ? "CONCORDANT" : "DIVERGENT",
-      consensus_summary: isConcordant
-        ? `Both CX-01 and Transfinite-1 independently concord on ${predictionLabel.toUpperCase()} assessment.`
-        : `Divergence detected: Quantum simulator Transfinite-1 identified non-linear epistasis boundary deviations.`,
-      cx_01: {
-        engine: "CX-01",
-        type: "Classical Baseline (SVM-RBF + XGBoost)",
-        prediction_label: label_cx01,
-        confidence: parseFloat(conf_cx01.toFixed(1)),
-        risk_score: parseFloat(riskData_cx01.compositeRiskScore.toFixed(1)),
-        risk_tag: riskData_cx01.riskTag,
-        risk_tier: riskData_cx01.riskTier,
-        severity: riskData_cx01.severity,
-        iac_category: riskData_cx01.iacCategory,
-        rom_estimate: riskData_cx01.romEstimate,
-        malignancy_prob: parseFloat((pMalignant_cx01 * 100).toFixed(1)),
-        latency_ms: latency_cx01,
-        architecture: "30-Feature Regularized Hyperplane",
-        shap_attributions: classicalAttributions
-      },
-      transfinite_1: {
-        engine: "Transfinite-1",
-        type: "Quantum Hybrid Simulator (ZZ Feature Map + VQC)",
-        prediction_label: label_transfinite1,
-        confidence: parseFloat(conf_transfinite1.toFixed(1)),
-        risk_score: parseFloat(riskData_transfinite1.compositeRiskScore.toFixed(1)),
-        risk_tag: riskData_transfinite1.riskTag,
-        risk_tier: riskData_transfinite1.riskTier,
-        severity: riskData_transfinite1.severity,
-        iac_category: riskData_transfinite1.iacCategory,
-        rom_estimate: riskData_transfinite1.romEstimate,
-        malignancy_prob: parseFloat((pMalignant_transfinite1 * 100).toFixed(1)),
-        quantum_expectation: parseFloat(quantumExpectation.toFixed(4)),
-        latency_ms: latency_transfinite1,
-        architecture: "8-Qubit ZZ Pauli Tensor Map",
-        shap_attributions: quantumAttributions
-      }
-    };
+    const primaryTelemetry = isClassicalPrimary
+      ? cxTelemetry
+      : (execution_mode === "real_ibm_qpu" && alephTelemetry ? alephTelemetry : tfTelemetry);
 
     const activeEngineName = isClassicalPrimary
       ? "CX-01"
       : (execution_mode === "real_ibm_qpu" ? "Aleph-1" : "Transfinite-1");
+
+    const shapAttributions = isClassicalPrimary ? classicalAttributions : quantumAttributions;
+
+    const latencyMs = performance.now() - t0;
+    const isConcordant = cxTelemetry.prediction_label === tfTelemetry.prediction_label;
+
+    const dualComparison = {
+      consensus: isConcordant ? "CONCORDANT" : "DIVERGENT",
+      consensus_summary: isConcordant
+        ? `Both CX-01 and Transfinite-1 independently concord on ${primaryTelemetry.prediction_label.toUpperCase()} assessment.`
+        : `Divergence detected: Quantum simulator Transfinite-1 identified non-linear epistasis boundary deviations.`,
+      cx_01: {
+        engine: "CX-01",
+        type: "Classical Baseline (SVM-RBF + XGBoost)",
+        prediction_label: cxTelemetry.prediction_label,
+        confidence: parseFloat(Number(cxTelemetry.confidence_percentage ?? 70.0).toFixed(1)),
+        risk_score: parseFloat(Number(cxTelemetry.composite_risk_score ?? 50.0).toFixed(1)),
+        risk_tag: cxTelemetry.risk_tag || "MODERATE_RISK",
+        risk_tier: cxTelemetry.risk_tier || "Moderate Risk",
+        severity: cxTelemetry.severity || "moderate",
+        iac_category: cxTelemetry.iac_category || "IAC Category 3 (Atypical)",
+        rom_estimate: cxTelemetry.rom_estimate || "15% - 50%",
+        malignancy_prob: parseFloat(Number(cxTelemetry.calibrated_malignancy_prob ?? 50.0).toFixed(1)),
+        latency_ms: parseFloat(Number(cxTelemetry.latency_ms ?? 14.5).toFixed(2)),
+        architecture: "30-Feature Regularized Hyperplane + Tree Ensemble",
+        individual_models: cxTelemetry.individual_models || {},
+        shap_attributions: classicalAttributions,
+      },
+      transfinite_1: {
+        engine: "Transfinite-1",
+        type: "Quantum Hybrid Simulator (ZZ Feature Map + VQC)",
+        prediction_label: tfTelemetry.prediction_label,
+        confidence: parseFloat(Number(tfTelemetry.confidence_percentage ?? 50.0).toFixed(1)),
+        risk_score: parseFloat(Number(tfTelemetry.composite_risk_score ?? 50.0).toFixed(1)),
+        risk_tag: tfTelemetry.risk_tag || "MODERATE_RISK",
+        risk_tier: tfTelemetry.risk_tier || "Moderate Risk",
+        severity: tfTelemetry.severity || "moderate",
+        iac_category: tfTelemetry.iac_category || "IAC Category 3 (Atypical)",
+        rom_estimate: tfTelemetry.rom_estimate || "15% - 50%",
+        malignancy_prob: parseFloat(Number(tfTelemetry.calibrated_malignancy_prob ?? 50.0).toFixed(1)),
+        quantum_expectation: parseFloat(Number(tfTelemetry.quantum_expectation_val ?? 0.0).toFixed(4)),
+        qubit_expectations: tfTelemetry.qubit_expectations || [],
+        latency_ms: parseFloat(Number(tfTelemetry.latency_ms ?? 75.0).toFixed(2)),
+        architecture: "8-Qubit ZZ Pauli Tensor Map + Strongly Entangling Layers",
+        quantum_saliency: quantumAttributions,
+        shap_attributions: quantumAttributions,
+      }
+    };
 
     const responsePayload = {
       success: true,
       engine: activeEngineName,
       model_family,
       execution_mode,
-      prediction_label: predictionLabel,
-      confidence: parseFloat(confidence.toFixed(1)),
-      calibrated_malignancy_prob: parseFloat((pMalignantPrimary * 100).toFixed(1)),
-      composite_risk_score: parseFloat(primaryRiskData.compositeRiskScore.toFixed(1)),
-      risk_tier: primaryRiskData.riskTier,
-      risk_tag: primaryRiskData.riskTag,
-      severity: primaryRiskData.severity,
-      iac_category: primaryRiskData.iacCategory,
-      rom_estimate: primaryRiskData.romEstimate,
-      clinical_action: primaryRiskData.clinicalAction,
-      morphology_summary: primaryRiskData.morphSummary,
-      morphometric_index: parseFloat(morphometricIndex.toFixed(1)),
-      in_overlap_zone: primaryRiskData.inOverlap,
-      quantum_expectation: parseFloat(quantumExpectation.toFixed(4)),
+      prediction_label: primaryTelemetry.prediction_label,
+      confidence: parseFloat(Number(primaryTelemetry.confidence_percentage ?? 50.0).toFixed(1)),
+      calibrated_malignancy_prob: parseFloat(Number(primaryTelemetry.calibrated_malignancy_prob ?? 50.0).toFixed(1)),
+      composite_risk_score: parseFloat(Number(primaryTelemetry.composite_risk_score ?? 50.0).toFixed(1)),
+      risk_tier: primaryTelemetry.risk_tier,
+      risk_tag: primaryTelemetry.risk_tag,
+      severity: primaryTelemetry.severity,
+      iac_category: primaryTelemetry.iac_category,
+      rom_estimate: primaryTelemetry.rom_estimate,
+      clinical_action: primaryTelemetry.clinical_action,
+      morphology_summary: primaryTelemetry.morphology_summary,
+      morphometric_index: parseFloat(Number(primaryTelemetry.morphometric_index ?? morphometricIndex).toFixed(1)),
+      in_overlap_zone: primaryTelemetry.composite_risk_score >= 45 && primaryTelemetry.composite_risk_score <= 65,
+      quantum_expectation: parseFloat(Number(tfTelemetry.quantum_expectation_val ?? 0.0).toFixed(4)),
+      qubit_expectations: tfTelemetry.qubit_expectations || [],
+      quantum_saliency: quantumAttributions,
+      individual_models: cxTelemetry.individual_models || {},
       shap_attributions: shapAttributions,
       dimension_details: dimensionDetails,
       hardware_receipt: hardwareReceipt,
@@ -438,12 +333,12 @@ export async function POST(req: NextRequest) {
           disease_type: "breast-cancer",
           model_family,
           execution_mode,
-          quantum_prediction: predictionLabel,
-          quantum_confidence: confidence,
-          classical_prediction: predictionLabel,
-          classical_confidence: confidence,
-          risk_level: primaryRiskData.riskTag,
-          risk_score: primaryRiskData.compositeRiskScore,
+          quantum_prediction: primaryTelemetry.prediction_label,
+          quantum_confidence: primaryTelemetry.confidence_percentage,
+          classical_prediction: cxTelemetry.prediction_label,
+          classical_confidence: cxTelemetry.confidence_percentage,
+          risk_level: primaryTelemetry.risk_tag,
+          risk_score: primaryTelemetry.composite_risk_score,
           morphometric_index: morphometricIndex,
           top_driver: shapAttributions[0]?.featureName || "Cell Size",
           quantum_execution_time_ms: Math.round(latencyMs),
@@ -451,7 +346,7 @@ export async function POST(req: NextRequest) {
           gate_attributions: shapAttributions,
           shap_attributions: shapAttributions,
           hardware_receipt: hardwareReceipt,
-          clinical_note: `${primaryRiskData.riskTier} - ${primaryRiskData.clinicalAction}`
+          clinical_note: `${primaryTelemetry.risk_tier} - ${primaryTelemetry.clinical_action}`
         });
       }
     } catch (dbErr) {

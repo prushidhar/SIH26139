@@ -61,7 +61,7 @@ export default function ModelAnalysisPage() {
 
     try {
       setIsRefreshing(true);
-      const storedFeedback = localStorage.getItem("quantumx_model_feedback");
+      const storedFeedback = localStorage.getItem("quresight_model_feedback");
       const feedbackMap: Record<string, { status: "correct" | "incorrect"; actualGroundTruth?: "High" | "Low" }> =
         storedFeedback ? JSON.parse(storedFeedback) : {};
 
@@ -121,7 +121,7 @@ export default function ModelAnalysisPage() {
           };
         }
       });
-      localStorage.setItem("quantumx_model_feedback", JSON.stringify(map));
+      localStorage.setItem("quresight_model_feedback", JSON.stringify(map));
     }
   };
 
@@ -155,7 +155,7 @@ export default function ModelAnalysisPage() {
       const resetList = screenings.map((s) => ({ ...s, status: "pending" as const, actualGroundTruth: undefined }));
       saveFeedbackMap(resetList);
       if (typeof window !== "undefined") {
-        localStorage.removeItem("quantumx_model_feedback");
+        localStorage.removeItem("quresight_model_feedback");
       }
     }
   };
@@ -300,7 +300,7 @@ export default function ModelAnalysisPage() {
         <div className="p-4 rounded-xl bg-white border border-hairline space-y-1 shadow-2xs">
           <div className="flex items-center gap-1">
             <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft">Real-Time Accuracy</span>
-            <HelpTooltip text="Percentage of evaluated cases where QuantumX's prediction matched verified medical findings." />
+            <HelpTooltip text="Percentage of evaluated cases where QureSight's prediction matched verified medical findings." />
           </div>
           <div className="font-serif text-2xl sm:text-3xl text-quantum font-light">
             {accuracy !== "—" ? `${accuracy}%` : "—"}
@@ -314,7 +314,7 @@ export default function ModelAnalysisPage() {
         <div className="p-4 rounded-xl bg-white border border-hairline space-y-1 shadow-2xs">
           <div className="flex items-center gap-1">
             <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft">Clinical Precision</span>
-            <HelpTooltip text="Ratio of true high-risk cases among all cases QuantumX flagged as high risk (minimizes false alarms)." />
+            <HelpTooltip text="Ratio of true high-risk cases among all cases QureSight flagged as high risk (minimizes false alarms)." />
           </div>
           <div className="font-serif text-2xl sm:text-3xl text-ink font-light">
             {precision !== "—" ? `${precision}%` : "—"}
@@ -564,7 +564,7 @@ export default function ModelAnalysisPage() {
               <h2 className="font-serif text-base font-medium text-ink">
                 Continuous Clinical Validation Feed
               </h2>
-              <HelpTooltip text="Confirm whether QuantumX's predictions match real physician diagnoses. If left unverified, you can click 'Auto-Evaluate' to verify using medical benchmark thresholds." />
+              <HelpTooltip text="Confirm whether QureSight's predictions match real physician diagnoses. If left unverified, you can click 'Auto-Evaluate' to verify using medical benchmark thresholds." />
             </div>
             <p className="text-[11px] text-ink-soft">
               Ruthlessly evaluate active session screening predictions to dynamically update live metrics.

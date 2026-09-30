@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://quantumx-health.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://quresight.vercel.app";
 
 export const viewport: Viewport = {
   themeColor: "#1E3A8A",
@@ -33,11 +33,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "QuantumX — Hybrid Quantum-Classical ML for Early Disease Detection",
-    template: "%s | QuantumX",
+    default: "QureSight — Hybrid Quantum-Classical ML for Early Disease Detection",
+    template: "%s | QureSight",
   },
   description:
-    "QuantumX applies hybrid quantum-classical machine learning to biomedical and multi-omics data, featuring geometric advantage pre-screening (s_K), variational quantum classifiers, and gate-level causal explainability.",
+    "QureSight applies hybrid quantum-classical machine learning to biomedical and multi-omics data, featuring geometric advantage pre-screening (s_K), variational quantum classifiers, and gate-level causal explainability.",
   keywords: [
     "Quantum Machine Learning",
     "Hybrid Quantum-Classical ML",
@@ -50,31 +50,31 @@ export const metadata: Metadata = {
     "PennyLane",
     "Qiskit",
     "Explainable AI",
-    "QXplain",
+    "QureExplain",
     "Gate Ablation Saliency",
     "Biomedical AI Diagnostics",
     "SIH26139",
   ],
-  authors: [{ name: "QuantumX Engineering & Research Team" }],
-  creator: "QuantumX",
-  publisher: "QuantumX",
-  applicationName: "QuantumX Diagnostic Platform",
+  authors: [{ name: "QureSight Engineering & Research Team" }],
+  creator: "QureSight",
+  publisher: "QureSight",
+  applicationName: "QureSight Diagnostic Platform",
   category: "Healthcare & Artificial Intelligence",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "QuantumX — Hybrid Quantum-Classical ML for Early Disease Detection",
+    title: "QureSight — Hybrid Quantum-Classical ML for Early Disease Detection",
     description:
       "Enterprise hybrid quantum-classical diagnostic platform evaluating 8-qubit VQCs against XGBoost and SVM baselines on identical patient splits.",
     url: siteUrl,
-    siteName: "QuantumX Platform",
+    siteName: "QureSight Platform",
     images: [
       {
         url: "/assets/dashboard.jpg",
         width: 1200,
         height: 630,
-        alt: "QuantumX Clinical Diagnostic Dashboard",
+        alt: "QureSight Clinical Diagnostic Dashboard",
       },
     ],
     locale: "en_US",
@@ -82,11 +82,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "QuantumX — Hybrid Quantum-Classical ML for Early Disease Detection",
+    title: "QureSight — Hybrid Quantum-Classical ML for Early Disease Detection",
     description:
       "Enterprise hybrid quantum-classical diagnostic platform with geometric advantage pre-screening and gate ablation explainability.",
     images: ["/assets/dashboard.jpg"],
-    creator: "@QuantumX_AI",
+    creator: "@QureSight_AI",
   },
   robots: {
     index: true,
@@ -110,12 +110,12 @@ const jsonLdSchema = {
   "@graph": [
     {
       "@type": "SoftwareApplication",
-      "name": "QuantumX",
+      "name": "QureSight",
       "applicationCategory": "HealthApplication",
       "operatingSystem": "Web Browser",
       "url": siteUrl,
       "description":
-        "QuantumX applies hybrid quantum-classical machine learning to biomedical and multi-omics data for high-confidence early disease detection.",
+        "QureSight applies hybrid quantum-classical machine learning to biomedical and multi-omics data for high-confidence early disease detection.",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -126,13 +126,13 @@ const jsonLdSchema = {
         "8-Qubit Variational Quantum Circuit (VQC) with Data Re-Uploading",
         "Dual-Path Hybrid Optimization (PyTorch Autograd & Parameter-Shift)",
         "Tri-Model Benchmark Verification Protocol (BVP)",
-        "Gate-Level Quantum Causal Saliency (QXplain)",
+        "Gate-Level Quantum Causal Saliency (QureExplain)",
         "Cryptographically Signed Quantum Diagnostic Receipts",
       ],
     },
     {
       "@type": "MedicalWebPage",
-      "name": "QuantumX Early Disease Detection Platform",
+      "name": "QureSight Early Disease Detection Platform",
       "url": siteUrl,
       "description":
         "Research and clinical benchmarking platform combining classical ensemble baselines with parameterized quantum circuits on biomedical datasets.",

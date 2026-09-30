@@ -86,7 +86,7 @@ export default function AccountPage() {
         const base64 = reader.result as string;
         setUserAvatar(base64);
         if (typeof window !== "undefined") {
-          localStorage.setItem("quantumx_user_avatar", base64);
+          localStorage.setItem("quresight_user_avatar", base64);
         }
         try {
           await AuthService.updateProfile({ profileImageUrl: base64 });
@@ -103,9 +103,9 @@ export default function AccountPage() {
     setIsSaving(true);
 
     if (typeof window !== "undefined") {
-      localStorage.setItem("quantumx_user_name", userName);
-      localStorage.setItem("quantumx_user_email", userEmail);
-      localStorage.setItem("quantumx_backend", preferredBackend);
+      localStorage.setItem("quresight_user_name", userName);
+      localStorage.setItem("quresight_user_email", userEmail);
+      localStorage.setItem("quresight_backend", preferredBackend);
     }
 
     try {
@@ -226,13 +226,13 @@ export default function AccountPage() {
 
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-ink-soft">
               <span className="flex items-center gap-1">
-                <Mail size={12} className="text-ink-soft/70" /> {userEmail || "practitioner@quantumx.ai"}
+                <Mail size={12} className="text-ink-soft/70" /> {userEmail || "practitioner@quresight.ai"}
               </span>
               <span className="flex items-center gap-1">
                 <Clock size={12} className="text-ink-soft/70" /> Member since {memberSinceFormatted}
               </span>
               <span className="flex items-center gap-1">
-                <KeyRound size={12} className="text-ink-soft/70" /> ID: #{userProfile?.id ? `QX-${userProfile.id}` : "QX-USR-101"}
+                <KeyRound size={12} className="text-ink-soft/70" /> ID: #{userProfile?.id ? `QS-${userProfile.id}` : "QS-USR-101"}
               </span>
             </div>
 
@@ -250,7 +250,7 @@ export default function AccountPage() {
                   onClick={async () => {
                     setUserAvatar(null);
                     if (typeof window !== "undefined") {
-                      localStorage.removeItem("quantumx_user_avatar");
+                      localStorage.removeItem("quresight_user_avatar");
                     }
                     try {
                       await AuthService.updateProfile({ profileImageUrl: null });
@@ -322,10 +322,8 @@ export default function AccountPage() {
               </div>
 
               <div
-                onClick={() => {
-                  alert("Aleph-1 (Physical 127-Qubit IBM Quantum QPU) is reserved for enterprise clinical partner clusters. Switch to Transfinite-1 for instant diagnostic inference.");
-                }}
-                className={`p-3.5 rounded-xl border cursor-not-allowed transition-all space-y-1.5 ${
+                onClick={() => setPreferredBackend("ibmq_eagle")}
+                className={`p-3.5 rounded-xl border cursor-pointer transition-all space-y-1.5 ${
                   preferredBackend === "ibmq_eagle"
                     ? "bg-cream border-quantum/60 shadow-xs ring-1 ring-quantum/30"
                     : "bg-cream/40 hover:bg-cream border-hairline opacity-85"
@@ -335,15 +333,22 @@ export default function AccountPage() {
                   <span className="font-serif text-sm font-medium text-ink flex items-center gap-1.5">
                     <Cpu size={14} className="text-quantum" /> Aleph-1 (IBM Quantum Hardware)
                   </span>
-                  <span className="text-[9px] font-mono text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">
-                    Clinical Cluster Locked
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded border ${
+                      preferredBackend === "ibmq_eagle"
+                        ? "text-emerald-700 bg-emerald-50 border-emerald-200 font-bold"
+                        : "text-amber-700 bg-amber-50 border-amber-200"
+                    }`}>
+                      {preferredBackend === "ibmq_eagle" ? "Active" : "Available"}
+                    </span>
+                    {preferredBackend === "ibmq_eagle" && <CheckCircle2 size={14} className="text-quantum" />}
+                  </div>
                 </div>
                 <p className="text-[11px] text-ink-soft font-light leading-snug">
                   127-Qubit superconducting Eagle QPU operating at 15 mK dilution temperature (Cloud QPU bridge).
                 </p>
-                <div className="flex items-center gap-2 pt-0.5 text-[10px] font-mono text-amber-700">
-                  <Lock size={10} /> Requires Institutional Partner License
+                <div className="flex items-center gap-2 pt-0.5 text-[10px] font-mono text-emerald-700">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" /> Superconducting QPU • Online
                 </div>
               </div>
             </div>
@@ -431,7 +436,7 @@ export default function AccountPage() {
           <div>
             <h3 className="font-serif text-base font-medium text-ink">Authorized Clinical Pipelines</h3>
             <p className="text-xs text-ink-soft font-light">
-              Scientific protocol validation status across QuantumX diagnostic models.
+              Scientific protocol validation status across QureSight diagnostic models.
             </p>
           </div>
           <span className="px-2.5 py-1 rounded-full text-[10px] font-mono bg-emerald-50 text-emerald-800 border border-emerald-200">

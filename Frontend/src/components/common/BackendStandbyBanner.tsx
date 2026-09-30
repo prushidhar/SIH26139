@@ -26,7 +26,7 @@ export default function BackendStandbyBanner() {
   const [isDismissed, setIsDismissed] = useState(() => {
     if (typeof window !== "undefined") {
       try {
-        return sessionStorage.getItem("quantumx_standby_dismissed") === "true";
+        return sessionStorage.getItem("quresight_standby_dismissed") === "true";
       } catch {
         return false;
       }
@@ -48,7 +48,7 @@ export default function BackendStandbyBanner() {
       const timer = setTimeout(() => {
         setIsDismissed(true);
         try {
-          sessionStorage.setItem("quantumx_standby_dismissed", "true");
+          sessionStorage.setItem("quresight_standby_dismissed", "true");
         } catch {}
       }, 1000);
       return () => clearTimeout(timer);
