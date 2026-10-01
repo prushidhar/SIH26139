@@ -36,9 +36,9 @@ export default function ModelArenaPage() {
         },
         {
           id: "densenet_vqc_6q",
-          name: "DenseNet-121 + 6-Qubit Hybrid VQC",
+          name: "Hybrid DenseNet + Quantum",
           family: "quantum",
-          architecture: "DenseNet Features + PennyLane 6-Qubit StronglyEntangling (L=6)",
+          architecture: "DenseNet Features + Quantum Circuit (6-Qubit)",
           accuracy: "87.00 ± 1.10%",
           auroc: 0.9300,
           f1_score: 0.8650,
@@ -227,9 +227,9 @@ export default function ModelArenaPage() {
       },
       {
         id: "vqc_8q",
-        name: "Transfinite-1 (8-Qubit VQC)",
+        name: "Quantum VQC (8-Qubit)",
         family: "quantum",
-        architecture: "8 Qubits • StronglyEntanglingLayers (2 Layers)",
+        architecture: "8 Qubits • Quantum Circuit (2 Layers)",
         accuracy: "87.87 ± 0.85%",
         auroc: 0.9850,
         f1_score: 0.8313,
@@ -242,9 +242,9 @@ export default function ModelArenaPage() {
       },
       {
         id: "q_kernel",
-        name: "Havlíček ZZ-Quantum Kernel",
+        name: "Quantum Kernel",
         family: "quantum",
-        architecture: "8 Qubits • Havlíček Entangled ZZ Kernel",
+        architecture: "8 Qubits • Quantum Kernel",
         accuracy: "86.45 ± 1.10%",
         auroc: 0.9812,
         f1_score: 0.8240,
@@ -257,7 +257,7 @@ export default function ModelArenaPage() {
       },
       {
         id: "aleph_1_ibm",
-        name: "Aleph-1 (Real IBM QPU)",
+        name: "IBM Quantum (QPU)",
         family: "quantum",
         architecture: "IBM Quantum Eagle r3 (127-Qubit Superconducting)",
         accuracy: "82.50 ± 2.40%",
@@ -266,7 +266,7 @@ export default function ModelArenaPage() {
         sensitivity: "76.40%",
         specificity: "86.80%",
         runtime_ms: 1240.0,
-        resource_cost: "1024 Shots / ZNE Mitigation",
+        resource_cost: "1024 Shots",
         provenance: "Hardware Run Receipt",
         badge: "Physical QPU",
       },
@@ -318,13 +318,13 @@ export default function ModelArenaPage() {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-ink-soft">
             <Swords className="w-3.5 h-3.5 text-quantum" />
-            <span>QureSight Platform • Phase 04</span>
+            <span>Model Comparison</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1 tracking-tight">
-            Model Arena
+            Model Comparison
           </h1>
           <p className="text-xs sm:text-sm text-ink-soft mt-1">
-            Empirical head-to-head evaluation: Classical baselines against Quantum variational circuits and kernels.
+            Compare classical and quantum models side by side.
           </p>
         </div>
 
@@ -333,7 +333,7 @@ export default function ModelArenaPage() {
             href="/feasibility"
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-ink text-parchment hover:bg-ink/90 text-xs font-medium transition-colors"
           >
-            <span>Proceed to Quantum Feasibility</span>
+            <span>Next: Feasibility Check</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
@@ -352,8 +352,8 @@ export default function ModelArenaPage() {
           >
             <option value="breast_cancer">Wisconsin Diagnostic Breast Cancer (WDBC)</option>
             <option value="heart_disease">UCI Cleveland Heart Disease</option>
-            <option value="cardiomegaly_cxr">CheXpert Cardiomegaly Radiography (Decoodt et al. 2023)</option>
-            <option value="ilpd_liver">Indian Liver Patient Dataset (ILPD / Donaire et al. 2026)</option>
+            <option value="cardiomegaly_cxr">CheXpert Cardiomegaly Radiography</option>
+            <option value="ilpd_liver">Indian Liver Patient Dataset (ILPD)</option>
           </select>
         </div>
 
@@ -376,7 +376,7 @@ export default function ModelArenaPage() {
           <div className="flex items-center justify-between mb-4">
             <span className="text-xs font-mono uppercase tracking-wider text-ink-soft flex items-center gap-1.5">
               <Scale className="w-4 h-4 text-quantum" />
-              Interactive Head-to-Head Differential
+              Side-by-Side Comparison
             </span>
             <span className="text-xs font-mono text-ink-soft">
               {candA.name} vs. {candB.name}

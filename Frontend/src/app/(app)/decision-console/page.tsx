@@ -22,12 +22,12 @@ export default function DecisionConsolePage() {
       setError("Unable to connect to live arbitration router. Displaying calibrated routing policies.");
       setData({
         success: true,
-        router_status: "ONLINE & RE-CALIBRATED",
-        arbitration_protocol: "Adaptive Shannon Entropy Dynamic Router (H-Protocol v2.4)",
+        router_status: "Active",
+        arbitration_protocol: "Adaptive Confidence Router",
         entropy_threshold_bits: 0.85,
         operational_tiers: [
           {
-            tier: "Tier 1: High Confidence Fastpath",
+            tier: "Tier 1: High Confidence — Use classical model",
             condition: "Shannon Entropy H < 0.65 bits (P > 0.85 or P < 0.15)",
             action: "Dispatch Classical Engine (SVM / XGBoost)",
             latency_guarantee: "< 2.5 ms",
@@ -35,7 +35,7 @@ export default function DecisionConsolePage() {
             badge: "Sub-millisecond",
           },
           {
-            tier: "Tier 2: Dual Verification",
+            tier: "Tier 2: Medium Confidence — Verify with both models",
             condition: "0.65 ≤ H < 0.85 bits (Intermediate boundary cases)",
             action: "Run Parallel Classical + Quantum VQC; Compute Consensus Concordance",
             latency_guarantee: "< 45 ms",
@@ -43,18 +43,18 @@ export default function DecisionConsolePage() {
             badge: "Concordance Verified",
           },
           {
-            tier: "Tier 3: Hilbert Space Resolving",
+            tier: "Tier 3: Low Confidence — Engage quantum model + clinical review",
             condition: "H ≥ 0.85 bits (Near-decision boundary / High ambiguity)",
-            action: "Engage Hybrid Quantum Hilbert Space Embedding + Flag for Clinical Review",
+            action: "Run quantum model and flag for review",
             latency_guarantee: "< 65 ms",
             cohort_coverage: "4.8% of Ingested Cases",
             badge: "Clinical Escalate",
           },
         ],
         safety_guardrails: [
-          "Zero Automated Negative Release: Predictions with H >= 0.85 require secondary clinician confirmation.",
-          "Real QPU Hardware Fallback: If cloud QPU latency exceeds 5000 ms, system seamlessly cascades to PennyLane statevector.",
-          "Audit Trail Immutability: Every routed sample produces a cryptographically signed execution receipt.",
+          "Safety Review Protocol: Predictions with H >= 0.85 require secondary clinician confirmation.",
+          "If quantum backend is slow, automatically falls back to simulator.",
+          "Every routed sample produces a logged audit trail.",
         ],
         live_telemetry_stats: {
           total_screenings_routed: 1842,
@@ -80,13 +80,13 @@ export default function DecisionConsolePage() {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-ink-soft">
             <Cpu className="w-3.5 h-3.5 text-quantum" />
-            <span>QureSight Platform • Phase 08</span>
+            <span>Routing & Safety</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1 tracking-tight">
             Decision Console
           </h1>
           <p className="text-xs sm:text-sm text-ink-soft mt-1">
-            Transform empirical evidence into transparent model-selection protocols, automated Shannon entropy routing, and clinical safety gates.
+            See how QureSight routes predictions between classical and quantum models based on confidence levels.
           </p>
         </div>
 
@@ -95,7 +95,7 @@ export default function DecisionConsolePage() {
             href="/vault"
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-ink text-parchment hover:bg-ink/90 text-xs font-medium transition-colors"
           >
-            <span>Proceed to Experiment Vault</span>
+            <span>Next: Data Vault</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
@@ -122,14 +122,14 @@ export default function DecisionConsolePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FindingPanel
               title="Mathematical Routing Equation"
-              finding="The router calculates H(P) = -[P*log2(P) + (1-P)*log2(1-P)]. When H < 0.65 bits, classical confidence is >=85%, making quantum dispatch redundant. When H >= 0.85 bits, classical certainty is low, and quantum Hilbert space resolution is engaged."
+              finding="The router calculates H(P) = -[P*log2(P) + (1-P)*log2(1-P)]. When H < 0.65 bits, the classical model handles the prediction. When H >= 0.85 bits, the quantum model is engaged."
               significance="Optimal Cost & Latency"
               sourceNote="Adaptive Router Formalization"
               badge="ALGORITHMIC LOGIC"
             />
             <FindingPanel
-              title="Zero Automated Negative Release Protocol"
-              finding="In clinical high-entropy cases, the system mandates secondary human review and will never generate an automated negative screening report without dual concordance agreement."
+              title="Safety Review Protocol"
+              finding="In low confidence cases, the system mandates secondary human review and will never generate an automated negative screening report without dual model agreement."
               significance="Clinical Safety Standard"
               sourceNote="QureSight Clinical Safety Board"
               badge="SAFETY GOVERNANCE"

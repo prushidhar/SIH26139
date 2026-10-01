@@ -92,8 +92,8 @@ export default function BenchmarksPage() {
     { trainingSplit: 100, sampleCount: 569, classicalSvm: 98.24, classicalXgBoost: 95.61, quantumVqc: 87.87, advantageMargin: -10.37, statisticalSignificance: "p < 1e-7 (Classical Decisive)" },
   ]);
   const [qasLeaderboard, setQasLeaderboard] = useState<QasRow[]>([
-    { rank: 1, ansatz: "StronglyEntanglingLayers", layers: 2, qubits: 8, topology: "Circular", gateCount: 48, cnotCount: 16, valAuc: 0.9850, accuracy: 87.87, latencyMs: 46.5 },
-    { rank: 2, ansatz: "Havlíček-ZZ-Kernel", layers: 2, qubits: 8, topology: "Full", gateCount: 64, cnotCount: 28, valAuc: 0.9812, accuracy: 86.45, latencyMs: 58.2 },
+    { rank: 1, ansatz: "Quantum Circuit", layers: 2, qubits: 8, topology: "Circular", gateCount: 48, cnotCount: 16, valAuc: 0.9850, accuracy: 87.87, latencyMs: 46.5 },
+    { rank: 2, ansatz: "Quantum Kernel", layers: 2, qubits: 8, topology: "Full", gateCount: 64, cnotCount: 28, valAuc: 0.9812, accuracy: 86.45, latencyMs: 58.2 },
     { rank: 3, ansatz: "BasicEntanglerLayers", layers: 3, qubits: 8, topology: "Linear", gateCount: 42, cnotCount: 14, valAuc: 0.9740, accuracy: 85.20, latencyMs: 38.1 },
     { rank: 4, ansatz: "RealAmplitudes", layers: 2, qubits: 8, topology: "Circular", gateCount: 36, cnotCount: 16, valAuc: 0.9688, accuracy: 84.60, latencyMs: 32.4 },
     { rank: 5, ansatz: "HardwareEfficient-Qiskit", layers: 1, qubits: 8, topology: "Linear", gateCount: 24, cnotCount: 7, valAuc: 0.9510, accuracy: 82.15, latencyMs: 24.8 },
@@ -139,14 +139,14 @@ export default function BenchmarksPage() {
           <div className="flex items-center gap-2 mb-1">
             <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-[11px] font-mono uppercase tracking-widest text-emerald-600 dark:text-emerald-400 font-bold">
-              100% Real Evaluation Telemetry &bull; MLflow Verified
+              Verified Benchmarks
             </span>
           </div>
           <h1 className="font-serif text-3xl sm:text-4xl font-light text-foreground tracking-tight">
-            Scientific Benchmark & Telemetry Observatory
+            Model Benchmarks
           </h1>
           <p className="text-xs text-muted-foreground font-light max-w-3xl pt-1">
-            Grounded strictly in verified cross-validation runs on Wisconsin Diagnostic Breast Cancer (WDBC) and Cleveland Cardiology datasets. Zero synthetic or hardcoded marketing claims.
+            Performance metrics from cross-validated runs on verified clinical datasets.
           </p>
         </div>
 
@@ -172,7 +172,7 @@ export default function BenchmarksPage() {
             </div>
             <h3 className="text-xs font-bold text-foreground">PennyLaneAI / pennylane</h3>
             <p className="text-[11px] text-muted-foreground leading-relaxed">
-              Foundational differentiable quantum programming: parameter-shift rule gradients, <strong>StronglyEntanglingLayers</strong>, and statevector QNodes.
+              Foundational quantum programming framework for model development.
             </p>
           </div>
           <div className="flex items-center gap-1.5 text-[9px] font-mono text-indigo-600 dark:text-indigo-400 pt-1 border-t border-indigo-500/10">
@@ -192,7 +192,7 @@ export default function BenchmarksPage() {
             </div>
             <h3 className="text-xs font-bold text-foreground">qiskit-community / qiskit-machine-learning</h3>
             <p className="text-[11px] text-muted-foreground leading-relaxed">
-              Hardware-grade quantum kernels & QPU execution: <strong>FidelityQuantumKernel</strong>, <strong>QSVC</strong>, Havlíček ZZ-feature maps, and Qiskit Runtime.
+              Hardware-grade tools for compiling and executing quantum models.
             </p>
           </div>
           <div className="flex items-center gap-1.5 text-[9px] font-mono text-purple-600 dark:text-purple-400 pt-1 border-t border-purple-500/10">
@@ -212,7 +212,7 @@ export default function BenchmarksPage() {
             </div>
             <h3 className="text-xs font-bold text-foreground">Quantara (sofiya132)</h3>
             <p className="text-[11px] text-muted-foreground leading-relaxed">
-              Adaptive model router via <strong>Shannon entropy arbitration</strong>, latency cost models, and UCI HCV Hepatitis C 12-biomarker reference panel.
+              Adaptive model router for efficient resource allocation.
             </p>
           </div>
           <div className="flex items-center gap-1.5 text-[9px] font-mono text-quantum pt-1 border-t border-quantum/10">
@@ -232,7 +232,7 @@ export default function BenchmarksPage() {
             </div>
             <h3 className="text-xs font-bold text-foreground">AstroVall02 / QML Early Detection</h3>
             <p className="text-[11px] text-muted-foreground leading-relaxed">
-              Disease-specific <strong>4-qubit VQC architectures</strong> evaluated on WDBC Breast Cytopathology (N=569) and UCI Cleveland Heart Disease (N=303).
+              Disease-specific quantum architectures evaluated on clinical datasets.
             </p>
           </div>
           <div className="flex items-center gap-1.5 text-[9px] font-mono text-emerald-600 dark:text-emerald-400 pt-1 border-t border-emerald-500/10">
@@ -246,13 +246,13 @@ export default function BenchmarksPage() {
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
               <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-amber-500/20 text-amber-600 dark:text-amber-400">
-                Imaging Pillar (2023)
+                Imaging Pillar
               </span>
-              <span className="text-[9px] font-mono text-muted-foreground">Peer-Reviewed DOI</span>
+              <span className="text-[9px] font-mono text-muted-foreground">Peer-Reviewed</span>
             </div>
-            <h3 className="text-xs font-bold text-foreground">Decoodt et al. / CXR QML</h3>
+            <h3 className="text-xs font-bold text-foreground">Chest X-Ray Analysis</h3>
             <p className="text-[11px] text-muted-foreground leading-relaxed">
-              Hybrid classical-quantum transfer learning: <strong>DenseNet-121 + PennyLane VQC</strong> for cardiomegaly detection on frontal chest X-rays.
+              Hybrid classical-quantum models for chest X-ray analysis.
             </p>
           </div>
           <div className="flex items-center gap-1.5 text-[9px] font-mono text-amber-600 dark:text-amber-400 pt-1 border-t border-amber-500/10">
@@ -266,13 +266,13 @@ export default function BenchmarksPage() {
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
               <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-teal-500/20 text-teal-600 dark:text-teal-400">
-                Liver QML Pillar (2026)
+                Liver QML Pillar
               </span>
               <span className="text-[9px] font-mono text-muted-foreground">EAAI Journal</span>
             </div>
-            <h3 className="text-xs font-bold text-foreground">LauraMDonaire / QML-Liver</h3>
+            <h3 className="text-xs font-bold text-foreground">Liver Disease Prediction</h3>
             <p className="text-[11px] text-muted-foreground leading-relaxed">
-              Hybrid classical-quantum optimization: <strong>2-to-4 Qubit VQC</strong> for liver disease prediction on the Indian Liver Patient Dataset (ILPD).
+              Optimized quantum circuits for liver disease prediction.
             </p>
           </div>
           <div className="flex items-center gap-1.5 text-[9px] font-mono text-teal-600 dark:text-teal-400 pt-1 border-t border-teal-500/10">
@@ -317,12 +317,11 @@ export default function BenchmarksPage() {
         <AlertTriangle className="h-5 w-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
         <div className="space-y-1 text-xs text-muted-foreground">
           <p className="font-semibold text-foreground text-sm">
-            Scientific Reality: Classical SVM Wins on Full Tabular Data, Quantum Dominates in Scarce Clinical Regimes
+            Model Performance Breakdown
           </p>
           <p className="leading-relaxed">
-            Unlike competitor presentations claiming unrealistic &gt;99% quantum accuracy on 30-feature tabular tables, QureSight follows scientific integrity: 
             Classical <strong className="text-foreground">SVM-RBF reaches 98.24%</strong> on the full dataset, outperforming our 8-qubit VQC (<strong className="text-foreground">87.87%</strong>). 
-            However, when clinical data is restricted to <strong className="text-foreground">15% scarce samples</strong> (rare pathology cohorts), classical SVM overfits and collapses to <strong className="text-amber-600 dark:text-amber-400">68.2%</strong> while QureSight holds <strong className="text-emerald-600 dark:text-emerald-400">76.5% (+8.3% Quantum Advantage)</strong>.
+            However, when clinical data is restricted to <strong className="text-foreground">15% scarce samples</strong>, classical SVM drops to <strong className="text-amber-600 dark:text-amber-400">68.2%</strong> while quantum models hold <strong className="text-emerald-600 dark:text-emerald-400">76.5%</strong>.
           </p>
         </div>
       </div>
@@ -339,7 +338,7 @@ export default function BenchmarksPage() {
           }`}
         >
           <Sparkles size={14} />
-          <span>The 15% Scarce-Data Quantum Advantage</span>
+          <span>Low-Data Performance</span>
           <span className="px-1.5 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold">
             +8.3% Margin
           </span>
@@ -368,7 +367,7 @@ export default function BenchmarksPage() {
           }`}
         >
           <Layers size={14} />
-          <span>100-Circuit Architecture Search (QAS)</span>
+          <span>Architecture Search</span>
         </button>
 
         <button
@@ -381,7 +380,7 @@ export default function BenchmarksPage() {
           }`}
         >
           <Clock size={14} />
-          <span>Latency & Hardware Footprint</span>
+          <span>Speed & Resources</span>
         </button>
       </div>
 
@@ -431,7 +430,7 @@ export default function BenchmarksPage() {
                 <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">
                   Geometric Difference (s_K)
                 </span>
-                <HelpTooltip text="s_K > 2.0 proves the quantum feature map projects data into an orthogonal subspace inaccessible to classical polynomial kernels." />
+                <HelpTooltip text="Measures the separation capability of the quantum model compared to classical baselines." />
               </div>
               <div className="font-serif text-3xl font-light text-foreground">
                 2.079
@@ -674,7 +673,7 @@ export default function BenchmarksPage() {
             </div>
 
             <div className="p-4 bg-muted/10 border-t border-border text-xs text-muted-foreground leading-relaxed">
-              <strong>Engineering Conclusion:</strong> StronglyEntanglingLayers with circular topology and depth=2 achieved the optimal Pareto frontier between 2-qubit CNOT entanglement cost (16 CNOTs) and validation AUROC (0.9850). Increasing depth to 3 caused barren plateau gradient dispersion.
+              <strong>Engineering Conclusion:</strong> StronglyEntanglingLayers with circular topology and depth=2 achieved the optimal Pareto frontier between 2-qubit CNOT entanglement cost (16 CNOTs) and validation AUROC (0.9850). Increasing depth to 3 caused training instability at higher depths.
             </div>
           </div>
         </motion.div>
@@ -1060,7 +1059,7 @@ export default function BenchmarksPage() {
 
           {/* 4-Qubit Manifold & Clinical Sensitivities */}
           <div className="p-5 rounded-2xl bg-card border border-border shadow-xs space-y-4">
-            <h3 className="font-serif text-base font-medium text-foreground">4-Qubit Latent Manifold & Biomarker Sensitivities</h3>
+            <h3 className="font-serif text-base font-medium text-foreground">Biomarker Sensitivity Analysis</h3>
             <p className="text-xs text-muted-foreground">How 13 clinical features project into PennyLane quantum circuit wires and drive individual qubit expectations</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[

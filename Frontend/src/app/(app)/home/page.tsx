@@ -50,7 +50,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     dataset: "569 Verified Clinical Samples",
     features: "Cell Shape & Texture Analysis",
     target: "Malignant vs Benign",
-    advantage: "Active • 100% Real",
+    advantage: "Active",
     description: "Fine Needle Aspirate (WDBC) 8-qubit cytopathology classification with verified 50-trial cross-validation.",
     route: "/predict/breast-cancer",
     tooltip: "Uses 8-qubit variational quantum circuits with 48 gates and 98.5% parameter efficiency to evaluate cytopathology biopsy cells.",
@@ -64,7 +64,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     dataset: "303 Patient Records (Offline)",
     features: "ECG ST-Waveform & Stress",
     target: "Acute MI & Arrhythmia Consensus",
-    advantage: "Hilbert Space Entangled VQC",
+    advantage: "Quantum-Enhanced",
     description: "12-lead paper ECG image analysis with real-time Grad-CAM localization, cardiac risk scoring, and 8-qubit Transfinite-1 VQC.",
     route: "/predict/heart-disease",
     tooltip: "Live active screening studio.",
@@ -81,7 +81,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     advantage: "Not Accessible (Phase 2)",
     description: "Multi-channel EEG spectral dynamics and neural firing waveforms for early neurodegenerative detection.",
     route: "/predict/neurological",
-    tooltip: "Locked for live demonstration. Offline cross-validation underway to preserve absolute scientific honesty.",
+    tooltip: "Locked for live demonstration. Offline cross-validation underway.",
     status: "locked",
   },
 ];
@@ -289,13 +289,13 @@ export default function HomePage() {
           <div className="space-y-1.5 max-w-2xl">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cream-deep/60 border border-hairline text-[11px] font-mono text-ink-soft">
               <span className="w-1.5 h-1.5 rounded-full bg-quantum" />
-              <span>QureSight Platform • Evidence-Driven Biomedical Intelligence</span>
+              <span>QureSight Dashboard</span>
             </div>
             <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-light text-ink tracking-tight">
-              Investigator Workstation <span className="italic font-normal">({userName})</span>
+              Welcome back, <span className="italic font-normal">{userName}</span>
             </h1>
             <p className="text-ink-soft text-xs sm:text-sm font-light leading-relaxed">
-              Explore the 9-stage scientific pipeline: investigate biomedical cohorts, rank biomarkers, evaluate quantum kernels against classical learners, profile noise feasibility, and inspect multi-criteria evidence matrices.
+              Select a disease module to begin screening, or explore tools to analyze and explain results.
             </p>
           </div>
 
@@ -317,21 +317,21 @@ export default function HomePage() {
 
         {/* 9-Stage Workflow Breadcrumb Strip */}
         <div className="pt-4 mt-5 border-t border-hairline flex items-center justify-between gap-2 overflow-x-auto text-[11px] font-mono text-ink-soft whitespace-nowrap">
-          <Link href="/observatory" className="hover:text-quantum transition-colors">01 Data</Link>
+          <Link href="/observatory" className="hover:text-quantum transition-colors">Data</Link>
           <span>→</span>
-          <Link href="/signal-studio" className="hover:text-quantum transition-colors">02 Signal</Link>
+          <Link href="/signal-studio" className="hover:text-quantum transition-colors">Signal</Link>
           <span>→</span>
-          <Link href="/model-arena" className="hover:text-quantum transition-colors">03 Models</Link>
+          <Link href="/model-arena" className="hover:text-quantum transition-colors">Models</Link>
           <span>→</span>
-          <Link href="/feasibility" className="hover:text-quantum transition-colors">04 Quantum</Link>
+          <Link href="/feasibility" className="hover:text-quantum transition-colors">Quantum</Link>
           <span>→</span>
-          <Link href="/evidence-matrix" className="hover:text-quantum transition-colors">05 Evidence</Link>
+          <Link href="/evidence-matrix" className="hover:text-quantum transition-colors">Evidence</Link>
           <span>→</span>
-          <Link href="/explainability" className="hover:text-quantum transition-colors">06 Explain</Link>
+          <Link href="/explainability" className="hover:text-quantum transition-colors">Explain</Link>
           <span>→</span>
-          <Link href="/decision-console" className="hover:text-quantum transition-colors">07 Decision</Link>
+          <Link href="/decision-console" className="hover:text-quantum transition-colors">Decision</Link>
           <span>→</span>
-          <Link href="/vault" className="hover:text-quantum transition-colors">08 Vault</Link>
+          <Link href="/vault" className="hover:text-quantum transition-colors">Vault</Link>
         </div>
 
         {/* 4 Summary Stats Cards */}
@@ -347,10 +347,10 @@ export default function HomePage() {
 
           <div className="space-y-0.5">
             <div className="flex items-center gap-1">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft">Quantum Advantage</span>
+              <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft">Model Advantage</span>
               <HelpTooltip text="In scarce clinical data regimes (15% sample size), Quantum VQC achieves +8.30% higher test accuracy over tuned classical SVM (p = 0.0153)." />
             </div>
-            <div className="font-serif text-xl sm:text-2xl text-quantum font-light">+8.30% <span className="text-[10px] font-sans text-ink-soft">Scarce-Data Win</span></div>
+            <div className="font-serif text-xl sm:text-2xl text-quantum font-light">+8.3% <span className="text-[10px] font-sans text-ink-soft">on limited data</span></div>
             <p className="text-[10px] text-ink-soft font-light">15% Cohort Regime (p = 0.0153)</p>
           </div>
 
@@ -365,11 +365,11 @@ export default function HomePage() {
 
           <div className="space-y-0.5">
             <div className="flex items-center gap-1">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft">Computing Mode</span>
+              <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft">Compute</span>
               <HelpTooltip text="The quantum processor or simulation engine actively analyzing patient data." />
             </div>
             <div className="font-serif text-xl sm:text-2xl text-ink font-light">
-              {backend === "ibmq_eagle" ? "127-Qubit" : "GPU Sim"} <span className="text-[10px] font-sans text-ink-soft">System</span>
+              Quantum + Classical
             </div>
             <p className="text-[10px] text-ink-soft font-light">
               {backend === "ibmq_eagle" ? "IBM Quantum Processor" : "GPU Matrix Engine Active"}
@@ -453,7 +453,7 @@ export default function HomePage() {
                       href={disease.route}
                       className="text-xs font-mono font-medium text-amber-800 bg-amber-500/10 px-2 py-1 rounded-md border border-amber-500/20 hover:bg-amber-500/20 transition-all flex items-center gap-1"
                     >
-                      Not Accessible <ChevronRight size={11} />
+                      Coming Soon <ChevronRight size={11} />
                     </Link>
                   )}
                 </div>

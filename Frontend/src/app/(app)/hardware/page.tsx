@@ -253,14 +253,14 @@ export default function HardwarePage() {
           <div className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-quantum" />
             <span className="text-[11px] font-mono uppercase tracking-wider text-quantum font-semibold">
-              Quantum Execution Infrastructure
+              Compute Infrastructure
             </span>
           </div>
           <h1 className="font-serif text-2xl sm:text-3xl font-light text-ink tracking-tight">
-            Quantum Computing Hardware &amp; Backends
+            Compute &amp; Hardware
           </h1>
           <p className="text-xs text-ink-soft font-light">
-            Real-time telemetry of physical superconducting quantum processors (Aleph-1), statevector simulators (Transfinite-1), and local client compute nodes.
+            Real-time status of quantum processors, simulators, and local compute.
           </p>
         </div>
 
@@ -312,13 +312,13 @@ export default function HardwarePage() {
               <Sparkles size={20} />
             </div>
             <div>
-              <h3 className="font-serif text-base font-semibold text-ink">Transfinite-1 (Quantum Simulator)</h3>
+              <h3 className="font-serif text-base font-semibold text-ink">Quantum Simulator</h3>
               <span className="text-[10px] font-mono text-ink-soft">8-Qubit Variational Quantum Circuit (VQC) Engine</span>
             </div>
           </div>
 
           <p className="text-xs text-ink-soft font-light leading-relaxed">
-            PennyLane-powered variational quantum statevector simulator. Computes pure Hilbert statevector wavefunctions (256-dim Hilbert space) with continuous quantum expectation values and zero decoherence noise.
+            Local statevector simulator for testing and validation. Computes quantum expectation values quickly with zero noise.
           </p>
 
           <div className="grid grid-cols-3 gap-2 pt-2 border-t border-hairline font-mono text-[11px]">
@@ -328,7 +328,7 @@ export default function HardwarePage() {
             </div>
             <div>
               <span className="text-[9px] text-ink-soft uppercase block">Decoherence Noise</span>
-              <span className="font-semibold text-emerald-700">0.00% (Pure State)</span>
+              <span className="font-semibold text-emerald-700">None</span>
             </div>
             <div>
               <span className="text-[9px] text-ink-soft uppercase block">Math Precision</span>
@@ -367,13 +367,13 @@ export default function HardwarePage() {
               <Cpu size={20} />
             </div>
             <div>
-              <h3 className="font-serif text-base font-medium text-ink">Aleph-1 (IBM Quantum QPU)</h3>
-              <span className="text-[10px] font-mono text-ink-soft">127-Qubit Superconducting Transmon Processor</span>
+              <h3 className="font-serif text-base font-medium text-ink">IBM Quantum QPU</h3>
+              <span className="text-[10px] font-mono text-ink-soft">127-Qubit Superconducting Processor</span>
             </div>
           </div>
 
           <p className="text-xs text-ink-soft font-light leading-relaxed">
-            Physical cryogenic quantum hardware routed through IBM Quantum Cloud Runtime. Connects heavy-hex superconducting qubits for multi-qubit entanglement. Reserved for verified clinical partner nodes.
+            Physical quantum hardware routed through the IBM Quantum Cloud. Connects real qubits for complex calculations.
           </p>
 
           <div className="grid grid-cols-3 gap-2 pt-2 border-t border-hairline font-mono text-[11px]">
@@ -459,7 +459,7 @@ export default function HardwarePage() {
                 {clientInfo.cpuCores} Logical CPU Cores
               </div>
               <span className="text-[10px] text-emerald-700 font-mono block font-semibold">
-                Parallel Statevector Simulation Active
+                Simulator Active
               </span>
             </div>
 
@@ -497,7 +497,7 @@ export default function HardwarePage() {
               <div className="font-serif text-sm font-bold text-emerald-700 flex items-center gap-1.5">
                 <Zap size={14} className="text-emerald-600" />
                 <span>{clientInfo.benchmarkLatencyMs} ms</span>
-                <span className="text-[10px] font-mono text-ink-soft font-normal">(250k Tensor FLOPs)</span>
+                <span className="text-[10px] font-mono text-ink-soft font-normal">(Local Compute Benchmark)</span>
               </div>
               <span className="text-[10px] text-quantum font-mono block font-medium">
                 {clientInfo.webAssemblySupported ? "WebAssembly SIMD Vectorized" : "JavaScript V8 Vectorized"}
@@ -512,21 +512,21 @@ export default function HardwarePage() {
         )}
       </div>
 
-      {/* Noise Reduction Protocols (LOCKED IN BETA / UPCOMING ON ALEPH-1) */}
+      {/* Noise Reduction Protocols */}
       <div className="p-5 rounded-2xl bg-parchment border border-hairline space-y-4 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
           <div>
             <div className="flex items-center gap-1.5">
-              <h3 className="font-serif text-base font-medium text-ink">Quantum Noise Reduction Protocols</h3>
-              <HelpTooltip text="Methods used to filter out thermal and electromagnetic decoherence during physical quantum hardware runs." />
+              <h3 className="font-serif text-base font-medium text-ink">Error Correction Methods</h3>
+              <HelpTooltip text="Methods used to filter out noise during physical quantum hardware runs." />
             </div>
             <p className="text-xs text-ink-soft font-light">
-              Error mitigation algorithms designed for physical superconducting quantum cryostats (Aleph-1).
+              Error mitigation algorithms designed for physical quantum processors.
             </p>
           </div>
           <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 self-start sm:self-auto flex items-center gap-1">
             <CheckCircle2 size={11} className="text-emerald-600" />
-            <span>CONFIGURED ON ALEPH-1 QPU</span>
+            <span>CONFIGURED ON QPU</span>
           </span>
         </div>
 
@@ -534,7 +534,7 @@ export default function HardwarePage() {
         <div className="p-3 rounded-xl bg-amber-50/60 border border-amber-200/80 flex items-start gap-2.5 text-xs text-amber-900 leading-relaxed">
           <Info size={16} className="text-amber-700 shrink-0 mt-0.5" />
           <p>
-            These protocols operate on physical superconducting cryostats during live hardware runs to eliminate thermal noise and gate errors. The active <strong>Transfinite-1 Statevector Engine</strong> calculates exact mathematical Hilbert space expectation values with zero simulation decoherence.
+            These protocols operate on physical quantum hardware during live runs to reduce errors. The active <strong>Quantum Simulator</strong> calculates exact mathematical values with zero simulation noise.
           </p>
         </div>
 
@@ -542,7 +542,7 @@ export default function HardwarePage() {
           {/* Zero-Noise Extrapolation (ZNE) */}
           <div
             onClick={() => {
-              alert("Zero-Noise Extrapolation (ZNE) is configured for Aleph-1 physical QPU execution.");
+              alert("Zero-Noise Extrapolation (ZNE) is configured for physical QPU execution.");
             }}
             className="p-3.5 rounded-xl border border-hairline bg-cream/40 opacity-85 hover:opacity-100 transition-all space-y-1.5 cursor-pointer"
           >
@@ -551,14 +551,14 @@ export default function HardwarePage() {
               <span className="text-[9px] font-mono bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">Beta</span>
             </div>
             <p className="text-[11px] text-ink-soft font-light leading-snug">
-              Intentionally amplifies noise via pulse stretching (λ ∈ 1.0, 1.5, 2.0) and calculates polynomial regression to extrapolate expectation values to the zero-noise limit.
+              Estimates the zero-noise limit by intentionally scaling noise and extrapolating backwards.
             </p>
           </div>
 
           {/* M3 Measurement Mitigation */}
           <div
             onClick={() => {
-              alert("Measurement Error Mitigation (M3) is configured for Aleph-1 physical QPU execution.");
+              alert("Measurement Error Mitigation (M3) is configured for physical QPU execution.");
             }}
             className="p-3.5 rounded-xl border border-hairline bg-cream/40 opacity-85 hover:opacity-100 transition-all space-y-1.5 cursor-pointer"
           >
@@ -567,14 +567,14 @@ export default function HardwarePage() {
               <span className="text-[9px] font-mono bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">Beta</span>
             </div>
             <p className="text-[11px] text-ink-soft font-light leading-snug">
-              Corrects bit-flip readout assignment errors using a matrix-free solver without computing full 2ⁿ × 2ⁿ tensor calibration matrices.
+              Corrects readout assignment errors using a matrix-free solver.
             </p>
           </div>
 
           {/* Dynamical Decoupling */}
           <div
             onClick={() => {
-              alert("Dynamical Decoupling (DD) is configured for Aleph-1 physical QPU execution.");
+              alert("Dynamical Decoupling (DD) is configured for physical QPU execution.");
             }}
             className="p-3.5 rounded-xl border border-hairline bg-cream/40 opacity-85 hover:opacity-100 transition-all space-y-1.5 cursor-pointer"
           >
@@ -583,7 +583,7 @@ export default function HardwarePage() {
               <span className="text-[9px] font-mono bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">Beta</span>
             </div>
             <p className="text-[11px] text-ink-soft font-light leading-snug">
-              Injects XY4/CPMG refocussing pulse sequences on idle qubits to eliminate environmental low-frequency phase drift during entangling blocks.
+              Injects pulse sequences to protect idle qubits from environmental drift.
             </p>
           </div>
         </div>

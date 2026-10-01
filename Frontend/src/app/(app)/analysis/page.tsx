@@ -250,14 +250,14 @@ export default function ModelAnalysisPage() {
           <div className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-quantum" />
             <span className="text-[11px] font-mono uppercase tracking-wider text-quantum font-semibold">
-              Live Model Auditing &amp; Diagnostics
+              Performance Tracking
             </span>
           </div>
           <h1 className="font-serif text-2xl sm:text-3xl font-light text-ink tracking-tight">
-            Real-Time Model Performance Analysis
+            Model Performance
           </h1>
           <p className="text-xs text-ink-soft font-light">
-            Continuous ruthless validation of quantum prediction accuracy, clinical precision, and confusion matrix.
+            Track screening accuracy, precision, and model confidence across sessions.
           </p>
         </div>
 
@@ -409,8 +409,8 @@ export default function ModelAnalysisPage() {
               <span className="font-semibold text-quantum">{accuracy !== "—" ? `${accuracy}%` : "—"}</span>
             </div>
             <div className="flex justify-between">
-              <span>Noise Error Resilience:</span>
-              <span className="font-semibold text-ink">98.4% (ZNE Active)</span>
+              <span>Error Resilience:</span>
+              <span className="font-semibold text-ink">98.4%</span>
             </div>
           </div>
         </div>
@@ -419,7 +419,7 @@ export default function ModelAnalysisPage() {
         <div className="lg:col-span-7 p-5 rounded-2xl bg-white border border-hairline shadow-xs space-y-4 flex flex-col justify-between relative">
           <div className="flex items-center justify-between border-b border-hairline pb-2.5">
             <div>
-              <h2 className="font-serif text-base font-medium text-ink">Accuracy &amp; Quantum Fidelity Curve</h2>
+              <h2 className="font-serif text-base font-medium text-ink">Accuracy Over Time</h2>
               <p className="text-[11px] text-ink-soft">Real-time tracking of sequential prediction convergence</p>
             </div>
             <div className="flex items-center gap-2">
@@ -546,7 +546,7 @@ export default function ModelAnalysisPage() {
           <div className="flex items-center justify-between pt-2 border-t border-hairline text-[11px] font-mono text-ink-soft">
             <div className="flex items-center gap-2">
               <span className="w-3 h-0.5 bg-quantum inline-block" />
-              <span>Quantum VQC Model ({accuracy !== "—" ? `${accuracy}%` : "Awaiting Data"})</span>
+              <span>QureSight Model ({accuracy !== "—" ? `${accuracy}%` : "Awaiting Data"})</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="w-3 h-0.5 bg-ink-soft/60 border-t border-dashed inline-block" />
@@ -562,12 +562,12 @@ export default function ModelAnalysisPage() {
           <div>
             <div className="flex items-center gap-1.5">
               <h2 className="font-serif text-base font-medium text-ink">
-                Continuous Clinical Validation Feed
+                Validation Feed
               </h2>
               <HelpTooltip text="Confirm whether QureSight's predictions match real physician diagnoses. If left unverified, you can click 'Auto-Evaluate' to verify using medical benchmark thresholds." />
             </div>
             <p className="text-[11px] text-ink-soft">
-              Ruthlessly evaluate active session screening predictions to dynamically update live metrics.
+              Evaluate active session screening predictions to dynamically update live metrics.
             </p>
           </div>
           <span className="text-xs font-mono text-ink-soft">
@@ -581,7 +581,7 @@ export default function ModelAnalysisPage() {
             <div className="space-y-1 max-w-sm mx-auto">
               <p className="font-medium text-ink text-xs">No patient screenings found in database</p>
               <p className="text-[11px] text-ink-soft font-light">
-                Run an authentic screening in Clinical Diagnostics to audit real quantum predictions, evaluate clinical concordances, and benchmark live model metrics.
+                Run a screening to see live performance metrics here.
               </p>
             </div>
             <Link

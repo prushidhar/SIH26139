@@ -30,8 +30,8 @@ export default function DatasetObservatoryPage() {
         {
           id: "breast_cancer",
           name: "Wisconsin Diagnostic Breast Cancer (WDBC)",
-          description: "Nuclear cytopathology feature panel for breast lesion malignancy prediction",
-          source: "UCI Machine Learning Repository / Wolberg, Street, Mangasarian",
+          description: "Breast tissue features for cancer screening",
+          source: "UCI Machine Learning Repository",
           sample_count: 569,
           feature_count: 30,
           target_column: "target",
@@ -46,7 +46,7 @@ export default function DatasetObservatoryPage() {
           id: "heart_disease",
           name: "UCI Cleveland Heart Disease",
           description: "Clinical and non-invasive hemodynamic features for coronary heart disease",
-          source: "UCI ML / Cleveland Clinic Foundation / AstroVall02 Reference",
+          source: "UCI ML / Cleveland Clinic Foundation",
           sample_count: 303,
           feature_count: 13,
           target_column: "target",
@@ -61,7 +61,7 @@ export default function DatasetObservatoryPage() {
           id: "cardiomegaly_cxr",
           name: "CheXpert Cardiomegaly Radiography Panel",
           description: "Frontal chest radiograph anatomical markers and deep convolutional embeddings",
-          source: "Stanford AIMI / Decoodt et al. (J. Imaging 2023, 9(7), 128)",
+          source: "Stanford AIMI",
           sample_count: 1200,
           feature_count: 6,
           target_column: "cardiomegaly",
@@ -74,9 +74,9 @@ export default function DatasetObservatoryPage() {
         },
         {
           id: "ilpd_liver",
-          name: "Indian Liver Patient Dataset (ILPD / Donaire et al. 2026)",
-          description: "Hepatic and metabolic biomarker panel for minimal 2-qubit hybrid quantum classification",
-          source: "UCI Machine Learning / Donaire et al., Eng. Appl. Artif. Intell. 2026",
+          name: "Indian Liver Patient Dataset (ILPD)",
+          description: "Liver biomarker panel for disease screening",
+          source: "UCI Machine Learning",
           sample_count: 583,
           feature_count: 10,
           target_column: "Liver_Disease",
@@ -253,13 +253,13 @@ export default function DatasetObservatoryPage() {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-ink-soft">
             <Database className="w-3.5 h-3.5 text-quantum" />
-            <span>QureSight Platform • Phase 02</span>
+            <span>Data Explorer</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1 tracking-tight">
-            Dataset Observatory
+            Dataset Explorer
           </h1>
           <p className="text-xs sm:text-sm text-ink-soft mt-1">
-            Examine biomedical cohort integrity, missingness, distributions, and multi-collinear structures before modeling.
+            Browse and inspect clinical datasets before running models.
           </p>
         </div>
 
@@ -316,7 +316,7 @@ export default function DatasetObservatoryPage() {
 
               <div className="mt-3 pt-3 border-t border-hairline/60 flex items-center justify-between text-xs font-mono text-ink-soft">
                 <span>{d.sample_count} Samples • {d.feature_count} Features</span>
-                <span className="text-quantum font-semibold">Quantum Ingest Ready</span>
+                <span className="text-quantum font-semibold">Ready</span>
               </div>
             </div>
           );
@@ -327,7 +327,7 @@ export default function DatasetObservatoryPage() {
       {detailLoading ? (
         <div className="p-12 text-center text-xs font-mono text-ink-soft">
           <RefreshCw className="w-5 h-5 animate-spin mx-auto text-quantum mb-2" />
-          Profiling tabular distributions & Pearson correlation matrices...
+          Loading dataset profiles...
         </div>
       ) : detail ? (
         <DatasetHealthPanel detail={detail} />
