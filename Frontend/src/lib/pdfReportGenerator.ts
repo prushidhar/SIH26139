@@ -248,7 +248,7 @@ export function generateCombinedReport(payload: ReportPayload): jsPDF {
 
   doc.setFontSize(7.2);
   doc.setTextColor(170, 185, 215);
-  doc.text("Dual-Engine Analysis: Classical Baseline (CX-01) + Quantum Hybrid (Transfinite-1) | SIH26139", M, 30);
+  doc.text("Dual-Engine Analysis: Classical Baseline + Quantum Hybrid (8-Qubit VQC) | SIH26139", M, 30);
   doc.text(`Report: ${sig}  |  Generated: ${reportDate}`, PW - M, 30, { align: "right" });
 
   // Patient Intake & Clinical Profile Card
@@ -322,7 +322,7 @@ export function generateCombinedReport(payload: ReportPayload): jsPDF {
   doc.setFontSize(7.5);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(...C.violet);
-  doc.text("TRANSFINITE-1 (QUANTUM HYBRID)", M + 4, y + 6.5);
+  doc.text("QUANTUM VQC (HYBRID MODEL)", M + 4, y + 6.5);
 
   doc.setFontSize(14);
   doc.setTextColor(...tfColor);
@@ -350,7 +350,7 @@ export function generateCombinedReport(payload: ReportPayload): jsPDF {
   doc.setFontSize(7.5);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(...C.blue);
-  doc.text("CX-01 (CLASSICAL ENSEMBLE)", cxX + 4, y + 6.5);
+  doc.text("CLASSICAL ENSEMBLE (SOTA)", cxX + 4, y + 6.5);
 
   doc.setFontSize(14);
   doc.setTextColor(...cxColor);
@@ -657,7 +657,7 @@ export function generateCombinedReport(payload: ReportPayload): jsPDF {
   autoTable(doc, {
     startY: y,
     margin: { left: M, right: M },
-    head: [["Diagnostic & Architectural Dimension", "CX-01 (Classical Baseline)", "Transfinite-1 (Quantum Hybrid)"]],
+    head: [["Diagnostic & Architectural Dimension", "Classical Baseline (SOTA)", "Quantum VQC (Hybrid)"]],
     body: [
       ["Prediction Label", cleanPdfText(payload.cx01.predictionLabel), cleanPdfText(payload.transfinite1.predictionLabel)],
       ["Model Confidence", `${payload.cx01.confidence.toFixed(1)}%`, `${payload.transfinite1.confidence.toFixed(1)}%`],
@@ -689,11 +689,11 @@ export function generateCombinedReport(payload: ReportPayload): jsPDF {
   y = subSection(doc, "Continuous Risk Score Comparison", y);
 
   const barBaseY = y;
-  // CX-01
+  // Classical
   doc.setFontSize(7);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(...C.blue);
-  doc.text("CX-01", M + 2, barBaseY + 4);
+  doc.text("Classical", M + 2, barBaseY + 4);
   doc.setFillColor(235, 242, 255);
   doc.roundedRect(M + 20, barBaseY, CW - 20, 5.2, 1.2, 1.2, "F");
   doc.setFillColor(...C.blue);
@@ -702,11 +702,11 @@ export function generateCombinedReport(payload: ReportPayload): jsPDF {
   doc.setFontSize(6.2);
   doc.text(`${payload.cx01.riskScore.toFixed(1)} / 100`, M + 23, barBaseY + 3.8);
 
-  // TF-1
+  // Quantum
   doc.setFontSize(7);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(...C.violet);
-  doc.text("TF-1", M + 2, barBaseY + 11);
+  doc.text("Quantum", M + 2, barBaseY + 11);
   doc.setFillColor(245, 240, 255);
   doc.roundedRect(M + 20, barBaseY + 7.5, CW - 20, 5.2, 1.2, 1.2, "F");
   doc.setFillColor(...C.violet);
@@ -721,13 +721,13 @@ export function generateCombinedReport(payload: ReportPayload): jsPDF {
   doc.addPage();
   y = 16;
 
-  // ENGINE 1: Transfinite-1 Banner
+  // ENGINE 1: Quantum VQC Banner
   doc.setFillColor(...C.violet);
   doc.roundedRect(M, y, CW, 10, 2, 2, "F");
   doc.setFontSize(9.5);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(...C.white);
-  doc.text("ENGINE 1: Transfinite-1 - 8-Qubit Variational Quantum Classifier (Simulator / NISQ)", PW / 2, y + 6.8, { align: "center" });
+  doc.text("ENGINE 1: Quantum VQC - 8-Qubit Variational Quantum Classifier (Simulator / NISQ)", PW / 2, y + 6.8, { align: "center" });
   y += 14;
 
   doc.setFontSize(7.5);
@@ -774,7 +774,7 @@ export function generateCombinedReport(payload: ReportPayload): jsPDF {
     y = (doc as any).lastAutoTable.finalY + 5;
   }
 
-  // Top Factors List for Transfinite-1
+  // Top Factors List for Quantum VQC
   const tfRisk = payload.transfinite1.attributions.filter((a) => a.direction === "risk_elevating").slice(0, 3);
   if (tfRisk.length > 0) {
     doc.setFontSize(7.5);
@@ -787,13 +787,13 @@ export function generateCombinedReport(payload: ReportPayload): jsPDF {
     y += 9;
   }
 
-  // CONTINUATION: ENGINE 2: CX-01 Banner
+  // CONTINUATION: ENGINE 2: Classical Ensemble Banner
   doc.setFillColor(...C.blue);
   doc.roundedRect(M, y, CW, 10, 2, 2, "F");
   doc.setFontSize(9.5);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(...C.white);
-  doc.text("ENGINE 2: CX-01 - Classical SVM-RBF + XGBoost Ensemble Baseline", PW / 2, y + 6.8, { align: "center" });
+  doc.text("ENGINE 2: Classical Ensemble - SVM-RBF + XGBoost Baseline", PW / 2, y + 6.8, { align: "center" });
   y += 14;
 
   doc.setFontSize(7.5);
@@ -1087,7 +1087,7 @@ export function generateCombinedReport(payload: ReportPayload): jsPDF {
       },
       {
         title: "2. Dual-Engine Quantum vs Classical Baseline Evaluation",
-        text: `Transfinite-1 evaluated compressed phase-space representations in 256-dimensional Hilbert space, returning a cardiac risk score of ${payload.transfinite1.riskScore.toFixed(1)}/100 (${payload.transfinite1.confidence.toFixed(1)}% certainty). CX-01 produced an independent risk score of ${payload.cx01.riskScore.toFixed(1)}/100 (${payload.cx01.confidence.toFixed(1)}% confidence). Dual-engine consensus is strictly ${payload.consensusStatus.toUpperCase()}.`,
+        text: `The Quantum VQC model evaluated compressed phase-space representations in 256-dimensional Hilbert space, returning a cardiac risk score of ${payload.transfinite1.riskScore.toFixed(1)}/100 (${payload.transfinite1.confidence.toFixed(1)}% certainty). The classical baseline produced an independent risk score of ${payload.cx01.riskScore.toFixed(1)}/100 (${payload.cx01.confidence.toFixed(1)}% confidence). Dual-engine consensus is strictly ${payload.consensusStatus.toUpperCase()}.`,
       },
       {
         title: "3. Anatomical Saliency & Hemodynamic Implications",
@@ -1120,7 +1120,7 @@ export function generateCombinedReport(payload: ReportPayload): jsPDF {
       },
       {
         title: "2. Dual-Engine Quantum vs Classical Baseline Evaluation",
-        text: `Transfinite-1 evaluated the 30-dimensional cytopathological feature vector mapped into 256-basis state Hilbert space, producing a composite risk score of ${payload.transfinite1.riskScore.toFixed(1)}/100 (${payload.transfinite1.confidence.toFixed(1)}% certainty). CX-01 produced an independent risk score of ${payload.cx01.riskScore.toFixed(1)}/100 (${payload.cx01.confidence.toFixed(1)}% confidence). Consensus: ${payload.consensusStatus.toUpperCase()}.`,
+        text: `The Quantum VQC model evaluated the 30-dimensional cytopathological feature vector mapped into 256-basis state Hilbert space, producing a composite risk score of ${payload.transfinite1.riskScore.toFixed(1)}/100 (${payload.transfinite1.confidence.toFixed(1)}% certainty). The classical baseline produced an independent risk score of ${payload.cx01.riskScore.toFixed(1)}/100 (${payload.cx01.confidence.toFixed(1)}% confidence). Consensus: ${payload.consensusStatus.toUpperCase()}.`,
       },
       {
         title: "3. Diagnostic Certainty & Staging Alignment",

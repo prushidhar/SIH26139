@@ -14,6 +14,7 @@ from models_v1 import (
     heart_tabular_pipeline,
     cxr_transfer_pipeline,
     donaire_liver_pipeline,
+    neurological_pipeline,
     AdaptiveModelRouter,
 )
 
@@ -418,4 +419,33 @@ async def run_liver_ilpd_inference(payload: LiverILPDInput):
             detail=f"ILPD minimal QML pipeline error: {str(e)}"
         )
 
+# ==============================================================================
+# NEUROLOGY PILLAR: BRAIN HEALTH, EEG SPECTRAL & MOTOR TREMOR INFERENCE
+# ==============================================================================
 
+class NeurologicalInput(BaseModel):
+    eeg_alpha_beta_ratio: float = Field(default=2.2, description="EEG Alpha/Beta power ratio (0.5 - 3.5)")
+    eeg_theta_power: float = Field(default=25.0, description="Theta wave power in uV^2 (10 - 80)")
+    motor_tremor_hz: float = Field(default=1.2, description="Resting motor tremor frequency in Hz (0 - 12)")
+    reaction_time_ms: float = Field(default=240.0, description="Saccadic / choice psychomotor latency in ms (150 - 650)")
+    speech_jitter_pct: float = Field(default=0.38, description="Acoustic phonation frequency jitter percentage (0.1 - 3.0)")
+    speech_shimmer_db: float = Field(default=0.18, description="Acoustic amplitude perturbation shimmer in dB (0.05 - 1.5)")
+    cognitive_mmse: float = Field(default=29.0, description="Mini-Mental State Examination score (10 - 30)")
+    age: float = Field(default=62.0, description="Patient age in years (30 - 90)")
+
+
+@router.post("/neurological", status_code=status.HTTP_200_OK)
+async def run_neurological_inference(payload: NeurologicalInput):
+    """
+    Executes PennyLane 4-Qubit Variational Quantum Classification and
+    Classical Multi-Domain Ensemble on EEG spectral, acoustic, and motor biomarkers.
+    """
+    try:
+        raw_dict = payload.model_dump()
+        telemetry = neurological_pipeline.predict(raw_dict)
+        return {"success": True, "telemetry": telemetry}
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Neurological QML pipeline execution error: {str(e)}"
+        )

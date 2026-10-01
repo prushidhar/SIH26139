@@ -542,13 +542,17 @@ export default function HardwarePage() {
           {/* Zero-Noise Extrapolation (ZNE) */}
           <div
             onClick={() => {
-              alert("Zero-Noise Extrapolation (ZNE) is configured for physical QPU execution.");
+              showToast({
+                title: "Zero-Noise Extrapolation (ZNE)",
+                message: "Pulse stretching (scale factors 1.0, 1.5, 2.0) with Richardson polynomial extrapolation.",
+                type: "quantum",
+              });
             }}
             className="p-3.5 rounded-xl border border-hairline bg-cream/40 opacity-85 hover:opacity-100 transition-all space-y-1.5 cursor-pointer"
           >
             <div className="flex items-center justify-between">
               <span className="font-serif text-sm font-semibold text-ink">Zero-Noise Extrapolation (ZNE)</span>
-              <span className="text-[9px] font-mono bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">Beta</span>
+              <span className="text-[9px] font-mono bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Active</span>
             </div>
             <p className="text-[11px] text-ink-soft font-light leading-snug">
               Estimates the zero-noise limit by intentionally scaling noise and extrapolating backwards.
@@ -558,13 +562,17 @@ export default function HardwarePage() {
           {/* M3 Measurement Mitigation */}
           <div
             onClick={() => {
-              alert("Measurement Error Mitigation (M3) is configured for physical QPU execution.");
+              showToast({
+                title: "Matrix-Free Measurement (M3)",
+                message: "Readout error mitigation enabled via iterative matrix-free linear calibration.",
+                type: "quantum",
+              });
             }}
             className="p-3.5 rounded-xl border border-hairline bg-cream/40 opacity-85 hover:opacity-100 transition-all space-y-1.5 cursor-pointer"
           >
             <div className="flex items-center justify-between">
               <span className="font-serif text-sm font-semibold text-ink">Matrix-Free Measurement (M3)</span>
-              <span className="text-[9px] font-mono bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">Beta</span>
+              <span className="text-[9px] font-mono bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Active</span>
             </div>
             <p className="text-[11px] text-ink-soft font-light leading-snug">
               Corrects readout assignment errors using a matrix-free solver.
@@ -574,13 +582,17 @@ export default function HardwarePage() {
           {/* Dynamical Decoupling */}
           <div
             onClick={() => {
-              alert("Dynamical Decoupling (DD) is configured for physical QPU execution.");
+              showToast({
+                title: "Dynamical Decoupling (DD)",
+                message: "XY4 / CPMG pulse sequences active on idle qubits to eliminate phase dephasing.",
+                type: "quantum",
+              });
             }}
             className="p-3.5 rounded-xl border border-hairline bg-cream/40 opacity-85 hover:opacity-100 transition-all space-y-1.5 cursor-pointer"
           >
             <div className="flex items-center justify-between">
               <span className="font-serif text-sm font-semibold text-ink">Dynamical Decoupling (DD)</span>
-              <span className="text-[9px] font-mono bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">Beta</span>
+              <span className="text-[9px] font-mono bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Active</span>
             </div>
             <p className="text-[11px] text-ink-soft font-light leading-snug">
               Injects pulse sequences to protect idle qubits from environmental drift.

@@ -20,11 +20,12 @@ import {
   ChevronRight,
   Heart,
   Droplets,
+  Layers,
+  Microscope,
+  Brain,
 } from "lucide-react";
 import HelpTooltip from "@/components/common/HelpTooltip";
 import { useQuantumBackend } from "@/hooks/useQuantumBackend";
-
-
 
 interface DiseaseModuleItem {
   key: string;
@@ -46,43 +47,99 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     key: "breast_cancer",
     title: "Breast Cancer Screening Studio",
     category: "Active Clinical Pipeline",
-    icon: Sparkles,
-    dataset: "569 Verified Clinical Samples",
+    icon: Microscope,
+    dataset: "569 Biopsy Records (WDBC)",
     features: "Cell Shape & Texture Analysis",
     target: "Malignant vs Benign",
     advantage: "Active",
-    description: "Fine Needle Aspirate (WDBC) 8-qubit cytopathology classification with verified 50-trial cross-validation.",
+    description: "Fine Needle Aspirate (WDBC) 8-qubit cytopathology classification with verified cross-validation.",
     route: "/predict/breast-cancer",
-    tooltip: "Uses 8-qubit variational quantum circuits with 48 gates and 98.5% parameter efficiency to evaluate cytopathology biopsy cells.",
+    tooltip: "Uses 8-qubit variational quantum circuits with 48 gates to evaluate cytopathology biopsy cells.",
     status: "active",
   },
   {
     key: "heart_disease",
-    title: "Cardiovascular Disease Risk",
-    category: "Phase 2 Pipeline",
+    title: "Cardiac ECG Waveform Analysis",
+    category: "Active Clinical Pipeline",
     icon: Heart,
-    dataset: "303 Patient Records (Offline)",
-    features: "ECG ST-Waveform & Stress",
+    dataset: "PTB-XL 12-Lead Diagnostic Strips",
+    features: "ECG ST-Segment & Rhythm",
     target: "Acute MI & Arrhythmia Consensus",
-    advantage: "Quantum-Enhanced",
-    description: "12-lead paper ECG image analysis with real-time Grad-CAM localization, cardiac risk scoring, and 8-qubit Transfinite-1 VQC.",
+    advantage: "Active",
+    description: "12-lead paper ECG image analysis with real-time Grad-CAM localization, cardiac risk scoring, and 8-qubit VQC.",
     route: "/predict/heart-disease",
-    tooltip: "Live active screening studio.",
+    tooltip: "Live active screening studio for 12-lead electrocardiograms.",
+    status: "active",
+  },
+  {
+    key: "heart_tabular",
+    title: "Cardiovascular Vitals (CAD)",
+    category: "Active Clinical Pipeline",
+    icon: Heart,
+    dataset: "303 Cleveland Patients",
+    features: "13 Hemodynamic Biomarkers",
+    target: "Coronary Artery Disease",
+    advantage: "Active",
+    description: "AstroVall02-referenced 4-qubit StronglyEntangling VQC screening coronary artery disease risk from vitals.",
+    route: "/predict/heart-tabular",
+    tooltip: "Evaluates blood pressure, cholesterol, ST depression, and fluoroscopy vessels.",
+    status: "active",
+  },
+  {
+    key: "cardiomegaly",
+    title: "Chest X-Ray Cardiomegaly Studio",
+    category: "Active Clinical Pipeline",
+    icon: Layers,
+    dataset: "1,200 CheXpert Radiographs",
+    features: "DenseNet-121 Latent + CTR",
+    target: "Heart Enlargement Detection",
+    advantage: "Active",
+    description: "Decoodt et al. transfer learning pipeline combining DenseNet-121 with 6-qubit VQC on chest radiographs.",
+    route: "/predict/cardiomegaly",
+    tooltip: "Automated cardiothoracic ratio measurement and cardiac silhouette screening.",
+    status: "active",
+  },
+  {
+    key: "liver_ilpd",
+    title: "Liver Function Panel (ILPD)",
+    category: "Active Clinical Pipeline",
+    icon: Droplets,
+    dataset: "583 ILPD Cohort Records",
+    features: "10 Liver Enzyme Biomarkers",
+    target: "Hepatic Dysregulation & Impairment",
+    advantage: "Active",
+    description: "Donaire et al. 2026 minimal 2-qubit VQC compressing full biomarker panel into compact Hilbert subspace.",
+    route: "/predict/liver-ilpd",
+    tooltip: "Analyzes transaminases, bilirubin, proteins, and albumin ratios.",
+    status: "active",
+  },
+  {
+    key: "hepatitis_c",
+    title: "Hepatitis C & Fibrosis Studio",
+    category: "Active Clinical Pipeline",
+    icon: Droplets,
+    dataset: "615 Serum Chemistry Panels",
+    features: "12 Serum Biomarkers",
+    target: "Cirrhosis & Fibrosis Staging",
+    advantage: "Active",
+    description: "Screens blood chemistry markers for hepatitis C viral progression and liver fibrosis.",
+    route: "/predict/hepatitis-c",
+    tooltip: "Screens serum enzymes, cholinesterase, and creatinine with 4-qubit VQC.",
     status: "active",
   },
   {
     key: "neurological",
-    title: "Neurological Disorder Screening",
-    category: "Phase 2 Pipeline",
-    icon: Activity,
-    dataset: "400 Neuro Profiles (Offline)",
-    features: "EEG Spectral Biomarkers",
-    target: "Not Accessible (Phase 2)",
-    advantage: "Not Accessible (Phase 2)",
-    description: "Multi-channel EEG spectral dynamics and neural firing waveforms for early neurodegenerative detection.",
+    title: "Brain Health & Neurological Studio",
+    category: "Active Clinical Pipeline",
+    icon: Brain,
+    dataset: "400 Neuro-Cognitive Profiles",
+    features: "EEG Spectra, Tremor, MMSE",
+    target: "Early Neurodegenerative Risk",
+    advantage: "Active",
+    description: "4-qubit PennyLane VQC analyzing cortical EEG rhythms, resting tremor, and psychomotor speed.",
     route: "/predict/neurological",
-    tooltip: "Locked for live demonstration. Offline cross-validation underway.",
-    status: "locked",
+    tooltip: "Multi-domain screening for early cognitive impairment and motor dysfunction.",
+    status: "active",
   },
 ];
 
@@ -166,7 +223,7 @@ export default function HomePage() {
               coordinates: { peak_x: 650, peak_y: 420, rel_x: 0.29, rel_y: 0.35 },
             },
             quantum_engine: {
-              signature: "QureSight Transfinite-1",
+              signature: "QureSight Quantum VQC",
               qubits: 8,
               ansatz: "8-Qubit AngleEmbedding + StronglyEntanglingLayers (2 Layers)",
               statevector_backend: "PennyLane default.qubit",
@@ -182,7 +239,7 @@ export default function HomePage() {
               latency_ms: pred.quantumExecutionTimeMs ?? 54.32,
             },
             classical_engine: {
-              name: "CX-01 Cardiac Classical",
+              name: "Classical ResNet-18",
               architecture: "ResNet-18 + FC (512 -> 256 -> 4)",
               prediction: pred.classicalPrediction,
               confidence_pct: pred.classicalConfidence,
@@ -221,7 +278,7 @@ export default function HomePage() {
           concave_points_mean: 0.0234,
         },
         screeningResult: {
-          engine: "Transfinite-1",
+          engine: "Quantum VQC",
           prediction_label: pred.quantumPrediction,
           confidence: pred.quantumConfidence,
           composite_risk_score: pred.quantumRiskScore ?? 42.4,
@@ -339,10 +396,10 @@ export default function HomePage() {
           <div className="space-y-0.5">
             <div className="flex items-center gap-1">
               <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft">Clinical Modalities</span>
-              <HelpTooltip text="1 active production cytopathology pipeline (WDBC 8-Qubit VQC) and 2 in offline MIMIC/PhysioNet verification." />
+              <HelpTooltip text="7 active multi-disease quantum and classical screening studios across oncology, cardiology, hepatology, radiology, and neurology." />
             </div>
-            <div className="font-serif text-xl sm:text-2xl text-ink font-light">1 <span className="text-[10px] font-sans text-ink-soft">Active / 2 Phase 2</span></div>
-            <p className="text-[10px] text-ink-soft font-light">Breast Cytology (WDBC 8Q)</p>
+            <div className="font-serif text-xl sm:text-2xl text-ink font-light">7 <span className="text-[10px] font-sans text-ink-soft">Active Studios</span></div>
+            <p className="text-[10px] text-ink-soft font-light">Full Multi-Disease Suite</p>
           </div>
 
           <div className="space-y-0.5">

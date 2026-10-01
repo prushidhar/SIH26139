@@ -612,7 +612,7 @@ export async function exportBatchAsPdfZip(
       },
       biomarkers,
       transfinite1: {
-        engineName: "Transfinite-1",
+        engineName: "Quantum VQC",
         engineDescription: "8-Qubit ZZ Variational Quantum Classifier (Simulator)",
         modelType: "hybrid",
         predictionLabel: r.quantumPrediction || "Unknown",
@@ -631,7 +631,7 @@ export async function exportBatchAsPdfZip(
         variationalParams: 48,
       },
       cx01: {
-        engineName: "CX-01",
+        engineName: "Classical Baseline",
         engineDescription: "Classical SVM-RBF + XGBoost Ensemble",
         modelType: "classical",
         predictionLabel: r.classicalPrediction || "Unknown",

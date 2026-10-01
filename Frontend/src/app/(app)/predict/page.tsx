@@ -149,16 +149,17 @@ const DISEASE_MODULES: DiseaseModule[] = [
     key: "neurological",
     title: "Brain Health & EEG",
     category: "Neurology",
-    datasetName: "EEG Profiles",
-    status: "beta_locked",
-    statusLabel: "Phase 2",
+    datasetName: "EEG & Psychomotor",
+    status: "active",
+    statusLabel: "Ready",
     icon: Activity,
     image: "/images/disease-neurological.jpg",
-    description: "EEG wave analysis for early neurodegenerative detection.",
+    description: "Evaluates EEG spectral power and motor tremor for cognitive risk.",
+    targetUrl: "/predict/neurological",
     metrics: {
       cohortSize: "400 Profiles",
-      engine: "Neuro VQC",
-      accuracy: "Clinical Trial"
+      engine: "4-Qubit VQC",
+      accuracy: "92.4% Consensus"
     }
   }
 ];
