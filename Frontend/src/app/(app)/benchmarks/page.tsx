@@ -159,8 +159,8 @@ export default function BenchmarksPage() {
         </div>
       </div>
 
-      {/* ═══════ RESEARCH & REPOSITORY PROVENANCE BANNER (THE FOUR PILLARS) ═══════ */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4 rounded-2xl border border-border bg-card/80 shadow-xs">
+      {/* ═══════ RESEARCH & REPOSITORY PROVENANCE BANNER (THE FIVE PILLARS) ═══════ */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3.5 p-4 rounded-2xl border border-border bg-card/80 shadow-xs">
         {/* Pillar 1: PennyLane */}
         <div className="p-3.5 rounded-xl border border-indigo-500/20 bg-indigo-500/5 space-y-2 flex flex-col justify-between">
           <div className="space-y-1.5">
@@ -181,7 +181,27 @@ export default function BenchmarksPage() {
           </div>
         </div>
 
-        {/* Pillar 2: Quantara */}
+        {/* Pillar 2: Qiskit Machine Learning */}
+        <div className="p-3.5 rounded-xl border border-purple-500/20 bg-purple-500/5 space-y-2 flex flex-col justify-between">
+          <div className="space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-purple-500/20 text-purple-600 dark:text-purple-400">
+                Hardware QML & Kernels
+              </span>
+              <span className="text-[9px] font-mono text-muted-foreground">IBM Quantum</span>
+            </div>
+            <h3 className="text-xs font-bold text-foreground">qiskit-community / qiskit-machine-learning</h3>
+            <p className="text-[11px] text-muted-foreground leading-relaxed">
+              Hardware-grade quantum kernels & QPU execution: <strong>FidelityQuantumKernel</strong>, <strong>QSVC</strong>, Havlíček ZZ-feature maps, and Qiskit Runtime.
+            </p>
+          </div>
+          <div className="flex items-center gap-1.5 text-[9px] font-mono text-purple-600 dark:text-purple-400 pt-1 border-t border-purple-500/10">
+            <CheckCircle2 size={11} />
+            <span>FidelityQuantumKernel &bull; QSVC &bull; EstimatorV2</span>
+          </div>
+        </div>
+
+        {/* Pillar 3: Quantara */}
         <div className="p-3.5 rounded-xl border border-quantum/20 bg-quantum/5 space-y-2 flex flex-col justify-between">
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
@@ -201,7 +221,7 @@ export default function BenchmarksPage() {
           </div>
         </div>
 
-        {/* Pillar 3: AstroVall02 */}
+        {/* Pillar 4: AstroVall02 */}
         <div className="p-3.5 rounded-xl border border-emerald-500/20 bg-emerald-500/5 space-y-2 flex flex-col justify-between">
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
@@ -221,7 +241,7 @@ export default function BenchmarksPage() {
           </div>
         </div>
 
-        {/* Pillar 4: Decoodt et al. 2023 */}
+        {/* Pillar 5: Decoodt et al. 2023 */}
         <div className="p-3.5 rounded-xl border border-amber-500/20 bg-amber-500/5 space-y-2 flex flex-col justify-between">
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
