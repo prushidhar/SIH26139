@@ -585,7 +585,7 @@ class CardiacDualEngineV2:
         with torch.no_grad():
             features, act_map = self.extractor(tensor)
 
-        # 4. Classical SOTA Inference (CX-IM01 ECGConVT Head)
+        # 4. Classical SOTA Inference (QureSight-Classical Head)
         t0_c = time.time()
         with torch.no_grad():
             c_logits = self.classical_model(features)
@@ -596,7 +596,7 @@ class CardiacDualEngineV2:
         latency_c = round((time.time() - t0_c) * 1000, 2)
         c_prob_dict = {CLASS_NAMES[i]: round(float(c_probs[i]), 4) for i in range(4)}
 
-        # 5. Hybrid Quantum SOTA Inference (Transfinite-IM1 8-Qubit Universal Data Re-Uploading PQC)
+        # 5. Hybrid Quantum SOTA Inference (QureSight-VQC 8-Qubit Universal Data Re-Uploading PQC)
         t0_q = time.time()
         with torch.no_grad():
             h_logits = self.hybrid_model(features)
@@ -607,7 +607,7 @@ class CardiacDualEngineV2:
         latency_q = round((time.time() - t0_q) * 1000, 2)
         h_prob_dict = {CLASS_NAMES[i]: round(float(h_probs[i]), 4) for i in range(4)}
 
-        # 6. Ensemble Consensus (60% Transfinite-IM1 Quantum + 40% CX-IM01 Classical)
+        # 6. Ensemble Consensus (60% QureSight-VQC Quantum + 40% QureSight-Classical)
         ensemble_probs = 0.60 * h_probs + 0.40 * c_probs
         pred_idx = int(np.argmax(ensemble_probs))
         pred_class = CLASS_NAMES[pred_idx]
@@ -660,8 +660,8 @@ class CardiacDualEngineV2:
             },
             "shap_explainability": shap_data,
             "quantum_engine": {
-                "signature": "Transfinite-IM1 (Hybrid Quantum)",
-                "model_id": "Transfinite-IM1",
+                "signature": "QureSight-VQC (Hybrid Quantum)",
+                "model_id": "QureSight-VQC",
                 "qubits": NUM_QUBITS,
                 "ansatz": "8-Qubit Universal AngleEmbedding + StronglyEntanglingLayers (3 Layers) + Bilinear Gated Fusion",
                 "statevector_backend": "PennyLane default.qubit (Ideal & Calibrated IBM Sherbrooke Noise Ready)",
@@ -678,8 +678,8 @@ class CardiacDualEngineV2:
                 "latency_ms": latency_q
             },
             "classical_engine": {
-                "name": "CX-IM01 (Classical)",
-                "model_id": "CX-IM01",
+                "name": "QureSight-Classical (ResNet-34 Ensemble)",
+                "model_id": "QureSight-Classical",
                 "architecture": "ResNet-34 + Multi-Scale Dilated Convolutions + CBAM + Lead Attention + Concat-Pooling (1024d)",
                 "prediction": c_pred_class,
                 "confidence_pct": round(c_conf * 100, 2),

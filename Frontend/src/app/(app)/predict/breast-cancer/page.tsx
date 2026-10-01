@@ -306,7 +306,7 @@ export default function BreastCancerDetailPage() {
 
   const generateNewPatientIdentity = () => {
     const randomSuffix = Math.floor(1000 + Math.random() * 9000);
-    setPatientId(`QX-BC-${randomSuffix}`);
+    setPatientId(`QS-BC-${randomSuffix}`);
     setAccessionNumber(`ACC-2026-08${Math.floor(10 + Math.random() * 90)}`);
     setIntakeDate(new Date().toISOString().split("T")[0]);
   };
@@ -836,7 +836,7 @@ export default function BreastCancerDetailPage() {
               } ${hasInferred ? "cursor-not-allowed opacity-80" : "cursor-pointer"}`}
             >
               <Sparkles size={13} />
-              <span>Transfinite-1 (Simulator)</span>
+              <span>Quantum Simulator</span>
             </button>
             <button
               disabled={hasInferred}
@@ -846,10 +846,10 @@ export default function BreastCancerDetailPage() {
                   ? "bg-amber-500 text-black shadow-xs font-bold"
                   : "text-ink-soft hover:text-ink"
               } ${hasInferred ? "cursor-not-allowed opacity-80" : "cursor-pointer"}`}
-              title="Aleph-1 (IBM QPU) — Physical Superconducting Quantum Hardware"
+              title="IBM Quantum Eagle QPU — Cloud Hardware"
             >
               <Cpu size={13} className={executionMode === "real_ibm_qpu" ? "text-black" : "text-amber-500"} />
-              <span>Aleph-1 (IBM QPU)</span>
+              <span>IBM Quantum (QPU)</span>
               <span className={`text-[9px] font-mono px-1 py-0.2 rounded border ${
                 executionMode === "real_ibm_qpu"
                   ? "bg-amber-100 text-amber-900 border-amber-300 font-bold"
@@ -1171,7 +1171,7 @@ export default function BreastCancerDetailPage() {
               ) : (
                 <>
                   <Play size={14} className="text-quantum fill-quantum" />
-                  <span>Run Dual-Engine Screening (Transfinite-1 &amp; CX-01)</span>
+                  <span>Run Dual-Engine Screening (Quantum &amp; Classical)</span>
                 </>
               )}
             </button>
@@ -1238,14 +1238,14 @@ export default function BreastCancerDetailPage() {
 
                 {/* SIDE-BY-SIDE DUAL-ENGINE LIVE COMPARISON CARDS */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* 1. Transfinite-1 Quantum Hybrid Simulator Card */}
+                  {/* 1. Quantum Hybrid VQC Card */}
                   <div className="p-4.5 rounded-2xl bg-white border border-quantum/30 shadow-xs space-y-3.5 relative overflow-hidden flex flex-col justify-between">
                     <div>
                       {/* Card Header */}
                       <div className="flex items-center justify-between border-b border-hairline pb-2.5">
                         <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-quantum/10 text-quantum border border-quantum/20 flex items-center gap-1.5">
                           <Sparkles size={12} />
-                          <span>Transfinite-1 (Quantum)</span>
+                          <span>Quantum Model (8-Qubit VQC)</span>
                         </span>
                         <span className="text-[10px] font-mono text-ink-soft font-semibold">
                           {screeningResult.dual_comparison?.transfinite_1?.latency_ms || "14.2"} ms
@@ -1378,14 +1378,14 @@ export default function BreastCancerDetailPage() {
                     </div>
                   </div>
 
-                  {/* 2. CX-01 Classical Benchmark Card */}
+                  {/* 2. Classical Baseline Card */}
                   <div className="p-4.5 rounded-2xl bg-white border border-blue-200 shadow-xs space-y-3.5 relative overflow-hidden flex flex-col justify-between">
                     <div>
                       {/* Card Header */}
                       <div className="flex items-center justify-between border-b border-hairline pb-2.5">
                         <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 flex items-center gap-1.5">
                           <Activity size={12} />
-                          <span>CX-01 (Classical)</span>
+                          <span>Classical Baseline Ensemble</span>
                         </span>
                         <span className="text-[10px] font-mono text-ink-soft font-semibold">
                           {screeningResult.dual_comparison?.cx_01?.latency_ms || "2.4"} ms

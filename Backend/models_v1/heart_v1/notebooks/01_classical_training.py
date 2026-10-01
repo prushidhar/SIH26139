@@ -12,7 +12,7 @@
 # ---
 
 # %% [markdown]
-# # QureSight — Classical Heart Attack Detection Model (CX-01 Cardiac)
+# # QureSight — Classical Heart Attack Detection Model (QureSight-Classical Cardiac)
 # ## ResNet-18 Fine-Tuned on 12-Lead ECG Paper-Strip Images
 # 
 # **Dataset**: ECG Images of Cardiac Patients (Kaggle evilspirit05/ecg-analysis)  
@@ -167,7 +167,7 @@ show_sample_images(train_loader, CLASS_NAMES)
 # %%
 def build_classical_model(num_classes: int = 4, pretrained: bool = True) -> nn.Module:
     """
-    Build the CX-01 Cardiac Classical Model.
+    Build the QureSight-Classical Cardiac Classical Model.
     
     Architecture:
         ResNet-18 (ImageNet pretrained) backbone
@@ -308,7 +308,7 @@ patience_counter = 0
 training_start = time.time()
 
 print("=" * 80)
-print("TRAINING CX-01 CARDIAC CLASSICAL MODEL")
+print("TRAINING QureSight-Classical CARDIAC CLASSICAL MODEL")
 print("=" * 80)
 
 for epoch in range(NUM_EPOCHS):
@@ -400,7 +400,7 @@ test_loss, test_acc, test_preds, test_labels, test_probs = evaluate(
 )
 
 print(f"\n{'='*60}")
-print(f"TEST SET RESULTS (CX-01 Classical Cardiac)")
+print(f"TEST SET RESULTS (QureSight-Classical Classical Cardiac)")
 print(f"{'='*60}")
 print(f"Test Accuracy: {test_acc:.2f}%")
 print(f"Test Loss: {test_loss:.4f}")
@@ -435,7 +435,7 @@ ax.plot(epochs_range, history['train_loss'], 'b-', linewidth=2, label='Training 
 ax.plot(epochs_range, history['val_loss'], 'r-', linewidth=2, label='Validation Loss', marker='s', markersize=4)
 ax.set_xlabel('Epoch', fontsize=14)
 ax.set_ylabel('Loss', fontsize=14)
-ax.set_title('CX-01 Cardiac: Training & Validation Loss', fontsize=16, fontweight='bold')
+ax.set_title('QureSight-Classical Cardiac: Training & Validation Loss', fontsize=16, fontweight='bold')
 ax.legend(fontsize=12)
 ax.grid(True, alpha=0.3)
 plt.tight_layout()
@@ -451,7 +451,7 @@ ax.plot(epochs_range, history['val_acc'], 'r-', linewidth=2, label='Validation A
 ax.axhline(y=best_val_acc, color='g', linestyle='--', alpha=0.7, label=f'Best Val Acc: {best_val_acc:.2f}%')
 ax.set_xlabel('Epoch', fontsize=14)
 ax.set_ylabel('Accuracy (%)', fontsize=14)
-ax.set_title('CX-01 Cardiac: Training & Validation Accuracy', fontsize=16, fontweight='bold')
+ax.set_title('QureSight-Classical Cardiac: Training & Validation Accuracy', fontsize=16, fontweight='bold')
 ax.legend(fontsize=12)
 ax.grid(True, alpha=0.3)
 plt.tight_layout()
@@ -465,7 +465,7 @@ fig, ax = plt.subplots(figsize=(12, 4))
 ax.plot(epochs_range, history['lr'], 'g-', linewidth=2, marker='d', markersize=4)
 ax.set_xlabel('Epoch', fontsize=14)
 ax.set_ylabel('Learning Rate', fontsize=14)
-ax.set_title('CX-01 Cardiac: Learning Rate Schedule (Cosine Annealing)', fontsize=16, fontweight='bold')
+ax.set_title('QureSight-Classical Cardiac: Learning Rate Schedule (Cosine Annealing)', fontsize=16, fontweight='bold')
 ax.set_yscale('log')
 ax.grid(True, alpha=0.3)
 plt.tight_layout()
@@ -485,7 +485,7 @@ sns.heatmap(
 )
 ax.set_xlabel('Predicted Label', fontsize=14)
 ax.set_ylabel('True Label', fontsize=14)
-ax.set_title('CX-01 Cardiac: Confusion Matrix (Test Set)', fontsize=16, fontweight='bold')
+ax.set_title('QureSight-Classical Cardiac: Confusion Matrix (Test Set)', fontsize=16, fontweight='bold')
 plt.tight_layout()
 plt.savefig(GRAPHS_DIR / 'classical_confusion_matrix.png', dpi=150, bbox_inches='tight')
 plt.show()
@@ -504,7 +504,7 @@ sns.heatmap(
 )
 ax.set_xlabel('Predicted Label', fontsize=14)
 ax.set_ylabel('True Label', fontsize=14)
-ax.set_title('CX-01 Cardiac: Normalized Confusion Matrix (Test Set)', fontsize=16, fontweight='bold')
+ax.set_title('QureSight-Classical Cardiac: Normalized Confusion Matrix (Test Set)', fontsize=16, fontweight='bold')
 plt.tight_layout()
 plt.savefig(GRAPHS_DIR / 'classical_confusion_matrix_normalized.png', dpi=150, bbox_inches='tight')
 plt.show()
@@ -522,7 +522,7 @@ bars3 = ax.bar(x + width, f1, width, label='F1-Score', color='#FF9800', edgecolo
 
 ax.set_xlabel('Class', fontsize=14)
 ax.set_ylabel('Score', fontsize=14)
-ax.set_title('CX-01 Cardiac: Per-Class Precision, Recall & F1-Score', fontsize=16, fontweight='bold')
+ax.set_title('QureSight-Classical Cardiac: Per-Class Precision, Recall & F1-Score', fontsize=16, fontweight='bold')
 ax.set_xticks(x)
 ax.set_xticklabels(CLASS_NAMES, fontsize=11)
 ax.legend(fontsize=12)
@@ -557,7 +557,7 @@ for i in range(NUM_CLASSES):
 ax.plot([0, 1], [0, 1], 'k--', alpha=0.5, linewidth=1)
 ax.set_xlabel('False Positive Rate', fontsize=14)
 ax.set_ylabel('True Positive Rate', fontsize=14)
-ax.set_title('CX-01 Cardiac: ROC Curves (One-vs-Rest)', fontsize=16, fontweight='bold')
+ax.set_title('QureSight-Classical Cardiac: ROC Curves (One-vs-Rest)', fontsize=16, fontweight='bold')
 ax.legend(fontsize=11, loc='lower right')
 ax.grid(True, alpha=0.3)
 ax.set_xlim([-0.02, 1.02])
@@ -645,7 +645,7 @@ for images, labels, paths in test_loader:
 
 # Generate Grad-CAM grid
 fig, axes = plt.subplots(NUM_CLASSES, 6, figsize=(30, 5*NUM_CLASSES))
-fig.suptitle('CX-01 Cardiac: Grad-CAM Heatmap Localization', fontsize=20, fontweight='bold', y=1.0)
+fig.suptitle('QureSight-Classical Cardiac: Grad-CAM Heatmap Localization', fontsize=20, fontweight='bold', y=1.0)
 
 for class_idx in range(NUM_CLASSES):
     for sample_idx, (img, lbl, path) in enumerate(class_samples[class_idx][:3]):
@@ -749,7 +749,7 @@ macro_auc = np.mean(list(auc_scores.values()))
 
 # Build comprehensive benchmark report
 benchmark_report = {
-    "model_name": "CX-01 Cardiac Classical",
+    "model_name": "QureSight-Classical Cardiac Classical",
     "model_type": "classical",
     "architecture": "ResNet-18 (ImageNet pretrained) + Custom FC Head",
     "disease": "Heart Attack / Cardiac Arrhythmia",
@@ -815,7 +815,7 @@ print(f"\nBenchmark report saved: {report_path}")
 # %%
 # Print summary
 print(f"\n{'='*60}")
-print(f"CX-01 CARDIAC CLASSICAL MODEL — TRAINING COMPLETE")
+print(f"QureSight-Classical CARDIAC CLASSICAL MODEL — TRAINING COMPLETE")
 print(f"{'='*60}")
 print(f"Test Accuracy:      {test_acc:.2f}%")
 print(f"Macro F1-Score:     {f1_score(test_labels, test_preds, average='macro'):.4f}")

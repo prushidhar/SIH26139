@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     const pName = patient.name || "Patient";
     const pAge = patient.age || 62;
     const pGender = patient.gender || "Male";
-    const pId = patient.id || "QX-CARD-8812";
+    const pId = patient.id || "QS-CARD-8812";
 
     const diagTitle = finding.diagnosis || "Acute Myocardial Infarction";
     const riskScore = finding.riskScore ?? 87.4;

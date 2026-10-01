@@ -47,7 +47,7 @@ class BiomarkerInput(BaseModel):
 class InferenceRequest(BaseModel):
     model_name: str = Field(default="transfinite_1", description="Target model: 'cx_01' | 'transfinite_1' | 'aleph_1'")
     biomarkers: BiomarkerInput
-    ibm_token: Optional[str] = Field(default=None, description="Optional IBM Quantum API token for Aleph-1")
+    ibm_token: Optional[str] = Field(default=None, description="Optional IBM Quantum API token for physical QPU hardware execution")
 
 @router.post("/breast-cancer", status_code=status.HTTP_200_OK)
 async def run_breast_cancer_inference(payload: InferenceRequest):
@@ -91,7 +91,7 @@ async def run_breast_cancer_inference(payload: InferenceRequest):
                 "consensus_status": router_decision["consensus_status"],
             }
         else:
-            # Default to Transfinite-1 (Simulator)
+            # Default to Quantum Simulator (VQC)
             result = transfinite_1_pipeline.predict(biomarker_dict)
 
         return {"success": True, "telemetry": result}

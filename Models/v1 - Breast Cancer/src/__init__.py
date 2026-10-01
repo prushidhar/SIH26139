@@ -9,8 +9,8 @@ Provides unified access to the sequential execution pipeline:
 - 04_quantum_noise_and_error_mitigation.py : Superconducting Noise Channels (Paper 30) & Zero-Noise Extrapolation
 - 05_quantum_explainability_xai.py         : QureExplain Saliency S(G_k), Von Neumann Entropy & OpenQASM 3.0 Receipts
 - 06_train_and_verification_pipeline.py    : 50-Fold Repeated Stratified CV & Statistical Significance Testing
-- 07_classical_inference_engine.py         : Dedicated Standalone Classical Inference Service (CX-01)
-- 08_quantum_hybrid_inference_engine.py    : Dedicated Standalone Quantum Hybrid Inference Service (QX-01)
+- 07_classical_inference_engine.py         : Dedicated Standalone Classical Inference Service (QureSight-Classical)
+- 08_quantum_hybrid_inference_engine.py    : Dedicated Standalone Quantum Hybrid Inference Service (QureSight-VQC)
 - 09_clinical_risk_stratification_engine.py: Calibrated Clinical Risk Stratification Engine
 - 10_generate_benchmark_graphs.py         : Scientific Publication Visualization & Figure Generator
 ====================================================================================================

@@ -2,9 +2,8 @@
 """
 ================================================================================
 QURESIGHT CARDIOLOGY: TABULAR UCI CLEVELAND HEART DISEASE QML PIPELINE
-================================================================================
-Disease-Specific QML Implementation Reference: AstroVall02/QML_Early_Disease_Detection
-Benchmarking & Routing Reference: Quantara (sofiya132)
+Dataset: UCI Cleveland Heart Disease Cohort (303 Clinical Cases, 13 Biomarkers)
+Mathematical Framework: Parameterized Variational Quantum Classification (PennyLane)
 
 Pipeline Architecture:
   1. 13 Hemodynamic Features:

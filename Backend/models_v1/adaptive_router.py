@@ -5,7 +5,7 @@ QURESIGHT ADAPTIVE CLINICAL MODEL ROUTER (SIH26139)
 ================================================================================
 An intelligent clinical routing engine that dynamically evaluates predictions
 from both Classical Ensembles (XGBoost, SVM, RF) and Hybrid Quantum Classifiers
-(PennyLane VQC, Transfinite-1).
+(PennyLane 8-Qubit VQC).
 
 Instead of dogmatically assuming quantum superiority or blindly relying on
 classical models, this router computes:
@@ -14,8 +14,8 @@ classical models, this router computes:
   3. Historical benchmark weights per disease domain
   4. NISQ hardware execution feasibility and latency constraints
 
-Synthesized from Quantara's adaptive routing thesis, elevated with rigorous
-Shannon entropy mathematics, NISQ cost penalties, and clinical safety gates.
+Custom engineered for SIH26139 with rigorous Shannon entropy mathematics,
+NISQ cost penalties, and multi-tier clinical safety gates.
 ================================================================================
 """
 

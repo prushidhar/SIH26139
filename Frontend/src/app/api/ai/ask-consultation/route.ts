@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
       patientInfo = {},
       biomarkers = {},
       screeningResult = {},
-      activeEngine = "Transfinite-1",
+      activeEngine = "Quantum Model (8-Qubit VQC)",
       history = [],
     } = body;
 
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
 
     // Build comprehensive clinical context from real patient data
     const patientName = patientInfo.name || "Yuki";
-    const patientId = patientInfo.patient_id || "QX-BC-5279";
+    const patientId = patientInfo.patient_id || "QS-BC-5279";
     const age = patientInfo.age || 55;
     const gender = patientInfo.gender || "Female";
 
@@ -64,8 +64,8 @@ CELL MEASUREMENTS:
 
 RESULT: ${predictionLabel} | Risk: ${riskScore}/100 | Confidence: ${confidence}%
 TIER: ${riskTier}
-CLASSICAL (CX-01): ${cxRisk}% risk (${cxPred})
-QUANTUM (Transfinite-1): ${tfRisk}% risk (${tfPred})
+CLASSICAL BASELINE: ${cxRisk}% risk (${cxPred})
+QUANTUM MODEL (8-Qubit VQC): ${tfRisk}% risk (${tfPred})
 
 CONVERSATION HISTORY:
 ${history.map((h: any) => `${h.role === "user" ? "Patient" : "Doctor"}: ${h.content.substring(0, 200)}`).join("\n")}
@@ -134,11 +134,11 @@ RULES:
 This score is calculated by analyzing 8 physical cell characteristics against a clinical benchmark of verified histology cases. The measured cell radius is ${r} μm and total area is ${a} μm², both of which remain close to the normal healthy baseline (${WDBC_BENIGN_RADIUS} μm and ${WDBC_BENIGN_AREA} μm²).
 
 Because the risk score is in the ${riskScore < 40 ? "lower" : "moderate"} range, standard protocol recommends routine annual mammography and clinical breast exams unless your physician notes specific localized changes.`;
-    } else if (qLower.includes("quantum") || qLower.includes("classical") || qLower.includes("difference") || qLower.includes("transfinite") || qLower.includes("cx-01")) {
+    } else if (qLower.includes("quantum") || qLower.includes("classical") || qLower.includes("difference") || qLower.includes("vqc") || qLower.includes("baseline")) {
       fallbackAnswer = `For ${patientName}'s biopsy, both the classical computer and quantum simulator evaluated the cells:
 
-• **Classical Model (CX-01)**: Evaluates the cells using traditional machine learning algorithms (Support Vector Machines and XGBoost), yielding a risk score of ${cxRisk.toFixed(1)}% (${cxPred}).
-• **Quantum Model (Transfinite-1)**: Simulates an 8-qubit quantum processor with Pauli-Z feature mapping, resulting in a risk score of ${tfRisk.toFixed(1)}% (${tfPred}).
+• **Classical Model**: Evaluates the cells using traditional machine learning algorithms (Support Vector Machines and XGBoost), yielding a risk score of ${cxRisk.toFixed(1)}% (${cxPred}).
+• **Quantum Model (8-Qubit VQC)**: Simulates an 8-qubit quantum processor with Pauli-Z feature mapping, resulting in a risk score of ${tfRisk.toFixed(1)}% (${tfPred}).
 
 The advantage of the quantum model is that it simulates quantum entanglement between qubits to detect complex geometric interactions—such as subtle combinations of indentation depth and nuclear texture—that traditional linear algorithms can occasionally overlook.`;
     } else if (qLower.includes("cell") || qLower.includes("indentation") || qLower.includes("size") || qLower.includes("concavity")) {

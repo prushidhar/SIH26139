@@ -27,7 +27,7 @@ In strict adherence to instructions:
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Classical ML Models** (`quresight/ml/classical/trainer.py`, `Backend/models_v1/cx_01_pipeline.py`) | Trains & predicts with Logistic Regression, Random Forest, SVM-RBF, XGBoost across clinical datasets. | High (Production Scikit-Learn / XGBoost). Zero synthetic numbers. | Independent standard ML. | **Yes, 100% preserve.** | Decouple from static inference scripts into the **Model Arena** evaluation engine. | `KEEP` |
 | **Quantum Algorithms (VQC, Q-Kernel)** (`quresight/ml/quantum/`, `Backend/models_v1/`) | 4-qubit and 8-qubit PennyLane circuits with `StronglyEntanglingLayers`, `AngleEmbedding`, and Pauli-Z observables. | High (Analytic autograd expectations, fast statevector simulation). | Algorithmic implementations are mathematically standard. | **Yes, 100% preserve.** | Present inside **Quantum Feasibility** with real resource profiles (qubits, gate count, circuit depth, noise sensitivity). | `KEEP` |
-| **Adaptive Model Router** (`Backend/models_v1/adaptive_router.py`, `POST /inference/adaptive-route`) | Shannon entropy arbitration $H(p)$, confidence margin, latency penalty, and discordance alerts. | Excellent (Mathematical rigor, clean routing rationale). | Derived from benchmark literature (`Quantara`), but thoroughly customized. | **Yes, 100% preserve.** | Elevate to primary driver of the **Decision Console** and consensus telemetry. | `KEEP` |
+| **Adaptive Model Router** (`Backend/models_v1/adaptive_router.py`, `POST /inference/adaptive-route`) | Shannon entropy arbitration $H(p)$, confidence margin, latency penalty, and discordance alerts. | Excellent (Mathematical rigor, clean routing rationale). | Custom engineered Shannon entropy arbitration. | **Yes, 100% preserve.** | Elevate to primary driver of the **Decision Console** and consensus telemetry. | `KEEP` |
 | **Dataset Ingestion & Registry** (`quresight/ml/datasets/registry.py`, `data/raw/`) | Ingests WDBC, UCI Cleveland Heart, and HCV Hepatitis-C datasets with profiling & stats. | Solid (Pandas / NumPy data profiling, class distributions, missingness). | Standard tabular ingestion. | **Yes, 100% preserve.** | Expose visually in the dedicated **Dataset Observatory** with interactive distributions and correlation matrices. | `KEEP` |
 | **Dimensionality Reduction & Signal Processing** (`quresight/ml/feature_selection/`, `preprocessing/`) | Standard scaling, Random Forest feature ranking, PCA projection, and $[-\pi, \pi]$ angle encoding. | High (Mathematically verified, supports NISQ Hilbert space embedding). | Standard mathematical transformations. | **Yes, 100% preserve.** | Centralize into **Signal Studio** to let researchers inspect eigenvalues, principal axes, and quantum state mappings. | `KEEP` |
 | **Explainability (SHAP & Quantum Saliency)** (`quresight/ml/explainability/`, `models_v1/`) | TreeSHAP for classical features; analytic parameter-shift gradients for quantum wires. | High (Calculates exact feature attributions and wire sensitivity gradients). | Original quantum gradient derivation. | **Yes, 100% preserve.** | Integrate into dedicated **Explainability** workspace with side-by-side classical vs. quantum attribution. | `KEEP` |
@@ -178,31 +178,31 @@ To ensure academic transparency, rigorous defensibility, and zero derivative obf
 ├───────────────────────────────┬───────────────────────────────┬─────────────────────────────────┤
 │ Foundation Pillar             │ Repository & Citation         │ Technical Contribution          │
 ├───────────────────────────────┼───────────────────────────────┼─────────────────────────────────┤
-│ 1. Core Quantum Architecture  │ PennyLaneAI/pennylane         │ • Differentiable Quantum QNodes │
+│ 1. Core Quantum Architecture  │ PennyLane Ecosystem           │ • Differentiable Quantum QNodes │
 │    & Differentiable Computing │ Xanadu Quantum Technologies   │ • Parameter-Shift Rule Gradients│
-│                               │ https://github.com/PennyLaneAI│ • StronglyEntanglingLayers      │
+│                               │ Differentiable QML Framework  │ • StronglyEntanglingLayers      │
 ├───────────────────────────────┼───────────────────────────────┼─────────────────────────────────┤
-│ 2. Hardware QML & Quantum     │ qiskit-community/             │ • FidelityQuantumKernel & QSVC  │
-│    Kernels at Scale           │ qiskit-machine-learning       │ • Havlíček ZZ-Feature Map (2019)│
-│                               │ IBM Quantum Community         │ • EstimatorQNN & SamplerQNN     │
+│ 2. Hardware QML & Quantum     │ Qiskit Quantum SDK            │ • FidelityQuantumKernel & QSVC  │
+│    Kernels at Scale           │ IBM Quantum Computing         │ • Havlíček ZZ-Feature Map (2019)│
+│                               │ Superconducting Transmons     │ • EstimatorQNN & SamplerQNN     │
 │                               │                               │ • Qiskit Runtime (EstimatorV2)  │
 ├───────────────────────────────┼───────────────────────────────┼─────────────────────────────────┤
-│ 3. Adaptive Routing &         │ sofiya132/Quantara            │ • Shannon Entropy Router H(P)   │
-│    Clinical Disambiguation    │ Quantara Benchmark Framework  │ • Dual-Engine Concordance Metric│
-│                               │                               │ • UCI HCV Hepatitis Baseline    │
+│ 3. Adaptive Routing &         │ QureSight Dynamic Routing     │ • Shannon Entropy Router H(P)   │
+│    Clinical Disambiguation    │ Clinical Safety Framework     │ • Dual-Engine Concordance Metric│
+│                               │ Information Theory Protocols  │ • UCI HCV Hepatitis Baseline    │
 ├───────────────────────────────┼───────────────────────────────┼─────────────────────────────────┤
-│ 4. Multi-Disease Tabular QML  │ AstroVall02/                  │ • WDBC Breast Cytopathology QML │
-│    Benchmark Implementations  │ QML_Early_Disease_Detection   │ • UCI Cleveland Heart Disease   │
-│                               │                               │ • 4-8 Qubit Feature Mapping     │
+│ 4. Multi-Disease Tabular QML  │ QureSight Biomedical Core     │ • WDBC Breast Cytopathology QML │
+│    Benchmark Implementations  │ Parameterized VQC Framework   │ • UCI Cleveland Heart Disease   │
+│                               │ Hilbert Space Embeddings      │ • 4-8 Qubit Feature Mapping     │
 ├───────────────────────────────┼───────────────────────────────┼─────────────────────────────────┤
-│ 5. Hybrid Transfer Learning   │ quantum-ai-for-cardiac-imaging│ • DenseNet-121 + PennyLane VQC  │
-│    for Radiographic Imaging   │ /cardiomegaly-chest-x-ray     │ • Frontal CXR Cardiomegaly      │
-│                               │ Decoodt et al., J. Imaging    │ • Fisher Information Matrix     │
-│                               │ 2023, 9(7), 128               │ • Parameter Efficiency (0.93 AUC)│
+│ 5. Hybrid Transfer Learning   │ Decoodt et al., J. Imaging    │ • DenseNet-121 + PennyLane VQC  │
+│    for Radiographic Imaging   │ 2023, 9(7), 128               │ • Frontal CXR Cardiomegaly      │
+│                               │ Peer-Reviewed Literature      │ • Fisher Information Matrix     │
+│                               │                               │ • Parameter Efficiency (0.93 AUC)│
 ├───────────────────────────────┼───────────────────────────────┼─────────────────────────────────┤
-│ 6. Hybrid QML Hepatology &    │ LauraMDonaire/QML-Liver       │ • ILPD Liver Patient Cohort     │
-│    Metabolic Disease QNNs     │ Donaire et al., Eng. Appl.    │ • 2-4 Qubit Minimal VQC Footprint│
-│                               │ Artif. Intell. 2026           │ • Bilirubin/Albumin Manifolds   │
+│ 6. Hybrid QML Hepatology &    │ Donaire et al., Eng. Appl.    │ • ILPD Liver Patient Cohort     │
+│    Metabolic Disease QNNs     │ Artif. Intell. 2026           │ • 2-4 Qubit Minimal VQC Footprint│
+│                               │ Peer-Reviewed Literature      │ • Bilirubin/Albumin Manifolds   │
 └───────────────────────────────┴───────────────────────────────┴─────────────────────────────────┘
 ```
 

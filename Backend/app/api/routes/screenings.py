@@ -38,7 +38,7 @@ async def create_screening(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    record_id = payload.id or f"QX-{uuid.uuid4().hex[:8].upper()}"
+    record_id = payload.id or f"QS-{uuid.uuid4().hex[:8].upper()}"
     patient_id = payload.patientId or record_id
 
     new_screening = Screening(

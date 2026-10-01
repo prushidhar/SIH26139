@@ -99,9 +99,9 @@ export default function BenchmarksPage() {
     { rank: 5, ansatz: "HardwareEfficient-Qiskit", layers: 1, qubits: 8, topology: "Linear", gateCount: 24, cnotCount: 7, valAuc: 0.9510, accuracy: 82.15, latencyMs: 24.8 },
   ]);
   const [latencyBreakdown, setLatencyBreakdown] = useState<Record<string, LatencyItem>>({
-    classical_cx01: { inferenceTimeMs: 1.18, memoryUsageMb: 42.4, hardware: "AMD Ryzen / NVIDIA CUDA Core", shots: "Deterministic" },
-    quantum_simulator_transfinite1: { inferenceTimeMs: 46.5, memoryUsageMb: 128.6, hardware: "PennyLane Default.Qubit Statevector", shots: "Analytic Expectation" },
-    quantum_hardware_aleph1: { inferenceTimeMs: 1240.0, memoryUsageMb: 184.2, hardware: "IBM Quantum Eagle r3 (127-Qubit Superconducting QPU)", shots: 1024, noiseMitigation: "Zero-Noise Extrapolation (ZNE)" },
+    classical: { inferenceTimeMs: 1.18, memoryUsageMb: 42.4, hardware: "AMD Ryzen / NVIDIA CUDA Core", shots: "Deterministic" },
+    quantum_simulator: { inferenceTimeMs: 46.5, memoryUsageMb: 128.6, hardware: "PennyLane Default.Qubit Statevector", shots: "Analytic Expectation" },
+    quantum_hardware: { inferenceTimeMs: 1240.0, memoryUsageMb: 184.2, hardware: "IBM Quantum Eagle r3 (127-Qubit Superconducting QPU)", shots: 1024, noiseMitigation: "Zero-Noise Extrapolation (ZNE)" },
   });
   const [isLiveLoaded, setIsLiveLoaded] = useState(false);
 
@@ -502,7 +502,7 @@ export default function BenchmarksPage() {
             </div>
 
             <div className="p-4 bg-muted/10 border-t border-border text-xs text-muted-foreground leading-relaxed">
-              <strong>Architectural Takeaway:</strong> Because classical SVM achieves 98.24% on 569 patients, QureSight implements a strict <strong>Dual-Engine Architecture</strong> where the classical engine (<code className="font-mono">CX-01</code>) runs alongside the quantum engine (<code className="font-mono">Transfinite-1</code>). Clinicians receive both perspectives and concordance metrics rather than blind quantum replacement.
+              <strong>Architectural Takeaway:</strong> Because classical SVM achieves 98.24% on 569 patients, QureSight implements a strict <strong>Dual-Engine Architecture</strong> where the classical engine (<code className="font-mono">Classical Baseline</code>) runs alongside the quantum engine (<code className="font-mono">8-Qubit VQC</code>). Clinicians receive both perspectives and concordance metrics rather than blind quantum replacement.
             </div>
           </div>
         </motion.div>
@@ -601,7 +601,7 @@ export default function BenchmarksPage() {
             <div className="p-5 rounded-2xl border border-border bg-card space-y-3 shadow-xs">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground font-bold">
-                  Classical CX-01
+                  Classical Baseline
                 </span>
                 <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold">
                   Ultra Fast
@@ -609,15 +609,15 @@ export default function BenchmarksPage() {
               </div>
               <div className="space-y-1">
                 <div className="font-serif text-3xl font-light text-foreground">
-                  {latencyBreakdown.classical_cx01.inferenceTimeMs} ms
+                  {latencyBreakdown.classical?.inferenceTimeMs} ms
                 </div>
                 <p className="text-xs text-muted-foreground font-mono">
-                  Memory: {latencyBreakdown.classical_cx01.memoryUsageMb} MB
+                  Memory: {latencyBreakdown.classical?.memoryUsageMb} MB
                 </p>
               </div>
               <div className="text-xs text-muted-foreground border-t border-border pt-2.5 space-y-1">
-                <p><strong>Hardware:</strong> {latencyBreakdown.classical_cx01.hardware}</p>
-                <p><strong>Execution:</strong> {latencyBreakdown.classical_cx01.shots}</p>
+                <p><strong>Hardware:</strong> {latencyBreakdown.classical?.hardware}</p>
+                <p><strong>Execution:</strong> {latencyBreakdown.classical?.shots}</p>
               </div>
             </div>
 
@@ -625,7 +625,7 @@ export default function BenchmarksPage() {
             <div className="p-5 rounded-2xl border border-border bg-card space-y-3 shadow-xs">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground font-bold">
-                  Transfinite-1 (Simulator)
+                  Quantum Simulator
                 </span>
                 <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-quantum/10 text-quantum font-bold">
                   Production Default
@@ -633,15 +633,15 @@ export default function BenchmarksPage() {
               </div>
               <div className="space-y-1">
                 <div className="font-serif text-3xl font-light text-foreground">
-                  {latencyBreakdown.quantum_simulator_transfinite1.inferenceTimeMs} ms
+                  {latencyBreakdown.quantum_simulator?.inferenceTimeMs} ms
                 </div>
                 <p className="text-xs text-muted-foreground font-mono">
-                  Memory: {latencyBreakdown.quantum_simulator_transfinite1.memoryUsageMb} MB
+                  Memory: {latencyBreakdown.quantum_simulator?.memoryUsageMb} MB
                 </p>
               </div>
               <div className="text-xs text-muted-foreground border-t border-border pt-2.5 space-y-1">
-                <p><strong>Hardware:</strong> {latencyBreakdown.quantum_simulator_transfinite1.hardware}</p>
-                <p><strong>Readout:</strong> {latencyBreakdown.quantum_simulator_transfinite1.shots}</p>
+                <p><strong>Hardware:</strong> {latencyBreakdown.quantum_simulator?.hardware}</p>
+                <p><strong>Readout:</strong> {latencyBreakdown.quantum_simulator?.shots}</p>
               </div>
             </div>
 
@@ -649,7 +649,7 @@ export default function BenchmarksPage() {
             <div className="p-5 rounded-2xl border border-border bg-card space-y-3 shadow-xs">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground font-bold">
-                  Aleph-1 (Real IBM QPU)
+                  IBM Quantum Eagle QPU
                 </span>
                 <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold">
                   Physical QPU
@@ -657,15 +657,15 @@ export default function BenchmarksPage() {
               </div>
               <div className="space-y-1">
                 <div className="font-serif text-3xl font-light text-foreground">
-                  {latencyBreakdown.quantum_hardware_aleph1.inferenceTimeMs} ms
+                  {latencyBreakdown.quantum_hardware?.inferenceTimeMs} ms
                 </div>
                 <p className="text-xs text-muted-foreground font-mono">
-                  Memory: {latencyBreakdown.quantum_hardware_aleph1.memoryUsageMb} MB
+                  Memory: {latencyBreakdown.quantum_hardware?.memoryUsageMb} MB
                 </p>
               </div>
               <div className="text-xs text-muted-foreground border-t border-border pt-2.5 space-y-1">
-                <p><strong>Hardware:</strong> {latencyBreakdown.quantum_hardware_aleph1.hardware}</p>
-                <p><strong>Mitigation:</strong> {latencyBreakdown.quantum_hardware_aleph1.noiseMitigation}</p>
+                <p><strong>Hardware:</strong> {latencyBreakdown.quantum_hardware?.hardware}</p>
+                <p><strong>Mitigation:</strong> {latencyBreakdown.quantum_hardware?.noiseMitigation}</p>
               </div>
             </div>
           </div>
@@ -691,8 +691,8 @@ export default function BenchmarksPage() {
                 12-Lead ECG Image Classification: ResNet-34 CNN vs 8-Qubit Parametric Quantum Circuit
               </p>
               <p className="leading-relaxed">
-                The classical <strong className="text-foreground">ResNet-34 deep CNN (CX-IM01)</strong> achieves <strong className="text-foreground">96.8% overall accuracy</strong> on 4-class ECG image classification, leveraging 21.3M parameters trained on 12-lead ECG strip images.
-                The <strong className="text-foreground">8-Qubit PQC (Transfinite-IM1)</strong> with StronglyEntanglingLayers achieves <strong className="text-foreground">89.2% accuracy</strong> — however in few-shot clinical scenarios with limited labeled ECGs, the quantum circuit demonstrates a <strong className="text-emerald-600 dark:text-emerald-400">+6.7% advantage</strong> over the CNN baseline.
+                The classical <strong className="text-foreground">ResNet-34 deep CNN</strong> achieves <strong className="text-foreground">96.8% overall accuracy</strong> on 4-class ECG image classification, leveraging 21.3M parameters trained on 12-lead ECG strip images.
+                The <strong className="text-foreground">8-Qubit PQC (QureSight-VQC)</strong> with StronglyEntanglingLayers achieves <strong className="text-foreground">89.2% accuracy</strong> — however in few-shot clinical scenarios with limited labeled ECGs, the quantum circuit demonstrates a <strong className="text-emerald-600 dark:text-emerald-400">+6.7% advantage</strong> over the CNN baseline.
               </p>
             </div>
           </div>
@@ -700,12 +700,12 @@ export default function BenchmarksPage() {
           {/* KPI Summary Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
             <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">CX-IM01 (Classical)</span>
+              <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">Classical (ResNet-34)</span>
               <div className="font-serif text-3xl font-light text-blue-600">96.8%</div>
               <p className="text-[10px] text-muted-foreground">ResNet-34 CNN • 4-class • 21.3M params</p>
             </div>
             <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">Transfinite-IM1 (Hybrid)</span>
+              <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">Quantum VQC (Hybrid)</span>
               <div className="font-serif text-3xl font-light text-quantum">89.2%</div>
               <p className="text-[10px] text-muted-foreground">8-Qubit PQC • StronglyEntanglingLayers</p>
             </div>
@@ -745,8 +745,8 @@ export default function BenchmarksPage() {
                 </thead>
                 <tbody className="font-mono">
                   {[
-                    { model: "CX-IM01 (ResNet-34)", arch: "34-layer Deep CNN + Grad-CAM", acc: "96.8 ± 1.2", auroc: "0.9891", sens: "95.4 ± 2.1", f1: "0.9612 ± 0.014", params: "21.3M" },
-                    { model: "Transfinite-IM1 (8-Qubit PQC)", arch: "StronglyEntanglingLayers × 2", acc: "89.2 ± 1.8", auroc: "0.9720", sens: "86.7 ± 3.4", f1: "0.8845 ± 0.021", params: "112" },
+                    { model: "Classical (ResNet-34)", arch: "34-layer Deep CNN + Grad-CAM", acc: "96.8 ± 1.2", auroc: "0.9891", sens: "95.4 ± 2.1", f1: "0.9612 ± 0.014", params: "21.3M" },
+                    { model: "8-Qubit Hybrid VQC", arch: "StronglyEntanglingLayers × 2", acc: "89.2 ± 1.8", auroc: "0.9720", sens: "86.7 ± 3.4", f1: "0.8845 ± 0.021", params: "112" },
                     { model: "ResNet-50 (Reference)", arch: "50-layer Deep CNN", acc: "97.1 ± 0.9", auroc: "0.9905", sens: "95.8 ± 1.8", f1: "0.9648 ± 0.011", params: "25.6M" },
                     { model: "VGG-16 (Reference)", arch: "16-layer VGG + FC", acc: "94.3 ± 1.6", auroc: "0.9782", sens: "92.1 ± 3.0", f1: "0.9310 ± 0.019", params: "138M" },
                   ].map((row, i) => (
@@ -782,7 +782,7 @@ export default function BenchmarksPage() {
                   <div className="space-y-2">
                     <div>
                       <div className="flex justify-between text-[10px] font-mono mb-1">
-                        <span className="text-blue-600">CX-IM01</span>
+                        <span className="text-blue-600">Classical</span>
                         <span className="font-bold">{c.cxAcc}%</span>
                       </div>
                       <div className="h-2 rounded-full bg-muted overflow-hidden">
@@ -791,7 +791,7 @@ export default function BenchmarksPage() {
                     </div>
                     <div>
                       <div className="flex justify-between text-[10px] font-mono mb-1">
-                        <span className="text-quantum">TF-IM1</span>
+                        <span className="text-quantum">Quantum VQC</span>
                         <span className="font-bold">{c.qAcc}%</span>
                       </div>
                       <div className="h-2 rounded-full bg-muted overflow-hidden">
@@ -818,8 +818,8 @@ export default function BenchmarksPage() {
                   <tr className="border-b border-border">
                     <th className="text-left py-2.5 px-3 font-mono uppercase text-[10px] tracking-wider text-muted-foreground">Training Split</th>
                     <th className="text-left py-2.5 px-3 font-mono uppercase text-[10px] tracking-wider text-muted-foreground">Labeled ECGs</th>
-                    <th className="text-left py-2.5 px-3 font-mono uppercase text-[10px] tracking-wider text-muted-foreground">CX-IM01 (ResNet-34)</th>
-                    <th className="text-left py-2.5 px-3 font-mono uppercase text-[10px] tracking-wider text-muted-foreground">TF-IM1 (8-Qubit PQC)</th>
+                    <th className="text-left py-2.5 px-3 font-mono uppercase text-[10px] tracking-wider text-muted-foreground">Classical (ResNet-34)</th>
+                    <th className="text-left py-2.5 px-3 font-mono uppercase text-[10px] tracking-wider text-muted-foreground">Quantum VQC (8-Qubit)</th>
                     <th className="text-left py-2.5 px-3 font-mono uppercase text-[10px] tracking-wider text-muted-foreground">Quantum Δ</th>
                     <th className="text-left py-2.5 px-3 font-mono uppercase text-[10px] tracking-wider text-muted-foreground">Significance</th>
                   </tr>
@@ -855,17 +855,17 @@ export default function BenchmarksPage() {
           {/* Latency Comparison */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="p-5 rounded-2xl bg-card border border-border space-y-2 shadow-xs">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-bold">CX-IM01 Inference</span>
+              <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-bold">Classical Inference</span>
               <div className="font-serif text-3xl font-light text-foreground">12.4 ms</div>
               <p className="text-[10px] text-muted-foreground font-mono">PyTorch CUDA/CPU • 21.3M params • 3.67 GFLOPs</p>
             </div>
             <div className="p-5 rounded-2xl bg-card border border-border space-y-2 shadow-xs">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-bold">TF-IM1 Inference</span>
+              <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-bold">Quantum VQC Inference</span>
               <div className="font-serif text-3xl font-light text-quantum">54.3 ms</div>
               <p className="text-[10px] text-muted-foreground font-mono">PennyLane Statevector • 112 trainable params</p>
             </div>
             <div className="p-5 rounded-2xl bg-card border border-border space-y-2 shadow-xs">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-bold">Aleph-1 (Real IBM QPU)</span>
+              <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-bold">IBM Quantum (Eagle QPU)</span>
               <div className="font-serif text-3xl font-light text-amber-600">1,840 ms</div>
               <p className="text-[10px] text-muted-foreground font-mono">IBM Eagle r3 • 1024 shots • ZNE + M3</p>
             </div>
@@ -954,7 +954,7 @@ export default function BenchmarksPage() {
                     <td className="py-2.5 px-3 text-muted-foreground">0.6 ms</td>
                   </tr>
                   <tr className="border-b border-border/50 bg-quantum/5">
-                    <td className="py-2.5 px-3 font-semibold text-quantum">Transfinite-4Q Hybrid VQC</td>
+                    <td className="py-2.5 px-3 font-semibold text-quantum">4-Qubit Hybrid VQC</td>
                     <td className="py-2.5 px-3 text-muted-foreground">StronglyEntanglingLayers (3 Layers) + Pauli-Z Readout</td>
                     <td className="py-2.5 px-3 font-semibold text-quantum">80.84 ± 5.31%</td>
                     <td className="py-2.5 px-3 text-quantum font-bold">0.8813 ± 0.0513</td>

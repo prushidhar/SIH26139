@@ -329,7 +329,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 }`}
               >
                 <Sparkles size={12} className="text-quantum" />
-                <span>Transfinite-1 (Simulator)</span>
+                <span>Quantum Simulator</span>
               </button>
               <button
                 type="button"
@@ -339,11 +339,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     ? "bg-parchment text-ink shadow-2xs border border-hairline/80 font-bold text-amber-600"
                     : "text-ink-soft hover:text-ink"
                 }`}
-                title="Aleph-1 (IBM QPU) — Real Quantum Hardware"
+                title="IBM Quantum Eagle QPU — Cloud Hardware"
               >
                 <Cpu size={12} className={quantumBackend === "ibmq_eagle" ? "text-amber-600" : "text-amber-500"} />
-                <span className="hidden sm:inline">Aleph-1 (IBM QPU)</span>
-                <span className="sm:hidden">Aleph-1</span>
+                <span className="hidden sm:inline">IBM Quantum (QPU)</span>
+                <span className="sm:hidden">IBM QPU</span>
                 <span className={`text-[9px] font-mono px-1 py-0.2 rounded border ${
                   quantumBackend === "ibmq_eagle"
                     ? "bg-amber-100 text-amber-800 border-amber-300 font-bold"
@@ -506,11 +506,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
             </Link>
           </div>
 
-          {/* Right: Toggleable Model Selector (Transfinite-1 / Aleph-1) + Notifications + Account */}
+          {/* Right: Toggleable Model Selector (Simulator / IBM QPU) + Notifications + Account */}
           <div className="flex items-center gap-1.5 sm:gap-2">
             {/* Mobile Model Toggle Selector */}
             <div className="flex items-center p-0.5 bg-cream-deep/60 rounded-lg border border-hairline text-[10px] font-mono shrink-0">
-              {/* Transfinite-1 (Simulator Active) */}
+              {/* Quantum Simulator Active */}
               <button
                 type="button"
                 onClick={() => handleBackendChange("gpu_simulator")}
@@ -519,14 +519,14 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     ? "bg-parchment text-quantum shadow-2xs border border-hairline/80 font-bold"
                     : "text-ink-soft hover:text-ink"
                 }`}
-                title="Transfinite-1 (Quantum Simulator Active)"
+                title="Quantum Simulator (PennyLane Active)"
               >
                 <Sparkles size={10} className="text-quantum shrink-0" />
-                <span className="hidden xs:inline">Transfinite-1</span>
-                <span className="xs:hidden">TF-1</span>
+                <span className="hidden xs:inline">Simulator</span>
+                <span className="xs:hidden">Sim</span>
               </button>
 
-              {/* Aleph-1 (IBM QPU) */}
+              {/* IBM Quantum QPU */}
               <button
                 type="button"
                 onClick={() => handleBackendChange("ibmq_eagle")}
@@ -535,10 +535,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     ? "bg-parchment text-amber-600 shadow-2xs border border-hairline/80 font-bold"
                     : "text-ink-soft hover:text-ink"
                 }`}
-                title="Aleph-1 (IBM QPU) — Real Quantum Hardware"
+                title="IBM Quantum Eagle QPU — Cloud Hardware"
               >
                 <Cpu size={10} className="text-amber-500 shrink-0" />
-                <span>Aleph-1</span>
+                <span>IBM QPU</span>
                 <span className="hidden xs:inline text-[8px] font-mono text-amber-700 bg-amber-50 px-0.5 py-0.1 rounded border border-amber-200">
                   {quantumBackend === "ibmq_eagle" ? "Active" : "QPU"}
                 </span>
@@ -1214,7 +1214,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
       </AnimatePresence>
 
       {/* ========================================================================= */}
-      {/* ALEPH-1 REAL QUANTUM HARDWARE CENTER CARD MODAL (WHITE) */}
+      {/* IBM QUANTUM HARDWARE CENTER CARD MODAL (WHITE) */}
       {/* ========================================================================= */}
       <AnimatePresence>
         {showAlephCard && (
@@ -1241,7 +1241,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className="font-serif text-lg font-medium text-ink">Aleph-1 — IBM Quantum QPU</h3>
+                      <h3 className="font-serif text-lg font-medium text-ink">IBM Quantum Eagle QPU</h3>
                       <span className="text-[10px] font-mono text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded-full border border-amber-300 font-bold">
                         Physical Hardware
                       </span>
@@ -1303,7 +1303,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     Physical Quantum Hardware Execution Ready
                   </p>
                   <p className="text-[11px] text-ink-soft leading-relaxed">
-                    Physical IBM Quantum Eagle superconducting circuit execution is active. Patient screenings executed under Aleph-1 generate cryptographic hardware receipts, calibration telemetry, and zero-noise extrapolation (ZNE) error mitigation.
+                    Physical IBM Quantum Eagle superconducting circuit execution is active. Patient screenings executed under physical QPU generate cryptographic hardware receipts, calibration telemetry, and zero-noise extrapolation (ZNE) error mitigation.
                   </p>
                 </div>
               </div>
@@ -1330,7 +1330,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     className="px-5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
                   >
                     <Cpu size={13} />
-                    <span>Activate Aleph-1</span>
+                    <span>Select IBM Quantum QPU</span>
                   </button>
                 </div>
               </div>

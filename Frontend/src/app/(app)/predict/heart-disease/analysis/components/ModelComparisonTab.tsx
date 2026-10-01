@@ -28,8 +28,8 @@ export default function ModelComparisonTab({
   const comparisonRows = [
     {
       factor: "Architecture & Foundation",
-      cx: cxData.name || "CX-IM01: ResNet-34 + Multi-Scale Dilated Convs + CBAM (ECGConVT)",
-      tf: tfData.signature || "Transfinite-IM1: 8-Qubit Universal Data Re-Uploading PQC (3 Layers)",
+      cx: cxData.name || "QureSight-Classical: ResNet-34 + Multi-Scale Dilated Convs + CBAM (ECGConVT)",
+      tf: tfData.signature || "QureSight-VQC: 8-Qubit Universal Data Re-Uploading PQC (3 Layers)",
       takeaway: "Classical uses multi-scale dilated convolutions with CBAM attention; Quantum uses 3-layer data re-uploading unitary gates.",
     },
     {
@@ -140,7 +140,7 @@ export default function ModelComparisonTab({
                 <Cpu size={16} />
               </div>
               <div>
-                <h4 className="text-xs font-bold text-ink">CX-01 Cardiac Classical</h4>
+                <h4 className="text-xs font-bold text-ink">QureSight Classical Baseline</h4>
                 <p className="text-[10px] font-mono text-ink-soft">ResNet-34 Convolutional Architecture</p>
               </div>
             </div>
@@ -169,7 +169,7 @@ export default function ModelComparisonTab({
           </p>
         </div>
 
-        {/* Hybrid Quantum Transfinite-1 */}
+        {/* Hybrid Quantum VQC */}
         <div className={`p-5 rounded-2xl border transition-all ${
           isHybrid ? "bg-white border-quantum shadow-xs" : "bg-white border-hairline opacity-80"
         }`}>
@@ -179,7 +179,7 @@ export default function ModelComparisonTab({
                 <Sparkles size={16} />
               </div>
               <div>
-                <h4 className="text-xs font-bold text-ink">{tfData.signature || "QureSight Transfinite-1"}</h4>
+                <h4 className="text-xs font-bold text-ink">{tfData.signature || "QureSight 8-Qubit VQC"}</h4>
                 <p className="text-[10px] font-mono text-ink-soft">8-Qubit Strongly Entangled VQC</p>
               </div>
             </div>
@@ -227,11 +227,11 @@ export default function ModelComparisonTab({
                 {row.factor}
               </div>
               <div className="md:col-span-3 font-mono text-blue-700 bg-blue-50/50 p-2 rounded-lg border border-blue-100">
-                <span className="text-[10px] uppercase font-mono text-ink-soft block font-bold">Classical (CX-01)</span>
+                <span className="text-[10px] uppercase font-mono text-ink-soft block font-bold">Classical Baseline</span>
                 {row.cx}
               </div>
               <div className="md:col-span-3 font-mono text-emerald-800 bg-emerald-50/50 p-2 rounded-lg border border-emerald-100">
-                <span className="text-[10px] uppercase font-mono text-ink-soft block font-bold">Quantum (Transfinite-1)</span>
+                <span className="text-[10px] uppercase font-mono text-ink-soft block font-bold">Quantum VQC (Hybrid)</span>
                 {row.tf}
               </div>
               <div className="md:col-span-3 text-ink-soft text-[11px] leading-snug">

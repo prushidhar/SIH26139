@@ -586,7 +586,7 @@ export default function HistoryPage() {
                         </span>
                       </td>
 
-                      {/* 5. Hybrid Quantum (Transfinite-IM1) */}
+                      {/* 5. Hybrid Quantum (VQC) */}
                       <td className="py-2.5 px-3 whitespace-nowrap">
                         <span
                           className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold border ${
@@ -600,7 +600,7 @@ export default function HistoryPage() {
                         </span>
                       </td>
 
-                      {/* 6. Classical SOTA (CX-IM01) */}
+                      {/* 6. Classical Baseline */}
                       <td className="py-2.5 px-3 whitespace-nowrap">
                         <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-blue-50 text-blue-700 border border-blue-200">
                           <Activity size={11} className="shrink-0" />
@@ -876,7 +876,7 @@ export default function HistoryPage() {
                 {/* Dual Model Results Grid */}
                 <div className="grid grid-cols-2 gap-3">
                   <div className="p-3.5 rounded-xl border border-purple-200 bg-purple-50/40 space-y-1">
-                    <span className="text-[10px] font-mono font-bold text-purple-700 uppercase">Hybrid Quantum (Transfinite-1)</span>
+                    <span className="text-[10px] font-mono font-bold text-purple-700 uppercase">Hybrid Quantum (8-Qubit VQC)</span>
                     <div className="text-lg font-mono font-black text-purple-800">
                       {selectedCase.quantumPrediction}
                     </div>

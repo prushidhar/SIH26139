@@ -244,7 +244,7 @@ export default function RealTimeGraphsTab({
                     : "bg-blue-50 text-blue-700 border-blue-200"
                 }`}
               >
-                {isHybrid ? "Quantum Transfinite-1" : "Classical CX-01"}
+                {isHybrid ? "Quantum Model (8-Qubit VQC)" : "Classical Baseline (ResNet-34)"}
               </span>
             </div>
             <p className="text-xs text-ink-soft">
@@ -274,7 +274,7 @@ export default function RealTimeGraphsTab({
                 <div className="flex items-center gap-2">
                   <Sparkles size={16} className="text-quantum" />
                   <h4 className="text-sm font-bold text-ink">
-                    Transfinite-IM1: 8-Qubit Universal Data Re-Uploading PQC (Original)
+                    QureSight-VQC: 8-Qubit Universal Data Re-Uploading PQC
                   </h4>
                 </div>
                 <p className="text-xs text-ink-soft mt-0.5 font-mono">
@@ -439,7 +439,7 @@ export default function RealTimeGraphsTab({
             {/* Authentic PennyLane Circuit Code Drawer */}
             <div className="p-4 rounded-xl bg-ink text-parchment font-mono text-xs space-y-2 border border-ink/20">
               <div className="flex items-center justify-between border-b border-hairline/20 pb-2 text-[11px] text-parchment/70">
-                <span>Original PennyLane QNode Source Code (Transfinite-IM1)</span>
+                <span>Authentic PennyLane QNode Source Code (8-Qubit VQC)</span>
                 <span className="text-emerald-400">● 100% Authentic Runtime Circuit</span>
               </div>
               <pre className="text-[11px] text-parchment/90 overflow-x-auto whitespace-pre font-mono p-1">
@@ -503,7 +503,7 @@ def ideal_cardiac_circuit(inputs, weights):
                 72 Weights
               </div>
               <p className="text-[11px] text-ink-soft">
-                3 Layers × 8 Qubits × 3 Euler Angles (φ, θ, ω) with 16 Readout Observables. 299,177× parameter compression compared to the classical 21.5M CX-IM01 model.
+                3 Layers × 8 Qubits × 3 Euler Angles (φ, θ, ω) with 16 Readout Observables. 299,177× parameter compression compared to the classical 21.5M ResNet-34 model.
               </p>
             </div>
           </div>

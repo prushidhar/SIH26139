@@ -1,5 +1,5 @@
 {
-  "model_name": "CX-01 Cardiac Classical",
+  "model_name": "QureSight-Classical Cardiac",
   "model_type": "classical",
   "architecture": "ResNet-18 + FC(512->256->4)",
   "task": "4-class ECG image classification",

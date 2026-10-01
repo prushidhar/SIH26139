@@ -190,8 +190,8 @@ export default function KeyRiskFactorsTab({
               title="Key Risk Factors & Attributions"
               text={
                 isHybrid
-                  ? "Combines verified laboratory cell measurements with Transfinite-1 Quantum Saliency gate rotations, showing exactly which features drove the risk assessment."
-                  : "Combines verified laboratory cell measurements with CX-01 Classical SHAP feature values, showing linear and non-linear tree decision contributions."
+                  ? "Combines verified laboratory cell measurements with Quantum Saliency gate rotations, showing exactly which features drove the risk assessment."
+                  : "Combines verified laboratory cell measurements with Classical SHAP feature values, showing linear and non-linear tree decision contributions."
               }
             />
           </div>

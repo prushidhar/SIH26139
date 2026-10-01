@@ -10,14 +10,14 @@ export async function POST(req: NextRequest) {
       risk_score = 15.0,
       risk_tier = "LOW RISK (BENIGN / NON-NEOPLASTIC)",
       risk_tag = "LOW_RISK",
-      model_engine = "Transfinite-1",
+      model_engine = "Quantum Model (8-Qubit VQC)",
       execution_mode = "simulator",
       shap_attributions = [],
       patient_info = {}
     } = body;
 
     const patientName = patient_info.name || "Patient";
-    const patientId = patient_info.patient_id || "QX-001";
+    const patientId = patient_info.patient_id || "QS-001";
     const age = patient_info.age || 45;
     const gender = patient_info.gender || "Female";
 

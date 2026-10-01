@@ -83,7 +83,7 @@ def calculate_morphometric_evidence_index(biomarkers: Dict[str, float]) -> Tuple
 def compute_calibrated_clinical_risk(
     model_malignant_prob: float,
     biomarkers: Dict[str, float],
-    model_name: str = "CX-01"
+    model_name: str = "QureSight-Classical"
 ) -> Dict[str, Any]:
     """
     Integrates Model Malignancy Probability with Morphometric Evidence Index (MEI)

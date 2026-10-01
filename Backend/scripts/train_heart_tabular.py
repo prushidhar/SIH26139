@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-TRAIN TABULAR HEART DISEASE QML PIPELINE (AstroVall02 Architecture Reference)
+TRAIN TABULAR HEART DISEASE QML PIPELINE (UCI CLEVELAND COHORT)
 ================================================================================
 Trains the dual-engine QML architecture for UCI Cleveland Heart Disease dataset:
   - 13 Clinical Hemodynamic Features
@@ -66,7 +66,7 @@ rf.fit(X_scaled, y)
 lr = LogisticRegression(C=1.0, random_state=42)
 lr.fit(X_scaled, y)
 
-# 3. Setup PennyLane VQC (AstroVall02 StronglyEntanglingLayers)
+# 3. Setup PennyLane VQC (StronglyEntanglingLayers)
 N_QUBITS = 4
 N_LAYERS = 3
 dev = qml.device("default.qubit", wires=N_QUBITS)
@@ -153,7 +153,7 @@ for train_idx, test_idx in skf.split(X, y):
     cv_q_auc.append(roc_auc_score(y_te, q_m.predict_proba(q_te)[:, 1]))
 
 benchmark_report = {
-    "dataset": "UCI Cleveland Heart Disease (AstroVall02 Reference)",
+    "dataset": "UCI Cleveland Heart Disease Cohort",
     "n_samples": int(len(df)),
     "n_features": 13,
     "feature_names": FEATURE_NAMES,

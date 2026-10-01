@@ -40,7 +40,7 @@ export default function BreastCancerAnalysisPage() {
   // Loaded State
   const [patientInfo, setPatientInfo] = useState({
     name: "Patient",
-    patient_id: "QX-BC-1001",
+    patient_id: "QS-BC-1001",
     age: 48,
     gender: "Female",
   });
@@ -57,7 +57,7 @@ export default function BreastCancerAnalysisPage() {
   });
 
   const [screeningResult, setScreeningResult] = useState<any>({
-    engine: "Transfinite-1",
+    engine: "Quantum Model (VQC)",
     model_family: "quresight_hybrid_v1",
     execution_mode: "simulator",
     prediction_label: "Benign",
@@ -147,7 +147,7 @@ export default function BreastCancerAnalysisPage() {
     ? (tfData?.latency_ms ?? screeningResult.latency_ms ?? 17.7)
     : (cxData?.latency_ms ?? 1.5);
 
-  const activeEngineName = isHybrid ? "Transfinite-1" : "CX-01";
+  const activeEngineName = isHybrid ? "Quantum Model (8-Qubit VQC)" : "Classical Baseline";
   const activeEngineSpecs = isHybrid
     ? "8-Qubit ZZ Feature Map + Variational Quantum Classifier (VQC)"
     : "SVM-RBF Hyperplane + XGBoost Gradient Decision Trees";
@@ -255,7 +255,7 @@ export default function BreastCancerAnalysisPage() {
     const payload: ReportPayload = {
       patient: {
         patientName: patientInfo.name || "Patient",
-        patientId: patientInfo.patient_id || "QX-001",
+        patientId: patientInfo.patient_id || "QS-001",
         patientAge: patientInfo.age || 50,
         patientGender: patientInfo.gender || "Female",
         diseaseType: "breast_cancer",
@@ -263,7 +263,7 @@ export default function BreastCancerAnalysisPage() {
       },
       biomarkers: biomarkerEntries,
       transfinite1: {
-        engineName: "Transfinite-1",
+        engineName: "Quantum Model (8-Qubit VQC)",
         engineDescription: "8-Qubit ZZ Variational Quantum Classifier (Simulator)",
         modelType: "hybrid",
         predictionLabel: tfData?.prediction_label || screeningResult.prediction_label || "Unknown",
@@ -285,7 +285,7 @@ export default function BreastCancerAnalysisPage() {
         variationalParams: 48,
       },
       cx01: {
-        engineName: "CX-01",
+        engineName: "Classical Baseline Ensemble",
         engineDescription: "Classical SVM-RBF + XGBoost Ensemble",
         modelType: "classical",
         predictionLabel: cxData?.prediction_label || screeningResult.prediction_label || "Unknown",
@@ -391,7 +391,7 @@ export default function BreastCancerAnalysisPage() {
                   Patient: <span className="font-semibold text-ink">{patientInfo.name || "Yuki"}</span>
                 </span>
                 <span className="text-[11px] font-mono px-2 py-0.2 rounded bg-cream border border-hairline text-ink-soft font-medium">
-                  {patientInfo.patient_id || "QX-BC-5279"}
+                  {patientInfo.patient_id || "QS-BC-5279"}
                 </span>
                 <span className="text-[10px] font-mono uppercase px-2 py-0.2 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold">
                   Intake Verified
@@ -414,7 +414,7 @@ export default function BreastCancerAnalysisPage() {
               }`}
             >
               <Sparkles size={13} className={isHybrid ? "text-quantum" : "text-ink-soft"} />
-              <span>Hybrid Quantum (Transfinite-1)</span>
+              <span>Hybrid Quantum (8-Qubit VQC)</span>
               {isHybrid && <span className="w-1.5 h-1.5 rounded-full bg-quantum" />}
             </button>
             <button
@@ -426,7 +426,7 @@ export default function BreastCancerAnalysisPage() {
               }`}
             >
               <Activity size={13} className={!isHybrid ? "text-blue-600" : "text-ink-soft"} />
-              <span>Classical Baseline (CX-01)</span>
+              <span>Classical Baseline Ensemble</span>
               {!isHybrid && <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />}
             </button>
           </div>

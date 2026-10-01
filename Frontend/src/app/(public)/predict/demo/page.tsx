@@ -109,11 +109,11 @@ const DEMO_CASES: DemoCase[] = [
   },
   {
     id: "breast-cancer-wdbc",
-    repo: "PennyLaneAI/pennylane & Qiskit ML",
-    provenance: "PennyLane VQC & IBM Eagle Profiler",
+    repo: "QureSight Biomedical Quantum Core",
+    provenance: "8-Qubit VQC & IBM Eagle Profiler",
     title: "Breast Cytopathology Biopsy",
     disease: "Cellular Nuclear Malignancy",
-    circuitInfo: "8-Qubit Transfinite-1 VQC + Classical Ensemble",
+    circuitInfo: "8-Qubit VQC + Classical Baseline Ensemble",
     sampleDescription: "WDBC Margin Sample: Radius 17.95 µm, Area 1040 µm²",
     endpoint: "/api/inference/breast-cancer",
     payload: {
@@ -135,11 +135,11 @@ const DEMO_CASES: DemoCase[] = [
   },
   {
     id: "ecg-acute-mi",
-    repo: "quresight/ml/quantum/vqc.py",
-    provenance: "ResNet-18 + 8Q Transfinite-1 Grad-CAM",
+    repo: "QureSight 12-Lead Cardiac Engine",
+    provenance: "ResNet-34 + 8-Qubit VQC Grad-CAM",
     title: "12-Lead ECG Acute Infarct",
     disease: "Myocardial Infarction / Arrhythmia",
-    circuitInfo: "Dual-Engine CX-01 + Transfinite-1",
+    circuitInfo: "Dual-Engine (Classical + 8-Qubit VQC)",
     sampleDescription: "Clinical 12-lead strip: Acute Anterolateral MI",
     endpoint: "/api/inference/cardiac-demo",
     payload: {

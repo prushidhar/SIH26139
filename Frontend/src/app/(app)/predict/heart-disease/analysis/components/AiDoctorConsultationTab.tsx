@@ -104,7 +104,7 @@ export default function AiDoctorConsultationTab({
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const pName = patientInfo?.name || "Patient";
-  const pId = patientInfo?.patient_id || "QX-ECG-1001";
+  const pId = patientInfo?.patient_id || "QS-ECG-1001";
   const pAge = patientInfo?.age || 55;
   const pGender = patientInfo?.gender || "Male";
 

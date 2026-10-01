@@ -225,7 +225,7 @@ class QureSightHybridEngine:
         # Compute QureExplain Quantum Saliency Attributions
         quantum_saliency = self.compute_quantum_saliency(raw_8, x_q)
 
-        active_engine = "Aleph-1" if execution_mode == "real_ibm_qpu" else "Transfinite-1"
+        active_engine = "IBM Quantum Eagle QPU" if execution_mode == "real_ibm_qpu" else "QureSight-VQC"
 
         # Compute Continuous Risk Stratification
         risk_data = compute_calibrated_clinical_risk(p_mal, biomarkers, active_engine)

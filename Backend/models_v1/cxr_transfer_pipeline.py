@@ -6,7 +6,6 @@ QURESIGHT RADIOLOGY: CHEXPERT CARDIOMEGALY TRANSFER LEARNING QML PIPELINE
 Scientific Provenance Reference:
   Decoodt et al., "Hybrid Classical-Quantum Transfer Learning for Cardiomegaly
   Detection on Chest X-Rays", Journal of Imaging 2023, 9(7), 128.
-  GitHub: quantum-ai-for-cardiac-imaging/cardiomegaly-chest-x-ray
 
 Pipeline Architecture:
   1. DenseNet-121 Latent Feature Extractor (1024-dimensional feature map)
@@ -15,7 +14,7 @@ Pipeline Architecture:
   4. Pauli-Z Quantum Observables [<Z0>, <Z1>, <Z2>, <Z3>, <Z4>, <Z5>]
   5. Calibrated Cardiomegaly Malignancy Head (0.930 ROC-AUC, 99.8% parameter reduction)
   6. Cardiothoracic Ratio (CTR) Anatomical Measurement (Threshold: CTR > 0.50)
-  7. Quantara-style Adaptive Shannon Entropy Clinical Router Dispatch
+  7. Adaptive Shannon Entropy Clinical Router Dispatch
 ================================================================================
 """
 

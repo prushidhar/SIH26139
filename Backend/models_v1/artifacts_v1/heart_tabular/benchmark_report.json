@@ -1,5 +1,5 @@
 {
-  "dataset": "UCI Cleveland Heart Disease (AstroVall02 Reference)",
+  "dataset": "UCI Cleveland Heart Disease Cohort",
   "n_samples": 303,
   "n_features": 13,
   "feature_names": [

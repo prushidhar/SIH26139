@@ -107,8 +107,8 @@ Models/v1 - Breast Cancer/
     ├── 04_quantum_noise_and_error_mitigation.py # Step 04: Superconducting noise emulation & ZNE
     ├── 05_quantum_explainability_xai.py   # Step 05: QureExplain gate saliency & OpenQASM 3.0 export
     ├── 06_train_and_verification_pipeline.py # Step 06: Master 50-fold training loop & stats
-    ├── 07_classical_inference_engine.py   # Step 07: Dedicated classical inference service (CX-01)
-    ├── 08_quantum_hybrid_inference_engine.py # Step 08: Dedicated quantum inference service (QX-01)
+    ├── 07_classical_inference_engine.py   # Step 07: Dedicated classical inference service (QureSight-Classical)
+    ├── 08_quantum_hybrid_inference_engine.py # Step 08: Dedicated quantum inference service (QureSight-VQC)
     ├── 09_clinical_risk_stratification_engine.py # Step 09: Calibrated risk scoring & triage tiers
     ├── 10_generate_benchmark_graphs.py    # Step 10: Scientific plotting & figure generation
     └── __init__.py                        # Dynamic module loader and package exports
@@ -143,11 +143,11 @@ Models/v1 - Breast Cancer/
 * **Key Classes & Methods**: `StatisticalSignificanceEngine`, `QureSightMasterPipeline`.
 
 ### [`07_classical_inference_engine.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/src/07_classical_inference_engine.py)
-* **Purpose**: Dedicated standalone inference service for classical models (`CX-01`). Loads production weights from `artifacts_v1/`, expands 8 canonical features to 30 baseline dimensions, computes a weighted ensemble probability ($0.50 \cdot P_{\text{SVM}} + 0.35 \cdot P_{\text{XGB}} + 0.15 \cdot P_{\text{RF}}$), evaluates directional SHAP attributions, and returns calibrated clinical risk tiers in $<5\text{ ms}$.
+* **Purpose**: Dedicated standalone inference service for classical models (`QureSight-Classical`). Loads production weights from `artifacts_v1/`, expands 8 canonical features to 30 baseline dimensions, computes a weighted ensemble probability ($0.50 \cdot P_{\text{SVM}} + 0.35 \cdot P_{\text{XGB}} + 0.15 \cdot P_{\text{RF}}$), evaluates directional SHAP attributions, and returns calibrated clinical risk tiers in $<5\text{ ms}$.
 * **Key Classes & Methods**: `AegisClassicalEngine`, `aegis_engine`.
 
 ### [`08_quantum_hybrid_inference_engine.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/src/08_quantum_hybrid_inference_engine.py)
-* **Purpose**: Dedicated standalone inference service for the hybrid quantum model (`QX-01`). Executes the 8-qubit VQC on local CPU statevector simulators ($<15\text{ ms}$) or compiles to real IBM Quantum superconducting QPUs via Qiskit Runtime, calculating live gate ablation saliencies and OpenQASM 3.0 receipts.
+* **Purpose**: Dedicated standalone inference service for the hybrid quantum model (`QureSight-VQC`). Executes the 8-qubit VQC on local CPU statevector simulators ($<15\text{ ms}$) or compiles to real IBM Quantum superconducting QPUs via Qiskit Runtime, calculating live gate ablation saliencies and OpenQASM 3.0 receipts.
 * **Key Classes & Methods**: `QureSightHybridEngine`, `quresight_engine`.
 
 ### [`09_clinical_risk_stratification_engine.py`](file:///c:/Users/anshu/OneDrive/Desktop/QureSight/Models/v1%20-%20Breast%20Cancer/src/09_clinical_risk_stratification_engine.py)
@@ -195,10 +195,10 @@ cd c:\Users\anshu\OneDrive\Desktop\QureSight
 .\Backend\.venv\Scripts\python.exe "Models/v1 - Breast Cancer/src/06_train_and_verification_pipeline.py"
 
 # --- Production Inference & Publication Visualizers ---
-# 07. Run Dedicated Classical Production Inference Engine (CX-01)
+# 07. Run Dedicated Classical Production Inference Engine (QureSight-Classical)
 .\Backend\.venv\Scripts\python.exe "Models/v1 - Breast Cancer/src/07_classical_inference_engine.py"
 
-# 08. Run Dedicated Hybrid Quantum Production Inference Engine (QX-01)
+# 08. Run Dedicated Hybrid Quantum Production Inference Engine (QureSight-VQC)
 .\Backend\.venv\Scripts\python.exe "Models/v1 - Breast Cancer/src/08_quantum_hybrid_inference_engine.py"
 
 # 09. Run Clinical Risk Stratification & Morphometric Evidence Index (MEI) Engine

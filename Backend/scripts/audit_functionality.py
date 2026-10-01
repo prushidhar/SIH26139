@@ -8,7 +8,7 @@ print("=" * 80)
 # -----------------------------------------------------------------------------
 # 1. FUNCTIONAL TEST: BREAST CANCER CYTOPATHOLOGY DUAL-ENGINE
 # -----------------------------------------------------------------------------
-print("\n[FUNCTIONALITY 1] BREAST CANCER: Classical (CX-01) vs Quantum VQC (Transfinite-1)")
+print("\n[FUNCTIONALITY 1] BREAST CANCER: Classical Baseline vs Quantum VQC")
 print("-" * 80)
 
 cases = {
@@ -39,8 +39,8 @@ for name, biomarkers in cases.items():
     print(f"   Prediction:          {d.get('prediction_label')} ({d.get('confidence')}%)")
     print(f"   Composite Risk Score:{d.get('composite_risk_score')} / 100 [{d.get('risk_tag')}]")
     print(f"   Clinical Action:     {d.get('clinical_action')}")
-    print(f"   Classical CX-01:     {cx.get('prediction_label')} (Risk: {cx.get('risk_score')}, Latency: {cx.get('latency_ms')}ms)")
-    print(f"   Quantum Transfinite-1:{tf.get('prediction_label')} (Risk: {tf.get('risk_score')}, <Z>: {tf.get('quantum_expectation')})")
+    print(f"   Classical Baseline:  {cx.get('prediction_label')} (Risk: {cx.get('risk_score')}, Latency: {cx.get('latency_ms')}ms)")
+    print(f"   Quantum VQC:         {tf.get('prediction_label')} (Risk: {tf.get('risk_score')}, <Z>: {tf.get('quantum_expectation')})")
     top_driver = d.get("shap_attributions", [{}])[0]
     print(f"   Top Diagnostic Driver:{top_driver.get('feature_name')} ({top_driver.get('quantum_impact')})")
 

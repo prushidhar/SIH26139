@@ -203,7 +203,7 @@ export async function POST(req: NextRequest) {
       };
     });
 
-    // PIPELINE 3: Aleph-1 Real IBM Hardware QPU (if requested)
+    // PIPELINE 3: IBM Quantum Hardware QPU (if requested)
     let hardwareReceipt = null;
     let alephTelemetry = null;
     if (execution_mode === "real_ibm_qpu") {
@@ -226,7 +226,7 @@ export async function POST(req: NextRequest) {
           }
         }
       } catch (alephErr) {
-        console.warn("Aleph-1 live QPU note:", alephErr);
+        console.warn("IBM live QPU note:", alephErr);
       }
     }
 
@@ -236,8 +236,8 @@ export async function POST(req: NextRequest) {
       : (execution_mode === "real_ibm_qpu" && alephTelemetry ? alephTelemetry : tfTelemetry);
 
     const activeEngineName = isClassicalPrimary
-      ? "CX-01"
-      : (execution_mode === "real_ibm_qpu" ? "Aleph-1" : "Transfinite-1");
+      ? "Classical Baseline"
+      : (execution_mode === "real_ibm_qpu" ? "IBM Quantum Eagle QPU" : "Quantum Model (8-Qubit VQC)");
 
     const shapAttributions = isClassicalPrimary ? classicalAttributions : quantumAttributions;
 
@@ -247,10 +247,10 @@ export async function POST(req: NextRequest) {
     const dualComparison = {
       consensus: isConcordant ? "CONCORDANT" : "DIVERGENT",
       consensus_summary: isConcordant
-        ? `Both CX-01 and Transfinite-1 independently concord on ${primaryTelemetry.prediction_label.toUpperCase()} assessment.`
-        : `Divergence detected: Quantum simulator Transfinite-1 identified non-linear epistasis boundary deviations.`,
+        ? `Both Classical Baseline and Quantum VQC independently concord on ${primaryTelemetry.prediction_label.toUpperCase()} assessment.`
+        : `Divergence detected: Quantum VQC model identified subtle non-linear boundary deviations.`,
       cx_01: {
-        engine: "CX-01",
+        engine: "Classical Baseline",
         type: "Classical Baseline (SVM-RBF + XGBoost)",
         prediction_label: cxTelemetry.prediction_label,
         confidence: parseFloat(Number(cxTelemetry.confidence_percentage ?? 70.0).toFixed(1)),
@@ -267,7 +267,7 @@ export async function POST(req: NextRequest) {
         shap_attributions: classicalAttributions,
       },
       transfinite_1: {
-        engine: "Transfinite-1",
+        engine: "Quantum Model (8-Qubit VQC)",
         type: "Quantum Hybrid Simulator (ZZ Feature Map + VQC)",
         prediction_label: tfTelemetry.prediction_label,
         confidence: parseFloat(Number(tfTelemetry.confidence_percentage ?? 50.0).toFixed(1)),
@@ -326,7 +326,7 @@ export async function POST(req: NextRequest) {
         const supabase = createClient(supabaseUrl, supabaseKey);
         await supabase.from("screenings").insert({
           id: `scr_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
-          patient_id: patient_info.patient_id || "QX-PATIENT-001",
+          patient_id: patient_info.patient_id || "QS-PATIENT-001",
           patient_name: patient_info.name || "Test Patient",
           patient_age: patient_info.age ? parseInt(patient_info.age) : null,
           patient_gender: patient_info.gender || "Female",

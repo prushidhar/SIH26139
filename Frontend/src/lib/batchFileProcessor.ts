@@ -713,7 +713,7 @@ export async function parseZIP(
           const parsed = await parseMedicalReportFile(file);
 
           const cleanFallbackName = pdfFile.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ");
-          const matchId = pdfFile.name.match(/(Patient-[A-Za-z0-9\-]+|QS-[A-Za-z0-9\-]+|QX-[A-Za-z0-9\-]+)/i);
+          const matchId = pdfFile.name.match(/(Patient-[A-Za-z0-9\-]+|QS-[A-Za-z0-9\-]+)/i);
           const matchName = pdfFile.name
             .replace(/^Case_\d+_/i, "")
             .replace(/^(Patient-[A-Za-z0-9\-]+_)/i, "")
@@ -749,7 +749,7 @@ export async function parseZIP(
           const parsed = await parseMedicalReportFile(file);
 
           const cleanFallbackName = txtFile.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ");
-          const matchId = txtFile.name.match(/(Patient-[A-Za-z0-9\-]+|QS-[A-Za-z0-9\-]+|QX-[A-Za-z0-9\-]+)/i);
+          const matchId = txtFile.name.match(/(Patient-[A-Za-z0-9\-]+|QS-[A-Za-z0-9\-]+)/i);
           const matchName = txtFile.name
             .replace(/^Case_\d+_/i, "")
             .replace(/^(Patient-[A-Za-z0-9\-]+_)/i, "")

@@ -400,8 +400,8 @@ export default function KeyRiskFactorsTab({
               )}
               <h4 className="text-sm font-bold text-ink">
                 {isHybrid
-                  ? "SHAP Explainability & Quantum Entanglement (Transfinite-IM1)"
-                  : "SHAP Explainability & 12-Lead Attribution (CX-IM01 Classical)"}
+                  ? "SHAP Explainability & Quantum Entanglement (8-Qubit VQC)"
+                  : "SHAP Explainability & 12-Lead Attribution (Classical ResNet-34)"}
               </h4>
               <span
                 className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold border ${
@@ -442,7 +442,7 @@ export default function KeyRiskFactorsTab({
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <span className="text-xs font-mono font-bold uppercase tracking-wider text-ink-soft">
-              1. Classical 12-Lead Saliency Waterfall (CX-IM01 Path-Shapley)
+              1. Classical 12-Lead Saliency Waterfall (ResNet-34 Path-Shapley)
             </span>
             <span className="text-[10px] font-mono text-ink-soft">
               shap_explainer_classical.py
@@ -501,7 +501,7 @@ export default function KeyRiskFactorsTab({
           <div className="space-y-4 pt-3 border-t border-hairline">
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono font-bold uppercase tracking-wider text-ink-soft">
-                2. Quantum Q-SHAP Observables &amp; Entanglement Attribution (Transfinite-IM1)
+                2. Quantum Q-SHAP Observables &amp; Entanglement Attribution (8-Qubit VQC)
               </span>
               <span className="text-[10px] font-mono text-ink-soft">
                 shap_explainer_quantum.py

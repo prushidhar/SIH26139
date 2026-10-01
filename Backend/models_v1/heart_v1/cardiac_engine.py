@@ -1,13 +1,13 @@
 """
 ================================================================================
-QureSight Cardiac Diagnostic Engine: Dual-Engine CX-01 & Transfinite-1 (ECG)
+QureSight Cardiac Diagnostic Engine: Dual-Engine Classical & Quantum (ECG)
 ================================================================================
 Production inference pipeline executing:
-  1. CX-01 Classical ResNet-18 with Grad-CAM visual heatmap localization
-  2. Transfinite-1 8-Qubit Variational Quantum Circuit (VQC) with PennyLane
+  1. QureSight-Classical ResNet-18 with Grad-CAM visual heatmap localization
+  2. QureSight-VQC 8-Qubit Variational Quantum Circuit (VQC) with PennyLane
   3. Continuous Cardiac Risk Score (0-100) & Clinical Urgency Stratification
   4. Anatomical Lead Localization (Anterior, Inferior, Lateral ST changes)
-  5. Quantum Circuit Signature: 'QureSight Transfinite-1'
+  5. Quantum Circuit Signature: 'QureSight-VQC'
 ================================================================================
 """
 
@@ -467,9 +467,9 @@ class CardiacDualEngine:
         """
         Executes end-to-end inference on the uploaded ECG image:
           - Clinical Domain Validation & Rotation-Aware Rejection Gate
-          - Classical CX-01 ResNet-18 prediction & class probabilities
+          - Classical ResNet-18 prediction & class probabilities
           - Grad-CAM heatmap generation with anatomical lead pinpointing
-          - Hybrid Transfinite-1 8-Qubit VQC circuit execution
+          - Hybrid 8-Qubit VQC circuit execution
           - Continuous Cardiac Risk Score calculation
           - Dual-Engine consensus analysis
         """
@@ -502,7 +502,7 @@ class CardiacDualEngine:
         orig_img = Image.fromarray(oriented_rgb)
         tensor = IMAGE_TRANSFORM(orig_img).unsqueeze(0).to(self.device)
 
-        # ── 1. Classical CX-01 Inference (Single-Pass Forward) ────────────────
+        # ── 1. Classical Inference (Single-Pass Forward) ─────────────────────
         t0_c = time.time()
         with torch.no_grad():
             x = self.classical_model.conv1(tensor)
@@ -531,7 +531,7 @@ class CardiacDualEngine:
         # ── 2. Grad-CAM Localization (Zero Autograd, Pure OpenCV) ─────────────
         heatmap_b64, loc_meta = self._generate_gradcam(act, pred_idx, oriented_bgr)
 
-        # ── 3. Hybrid Quantum Transfinite-1 Execution ─────────────────────────
+        # ── 3. Hybrid Quantum VQC Execution ──────────────────────────────────
         t0_q = time.time()
         with torch.no_grad():
             # Bottleneck compression: 512-dim visual manifold -> 8 rotation angles
@@ -599,7 +599,7 @@ class CardiacDualEngine:
                 }
             },
             "quantum_engine": {
-                "signature": "QureSight Transfinite-1",
+                "signature": "QureSight-VQC",
                 "qubits": N_QUBITS,
                 "ansatz": "8-Qubit AngleEmbedding + StronglyEntanglingLayers (2 Layers)",
                 "statevector_backend": "PennyLane default.qubit (Analytical)",
@@ -610,7 +610,7 @@ class CardiacDualEngine:
                 "latency_ms": latency_q
             },
             "classical_engine": {
-                "name": "CX-01 Cardiac Classical",
+                "name": "QureSight-Classical Cardiac",
                 "architecture": "ResNet-18 + FC (512 -> 256 -> 4)",
                 "prediction": pred_class,
                 "confidence_pct": round(conf * 100, 2),

@@ -12,7 +12,7 @@
 # ---
 
 # %% [markdown]
-# # QureSight — Hybrid Quantum Heart Attack Detection Model (Transfinite-1 Cardiac)
+# # QureSight — Hybrid Quantum Heart Attack Detection Model (QureSight-VQC Cardiac)
 # ## Frozen ResNet-18 Encoder → 8-Qubit Variational Quantum Classifier
 # 
 # **Dataset**: ECG Images of Cardiac Patients (Kaggle evilspirit05/ecg-analysis)  
@@ -168,7 +168,7 @@ dummy_weights = torch.randn(*weight_shape)
 
 fig, ax = qml.draw_mpl(quantum_circuit, style="pennylane")(dummy_inputs, dummy_weights)
 fig.set_size_inches(20, 8)
-fig.suptitle('Transfinite-1 Cardiac: 8-Qubit VQC Architecture', fontsize=16, fontweight='bold')
+fig.suptitle('QureSight-VQC Cardiac: 8-Qubit VQC Architecture', fontsize=16, fontweight='bold')
 plt.tight_layout()
 plt.savefig(GRAPHS_DIR / 'quantum_circuit_diagram.png', dpi=150, bbox_inches='tight')
 plt.show()
@@ -187,7 +187,7 @@ print(circuit_text)
 # %%
 class HybridQuantumCardiacModel(nn.Module):
     """
-    Transfinite-1 Cardiac: Hybrid Classical-Quantum Heart Attack Detection Model.
+    QureSight-VQC Cardiac: Hybrid Classical-Quantum Heart Attack Detection Model.
     
     Architecture:
         1. Frozen ResNet-18 Encoder: Extracts 512-dim feature vector from ECG image
@@ -395,7 +395,7 @@ patience_counter_q = 0
 training_start_q = time.time()
 
 print("=" * 80)
-print("TRAINING TRANSFINITE-1 CARDIAC HYBRID QUANTUM MODEL")
+print("TRAINING QURESIGHT-VQC CARDIAC HYBRID QUANTUM MODEL")
 print("=" * 80)
 
 for epoch in range(NUM_EPOCHS_Q):
@@ -477,7 +477,7 @@ test_loss_q, test_acc_q, test_preds_q, test_labels_q, test_probs_q = eval_hybrid
 )
 
 print(f"\n{'='*60}")
-print(f"TEST SET RESULTS (Transfinite-1 Hybrid Quantum Cardiac)")
+print(f"TEST SET RESULTS (QureSight-VQC Hybrid Quantum Cardiac)")
 print(f"{'='*60}")
 print(f"Test Accuracy: {test_acc_q:.2f}%")
 print(f"Test Loss: {test_loss_q:.4f}")
@@ -504,7 +504,7 @@ ax.plot(epochs_range_q, history_q['train_loss'], 'purple', linewidth=2, label='T
 ax.plot(epochs_range_q, history_q['val_loss'], 'darkorange', linewidth=2, label='Val Loss', marker='s', markersize=4)
 ax.set_xlabel('Epoch', fontsize=14)
 ax.set_ylabel('Loss', fontsize=14)
-ax.set_title('Transfinite-1 Cardiac: Quantum Training Loss', fontsize=16, fontweight='bold')
+ax.set_title('QureSight-VQC Cardiac: Quantum Training Loss', fontsize=16, fontweight='bold')
 ax.legend(fontsize=12)
 ax.grid(True, alpha=0.3)
 plt.tight_layout()
@@ -519,7 +519,7 @@ ax.plot(epochs_range_q, history_q['val_acc'], 'darkorange', linewidth=2, label='
 ax.axhline(y=best_val_acc_q, color='g', linestyle='--', alpha=0.7, label=f'Best Val: {best_val_acc_q:.2f}%')
 ax.set_xlabel('Epoch', fontsize=14)
 ax.set_ylabel('Accuracy (%)', fontsize=14)
-ax.set_title('Transfinite-1 Cardiac: Quantum Training Accuracy', fontsize=16, fontweight='bold')
+ax.set_title('QureSight-VQC Cardiac: Quantum Training Accuracy', fontsize=16, fontweight='bold')
 ax.legend(fontsize=12)
 ax.grid(True, alpha=0.3)
 plt.tight_layout()
@@ -538,7 +538,7 @@ sns.heatmap(
 )
 ax.set_xlabel('Predicted Label', fontsize=14)
 ax.set_ylabel('True Label', fontsize=14)
-ax.set_title('Transfinite-1 Cardiac: Quantum Confusion Matrix', fontsize=16, fontweight='bold')
+ax.set_title('QureSight-VQC Cardiac: Quantum Confusion Matrix', fontsize=16, fontweight='bold')
 plt.tight_layout()
 plt.savefig(GRAPHS_DIR / 'quantum_confusion_matrix.png', dpi=150, bbox_inches='tight')
 plt.show()
@@ -559,7 +559,7 @@ for i in range(NUM_CLASSES):
 ax.plot([0, 1], [0, 1], 'k--', alpha=0.5)
 ax.set_xlabel('False Positive Rate', fontsize=14)
 ax.set_ylabel('True Positive Rate', fontsize=14)
-ax.set_title('Transfinite-1 Cardiac: Quantum ROC Curves', fontsize=16, fontweight='bold')
+ax.set_title('QureSight-VQC Cardiac: Quantum ROC Curves', fontsize=16, fontweight='bold')
 ax.legend(fontsize=11, loc='lower right')
 ax.grid(True, alpha=0.3)
 plt.tight_layout()
@@ -601,8 +601,8 @@ x = np.arange(len(metrics_names))
 width = 0.35
 
 fig, ax = plt.subplots(figsize=(14, 7))
-bars1 = ax.bar(x - width/2, classical_vals, width, label='CX-01 Classical', color='#2196F3', edgecolor='white')
-bars2 = ax.bar(x + width/2, quantum_vals, width, label='Transfinite-1 Quantum', color='#9C27B0', edgecolor='white')
+bars1 = ax.bar(x - width/2, classical_vals, width, label='QureSight-Classical Classical', color='#2196F3', edgecolor='white')
+bars2 = ax.bar(x + width/2, quantum_vals, width, label='QureSight-VQC Quantum', color='#9C27B0', edgecolor='white')
 
 ax.set_ylabel('Score', fontsize=14)
 ax.set_title('Classical vs Quantum: Model Performance Comparison', fontsize=16, fontweight='bold')
@@ -632,7 +632,7 @@ else:
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
 
 # Parameter count
-models_list = ['CX-01\nClassical', 'Transfinite-1\nQuantum']
+models_list = ['QureSight-Classical\nClassical', 'QureSight-VQC\nQuantum']
 params = [classical_params, trainable_params_hybrid]
 colors_bar = ['#2196F3', '#9C27B0']
 
@@ -655,7 +655,7 @@ explode = (0, 0, 0.1, 0)
 ax2.pie(sizes_pie, explode=explode, labels=labels_pie, colors=colors_pie,
         autopct='%1.1f%%', shadow=True, startangle=90,
         textprops={'fontsize': 10})
-ax2.set_title('Transfinite-1 Parameter Breakdown', fontsize=14, fontweight='bold')
+ax2.set_title('QureSight-VQC Parameter Breakdown', fontsize=14, fontweight='bold')
 
 plt.tight_layout()
 plt.savefig(GRAPHS_DIR / 'parameter_efficiency_comparison.png', dpi=150, bbox_inches='tight')
@@ -746,8 +746,8 @@ for frac in scarce_fractions:
 fig, ax = plt.subplots(figsize=(12, 7))
 percentages = [f*100 for f in scarce_fractions]
 
-ax.plot(percentages, scarce_results_classical, 'b-o', linewidth=2.5, markersize=10, label='CX-01 Classical')
-ax.plot(percentages, scarce_results_quantum, 'purple', linewidth=2.5, marker='D', markersize=10, label='Transfinite-1 Quantum')
+ax.plot(percentages, scarce_results_classical, 'b-o', linewidth=2.5, markersize=10, label='QureSight-Classical Classical')
+ax.plot(percentages, scarce_results_quantum, 'purple', linewidth=2.5, marker='D', markersize=10, label='QureSight-VQC Quantum')
 
 # Shade quantum advantage region
 for i in range(len(percentages)):
@@ -819,7 +819,7 @@ for layer_idx in range(N_LAYERS):
     )
     ax.set_title(f'VQC Layer {layer_idx+1} Gate Saliency', fontsize=14, fontweight='bold')
 
-plt.suptitle('Transfinite-1 Cardiac: Quantum Gate Importance', fontsize=16, fontweight='bold')
+plt.suptitle('QureSight-VQC Cardiac: Quantum Gate Importance', fontsize=16, fontweight='bold')
 plt.tight_layout()
 plt.savefig(GRAPHS_DIR / 'quantum_gate_saliency.png', dpi=150, bbox_inches='tight')
 plt.show()
@@ -829,7 +829,7 @@ plt.show()
 
 # %%
 quantum_benchmark = {
-    "model_name": "Transfinite-1 Cardiac Quantum",
+    "model_name": "QureSight-VQC Cardiac Quantum",
     "model_type": "hybrid_quantum",
     "architecture": "Frozen ResNet-18 encoder → FC(512→8) → 8-Qubit VQC → FC(8→4)",
     "disease": "Heart Attack / Cardiac Arrhythmia",
@@ -910,7 +910,7 @@ print(f"Benchmark report updated: {report_path}")
 
 # %%
 print(f"\n{'='*60}")
-print(f"TRANSFINITE-1 CARDIAC QUANTUM MODEL — TRAINING COMPLETE")
+print(f"QURESIGHT-VQC CARDIAC QUANTUM MODEL — TRAINING COMPLETE")
 print(f"{'='*60}")
 print(f"Test Accuracy:      {test_acc_q:.2f}%")
 print(f"Macro F1-Score:     {quantum_f1:.4f}")

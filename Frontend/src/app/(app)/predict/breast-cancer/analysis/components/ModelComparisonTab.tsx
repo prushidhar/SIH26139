@@ -105,7 +105,7 @@ export default function ModelComparisonTab({
         <div className="space-y-0.5">
           <div className="flex items-center gap-2">
             <h3 className="text-sm font-bold text-ink">
-              Genuine Model Comparison: Classical (CX-01) vs. Quantum (Transfinite-1)
+              Genuine Model Comparison: Classical Baseline vs. Quantum VQC
             </h3>
             <HelpTooltip
               title="Model Comparison"
@@ -145,7 +145,7 @@ export default function ModelComparisonTab({
               </span>
             </h4>
             <p className="text-amber-800 leading-relaxed">
-              Classical engine (CX-01) predicted <strong className="font-semibold text-amber-950">{cxPrediction} ({cxRisk}%)</strong> while Quantum engine (Transfinite-1) predicted <strong className="font-semibold text-amber-950">{tfPrediction} ({tfRisk}%)</strong>. Because single-model blind spots can cause False Negatives, automated clearance is withheld. Secondary molecular confirmation (HER2 / IHC staining or core biopsy) is strongly recommended.
+              Classical engine predicted <strong className="font-semibold text-amber-950">{cxPrediction} ({cxRisk}%)</strong> while Quantum engine (8-Qubit VQC) predicted <strong className="font-semibold text-amber-950">{tfPrediction} ({tfRisk}%)</strong>. Because single-model blind spots can cause False Negatives, automated clearance is withheld. Secondary molecular confirmation (HER2 / IHC staining or core biopsy) is strongly recommended.
             </p>
           </div>
         </div>
@@ -153,7 +153,7 @@ export default function ModelComparisonTab({
 
       {/* Middle: 2 Side-by-Side Model Summaries Separated by Hairline Divider */}
       <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-hairline border-b border-hairline">
-        {/* Left Column: Classical Baseline (CX-01) */}
+        {/* Left Column: Classical Baseline */}
         <div className={`p-6 space-y-4 ${!isHybrid ? "bg-blue-50/20" : ""}`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -161,7 +161,7 @@ export default function ModelComparisonTab({
                 <Cpu size={15} />
               </div>
               <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
-                Classical Baseline (CX-01)
+                Classical Baseline
               </span>
             </div>
             <span className="text-xs text-ink-soft font-mono font-semibold">~{cxLatency} ms</span>
@@ -197,7 +197,7 @@ export default function ModelComparisonTab({
           </div>
         </div>
 
-        {/* Right Column: Quantum Simulator (Transfinite-1) */}
+        {/* Right Column: Quantum Simulator */}
         <div className={`p-6 space-y-4 ${isHybrid ? "bg-quantum/5" : ""}`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -205,7 +205,7 @@ export default function ModelComparisonTab({
                 <Sparkles size={15} />
               </div>
               <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-700 border border-purple-200">
-                Quantum Simulator (Transfinite-1)
+                Quantum Simulator (8-Qubit VQC)
               </span>
             </div>
             <span className="text-xs text-ink-soft font-mono font-semibold">~{tfLatency} ms</span>
@@ -254,8 +254,8 @@ export default function ModelComparisonTab({
             <thead className="bg-cream/40 text-ink-soft font-mono uppercase text-[10px] border-b border-hairline">
               <tr>
                 <th className="py-3 px-4 font-semibold">Evaluation Factor</th>
-                <th className="py-3 px-4 font-semibold text-blue-700">Classical (CX-01)</th>
-                <th className="py-3 px-4 font-semibold text-purple-700">Quantum (Transfinite-1)</th>
+                <th className="py-3 px-4 font-semibold text-blue-700">Classical Baseline</th>
+                <th className="py-3 px-4 font-semibold text-purple-700">Quantum VQC</th>
                 <th className="py-3 px-4 font-semibold">Clinical Takeaway</th>
               </tr>
             </thead>

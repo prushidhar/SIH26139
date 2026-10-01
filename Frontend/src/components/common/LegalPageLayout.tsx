@@ -99,7 +99,7 @@ export function LegalPageLayout({
           <div className="flex items-center gap-4 text-xs font-mono text-white/40 uppercase tracking-widest pb-12 border-b border-white/10 mb-12">
             <span>Last Updated: {lastUpdated}</span>
             <span>•</span>
-            <span>Document ID: QX-POL-2026</span>
+            <span>Document ID: QS-POL-2026</span>
           </div>
 
           {/* Legal Prose Content */}

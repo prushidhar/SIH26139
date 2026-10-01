@@ -113,7 +113,7 @@ export default function RealTimeGraphsTab({
   ];
   const featureKeys = Object.keys(COMBINED_BIOMARKER_DATA);
 
-  // Quantum Telemetry (Transfinite-1)
+  // Quantum Telemetry (8-Qubit VQC)
   const quantumExpectation =
     screeningResult.quantum_expectation ?? screeningResult.quantum_expectation_val ?? -0.0127;
   const rawQubitExpectations =
@@ -256,13 +256,13 @@ export default function RealTimeGraphsTab({
               </h3>
               <HelpTooltip
                 title="Model Geometry Telemetry"
-                text={`Continuous mathematical plots computed directly from ${patientName || "the patient"}'s biomarker inputs, ${isHybrid ? "PennyLane quantum Pauli-Z statevectors" : "CX-01 classical SVM-RBF decision hyperplanes"}, and dual classification manifolds.`}
+                text={`Continuous mathematical plots computed directly from ${patientName || "the patient"}'s biomarker inputs, ${isHybrid ? "PennyLane quantum Pauli-Z statevectors" : "classical SVM-RBF decision hyperplanes"}, and dual classification manifolds.`}
               />
             </div>
             <p className="text-xs text-ink-soft">
               {isHybrid
-                ? `Active Architecture: Transfinite-1 (8-Qubit VQC Simulator) · Visualizing Pauli-Z quantum rotations and non-linear boundary manifolds for ${patientName}.`
-                : `Active Architecture: CX-01 (Classical SVM + XGBoost) · Visualizing Euclidean hyperplane distance and Gini decision tree splits for ${patientName}.`}
+                ? `Active Architecture: 8-Qubit VQC Simulator · Visualizing Pauli-Z quantum rotations and non-linear boundary manifolds for ${patientName}.`
+                : `Active Architecture: Classical Ensemble (SVM + XGBoost) · Visualizing Euclidean hyperplane distance and Gini decision tree splits for ${patientName}.`}
             </p>
           </div>
           <div className="flex items-center gap-2 shrink-0 flex-wrap">
@@ -278,7 +278,7 @@ export default function RealTimeGraphsTab({
               }`}
             >
               {isHybrid ? <Sparkles size={11} /> : <Cpu size={11} />}
-              <span>{isHybrid ? "Transfinite-1 (VQC) Active" : "CX-01 (Classical) Active"}</span>
+              <span>{isHybrid ? "Quantum Model (VQC) Active" : "Classical Baseline Active"}</span>
             </span>
           </div>
         </div>
@@ -376,7 +376,7 @@ export default function RealTimeGraphsTab({
           <div className="flex items-center gap-2">
             <Split size={15} className="text-quantum" />
             <h4 className="text-xs font-bold uppercase tracking-wider text-ink">
-              Part 2: Model Mathematical Inference ({isHybrid ? "Transfinite-1 VQC" : "CX-01 Classical"})
+              Part 2: Model Mathematical Inference ({isHybrid ? "Quantum VQC" : "Classical Baseline"})
             </h4>
           </div>
           <div
@@ -414,8 +414,8 @@ export default function RealTimeGraphsTab({
                 </h4>
                 <p className="text-[11px] text-ink-soft">
                   {isHybrid
-                    ? "Pauli-Z quantum spin projection across Transfinite-1 quantum circuit wires."
-                    : "SVM decision hyperplane margin distance and XGBoost split weights for CX-01."}
+                    ? "Pauli-Z quantum spin projection across 8-qubit variational circuit wires."
+                    : "SVM decision hyperplane margin distance and XGBoost split weights."}
                 </p>
               </div>
               <span
@@ -572,10 +572,10 @@ export default function RealTimeGraphsTab({
             </div>
             <div className="flex items-center gap-2">
               <span className="text-[10px] font-mono bg-purple-50 text-purple-700 px-2 py-0.5 rounded border border-purple-200 font-medium">
-                Transfinite-1: {tfRiskScore.toFixed(1)}% (Benign)
+                Quantum VQC: {tfRiskScore.toFixed(1)}% (Benign)
               </span>
               <span className="text-[10px] font-mono bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-200 font-medium">
-                CX-01: {cxRiskScore.toFixed(1)}% (Malignant)
+                Classical Baseline: {cxRiskScore.toFixed(1)}% (Malignant)
               </span>
             </div>
           </div>
@@ -624,7 +624,7 @@ export default function RealTimeGraphsTab({
                   strokeWidth={2.5}
                   strokeDasharray="4 4"
                   label={{
-                    value: `${patientName} [${isHybrid ? "Transfinite-1" : "CX-01"}: ${currentRiskScore.toFixed(1)}%]`,
+                    value: `${patientName} [${isHybrid ? "Quantum VQC" : "Classical"}: ${currentRiskScore.toFixed(1)}%]`,
                     fill: isHybrid ? "#7c3aed" : "#2563eb",
                     fontSize: 11,
                     position: "top",
@@ -633,7 +633,7 @@ export default function RealTimeGraphsTab({
                 <Area
                   type="monotone"
                   dataKey="classical"
-                  name="Classical Sigmoid (CX-01)"
+                  name="Classical Baseline Ensemble"
                   stroke="#2563eb"
                   strokeWidth={isHybrid ? 1.5 : 3}
                   fill="#2563eb"
@@ -642,7 +642,7 @@ export default function RealTimeGraphsTab({
                 <Area
                   type="monotone"
                   dataKey="quantum"
-                  name="Quantum VQC (Transfinite-1)"
+                  name="Quantum Model (8-Qubit VQC)"
                   stroke="#7c3aed"
                   strokeWidth={isHybrid ? 3 : 1.5}
                   fill="#7c3aed"
@@ -662,7 +662,7 @@ export default function RealTimeGraphsTab({
               </span>
             </div>
             <p className="text-ink-soft text-[11px] font-light leading-relaxed">
-              Classical CX-01 scored <strong>{cxRiskScore.toFixed(1)}% (Mild Suspicion / Malignant)</strong> due to linear Euclidean surface metrics. Hybrid Quantum Transfinite-1 evaluated non-linear qubit entanglement across chromatin concavities, correctly identifying the sample as <strong>{tfRiskScore.toFixed(1)}% (Benign)</strong> with 0.00% decoherence fidelity.
+              Classical baseline scored <strong>{cxRiskScore.toFixed(1)}% (Mild Suspicion / Malignant)</strong> due to linear Euclidean surface metrics. Hybrid Quantum VQC evaluated non-linear qubit entanglement across chromatin concavities, correctly identifying the sample as <strong>{tfRiskScore.toFixed(1)}% (Benign)</strong>.
             </p>
           </div>
         </div>

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-TRANSFINITE-1: DEDICATED QUANTUM HYBRID BASELINE SIMULATOR PIPELINE
+QURESIGHT-VQC: DEDICATED QUANTUM HYBRID BASELINE SIMULATOR PIPELINE
 ================================================================================
 The baseline quantum-classical hybrid inference engine for QureSight.
 Executes 8-Qubit Second-Order Pauli-Z Feature Map and 2-layer Parameterized
@@ -62,11 +62,11 @@ except ImportError:
 
 
 class Transfinite1Pipeline:
-    """Dedicated Hybrid Quantum Simulator Pipeline (Transfinite-1)"""
+    """Dedicated Hybrid Quantum Simulator Pipeline (QureSight-VQC)"""
 
     def __init__(self):
         self.version = "1.0.0-PROD"
-        self.model_name = "Transfinite-1"
+        self.model_name = "QureSight-VQC (8-Qubit)"
         self.qubit_count = 8
         self._load_artifacts()
 
@@ -75,7 +75,7 @@ class Transfinite1Pipeline:
         weights_path = os.path.join(ARTIFACTS_DIR, "vqc_weights.npy")
         
         if not os.path.exists(q_scaler_path) or not os.path.exists(weights_path):
-            raise FileNotFoundError(f"Transfinite-1 artifacts missing in: {ARTIFACTS_DIR}")
+            raise FileNotFoundError(f"Quantum VQC artifacts missing in: {ARTIFACTS_DIR}")
 
         self.q_scaler = joblib.load(q_scaler_path)
         self.weights = np.load(weights_path)
@@ -134,7 +134,7 @@ class Transfinite1Pipeline:
         return saliencies
 
     def predict(self, biomarkers: Dict[str, float], patient_meta: Dict[str, Any] = None) -> Dict[str, Any]:
-        """Executes Transfinite-1 quantum simulator inference pipeline."""
+        """Executes QureSight-VQC quantum simulator inference pipeline."""
         t0 = time.perf_counter()
         
         defaults = {
@@ -191,4 +191,4 @@ if __name__ == "__main__":
         "smoothness_mean": 0.073, "compactness_mean": 0.048, "concavity_mean": 0.026, "concave_points_mean": 0.018
     }
     res = transfinite_1_pipeline.predict(case)
-    print(f"Transfinite-1 Output: {res['prediction_label']} ({res['confidence_percentage']:.1f}%) | Risk: {res['composite_risk_score']:.1f}/100")
+    print(f"QureSight-VQC Output: {res['prediction_label']} ({res['confidence_percentage']:.1f}%) | Risk: {res['composite_risk_score']:.1f}/100")

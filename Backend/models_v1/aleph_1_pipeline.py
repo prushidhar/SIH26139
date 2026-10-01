@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-ALEPH-1: DEDICATED FINE-TUNED REAL IBM QUANTUM HARDWARE PIPELINE
+IBM QUANTUM: DEDICATED FINE-TUNED REAL IBM QUANTUM HARDWARE PIPELINE
 ================================================================================
 The hardware-calibrated quantum hybrid model for QureSight.
 Engineered for deployment on 127-qubit superconducting transmon processors
@@ -67,11 +67,11 @@ except ImportError:
 
 
 class Aleph1QpuPipeline:
-    """Dedicated Fine-Tuned Real IBM Hardware QPU Pipeline (Aleph-1)"""
+    """Dedicated Fine-Tuned Real IBM Hardware QPU Pipeline"""
 
     def __init__(self):
         self.version = "1.0.0-PROD-QPU"
-        self.model_name = "Aleph-1"
+        self.model_name = "IBM Quantum Eagle QPU"
         self.qubit_count = 8
         self.target_qpu = "ibm_brisbane (127-Qubit Eagle r3)"
         self._load_artifacts()
@@ -81,7 +81,7 @@ class Aleph1QpuPipeline:
         weights_path = os.path.join(ARTIFACTS_DIR, "vqc_weights.npy")
         
         if not os.path.exists(q_scaler_path) or not os.path.exists(weights_path):
-            raise FileNotFoundError(f"Aleph-1 artifacts missing in: {ARTIFACTS_DIR}")
+            raise FileNotFoundError(f"IBM Quantum artifacts missing in: {ARTIFACTS_DIR}")
 
         self.q_scaler = joblib.load(q_scaler_path)
         self.weights = np.load(weights_path)
@@ -104,7 +104,7 @@ class Aleph1QpuPipeline:
             lines.append(f'cx q[{i}], q[{i+1}];')
             lines.append(f'rz({val:.6f}) q[{i+1}];')
             lines.append(f'cx q[{i}], q[{i+1}];')
-        lines.append('// 2. Variational Quantum Classifier (Aleph-1 Layer)')
+        lines.append('// 2. Variational Quantum Classifier (IBM Quantum Layer)')
         for l in range(self.weights.shape[0]):
             for i in range(8):
                 lines.append(f'rz({float(self.weights[l, i, 0]):.6f}) q[{i}];')
@@ -209,7 +209,7 @@ class Aleph1QpuPipeline:
         return saliencies
 
     def predict(self, biomarkers: Dict[str, float], ibm_token: Optional[str] = None) -> Dict[str, Any]:
-        """Executes Aleph-1 real IBM hardware inference pipeline."""
+        """Executes IBM Quantum real hardware inference pipeline."""
         t0 = time.perf_counter()
         
         defaults = {
@@ -260,4 +260,4 @@ if __name__ == "__main__":
         "smoothness_mean": 0.103, "compactness_mean": 0.284, "concavity_mean": 0.318, "concave_points_mean": 0.174
     }
     res = aleph_1_pipeline.predict(case)
-    print(f"Aleph-1 Status: {res['hardware_receipt']['status']} | Target: {res['hardware_receipt']['qpu_target']}")
+    print(f"IBM Quantum Status: {res['hardware_receipt']['status']} | Target: {res['hardware_receipt']['qpu_target']}")

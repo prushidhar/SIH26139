@@ -230,7 +230,7 @@ class CryptographicQuantumReceiptGenerator:
         receipt_hash = hashlib.sha256(raw_payload.encode("utf-8")).hexdigest()
         
         receipt = {
-            "receipt_id": f"QX-CERT-{receipt_hash[:12].upper()}",
+            "receipt_id": f"QS-CERT-{receipt_hash[:12].upper()}",
             "sha256_hash": receipt_hash,
             "patient_id": patient_id,
             "backend": self.backend_name,

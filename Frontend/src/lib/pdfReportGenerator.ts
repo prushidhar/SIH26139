@@ -8,12 +8,12 @@
  * Report Structure (12+ Pages):
  *   Page 1:  Cover Page — QureSight branding, patient info, report metadata
  *   Page 2:  Patient Clinical Intake — Demographics + Submitted Biomarker Data Table
- *   Page 3:  Transfinite-1 (Quantum) Prediction & Risk Stratification
- *   Page 4:  Transfinite-1 SHAP / Gate Explainability + Top Risk/Protective Factors
- *   Page 5:  CX-01 (Classical) Prediction & Risk Stratification
- *   Page 6:  CX-01 SHAP Feature Attribution Analysis
+ *   Page 3:  Quantum VQC Prediction & Risk Stratification
+ *   Page 4:  Quantum Saliency / Gate Explainability + Top Risk/Protective Factors
+ *   Page 5:  Classical Baseline Prediction & Risk Stratification
+ *   Page 6:  Classical SHAP Feature Attribution Analysis
  *   Page 7:  Dual-Engine Comparison Table + Consensus Analysis
- *   Page 8:  Quantum Circuit Architecture + Hardware Receipt (if Aleph-1)
+ *   Page 8:  Quantum Circuit Architecture + Hardware Execution Receipt
  *   Page 9:  SHAP Waterfall Visualization (drawn as horizontal bar chart)
  *   Page 10: QureSight AI Clinical Intelligence Summary (Gemini analysis text)
  *   Page 11: Clinical Advice, Recommended Next Steps
@@ -312,7 +312,7 @@ export function generateCombinedReport(payload: ReportPayload): jsPDF {
   const tfColor = riskColor(payload.transfinite1.riskTag);
   const cxColor = riskColor(payload.cx01.riskTag);
 
-  // Transfinite-1 Card (Left)
+  // Quantum VQC Card (Left)
   doc.setFillColor(...C.quantumBg);
   doc.roundedRect(M, y, cardW, cardH, 2.5, 2.5, "F");
   doc.setDrawColor(...C.violet);
@@ -339,7 +339,7 @@ export function generateCombinedReport(payload: ReportPayload): jsPDF {
   doc.setTextColor(...C.violet);
   doc.text("Hilbert Space: 2^8 = 256 Basis States", M + 4, y + 36);
 
-  // CX-01 Card (Right)
+  // Classical Ensemble Card (Right)
   const cxX = M + cardW + 4;
   doc.setFillColor(...C.classicBg);
   doc.roundedRect(cxX, y, cardW, cardH, 2.5, 2.5, "F");
@@ -400,7 +400,7 @@ export function generateCombinedReport(payload: ReportPayload): jsPDF {
     },
     {
       title: "2. Dual-Engine Quantum vs Classical Phase-Space Concordance",
-      desc: `The Transfinite-1 variational quantum classifier evaluated compressed 12-lead phase-space representations in 256-dimensional Hilbert space, returning a continuous cardiac risk score of ${payload.transfinite1.riskScore.toFixed(1)}/100 (${payload.transfinite1.confidence.toFixed(1)}% certainty). The classical CX-01 deep convolutional baseline independently scored ${payload.cx01.riskScore.toFixed(1)}/100 (${payload.cx01.confidence.toFixed(1)}% confidence). Consensus status: ${payload.consensusStatus.toUpperCase()}.`,
+      desc: `The Quantum VQC model evaluated compressed 12-lead phase-space representations in 256-dimensional Hilbert space, returning a continuous cardiac risk score of ${payload.transfinite1.riskScore.toFixed(1)}/100 (${payload.transfinite1.confidence.toFixed(1)}% certainty). The classical convolutional baseline independently scored ${payload.cx01.riskScore.toFixed(1)}/100 (${payload.cx01.confidence.toFixed(1)}% confidence). Consensus status: ${payload.consensusStatus.toUpperCase()}.`,
     },
     {
       title: "3. Diagnostic Certainty & Clinical Risk Calibration",
@@ -415,7 +415,7 @@ export function generateCombinedReport(payload: ReportPayload): jsPDF {
     },
     {
       title: "2. Dual-Engine Quantum vs Classical Hyperplane Concordance",
-      desc: `Transfinite-1 evaluated the 30-dimensional cytopathological feature vector mapped into 256-basis state Hilbert space, producing a composite risk score of ${payload.transfinite1.riskScore.toFixed(1)}/100 (${payload.transfinite1.confidence.toFixed(1)}% certainty). CX-01 produced an independent score of ${payload.cx01.riskScore.toFixed(1)}/100 (${payload.cx01.confidence.toFixed(1)}% confidence). Consensus: ${payload.consensusStatus.toUpperCase()}.`,
+      desc: `The Quantum VQC model evaluated the 30-dimensional cytopathological feature vector mapped into 256-basis state Hilbert space, producing a composite risk score of ${payload.transfinite1.riskScore.toFixed(1)}/100 (${payload.transfinite1.confidence.toFixed(1)}% certainty). The classical baseline produced an independent score of ${payload.cx01.riskScore.toFixed(1)}/100 (${payload.cx01.confidence.toFixed(1)}% confidence). Consensus: ${payload.consensusStatus.toUpperCase()}.`,
     },
     {
       title: "3. Diagnostic Certainty & Staging Alignment",
@@ -838,7 +838,7 @@ export function generateCombinedReport(payload: ReportPayload): jsPDF {
     y = (doc as any).lastAutoTable.finalY + 5;
   }
 
-  // Top Factors List for CX-01
+  // Top Factors List for Classical Baseline
   const cxRisk = payload.cx01.attributions.filter((a) => a.direction === "risk_elevating").slice(0, 3);
   if (cxRisk.length > 0) {
     doc.setFontSize(7.5);

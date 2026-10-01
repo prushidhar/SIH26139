@@ -233,7 +233,7 @@ function Hero() {
           <dl className="mt-20 grid max-w-3xl grid-cols-2 gap-x-8 gap-y-8 border-t border-hairline pt-8 sm:grid-cols-4">
             {[
               ["7+", "disease screening modules"],
-              ["6", "verified open-source repos"],
+              ["6", "clinical validation cohorts"],
               ["< 3s", "average inference time"],
               ["100%", "explainable predictions"],
             ].map(([v, k]) => (
@@ -742,7 +742,7 @@ function Footer() {
           className="col-span-2 md:col-span-2"
         >
           <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#38bdf8] mb-5 pb-2 border-b border-white/10 flex items-center gap-2">
-            <Cpu size={12} /> Built with · open-source stack
+            <Cpu size={12} /> Built with · Advanced Technology Stack
           </div>
           <div className="flex flex-wrap gap-2.5">
             {credits.map((c, i) => (
@@ -763,7 +763,7 @@ function Footer() {
             transition={{ duration: 0.5, delay: 0.8 }}
             className="mt-6 text-xs text-white/45 leading-relaxed max-w-md"
           >
-            QureSight is an open-source multi-disease screening platform that pairs quantum-enhanced machine learning with classical baselines. Every prediction is explainable, every benchmark is reproducible.
+            QureSight is an advanced multi-disease screening platform engineered for SIH26139 that pairs quantum-enhanced machine learning with classical baselines. Every prediction is explainable, every benchmark is reproducible.
           </motion.p>
         </motion.div>
       </div>

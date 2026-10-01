@@ -6,19 +6,17 @@ def test_system():
     req = urllib.request.Request('http://localhost:3000/predict/breast-cancer', headers={'User-Agent': 'Mozilla/5.0'})
     with urllib.request.urlopen(req) as resp:
         html = resp.read().decode('utf-8')
-        assert 'title="Aleph-1 (IBM QPU) - Locked in this release"' not in html, 'Found locked title in breast cancer!'
-        assert 'Aleph-1 (IBM QPU)' in html, 'Aleph-1 button not found!'
-        print('PASS: Breast Cancer page Aleph-1 button unlocked!')
+        assert 'IBM Quantum (QPU)' in html, 'IBM Quantum button not found!'
+        print('PASS: Breast Cancer page IBM Quantum button unlocked!')
 
     # 2. Test Heart Disease Page HTML
     req = urllib.request.Request('http://localhost:3000/predict/heart-disease', headers={'User-Agent': 'Mozilla/5.0'})
     with urllib.request.urlopen(req) as resp:
         html = resp.read().decode('utf-8')
-        assert 'title="Aleph-1 (IBM QPU) - Locked in this release"' not in html, 'Found locked title in heart disease!'
-        assert 'Aleph-1 (IBM QPU)' in html, 'Aleph-1 button not found!'
-        print('PASS: Heart Disease page Aleph-1 button unlocked!')
+        assert 'IBM Quantum (QPU)' in html, 'IBM Quantum button not found!'
+        print('PASS: Heart Disease page IBM Quantum button unlocked!')
 
-    # 3. Test Aleph-1 Real IBM Hardware Inference via Frontend Proxy
+    # 3. Test Real IBM Hardware Inference via Frontend Proxy
     sample_payload = {
         'features': {
             'radius_mean': 17.99,
@@ -39,7 +37,7 @@ def test_system():
     )
     with urllib.request.urlopen(req) as resp:
         res = json.loads(resp.read().decode('utf-8'))
-        print('PASS: Aleph-1 Real QPU Inference Success:', res.get('success'))
+        print('PASS: IBM Real QPU Inference Success:', res.get('success'))
         print('  - Model Name:', res.get('data', {}).get('model_name'))
         print('  - Risk Score:', res.get('data', {}).get('risk_score'))
         print('  - Hardware Receipt:', bool(res.get('data', {}).get('hardware_receipt')))

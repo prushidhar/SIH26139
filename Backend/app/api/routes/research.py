@@ -656,7 +656,7 @@ async def get_model_arena(dataset_id: str = Query(default="breast_cancer")):
             },
             {
                 "id": "aleph_1_ibm",
-                "name": "Aleph-1 (Real IBM QPU)",
+                "name": "IBM Quantum (Real QPU)",
                 "family": "quantum",
                 "architecture": "IBM Quantum Eagle r3 (127-Qubit Superconducting)",
                 "accuracy": "82.50 ± 2.40%",

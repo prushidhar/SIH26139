@@ -42,7 +42,7 @@ export default function HeartDiseaseAnalysisPage() {
   // Loaded State
   const [patientInfo, setPatientInfo] = useState({
     name: "Patient",
-    patient_id: "QX-ECG-1001",
+    patient_id: "QS-ECG-1001",
     age: 55,
     gender: "Male",
     intake_date: new Date().toISOString().split("T")[0],
@@ -80,7 +80,7 @@ export default function HeartDiseaseAnalysisPage() {
       coordinates: { peak_x: 650, peak_y: 420, rel_x: 0.29, rel_y: 0.35 },
     },
     quantum_engine: {
-      signature: "Transfinite-IM1 (Hybrid Quantum)",
+      signature: "QureSight-VQC (Hybrid Quantum)",
       qubits: 8,
       ansatz: "8-Qubit AngleEmbedding + StronglyEntanglingLayers (2 Layers)",
       statevector_backend: "PennyLane default.qubit",
@@ -96,7 +96,7 @@ export default function HeartDiseaseAnalysisPage() {
       latency_ms: 54.32,
     },
     classical_engine: {
-      name: "CX-01 Cardiac Classical",
+      name: "QureSight-Classical (ResNet-34)",
       architecture: "ResNet-34 + FC (512 -> 256 -> 4)",
       prediction: "Normal",
       confidence_pct: 100.0,
@@ -142,8 +142,8 @@ export default function HeartDiseaseAnalysisPage() {
     ? telemetry?.quantum_engine?.latency_ms ?? 54.3
     : telemetry?.classical_engine?.latency_ms ?? 35.3;
   const activeEngineName = isHybrid
-    ? (telemetry?.quantum_engine?.signature || "Transfinite-IM1 (Hybrid Quantum)")
-    : (telemetry?.classical_engine?.name || "CX-IM01 (Classical)");
+    ? (telemetry?.quantum_engine?.signature || "QureSight-VQC (Hybrid Quantum)")
+    : (telemetry?.classical_engine?.name || "QureSight-Classical (ResNet-34)");
   const activeEngineSpecs = isHybrid
     ? "8-Qubit Universal AngleEmbedding + StronglyEntanglingLayers (3 Layers)"
     : "ResNet-34 + Multi-Scale Dilated Convolutions + CBAM + ECGConVT (21.5M Params)";
@@ -211,7 +211,7 @@ export default function HeartDiseaseAnalysisPage() {
     const payload: ReportPayload = {
       patient: {
         patientName: patientInfo.name || "Patient",
-        patientId: patientInfo.patient_id || "QX-ECG-1001",
+        patientId: patientInfo.patient_id || "QS-ECG-1001",
         patientAge: patientInfo.age || 55,
         patientGender: patientInfo.gender || "Male",
         diseaseType: "cardiac_ecg",
@@ -219,7 +219,7 @@ export default function HeartDiseaseAnalysisPage() {
       },
       biomarkers: [],
       transfinite1: {
-        engineName: telemetry?.quantum_engine?.signature || "Transfinite-IM1 (Hybrid Quantum)",
+        engineName: telemetry?.quantum_engine?.signature || "QureSight-VQC (Hybrid Quantum)",
         engineDescription: "8-Qubit Universal Data Re-Uploading PQC + Bilinear Gated Fusion",
         modelType: "hybrid",
         predictionLabel: telemetry?.quantum_engine?.quantum_prediction || telemetry?.prediction?.clinical_title || "Normal",
@@ -247,7 +247,7 @@ export default function HeartDiseaseAnalysisPage() {
         variationalParams: 72,
       },
       cx01: {
-        engineName: telemetry?.classical_engine?.name || "CX-IM01 (Classical)",
+        engineName: telemetry?.classical_engine?.name || "QureSight-Classical (ResNet-34)",
         engineDescription: "ResNet-34 + Multi-Scale Dilated Convolutions + CBAM (21.5M Params)",
         modelType: "classical",
         predictionLabel: telemetry?.classical_engine?.prediction || telemetry?.prediction?.clinical_title || "Normal",
@@ -364,7 +364,7 @@ export default function HeartDiseaseAnalysisPage() {
                   Patient: <span className="font-semibold text-ink">{patientInfo.name || "Patient"}</span>
                 </span>
                 <span className="text-[11px] font-mono px-2 py-0.2 rounded bg-cream border border-hairline text-ink-soft font-medium">
-                  {patientInfo.patient_id || "QX-ECG-1001"}
+                  {patientInfo.patient_id || "QS-ECG-1001"}
                 </span>
                 <span className="text-[10px] font-mono uppercase px-2 py-0.2 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold">
                   Intake Verified
@@ -387,7 +387,7 @@ export default function HeartDiseaseAnalysisPage() {
               }`}
             >
               <Sparkles size={13} className={isHybrid ? "text-quantum" : "text-ink-soft"} />
-              <span>Hybrid Quantum (Transfinite-IM1)</span>
+              <span>Hybrid Quantum (8-Qubit VQC)</span>
               {isHybrid && <span className="w-1.5 h-1.5 rounded-full bg-quantum" />}
             </button>
             <button
@@ -399,7 +399,7 @@ export default function HeartDiseaseAnalysisPage() {
               }`}
             >
               <Activity size={13} className={!isHybrid ? "text-blue-600" : "text-ink-soft"} />
-              <span>Classical SOTA (CX-IM01)</span>
+              <span>Classical Baseline (ResNet-34)</span>
               {!isHybrid && <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />}
             </button>
           </div>
@@ -536,7 +536,7 @@ export default function HeartDiseaseAnalysisPage() {
             }`}
           >
             <Layers size={14} className={activeTab === "model_comparison" ? "text-quantum" : ""} />
-            <span>⚖️ 3. Model Comparison (CX-IM01 vs Transfinite-IM1)</span>
+            <span>⚖️ 3. Model Comparison (Classical vs Quantum VQC)</span>
           </button>
 
           {/* Tab 4: Real-Time Architecture & Circuit Telemetry */}

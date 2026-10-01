@@ -285,7 +285,7 @@ export default function HardwarePage() {
 
       {/* Backend Selection Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Transfinite-1 (Quantum Simulator Engine - ACTIVE DEFAULT) */}
+        {/* Quantum Simulator Engine - ACTIVE DEFAULT */}
         <div
           onClick={() => {
             setActiveBackend("gpu_simulator");

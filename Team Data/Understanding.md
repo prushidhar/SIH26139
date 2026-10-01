@@ -163,7 +163,7 @@ Here is exactly how real patients, diagnostic laboratories, cancer specialists, 
 * **How they use QureSight (The Solution)**:
   * The lab's own digital slide software (like QuPath, Aperio, or ImageJ) measures the cell boundaries and generates the 10 numerical metrics (**radius, texture, perimeter, concavity, etc.**).
   * The lab software automatically sends this **10-number feature vector** to the **QureSight REST API**.
-  * QureSight runs the numbers through the **Hybrid Quantum Engine (`Transfinite-1`)** and **Classical Baseline (`CX-01`)** in milliseconds.
+  * QureSight runs the numbers through the **Hybrid Quantum Engine (`QureSight-VQC`)** and **Classical Baseline (`QureSight-Classical`)** in milliseconds.
   * **Automated Emergency Triaging**: If QureSight detects an aggressive malignant pattern, it instantly returns an emergency flag to the lab dashboard, moving that critical patient to the very top of the senior doctor's review queue on the same day.
 
 ---
@@ -178,7 +178,7 @@ Here is exactly how real patients, diagnostic laboratories, cancer specialists, 
   * This is where the **10 interactive sliders in the QureSight Studio** come in. It serves as a **digital simulation and decision support tool for oncologists**:
     * **Simulate "What-If" Disease Progression**: A doctor can adjust a slider (*"If this tumor's cell radius swells from 12 $\mu m$ to 16 $\mu m$ or membrane concavity deepens by 15%, does the quantum confidence flip from Benign to Malignant?"*).
     * **Explainability (SHAP Biological Drivers)**: QureSight shows the doctor an exact mathematical breakdown of which cellular feature is driving the risk (e.g., *"+32% risk increase driven by abnormal cell membrane concavity"*).
-    * **Multi-Engine Consensus**: The doctor sees both the **Quantum Model (`Transfinite-1`)** and the **Classical Baseline (`CX-01`)** side-by-side. If both agree, diagnostic confidence is nearly 100%. If they disagree (Discordant), it warns the oncologist to perform a deeper molecular genetic test (like HER2/IHC).
+    * **Multi-Engine Consensus**: The doctor sees both the **Quantum Model (`QureSight-VQC`)** and the **Classical Baseline (`QureSight-Classical`)** side-by-side. If both agree, diagnostic confidence is nearly 100%. If they disagree (Discordant), it warns the oncologist to perform a deeper molecular genetic test (like HER2/IHC).
 
 ---
 
@@ -199,7 +199,7 @@ Here is exactly how real patients, diagnostic laboratories, cancer specialists, 
 | User Type | What They Give to QureSight | How QureSight Solves Their Exact Pain Point |
 | :--- | :--- | :--- |
 | **Everyday Patient / Family** | Photo / PDF of their paper lab report | Multimodal AI reads the report text & translates scary medical jargon into simple Hindi/regional languages with calm risk guidance. |
-| **Pathology Diagnostic Lab** | 10-feature numerical vector (via REST API from lab software) | Runs instant Quantum (`Transfinite-1`) vs. Classical (`CX-01`) analysis in milliseconds & flags emergency cancer cases automatically. |
+| **Pathology Diagnostic Lab** | 10-feature numerical vector (via REST API from lab software) | Runs instant Quantum (`QureSight-VQC`) vs. Classical (`QureSight-Classical`) analysis in milliseconds & flags emergency cancer cases automatically. |
 | **Oncologist / Doctor** | Interactive 10 sliders & clinical parameters | Simulates disease progression, inspects SHAP biological drivers, and compares Quantum vs Classical consensus. |
 | **Rural Health Workers** | Mobile tablet inputs / uploaded report sheets | Instant cancer risk triage at village health camps, eliminating 3-week courier delays to metro cities. |
 
@@ -220,9 +220,9 @@ Now, instead of just 2 numbers, QureSight takes **10 numbers at once** (a 10-dim
 
 ---
 
-### Part A: How the Classical Model (`CX-01`) Works
+### Part A: How the Classical Model (`QureSight-Classical`) Works
 
-`CX-01` runs on standard classical computer silicon (CPUs/GPUs).
+`QureSight-Classical` runs on standard classical computer silicon (CPUs/GPUs).
 
 1. **How it calculates**:
    * It takes the 10 numbers as mathematical coordinates: $(x_1, x_2, \dots, x_{10})$.
@@ -238,9 +238,9 @@ Now, instead of just 2 numbers, QureSight takes **10 numbers at once** (a 10-dim
 
 ---
 
-### Part B: How the Quantum Model (`Transfinite-1` — Variational Quantum Classifier) Works
+### Part B: How the Quantum Model (`QureSight-VQC` — Variational Quantum Classifier) Works
 
-`Transfinite-1` runs on quantum principles (simulated on high-performance tensors or executed on real Quantum Processing Units / QPUs).
+`QureSight-VQC` runs on quantum principles (simulated on high-performance tensors or executed on real Quantum Processing Units / QPUs).
 
 Here is the exact step-by-step quantum physics process—completely demystified:
 
@@ -283,7 +283,7 @@ Here is the exact step-by-step quantum physics process—completely demystified:
 
 ### Part C: Why Run Both Models Side-by-Side in QureSight? (The Dual-Engine Advantage)
 
-In real hospitals, a single AI model can have blind spots. QureSight runs **`Transfinite-1` (Quantum)** and **`CX-01` (Classical)** in parallel on every single patient:
+In real hospitals, a single AI model can have blind spots. QureSight runs **`QureSight-VQC` (Quantum)** and **`QureSight-Classical` (Classical)** in parallel on every single patient:
 
 1. **When Both Agree (Concordant — ~94% of cases)**:
    * Both the Quantum Engine and the Classical Baseline output "Benign" or both output "Malignant".
@@ -306,7 +306,7 @@ In real hospitals, a single AI model can have blind spots. QureSight runs **`Tra
                        ↓
 [10-Number Feature Vector (or Uploaded Report) sent into QureSight]
                        ↓
-[QureSight Engine evaluates data: Transfinite-1 (Quantum) + CX-01 (Classical)]
+[QureSight Engine evaluates data: QureSight-VQC (Quantum) + QureSight-Classical (Classical)]
                        ↓
 [Instant Consensus Risk Index + SHAP Explanations showing top warning feature]
                        ↓
@@ -397,8 +397,8 @@ This is precisely why QureSight was engineered with a **Dual-Engine Multi-Model 
 
 #### 1. Why Single AI Algorithms Have Dangerous Blind Spots
 Standard clinical AI products rely on a single model (e.g. just a Convolutional Neural Network or just an SVM). However, **no single machine learning architecture has a 100% convex loss landscape across all biological variations**:
-* **Classical Linear/Kernel Models (`CX-01`)** excel at detecting gross macroscopic abnormalities (large cell radius, extreme perimeter expansion), but they can miss subtle, high-order non-linear correlations where cell size is only marginally elevated.
-* **Quantum Variational Classifiers (`Transfinite-1`)** excel at detecting entangled multidimensional phase relationships (e.g. subtle membrane concavity interacting with localized chromatin clump density), but can occasionally exhibit sensitivity shifts near narrow decision hyperplanes.
+* **Classical Linear/Kernel Models (`QureSight-Classical`)** excel at detecting gross macroscopic abnormalities (large cell radius, extreme perimeter expansion), but they can miss subtle, high-order non-linear correlations where cell size is only marginally elevated.
+* **Quantum Variational Classifiers (`QureSight-VQC`)** excel at detecting entangled multidimensional phase relationships (e.g. subtle membrane concavity interacting with localized chromatin clump density), but can occasionally exhibit sensitivity shifts near narrow decision hyperplanes.
 
 **QureSight's Golden Rule**: *No single algorithm is ever allowed to clear a patient in isolation.*
 
@@ -416,7 +416,7 @@ Every single patient biopsy vector $(x_1, x_2, \dots, x_{10})$ is evaluated simu
                     ▼                                             ▼
         ┌───────────────────────┐                     ┌───────────────────────┐
         │   Classical Engine    │                     │    Quantum Engine     │
-        │       (CX-01)         │                     │    (Transfinite-1)    │
+        │       (QureSight-Classical)         │                     │    (QureSight-VQC)    │
         │ SVM-RBF + XGBoost     │                     │ 8-Qubit VQC Entangled │
         │ Linear Decision Bound │                     │ Hilbert-Space Phase   │
         └───────────┬───────────┘                     └───────────┬───────────┘
@@ -453,19 +453,19 @@ To understand how this saves lives in clinical practice, let us examine a real-w
   * `concavity_mean`: $0.068$ (mildly atypical indentation on cell borders).
   * `texture_mean`: $18.4$ (moderate chromatin granularity).
 
-**Step 1: Classical Baseline Evaluation (`CX-01`)**
+**Step 1: Classical Baseline Evaluation (`QureSight-Classical`)**
 * The classical SVM-RBF model looks at the macroscopic features. Because the radius ($14.1\ \mu\text{m}$) has not crossed its strict $15.0\ \mu\text{m}$ linear threshold, the classical model outputs:
   * **Classical Prediction**: `Benign` (44.1% Calculated Risk).
   * *If an oncology clinic relied only on this classical AI, Ananya would be sent home with a False Negative!*
 
-**Step 2: Quantum Hilbert Space Evaluation (`Transfinite-1`)**
+**Step 2: Quantum Hilbert Space Evaluation (`QureSight-VQC`)**
 * Simultaneously, QureSight's $U_{\Phi(x)}$ circuit embeds all 8 features into 8 entangled qubits.
 * The multi-qubit CNOT entangling gates calculate the non-linear cross-product between `concavity_mean` ($0.068$) and `compactness_mean` ($0.082$).
 * In the 256-dimensional Hilbert state space, this phase interference reveals that the cell borders exhibit high-order atypical dysplasia (early intraductal micro-invasion).
 * **Quantum Prediction**: `Malignant` (68.4% Calculated Risk).
 
 **Step 3: Automated Discordant Safety Activation**
-* The QureSight consensus engine detects that `CX-01` (`Benign`) and `Transfinite-1` (`Malignant`) diverge.
+* The QureSight consensus engine detects that `QureSight-Classical` (`Benign`) and `QureSight-VQC` (`Malignant`) diverge.
 * The system instantly sets `consensusStatus = "Discordant"`.
 * **Fail-Safe Protocol Activated**:
   1. Automated benign sign-off is permanently locked.
@@ -483,7 +483,7 @@ To understand how this saves lives in clinical practice, let us examine a real-w
 Doctors and pathologists do not need to read code; the QureSight frontend communicates this status instantly across multiple views:
 
 1. **Screening Studio Page (`/predict/breast-cancer`)**:
-   * After real-time inference finishes, the UI presents a dual telemetry card comparing **Classical CX-01** against **Hybrid Quantum Transfinite-1**.
+   * After real-time inference finishes, the UI presents a dual telemetry card comparing **Classical QureSight-Classical** against **Hybrid Quantum QureSight-VQC**.
 2. **Detailed Analysis Page (`/predict/breast-cancer/analysis`) — Model Comparison Tab**:
    * The top header renders a prominent amber badge with the shield icon: `[ ⚠️ DISCORDANT RESULT ]`.
    * A full-width clinical alert banner is displayed:
@@ -630,8 +630,8 @@ When judges ask: *"How does QureSight compare against these giant foundation mod
 │    high VRAM GPUs, heavy cloud costs.        │    on cheap rural tablets & 4G/5G mobile.    │
 │                                              │                                              │
 │ 5. Decision Protocol:                        │ 5. Decision Protocol:                        │
-│    Single model inference (vulnerable to     │    Dual-Engine Consensus (Transfinite-1 +    │
-│    unexplained False Negatives on atypia).   │    CX-01) with Fail-Safe Discordant Alert.   │
+│    Single model inference (vulnerable to     │    Dual-Engine Consensus (QureSight-VQC +    │
+│    unexplained False Negatives on atypia).   │    QureSight-Classical) with Fail-Safe Discordant Alert.   │
 └──────────────────────────────────────────────┴──────────────────────────────────────────────┘
 ```
 

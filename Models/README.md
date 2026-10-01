@@ -77,8 +77,8 @@ Models/v1 - Breast Cancer/
     ├── 04_quantum_noise_and_error_mitigation.py # Superconducting noise emulation & ZNE
     ├── 05_quantum_explainability_xai.py   # QureExplain gate saliency & OpenQASM receipts
     ├── 06_train_and_verification_pipeline.py # Master 50-fold training loop & stats
-    ├── 07_classical_inference_engine.py   # Dedicated classical inference service (CX-01)
-    ├── 08_quantum_hybrid_inference_engine.py # Dedicated quantum inference service (QX-01)
+    ├── 07_classical_inference_engine.py   # Dedicated classical inference service (QureSight-Classical)
+    ├── 08_quantum_hybrid_inference_engine.py # Dedicated quantum inference service (QureSight-VQC)
     ├── 09_clinical_risk_stratification_engine.py # Calibrated risk scoring & triage tiers
     ├── 10_generate_benchmark_graphs.py    # Scientific plotting & figure generation
     └── __init__.py                        # Dynamic package loader & export bindings
@@ -114,10 +114,10 @@ cd <path-to-repository-root>
 .\Backend\.venv\Scripts\python.exe "Models/v1 - Breast Cancer/src/06_train_and_verification_pipeline.py"
 
 # --- Production Inference & Clinical Triage ---
-# 07. Run Dedicated Classical Production Inference Engine (CX-01)
+# 07. Run Dedicated Classical Production Inference Engine (QureSight-Classical)
 .\Backend\.venv\Scripts\python.exe "Models/v1 - Breast Cancer/src/07_classical_inference_engine.py"
 
-# 08. Run Dedicated Hybrid Quantum Production Inference Engine (QX-01)
+# 08. Run Dedicated Hybrid Quantum Production Inference Engine (QureSight-VQC)
 .\Backend\.venv\Scripts\python.exe "Models/v1 - Breast Cancer/src/08_quantum_hybrid_inference_engine.py"
 
 # 09. Run Clinical Risk Stratification & Morphometric Evidence Index (MEI) Engine

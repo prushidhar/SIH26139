@@ -190,7 +190,7 @@ def main():
     scheduler = CosineAnnealingLR(optimizer, T_max=epochs, eta_min=1e-5)
 
     print("\n" + "=" * 60)
-    print(f"Starting Training: 8-Qubit Transfinite-1 VQC ({epochs} Epochs)")
+    print(f"Starting Training: 8-Qubit QureSight-VQC ({epochs} Epochs)")
     print("=" * 60)
 
     best_val_acc = 0.0
@@ -278,7 +278,7 @@ def main():
 
     # Save artifact
     production_payload = {
-        "model_signature": "QureSight Transfinite-1 Cardiac",
+        "model_signature": "QureSight-VQC Cardiac",
         "architecture": "Bottleneck(512->64->8) -> 8-Qubit VQC (AngleEmbedding + 2x StronglyEntanglingLayers) -> Readout(8->32->4)",
         "n_qubits": N_QUBITS,
         "n_layers": N_LAYERS,

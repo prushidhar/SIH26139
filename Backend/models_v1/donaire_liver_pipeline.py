@@ -7,7 +7,6 @@ Scientific Provenance Reference:
   Laura M. Donaire et al., "Hybrid quantum-classical machine learning for
   liver disease prediction on the Indian Liver Patient Dataset (ILPD)",
   Engineering Applications of Artificial Intelligence (2026).
-  GitHub: LauraMDonaire/QML-Liver
 
 Pipeline Architecture:
   1. 10 Hepatic Biomarkers:
@@ -19,7 +18,7 @@ Pipeline Architecture:
   4. Observables: [<Z0>, <Z1>] and Parity <Z0 Z1>
   5. Parameter-Shift Differentiable Sensitivity Gradients
   6. Real-Time Comparison with Classical Random Forest & Logistic Regression
-  7. Quantara-style Adaptive Shannon Entropy Clinical Router Dispatch
+  7. Adaptive Shannon Entropy Clinical Router Dispatch
 ================================================================================
 """
 

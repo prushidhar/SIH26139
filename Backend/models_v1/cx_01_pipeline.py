@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-CX-01: DEDICATED CLASSICAL BENCHMARK PIPELINE
+QURESIGHT-CLASSICAL: DEDICATED CLASSICAL BENCHMARK PIPELINE
 ================================================================================
 The isolated, standalone classical baseline engine for QureSight.
 Trained on zero-leakage 30-feature WDBC cytopathology vectors using RBF Support
@@ -32,11 +32,11 @@ CANONICAL_FEATURES = [
 ]
 
 class CX01ClassicalPipeline:
-    """Dedicated Classical Machine Learning Inference Pipeline (CX-01)"""
+    """Dedicated Classical Machine Learning Inference Pipeline (QureSight-Classical)"""
     
     def __init__(self):
         self.version = "1.0.0-PROD"
-        self.model_name = "CX-01"
+        self.model_name = "QureSight-Classical (SVM + XGBoost)"
         self._load_models()
 
     def _load_models(self):
@@ -46,7 +46,7 @@ class CX01ClassicalPipeline:
         rf_path = os.path.join(ARTIFACTS_DIR, "random_forest_production.joblib")
 
         if not os.path.exists(scaler_path) or not os.path.exists(svm_path):
-            raise FileNotFoundError(f"CX-01 artifacts missing in: {ARTIFACTS_DIR}")
+            raise FileNotFoundError(f"Classical baseline artifacts missing in: {ARTIFACTS_DIR}")
 
         self.scaler = joblib.load(scaler_path)
         self.svm_model = joblib.load(svm_path)
@@ -95,7 +95,7 @@ class CX01ClassicalPipeline:
         return attributions
 
     def predict(self, biomarkers: Dict[str, float], patient_meta: Dict[str, Any] = None) -> Dict[str, Any]:
-        """Executes CX-01 classical inference pipeline."""
+        """Executes QureSight-Classical inference pipeline."""
         t0 = time.perf_counter()
         
         defaults = {
@@ -158,4 +158,4 @@ if __name__ == "__main__":
         "smoothness_mean": 0.073, "compactness_mean": 0.048, "concavity_mean": 0.026, "concave_points_mean": 0.018
     }
     res = cx_01_pipeline.predict(case)
-    print(f"CX-01 Output: {res['prediction_label']} ({res['confidence_percentage']:.1f}%) | Risk: {res['composite_risk_score']:.1f}/100")
+    print(f"QureSight-Classical Output: {res['prediction_label']} ({res['confidence_percentage']:.1f}%) | Risk: {res['composite_risk_score']:.1f}/100")

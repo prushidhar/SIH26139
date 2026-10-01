@@ -205,7 +205,7 @@ export default function HeartDiseaseStudioPage() {
 
   const generateNewPatientId = () => {
     const rand = Math.floor(1000 + Math.random() * 9000);
-    setPatientId(`QX-ECG-${rand}`);
+    setPatientId(`QS-ECG-${rand}`);
   };
 
   // Typewriter Engine
@@ -372,7 +372,7 @@ export default function HeartDiseaseStudioPage() {
             coordinates: full.pinpointing_gradcam?.coordinates || { peak_x: 650, peak_y: 420, rel_x: 0.29, rel_y: 0.35 },
           },
           quantum_engine: {
-            signature: "Transfinite-IM1 (Hybrid Quantum)",
+            signature: "QureSight-VQC (Hybrid Quantum)",
             qubits: 8,
             ansatz: "8-Qubit AngleEmbedding + StronglyEntanglingLayers (2 Layers)",
             statevector_backend: "PennyLane default.qubit",
@@ -388,7 +388,7 @@ export default function HeartDiseaseStudioPage() {
             latency_ms: record.latencyMs || 54.32,
           },
           classical_engine: {
-            name: "CX-IM01 (Classical)",
+            name: "QureSight-Classical (ResNet-34 Ensemble)",
             architecture: "ResNet-34 ECGConVT (21.5M Params)",
             prediction: record.classicalPrediction || "Normal",
             confidence_pct: record.classicalConfidence || 92.0,
@@ -651,8 +651,8 @@ export default function HeartDiseaseStudioPage() {
         const isHighRisk = rStrat.severity_tier.includes("CRITICAL") || rStrat.severity_tier.includes("HIGH");
 
         ScreeningService.createScreening({
-          id: patientId || `QX-ECG-${Math.floor(1000 + Math.random() * 9000)}`,
-          patientId: patientId || `QX-ECG-${Math.floor(1000 + Math.random() * 9000)}`,
+          id: patientId || `QS-ECG-${Math.floor(1000 + Math.random() * 9000)}`,
+          patientId: patientId || `QS-ECG-${Math.floor(1000 + Math.random() * 9000)}`,
           patientName: patientName.trim() || "Patient",
           patientAge: typeof patientAge === "number" ? patientAge : 55,
           patientGender: patientGender || "Male",
@@ -701,7 +701,7 @@ export default function HeartDiseaseStudioPage() {
           lead_detected: data.pinpointing_gradcam.lead_detected,
           anatomical_region: data.pinpointing_gradcam.anatomical_region,
           clinical_recommendation: data.risk_stratification.clinical_recommendation,
-          model_engine: data.quantum_engine.signature || "Transfinite-IM1 (Hybrid Quantum)",
+          model_engine: data.quantum_engine.signature || "QureSight-VQC (Hybrid Quantum)",
           execution_mode: executionMode,
           patient_info: {
             name: patientName.trim() || "Patient",
@@ -836,7 +836,7 @@ export default function HeartDiseaseStudioPage() {
                 } cursor-pointer`}
             >
               <Sparkles size={13} />
-              <span>Transfinite-IM1 (Simulator)</span>
+              <span>Quantum Simulator</span>
             </button>
             <button
               onClick={() => setExecutionMode("real_ibm_qpu")}
@@ -845,10 +845,10 @@ export default function HeartDiseaseStudioPage() {
                   ? "bg-amber-500 text-black shadow-xs font-bold"
                   : "text-ink-soft hover:text-ink"
               } cursor-pointer`}
-              title="Aleph-1 (IBM QPU) — Superconducting Quantum Hardware"
+              title="IBM Quantum (QPU) — Superconducting Quantum Hardware"
             >
               <Cpu size={13} className={executionMode === "real_ibm_qpu" ? "text-black" : "text-amber-500"} />
-              <span>Aleph-1 (IBM QPU)</span>
+              <span>IBM Quantum (QPU)</span>
               <span className={`text-[9px] font-mono px-1 py-0.2 rounded border ${
                 executionMode === "real_ibm_qpu"
                   ? "bg-amber-100 text-amber-900 border-amber-300 font-bold"
@@ -1307,7 +1307,7 @@ export default function HeartDiseaseStudioPage() {
                   {telemetry.dual_engine_consensus.status}
                 </span>
                 <span className="text-xs text-ink-soft hidden md:inline">
-                  (60% Transfinite-IM1 Quantum + 40% CX-IM01 Classical Ensemble)
+                  (60% Quantum VQC + 40% Classical Ensemble)
                 </span>
               </div>
               <div className="flex items-center gap-3 text-xs font-mono">
@@ -1325,14 +1325,14 @@ export default function HeartDiseaseStudioPage() {
 
             {/* 2. DUAL-ENGINE SIDE-BY-SIDE BENCHMARK CARDS */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Card 1: Transfinite-IM1 (Hybrid Quantum Simulator) */}
+              {/* Card 1: Quantum VQC Card */}
               <div className="p-4.5 rounded-2xl bg-white border border-quantum/40 shadow-xs space-y-3.5 relative overflow-hidden flex flex-col justify-between">
                 <div>
                   {/* Card Header */}
                   <div className="flex items-center justify-between border-b border-hairline pb-2.5">
                     <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-quantum/15 text-quantum border border-quantum/30 flex items-center gap-1.5">
                       <Sparkles size={12} />
-                      <span>{telemetry.quantum_engine.signature || "Transfinite-IM1 (Hybrid Quantum)"}</span>
+                      <span>{telemetry.quantum_engine.signature || "QureSight-VQC (Hybrid Quantum)"}</span>
                     </span>
                     <span className="text-[10px] font-mono text-ink-soft font-semibold">
                       {telemetry.quantum_engine.latency_ms} ms
@@ -1457,19 +1457,19 @@ export default function HeartDiseaseStudioPage() {
                 </div>
 
                 <div className="pt-2 border-t border-hairline flex justify-between items-center text-[10px] font-mono text-ink-soft">
-                  <span>Engine: Transfinite-IM1 (8-Qubit Universal PQC)</span>
+                  <span>Engine: QureSight-VQC (8-Qubit Universal VQC)</span>
                   <span className="text-emerald-700 font-bold">98.57% SOTA Acc</span>
                 </div>
               </div>
 
-              {/* Card 2: CX-IM01 (Classical SOTA) */}
+              {/* Card 2: Classical Baseline Card */}
               <div className="p-4.5 rounded-2xl bg-white border border-blue-200 shadow-xs space-y-3.5 relative overflow-hidden flex flex-col justify-between">
                 <div>
                   {/* Card Header */}
                   <div className="flex items-center justify-between border-b border-hairline pb-2.5">
                     <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 flex items-center gap-1.5">
                       <Activity size={12} />
-                      <span>{telemetry.classical_engine.name || "CX-IM01 (Classical)"}</span>
+                      <span>{telemetry.classical_engine.name || "QureSight-Classical (ResNet-34 Ensemble)"}</span>
                     </span>
                     <span className="text-[10px] font-mono text-ink-soft font-semibold">
                       {telemetry.classical_engine.latency_ms} ms
@@ -1594,7 +1594,7 @@ export default function HeartDiseaseStudioPage() {
                 </div>
 
                 <div className="pt-2 border-t border-hairline flex justify-between items-center text-[10px] font-mono text-ink-soft">
-                  <span>Engine: CX-IM01 (ResNet-34 ECGConVT)</span>
+                  <span>Engine: QureSight-Classical (ResNet-34 ECGConVT)</span>
                   <span className="text-blue-700 font-bold">97.13% SOTA Acc</span>
                 </div>
               </div>
@@ -1799,7 +1799,7 @@ export default function HeartDiseaseStudioPage() {
                   <div className="space-y-1">
                     <strong className="block font-semibold text-amber-900">Enterprise Hardware Queue Notice</strong>
                     <span className="text-[11px] text-ink-soft leading-relaxed block">
-                      Physical cryogenic IBM Quantum QPU runs execute through the IBM Qiskit cloud queue (typical latency 1-8 minutes). Active clinical screening is recommended on our 1:1 statevector simulator (Transfinite-IM1) for immediate sub-second results.
+                      Physical cryogenic IBM Quantum QPU runs execute through the IBM Qiskit cloud queue (typical latency 1-8 minutes). Active clinical screening is recommended on our high-speed quantum simulator for immediate sub-second results.
                     </span>
                   </div>
                 </div>

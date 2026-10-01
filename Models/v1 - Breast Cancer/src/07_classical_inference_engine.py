@@ -50,11 +50,11 @@ CANONICAL_FEATURES = [
 ]
 
 class AegisClassicalEngine:
-    """Dedicated Classical Machine Learning Inference Engine (CX-01)"""
+    """Dedicated Classical Machine Learning Inference Engine (QureSight-Classical)"""
     
     def __init__(self):
         self.version = "1.0.0-PROD"
-        self.engine_name = "CX-01"
+        self.engine_name = "QureSight-Classical"
         self._load_models()
 
     def _load_models(self):

@@ -212,7 +212,7 @@ export default function BatchResultsTable({
           variationalParams: 48,
         },
         cx01: {
-          engineName: "CX-01",
+          engineName: "Classical Baseline",
           engineDescription: "Classical SVM-RBF + XGBoost Ensemble",
           modelType: "classical",
           predictionLabel: record.classicalPrediction || "Unknown",

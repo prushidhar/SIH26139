@@ -2,10 +2,10 @@
 ================================================================================
 QURESIGHT MODELS V1 PACKAGE
 ================================================================================
-Exposes the three canonical inference pipelines:
-  - CX-01: Dedicated Classical Baseline Benchmark Pipeline
-  - Transfinite-1: Dedicated Quantum Hybrid Baseline Simulator Pipeline
-  - Aleph-1: Dedicated Fine-Tuned Real IBM Quantum Hardware QPU Pipeline
+Exposes the canonical inference pipelines:
+  - QureSight-Classical: Dedicated Classical Baseline Benchmark Pipeline
+  - QureSight-VQC: Dedicated Quantum Hybrid Baseline Simulator Pipeline
+  - IBM Quantum: Dedicated Fine-Tuned Real IBM Quantum Hardware QPU Pipeline
 ================================================================================
 """
 
