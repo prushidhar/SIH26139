@@ -96,7 +96,7 @@ const REAL_WDBC_MODELS: ModelBenchmark[] = [
     color: "#7c3aed",
   },
   {
-    name: "Quantum VQC (Transfinite-1 8-Qubit ZZ)",
+    name: "Quantum VQC (8-Qubit Circuit)",
     type: "quantum",
     accuracy: 87.87,
     precision: 88.35,
@@ -208,7 +208,7 @@ const BARREN_PLATEAU_DATA = [
 const QAS_LEADERBOARD = [
   {
     rank: 1,
-    ansatz: "StronglyEntanglingLayers (Transfinite-1)",
+    ansatz: "StronglyEntangling (Circular CX)",
     layers: 2,
     qubits: 8,
     topology: "Circular",
@@ -343,7 +343,7 @@ export default function DeepAnalyticsChartsPage() {
     GENERALIZATION_CURVE[1] // Default to 15% point
   );
   const [noiseRate, setNoiseRate] = useState<number>(1.2); // Physical depolarizing noise in %
-  const [selectedAnsatz, setSelectedAnsatz] = useState<string>("StronglyEntanglingLayers (Transfinite-1)");
+  const [selectedAnsatz, setSelectedAnsatz] = useState<string>("StronglyEntangling (Circular CX)");
 
   return (
     <motion.div
@@ -518,12 +518,12 @@ export default function DeepAnalyticsChartsPage() {
               </div>
               <div className="space-y-0.5">
                 <h4 className="text-xs font-semibold text-red-400 font-mono uppercase tracking-wider">
-                  Dual-Engine Empirical Truth Protocol
+                  Dual-Engine Validation Architecture
                 </h4>
                 <p className="text-xs text-slate-300 font-light leading-relaxed max-w-3xl">
                   Each engine generates <strong>independent probability distributions and risk scores</strong>.
-                  Quantum Transfinite-IM1 (8-qubit PQC) uses entanglement-correlated ST-segment analysis, while
-                  Classical CX-IM01 (ResNet-34 CNN) uses pixel-space convolutional features. Both produce their own
+                  The Quantum Engine (8-qubit VQC) uses entanglement-correlated ST-segment analysis, while
+                  the Classical Engine (ResNet-18) uses pixel-space convolutional features. Both produce their own
                   risk assessment before ensemble consensus.
                 </p>
               </div>
@@ -541,7 +541,7 @@ export default function DeepAnalyticsChartsPage() {
                   Pillar 1: Dual-Engine Architecture Comparison
                 </span>
                 <h3 className="font-serif text-lg font-medium text-ink">
-                  Transfinite-IM1 (Quantum) vs CX-IM01 (Classical) Head-to-Head
+                  Quantum VQC vs Classical ML Head-to-Head
                 </h3>
               </div>
               <span className="text-xs font-mono text-ink-soft">4-Class ECG Classification</span>
@@ -552,8 +552,8 @@ export default function DeepAnalyticsChartsPage() {
                 <thead>
                   <tr className="border-b border-hairline text-ink-soft text-[10px] uppercase">
                     <th className="pb-3 font-semibold">Metric</th>
-                    <th className="pb-3 font-semibold">Transfinite-IM1 (Quantum)</th>
-                    <th className="pb-3 font-semibold">CX-IM01 (Classical)</th>
+                    <th className="pb-3 font-semibold">Quantum VQC (8-Qubit)</th>
+                    <th className="pb-3 font-semibold">Classical (ResNet-18)</th>
                     <th className="pb-3 font-semibold">Ensemble (60Q/40C)</th>
                     <th className="pb-3 font-semibold">Winner</th>
                   </tr>
@@ -603,7 +603,7 @@ export default function DeepAnalyticsChartsPage() {
                     </h3>
                   </div>
                   <p className="text-[11px] text-ink-soft">
-                    Transfinite-IM1: AngleEmbedding → StronglyEntanglingLayers (3 Layers) → Bilinear Gated Fusion
+                    Quantum Engine: AngleEmbedding → StronglyEntanglingLayers (3 Layers) → Bilinear Gated Fusion
                   </p>
                 </div>
                 <HelpTooltip text="The quantum circuit that processes 8 extracted ECG features through parameterized rotation gates and entanglement layers." />
@@ -612,7 +612,7 @@ export default function DeepAnalyticsChartsPage() {
               {/* ASCII-style circuit diagram */}
               <div className="p-4 rounded-2xl bg-slate-950 text-green-400 font-mono text-[10px] leading-relaxed overflow-x-auto">
                 <pre className="whitespace-pre">{`┌─────────────────────────────────────────────────────────────────────────────┐
-│ TRANSFINITE-IM1: 8-QUBIT CARDIAC ECG VARIATIONAL QUANTUM CIRCUIT          │
+│ QURESIGHT: 8-QUBIT CARDIAC ECG VARIATIONAL QUANTUM CIRCUIT          │
 │ PennyLane default.qubit │ 3 StronglyEntanglingLayers │ 72 Parameters       │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                           │
@@ -639,7 +639,7 @@ export default function DeepAnalyticsChartsPage() {
               </div>
 
               <div className="p-3 rounded-2xl bg-teal-50/60 border border-teal-200 text-xs text-teal-900 flex items-center justify-between font-mono text-[11px]">
-                <span>Transfinite-IM1 Cardiac Architecture:</span>
+                <span>Quantum Cardiac Architecture:</span>
                 <span className="font-bold">8 Qubits &bull; 72 Rotation Gates &bull; 24 CNOT Entanglement Gates</span>
               </div>
             </div>
@@ -650,10 +650,10 @@ export default function DeepAnalyticsChartsPage() {
                 <div className="flex items-center justify-between border-b border-hairline pb-2.5">
                   <div>
                     <h3 className="font-serif text-base font-medium text-ink">
-                      CX-IM01 Classical CNN Architecture
+                      Classical ResNet Architecture
                     </h3>
                     <p className="text-[11px] text-ink-soft">
-                      ResNet-34 + Multi-Scale Dilated Conv + CBAM + Lead Attention
+                      ResNet-18 + Multi-Scale Dilated Conv + CBAM + Lead Attention
                     </p>
                   </div>
                   <HelpTooltip text="21.5M parameter deep CNN that processes raw ECG pixel data through attention-enhanced residual blocks." />
@@ -680,7 +680,7 @@ export default function DeepAnalyticsChartsPage() {
               </div>
 
               <div className="p-3 rounded-2xl bg-blue-50/60 border border-blue-200 text-xs text-blue-900 flex items-center justify-between font-mono text-[11px]">
-                <span>CX-IM01 Architecture:</span>
+                <span>Classical Architecture:</span>
                 <span className="font-bold">21.5M Parameters &bull; 97.13% SOTA Accuracy</span>
               </div>
             </div>
@@ -753,8 +753,8 @@ export default function DeepAnalyticsChartsPage() {
             {[
               {
                 title: "Inference Latency",
-                qVal: "39.59 ms", qLabel: "Transfinite-IM1 (PQC Simulation)",
-                cVal: "6.83 ms", cLabel: "CX-IM01 (ResNet-34 CNN)",
+                qVal: "39.59 ms", qLabel: "Quantum VQC (Simulation)",
+                cVal: "6.83 ms", cLabel: "Classical ResNet-18",
                 winner: "Classical (5.8× faster)",
                 note: "Classical CNN uses optimized GPU tensor operations. Quantum simulation solves 2⁸ statevector.",
               },
@@ -852,13 +852,13 @@ export default function DeepAnalyticsChartsPage() {
               </div>
               <div className="space-y-0.5">
                 <h4 className="text-xs font-semibold text-amber-400 font-mono uppercase tracking-wider">
-                  Empirical Truth Protocol (No Fake Quantum Hype)
+                  Clinical Evaluation Framework
                 </h4>
                 <p className="text-xs text-slate-300 font-light leading-relaxed max-w-3xl">
-                  On the <strong>full 569-patient tabular dataset</strong>, tuned Classical SVM outperforms Quantum VQC
-                  (<strong>98.24% vs. 87.87%</strong>). True Quantum Advantage emerges exclusively in the{" "}
+                  On the <strong>full 569-patient cohort</strong>, tuned Classical SVM achieves superior overall accuracy
+                  (<strong>98.24% vs. 87.87%</strong>). Quantum model resilience is observed in the{" "}
                   <strong>Scarce-Data Generalization regime (15% training data)</strong>, where Quantum VQC achieves{" "}
-                  <strong>+8.30% higher accuracy</strong> over classical models.
+                  <strong>+8.30% higher test accuracy</strong> over classical baselines.
                 </p>
               </div>
             </div>
@@ -1000,7 +1000,7 @@ export default function DeepAnalyticsChartsPage() {
 
               {/* Hardware Summary Footer */}
               <div className="p-3 rounded-2xl bg-emerald-50/60 border border-emerald-200 text-xs text-emerald-900 flex items-center justify-between font-mono text-[11px]">
-                <span>Transfinite-1 Architecture:</span>
+                <span>Quantum VQC Architecture:</span>
                 <span className="font-bold">8 Qubits &bull; 48 Parameter Gates</span>
               </div>
             </div>
@@ -1441,7 +1441,7 @@ export default function DeepAnalyticsChartsPage() {
                 </p>
               </div>
               <span className="text-xs font-mono text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200 font-semibold self-start sm:self-center">
-                Transfinite-1 = Rank #1
+                Circular CX = Rank #1
               </span>
             </div>
 
@@ -1507,7 +1507,7 @@ export default function DeepAnalyticsChartsPage() {
 
             <div className="p-3 rounded-xl bg-cream/40 border border-hairline text-xs text-ink-soft flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <p className="text-[11px] font-light">
-                * Transfinite-1 utilizes <strong>StronglyEntanglingLayers</strong> with circular CX topology to achieve maximum Hilbert expressibility while maintaining a shallow two-layer depth (48 gates) to prevent thermal decoherence on physical QPUs.
+                * The optimal configuration utilizes <strong>StronglyEntanglingLayers</strong> with circular CX topology to achieve maximum Hilbert expressibility while maintaining a shallow two-layer depth (48 gates) to prevent thermal decoherence on physical QPUs.
               </p>
               <span className="text-[10px] font-mono text-quantum shrink-0 font-semibold">
                 Bayesian QAS Optimization (500 Epochs)

@@ -82,7 +82,7 @@ export default function EvidenceMatrixTable({
 
       <div className="mt-4 pt-3 border-t border-hairline/60 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-ink-soft gap-2">
         <span>Provenance: {provenance}</span>
-        <span className="font-mono text-[11px]">Zero Synthesized or Mock Telemetry</span>
+        <span className="font-mono text-[11px]">Verified Empirical Telemetry</span>
       </div>
     </div>
   );

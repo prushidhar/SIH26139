@@ -162,7 +162,7 @@ export default function ModelAnalysisPage() {
 
 
 
-  // Calculate Ruthless Real-Time Metrics
+  // Calculate Live Performance Metrics
   const evaluatedCases = screenings.filter((s) => s.status !== "pending");
   const totalEvaluated = evaluatedCases.length;
 
