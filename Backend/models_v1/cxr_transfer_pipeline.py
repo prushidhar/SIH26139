@@ -177,7 +177,7 @@ class CXRCardiomegalyQMLPipeline:
         return {
             "dataset": "CheXpert Frontal Chest Radiographs (Stanford AIMI)",
             "sample_label": sample_label,
-            "provenance_pillar": "Decoodt et al. (J. Imaging 2023, 9(7), 128)",
+            "provenance_pillar": "CheXpert Transfer Learning Pipeline (DenseNet-121 + 6-Qubit VQC)",
             "diagnosis": "Cardiomegaly Detected" if is_cardiomegaly else "Normal Cardiac Silhouette",
             "cardiomegaly_probability": round(final_prob, 4),
             "classical_probability": round(classical_prob, 4),

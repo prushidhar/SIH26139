@@ -52,10 +52,10 @@ class InferenceRequest(BaseModel):
 @router.post("/breast-cancer", status_code=status.HTTP_200_OK)
 async def run_breast_cancer_inference(payload: InferenceRequest):
     """
-    Executes one of the three dedicated model pipelines:
-      - CX-01: Classical Benchmark (SVM-RBF + XGBoost)
-      - Transfinite-1: Hybrid Quantum Baseline Simulator (PennyLane statevector)
-      - Aleph-1: Fine-Tuned Real IBM Hardware QPU Model
+    Executes one of the dedicated model pipelines:
+      - Classical: Classical Benchmark (SVM-RBF + XGBoost)
+      - Quantum: Hybrid Quantum Simulator (PennyLane statevector)
+      - Real QPU: Fine-Tuned Real IBM Hardware QPU Model
     """
     try:
         biomarker_dict = payload.biomarkers.model_dump()
@@ -115,8 +115,8 @@ async def run_cardiac_ecg_inference(
 ):
     """
     Executes production Cardiac ECG Dual-Engine Inference:
-      - Classical CX-01 ResNet-18 + Grad-CAM Heatmap
-      - Hybrid Quantum Transfinite-1 8-Qubit VQC
+      - Classical ResNet-18 + Grad-CAM Heatmap
+      - Hybrid Quantum 8-Qubit VQC
       - Calibrated 0-100 Continuous Cardiac Risk Score
       - Anatomical Lead & ST Abnormality Pinpointing
     """
@@ -281,7 +281,6 @@ async def run_hepatitis_inference(payload: HepatitisBiomarkerInput):
 
 # ==============================================================================
 # CARDIOLOGY TABULAR PILLAR: UCI CLEVELAND HEART DISEASE QML INFERENCE
-# (AstroVall02 Architecture Reference)
 # ==============================================================================
 
 class HeartTabularInput(BaseModel):
@@ -303,8 +302,8 @@ class HeartTabularInput(BaseModel):
 @router.post("/heart-disease-tabular", status_code=status.HTTP_200_OK)
 async def run_heart_disease_tabular_inference(payload: HeartTabularInput):
     """
-    Executes AstroVall02-referenced 4-Qubit StronglyEntanglingLayers QML Inference
-    on the 13-feature UCI Cleveland Cardiology panel with Quantara Adaptive Routing.
+    Executes 4-Qubit StronglyEntanglingLayers QML Inference
+    on the 13-feature UCI Cleveland Cardiology panel with Adaptive Confidence Routing.
     """
     try:
         raw_dict = payload.model_dump()
@@ -355,7 +354,6 @@ async def evaluate_adaptive_routing(payload: AdaptiveRouteRequest):
 
 # ==============================================================================
 # RADIOLOGY PILLAR: CHEXPERT CARDIOMEGALY TRANSFER LEARNING INFERENCE
-# (Decoodt et al. 2023 Architecture Reference)
 # ==============================================================================
 
 class CXRInferenceRequest(BaseModel):
@@ -367,7 +365,7 @@ class CXRInferenceRequest(BaseModel):
 @router.post("/cardiomegaly-cxr", status_code=status.HTTP_200_OK)
 async def run_cardiomegaly_cxr_inference(payload: CXRInferenceRequest):
     """
-    Executes Decoodt et al. (J. Imaging 2023) Classical-Quantum Transfer Learning
+    Executes Classical-Quantum Transfer Learning
     on CheXpert Chest Radiographs using 6-Qubit PennyLane VQC with DenseNet-121 features.
     """
     try:
@@ -387,7 +385,6 @@ async def run_cardiomegaly_cxr_inference(payload: CXRInferenceRequest):
 
 # ==============================================================================
 # HEPATOLOGY MINIMAL PILLAR: ILPD 2-QUBIT VQC INFERENCE
-# (Donaire et al. 2026 Architecture Reference)
 # ==============================================================================
 
 class LiverILPDInput(BaseModel):
@@ -406,8 +403,7 @@ class LiverILPDInput(BaseModel):
 @router.post("/liver-ilpd", status_code=status.HTTP_200_OK)
 async def run_liver_ilpd_inference(payload: LiverILPDInput):
     """
-    Executes Donaire et al. (Eng. Appl. Artif. Intell. 2026) ultra-compact
-    2-Qubit Minimal Footprint VQC on 10 Indian Liver Patient Dataset biomarkers.
+    Executes ultra-compact 2-Qubit Minimal Footprint VQC on 10 Indian Liver Patient Dataset biomarkers.
     """
     try:
         raw_dict = payload.model_dump()

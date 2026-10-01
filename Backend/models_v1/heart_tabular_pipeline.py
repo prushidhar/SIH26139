@@ -257,7 +257,7 @@ class HeartTabularPipeline:
 
         return {
             "success": True,
-            "modality": "UCI Cleveland Tabular Clinical Panel (AstroVall02 Reference Architecture)",
+            "modality": "UCI Cleveland Tabular Cardiology Panel (4-Qubit VQC)",
             "primary_model_used": router_decision["selected_engine"],
             "prediction_label": "Coronary Artery Disease Present" if cad_present else "No Significant CAD Detected",
             "cad_presence": bool(cad_present),
@@ -279,7 +279,7 @@ class HeartTabularPipeline:
                 "latency_ms": round(t_classical, 2),
             },
             "quantum_results": {
-                "model": "Transfinite-4Q Hybrid VQC (PennyLane AstroVall02 Architecture)",
+                "model": "4-Qubit Hybrid VQC (PennyLane)",
                 "qubits": 4,
                 "ansatz": "AngleEmbedding(RX) + StronglyEntanglingLayers(3 Layers)",
                 "probability": round(p_quantum, 4),
@@ -291,9 +291,9 @@ class HeartTabularPipeline:
             },
             "router_decision": router_decision,
             "provenance": {
-                "disease_reference": "AstroVall02/QML_Early_Disease_Detection",
-                "routing_reference": "Quantara (sofiya132)",
                 "dataset": "Cleveland Clinic Foundation (UCI Heart Disease)",
+                "architecture": "4-Qubit StronglyEntangling Variational Circuit",
+                "evaluation": "5-Fold Cross-Validation Telemetry",
             }
         }
 

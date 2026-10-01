@@ -272,7 +272,7 @@ class HepatitisCPipeline:
             "pipeline_version": self.version,
             "execution_time_ms": total_time_ms,
             "classical_results": {
-                "model": "CX-01 Liver Ensemble (XGBoost/LR)",
+                "model": "Classical Liver Ensemble (XGBoost/LR)",
                 "probability": round(p_classical, 4),
                 "prediction": "Liver Disease / Fibrosis" if p_classical >= 0.50 else "Normal Liver Panel",
                 "confidence": round(abs(p_classical - 0.5) * 2.0, 4),
@@ -282,7 +282,7 @@ class HepatitisCPipeline:
                 "latency_ms": t_classical_ms,
             },
             "quantum_results": {
-                "model": "Transfinite-4Q Hybrid VQC (PennyLane)",
+                "model": "4-Qubit Hybrid VQC (PennyLane)",
                 "qubits": self.n_qubits,
                 "ansatz": "Ring-CNOT Entangled Dual-Angle VQC",
                 "probability": round(p_quantum, 4),

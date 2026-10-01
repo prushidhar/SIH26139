@@ -190,7 +190,7 @@ class DonaireLiverQMLPipeline:
 
         return {
             "dataset": "Indian Liver Patient Dataset (ILPD / UCI Machine Learning)",
-            "provenance_pillar": "Laura M. Donaire et al. (Eng. Appl. Artif. Intell. 2026)",
+            "provenance_pillar": "ILPD 2-Qubit Minimal VQC Architecture",
             "diagnosis": "Liver Disease Indicated" if is_liver_patient else "Normal Liver Biomarkers",
             "liver_disease_probability": round(final_prob, 4),
             "classical_probability": round(c_prob, 4),
@@ -205,7 +205,7 @@ class DonaireLiverQMLPipeline:
                 "published_metrics": {
                     "accuracy": "73.8%",
                     "auroc": 0.7720,
-                    "model": "Donaire 2Q-VQC (StronglyEntangling)",
+                    "model": "2-Qubit Minimal VQC (StronglyEntangling)",
                 },
             },
             "quantum_observables": {

@@ -137,7 +137,7 @@ class AdaptiveModelRouter:
         # High Classical Certainty: if classical model is >95% confident with very low entropy,
         # dispatch Classical (zero latency, mathematically provable accuracy)
         if c_confidence >= 0.90 and c_entropy < 0.25:
-            selected_engine = "CX-01 Classical Ensemble"
+            selected_engine = "QureSight Classical Ensemble"
             dispatch_code = "CLASSICAL_OPTIMAL"
             final_prob = c_prob
             rationale = (
@@ -148,7 +148,7 @@ class AdaptiveModelRouter:
         # If classical model is uncertain (entropy > 0.65 or confidence < 0.55), but Quantum VQC
         # maintains high confidence in the Hilbert feature space
         elif c_confidence < 0.55 and q_confidence >= 0.65:
-            selected_engine = "Transfinite-1 Hybrid Quantum VQC"
+            selected_engine = "QureSight Hybrid Quantum VQC"
             dispatch_code = "QUANTUM_BOUNDARY_ADVANTAGE"
             final_prob = q_prob
             rationale = (
@@ -172,7 +172,7 @@ class AdaptiveModelRouter:
         else:
             # When models diverge sharply, choose the higher router score but flag alert
             selected_engine = (
-                "CX-01 Classical Ensemble" if c_score >= q_score else "Transfinite-1 Hybrid Quantum VQC"
+                "QureSight Classical Ensemble" if c_score >= q_score else "QureSight Hybrid Quantum VQC"
             )
             final_prob = c_prob if c_score >= q_score else q_prob
             dispatch_code = "DISCORDANT_ALERT"
