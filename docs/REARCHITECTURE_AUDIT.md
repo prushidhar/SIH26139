@@ -165,3 +165,37 @@ NEW QURESIGHT RESEARCH PIPELINE:
 - [x] All 9 Authentication & Session security tests verified passing.
 - [x] Zero mock or fabricated benchmark data identified.
 - [x] Structural refactoring blueprint approved for implementation.
+
+---
+
+## 7. Open-Source & Academic Foundations (The Four Provenance Pillars)
+
+To ensure academic transparency, rigorous defensibility, and zero derivative obfuscation, QureSight explicitly anchors its quantum and machine learning capabilities on four foundational pillars:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                               QURESIGHT SCIENTIFIC PROVENANCE LEDGER                            │
+├───────────────────────────────┬───────────────────────────────┬─────────────────────────────────┤
+│ Foundation Pillar             │ Repository & Citation         │ Technical Contribution          │
+├───────────────────────────────┼───────────────────────────────┼─────────────────────────────────┤
+│ 1. Core Quantum Architecture  │ PennyLaneAI/pennylane         │ • Differentiable Quantum QNodes │
+│    & Differentiable Computing │ Xanadu Quantum Technologies   │ • Parameter-Shift Rule Gradients│
+│                               │ https://github.com/PennyLaneAI│ • StronglyEntanglingLayers      │
+├───────────────────────────────┼───────────────────────────────┼─────────────────────────────────┤
+│ 2. Adaptive Routing &         │ sofiya132/Quantara            │ • Shannon Entropy Router H(P)   │
+│    Clinical Disambiguation    │ Quantara Benchmark Framework  │ • Dual-Engine Concordance Metric│
+│                               │                               │ • UCI HCV Hepatitis Baseline    │
+├───────────────────────────────┼───────────────────────────────┼─────────────────────────────────┤
+│ 3. Multi-Disease Tabular QML  │ AstroVall02/                  │ • WDBC Breast Cytopathology QML │
+│    Benchmark Implementations  │ QML_Early_Disease_Detection   │ • UCI Cleveland Heart Disease   │
+│                               │                               │ • 4-8 Qubit Feature Mapping     │
+├───────────────────────────────┼───────────────────────────────┼─────────────────────────────────┤
+│ 4. Hybrid Transfer Learning   │ quantum-ai-for-cardiac-imaging│ • DenseNet-121 + PennyLane VQC  │
+│    for Radiographic Imaging   │ /cardiomegaly-chest-x-ray     │ • Frontal CXR Cardiomegaly      │
+│                               │ Decoodt et al., J. Imaging    │ • Fisher Information Matrix     │
+│                               │ 2023, 9(7), 128               │ • Parameter Efficiency (0.93 AUC)│
+└───────────────────────────────┴───────────────────────────────┴─────────────────────────────────┘
+```
+
+By synthesizing these four peer-reviewed and open-source foundations into an integrated 9-stage research workflow, QureSight bridges raw quantum physics with clinical cardiology, oncology, and hepatology workflows.
+
