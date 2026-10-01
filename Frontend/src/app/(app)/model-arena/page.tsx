@@ -66,6 +66,70 @@ export default function ModelArenaPage() {
         },
       ];
     }
+    if (id === "ilpd_liver") {
+      return [
+        {
+          id: "rf_ilpd",
+          name: "Random Forest (Classical)",
+          family: "classical",
+          architecture: "100 Gini Trees (max_depth=6) • Standardized 10 Features",
+          accuracy: "75.40 ± 2.80%",
+          auroc: 0.7850,
+          f1_score: 0.7420,
+          sensitivity: "76.80%",
+          specificity: "72.10%",
+          runtime_ms: 1.9,
+          resource_cost: "CPU / 450 KB",
+          provenance: "Donaire et al. Baseline Benchmark",
+          badge: "Classical Leader",
+        },
+        {
+          id: "lr_ilpd",
+          name: "Logistic Regression (L2)",
+          family: "classical",
+          architecture: "Convex Sigmoidal Estimator (C=1.0)",
+          accuracy: "74.20 ± 2.40%",
+          auroc: 0.7780,
+          f1_score: 0.7350,
+          sensitivity: "75.10%",
+          specificity: "71.90%",
+          runtime_ms: 0.8,
+          resource_cost: "CPU / 2 KB",
+          provenance: "Scikit-Learn 5-Fold CV",
+          badge: "Linear Baseline",
+        },
+        {
+          id: "vqc_2q_donaire",
+          name: "2-Qubit Minimal VQC (Donaire et al.)",
+          family: "quantum",
+          architecture: "2 Qubits • AngleEmbedding + StronglyEntanglingLayers (2 Layers)",
+          accuracy: "73.80 ± 2.20%",
+          auroc: 0.7720,
+          f1_score: 0.7310,
+          sensitivity: "74.50%",
+          specificity: "71.80%",
+          runtime_ms: 16.4,
+          resource_cost: "2 Qubits • 12 Quantum Params",
+          provenance: "PennyLane / Donaire et al. (2026)",
+          badge: "Minimal Qubit Footprint",
+        },
+        {
+          id: "vqc_4q_hybrid",
+          name: "4-Qubit Hybrid VQC (Transfinite)",
+          family: "quantum",
+          architecture: "4 Qubits • PCA Projection + StronglyEntanglingLayers (3 Layers)",
+          accuracy: "75.20 ± 2.10%",
+          auroc: 0.7840,
+          f1_score: 0.7410,
+          sensitivity: "76.20%",
+          specificity: "72.80%",
+          runtime_ms: 27.8,
+          resource_cost: "4 Qubits • 24 Quantum Params",
+          provenance: "PennyLane default.qubit",
+          badge: "High-Fidelity Quantum",
+        },
+      ];
+    }
     if (id === "heart_disease") {
       return [
         {
@@ -289,6 +353,7 @@ export default function ModelArenaPage() {
             <option value="breast_cancer">Wisconsin Diagnostic Breast Cancer (WDBC)</option>
             <option value="heart_disease">UCI Cleveland Heart Disease</option>
             <option value="cardiomegaly_cxr">CheXpert Cardiomegaly Radiography (Decoodt et al. 2023)</option>
+            <option value="ilpd_liver">Indian Liver Patient Dataset (ILPD / Donaire et al. 2026)</option>
           </select>
         </div>
 

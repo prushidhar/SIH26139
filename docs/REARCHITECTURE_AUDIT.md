@@ -168,9 +168,9 @@ NEW QURESIGHT RESEARCH PIPELINE:
 
 ---
 
-## 7. Open-Source & Academic Foundations (The Five Provenance Pillars)
+## 7. Open-Source & Academic Foundations (The Six Provenance Pillars)
 
-To ensure academic transparency, rigorous defensibility, and zero derivative obfuscation, QureSight explicitly anchors its quantum and machine learning capabilities on five foundational pillars:
+To ensure academic transparency, rigorous defensibility, and zero derivative obfuscation, QureSight explicitly anchors its quantum and machine learning capabilities on six foundational pillars:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -199,8 +199,12 @@ To ensure academic transparency, rigorous defensibility, and zero derivative obf
 │    for Radiographic Imaging   │ /cardiomegaly-chest-x-ray     │ • Frontal CXR Cardiomegaly      │
 │                               │ Decoodt et al., J. Imaging    │ • Fisher Information Matrix     │
 │                               │ 2023, 9(7), 128               │ • Parameter Efficiency (0.93 AUC)│
+├───────────────────────────────┼───────────────────────────────┼─────────────────────────────────┤
+│ 6. Hybrid QML Hepatology &    │ LauraMDonaire/QML-Liver       │ • ILPD Liver Patient Cohort     │
+│    Metabolic Disease QNNs     │ Donaire et al., Eng. Appl.    │ • 2-4 Qubit Minimal VQC Footprint│
+│                               │ Artif. Intell. 2026           │ • Bilirubin/Albumin Manifolds   │
 └───────────────────────────────┴───────────────────────────────┴─────────────────────────────────┘
 ```
 
-By synthesizing these five peer-reviewed and open-source foundations into an integrated 9-stage research workflow, QureSight bridges raw quantum physics and physical NISQ superconducting processors (IBM Eagle) with clinical cardiology, oncology, and hepatology workflows.
+By synthesizing these six peer-reviewed and open-source foundations into an integrated 9-stage research workflow, QureSight bridges raw quantum physics and physical NISQ superconducting processors (IBM Eagle) with clinical cardiology, oncology, and hepatology workflows.
 

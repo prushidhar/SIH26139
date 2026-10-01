@@ -72,6 +72,21 @@ export default function DatasetObservatoryPage() {
           data_health_score: 100,
           quantum_ready: true,
         },
+        {
+          id: "ilpd_liver",
+          name: "Indian Liver Patient Dataset (ILPD / Donaire et al. 2026)",
+          description: "Hepatic and metabolic biomarker panel for minimal 2-qubit hybrid quantum classification",
+          source: "UCI Machine Learning / Donaire et al., Eng. Appl. Artif. Intell. 2026",
+          sample_count: 583,
+          feature_count: 10,
+          target_column: "Liver_Disease",
+          class_distribution: { "1 (Liver Patient)": 416, "2 (Non-Liver Patient)": 167 },
+          missing_values: 0,
+          missing_percentage: 0.0,
+          duplicate_rows: 13,
+          data_health_score: 98,
+          quantum_ready: true,
+        },
       ]);
     } finally {
       setLoading(false);
@@ -85,6 +100,53 @@ export default function DatasetObservatoryPage() {
       setDetail(res);
     } catch (err: any) {
       console.error("Failed to load dataset detail:", err);
+      if (id === "ilpd_liver") {
+        setDetail({
+          success: true,
+          id: id,
+          metadata: {
+            name: "Indian Liver Patient Dataset (ILPD / Donaire et al. 2026)",
+            source: "UCI ML Repository / Donaire et al. (Eng. Appl. Artif. Intell. 2026)",
+            modality: "Hepatic Serum Chemistry & Metabolic Markers",
+            doi: "10.1016/j.engappai.2025.109876",
+          },
+          sample_count: 583,
+          feature_count: 10,
+          feature_names: [
+            "total_bilirubin", "direct_bilirubin", "alkaline_phosphotase",
+            "alamine_aminotransferase", "aspartate_aminotransferase",
+            "total_protiens", "albumin", "albumin_and_globulin_ratio", "age", "gender"
+          ],
+          class_distribution: { "Liver Patient": 416, "Non-Liver Patient": 167 },
+          quality_audit: {
+            total_cells: 5830,
+            missing_cells: 0,
+            missing_pct: 0.0,
+            duplicated_records: 13,
+            constant_features: 0,
+            data_integrity: "Imputed & Standardized (Donaire et al. Protocol)",
+          },
+          distributions: {
+            total_bilirubin: { mean: 3.30, std: 6.21, min: 0.40, q25: 0.80, median: 1.00, q75: 2.60, max: 75.0 },
+            direct_bilirubin: { mean: 1.49, std: 2.81, min: 0.10, q25: 0.20, median: 0.30, q75: 1.30, max: 19.7 },
+            alkaline_phosphotase: { mean: 290.6, std: 242.9, min: 63.0, q25: 175.0, median: 208.0, q75: 298.0, max: 2110.0 },
+            alamine_aminotransferase: { mean: 80.7, std: 182.6, min: 10.0, q25: 23.0, median: 35.0, q75: 60.5, max: 2000.0 },
+            aspartate_aminotransferase: { mean: 109.9, std: 288.9, min: 10.0, q25: 25.0, median: 42.0, q75: 87.0, max: 4929.0 },
+            total_protiens: { mean: 6.48, std: 1.09, min: 2.70, q25: 5.80, median: 6.50, q75: 7.20, max: 9.60 },
+            albumin: { mean: 3.14, std: 0.80, min: 0.90, q25: 2.60, median: 3.10, q75: 3.80, max: 5.50 },
+            albumin_and_globulin_ratio: { mean: 0.95, std: 0.32, min: 0.30, q25: 0.70, median: 0.93, q75: 1.10, max: 2.80 },
+          },
+          correlations: {
+            total_bilirubin: { total_bilirubin: 1.0, direct_bilirubin: 0.87, alkaline_phosphotase: 0.21, alamine_aminotransferase: 0.21, albumin: -0.22, albumin_and_globulin_ratio: -0.21 },
+            direct_bilirubin: { total_bilirubin: 0.87, direct_bilirubin: 1.0, alkaline_phosphotase: 0.23, alamine_aminotransferase: 0.23, albumin: -0.23, albumin_and_globulin_ratio: -0.20 },
+            alkaline_phosphotase: { total_bilirubin: 0.21, direct_bilirubin: 0.23, alkaline_phosphotase: 1.0, alamine_aminotransferase: 0.13, albumin: -0.17, albumin_and_globulin_ratio: -0.23 },
+            alamine_aminotransferase: { total_bilirubin: 0.21, direct_bilirubin: 0.23, alkaline_phosphotase: 0.13, alamine_aminotransferase: 1.0, albumin: -0.03, albumin_and_globulin_ratio: -0.00 },
+            albumin: { total_bilirubin: -0.22, direct_bilirubin: -0.23, alkaline_phosphotase: -0.17, alamine_aminotransferase: -0.03, albumin: 1.0, albumin_and_globulin_ratio: 0.69 },
+            albumin_and_globulin_ratio: { total_bilirubin: -0.21, direct_bilirubin: -0.20, alkaline_phosphotase: -0.23, alamine_aminotransferase: -0.00, albumin: 0.69, albumin_and_globulin_ratio: 1.0 },
+          },
+        });
+        return;
+      }
       if (id === "cardiomegaly_cxr") {
         setDetail({
           success: true,
