@@ -112,6 +112,40 @@ const DISEASE_MODULES: DiseaseModule[] = [
     }
   },
   {
+    key: "heart_tabular",
+    title: "Cleveland Cardiovascular Tabular Studio",
+    category: "Cardiology & Preventive Medicine",
+    datasetName: "UCI Cleveland Cohort (AstroVall02)",
+    status: "active",
+    statusLabel: "Ready (v1.0-PROD)",
+    icon: Heart,
+    image: "/images/disease-cardiovascular.jpg",
+    description: "13 hemodynamic vitals analyzed via 4-qubit StronglyEntangling VQC and Quantara router.",
+    targetUrl: "/predict/heart-tabular",
+    metrics: {
+      cohortSize: "303 Patient Cases",
+      engine: "4-Qubit VQC (PennyLane)",
+      accuracy: "0.918 ROC-AUC"
+    }
+  },
+  {
+    key: "liver_ilpd",
+    title: "Indian Liver Patient Studio (ILPD)",
+    category: "Hepatology & Metabolic Risk",
+    datasetName: "ILPD Cohort (Donaire et al. 2026)",
+    status: "active",
+    statusLabel: "Ready (Donaire et al.)",
+    icon: Droplets,
+    image: "/images/disease-breast-cancer.jpg",
+    description: "Ultra-compact 2-qubit minimal VQC evaluating 10 hepatic biomarkers with 12 parameters.",
+    targetUrl: "/predict/liver-ilpd",
+    metrics: {
+      cohortSize: "583 Patient Records",
+      engine: "2-Qubit Minimal VQC",
+      accuracy: "0.772 ROC-AUC"
+    }
+  },
+  {
     key: "neurological",
     title: "Neurological & Brain Health Studio",
     category: "Neurology & Neuro-Electrophysiology",
@@ -247,8 +281,8 @@ export default function PredictHubPage() {
         </div>
       </div>
 
-      {/* 3 DISEASE MODULE SELECTION CARDS WITH VISUAL ARTWORK */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+      {/* CLINICAL DETECTION MODULES */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
         {DISEASE_MODULES.map((mod) => {
           const isActive = mod.status === "active";
           const IconComp = mod.icon;
