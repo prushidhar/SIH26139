@@ -277,7 +277,7 @@ export default function HomePage() {
       className="space-y-6 pb-12 w-full"
     >
       {/* ========================================================================= */}
-      {/* 1. EXECUTIVE WELCOME BANNER */}
+      {/* 1. EXECUTIVE RESEARCH PORTAL BANNER */}
       {/* ========================================================================= */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -287,32 +287,51 @@ export default function HomePage() {
       >
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 relative z-10">
           <div className="space-y-1.5 max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cream-deep/60 border border-hairline text-[11px] font-sans text-ink-soft">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cream-deep/60 border border-hairline text-[11px] font-mono text-ink-soft">
               <span className="w-1.5 h-1.5 rounded-full bg-quantum" />
-              <span>Quantum-Assisted Medical Diagnostics System</span>
+              <span>QureSight Platform • Evidence-Driven Biomedical Intelligence</span>
             </div>
             <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-light text-ink tracking-tight">
-              Welcome, <span className="italic font-normal">{userName}</span>
+              Investigator Workstation <span className="italic font-normal">({userName})</span>
             </h1>
             <p className="text-ink-soft text-xs sm:text-sm font-light leading-relaxed">
-              Run quick diagnostic screenings for patients, compare quantum and standard computer predictions side by side, and review past reports.
+              Explore the 9-stage scientific pipeline: investigate biomedical cohorts, rank biomarkers, evaluate quantum kernels against classical learners, profile noise feasibility, and inspect multi-criteria evidence matrices.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <Link
-              href="/predict"
-              className="px-4 py-2 rounded-lg bg-ink text-parchment font-medium text-xs tracking-wider hover:opacity-90 transition-all shadow-sm flex items-center gap-1.5 cursor-pointer"
+              href="/workspace"
+              className="px-4 py-2 rounded-lg bg-ink text-parchment font-medium text-xs tracking-wider hover:opacity-90 transition-all shadow-sm flex items-center gap-1.5 cursor-pointer font-sans"
             >
-              <Play size={12} className="fill-parchment" /> Start Patient Screening
+              <FlaskConical size={13} className="text-quantum-soft" /> Research Workspace
             </Link>
             <Link
-              href="/benchmarks"
-              className="px-4 py-2 rounded-lg bg-cream-deep/70 hover:bg-cream border border-hairline text-ink font-medium text-xs tracking-wider transition-all flex items-center gap-1.5 cursor-pointer"
+              href="/evidence-matrix"
+              className="px-4 py-2 rounded-lg bg-cream-deep/70 hover:bg-cream border border-hairline text-ink font-medium text-xs tracking-wider transition-all flex items-center gap-1.5 cursor-pointer font-sans"
             >
-              <Activity size={12} /> Model Accuracy
+              <Activity size={13} /> Evidence Matrix
             </Link>
           </div>
+        </div>
+
+        {/* 9-Stage Workflow Breadcrumb Strip */}
+        <div className="pt-4 mt-5 border-t border-hairline flex items-center justify-between gap-2 overflow-x-auto text-[11px] font-mono text-ink-soft whitespace-nowrap">
+          <Link href="/observatory" className="hover:text-quantum transition-colors">01 Data</Link>
+          <span>→</span>
+          <Link href="/signal-studio" className="hover:text-quantum transition-colors">02 Signal</Link>
+          <span>→</span>
+          <Link href="/model-arena" className="hover:text-quantum transition-colors">03 Models</Link>
+          <span>→</span>
+          <Link href="/feasibility" className="hover:text-quantum transition-colors">04 Quantum</Link>
+          <span>→</span>
+          <Link href="/evidence-matrix" className="hover:text-quantum transition-colors">05 Evidence</Link>
+          <span>→</span>
+          <Link href="/explainability" className="hover:text-quantum transition-colors">06 Explain</Link>
+          <span>→</span>
+          <Link href="/decision-console" className="hover:text-quantum transition-colors">07 Decision</Link>
+          <span>→</span>
+          <Link href="/vault" className="hover:text-quantum transition-colors">08 Vault</Link>
         </div>
 
         {/* 4 Summary Stats Cards */}
