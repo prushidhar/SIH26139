@@ -53,6 +53,36 @@ DATASET_REGISTRY = {
         "feature_count": 8,
         "sample_count": 768,
         "features_description": "Pregnancies, Glucose tolerance, Diastolic BP, Triceps skin thickness, 2-hour serum insulin, Body Mass Index, Pedigree function, Age."
+    },
+    "cardiomegaly_cxr": {
+        "id": "cardiomegaly_cxr",
+        "name": "CheXpert Cardiomegaly Radiography (Decoodt et al. 2023)",
+        "description": "Frontal chest X-ray transfer learning cohort for enlarged cardiac silhouette detection using DenseNet-121 backbones.",
+        "source": "Stanford AIMI / Decoodt et al., J. Imaging 2023, 9(7), 128",
+        "target_column": "target",
+        "task_type": "binary_classification",
+        "positive_class": "Cardiomegaly (Class 1)",
+        "negative_class": "Normal Cardiac Silhouette (Class 0)",
+        "file_name": "cardiomegaly_cxr.csv",
+        "default_quantum_dimensions": 6,
+        "feature_count": 7,
+        "sample_count": 1200,
+        "features_description": "DenseNet_PC1 through PC6 orthogonal latent projections, Cardiothoracic_Ratio (CTR)."
+    },
+    "ilpd_liver": {
+        "id": "ilpd_liver",
+        "name": "Indian Liver Patient Dataset (ILPD / Donaire et al. 2026)",
+        "description": "Hepatic and metabolic biomarker panel for minimal 2-qubit hybrid quantum classification.",
+        "source": "UCI Machine Learning / Donaire et al., Eng. Appl. Artif. Intell. 2026",
+        "target_column": "target",
+        "task_type": "binary_classification",
+        "positive_class": "Liver Patient (Class 1)",
+        "negative_class": "Non-Liver Patient (Class 0)",
+        "file_name": "ilpd_liver.csv",
+        "default_quantum_dimensions": 2,
+        "feature_count": 10,
+        "sample_count": 583,
+        "features_description": "Total Bilirubin, Direct Bilirubin, Alkaline Phosphotase, ALT, AST, Total Proteins, Albumin, A/G Ratio, Age, Gender."
     }
 }
 

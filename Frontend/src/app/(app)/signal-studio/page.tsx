@@ -114,7 +114,10 @@ export default function SignalStudioPage() {
                 className="block px-3 py-1.5 rounded-md border border-hairline bg-cream-deep/60 text-ink text-xs font-mono focus:outline-none focus:ring-1 focus:ring-quantum"
               >
                 <option value="breast_cancer">Wisconsin Diagnostic Breast Cancer (WDBC)</option>
-                <option value="heart_disease">UCI Cleveland Heart Disease</option>
+                <option value="heart_disease">UCI Cleveland Heart Disease (AstroVall02)</option>
+                <option value="cardiomegaly_cxr">CheXpert Radiography CXR (Decoodt et al. 2023)</option>
+                <option value="ilpd_liver">Indian Liver Patient Dataset (Donaire et al. 2026)</option>
+                <option value="diabetes">NIDDK Diabetes Diagnostic Cohort</option>
               </select>
             </div>
 
