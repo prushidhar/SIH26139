@@ -139,7 +139,7 @@ export default function QuantumFeasibilityPage() {
             Quantum Feasibility & Hardware Profiler
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-            Resource footprint, circuit depth scaling, NISQ noise vulnerability, and IBM Eagle 127-qubit Heavy-Hex transpilation.
+            Circuit depth scaling, noise vulnerability, and IBM Eagle 127Q transpilation.
           </p>
         </div>
 
@@ -167,9 +167,9 @@ export default function QuantumFeasibilityPage() {
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
-            Multi-Paradigm Circuit Architecture Ledger
+            Circuit Architecture
           </span>
-          <span className="text-[11px] font-mono text-muted-foreground">Peer-Reviewed NISQ Implementations</span>
+          <span className="text-[11px] font-mono text-muted-foreground">NISQ Implementations</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -285,10 +285,10 @@ export default function QuantumFeasibilityPage() {
               </div>
               <div>
                 <h3 className="text-sm font-medium text-foreground">
-                  IBM Eagle r3 Hardware Compilation & Zero-Noise Extrapolation (ZNE)
+                  IBM Eagle r3 · Zero-Noise Extrapolation (ZNE)
                 </h3>
                 <p className="text-xs text-muted-foreground">
-                  127-Qubit Heavy-Hex Lattice · Echoed Cross-Resonance (ECR) Basis Gates
+                  127Q Heavy-Hex · ECR Basis Gates
                 </p>
               </div>
             </div>

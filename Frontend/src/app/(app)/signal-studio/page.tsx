@@ -82,7 +82,7 @@ export default function SignalStudioPage() {
             Signal Studio
           </h1>
           <p className="text-xs sm:text-sm text-ink-soft mt-1">
-            Supervised biomarker ranking, orthogonal PCA projection, and continuous rotation angle encoding for quantum Hilbert space circuits.
+            Biomarker ranking, PCA projection, and quantum rotation angle encoding.
           </p>
         </div>
 

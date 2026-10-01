@@ -70,7 +70,7 @@ export default function ExplainabilityPage() {
             Explainability
           </h1>
           <p className="text-xs sm:text-sm text-ink-soft mt-1">
-            Why did the model arrive at this finding? Comparing Classical TreeSHAP attributions with Quantum analytic parameter-shift gradients.
+            Classical SHAP attributions vs. quantum parameter-shift gradients — side by side.
           </p>
         </div>
 

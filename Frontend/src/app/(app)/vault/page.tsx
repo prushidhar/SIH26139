@@ -123,7 +123,7 @@ export default function ExperimentVaultPage() {
             Experiment Vault
           </h1>
           <p className="text-xs sm:text-sm text-ink-soft mt-1">
-            Store, audit, and revisit complete reproducible scientific experiments with immutable cryptographic audit locks.
+            Auditable, reproducible experiment records with immutable audit locks.
           </p>
         </div>
 
@@ -140,13 +140,12 @@ export default function ExperimentVaultPage() {
 
       <ExperimentTimeline currentStageId="vault" />
 
-      {/* Search and Filter Strip */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl border border-hairline bg-parchment">
         <div className="relative flex-1 max-w-md">
           <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-ink-soft" />
           <input
             type="text"
-            placeholder="Search experiments by title, dataset, or ID..."
+            placeholder="Search by title, dataset, or ID..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full pl-9 pr-3 py-1.5 rounded-md border border-hairline bg-cream-deep/60 text-ink text-xs font-mono placeholder:text-ink-soft focus:outline-none focus:ring-1 focus:ring-quantum"
@@ -155,7 +154,7 @@ export default function ExperimentVaultPage() {
 
         <div className="flex items-center gap-2 text-xs font-mono text-ink-soft">
           <Lock className="w-3.5 h-3.5 text-emerald-600" />
-          <span>{filtered.length} Immutable Records Found</span>
+          <span>{filtered.length} Records</span>
         </div>
       </div>
 

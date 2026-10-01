@@ -52,7 +52,7 @@ const DISEASE_MODULES: DiseaseModule[] = [
     statusLabel: "Ready (v1.0-PROD)",
     icon: Microscope,
     image: "/images/disease-breast-cancer.jpg",
-    description: "Evaluates 8 fine-needle biopsy cellular morphometric biomarkers (cell radius, perimeter, concavity, and texture) using 8-qubit variational quantum circuits and classical ensembles.",
+    description: "FNA biopsy morphometrics evaluated by 8-qubit VQC and classical ensemble.",
     targetUrl: "/predict/breast-cancer",
     metrics: {
       cohortSize: "569 Tissue Cases",
@@ -69,7 +69,7 @@ const DISEASE_MODULES: DiseaseModule[] = [
     statusLabel: "Ready (v1.0-PROD)",
     icon: Heart,
     image: "/images/disease-cardiovascular.jpg",
-    description: "Evaluates 12-lead paper ECG images for acute myocardial infarction, arrhythmias, and conduction blocks using ResNet-18 (CX-01) and 8-qubit VQC (Transfinite-1) with real-time Grad-CAM pinpointing and cardiac risk scoring.",
+    description: "12-lead ECG analysis for AMI and arrhythmias using ResNet-18 + 8-qubit VQC with Grad-CAM.",
     targetUrl: "/predict/heart-disease",
     metrics: {
       cohortSize: "Verified Clinical Cohort",
@@ -86,7 +86,7 @@ const DISEASE_MODULES: DiseaseModule[] = [
     statusLabel: "Ready (v1.0-PROD)",
     icon: Droplets,
     image: "/images/disease-breast-cancer.jpg",
-    description: "Evaluates 12 serum chemistry biomarkers (AST, ALT, Bilirubin, Albumin, Cholinesterase) using 4-qubit PennyLane VQC with ring entanglement and adaptive clinical routing for early liver fibrosis and cirrhosis triage.",
+    description: "12 serum biomarkers (AST, ALT, Albumin) processed by 4-qubit ring-CNOT VQC for early liver fibrosis triage.",
     targetUrl: "/predict/hepatitis-c",
     metrics: {
       cohortSize: "615 Patient Cases",
@@ -103,7 +103,7 @@ const DISEASE_MODULES: DiseaseModule[] = [
     statusLabel: "Ready (Decoodt et al. 2023)",
     icon: Layers,
     image: "/images/disease-cardiovascular.jpg",
-    description: "Evaluates chest radiographs for cardiomegaly and cardiac enlargement using DenseNet-121 feature maps and 6-qubit PennyLane VQC with 96.5% parameter reduction and 0.930 ROC-AUC.",
+    description: "Chest X-ray cardiomegaly detection via DenseNet-121 + 6-qubit VQC with 0.930 ROC-AUC.",
     targetUrl: "/predict/cardiomegaly",
     metrics: {
       cohortSize: "1,200 Chest Radiographs",
@@ -120,7 +120,7 @@ const DISEASE_MODULES: DiseaseModule[] = [
     statusLabel: "Not Accessible (Phase 2)",
     icon: Activity,
     image: "/images/disease-neurological.jpg",
-    description: "Analyzes multi-channel EEG frequency spectrums, cognitive response latency, and neural spike wave anomalies to detect early-stage neurodegenerative disorders.",
+    description: "Multi-channel EEG and neural spike analysis for early neurodegenerative disease detection.",
     metrics: {
       cohortSize: "400 Neuro Profiles",
       engine: "Tensor-Entangled Neuro VQC",
@@ -353,80 +353,6 @@ export default function PredictHubPage() {
         })}
       </div>
 
-      {/* MULTI-DISEASE SCREENING ARCHITECTURE OVERVIEW */}
-      <div className="bg-parchment rounded-2xl border border-hairline p-6 shadow-xs space-y-5">
-        <div className="flex items-center justify-between border-b border-hairline pb-3">
-          <div>
-            <h2 className="font-serif text-lg font-medium text-ink">
-              QureSight Multi-Disease Screening Architecture
-            </h2>
-            <p className="text-xs text-ink-soft">
-              How dual-engine classical and variational quantum models evaluate clinical risk
-            </p>
-          </div>
-          <span className="text-xs font-mono text-quantum font-semibold bg-quantum/10 px-2.5 py-1 rounded-full border border-quantum/20">
-            Validated Framework
-          </span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* Card 1: Dual Engine Run */}
-          <div className="p-4 rounded-xl bg-white border border-hairline space-y-2 shadow-2xs">
-            <div className="w-8 h-8 rounded-lg bg-quantum/10 text-quantum flex items-center justify-center">
-              <Zap size={16} />
-            </div>
-            <h4 className="text-xs font-bold text-ink">Simultaneous Dual-Engine Execution</h4>
-            <p className="text-xs text-ink-soft leading-relaxed">
-              Every screening pass concurrently runs classical ML baseline (CX-01) and an 8-qubit variational quantum classifier (Transfinite-1) on independent pipelines.
-            </p>
-          </div>
-
-          {/* Card 2: SHAP Explainability */}
-          <div className="p-4 rounded-xl bg-white border border-hairline space-y-2 shadow-2xs">
-            <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-              <Activity size={16} />
-            </div>
-            <h4 className="text-xs font-bold text-ink">Directional SHAP Risk Attribution</h4>
-            <p className="text-xs text-ink-soft leading-relaxed">
-              Calculates distinct quantum and classical feature impacts so clinicians know which exact cellular or physiological measurements elevated risk.
-            </p>
-          </div>
-
-          {/* Card 3: IBM Hardware Path */}
-          <div className="p-4 rounded-xl bg-white border border-hairline space-y-2 shadow-2xs">
-            <div className="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
-              <Cpu size={16} />
-            </div>
-            <h4 className="text-xs font-bold text-ink">Physical IBM Quantum Target (Aleph-1)</h4>
-            <p className="text-xs text-ink-soft leading-relaxed">
-              Built on 127-qubit IBM Eagle superconducting quantum hardware architecture with automated Pauli-Z tensor mapping and readout error mitigation.
-            </p>
-          </div>
-        </div>
-
-        {/* Quick System Navigation Footer */}
-        <div className="pt-3 border-t border-hairline flex flex-wrap items-center justify-between gap-3 text-xs">
-          <span className="text-ink-soft font-mono text-[11px]">
-            Ready to test? Access live diagnostics or explore system benchmarks.
-          </span>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/benchmarks"
-              className="text-xs font-medium text-ink hover:text-quantum hover:underline flex items-center gap-1"
-            >
-              <TrendingUp size={13} />
-              <span>Model Benchmarks</span>
-            </Link>
-            <Link
-              href="/hardware"
-              className="text-xs font-medium text-ink hover:text-quantum hover:underline flex items-center gap-1"
-            >
-              <Cpu size={13} />
-              <span>Hardware Telemetry</span>
-            </Link>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

@@ -35,26 +35,26 @@ interface CXRPreset {
 const CXR_PRESETS: CXRPreset[] = [
   {
     name: "Normal Chest Radiograph",
-    badge: "CTR 0.43 (Physiological)",
+    badge: "CTR 0.43 (Normal)",
     color: "emerald",
     ctr: 0.43,
-    description: "Transverse cardiac diameter is 43% of thoracic ribcage span. Clear costophrenic angles.",
+    description: "Cardiac silhouette within normal limits. Clear costophrenic angles.",
     features: [0.12, -0.45, 0.22, -0.18, 0.05, -0.31],
   },
   {
     name: "Borderline Triage Zone",
-    badge: "CTR 0.52 (Ambiguity Zone)",
+    badge: "CTR 0.52 (Ambiguous)",
     color: "amber",
     ctr: 0.52,
-    description: "Cardiac silhouette near 50% cutoff. High Shannon entropy triggering quantum arbitration.",
+    description: "Near the 0.50 clinical cutoff — quantum arbitration activated.",
     features: [0.48, 0.35, -0.12, 0.55, 0.28, 0.41],
   },
   {
     name: "Severe Biventricular Cardiomegaly",
-    badge: "CTR 0.65 (Enlarged Apex)",
+    badge: "CTR 0.65 (Enlarged)",
     color: "rose",
     ctr: 0.65,
-    description: "Marked biventricular dilatation with lateral displacement of the cardiac apex.",
+    description: "Marked biventricular dilatation with lateral apex displacement.",
     features: [0.92, 0.84, 0.78, 0.88, 0.64, 0.72],
   },
 ];
@@ -219,9 +219,6 @@ export default function CardiomegalyStudioPage() {
               </span>
             </div>
 
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              The cardiothoracic ratio is the transverse cardiac diameter divided by the internal diameter of the thoracic cage. A value above 0.50 on a PA frontal radiograph indicates cardiac enlargement.
-            </p>
 
             {/* CTR Slider */}
             <div className="space-y-2 pt-2">
