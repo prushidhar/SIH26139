@@ -176,13 +176,13 @@ export default function RegisterPage() {
     }
   };
 
-  // Safety timeout: if isGoogleLoading stays active for >40s, auto-cancel and alert user
+  // Safety timeout: if isGoogleLoading stays active for >85s, auto-cancel and alert user
   useEffect(() => {
     if (!isGoogleLoading) return;
     const timeout = setTimeout(() => {
       setIsGoogleLoading(false);
       setErrorMessage("The server took too long to respond. If it was sleeping, please try again now.");
-    }, 42000);
+    }, 85000);
     return () => clearTimeout(timeout);
   }, [isGoogleLoading]);
 
@@ -679,9 +679,9 @@ export default function RegisterPage() {
                 <Loader2 size={36} className="animate-spin text-quantum mb-3" />
                 <h3 className="font-serif text-lg font-medium text-ink">Creating your account...</h3>
                 <p className="text-xs text-ink-soft mt-1">Verifying Google identity & establishing workspace credentials...</p>
-                {waitElapsed > 8 && (
+                {waitElapsed > 4 && (
                   <p className="text-[11px] text-amber-700 bg-amber-50/90 px-3 py-1.5 rounded-lg border border-amber-200/80 mt-3 max-w-xs animate-pulse">
-                    Connecting to cloud server ({waitElapsed}s). Standby wake-up may take up to ~35s...
+                    {isOnline ? "Server connected! Finalizing credentials..." : `Connecting to cloud server (${waitElapsed}s). Standby wake-up in progress (~30-50s)...`}
                   </p>
                 )}
                 <button

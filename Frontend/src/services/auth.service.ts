@@ -138,7 +138,7 @@ export class AuthService {
     let lastError: unknown;
     for (let attempt = 1; attempt <= retries; attempt++) {
       try {
-        const response = await apiClient.post<AuthResponse>('/auth/register', payload, { timeout: 35000 });
+        const response = await apiClient.post<AuthResponse>('/auth/register', payload, { timeout: 75000 });
         if (response.data.accessToken) {
           setTokens(response.data.accessToken, response.data.refreshToken);
           setUserData(response.data.user as unknown as Record<string, unknown>);
@@ -203,7 +203,7 @@ export class AuthService {
     let lastError: unknown;
     for (let attempt = 1; attempt <= retries; attempt++) {
       try {
-        const response = await apiClient.post<AuthResponse>('/auth/login', credentials, { timeout: 35000 });
+        const response = await apiClient.post<AuthResponse>('/auth/login', credentials, { timeout: 75000 });
         const data = response.data;
 
         setTokens(data.accessToken, data.refreshToken);
@@ -237,7 +237,7 @@ export class AuthService {
         const response = await apiClient.post<AuthResponse>(
           '/auth/google',
           { credential },
-          { timeout: 35000 }
+          { timeout: 75000 }
         );
         const data = response.data;
 

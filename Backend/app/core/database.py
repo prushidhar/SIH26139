@@ -21,6 +21,10 @@ def resolve_db_url() -> str:
     # If using the defunct / paused Supabase tenant reference or empty, default to resilient local SQLite
     if not url or "vknujqpzwbxmfhdcgxpa" in url:
         return "sqlite+aiosqlite:///./quresight.db"
+    if url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+    elif url.startswith("postgresql://") and not url.startswith("postgresql+asyncpg://"):
+        url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
     return url
 
 
@@ -37,13 +41,14 @@ else:
     engine_kwargs["connect_args"] = {
         "statement_cache_size": 0,
         "prepared_statement_cache_size": 0,
+        "timeout": 3.0,
     }
     engine_kwargs.update({
         "pool_pre_ping": True,
         "pool_size": 20,
         "max_overflow": 20,
         "pool_recycle": 1800,
-        "pool_timeout": 5,
+        "pool_timeout": 3,
     })
 
 engine = create_async_engine(
@@ -70,9 +75,22 @@ FallbackSessionLocal = async_sessionmaker(
 
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
-    """Yields a database session with robust session lifecycle management."""
-    async with AsyncSessionLocal() as session:
-        yield session
+    """Yields a database session with robust session lifecycle management and resilient fallback."""
+    global engine, AsyncSessionLocal
+    try:
+        async with AsyncSessionLocal() as session:
+            yield session
+    except Exception as exc:
+        print(f"[QureSight Database] Primary session failed ({exc}). Activating fallback local SQLite...")
+        AsyncSessionLocal = FallbackSessionLocal
+        engine = fallback_engine
+        try:
+            async with fallback_engine.begin() as conn:
+                await conn.run_sync(Base.metadata.create_all)
+        except Exception:
+            pass
+        async with FallbackSessionLocal() as fallback_session:
+            yield fallback_session
 
 
 async def init_db() -> None:

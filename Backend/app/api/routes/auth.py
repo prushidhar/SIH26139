@@ -100,6 +100,11 @@ async def register(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(exc),
         ) from exc
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Registration error: {str(exc)}",
+        ) from exc
 
     set_auth_cookies(response, auth_data, request)
     return auth_data
@@ -200,6 +205,11 @@ async def login(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=str(exc),
         ) from exc
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Login error: {str(exc)}",
+        ) from exc
 
 
 # =========================================================
@@ -232,6 +242,11 @@ async def google_auth(
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(exc),
+        ) from exc
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Google login error: {str(exc)}",
         ) from exc
 
 
