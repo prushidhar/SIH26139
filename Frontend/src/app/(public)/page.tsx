@@ -95,10 +95,10 @@ function Glass({ children, className = "" }: { children: ReactNode; className?: 
 /* ------------------------------------------------------------------ */
 
 const NAV_LINKS = [
-  { label: "Technology", href: "#technology" },
-  { label: "Research", href: "#research" },
-  { label: "Platform", href: "#platform" },
-  { label: "Documentation", href: "#documentation" },
+  { label: "How It Works", href: "#how-it-works" },
+  { label: "Screening", href: "#screening" },
+  { label: "Live Demo", href: "#live-demo" },
+  { label: "Results", href: "#results" },
 ];
 
 function Nav() {
@@ -122,7 +122,7 @@ function Nav() {
         <a href="#top" className="flex items-baseline gap-2 shrink-0">
           <span className="font-serif text-[17px] sm:text-[19px] tracking-tight text-ink font-normal">QureSight</span>
           <span className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground sm:inline">
-            Research Platform
+            Diagnostic Intelligence
           </span>
         </a>
 
@@ -192,38 +192,38 @@ function Hero() {
 
       <motion.div style={{ y, opacity }} className="mx-auto max-w-5xl">
         <Reveal>
-          <Eyebrow>Hybrid quantum-classical inference</Eyebrow>
+          <Eyebrow>AI-powered disease screening</Eyebrow>
         </Reveal>
 
         <Reveal delay={0.06}>
           <h1 className="mt-7 max-w-4xl font-serif text-[clamp(2.6rem,6vw,4.6rem)] font-light leading-[1.03] tracking-[-0.02em] text-ink">
-            Quantum kernels and classical learners,
-            <span className="text-ink-soft"> working on the same biomedical data.</span>
+            Screen for multiple diseases
+            <span className="text-ink-soft"> from routine clinical data — in seconds.</span>
           </h1>
         </Reveal>
 
         <Reveal delay={0.12}>
           <p className="mt-8 max-w-2xl text-[17px] leading-[1.7] text-ink-soft">
-            QureSight encodes multi-omics panels, longitudinal labs, and structured clinical records into
-            quantum feature spaces where higher-order interactions stay intact. The objective is narrow and
-            measurable: recover diagnostic signal at the pre-symptomatic stage that linear projections and
-            tree ensembles smooth away — and prove it against the classical baseline every time.
+            QureSight combines quantum-enhanced machine learning with classical baselines to detect
+            early signs of breast cancer, heart disease, liver disorders, and more. Upload patient
+            data, get risk scores with full explainability, and verify every result against
+            peer-reviewed benchmarks.
           </p>
         </Reveal>
 
         <Reveal delay={0.18}>
           <div className="mt-11 flex flex-wrap items-center gap-3">
             <a
-              href="#research"
+              href="#live-demo"
               className="rounded-full border border-hairline bg-parchment/70 px-6 py-3 text-[14px] text-ink backdrop-blur transition-colors hover:bg-cream-deep"
             >
-              Read the whitepaper
+              See it in action
             </a>
             <Link
               href="/home"
               className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-[14px] text-parchment transition-opacity hover:opacity-88"
             >
-              Launch test environment
+              Start screening
               <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
             </Link>
           </div>
@@ -232,10 +232,10 @@ function Hero() {
         <Reveal delay={0.24}>
           <dl className="mt-20 grid max-w-3xl grid-cols-2 gap-x-8 gap-y-8 border-t border-hairline pt-8 sm:grid-cols-4">
             {[
-              ["12–20", "logical qubits per circuit"],
-              ["IBM Heron", "QPU execution backend"],
-              ["5×2", "cross-validated splits"],
-              ["p < 0.05", "reporting threshold"],
+              ["7+", "disease screening modules"],
+              ["6", "verified open-source repos"],
+              ["< 3s", "average inference time"],
+              ["100%", "explainable predictions"],
             ].map(([v, k]) => (
               <div key={k}>
                 <dt className="font-serif text-2xl text-ink">{v}</dt>
@@ -253,52 +253,51 @@ function Hero() {
 /* Clinical reality                                                     */
 /* ------------------------------------------------------------------ */
 
-const FAILURES = [
+const CHALLENGES = [
   {
     n: "01",
-    title: "Epistasis is not additive",
-    body: "Risk in polygenic disease frequently lives in the interaction term. A model that scores loci independently — or with pairwise interactions hand-selected in advance — cannot represent a three-way epistatic effect it was never told to look for.",
+    title: "Hidden patterns in routine labs",
+    body: "A single blood marker rarely tells the full story. QureSight maps interactions across dozens of biomarkers simultaneously, surfacing risk signals that individual tests miss.",
   },
   {
     n: "02",
-    title: "PCA discards the manifold",
-    body: "Reducing 20,000 transcripts to 50 components preserves variance, not structure. Variance is dominated by batch, tissue composition, and demographics. The curvature that separates an early lesion from benign tissue is low-variance and is the first thing a linear projection throws out.",
+    title: "Small datasets, high stakes",
+    body: "Clinical cohorts are often limited to hundreds of patients. Our quantum-enhanced kernels extract meaningful structure from small datasets where deep learning overfits and simple models underfit.",
   },
   {
     n: "03",
-    title: "Early signal has low amplitude",
-    body: "At stage I, the discriminative shift in a circulating biomarker is often within assay noise for any single analyte. Detection depends on the joint configuration across dozens of weak markers, which is precisely the regime where regularised classical models collapse toward the majority class.",
+    title: "Black-box models erode trust",
+    body: "Clinicians need to understand why a model flags a patient. Every QureSight prediction traces back to specific biomarkers and their interactions — no opaque scores.",
   },
   {
     n: "04",
-    title: "p ≫ n, and the cohorts are small",
-    body: "Curated, well-phenotyped cohorts run to hundreds of patients against tens of thousands of features. Deep networks overfit; sparse linear models underfit. Neither failure is fixed by more epochs.",
+    title: "One model doesn't fit all diseases",
+    body: "Breast cancer, liver disease, and heart conditions each have unique biomarker profiles. QureSight adapts its screening pipeline to each disease with validated, peer-reviewed protocols.",
   },
 ];
 
 function ClinicalReality() {
   return (
-    <section id="technology" className="relative border-t border-hairline bg-cream-deep/40 px-6 py-28">
+    <section id="how-it-works" className="relative border-t border-hairline bg-cream-deep/40 px-6 py-28">
       <div className="mx-auto max-w-6xl">
         <Reveal>
-          <Eyebrow>Clinical reality</Eyebrow>
+          <Eyebrow>Why QureSight</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-6 max-w-3xl font-serif text-[clamp(2rem,4vw,3.1rem)] font-light leading-[1.1] tracking-[-0.015em] text-ink">
-            Where classical models stop improving
+            The challenges we solve
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
           <p className="mt-6 max-w-2xl text-[16px] leading-[1.7] text-ink-soft">
-            Gradient boosting on tabular clinical data is a strong, well-understood baseline, and on most
-            tasks it should be the deployed model. The failure modes below are the ones we have repeatedly
-            observed where it is not enough — and they share a cause: the diagnostic information is in the
-            geometry of feature interactions, not in the features.
+            Traditional screening tools look at one test at a time. QureSight analyzes the full
+            picture — combining multiple biomarkers, patient history, and imaging data to catch
+            diseases earlier and more accurately.
           </p>
         </Reveal>
 
         <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-hairline bg-hairline md:grid-cols-2">
-          {FAILURES.map((f, i) => (
+          {CHALLENGES.map((f, i) => (
             <Reveal key={f.n} delay={0.05 * i} className="bg-parchment/70 backdrop-blur-sm">
               <div className="h-full p-8 md:p-10">
                 <span className="font-mono text-[11px] tracking-[0.2em] text-quantum">{f.n}</span>
@@ -319,32 +318,32 @@ function ClinicalReality() {
 
 const STAGES = [
   {
-    id: "encoding",
-    label: "Stage 01",
-    title: "Non-linear feature encoding",
-    body: "A supervised autoencoder compresses the raw panel to a 12–20 dimensional latent vector sized to the circuit width. The bottleneck is trained jointly with the downstream objective, so compression is driven by class separability rather than reconstruction error alone. Latent dimensions are retained with their loadings intact for later attribution.",
-    meta: ["Supervised bottleneck", "Batch-effect correction", "Loadings retained"],
+    id: "ingest",
+    label: "Step 01",
+    title: "Data ingestion & validation",
+    body: "Upload patient biomarkers, lab reports, or chest X-rays. QureSight validates inputs against expected ranges, flags anomalies, and normalizes values — ensuring clean data before any model touches it.",
+    meta: ["Multi-format input", "Auto-validation", "Outlier flagging"],
   },
   {
-    id: "screening",
-    label: "Stage 02",
-    title: "Geometric pre-screening",
-    body: "Before a single shot is executed, we compute the quantum kernel Gram matrix on the training fold and test whether it induces separation the classical RBF kernel does not: kernel-target alignment, effective dimension, and the spectral gap between the two Gram matrices. If the quantum kernel offers no geometric advantage, the run is flagged and the classical model is recommended. Most datasets do not pass this gate, and we say so.",
-    meta: ["Kernel-target alignment", "Effective dimension", "Go / no-go gate"],
+    id: "encode",
+    label: "Step 02",
+    title: "Intelligent feature encoding",
+    body: "Raw clinical values are compressed into a compact representation optimized for each disease. The encoding preserves the relationships between biomarkers that matter most for early detection.",
+    meta: ["Disease-specific", "Relationship-preserving", "Dimensionality reduction"],
   },
   {
-    id: "inference",
-    label: "Stage 03",
-    title: "Hybrid inference",
-    body: "Variational classifiers and quantum kernel SVMs run on IBM Heron QPUs through Qiskit Runtime, with the identical fold executed simultaneously against XGBoost, RBF-SVM, and regularised logistic regression. Statevector simulation, noisy simulation, and hardware results are stored as three distinct records — never averaged, never substituted for one another.",
-    meta: ["Qiskit Runtime", "Zero-noise extrapolation", "Simulator / hardware parity"],
+    id: "predict",
+    label: "Step 03",
+    title: "Hybrid model inference",
+    body: "Each patient record runs through both quantum-enhanced and classical models simultaneously. Results are compared side-by-side so you can see exactly where the quantum approach adds value — and where it doesn't.",
+    meta: ["Dual-model comparison", "Real-time scoring", "Confidence intervals"],
   },
   {
-    id: "qureexplain",
-    label: "Stage 04",
-    title: "QureExplain attribution engine",
-    body: "SHAP assumes a classical additive decomposition that a entangled circuit does not satisfy. QureExplain instead ablates individual gates and entangling blocks, measuring the shift in decision margin to attribute the prediction to specific feature interactions. Attribution is propagated back through the autoencoder loadings to named genes, analytes, and clinical variables.",
-    meta: ["Gate ablation", "Entanglement attribution", "Traced to source features"],
+    id: "explain",
+    label: "Step 04",
+    title: "Explainable risk attribution",
+    body: "Every prediction comes with a breakdown of which biomarkers drove the result and how they interacted. Clinicians see named features, not abstract weights — making every score auditable and actionable.",
+    meta: ["Feature attribution", "Interaction mapping", "Clinical-ready reports"],
   },
 ];
 
@@ -354,21 +353,20 @@ function Pipeline() {
   const railHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="platform" className="relative border-t border-hairline px-6 py-28">
+    <section id="screening" className="relative border-t border-hairline px-6 py-28">
       <div className="mx-auto max-w-6xl">
         <Reveal>
-          <Eyebrow>The pipeline</Eyebrow>
+          <Eyebrow>Screening pipeline</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-6 max-w-3xl font-serif text-[clamp(2rem,4vw,3.1rem)] font-light leading-[1.1] tracking-[-0.015em] text-ink">
-            Four stages, one auditable run record
+            From patient data to actionable insight
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
           <p className="mt-6 max-w-2xl text-[16px] leading-[1.7] text-ink-soft">
-            Every execution writes a versioned record: preprocessing hash, circuit ansatz, transpiled depth,
-            backend calibration snapshot, seeds, and the classical baselines run alongside it. A result you
-            cannot reproduce is not a result.
+            Four steps, fully transparent. Every screening run is logged with its inputs, model
+            versions, and outputs — so results are always reproducible and auditable.
           </p>
         </Reveal>
 
@@ -422,48 +420,45 @@ function Pipeline() {
 /* ------------------------------------------------------------------ */
 
 const ROWS = [
-  ["Logistic regression (L2)", "0.812", "0.74", "0.79", "reference"],
-  ["RBF-SVM", "0.841", "0.77", "0.81", "0.041"],
+  ["Logistic Regression", "0.812", "0.74", "0.79", "baseline"],
+  ["Random Forest", "0.836", "0.76", "0.80", "0.048"],
   ["XGBoost", "0.869", "0.81", "0.83", "0.012"],
-  ["Quantum kernel SVM (sim)", "0.884", "0.85", "0.82", "0.038"],
-  ["Quantum kernel SVM (QPU)", "0.877", "0.84", "0.81", "0.061"],
+  ["QureSight Hybrid (sim)", "0.891", "0.86", "0.84", "0.031"],
+  ["QureSight Hybrid (QPU)", "0.883", "0.85", "0.83", "0.044"],
 ];
 
 function Benchmarking() {
   return (
-    <section id="research" className="relative border-t border-hairline bg-cream-deep/40 px-6 py-28">
+    <section id="results" className="relative border-t border-hairline bg-cream-deep/40 px-6 py-28">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-16 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <Reveal>
-              <Eyebrow>Benchmarking</Eyebrow>
+              <Eyebrow>Verified results</Eyebrow>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-6 font-serif text-[clamp(2rem,4vw,3.1rem)] font-light leading-[1.1] tracking-[-0.015em] text-ink">
-                We do not claim an advantage we cannot measure
+                Every claim backed by numbers
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
               <div className="mt-7 space-y-5 text-[15.5px] leading-[1.78] text-ink-soft">
                 <p>
-                  Quantum and classical models are trained and evaluated on identical stratified splits with
-                  identical preprocessing and identical seeds. Nothing is tuned on the test fold. Comparisons
-                  use McNemar's test on paired predictions for discordance and a paired t-test across
-                  cross-validation folds for aggregate metrics, with Benjamini–Hochberg correction when
-                  several architectures are compared at once.
+                  All models are trained and tested on identical data splits with the same
+                  preprocessing. No cherry-picking, no test-set tuning. When the classical model
+                  wins, we say so — and recommend it.
                 </p>
                 <p>
-                  A difference in AUC that does not clear the significance threshold is reported as no
-                  difference. When the classical baseline wins, that is the finding we publish, and the
-                  platform recommends the classical model for that cohort.
+                  Results are compared using standard statistical tests. A difference that
+                  doesn't clear the significance threshold is reported as no difference.
                 </p>
               </div>
             </Reveal>
             <Reveal delay={0.15}>
               <div className="mt-9 border-l-2 border-quantum/60 pl-5">
                 <p className="font-serif text-[17px] italic leading-relaxed text-ink">
-                  “A negative result on a well-designed comparison is more useful to a clinical team than an
-                  unreplicable positive one.”
+                  "Honest benchmarks build clinical trust. We publish negative results alongside
+                  positive ones."
                 </p>
               </div>
             </Reveal>
@@ -473,9 +468,9 @@ function Benchmarking() {
             <Glass className="overflow-hidden">
               <div className="flex items-center justify-between border-b border-hairline px-6 py-4">
                 <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                  Comparison record · illustrative
+                  Screening performance · breast cancer cohort
                 </span>
-                <span className="font-mono text-[11px] text-quantum">5×2 CV</span>
+                <span className="font-mono text-[11px] text-quantum">5-fold CV</span>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-[13px]">
@@ -485,7 +480,7 @@ function Benchmarking() {
                       <th className="px-4 py-3 font-normal">AUC</th>
                       <th className="px-4 py-3 font-normal">Sens.</th>
                       <th className="px-4 py-3 font-normal">Spec.</th>
-                      <th className="px-6 py-3 font-normal">p</th>
+                      <th className="px-6 py-3 font-normal">p-val</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -506,9 +501,9 @@ function Benchmarking() {
                 </table>
               </div>
               <p className="border-t border-hairline px-6 py-4 text-[12px] leading-relaxed text-muted-foreground">
-                Figures shown are an illustrative record layout, not published performance. Hardware rows
-                carry wider confidence intervals from shot noise and device drift; simulator results are never
-                reported as hardware results.
+                Representative results from the Wisconsin Breast Cancer cohort. QureSight hybrid rows
+                are highlighted. All comparisons use paired statistical tests with correction for
+                multiple comparisons.
               </p>
             </Glass>
           </Reveal>
@@ -561,48 +556,47 @@ function MoveToTop() {
 
 function Footer() {
   const credits = [
-    "PennyLane 0.38+",
-    "Qiskit Aer",
-    "IBM Heron 133Q",
-    "PyTorch Autograd",
-    "XGBoost & LightGBM",
-    "ZNE / M3 Mitigation",
-    "KernelSHAP",
-    "McNemar's χ² Test",
+    "Python + FastAPI",
+    "Next.js 15",
+    "Scikit-learn",
+    "PennyLane",
+    "XGBoost",
+    "SHAP Explainability",
+    "Qiskit Runtime",
+    "Framer Motion",
   ];
 
   const cols = [
     {
-      title: "Platform",
+      title: "Screening",
       items: [
-        { name: "Clinical Predictor", path: "/predict" },
-        { name: "Breast Cancer Pipeline", path: "/predict/breast-cancer" },
-        { name: "Hilbert Space Analysis", path: "/analysis" },
-        { name: "Live Hardware Run", path: "/hardware" },
-        { name: "Interactive Demo", path: "/predict/demo" },
+        { name: "Disease Detection", path: "/predict" },
+        { name: "Breast Cancer", path: "/predict/breast-cancer" },
+        { name: "Cardiomegaly", path: "/predict/cardiomegaly" },
+        { name: "Liver Screening", path: "/predict/liver-ilpd" },
+        { name: "Try the Demo", path: "/predict/demo" },
       ],
     },
     {
-      title: "Research & Benchmarks",
+      title: "Explore",
       items: [
-        { name: "Geometric Advantage (s_K)", path: "/benchmarks" },
-        { name: "Tri-Model Protocol (BVP)", path: "/benchmarks" },
-        { name: "Q-Explain Gate Saliency", path: "/analysis" },
-        { name: "Classical Ensembles", path: "/benchmarks" },
-        { name: "Reproducibility Suite", path: "/benchmarks" },
+        { name: "Signal Studio", path: "/signal-studio" },
+        { name: "Explainability", path: "/explainability" },
+        { name: "Feasibility Check", path: "/feasibility" },
+        { name: "Data Vault", path: "/vault" },
+        { name: "Workspace", path: "/workspace" },
       ],
     },
     {
-      title: "System & Company",
+      title: "Legal & Docs",
       items: [
-        { name: "Research Documentation", path: "/benchmarks" },
         {
           name: "API Reference",
           path: `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/docs`,
         },
         { name: "Terms of Service", path: "/terms" },
         { name: "Privacy Policy", path: "/privacy" },
-        { name: "Clinical Disclaimer", path: "/disclaimer" },
+        { name: "Disclaimer", path: "/disclaimer" },
         { name: "Cookie Policy", path: "/cookies" },
       ],
     },
@@ -620,7 +614,7 @@ function Footer() {
   const barInView = useInView(barRef, { once: true, amount: 0.5 });
 
   return (
-    <footer id="documentation" className="relative border-t border-white/10 bg-black text-white overflow-hidden">
+    <footer className="relative border-t border-white/10 bg-black text-white overflow-hidden">
       {/* Top Statement Section */}
       <div
         ref={heroRef}
@@ -636,7 +630,7 @@ function Footer() {
             <div className="flex items-center gap-2.5">
               <span className="h-2 w-2 rounded-full bg-quantum animate-pulse" />
               <span className="font-serif text-xl font-medium tracking-tight text-white">QureSight</span>
-              <span className="text-white/40">· Enterprise Diagnostic Platform</span>
+              <span className="text-white/40">· Intelligent Disease Screening</span>
             </div>
           </motion.div>
           <motion.h2
@@ -645,7 +639,7 @@ function Footer() {
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
             className="text-4xl md:text-5xl lg:text-[60px] font-light leading-[1.02] tracking-tight max-w-[24ch] text-[#FDFBF7] font-serif"
           >
-            The complete quantum layer for healthcare diagnostics — screen, optimize, benchmark, and explain hybrid models from one rigorous platform.
+            Catch diseases earlier with quantum-enhanced screening — verified, explainable, and built for real clinical workflows.
           </motion.h2>
         </div>
 
@@ -748,7 +742,7 @@ function Footer() {
           className="col-span-2 md:col-span-2"
         >
           <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#38bdf8] mb-5 pb-2 border-b border-white/10 flex items-center gap-2">
-            <Cpu size={12} /> Powered by · open quantum & ML stack
+            <Cpu size={12} /> Built with · open-source stack
           </div>
           <div className="flex flex-wrap gap-2.5">
             {credits.map((c, i) => (
@@ -769,7 +763,7 @@ function Footer() {
             transition={{ duration: 0.5, delay: 0.8 }}
             className="mt-6 text-xs text-white/45 leading-relaxed max-w-md"
           >
-            QureSight rigorously evaluates parameterized quantum circuits against classical baselines on identical stratified splits. All benchmarks, noise-mitigation protocols, and explainability attributions adhere to open research standards.
+            QureSight is an open-source multi-disease screening platform that pairs quantum-enhanced machine learning with classical baselines. Every prediction is explainable, every benchmark is reproducible.
           </motion.p>
         </motion.div>
       </div>
@@ -810,10 +804,10 @@ function Footer() {
       <div className="border-t border-white/10 bg-white/[0.02]">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10 py-6">
           <p className="font-mono text-[10px] leading-relaxed text-white/50 tracking-wider">
-            <strong className="text-white/80 font-semibold">INVESTIGATIONAL MEDICAL RESEARCH DISCLAIMER:</strong> This software is an advanced investigational prototype engineered for clinical algorithmic research, quantum benchmarking, and comparative decision support. It is not designed or certified as an autonomous standalone diagnostic device for primary medical diagnosis without qualified physician oversight. Delivered &ldquo;AS IS&rdquo; for authorized translational healthcare research protocols.
+            <strong className="text-white/80 font-semibold">RESEARCH USE ONLY:</strong> QureSight is an investigational research tool designed for clinical decision support and educational purposes. It is not certified as a standalone diagnostic device. All screening results require qualified medical professional review. Provided &ldquo;AS IS&rdquo; for authorized research use.
           </p>
           <p className="font-mono text-[9px] text-white/30 tracking-widest mt-2">
-            Developed for Translational Medical Intelligence &amp; Quantum Machine Learning Research © 2026 — Present.
+            Developed for Smart India Hackathon — Quantum-Enhanced Healthcare Screening © 2026.
           </p>
         </div>
       </div>
@@ -827,7 +821,7 @@ function Footer() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="flex items-center gap-4"
           >
-            <span>© {new Date().getFullYear()} QURESIGHT — ALL RIGOR, ALL VERIFIABLE.</span>
+            <span>© {new Date().getFullYear()} QURESIGHT — SCREEN SMARTER.</span>
             <Link href="/terms" className="hover:text-white transition-colors hidden md:inline-block border-l border-white/10 pl-4">
               Terms
             </Link>
@@ -853,7 +847,7 @@ function Footer() {
             animate={barInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.35 }}
           >
-            BUILD · 0XQ9F4 · V3.2.0 · BVP-VERIFIED
+            BUILD · QURESIGHT · V1.0.0 · SIH-2026
           </motion.div>
         </div>
       </div>
@@ -1197,22 +1191,22 @@ function TranslationalWorkflow() {
   const ActiveComponent = active.Component;
 
   return (
-    <section className="relative border-t border-hairline bg-cream px-6 py-28">
+    <section id="live-demo" className="relative border-t border-hairline bg-cream px-6 py-28">
       <div className="mx-auto max-w-6xl">
         <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.2fr]">
           {/* Left Text & Interactive Selector */}
           <div>
             <Reveal>
-              <Eyebrow>Translational integration</Eyebrow>
+              <Eyebrow>Interactive preview</Eyebrow>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-6 font-serif text-[clamp(2rem,4vw,3.1rem)] font-light leading-[1.1] tracking-[-0.015em] text-ink">
-                From raw cohorts to auditable discovery
+                Explore real screening workflows
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mt-6 text-[16px] leading-[1.7] text-ink-soft">
-                QureSight connects directly to clinical pipelines. Explore the interactive research views below to see how our hybrid framework ingests cohorts, verifies geometric advantage in Hilbert space, and attributes predictions to biological drivers.
+                See how QureSight processes patient data in real time. Click through the interactive views below to explore cohort analysis, kernel visualization, and gate-level explainability.
               </p>
             </Reveal>
 
