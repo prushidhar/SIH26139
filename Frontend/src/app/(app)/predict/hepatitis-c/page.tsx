@@ -164,7 +164,7 @@ const PRESETS: PresetConfig[] = [
     values: { AST: 52, ALT: 48, GGT: 68, ALP: 85, ALB: 35.0, CHE: 5.5, BIL: 18.5, CREA: 89, Age: 52 },
   },
   {
-    name: "ILPD Liver Patient (Donaire et al.)",
+    name: "ILPD Hepatic Biomarker Case",
     badge: "2-Qubit Minimal VQC Target",
     color: "teal",
     sex: "m",

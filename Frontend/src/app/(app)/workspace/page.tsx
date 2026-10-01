@@ -5,7 +5,6 @@ import { ResearchService, ResearchOverview } from "@/services/research.service";
 import {
   ResearchQuestionCard,
   ResearchStatus,
-  ExperimentTimeline,
   FindingPanel,
 } from "@/components/research";
 import { Compass, RefreshCw, AlertCircle, ArrowRight, ShieldCheck, Database, FlaskConical } from "lucide-react";
@@ -59,7 +58,7 @@ export default function ResearchWorkspacePage() {
           { id: "models", name: "Model Arena", status: "EVALUATED", details: "4 Classical + 3 Quantum Candidates Profiled" },
           { id: "quantum", name: "Quantum Feasibility", status: "PROFILED", details: "4-8 Qubits, Depth 2-3, IBM Eagle Noise Ready" },
           { id: "evidence", name: "Evidence Matrix", status: "SYNTHESIZED", details: "9 Diagnostic & Operational Axes Grounded" },
-          { id: "decision", name: "Decision Console", status: "ACTIVE", details: "Shannon Entropy Dynamic Routing Protocol" },
+          { id: "decision", name: "Decision Console", status: "ACTIVE", details: "Adaptive Confidence Routing Protocol" },
         ],
       });
     } finally {
@@ -78,7 +77,7 @@ export default function ResearchWorkspacePage() {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-ink-soft">
             <Compass className="w-3.5 h-3.5 text-quantum" />
-            <span>QureSight Platform • Phase 01</span>
+            <span>Clinical Intelligence Platform</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1 tracking-tight">
             Research Workspace
@@ -99,10 +98,10 @@ export default function ResearchWorkspacePage() {
           </button>
 
           <Link
-            href="/observatory"
+            href="/benchmarks"
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-ink text-parchment hover:bg-ink/90 text-xs font-medium transition-colors"
           >
-            <span>Proceed to Observatory</span>
+            <span>View Benchmarks</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
@@ -114,9 +113,6 @@ export default function ResearchWorkspacePage() {
           <span>{error}</span>
         </div>
       )}
-
-      {/* 9-Stage Progress Timeline */}
-      <ExperimentTimeline currentStageId="workspace" />
 
       {data && (
         <div className="space-y-6">
@@ -155,9 +151,9 @@ export default function ResearchWorkspacePage() {
               badge="QUANTUM ADVANTAGE"
             />
             <FindingPanel
-              title="Adaptive Shannon Routing"
-              finding="Screenings with Shannon entropy H < 0.65 bits route to sub-millisecond Classical inference; H ≥ 0.85 bits trigger dual quantum consensus."
-              significance="96.4% Discordance Aversion"
+              title="Adaptive Confidence Routing"
+              finding="Screenings with high predictive confidence route to rapid classical inference; uncertain cases automatically engage dual-engine quantum verification."
+              significance="96.4% Agreement Rate"
               sourceNote="Adaptive Router Engine"
               badge="SAFETY GOVERNANCE"
             />

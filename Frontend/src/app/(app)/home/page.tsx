@@ -80,7 +80,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     features: "13 Hemodynamic Biomarkers",
     target: "Coronary Artery Disease",
     advantage: "Active",
-    description: "AstroVall02-referenced 4-qubit StronglyEntangling VQC screening coronary artery disease risk from vitals.",
+    description: "4-qubit variational circuit screening coronary artery disease risk from vitals.",
     route: "/predict/heart-tabular",
     tooltip: "Evaluates blood pressure, cholesterol, ST depression, and fluoroscopy vessels.",
     status: "active",
@@ -94,7 +94,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     features: "DenseNet-121 Latent + CTR",
     target: "Heart Enlargement Detection",
     advantage: "Active",
-    description: "Decoodt et al. transfer learning pipeline combining DenseNet-121 with 6-qubit VQC on chest radiographs.",
+    description: "Deep transfer learning pipeline combining DenseNet-121 with 6-qubit quantum classifier on chest radiographs.",
     route: "/predict/cardiomegaly",
     tooltip: "Automated cardiothoracic ratio measurement and cardiac silhouette screening.",
     status: "active",
@@ -108,7 +108,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     features: "10 Liver Enzyme Biomarkers",
     target: "Hepatic Dysregulation & Impairment",
     advantage: "Active",
-    description: "Donaire et al. 2026 minimal 2-qubit VQC compressing full biomarker panel into compact Hilbert subspace.",
+    description: "Compact 2-qubit quantum classifier evaluating hepatic biomarkers with high specificity.",
     route: "/predict/liver-ilpd",
     tooltip: "Analyzes transaminases, bilirubin, proteins, and albumin ratios.",
     status: "active",
@@ -358,37 +358,33 @@ export default function HomePage() {
 
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <Link
-              href="/workspace"
+              href="/predict"
               className="px-4 py-2 rounded-lg bg-ink text-parchment font-medium text-xs tracking-wider hover:opacity-90 transition-all shadow-sm flex items-center gap-1.5 cursor-pointer font-sans"
             >
-              <FlaskConical size={13} className="text-quantum-soft" /> Research Workspace
+              <Sparkles size={13} className="text-quantum-soft" /> Clinical Screening
             </Link>
             <Link
-              href="/evidence-matrix"
+              href="/benchmarks"
               className="px-4 py-2 rounded-lg bg-cream-deep/70 hover:bg-cream border border-hairline text-ink font-medium text-xs tracking-wider transition-all flex items-center gap-1.5 cursor-pointer font-sans"
             >
-              <Activity size={13} /> Evidence Matrix
+              <Activity size={13} /> Model Benchmarks
             </Link>
           </div>
         </div>
 
-        {/* 9-Stage Workflow Breadcrumb Strip */}
+        {/* Quick Platform Navigation Strip */}
         <div className="pt-4 mt-5 border-t border-hairline flex items-center justify-between gap-2 overflow-x-auto text-[11px] font-mono text-ink-soft whitespace-nowrap">
-          <Link href="/observatory" className="hover:text-quantum transition-colors">Data</Link>
-          <span>→</span>
-          <Link href="/signal-studio" className="hover:text-quantum transition-colors">Signal</Link>
-          <span>→</span>
-          <Link href="/model-arena" className="hover:text-quantum transition-colors">Models</Link>
-          <span>→</span>
-          <Link href="/feasibility" className="hover:text-quantum transition-colors">Quantum</Link>
-          <span>→</span>
-          <Link href="/evidence-matrix" className="hover:text-quantum transition-colors">Evidence</Link>
-          <span>→</span>
-          <Link href="/explainability" className="hover:text-quantum transition-colors">Explain</Link>
-          <span>→</span>
-          <Link href="/decision-console" className="hover:text-quantum transition-colors">Decision</Link>
-          <span>→</span>
-          <Link href="/vault" className="hover:text-quantum transition-colors">Vault</Link>
+          <Link href="/predict" className="hover:text-quantum transition-colors font-medium">Screening Studios</Link>
+          <span>•</span>
+          <Link href="/history" className="hover:text-quantum transition-colors">Screening Records</Link>
+          <span>•</span>
+          <Link href="/observatory" className="hover:text-quantum transition-colors">Dataset Explorer</Link>
+          <span>•</span>
+          <Link href="/benchmarks" className="hover:text-quantum transition-colors">Model Benchmarks</Link>
+          <span>•</span>
+          <Link href="/explainability" className="hover:text-quantum transition-colors">Explainability Studio</Link>
+          <span>•</span>
+          <Link href="/hardware" className="hover:text-quantum transition-colors">Compute Infrastructure</Link>
         </div>
 
         {/* 4 Summary Stats Cards */}

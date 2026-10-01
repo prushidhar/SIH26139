@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { ResearchService, VaultExperiment } from "@/services/research.service";
-import { ExperimentRecord, ExperimentTimeline, FindingPanel } from "@/components/research";
+import { ExperimentRecord, FindingPanel } from "@/components/research";
 import { Archive, RefreshCw, AlertCircle, ArrowRight, Lock, CheckCircle2, Search } from "lucide-react";
 import Link from "next/link";
 
@@ -60,13 +60,13 @@ export default function ExperimentVaultPage() {
         },
         {
           id: "EXP-04-HEPATOLOGY-HCV",
-          title: "Multi-Biomarker Hepatology Screening with Adaptive Shannon Entropy Arbitration",
+          title: "Multi-Biomarker Hepatology Screening with Adaptive Confidence Arbitration",
           dataset: "UCI HCV Hepatitis C Serum Panel (615 Cases)",
           date: "2026-09-30",
-          hypothesis: "Dynamic routing between Classical and Quantum models using Shannon entropy reduces clinical false negatives.",
+          hypothesis: "Dynamic routing between Classical and Quantum models using predictive confidence reduces clinical false negatives.",
           classical_baseline: "XGBoost + Logistic Regression (99.2% / 91.1%)",
           quantum_result: "4-Qubit Ring-CNOT VQC (88.4%)",
-          advantage_delta: "Dispatches to Quantum when Classical boundary entropy > 0.90 bits",
+          advantage_delta: "Dispatches to Quantum when Classical confidence falls below boundary threshold",
           conclusion: "Router successfully disambiguates borderline fibrosis cases with discordant alert flags.",
           status: "Verified & Locked",
         },
@@ -80,7 +80,7 @@ export default function ExperimentVaultPage() {
           quantum_result: "DenseNet-121 + PennyLane 6-Qubit VQC (87.0%, AUROC 0.9300)",
           advantage_delta: "+0.005 AUROC with 99.8% parameter reduction in classification head",
           conclusion: "CONFIRMED (CheXpert Dataset): 6Q variational circuits integrate seamlessly into clinical imaging workflows with 96.5% parameter compression.",
-          status: "Verified & Published (DOI: 10.3390/jimaging9070128)",
+          status: "Verified & Benchmarked",
         },
         {
           id: "EXP-06-LIVER-ILPD",
@@ -92,7 +92,7 @@ export default function ExperimentVaultPage() {
           quantum_result: "2-Qubit VQC (73.8%, AUROC 0.7720) & 4-Qubit VQC (75.2%, AUROC 0.7840)",
           advantage_delta: "Equal diagnostic fidelity with only 2-4 qubits and 12-24 parameters",
           conclusion: "CONFIRMED (ILPD Cohort): Demonstrates extreme 2-qubit economy for non-linear hepatic biomarker discrimination, establishing minimal NISQ resource boundaries.",
-          status: "Verified & Published (Eng. Appl. Artif. Intell.)",
+          status: "Verified & Benchmarked",
         },
       ]);
     } finally {
@@ -129,16 +129,14 @@ export default function ExperimentVaultPage() {
 
         <div className="flex items-center gap-2 self-start sm:self-center">
           <Link
-            href="/workspace"
+            href="/benchmarks"
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-ink text-parchment hover:bg-ink/90 text-xs font-medium transition-colors"
           >
-            <span>Return to Workspace</span>
+            <span>View Benchmarks</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </div>
-
-      <ExperimentTimeline currentStageId="vault" />
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl border border-hairline bg-parchment">
         <div className="relative flex-1 max-w-md">

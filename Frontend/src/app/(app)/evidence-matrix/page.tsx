@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { ResearchService, EvidenceMatrixResponse } from "@/services/research.service";
-import { EvidenceMatrixTable, ExperimentTimeline, FindingPanel } from "@/components/research";
+import { EvidenceMatrixTable, FindingPanel } from "@/components/research";
 import { TableProperties, RefreshCw, AlertCircle, ArrowRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 
@@ -72,8 +72,6 @@ export default function EvidenceMatrixPage() {
           </Link>
         </div>
       </div>
-
-      <ExperimentTimeline currentStageId="evidence" />
 
       {error && (
         <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-xs flex items-center gap-2 font-mono">

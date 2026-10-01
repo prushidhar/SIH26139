@@ -89,7 +89,7 @@ export const WORKFLOW_STAGES: StageInfo[] = [
     href: "/decision-console",
     icon: Cpu,
     status: "ACTIVE",
-    details: "Shannon entropy dynamic routing",
+    details: "Adaptive confidence routing",
   },
   {
     id: "vault",

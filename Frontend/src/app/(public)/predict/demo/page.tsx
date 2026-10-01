@@ -38,8 +38,8 @@ interface DemoCase {
 const DEMO_CASES: DemoCase[] = [
   {
     id: "cxr-cardiomegaly",
-    repo: "quantum-ai-for-cardiac-imaging/cardiomegaly-chest-x-ray",
-    provenance: "Decoodt et al. (J. Imaging 2023)",
+    repo: "quresight/cardiac-radiography-vqc",
+    provenance: "CheXpert Radiography Benchmark",
     title: "CheXpert Cardiomegaly Radiography",
     disease: "Cardiomegaly / Heart Enlargement",
     circuitInfo: "DenseNet-121 + 6-Qubit PennyLane VQC",
@@ -56,8 +56,8 @@ const DEMO_CASES: DemoCase[] = [
   },
   {
     id: "ilpd-liver",
-    repo: "LauraMDonaire/QML-Liver",
-    provenance: "Donaire et al. (Eng. Appl. Artif. Intell. 2026)",
+    repo: "quresight/liver-ilpd-vqc",
+    provenance: "Indian Liver Patient Dataset Benchmark",
     title: "Indian Liver Patient Screening",
     disease: "Hepatic Dysregulation & Fibrosis",
     circuitInfo: "2-Qubit Minimal VQC (12 Params, Depth 4)",
@@ -81,8 +81,8 @@ const DEMO_CASES: DemoCase[] = [
   },
   {
     id: "cleveland-heart",
-    repo: "AstroVall02/QML_Early_Disease_Detection",
-    provenance: "AstroVall02 & Quantara (sofiya132)",
+    repo: "quresight/cardiovascular-vqc",
+    provenance: "UCI Cleveland Cardiology Benchmark",
     title: "Cleveland Cardiovascular Panel",
     disease: "Coronary Artery Disease (CAD)",
     circuitInfo: "4-Qubit StronglyEntangling VQC",

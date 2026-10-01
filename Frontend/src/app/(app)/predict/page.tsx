@@ -202,7 +202,7 @@ export default function PredictHubPage() {
                       {lockedModal.title}
                     </h3>
                     <span className="text-[11px] font-mono text-amber-700 font-medium">
-                      Not Accessible (Phase 2 Clinical Pipeline)
+                      Module Under Validation
                     </span>
                   </div>
                 </div>
@@ -316,7 +316,7 @@ export default function PredictHubPage() {
                       </span>
                     ) : (
                       <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-white/95 text-amber-800 border border-amber-300 shadow-2xs backdrop-blur-xs flex items-center gap-1">
-                        <Lock size={10} /> PHASE 2
+                        <Lock size={10} /> PREVIEW
                       </span>
                     )}
                   </div>
@@ -379,7 +379,7 @@ export default function PredictHubPage() {
                     className="w-full py-2.5 px-3 rounded-xl bg-cream hover:bg-cream-deep/60 border border-hairline text-ink-soft hover:text-ink text-xs font-medium flex items-center justify-center gap-1.5 transition-all cursor-pointer"
                   >
                     <Lock size={12} className="text-amber-600" />
-                    <span>Phase 2 (Under Trial)</span>
+                    <span>Preview Only</span>
                   </button>
                 )}
               </div>

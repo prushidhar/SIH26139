@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { ResearchService, ExplainabilityResponse } from "@/services/research.service";
-import { FeatureContributionPanel, ExperimentTimeline, FindingPanel } from "@/components/research";
+import { FeatureContributionPanel, FindingPanel } from "@/components/research";
 import { Sparkles, RefreshCw, AlertCircle, ArrowRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 
@@ -64,28 +64,26 @@ export default function ExplainabilityPage() {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-ink-soft">
             <Sparkles className="w-3.5 h-3.5 text-quantum" />
-            <span>QureSight Platform • Phase 07</span>
+            <span>Biomarker Interpretability</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1 tracking-tight">
-            Explainability
+            Feature Explainability & SHAP
           </h1>
           <p className="text-xs sm:text-sm text-ink-soft mt-1">
-            Classical SHAP attributions vs. quantum parameter-shift gradients — side by side.
+            Analyze which clinical features and laboratory biomarkers drive model predictions across classical and quantum models.
           </p>
         </div>
 
         <div className="flex items-center gap-2 self-start sm:self-center">
           <Link
-            href="/decision-console"
+            href="/predict"
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-ink text-parchment hover:bg-ink/90 text-xs font-medium transition-colors"
           >
-            <span>Proceed to Decision Console</span>
+            <span>Run Clinical Screening</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </div>
-
-      <ExperimentTimeline currentStageId="explainability" />
 
       {/* Cohort Selector Strip */}
       <div className="flex items-center justify-between p-4 rounded-xl border border-hairline bg-parchment">
@@ -97,15 +95,15 @@ export default function ExplainabilityPage() {
             className="px-3 py-1.5 rounded-md border border-hairline bg-cream-deep/60 text-ink text-xs font-mono focus:outline-none focus:ring-1 focus:ring-quantum"
           >
             <option value="breast_cancer">Wisconsin Diagnostic Breast Cancer (WDBC)</option>
-            <option value="heart_disease">UCI Cleveland Heart Disease (AstroVall02)</option>
-            <option value="cardiomegaly_cxr">CheXpert Radiography CXR (Decoodt et al. 2023)</option>
-            <option value="ilpd_liver">Indian Liver Patient Dataset (Donaire et al. 2026)</option>
-            <option value="diabetes">NIDDK Diabetes Diagnostic Cohort</option>
+            <option value="heart_disease">UCI Cleveland Heart Disease</option>
+            <option value="cardiomegaly_cxr">CheXpert Chest Radiography (CXR)</option>
+            <option value="ilpd_liver">Indian Liver Patient Dataset (ILPD)</option>
+            <option value="diabetes">NIDDK Diabetes Screening Cohort</option>
           </select>
         </div>
 
         <div className="text-xs font-mono text-ink-soft">
-          Concordance Protocol: Kendall Tau & Cosine Alignment
+          Attribution Model: TreeSHAP + Quantum Gate Sensitivity
         </div>
       </div>
 
@@ -119,7 +117,7 @@ export default function ExplainabilityPage() {
       {loading && !data ? (
         <div className="p-16 text-center text-xs font-mono text-ink-soft">
           <RefreshCw className="w-5 h-5 animate-spin mx-auto text-quantum mb-2" />
-          Computing TreeSHAP marginals & quantum parameter-shift gradient expectations...
+          Calculating feature importance and SHAP attributions...
         </div>
       ) : data ? (
         <div className="space-y-6">
@@ -127,18 +125,18 @@ export default function ExplainabilityPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FindingPanel
-              title="Dual-Paradigm Concordance Score"
-              finding="Classical TreeSHAP and Quantum Parameter Gradients demonstrate 91.2% directional agreement on primary risk features. Both paradigms independently pinpoint concave points and nuclear radius as primary drivers."
-              significance="Independent Validation"
-              sourceNote="Concordance Analysis Engine"
+              title="Dual-Model Agreement"
+              finding="Classical TreeSHAP and Quantum Parameter Gradients demonstrate 91.2% directional agreement on primary risk features, independently validating the top clinical drivers."
+              significance="Consensus Verification"
+              sourceNote="Cross-Paradigm Attribution"
               badge="EXPLAINABILITY"
             />
             <FindingPanel
-              title="PennyLane Parameter-Shift Rule Grounding"
-              finding="Unlike perturbation methods that estimate sensitivity numerically, QureSight computes exact analytic derivatives ∂⟨Z⟩/∂θ by evaluating quantum circuits at ±π/2 shifts."
-              significance="Exact Analytic Derivatives"
+              title="Analytic Parameter-Shift Attribution"
+              finding="QureSight evaluates quantum feature contributions directly from the circuit's variational gates using PennyLane's parameter-shift rule, ensuring attributions reflect actual quantum circuit behavior."
+              significance="Analytic Gate Sensitivity"
               sourceNote="PennyLane QNode Shift Rule"
-              badge="QUANTUM MATH"
+              badge="QUANTUM EXPLAIN"
             />
           </div>
         </div>

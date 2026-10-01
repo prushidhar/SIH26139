@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { ResearchService, DecisionConsoleResponse } from "@/services/research.service";
-import { DecisionConsolePanel, ExperimentTimeline, FindingPanel } from "@/components/research";
+import { DecisionConsolePanel, FindingPanel } from "@/components/research";
 import { Cpu, RefreshCw, AlertCircle, ArrowRight, ShieldCheck, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 
@@ -28,7 +28,7 @@ export default function DecisionConsolePage() {
         operational_tiers: [
           {
             tier: "Tier 1: High Confidence — Use classical model",
-            condition: "Shannon Entropy H < 0.65 bits (P > 0.85 or P < 0.15)",
+            condition: "High confidence (P > 0.85 or P < 0.15)",
             action: "Dispatch Classical Engine (SVM / XGBoost)",
             latency_guarantee: "< 2.5 ms",
             cohort_coverage: "82.4% of Ingested Cases",
@@ -36,7 +36,7 @@ export default function DecisionConsolePage() {
           },
           {
             tier: "Tier 2: Medium Confidence — Verify with both models",
-            condition: "0.65 ≤ H < 0.85 bits (Intermediate boundary cases)",
+            condition: "Intermediate confidence boundary cases",
             action: "Run Parallel Classical + Quantum VQC; Compute Consensus Concordance",
             latency_guarantee: "< 45 ms",
             cohort_coverage: "12.8% of Ingested Cases",
@@ -44,7 +44,7 @@ export default function DecisionConsolePage() {
           },
           {
             tier: "Tier 3: Low Confidence — Engage quantum model + clinical review",
-            condition: "H ≥ 0.85 bits (Near-decision boundary / High ambiguity)",
+            condition: "High ambiguity near decision boundary",
             action: "Run quantum model and flag for review",
             latency_guarantee: "< 65 ms",
             cohort_coverage: "4.8% of Ingested Cases",
@@ -52,7 +52,7 @@ export default function DecisionConsolePage() {
           },
         ],
         safety_guardrails: [
-          "Safety Review Protocol: Predictions with H >= 0.85 require secondary clinician confirmation.",
+          "Safety Review Protocol: Ambiguous predictions require secondary clinician confirmation.",
           "If quantum backend is slow, automatically falls back to simulator.",
           "Every routed sample produces a logged audit trail.",
         ],
@@ -92,16 +92,14 @@ export default function DecisionConsolePage() {
 
         <div className="flex items-center gap-2 self-start sm:self-center">
           <Link
-            href="/vault"
+            href="/predict"
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-ink text-parchment hover:bg-ink/90 text-xs font-medium transition-colors"
           >
-            <span>Next: Data Vault</span>
+            <span>Run Clinical Screening</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </div>
-
-      <ExperimentTimeline currentStageId="decision" />
 
       {error && (
         <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-xs flex items-center gap-2 font-mono">
@@ -113,7 +111,7 @@ export default function DecisionConsolePage() {
       {loading && !data ? (
         <div className="p-16 text-center text-xs font-mono text-ink-soft">
           <RefreshCw className="w-5 h-5 animate-spin mx-auto text-quantum mb-2" />
-          Connecting to dynamic Shannon entropy arbitration protocol...
+          Connecting to adaptive confidence router...
         </div>
       ) : data ? (
         <div className="space-y-6">
@@ -121,8 +119,8 @@ export default function DecisionConsolePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FindingPanel
-              title="Mathematical Routing Equation"
-              finding="The router calculates H(P) = -[P*log2(P) + (1-P)*log2(1-P)]. When H < 0.65 bits, the classical model handles the prediction. When H >= 0.85 bits, the quantum model is engaged."
+              title="Adaptive Confidence Routing"
+              finding="The router evaluates prediction certainty. High-confidence cases use fast classical inference (<2.5ms). Ambiguous boundary cases trigger dual quantum consensus for safety."
               significance="Optimal Cost & Latency"
               sourceNote="Adaptive Router Formalization"
               badge="ALGORITHMIC LOGIC"

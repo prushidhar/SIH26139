@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { ResearchService, SignalTransformResult } from "@/services/research.service";
-import { SignalMap, FeatureEvidencePanel, ExperimentTimeline } from "@/components/research";
+import { SignalMap, FeatureEvidencePanel } from "@/components/research";
 import { Sliders, RefreshCw, AlertCircle, ArrowRight, Sparkles, Database } from "lucide-react";
 import Link from "next/link";
 
@@ -76,7 +76,7 @@ export default function SignalStudioPage() {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-ink-soft">
             <Sliders className="w-3.5 h-3.5 text-quantum" />
-            <span>QureSight Platform • Phase 03</span>
+            <span>Signal Processing Studio</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1 tracking-tight">
             Signal Studio
@@ -88,16 +88,14 @@ export default function SignalStudioPage() {
 
         <div className="flex items-center gap-2 self-start sm:self-center">
           <Link
-            href="/model-arena"
+            href="/benchmarks"
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-ink text-parchment hover:bg-ink/90 text-xs font-medium transition-colors"
           >
-            <span>Proceed to Model Arena</span>
+            <span>View Benchmarks</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </div>
-
-      <ExperimentTimeline currentStageId="signal" />
 
       {/* Interactive Controls Strip */}
       <div className="rounded-xl border border-hairline bg-parchment p-5">
@@ -114,9 +112,9 @@ export default function SignalStudioPage() {
                 className="block px-3 py-1.5 rounded-md border border-hairline bg-cream-deep/60 text-ink text-xs font-mono focus:outline-none focus:ring-1 focus:ring-quantum"
               >
                 <option value="breast_cancer">Wisconsin Diagnostic Breast Cancer (WDBC)</option>
-                <option value="heart_disease">UCI Cleveland Heart Disease (AstroVall02)</option>
-                <option value="cardiomegaly_cxr">CheXpert Radiography CXR (Decoodt et al. 2023)</option>
-                <option value="ilpd_liver">Indian Liver Patient Dataset (Donaire et al. 2026)</option>
+                <option value="heart_disease">Cleveland Heart Disease Cohort</option>
+                <option value="cardiomegaly_cxr">CheXpert Radiography CXR</option>
+                <option value="ilpd_liver">Indian Liver Patient Dataset (ILPD)</option>
                 <option value="diabetes">NIDDK Diabetes Diagnostic Cohort</option>
               </select>
             </div>

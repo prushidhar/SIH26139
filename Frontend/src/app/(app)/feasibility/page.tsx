@@ -5,7 +5,6 @@ import { ResearchService, QuantumFeasibilityResponse } from "@/services/research
 import {
   QuantumResourceProfile,
   NoiseImpactChart,
-  ExperimentTimeline,
   FindingPanel,
 } from "@/components/research";
 import { Gauge, RefreshCw, AlertCircle, ArrowRight, Zap, CheckCircle2, Cpu, ShieldCheck, Layers } from "lucide-react";
@@ -133,7 +132,7 @@ export default function QuantumFeasibilityPage() {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-muted-foreground">
             <Gauge className="w-3.5 h-3.5 text-indigo-500" />
-            <span>QureSight Platform • Phase 05</span>
+            <span>Hardware Feasibility & Profiling</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-serif font-light text-foreground mt-1 tracking-tight">
             Quantum Feasibility & Hardware Profiler
@@ -145,16 +144,14 @@ export default function QuantumFeasibilityPage() {
 
         <div className="flex items-center gap-2 self-start sm:self-center">
           <Link
-            href="/evidence-matrix"
+            href="/hardware"
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-foreground text-background hover:bg-foreground/90 text-xs font-medium transition-colors"
           >
-            <span>Proceed to Evidence Matrix</span>
+            <span>View Hardware Telemetry</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </div>
-
-      <ExperimentTimeline currentStageId="feasibility" />
 
       {error && (
         <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-400 text-xs flex items-center gap-2 font-mono">
@@ -173,7 +170,7 @@ export default function QuantumFeasibilityPage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {/* Donaire et al. 2026 */}
+          {/* 2-Qubit Minimal VQC */}
           <button
             type="button"
             onClick={() => handleCircuitSelect("donaire_2q", 2)}
@@ -186,11 +183,11 @@ export default function QuantumFeasibilityPage() {
             <div className="flex items-center justify-between">
               <span className="font-medium text-xs text-foreground">2-Qubit Minimal VQC</span>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/20 font-mono">
-                Donaire et al. 2026
+                Minimal VQC
               </span>
             </div>
             <p className="text-[11px] text-muted-foreground leading-relaxed">
-              Extreme NISQ economy for ILPD liver disease: 12 parameters, depth 4, 2 CNOTs.
+              Extreme NISQ economy for liver disease screening: 12 parameters, depth 4, 2 CNOTs.
             </p>
             <div className="pt-1 flex items-center justify-between text-[11px] font-mono text-muted-foreground">
               <span>2 Wires</span>
@@ -198,7 +195,7 @@ export default function QuantumFeasibilityPage() {
             </div>
           </button>
 
-          {/* AstroVall02 / Quantara 4Q */}
+          {/* 4Q Ring-CNOT VQC */}
           <button
             type="button"
             onClick={() => handleCircuitSelect("vqc", 4)}
@@ -211,11 +208,11 @@ export default function QuantumFeasibilityPage() {
             <div className="flex items-center justify-between">
               <span className="font-medium text-xs text-foreground">4-Qubit Ring-CNOT VQC</span>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-mono">
-                AstroVall / Quantara
+                Ring-CNOT VQC
               </span>
             </div>
             <p className="text-[11px] text-muted-foreground leading-relaxed">
-              Standard tabular disease classifier for Cleveland Heart & UCI HCV panels.
+              Standard tabular disease classifier for cardiac and biomarker panels.
             </p>
             <div className="pt-1 flex items-center justify-between text-[11px] font-mono text-muted-foreground">
               <span>4 Wires</span>
@@ -223,7 +220,7 @@ export default function QuantumFeasibilityPage() {
             </div>
           </button>
 
-          {/* Decoodt et al. 2023 CXR */}
+          {/* 6Q CXR Transfer */}
           <button
             type="button"
             onClick={() => handleCircuitSelect("cxr_transfer", 6)}
@@ -236,7 +233,7 @@ export default function QuantumFeasibilityPage() {
             <div className="flex items-center justify-between">
               <span className="font-medium text-xs text-foreground">6-Qubit CXR Transfer VQC</span>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-mono">
-                Decoodt et al. 2023
+                Transfer VQC
               </span>
             </div>
             <p className="text-[11px] text-muted-foreground leading-relaxed">
@@ -248,7 +245,7 @@ export default function QuantumFeasibilityPage() {
             </div>
           </button>
 
-          {/* Qiskit Havlíček ZZ-Kernel */}
+          {/* ZZ-Kernel */}
           <button
             type="button"
             onClick={() => handleCircuitSelect("zz_kernel", 4)}
@@ -259,9 +256,9 @@ export default function QuantumFeasibilityPage() {
             }`}
           >
             <div className="flex items-center justify-between">
-              <span className="font-medium text-xs text-foreground">Havlíček ZZ-Kernel (QSVC)</span>
+              <span className="font-medium text-xs text-foreground">ZZ-Kernel (QSVC)</span>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20 font-mono">
-                Qiskit ML (Nature 2019)
+                Quantum Kernel
               </span>
             </div>
             <p className="text-[11px] text-muted-foreground leading-relaxed">

@@ -102,7 +102,7 @@ export default function CardiomegalyStudioPage() {
         setTelemetry(data.telemetry);
         showToast({
           title: "Inference Complete",
-          message: "Decoodt et al. Transfer Learning & 6Q VQC evaluation finished.",
+          message: "Chest X-Ray Transfer Learning & 6Q Quantum evaluation finished.",
           type: "quantum",
         });
       } else {
@@ -326,10 +326,10 @@ export default function CardiomegalyStudioPage() {
                 </span>
               </div>
 
-              {/* Shannon Entropy Router Decision */}
+              {/* Adaptive Confidence Router Decision */}
               <div className="p-5 rounded-2xl border border-border/50 bg-card/60 space-y-3">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-mono text-muted-foreground">Quantara Adaptive Router</span>
+                  <span className="font-mono text-muted-foreground">Adaptive Confidence Router</span>
                   <span className="px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-mono text-[10px] font-medium border border-indigo-500/20">
                     {telemetry.router_telemetry.dispatch_code}
                   </span>

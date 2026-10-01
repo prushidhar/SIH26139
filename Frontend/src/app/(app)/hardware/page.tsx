@@ -290,7 +290,7 @@ export default function HardwarePage() {
           onClick={() => {
             setActiveBackend("gpu_simulator");
             showToast({
-              title: "Transfinite-1 Active",
+              title: "Simulator Active",
               message: "Selected 8-qubit variational quantum circuit statevector engine.",
               type: "quantum",
             });
@@ -337,13 +337,13 @@ export default function HardwarePage() {
           </div>
         </div>
 
-        {/* Aleph-1 (IBM Quantum QPU Hardware - UNLOCKED) */}
+        {/* IBM Quantum QPU Hardware */}
         <div
           onClick={() => {
             setActiveBackend("ibmq_eagle");
             showToast({
-              title: "Hardware Activated",
-              message: "Aleph-1 Superconducting IBM Quantum Hardware activated.",
+              title: "IBM Quantum QPU Activated",
+              message: "127-Qubit superconducting IBM Quantum processor selected.",
               type: "success",
             });
           }}

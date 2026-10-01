@@ -491,7 +491,7 @@ export default function NeurologicalStudioPage() {
                 </div>
                 <div className="flex justify-between text-[10px] font-mono text-ink-soft pt-0.5">
                   <span>Confidence: {telemetry.confidence_percentage}%</span>
-                  <span>Entropy: {telemetry.shannon_entropy_bits} bits</span>
+                  <span>Uncertainty: {telemetry.shannon_entropy_bits} bits</span>
                 </div>
               </div>
 

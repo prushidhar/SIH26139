@@ -156,7 +156,7 @@ export default function HeartTabularStudioPage() {
         setTelemetry(data.telemetry);
         showToast({
           title: "Inference Complete",
-          message: "AstroVall02 4-Qubit VQC evaluation finished.",
+          message: "4-Qubit Variational Quantum evaluation finished.",
           type: "quantum",
         });
       } else {
@@ -445,11 +445,11 @@ export default function HeartTabularStudioPage() {
                   <div className="flex items-center gap-2">
                     <Cpu size={14} className="text-indigo-500" />
                     <span className="font-mono uppercase tracking-wider text-muted-foreground">
-                      Transfinite-4Q Observables
+                      4-Qubit VQC Observables
                     </span>
                   </div>
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
-                    AstroVall02 Architecture
+                    Variational Circuit
                   </span>
                 </div>
 
@@ -463,7 +463,7 @@ export default function HeartTabularStudioPage() {
                 </div>
               </div>
 
-              {/* Quantara Adaptive Router */}
+              {/* Adaptive Model Router */}
               <div className="p-5 rounded-2xl border border-border/50 bg-card/60 space-y-2">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-mono text-muted-foreground">Adaptive Model Router</span>

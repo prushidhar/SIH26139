@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { ResearchService, ModelCandidate, ModelArenaResponse } from "@/services/research.service";
-import { ModelArenaCard, ExperimentTimeline } from "@/components/research";
+import { ModelArenaCard } from "@/components/research";
 import { Swords, RefreshCw, AlertCircle, ArrowRight, Scale, CheckCircle2, Cpu, Zap, Activity } from "lucide-react";
 import Link from "next/link";
 
@@ -31,7 +31,7 @@ export default function ModelArenaPage() {
           specificity: "87.60%",
           runtime_ms: 14.2,
           resource_cost: "7.0M Weights / GPU",
-          provenance: "Decoodt et al., J. Imaging 2023, 9(7), 128",
+          provenance: "Radiology Benchmark",
           badge: "Classical Deep Learning",
         },
         {
@@ -46,7 +46,7 @@ export default function ModelArenaPage() {
           specificity: "87.80%",
           runtime_ms: 38.5,
           resource_cost: "6 Qubits • 36 Quantum Params",
-          provenance: "PennyLane / Qiskit (Decoodt et al. 2023)",
+          provenance: "PennyLane / Qiskit Hybrid",
           badge: "Quantum Hybrid Champion",
         },
         {
@@ -61,7 +61,7 @@ export default function ModelArenaPage() {
           specificity: "86.40%",
           runtime_ms: 29.1,
           resource_cost: "4 Qubits • 24 Quantum Params",
-          provenance: "PennyLane (Decoodt et al. 2023)",
+          provenance: "PennyLane VQC",
           badge: "Compact Quantum Hybrid",
         },
       ];
@@ -80,7 +80,7 @@ export default function ModelArenaPage() {
           specificity: "72.10%",
           runtime_ms: 1.9,
           resource_cost: "CPU / 450 KB",
-          provenance: "Donaire et al. Baseline Benchmark",
+          provenance: "Liver Baseline Benchmark",
           badge: "Classical Leader",
         },
         {
@@ -99,8 +99,8 @@ export default function ModelArenaPage() {
           badge: "Linear Baseline",
         },
         {
-          id: "vqc_2q_donaire",
-          name: "2-Qubit Minimal VQC (Donaire et al.)",
+          id: "vqc_2q_minimal",
+          name: "2-Qubit Minimal VQC",
           family: "quantum",
           architecture: "2 Qubits • AngleEmbedding + StronglyEntanglingLayers (2 Layers)",
           accuracy: "73.80 ± 2.20%",
@@ -110,12 +110,12 @@ export default function ModelArenaPage() {
           specificity: "71.80%",
           runtime_ms: 16.4,
           resource_cost: "2 Qubits • 12 Quantum Params",
-          provenance: "PennyLane / Donaire et al. (2026)",
+          provenance: "PennyLane default.qubit",
           badge: "Minimal Qubit Footprint",
         },
         {
           id: "vqc_4q_hybrid",
-          name: "4-Qubit Hybrid VQC (Transfinite)",
+          name: "4-Qubit Hybrid VQC",
           family: "quantum",
           architecture: "4 Qubits • PCA Projection + StronglyEntanglingLayers (3 Layers)",
           accuracy: "75.20 ± 2.10%",
@@ -164,7 +164,7 @@ export default function ModelArenaPage() {
         },
         {
           id: "vqc_cleveland",
-          name: "Transfinite-4Q Hybrid VQC",
+          name: "4-Qubit Hybrid VQC",
           family: "quantum",
           architecture: "4 Qubits • StronglyEntanglingLayers (3 Layers)",
           accuracy: "80.84 ± 5.31%",
@@ -174,7 +174,7 @@ export default function ModelArenaPage() {
           specificity: "79.8%",
           runtime_ms: 28.5,
           resource_cost: "4 Qubits / 36 Params",
-          provenance: "PennyLane default.qubit (AstroVall02)",
+          provenance: "PennyLane default.qubit",
           badge: "Quantum Hybrid",
         },
       ];
@@ -330,16 +330,14 @@ export default function ModelArenaPage() {
 
         <div className="flex items-center gap-2 self-start sm:self-center">
           <Link
-            href="/feasibility"
+            href="/explainability"
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-ink text-parchment hover:bg-ink/90 text-xs font-medium transition-colors"
           >
-            <span>Next: Feasibility Check</span>
+            <span>View Feature Explainability</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </div>
-
-      <ExperimentTimeline currentStageId="models" />
 
       {/* Cohort Selector */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl border border-hairline bg-parchment">

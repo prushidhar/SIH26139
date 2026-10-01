@@ -141,7 +141,7 @@ export default function LiverILPDStudioPage() {
         setTelemetry(data.telemetry);
         showToast({
           title: "Inference Complete",
-          message: "Donaire et al. 2-Qubit VQC evaluation finished.",
+          message: "2-Qubit Variational Quantum evaluation finished.",
           type: "quantum",
         });
       } else {
@@ -428,7 +428,7 @@ export default function LiverILPDStudioPage() {
                   <div className="flex items-center gap-2">
                     <Cpu size={14} className="text-teal-500" />
                     <span className="font-mono uppercase tracking-wider text-muted-foreground">
-                      Donaire 2-Qubit VQC
+                      Compact 2-Qubit VQC
                     </span>
                   </div>
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/20">
@@ -452,7 +452,7 @@ export default function LiverILPDStudioPage() {
                 </div>
               </div>
 
-              {/* Quantara Adaptive Router */}
+              {/* Adaptive Model Router */}
               <div className="p-5 rounded-2xl border border-border/50 bg-card/60 space-y-2">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-mono text-muted-foreground">Adaptive Model Router</span>

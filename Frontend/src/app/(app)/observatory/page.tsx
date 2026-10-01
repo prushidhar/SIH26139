@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { ResearchService, ObservatoryDatasetSummary, DatasetDetail } from "@/services/research.service";
-import { DatasetHealthPanel, ExperimentTimeline } from "@/components/research";
+import { DatasetHealthPanel } from "@/components/research";
 import { Database, RefreshCw, AlertCircle, ArrowRight, Layers, CheckCircle2, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
@@ -105,10 +105,9 @@ export default function DatasetObservatoryPage() {
           success: true,
           id: id,
           metadata: {
-            name: "Indian Liver Patient Dataset (ILPD / Donaire et al. 2026)",
-            source: "UCI ML Repository / Donaire et al. (Eng. Appl. Artif. Intell. 2026)",
+            name: "Indian Liver Patient Dataset (ILPD)",
+            source: "UCI ML Repository",
             modality: "Hepatic Serum Chemistry & Metabolic Markers",
-            doi: "10.1016/j.engappai.2025.109876",
           },
           sample_count: 583,
           feature_count: 10,
@@ -124,7 +123,7 @@ export default function DatasetObservatoryPage() {
             missing_pct: 0.0,
             duplicated_records: 13,
             constant_features: 0,
-            data_integrity: "Imputed & Standardized (Donaire et al. Protocol)",
+            data_integrity: "Standardized Clinical Biomarker Panel",
           },
           distributions: {
             total_bilirubin: { mean: 3.30, std: 6.21, min: 0.40, q25: 0.80, median: 1.00, q75: 2.60, max: 75.0 },
@@ -153,9 +152,8 @@ export default function DatasetObservatoryPage() {
           id: id,
           metadata: {
             name: "CheXpert Cardiomegaly Chest Radiograph Panel",
-            source: "Stanford AIMI / Decoodt et al. (2023)",
+            source: "Stanford AIMI",
             modality: "Frontal Chest Radiography (DICOM/JPEG)",
-            doi: "10.3390/jimaging9070128",
           },
           sample_count: 1200,
           feature_count: 6,
@@ -265,16 +263,14 @@ export default function DatasetObservatoryPage() {
 
         <div className="flex items-center gap-2 self-start sm:self-center">
           <Link
-            href="/signal-studio"
+            href="/benchmarks"
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-ink text-parchment hover:bg-ink/90 text-xs font-medium transition-colors"
           >
-            <span>Proceed to Signal Studio</span>
+            <span>View Model Benchmarks</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </div>
-
-      <ExperimentTimeline currentStageId="observatory" />
 
       {error && (
         <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-xs flex items-center gap-2 font-mono">

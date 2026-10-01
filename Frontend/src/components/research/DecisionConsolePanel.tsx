@@ -24,7 +24,7 @@ export default function DecisionConsolePanel({ decision }: DecisionConsolePanelP
             {arbitration_protocol}
           </h3>
           <p className="text-xs text-ink-soft mt-1">
-            Dynamic Shannon entropy routing boundary set at η = {entropy_threshold_bits} bits.
+            Adaptive predictive confidence routing threshold set at η = {entropy_threshold_bits}.
           </p>
         </div>
 
@@ -51,7 +51,7 @@ export default function DecisionConsolePanel({ decision }: DecisionConsolePanelP
           <div className="text-2xl font-serif font-bold text-ink mt-1">
             {live_telemetry_stats.classical_only_resolved.toLocaleString()}
           </div>
-          <div className="text-xs text-ink-soft mt-1">H &lt; 0.65 bits (&lt; 2.5 ms)</div>
+          <div className="text-xs text-ink-soft mt-1">High confidence (&lt; 2.5 ms)</div>
         </div>
 
         <div className="p-4 rounded-xl border border-hairline bg-parchment">
