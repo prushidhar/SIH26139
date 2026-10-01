@@ -242,7 +242,7 @@ export function extractPatientMetadataFromText(text: string): PatientMetadata {
     }
   }
   if (!patientId) {
-    patientId = `QX-BC-${Math.floor(1000 + Math.random() * 9000)}`;
+    patientId = `QS-BC-${Math.floor(1000 + Math.random() * 9000)}`;
   }
 
   // 2. Patient Name

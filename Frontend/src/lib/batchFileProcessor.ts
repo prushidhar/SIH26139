@@ -237,7 +237,7 @@ async function parseCSV(file: File): Promise<BatchParseResult> {
 
           records.push({
             rowIndex: i,
-            patientId: idColumn ? String(row[idColumn] || `QX-BATCH-${String(i + 1).padStart(4, "0")}`) : `QX-BATCH-${String(i + 1).padStart(4, "0")}`,
+            patientId: idColumn ? String(row[idColumn] || `QS-BATCH-${String(i + 1).padStart(4, "0")}`) : `QS-BATCH-${String(i + 1).padStart(4, "0")}`,
             patientName: nameColumn ? String(row[nameColumn] || `Patient ${i + 1}`) : `Patient ${i + 1}`,
             data,
             rawRow: row as Record<string, string | number>,
@@ -319,7 +319,7 @@ function extractRecordFromJSONItem(
   const patientId = String(
     item.patient_id || item.patientId || item.id ||
     candidateSource.patient_id || candidateSource.patientId || candidateSource.id ||
-    `QX-BATCH-${String(fallbackIndex + 1).padStart(4, "0")}`
+    `QS-BATCH-${String(fallbackIndex + 1).padStart(4, "0")}`
   );
   const patientName = String(
     item.patient_name || item.patientName || item.name ||
@@ -588,7 +588,7 @@ export async function parseZIP(
         );
         return {
           rowIndex: i,
-          patientId: `QX-ECG-${String(i + 1).padStart(4, "0")}`,
+          patientId: `QS-ECG-${String(i + 1).padStart(4, "0")}`,
           patientName: img.name.replace(/\.[^.]+$/, ""),
           data: {},
           imageBase64: `data:image/jpeg;base64,${base64}`,
@@ -639,8 +639,8 @@ export async function parseZIP(
           allRecords.push({
             rowIndex: globalIndex,
             patientId: idColumn
-              ? String(row[idColumn] || `QX-BATCH-${String(globalIndex + 1).padStart(4, "0")}`)
-              : `QX-BATCH-${String(globalIndex + 1).padStart(4, "0")}`,
+              ? String(row[idColumn] || `QS-BATCH-${String(globalIndex + 1).padStart(4, "0")}`)
+              : `QS-BATCH-${String(globalIndex + 1).padStart(4, "0")}`,
             patientName: nameColumn
               ? String(row[nameColumn] || `Patient ${globalIndex + 1}`)
               : `Patient ${globalIndex + 1}`,
@@ -713,7 +713,7 @@ export async function parseZIP(
           const parsed = await parseMedicalReportFile(file);
 
           const cleanFallbackName = pdfFile.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ");
-          const matchId = pdfFile.name.match(/(Patient-[A-Za-z0-9\-]+|QX-[A-Za-z0-9\-]+)/i);
+          const matchId = pdfFile.name.match(/(Patient-[A-Za-z0-9\-]+|QS-[A-Za-z0-9\-]+|QX-[A-Za-z0-9\-]+)/i);
           const matchName = pdfFile.name
             .replace(/^Case_\d+_/i, "")
             .replace(/^(Patient-[A-Za-z0-9\-]+_)/i, "")
@@ -722,7 +722,7 @@ export async function parseZIP(
 
           const patientId = matchId
             ? matchId[1]
-            : (parsed.patientId || parsed.metadata?.patientId || `QX-BATCH-${String(allRecords.length + 1).padStart(4, "0")}`);
+            : (parsed.patientId || parsed.metadata?.patientId || `QS-BATCH-${String(allRecords.length + 1).padStart(4, "0")}`);
           const patientName = matchName && matchName.trim().length > 1
             ? matchName.trim()
             : (parsed.metadata?.patientName || cleanFallbackName);
@@ -749,7 +749,7 @@ export async function parseZIP(
           const parsed = await parseMedicalReportFile(file);
 
           const cleanFallbackName = txtFile.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ");
-          const matchId = txtFile.name.match(/(Patient-[A-Za-z0-9\-]+|QX-[A-Za-z0-9\-]+)/i);
+          const matchId = txtFile.name.match(/(Patient-[A-Za-z0-9\-]+|QS-[A-Za-z0-9\-]+|QX-[A-Za-z0-9\-]+)/i);
           const matchName = txtFile.name
             .replace(/^Case_\d+_/i, "")
             .replace(/^(Patient-[A-Za-z0-9\-]+_)/i, "")
@@ -758,7 +758,7 @@ export async function parseZIP(
 
           const patientId = matchId
             ? matchId[1]
-            : (parsed.patientId || parsed.metadata?.patientId || `QX-BATCH-${String(allRecords.length + 1).padStart(4, "0")}`);
+            : (parsed.patientId || parsed.metadata?.patientId || `QS-BATCH-${String(allRecords.length + 1).padStart(4, "0")}`);
           const patientName = matchName && matchName.trim().length > 1
             ? matchName.trim()
             : (parsed.metadata?.patientName || cleanFallbackName);
@@ -878,7 +878,7 @@ async function parseImageBulk(
 
       records.push({
         rowIndex: i,
-        patientId: `QX-ECG-${String(i + 1).padStart(4, "0")}`,
+        patientId: `QS-ECG-${String(i + 1).padStart(4, "0")}`,
         patientName: file.name.replace(/\.[^.]+$/, ""),
         data: {},
         imageBase64: `data:${mimeType};base64,${base64}`,
@@ -1015,7 +1015,7 @@ async function parseReportFiles(files: File[]): Promise<BatchParseResult> {
       const patientId =
         parsed.patientId ||
         parsed.metadata?.patientId ||
-        `QX-BATCH-${String(records.length + 1).padStart(4, "0")}`;
+        `QS-BATCH-${String(records.length + 1).padStart(4, "0")}`;
       const patientName = parsed.metadata?.patientName || fallbackName;
 
       records.push({

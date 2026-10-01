@@ -85,7 +85,7 @@ export type ProgressCallback = (session: BatchSession) => void;
 function generateBatchId(): string {
   const ts = Date.now().toString(36);
   const rand = Math.random().toString(36).substring(2, 6);
-  return `QX-BATCH-${ts}-${rand}`.toUpperCase();
+  return `QS-BATCH-${ts}-${rand}`.toUpperCase();
 }
 
 // ── Breast Cancer Inference ─────────────────────────────────────────────────────

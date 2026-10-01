@@ -115,7 +115,7 @@ function generateSignatureHash(payload: ReportPayload): string {
     hash = ((hash << 5) - hash) + char;
     hash = hash & hash;
   }
-  return `QX-SIG-${Math.abs(hash).toString(16).padStart(8, "0").slice(0, 8).toUpperCase()}`;
+  return `QS-SIG-${Math.abs(hash).toString(16).padStart(8, "0").slice(0, 8).toUpperCase()}`;
 }
 
 // ── Color Palette ───────────────────────────────────────────────────────────────
@@ -280,7 +280,7 @@ export function generateCombinedReport(payload: ReportPayload): jsPDF {
   doc.text("Patient ID / MRN:", M + 5, y + 20.5);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(...C.ink);
-  doc.text(cleanPdfText(payload.patient.patientId || "QX-001"), M + 32, y + 20.5);
+  doc.text(cleanPdfText(payload.patient.patientId || "QS-001"), M + 32, y + 20.5);
 
   doc.setFont("helvetica", "normal");
   doc.setTextColor(...C.slate);

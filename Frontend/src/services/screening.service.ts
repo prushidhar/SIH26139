@@ -161,7 +161,7 @@ export class ScreeningService {
    * Save a new screening record to the database for the current user.
    */
   static async createScreening(payload: Partial<StoredPrediction>): Promise<StoredPrediction> {
-    const recordId = payload.id || payload.patientId || `QX-BC-${Math.floor(1000 + Math.random() * 9000)}`;
+    const recordId = payload.id || payload.patientId || `QS-BC-${Math.floor(1000 + Math.random() * 9000)}`;
     const nowStr = new Date().toLocaleDateString([], {
       month: "short",
       day: "numeric",

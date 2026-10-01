@@ -90,7 +90,7 @@ export default function HistoryPage() {
     const payload: ReportPayload = {
       patient: {
         patientName: pred.patientName || "Patient",
-        patientId: pred.id || pred.patientId || "QX-001",
+        patientId: pred.id || pred.patientId || "QS-001",
         patientAge: pred.patientAge || "N/A",
         patientGender: pred.patientGender || "Not Specified",
         diseaseType: isCardiac ? "cardiac_ecg" : "breast_cancer",
