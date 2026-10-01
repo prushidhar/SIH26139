@@ -193,7 +193,7 @@ export default function BatchResultsTable({
         },
         biomarkers,
         transfinite1: {
-          engineName: "Transfinite-1",
+          engineName: "Quantum VQC",
           engineDescription: "8-Qubit ZZ Variational Quantum Classifier (Simulator)",
           modelType: "hybrid",
           predictionLabel: record.quantumPrediction || "Unknown",

@@ -130,7 +130,7 @@ export default function SettingsPage() {
     if (typeof window !== "undefined") {
       localStorage.setItem("quresight_setting_audio", String(val));
     }
-    triggerAutoSaveFeedback("Quantum Audio Cues", val ? "Enabled" : "Muted");
+    triggerAutoSaveFeedback("Audio Feedback", val ? "Enabled" : "Muted");
   };
 
   const handleExportAllData = async () => {
@@ -339,14 +339,14 @@ export default function SettingsPage() {
                   <button
                     type="button"
                     onClick={() => playQuantumCompletionSound(true)}
-                    title="Test Quantum Completion Sound"
+                    title="Test Completion Sound"
                     className="inline-flex items-center gap-1 text-[10px] font-mono text-quantum hover:underline cursor-pointer font-semibold"
                   >
                     <Volume2 size={11} /> Test Sound
                   </button>
                 </div>
                 <p className="text-[11px] text-ink-soft font-light">
-                  Plays a resonant quantum acoustic chord upon diagnostic test completion.
+                  Plays an audio chime when a screening completes.
                 </p>
               </div>
               <input
@@ -568,7 +568,7 @@ export default function SettingsPage() {
               {/* Warning Content */}
               <div className="space-y-2 text-xs text-ink-soft leading-relaxed">
                 <p className="text-red-900 font-medium bg-red-50 p-3 rounded-2xl border border-red-200">
-                  ⚠️ This action is catastrophic and irreversible. All your login credentials, profile data, patient screenings, QureExplain gate attributions, and notifications will be wiped from Supabase immediately.
+                  ⚠️ This action is permanent and cannot be undone. All your login credentials, profile data, patient screenings, feature attributions, and notifications will be wiped from Supabase immediately.
                 </p>
                 <p>
                   Target Account: <strong className="text-ink">{userEmail || userName}</strong>

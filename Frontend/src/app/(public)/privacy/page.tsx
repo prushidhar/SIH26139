@@ -20,7 +20,7 @@ export default function PrivacyPage() {
           1. Data Minimization & Zero-Leakage Architecture
         </h2>
         <p>
-          QureSight operates under strict data minimization principles. We do not collect, store, or sell personal identifiers or raw patient biological specimens. All computational workloads entering the preprocessing autoencoder are normalized into bounded feature vectors prior to quantum angle encoding.
+          QureSight operates under strict data minimization principles. We do not collect, store, or sell personal identifiers or raw patient biological specimens. All computational workloads entering the preprocessing pipeline are normalized into bounded feature vectors prior to quantum angle encoding.
         </p>
       </section>
 
@@ -55,7 +55,7 @@ export default function PrivacyPage() {
           4. Cryptographic Receipt Provenance
         </h2>
         <p>
-          Every inference request generates a verifiable SHA-256 cryptographic receipt. This digest encapsulates the model configuration, the exact random seed utilized in stratified k-fold splits, and the resulting gate ablation importance scores. These receipts allow research audits without requiring persistent retention of raw underlying feature matrices.
+          Every inference request generates a verifiable SHA-256 cryptographic receipt. This digest encapsulates the model configuration, the exact random seed utilized in stratified k-fold splits, and the resulting feature attribution scores. These receipts allow research audits without requiring persistent retention of raw underlying feature matrices.
         </p>
       </section>
 
@@ -64,7 +64,7 @@ export default function PrivacyPage() {
           5. User Rights & Data Deletion
         </h2>
         <p>
-          You hold the absolute right to purge your uploaded datasets, custom VQC checkpoints, and analytical logs from our encrypted databases at any time through the Settings dashboard or by dispatching a deletion request to our compliance team.
+          You hold the absolute right to purge your uploaded datasets, custom model checkpoints, and analytical logs from our encrypted databases at any time through the Settings dashboard or by dispatching a deletion request to our compliance team.
         </p>
       </section>
     </LegalPageLayout>

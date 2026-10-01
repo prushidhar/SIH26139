@@ -98,7 +98,7 @@ export default function HistoryPage() {
       },
       biomarkers,
       transfinite1: {
-        engineName: "Transfinite-1",
+        engineName: "Quantum VQC",
         engineDescription: isCardiac ? "8-Qubit AngleEmbedding VQC" : "8-Qubit ZZ Variational Quantum Classifier (Simulator)",
         modelType: "hybrid",
         predictionLabel: pred.quantumPrediction || "Unknown",
@@ -126,7 +126,7 @@ export default function HistoryPage() {
         variationalParams: 48,
       },
       cx01: {
-        engineName: isCardiac ? "CX-01 Cardiac Classical" : "CX-01",
+        engineName: isCardiac ? "Classical Baseline" : "Classical Baseline",
         engineDescription: isCardiac ? "ResNet-18 Deep Convolutional Baseline" : "Classical SVM-RBF + XGBoost Ensemble",
         modelType: "classical",
         predictionLabel: pred.classicalPrediction || "Unknown",
@@ -246,7 +246,7 @@ export default function HistoryPage() {
               coordinates: { peak_x: 650, peak_y: 420, rel_x: 0.29, rel_y: 0.35 },
             },
             quantum_engine: {
-              signature: "QureSight Transfinite-1",
+              signature: "QureSight Quantum VQC",
               qubits: 8,
               ansatz: "8-Qubit AngleEmbedding + StronglyEntanglingLayers (2 Layers)",
               statevector_backend: "PennyLane default.qubit",
@@ -262,7 +262,7 @@ export default function HistoryPage() {
               latency_ms: pred.quantumExecutionTimeMs ?? 54.32,
             },
             classical_engine: {
-              name: "CX-01 Cardiac Classical",
+              name: "Classical Baseline",
               architecture: "ResNet-18 + FC (512 -> 256 -> 4)",
               prediction: pred.classicalPrediction,
               confidence_pct: pred.classicalConfidence,
@@ -301,7 +301,7 @@ export default function HistoryPage() {
           concave_points_mean: 0.0234,
         },
         screeningResult: {
-          engine: "Transfinite-1",
+          engine: "Quantum VQC",
           prediction_label: pred.quantumPrediction,
           confidence: pred.quantumConfidence,
           composite_risk_score: pred.quantumRiskScore ?? 42.4,
@@ -507,8 +507,8 @@ export default function HistoryPage() {
                   <th className="py-2.5 px-3 font-semibold whitespace-nowrap">Patient Name</th>
                   <th className="py-2.5 px-3 font-semibold whitespace-nowrap">Demographics</th>
                   <th className="py-2.5 px-3 font-semibold whitespace-nowrap">Clinical Cohort</th>
-                  <th className="py-2.5 px-3 font-semibold text-purple-700 whitespace-nowrap">Hybrid Quantum (Transfinite-IM1)</th>
-                  <th className="py-2.5 px-3 font-semibold text-blue-700 whitespace-nowrap">Classical SOTA (CX-IM01)</th>
+                  <th className="py-2.5 px-3 font-semibold text-purple-700 whitespace-nowrap">Hybrid Quantum (VQC)</th>
+                  <th className="py-2.5 px-3 font-semibold text-blue-700 whitespace-nowrap">Classical Benchmark</th>
                   <th className="py-2.5 px-3 font-semibold whitespace-nowrap">Key Risk Factor</th>
                   <th className="py-2.5 px-3 font-semibold whitespace-nowrap">Consensus</th>
                   <th className="py-2.5 px-3 font-semibold whitespace-nowrap">Test Date</th>
@@ -886,7 +886,7 @@ export default function HistoryPage() {
                   </div>
 
                   <div className="p-3.5 rounded-xl border border-blue-200 bg-blue-50/40 space-y-1">
-                    <span className="text-[10px] font-mono font-bold text-blue-700 uppercase">Classical Baseline (CX-01)</span>
+                    <span className="text-[10px] font-mono font-bold text-blue-700 uppercase">Classical Baseline</span>
                     <div className="text-lg font-mono font-black text-blue-800">
                       {selectedCase.classicalPrediction}
                     </div>

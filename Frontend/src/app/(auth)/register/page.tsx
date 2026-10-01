@@ -106,7 +106,7 @@ export default function RegisterPage() {
       case 3:
         return { label: "Robust", color: "bg-teal-500", text: "text-teal-700", border: "border-teal-200", badgeBg: "bg-teal-50/80" };
       case 4:
-        return { label: "Cryptographic", color: "bg-quantum", text: "text-quantum", border: "border-quantum/30", badgeBg: "bg-quantum/10" };
+        return { label: "Excellent", color: "bg-quantum", text: "text-quantum", border: "border-quantum/30", badgeBg: "bg-quantum/10" };
       default:
         return { label: "Required", color: "bg-ink/10", text: "text-muted-foreground", border: "border-hairline", badgeBg: "bg-cream-deep/40" };
     }
@@ -626,7 +626,7 @@ export default function RegisterPage() {
                 className="absolute inset-0 bg-parchment/95 backdrop-blur-xs z-50 flex flex-col items-center justify-center p-6 text-center rounded-[2.5rem]"
               >
                 <Loader2 size={36} className="animate-spin text-quantum mb-3" />
-                <h3 className="font-serif text-lg font-medium text-ink">Authorizing Clinical Registration</h3>
+                <h3 className="font-serif text-lg font-medium text-ink">Creating your account...</h3>
                 <p className="text-xs text-ink-soft mt-1">Verifying Google identity & establishing workspace credentials...</p>
               </motion.div>
             )}
@@ -651,7 +651,7 @@ export default function RegisterPage() {
         >
           <motion.img
             src="/images/auth-coherence.jpg"
-            alt="Quantum Topological Coherence"
+            alt="Abstract quantum visualization"
             animate={{ scale: [1, 1.04, 1], rotate: [0, -0.4, 0] }}
             transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
             className="absolute inset-0 w-full h-full object-cover object-center opacity-90"
@@ -663,7 +663,7 @@ export default function RegisterPage() {
           <div className="relative z-10">
             <div className="flex items-center gap-3">
               <span className="text-[11px] font-mono tracking-[0.25em] uppercase font-semibold text-parchment/90 drop-shadow-sm">
-                TOPOLOGICAL RESEARCH PLATFORM
+                RESEARCH PLATFORM
               </span>
               <div className="h-[1px] w-12 bg-parchment/50" />
             </div>
@@ -676,7 +676,7 @@ export default function RegisterPage() {
               Quantum Machine Learning
             </h1>
             <p className="text-parchment/75 text-sm sm:text-base font-light leading-relaxed">
-              Join translational oncology cohorts utilizing continuous gate-optimized quantum kernels and interpretable feature circuits.
+              Screen for diseases using quantum-enhanced ML models benchmarked against classical baselines on real clinical data.
             </p>
           </div>
         </motion.div>

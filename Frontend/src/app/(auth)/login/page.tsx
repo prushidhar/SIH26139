@@ -344,7 +344,7 @@ export default function LoginPage() {
         >
           <motion.img
             src="/images/auth-manifold.jpg"
-            alt="Quantum Crystalline Manifold"
+            alt="Abstract geometric visualization"
             animate={{ scale: [1, 1.04, 1], rotate: [0, 0.4, 0] }}
             transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
             className="absolute inset-0 w-full h-full object-cover object-center opacity-90"
@@ -356,7 +356,7 @@ export default function LoginPage() {
           <div className="relative z-10">
             <div className="flex items-center gap-3">
               <span className="text-[11px] font-mono tracking-[0.25em] uppercase font-semibold text-parchment/90 drop-shadow-sm">
-                HYBRID QUANTUM ENCLAVE
+                CLINICAL INTELLIGENCE PLATFORM
               </span>
               <div className="h-[1px] w-12 bg-parchment/50" />
             </div>
@@ -369,7 +369,7 @@ export default function LoginPage() {
               Pre-Symptomatic Signal
             </h1>
             <p className="text-parchment/75 text-sm sm:text-base font-light leading-relaxed">
-              Higher-order epistatic interactions live in curved feature manifolds. Quantum feature spaces keep the geometry intact.
+              Quantum-enhanced models uncover subtle biomarker relationships that classical methods miss.
             </p>
           </div>
         </motion.div>
@@ -576,7 +576,7 @@ export default function LoginPage() {
                 className="absolute inset-0 bg-parchment/95 backdrop-blur-xs z-50 flex flex-col items-center justify-center p-6 text-center rounded-[2.5rem]"
               >
                 <Loader2 size={36} className="animate-spin text-quantum mb-3" />
-                <h3 className="font-serif text-lg font-medium text-ink">Authorizing Clinical Session</h3>
+                <h3 className="font-serif text-lg font-medium text-ink">Signing in...</h3>
                 <p className="text-xs text-ink-soft mt-1">Verifying Google identity & establishing secure tokens...</p>
               </motion.div>
             )}

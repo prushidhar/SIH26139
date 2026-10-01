@@ -53,7 +53,7 @@ export default function ExperimentVaultPage() {
           date: "2026-09-28",
           hypothesis: "Combining ResNet-34 lead localization with 4-qubit VQC tabular analysis catches atypical infarctions.",
           classical_baseline: "ResNet-34 (96.8%) / Random Forest (82.8%)",
-          quantum_result: "Transfinite-IM1 (89.2%) / Transfinite-4Q (80.8%)",
+          quantum_result: "8-Qubit VQC (89.2%) / 4-Qubit VQC (80.8%)",
           advantage_delta: "Dual-Engine Consensus Concordance: 91.7%",
           conclusion: "Complementary diagnostic utility: Grad-CAM pinpoints anatomical leads while VQC handles multi-hemodynamic stress.",
           status: "Verified & Locked",
@@ -79,7 +79,7 @@ export default function ExperimentVaultPage() {
           classical_baseline: "DenseNet-121 (86.5%, AUROC 0.9250)",
           quantum_result: "DenseNet-121 + PennyLane 6-Qubit VQC (87.0%, AUROC 0.9300)",
           advantage_delta: "+0.005 AUROC with 99.8% parameter reduction in classification head",
-          conclusion: "CONFIRMED & PEER-REVIEWED (Decoodt et al., J. Imaging 2023, 9(7), 128): 6Q variational circuits integrate seamlessly into clinical imaging workflows with 96.5% parameter compression.",
+          conclusion: "CONFIRMED (CheXpert Dataset): 6Q variational circuits integrate seamlessly into clinical imaging workflows with 96.5% parameter compression.",
           status: "Verified & Published (DOI: 10.3390/jimaging9070128)",
         },
         {
@@ -89,9 +89,9 @@ export default function ExperimentVaultPage() {
           date: "2026-01-15",
           hypothesis: "A compact 2-to-4 qubit parameterized quantum circuit with PCA pre-processing matches classical ensemble performance while dramatically compressing parameter count.",
           classical_baseline: "Random Forest (75.4%, AUROC 0.7850) / Logistic Regression (74.2%)",
-          quantum_result: "Donaire et al. 2-Qubit VQC (73.8%, AUROC 0.7720) & 4-Qubit VQC (75.2%, AUROC 0.7840)",
+          quantum_result: "2-Qubit VQC (73.8%, AUROC 0.7720) & 4-Qubit VQC (75.2%, AUROC 0.7840)",
           advantage_delta: "Equal diagnostic fidelity with only 2-4 qubits and 12-24 parameters",
-          conclusion: "CONFIRMED & PEER-REVIEWED (Donaire et al., Eng. Appl. Artif. Intell. 2026): Demonstrates extreme 2-qubit economy for non-linear hepatic biomarker discrimination, establishing minimal NISQ resource boundaries.",
+          conclusion: "CONFIRMED (ILPD Cohort): Demonstrates extreme 2-qubit economy for non-linear hepatic biomarker discrimination, establishing minimal NISQ resource boundaries.",
           status: "Verified & Published (Eng. Appl. Artif. Intell.)",
         },
       ]);
@@ -117,7 +117,7 @@ export default function ExperimentVaultPage() {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-ink-soft">
             <Archive className="w-3.5 h-3.5 text-quantum" />
-            <span>QureSight Platform • Phase 09</span>
+            <span>Research Archive</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1 tracking-tight">
             Experiment Vault

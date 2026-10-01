@@ -31,7 +31,7 @@ export default function ResearchWorkspacePage() {
         hypothesis: "In low-sample regimes (≤15% training data), quantum Hilbert space embeddings resist overfitting and capture subtle nonlinear biomarker interactions better than classical kernel machines.",
         active_experiment: {
           id: "exp_wdbc_qas_v1",
-          name: "TM-BVP (Topological Manifold Biomedical Variational Protocol)",
+          name: "WDBC Variational Quantum Classification",
           primary_dataset: "Wisconsin Diagnostic Breast Cancer (WDBC)",
           status: "COMPLETED & VERIFIED",
           updated_at: "2026-10-01T12:00:00Z",
@@ -45,7 +45,7 @@ export default function ResearchWorkspacePage() {
           badge: "Classical Champion (Full Data)",
         },
         strongest_quantum: {
-          model: "8-Qubit VQC (Transfinite-1)",
+          model: "8-Qubit VQC",
           accuracy: "76.5 ± 1.1%",
           advantage_margin: "+8.3% over Classical SVM",
           p_value: "p = 0.014 *",

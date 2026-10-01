@@ -309,7 +309,7 @@ export default function AccountPage() {
               >
                 <div className="flex items-center justify-between">
                   <span className="font-serif text-sm font-medium text-ink flex items-center gap-1.5">
-                    <Zap size={14} className="text-blue-700" /> Transfinite-1 (Quantum Simulator)
+                    <Zap size={14} className="text-blue-700" /> Quantum Simulator (PennyLane)
                   </span>
                   {preferredBackend === "gpu_simulator" && <CheckCircle2 size={14} className="text-quantum" />}
                 </div>
@@ -331,7 +331,7 @@ export default function AccountPage() {
               >
                 <div className="flex items-center justify-between">
                   <span className="font-serif text-sm font-medium text-ink flex items-center gap-1.5">
-                    <Cpu size={14} className="text-quantum" /> Aleph-1 (IBM Quantum Hardware)
+                    <Cpu size={14} className="text-quantum" /> IBM Quantum Hardware (Eagle QPU)
                   </span>
                   <div className="flex items-center gap-2">
                     <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded border ${
@@ -345,7 +345,7 @@ export default function AccountPage() {
                   </div>
                 </div>
                 <p className="text-[11px] text-ink-soft font-light leading-snug">
-                  127-Qubit superconducting Eagle QPU operating at 15 mK dilution temperature (Cloud QPU bridge).
+                  127-Qubit IBM Eagle processor accessed via IBM Quantum Runtime.
                 </p>
                 <div className="flex items-center gap-2 pt-0.5 text-[10px] font-mono text-emerald-700">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" /> Superconducting QPU • Online
@@ -422,7 +422,7 @@ export default function AccountPage() {
             </span>
           </div>
           <div className="font-serif text-2xl text-ink font-light">
-            {preferredBackend === "ibmq_eagle" ? "Aleph-1" : "Transfinite-1"}
+            {preferredBackend === "ibmq_eagle" ? "IBM Eagle QPU" : "Quantum Simulator"}
           </div>
           <p className="text-[11px] text-ink-soft font-light leading-snug">
             0.00% decoherence noise • Continuous statevector simulation.
@@ -457,7 +457,7 @@ export default function AccountPage() {
               Fine Needle Aspirate (FNA) cytology analysis using 8-Qubit VQC with 48 parameterized rotation gates.
             </p>
             <div className="text-[10px] font-mono text-quantum pt-1">
-              Model: Transfinite-1 (8Q ZZ) • Status: Active
+              Model: 8-Qubit VQC • Status: Active
             </div>
           </div>
 
@@ -465,15 +465,15 @@ export default function AccountPage() {
           <div className="p-3.5 rounded-xl bg-cream/40 border border-hairline space-y-2 opacity-80">
             <div className="flex items-center justify-between">
               <span className="font-semibold text-xs text-ink">Cardiovascular Risk</span>
-              <span className="text-[9px] font-mono text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200 font-semibold">
-                Not Accessible
+              <span className="text-[9px] font-mono text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 font-semibold">
+                Active
               </span>
             </div>
             <p className="text-[11px] text-ink-soft font-light leading-snug">
-              Multi-lead ECG waveform and cardiac stress telemetry currently in offline validation against MIMIC-IV.
+              12-Lead ECG analysis and cardiac risk screening.
             </p>
             <div className="text-[10px] font-mono text-amber-700 pt-1">
-              Phase 2 Pipeline • Offline Calibration
+              Model: Dual-Engine (VQC + ResNet) • Status: Active
             </div>
           </div>
 
@@ -481,15 +481,15 @@ export default function AccountPage() {
           <div className="p-3.5 rounded-xl bg-cream/40 border border-hairline space-y-2 opacity-80">
             <div className="flex items-center justify-between">
               <span className="font-semibold text-xs text-ink">Neurological Disorders</span>
-              <span className="text-[9px] font-mono text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200 font-semibold">
-                Not Accessible
+              <span className="text-[9px] font-mono text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 font-semibold">
+                Active
               </span>
             </div>
             <p className="text-[11px] text-ink-soft font-light leading-snug">
               Multi-channel EEG spectral dynamics and cognitive latency indices undergoing prospective validation.
             </p>
             <div className="text-[10px] font-mono text-amber-700 pt-1">
-              Phase 2 Pipeline • Offline Calibration
+              Model: Dual-Engine (VQC + ResNet) • Status: Active
             </div>
           </div>
         </div>

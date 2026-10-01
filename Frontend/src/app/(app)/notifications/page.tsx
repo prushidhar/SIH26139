@@ -87,7 +87,7 @@ export default function NotificationsPage() {
             Notification Center
           </h1>
           <p className="text-xs text-ink-soft font-light">
-            Stay informed on quantum computing hardware state, model accuracy updates, and screening reports.
+            Stay informed on system status, model updates, and screening reports.
           </p>
         </div>
 
