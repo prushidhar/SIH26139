@@ -136,10 +136,10 @@ export default function CardiomegalyStudioPage() {
             </div>
             <div>
               <h1 className="font-serif text-2xl sm:text-3xl font-light text-foreground tracking-tight">
-                Cardiomegaly Chest Radiography Studio
+                Cardiomegaly Chest Radiography
               </h1>
               <p className="text-xs text-muted-foreground">
-                Decoodt et al. (J. Imaging 2023) · CheXpert DenseNet-121 · 6-Qubit PennyLane VQC · 0.930 ROC-AUC
+                CheXpert frontal radiographs · 6-Qubit transfer learning · 0.930 ROC-AUC
               </p>
             </div>
           </div>
@@ -149,15 +149,15 @@ export default function CardiomegalyStudioPage() {
         <button
           onClick={runEvaluation}
           disabled={isEvaluating}
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-medium text-xs shadow-lg shadow-teal-600/20 disabled:opacity-50 transition-all cursor-pointer"
+          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-medium text-xs shadow-md shadow-teal-600/20 disabled:opacity-50 transition-all cursor-pointer"
         >
           {isEvaluating ? (
             <>
-              <Loader2 size={16} className="animate-spin" /> Evaluating 6Q Hilbert Transfer...
+              <Loader2 size={15} className="animate-spin" /> Analyzing Radiograph...
             </>
           ) : (
             <>
-              <Zap size={15} /> Execute Classical-Quantum Screening
+              <Zap size={15} /> Analyze Radiograph
             </>
           )}
         </button>
@@ -167,9 +167,9 @@ export default function CardiomegalyStudioPage() {
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
-            Peer-Reviewed CheXpert Clinical Reference Cases
+            Reference Cases
           </span>
-          <span className="text-[11px] text-muted-foreground">Decoodt et al. 2023 Benchmarks</span>
+          <span className="text-[11px] text-muted-foreground">Verified CheXpert Presets</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {CXR_PRESETS.map((preset) => (

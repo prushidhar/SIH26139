@@ -200,18 +200,18 @@ export default function DemoSandboxPage() {
               <ArrowLeft size={13} /> Back to Screening Hub
             </Link>
             <h1 className="text-2xl sm:text-3xl font-serif font-light tracking-tight text-ink">
-              Live Provenance Detection Sandbox
+              Instant Detection Sandbox
             </h1>
             <p className="text-xs text-ink-soft">
-              Instant 1-click clinical detections powered by all verified quantum machine learning repositories.
+              One-click screening across verified clinical cohorts.
             </p>
           </div>
 
           <Link
             href="/predict"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-ink text-parchment text-xs font-medium hover:bg-ink/90 transition-all self-start sm:self-center"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-ink text-parchment text-xs font-medium hover:bg-ink/90 transition-all self-start sm:self-center"
           >
-            <span>Open Full Studios</span>
+            <span>Screening Hub</span>
             <ArrowRight size={13} />
           </Link>
         </div>

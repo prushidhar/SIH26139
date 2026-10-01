@@ -175,10 +175,10 @@ export default function LiverILPDStudioPage() {
             </div>
             <div>
               <h1 className="font-serif text-2xl sm:text-3xl font-light text-foreground tracking-tight">
-                Indian Liver Patient Studio (ILPD)
+                Liver Function Screening (ILPD)
               </h1>
               <p className="text-xs text-muted-foreground">
-                Laura M. Donaire et al. (2026) · 2-Qubit Minimal VQC · 12 Parameters · 0.772 AUROC
+                10 hepatic biomarkers · 2-Qubit minimal VQC · 0.772 ROC-AUC
               </p>
             </div>
           </div>
@@ -187,15 +187,15 @@ export default function LiverILPDStudioPage() {
         <button
           onClick={runEvaluation}
           disabled={isEvaluating}
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-medium text-xs shadow-lg shadow-teal-600/20 disabled:opacity-50 transition-all cursor-pointer"
+          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-medium text-xs shadow-md shadow-teal-600/20 disabled:opacity-50 transition-all cursor-pointer"
         >
           {isEvaluating ? (
             <>
-              <Loader2 size={16} className="animate-spin" /> Evaluating 2-Qubit VQC...
+              <Loader2 size={15} className="animate-spin" /> Evaluating Biomarkers...
             </>
           ) : (
             <>
-              <Zap size={15} /> Execute Quantum-Classical Screening
+              <Zap size={15} /> Screen Liver Function
             </>
           )}
         </button>
@@ -205,9 +205,9 @@ export default function LiverILPDStudioPage() {
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
-            Clinical Reference Profiles
+            Reference Profiles
           </span>
-          <span className="text-[11px] text-muted-foreground">ILPD Verified Presets</span>
+          <span className="text-[11px] text-muted-foreground">Verified ILPD Presets</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {PRESETS.map((preset) => (

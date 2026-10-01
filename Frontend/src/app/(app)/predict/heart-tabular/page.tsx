@@ -190,10 +190,10 @@ export default function HeartTabularStudioPage() {
             </div>
             <div>
               <h1 className="font-serif text-2xl sm:text-3xl font-light text-foreground tracking-tight">
-                Cleveland Cardiovascular Tabular Studio
+                Cardiovascular Vitals (CAD)
               </h1>
               <p className="text-xs text-muted-foreground">
-                AstroVall02 & Quantara Architecture · 4-Qubit StronglyEntangling VQC · 13 Hemodynamic Features · 0.918 AUROC
+                13 hemodynamic vitals · 4-Qubit VQC · 0.918 ROC-AUC
               </p>
             </div>
           </div>
@@ -202,15 +202,15 @@ export default function HeartTabularStudioPage() {
         <button
           onClick={runEvaluation}
           disabled={isEvaluating}
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-lg shadow-indigo-600/20 disabled:opacity-50 transition-all cursor-pointer"
+          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-md shadow-indigo-600/20 disabled:opacity-50 transition-all cursor-pointer"
         >
           {isEvaluating ? (
             <>
-              <Loader2 size={16} className="animate-spin" /> Evaluating 4-Qubit VQC...
+              <Loader2 size={15} className="animate-spin" /> Evaluating Vitals...
             </>
           ) : (
             <>
-              <Zap size={15} /> Execute Classical-Quantum Screening
+              <Zap size={15} /> Evaluate Cardiovascular Risk
             </>
           )}
         </button>
@@ -220,9 +220,9 @@ export default function HeartTabularStudioPage() {
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
-            Clinical Reference Profiles
+            Reference Profiles
           </span>
-          <span className="text-[11px] text-muted-foreground">UCI Cleveland Benchmarks</span>
+          <span className="text-[11px] text-muted-foreground">Verified Cleveland Presets</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {PRESETS.map((preset) => (

@@ -259,10 +259,10 @@ export default function HepatitisStudioPage() {
             </div>
             <div>
               <h1 className="font-serif text-2xl sm:text-3xl font-light text-foreground tracking-tight">
-                Hepatitis C & Liver Disease Studio
+                Hepatitis C & Liver Health
               </h1>
               <p className="text-xs text-muted-foreground">
-                Serum Blood Chemistry · UCI HCV & Donaire et al. ILPD (2026) · 2Q & 4Q VQC · Adaptive Shannon Router
+                12 serum biomarkers · 4-Qubit VQC · Adaptive Router
               </p>
             </div>
           </div>
@@ -272,17 +272,17 @@ export default function HepatitisStudioPage() {
         <button
           onClick={runDiagnosticTriage}
           disabled={isEvaluating}
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-lg shadow-indigo-600/20 disabled:opacity-50 transition-all cursor-pointer"
+          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-md shadow-indigo-600/20 disabled:opacity-50 transition-all cursor-pointer"
         >
           {isEvaluating ? (
             <>
               <Loader2 size={15} className="animate-spin" />
-              Evaluating Quantum & Classical Engines...
+              Evaluating Biomarkers...
             </>
           ) : (
             <>
               <Zap size={15} />
-              Execute Adaptive Triage
+              Screen Liver Biomarkers
             </>
           )}
         </button>
@@ -291,7 +291,7 @@ export default function HepatitisStudioPage() {
       {/* Presets Bar */}
       <div className="space-y-2">
         <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground font-semibold flex items-center gap-1.5">
-          <FlaskConical size={12} /> Clinical Cohort Presets
+          <FlaskConical size={12} /> Reference Profiles
         </span>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
           {PRESETS.map((p) => (

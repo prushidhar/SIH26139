@@ -45,120 +45,120 @@ interface DiseaseModule {
 const DISEASE_MODULES: DiseaseModule[] = [
   {
     key: "breast_cancer",
-    title: "Breast Cancer Screening Studio",
-    category: "Oncology & Cytopathology",
-    datasetName: "569 Verified FNA Biopsies",
+    title: "Breast Cancer Screening",
+    category: "Oncology",
+    datasetName: "569 Biopsy Records",
     status: "active",
-    statusLabel: "Ready (v1.0-PROD)",
+    statusLabel: "Ready",
     icon: Microscope,
     image: "/images/disease-breast-cancer.jpg",
-    description: "FNA biopsy morphometrics evaluated by 8-qubit VQC and classical ensemble.",
+    description: "Evaluates cell biopsy markers to assess tissue malignancy.",
     targetUrl: "/predict/breast-cancer",
     metrics: {
-      cohortSize: "569 Tissue Cases",
-      engine: "Dual-Engine (Transfinite-1 & CX-01)",
+      cohortSize: "569 Cases",
+      engine: "Dual Quantum-Classical",
       accuracy: "98.2% Consensus"
     }
   },
   {
     key: "heart_disease",
-    title: "Heart Attack & Cardiac ECG Studio",
-    category: "Cardiology & Emergency Care",
-    datasetName: "12-Lead Clinical ECG Strips",
+    title: "Cardiac ECG Analysis",
+    category: "Cardiology",
+    datasetName: "12-Lead ECG Strips",
     status: "active",
-    statusLabel: "Ready (v1.0-PROD)",
+    statusLabel: "Ready",
     icon: Heart,
     image: "/images/disease-cardiovascular.jpg",
-    description: "12-lead ECG analysis for AMI and arrhythmias using ResNet-18 + 8-qubit VQC with Grad-CAM.",
+    description: "Analyzes 12-lead ECGs for acute heart attack and arrhythmia.",
     targetUrl: "/predict/heart-disease",
     metrics: {
-      cohortSize: "Verified Clinical Cohort",
-      engine: "Dual-Engine (Transfinite-1 & CX-01)",
+      cohortSize: "Clinical Cohort",
+      engine: "ResNet-18 + 8Q VQC",
       accuracy: "98.8% Consensus"
     }
   },
   {
     key: "hepatitis_c",
-    title: "Hepatitis C & Liver Disease Studio",
-    category: "Hepatology & Metabolic Risk",
-    datasetName: "615 Verified Serum Panels (HCV)",
+    title: "Hepatitis C & Liver Health",
+    category: "Hepatology",
+    datasetName: "615 Serum Panels",
     status: "active",
-    statusLabel: "Ready (v1.0-PROD)",
+    statusLabel: "Ready",
     icon: Droplets,
     image: "/images/disease-breast-cancer.jpg",
-    description: "12 serum biomarkers (AST, ALT, Albumin) processed by 4-qubit ring-CNOT VQC for early liver fibrosis triage.",
+    description: "Screens blood chemistry markers for hepatitis and fibrosis.",
     targetUrl: "/predict/hepatitis-c",
     metrics: {
-      cohortSize: "615 Patient Cases",
-      engine: "Adaptive Router (VQC & Classical)",
-      accuracy: "99.2% Classical / 88.4% VQC"
+      cohortSize: "615 Cases",
+      engine: "4-Qubit VQC",
+      accuracy: "99.2% Classical / 88.4% QML"
     }
   },
   {
     key: "cardiomegaly",
-    title: "CheXpert Cardiomegaly Radiography Studio",
-    category: "Radiology & Pulmonary Imaging",
-    datasetName: "CheXpert CXR Cohort (Stanford AIMI)",
+    title: "Chest X-Ray Cardiomegaly",
+    category: "Radiology",
+    datasetName: "CheXpert CXR",
     status: "active",
-    statusLabel: "Ready (Decoodt et al. 2023)",
+    statusLabel: "Ready",
     icon: Layers,
     image: "/images/disease-cardiovascular.jpg",
-    description: "Chest X-ray cardiomegaly detection via DenseNet-121 + 6-qubit VQC with 0.930 ROC-AUC.",
+    description: "Detects heart enlargement from frontal chest radiographs.",
     targetUrl: "/predict/cardiomegaly",
     metrics: {
-      cohortSize: "1,200 Chest Radiographs",
-      engine: "Transfer Learning (6Q VQC)",
+      cohortSize: "1,200 Radiographs",
+      engine: "6-Qubit Transfer VQC",
       accuracy: "0.930 ROC-AUC"
     }
   },
   {
     key: "heart_tabular",
-    title: "Cleveland Cardiovascular Tabular Studio",
-    category: "Cardiology & Preventive Medicine",
-    datasetName: "UCI Cleveland Cohort (AstroVall02)",
+    title: "Cardiovascular Vitals (CAD)",
+    category: "Cardiology",
+    datasetName: "Cleveland Cohort",
     status: "active",
-    statusLabel: "Ready (v1.0-PROD)",
+    statusLabel: "Ready",
     icon: Heart,
     image: "/images/disease-cardiovascular.jpg",
-    description: "13 hemodynamic vitals analyzed via 4-qubit StronglyEntangling VQC and Quantara router.",
+    description: "Assesses coronary artery disease risk from clinical vitals.",
     targetUrl: "/predict/heart-tabular",
     metrics: {
-      cohortSize: "303 Patient Cases",
-      engine: "4-Qubit VQC (PennyLane)",
+      cohortSize: "303 Cases",
+      engine: "4-Qubit VQC",
       accuracy: "0.918 ROC-AUC"
     }
   },
   {
     key: "liver_ilpd",
-    title: "Indian Liver Patient Studio (ILPD)",
-    category: "Hepatology & Metabolic Risk",
-    datasetName: "ILPD Cohort (Donaire et al. 2026)",
+    title: "Liver Function Panel (ILPD)",
+    category: "Hepatology",
+    datasetName: "ILPD Cohort",
     status: "active",
-    statusLabel: "Ready (Donaire et al.)",
+    statusLabel: "Ready",
     icon: Droplets,
     image: "/images/disease-breast-cancer.jpg",
-    description: "Ultra-compact 2-qubit minimal VQC evaluating 10 hepatic biomarkers with 12 parameters.",
+    description: "Evaluates 10 liver enzyme markers for early impairment.",
     targetUrl: "/predict/liver-ilpd",
     metrics: {
-      cohortSize: "583 Patient Records",
+      cohortSize: "583 Records",
       engine: "2-Qubit Minimal VQC",
       accuracy: "0.772 ROC-AUC"
     }
   },
   {
     key: "neurological",
-    title: "Neurological & Brain Health Studio",
-    category: "Neurology & Neuro-Electrophysiology",
-    datasetName: "Multi-Channel EEG & Neuro Profiles",
+    title: "Brain Health & EEG",
+    category: "Neurology",
+    datasetName: "EEG Profiles",
     status: "beta_locked",
-    statusLabel: "Not Accessible (Phase 2)",
+    statusLabel: "Phase 2",
     icon: Activity,
     image: "/images/disease-neurological.jpg",
-    description: "Multi-channel EEG and neural spike analysis for early neurodegenerative disease detection.",
+    description: "EEG wave analysis for early neurodegenerative detection.",
     metrics: {
-      cohortSize: "400 Neuro Profiles",
-      engine: "Tensor-Entangled Neuro VQC",
-      accuracy: "Under Multi-Center Trial"
+      cohortSize: "400 Profiles",
+      engine: "Neuro VQC",
+      accuracy: "Clinical Trial"
     }
   }
 ];
@@ -262,10 +262,10 @@ export default function PredictHubPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="font-serif text-2xl sm:text-3xl font-light text-ink tracking-tight">
-              Patient Disease Screening Hub
+              Patient Screening Hub
             </h1>
             <p className="text-xs text-ink-soft font-light">
-              Select an active disease module below to launch its dedicated clinical screening studio.
+              Select a screening studio to evaluate clinical risk.
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -274,7 +274,7 @@ export default function PredictHubPage() {
               className="px-3.5 py-2 rounded-xl bg-ink hover:bg-ink/90 text-parchment text-xs font-semibold flex items-center gap-2 transition-all shadow-xs"
             >
               <Microscope size={14} className="text-quantum" />
-              <span>Launch Active Studio</span>
+              <span>Launch Studio</span>
               <ArrowRight size={13} className="text-parchment/70" />
             </Link>
           </div>
@@ -311,11 +311,11 @@ export default function PredictHubPage() {
                   <div className="absolute top-2.5 right-2.5">
                     {isActive ? (
                       <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-white/95 text-emerald-800 border border-emerald-300 shadow-2xs backdrop-blur-xs">
-                        ● READY (v1.0-PROD)
+                        ● READY
                       </span>
                     ) : (
                       <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-white/95 text-amber-800 border border-amber-300 shadow-2xs backdrop-blur-xs flex items-center gap-1">
-                        <Lock size={10} /> BETA (LOCKED)
+                        <Lock size={10} /> PHASE 2
                       </span>
                     )}
                   </div>
@@ -365,7 +365,7 @@ export default function PredictHubPage() {
                     onClick={(e) => e.stopPropagation()}
                     className="w-full py-2.5 px-3 rounded-xl bg-ink hover:bg-ink/90 text-parchment text-xs font-semibold flex items-center justify-between transition-all shadow-2xs group-hover:shadow-xs"
                   >
-                    <span>Open Clinical Studio</span>
+                    <span>Open Studio</span>
                     <ArrowRight size={13} className="text-quantum group-hover:translate-x-0.5 transition-transform" />
                   </Link>
                 ) : (
@@ -378,7 +378,7 @@ export default function PredictHubPage() {
                     className="w-full py-2.5 px-3 rounded-xl bg-cream hover:bg-cream-deep/60 border border-hairline text-ink-soft hover:text-ink text-xs font-medium flex items-center justify-center gap-1.5 transition-all cursor-pointer"
                   >
                     <Lock size={12} className="text-amber-600" />
-                    <span>Not Accessible (Phase 2)</span>
+                    <span>Phase 2 (Under Trial)</span>
                   </button>
                 )}
               </div>
