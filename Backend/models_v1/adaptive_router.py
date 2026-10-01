@@ -49,6 +49,24 @@ class AdaptiveModelRouter:
             "classical_auc": 0.997,
             "quantum_auc": 0.892,
         },
+        "heart_disease": {
+            "classical_f1": 0.885,
+            "quantum_f1": 0.871,
+            "classical_auc": 0.935,
+            "quantum_auc": 0.918,
+        },
+        "cardiomegaly_cxr": {
+            "classical_f1": 0.912,
+            "quantum_f1": 0.924,
+            "classical_auc": 0.918,
+            "quantum_auc": 0.930,
+        },
+        "ilpd_liver": {
+            "classical_f1": 0.742,
+            "quantum_f1": 0.731,
+            "classical_auc": 0.785,
+            "quantum_auc": 0.772,
+        },
     }
 
     # Weight hyperparameters

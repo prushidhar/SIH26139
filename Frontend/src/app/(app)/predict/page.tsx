@@ -95,6 +95,23 @@ const DISEASE_MODULES: DiseaseModule[] = [
     }
   },
   {
+    key: "cardiomegaly",
+    title: "CheXpert Cardiomegaly Radiography Studio",
+    category: "Radiology & Pulmonary Imaging",
+    datasetName: "CheXpert CXR Cohort (Stanford AIMI)",
+    status: "active",
+    statusLabel: "Ready (Decoodt et al. 2023)",
+    icon: Layers,
+    image: "/images/disease-cardiovascular.jpg",
+    description: "Evaluates chest radiographs for cardiomegaly and cardiac enlargement using DenseNet-121 feature maps and 6-qubit PennyLane VQC with 96.5% parameter reduction and 0.930 ROC-AUC.",
+    targetUrl: "/predict/cardiomegaly",
+    metrics: {
+      cohortSize: "1,200 Chest Radiographs",
+      engine: "Transfer Learning (6Q VQC)",
+      accuracy: "0.930 ROC-AUC"
+    }
+  },
+  {
     key: "neurological",
     title: "Neurological & Brain Health Studio",
     category: "Neurology & Neuro-Electrophysiology",

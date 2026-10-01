@@ -309,4 +309,14 @@ export class ResearchService {
     const res = await apiClient.get<VaultResponse>("/research/vault");
     return res.data.experiments;
   }
+
+  static async getQiskitHardwareProfile(qubits: number = 4, circuitType: string = "vqc"): Promise<any> {
+    const res = await apiClient.get<any>(`/research/quantum/qiskit-profile?qubits=${qubits}&circuit_type=${circuitType}`);
+    return res.data;
+  }
+
+  static async getCXRCases(): Promise<any> {
+    const res = await apiClient.get<any>("/research/transfer-learning/cxr-cases");
+    return res.data.cases;
+  }
 }

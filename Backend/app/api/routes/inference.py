@@ -1,4 +1,4 @@
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 import io
 import base64
 from pathlib import Path
@@ -11,6 +11,8 @@ from models_v1 import (
     aleph_1_pipeline,
     hepatitis_pipeline,
     heart_tabular_pipeline,
+    cxr_transfer_pipeline,
+    donaire_liver_pipeline,
     AdaptiveModelRouter,
 )
 
@@ -347,4 +349,72 @@ async def evaluate_adaptive_routing(payload: AdaptiveRouteRequest):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Adaptive routing error: {str(e)}"
         )
+
+
+# ==============================================================================
+# RADIOLOGY PILLAR: CHEXPERT CARDIOMEGALY TRANSFER LEARNING INFERENCE
+# (Decoodt et al. 2023 Architecture Reference)
+# ==============================================================================
+
+class CXRInferenceRequest(BaseModel):
+    measured_ctr: Optional[float] = Field(default=0.52, description="Cardiothoracic Ratio (CTR) measured from frontal radiograph")
+    sample_label: Optional[str] = Field(default="CheXpert CXR Patient Study", description="Patient study identifier")
+    dense_features: Optional[List[float]] = Field(default=None, description="Optional 1024 or 6 dimensional DenseNet-121 latent vector")
+
+
+@router.post("/cardiomegaly-cxr", status_code=status.HTTP_200_OK)
+async def run_cardiomegaly_cxr_inference(payload: CXRInferenceRequest):
+    """
+    Executes Decoodt et al. (J. Imaging 2023) Classical-Quantum Transfer Learning
+    on CheXpert Chest Radiographs using 6-Qubit PennyLane VQC with DenseNet-121 features.
+    """
+    try:
+        features_np = np.array(payload.dense_features, dtype=np.float64) if payload.dense_features else None
+        telemetry = cxr_transfer_pipeline.predict(
+            features=features_np,
+            ctr_measurement=payload.measured_ctr,
+            sample_label=payload.sample_label or "CheXpert CXR Patient Study"
+        )
+        return {"success": True, "telemetry": telemetry}
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"CXR transfer learning pipeline error: {str(e)}"
+        )
+
+
+# ==============================================================================
+# HEPATOLOGY MINIMAL PILLAR: ILPD 2-QUBIT VQC INFERENCE
+# (Donaire et al. 2026 Architecture Reference)
+# ==============================================================================
+
+class LiverILPDInput(BaseModel):
+    Age: float = Field(default=45.0, description="Age in years")
+    Gender: float = Field(default=1.0, description="1 for Male, 0 for Female")
+    Total_Bilirubin: float = Field(default=2.4, description="Total Bilirubin in mg/dL")
+    Direct_Bilirubin: float = Field(default=1.1, description="Direct Bilirubin in mg/dL")
+    Alkaline_Phosphotase: float = Field(default=280.0, description="Alkaline Phosphatase in IU/L")
+    Alamine_Aminotransferase: float = Field(default=52.0, description="ALT in IU/L")
+    Aspartate_Aminotransferase: float = Field(default=64.0, description="AST in IU/L")
+    Total_Protiens: float = Field(default=6.8, description="Total Proteins in g/dL")
+    Albumin: float = Field(default=3.1, description="Albumin in g/dL")
+    Albumin_and_Globulin_Ratio: float = Field(default=0.85, description="A/G Ratio")
+
+
+@router.post("/liver-ilpd", status_code=status.HTTP_200_OK)
+async def run_liver_ilpd_inference(payload: LiverILPDInput):
+    """
+    Executes Donaire et al. (Eng. Appl. Artif. Intell. 2026) ultra-compact
+    2-Qubit Minimal Footprint VQC on 10 Indian Liver Patient Dataset biomarkers.
+    """
+    try:
+        raw_dict = payload.model_dump()
+        telemetry = donaire_liver_pipeline.predict(raw_dict)
+        return {"success": True, "telemetry": telemetry}
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"ILPD minimal QML pipeline error: {str(e)}"
+        )
+
 

@@ -15,6 +15,8 @@ from .aleph_1_pipeline import aleph_1_pipeline, Aleph1QpuPipeline
 from .adaptive_router import AdaptiveModelRouter
 from .hepatitis_pipeline import hepatitis_pipeline, HepatitisCPipeline
 from .heart_tabular_pipeline import heart_tabular_pipeline, HeartTabularPipeline
+from .cxr_transfer_pipeline import cxr_transfer_pipeline, CXRCardiomegalyQMLPipeline
+from .donaire_liver_pipeline import donaire_liver_pipeline, DonaireLiverQMLPipeline
 
 __all__ = [
     "cx_01_pipeline",
@@ -27,6 +29,10 @@ __all__ = [
     "HepatitisCPipeline",
     "heart_tabular_pipeline",
     "HeartTabularPipeline",
+    "cxr_transfer_pipeline",
+    "CXRCardiomegalyQMLPipeline",
+    "donaire_liver_pipeline",
+    "DonaireLiverQMLPipeline",
     "AdaptiveModelRouter",
     "compute_calibrated_clinical_risk",
     "calculate_morphometric_evidence_index",
