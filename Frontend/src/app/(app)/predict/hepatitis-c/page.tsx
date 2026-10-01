@@ -163,6 +163,13 @@ const PRESETS: PresetConfig[] = [
     sex: "m",
     values: { AST: 52, ALT: 48, GGT: 68, ALP: 85, ALB: 35.0, CHE: 5.5, BIL: 18.5, CREA: 89, Age: 52 },
   },
+  {
+    name: "ILPD Liver Patient (Donaire et al.)",
+    badge: "2-Qubit Minimal VQC Target",
+    color: "teal",
+    sex: "m",
+    values: { AST: 65, ALT: 72, GGT: 85, ALP: 198, ALB: 31.0, CHE: 5.0, BIL: 24.5, CREA: 95, Age: 45 },
+  },
 ];
 
 export default function HepatitisStudioPage() {
@@ -255,7 +262,7 @@ export default function HepatitisStudioPage() {
                 Hepatitis C & Liver Disease Studio
               </h1>
               <p className="text-xs text-muted-foreground">
-                Pillar 3: Serum Blood Chemistry · 4-Qubit Ring-CNOT VQC · Adaptive Model Router
+                Serum Blood Chemistry · UCI HCV & Donaire et al. ILPD (2026) · 2Q & 4Q VQC · Adaptive Shannon Router
               </p>
             </div>
           </div>
