@@ -80,6 +80,13 @@ export default function LoginPage() {
     };
   }, [isLoading, isGoogleLoading]);
 
+  // Automatically clear standby notification as soon as cloud server is confirmed online
+  useEffect(() => {
+    if (isOnline && (errorMessage.includes("standby") || errorMessage.includes("waking up"))) {
+      setErrorMessage("");
+    }
+  }, [isOnline, errorMessage]);
+
   // Auth Check Guard
   useEffect(() => {
     if (AuthService.isAuthenticated()) {
@@ -561,7 +568,7 @@ export default function LoginPage() {
                 {isLoading ? (
                   <>
                     <Loader2 size={16} className="animate-spin" />
-                    <span>Signing In...</span>
+                    <span>{waitElapsed > 3 ? `Connecting to server (${waitElapsed}s)...` : "Signing In..."}</span>
                   </>
                 ) : (
                   <span>Sign In</span>

@@ -82,6 +82,13 @@ export default function RegisterPage() {
     };
   }, [isLoading, isGoogleLoading]);
 
+  // Automatically clear standby notification as soon as cloud server is confirmed online
+  useEffect(() => {
+    if (isOnline && (errorMessage.includes("standby") || errorMessage.includes("waking up"))) {
+      setErrorMessage("");
+    }
+  }, [isOnline, errorMessage]);
+
   // Strength Criteria Calculation
   const hasMinLength = password.length >= 8;
   const hasUppercase = /[A-Z]/.test(password);
@@ -611,7 +618,7 @@ export default function RegisterPage() {
                 {isLoading ? (
                   <>
                     <Loader2 size={16} className="animate-spin" />
-                    <span>Creating Account...</span>
+                    <span>{waitElapsed > 3 ? `Connecting to server (${waitElapsed}s)...` : "Creating Account..."}</span>
                   </>
                 ) : (
                   <span>Create Account</span>

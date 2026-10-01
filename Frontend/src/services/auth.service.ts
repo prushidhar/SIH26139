@@ -126,22 +126,39 @@ export class AuthService {
   /**
    * Register a new user with email and password and authenticate immediately without OTP.
    */
-  static async register(payload: {
-    username: string;
-    email: string;
-    password: string;
-    fullName?: string;
-  }): Promise<AuthResponse> {
-    try {
-      const response = await apiClient.post<AuthResponse>('/auth/register', payload);
-      if (response.data.accessToken) {
-        setTokens(response.data.accessToken, response.data.refreshToken);
-        setUserData(response.data.user as unknown as Record<string, unknown>);
+  static async register(
+    payload: {
+      username: string;
+      email: string;
+      password: string;
+      fullName?: string;
+    },
+    retries = 2
+  ): Promise<AuthResponse> {
+    let lastError: unknown;
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        const response = await apiClient.post<AuthResponse>('/auth/register', payload, { timeout: 35000 });
+        if (response.data.accessToken) {
+          setTokens(response.data.accessToken, response.data.refreshToken);
+          setUserData(response.data.user as unknown as Record<string, unknown>);
+        }
+        return response.data;
+      } catch (error) {
+        lastError = error;
+        const status = (error as { response?: { status?: number } })?.response?.status;
+        if (status && status >= 400 && status < 500) {
+          // Immediately propagate client validation errors without retrying
+          throw new Error(extractErrorMessage(error));
+        }
+        if (attempt < retries) {
+          // Cloud server waking up from standby, wait and retry
+          await new Promise((resolve) => setTimeout(resolve, 2000 * attempt));
+          continue;
+        }
       }
-      return response.data;
-    } catch (error) {
-      throw new Error(extractErrorMessage(error));
     }
+    throw new Error(extractErrorMessage(lastError));
   }
 
   /**
@@ -176,21 +193,38 @@ export class AuthService {
   /**
    * Authenticate with email and password (establishes 7-day sliding session).
    */
-  static async login(credentials: {
-    email: string;
-    password: string;
-  }): Promise<AuthResponse> {
-    try {
-      const response = await apiClient.post<AuthResponse>('/auth/login', credentials);
-      const data = response.data;
+  static async login(
+    credentials: {
+      email: string;
+      password: string;
+    },
+    retries = 2
+  ): Promise<AuthResponse> {
+    let lastError: unknown;
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        const response = await apiClient.post<AuthResponse>('/auth/login', credentials, { timeout: 35000 });
+        const data = response.data;
 
-      setTokens(data.accessToken, data.refreshToken);
-      setUserData(data.user as unknown as Record<string, unknown>);
+        setTokens(data.accessToken, data.refreshToken);
+        setUserData(data.user as unknown as Record<string, unknown>);
 
-      return data;
-    } catch (error) {
-      throw new Error(extractErrorMessage(error));
+        return data;
+      } catch (error) {
+        lastError = error;
+        const status = (error as { response?: { status?: number } })?.response?.status;
+        if (status && status >= 400 && status < 500) {
+          // Immediately propagate client auth errors without retrying
+          throw new Error(extractErrorMessage(error));
+        }
+        if (attempt < retries) {
+          // Cloud server waking up from standby, wait and retry
+          await new Promise((resolve) => setTimeout(resolve, 2000 * attempt));
+          continue;
+        }
+      }
     }
+    throw new Error(extractErrorMessage(lastError));
   }
 
   /**
