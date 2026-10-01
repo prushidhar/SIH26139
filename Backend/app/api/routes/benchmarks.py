@@ -113,6 +113,34 @@ async def get_benchmark_summary():
             }
         }
 
+        # Load Tabular Cardiology (AstroVall02 reference) benchmark report
+        heart_tabular_path = ARTIFACTS_DIR / "heart_tabular" / "benchmark_report.json"
+        heart_tabular_data = None
+        if heart_tabular_path.exists():
+            with open(heart_tabular_path, "r", encoding="utf-8") as hf:
+                heart_tabular_data = json.load(hf)
+
+        reference_provenance = {
+            "quantara_reference": {
+                "repository": "Quantara (sofiya132)",
+                "role": "Benchmark & Routing Reference",
+                "innovations": [
+                    "Adaptive Model Router: Dynamic Shannon entropy and latency trade-off arbitration",
+                    "HCV Hepatitis-C 12-Biomarker Serum Chemistry Panel with 4-qubit ring-CNOT PennyLane VQC",
+                    "Scarce-Data Clinical Advantage Validation (statistically significant advantage at <= 15% training cohort)"
+                ]
+            },
+            "astrovall_reference": {
+                "repository": "AstroVall02/QML_Early_Disease_Detection",
+                "role": "Disease-Specific QML Implementation Reference",
+                "innovations": [
+                    "4-Qubit StronglyEntanglingLayers + AngleEmbedding PennyLane VQC architecture",
+                    "StandardScaler + PCA(4) + MinMaxScaler([-pi, pi]) projection pipeline",
+                    "Dual-Disease Tabular Validation: Wisconsin Diagnostic Breast Cancer (WDBC) & UCI Cleveland Heart Disease"
+                ]
+            }
+        }
+
         return {
             "status": "success",
             "protocol": report.get("protocol", "QureSight TM-BVP"),
@@ -124,6 +152,8 @@ async def get_benchmark_summary():
             "scarce_data_curves": scarce_data_curves,
             "qas_leaderboard": qas_leaderboard,
             "latency_breakdown": latency_breakdown,
+            "cardiology_tabular": heart_tabular_data,
+            "reference_provenance": reference_provenance,
             "provenance": {
                 "verified": True,
                 "source": "Backend/models_v1/artifacts_v1/benchmark_report.json",

@@ -14,6 +14,7 @@ from .transfinite_1_pipeline import transfinite_1_pipeline, Transfinite1Pipeline
 from .aleph_1_pipeline import aleph_1_pipeline, Aleph1QpuPipeline
 from .adaptive_router import AdaptiveModelRouter
 from .hepatitis_pipeline import hepatitis_pipeline, HepatitisCPipeline
+from .heart_tabular_pipeline import heart_tabular_pipeline, HeartTabularPipeline
 
 __all__ = [
     "cx_01_pipeline",
@@ -24,6 +25,8 @@ __all__ = [
     "Aleph1QpuPipeline",
     "hepatitis_pipeline",
     "HepatitisCPipeline",
+    "heart_tabular_pipeline",
+    "HeartTabularPipeline",
     "AdaptiveModelRouter",
     "compute_calibrated_clinical_risk",
     "calculate_morphometric_evidence_index",

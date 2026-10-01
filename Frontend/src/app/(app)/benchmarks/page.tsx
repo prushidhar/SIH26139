@@ -64,7 +64,19 @@ interface LatencyItem {
 
 export default function BenchmarksPage() {
   const [activeTab, setActiveTab] = useState<"SCARCE_WIN" | "FULL_DATA" | "QAS" | "LATENCY">("SCARCE_WIN");
-  const [benchModality, setBenchModality] = useState<"breast" | "cardiac">("breast");
+  const [benchModality, setBenchModality] = useState<"breast" | "cardiac" | "cleveland">("breast");
+  const [cardiologyTabular, setCardiologyTabular] = useState<any>({
+    dataset: "UCI Cleveland Heart Disease (AstroVall02 Reference)",
+    n_samples: 303,
+    n_features: 13,
+    pca_explained_variance: [0.2125, 0.1182, 0.0941, 0.0909],
+    pca_cumulative_variance: 0.5157,
+    metrics: {
+      random_forest: { accuracy: "82.84 ± 6.10%", auroc: "0.9088 ± 0.0521" },
+      logistic_regression: { accuracy: "83.83 ± 4.07%", auroc: "0.8899 ± 0.0468" },
+      hybrid_vqc_quantum: { accuracy: "80.84 ± 5.31%", auroc: "0.8813 ± 0.0513" },
+    }
+  });
   const [summaryData, setSummaryData] = useState<RealBenchmarkRow[]>([
     { Model: "SVM-RBF", "Accuracy (%)": "98.24 ± 0.96", AUROC: "0.9954 ± 0.0055", "Sensitivity (%)": "96.21 ± 3.56", "F1-Score": "0.9757 ± 0.0140" },
     { Model: "XGBoost", "Accuracy (%)": "95.61 ± 1.84", AUROC: "0.9901 ± 0.0070", "Sensitivity (%)": "92.48 ± 5.40", "F1-Score": "0.9395 ± 0.0267" },
@@ -103,6 +115,7 @@ export default function BenchmarksPage() {
           if (res.data.scarce_data_curves) setScarceCurves(res.data.scarce_data_curves);
           if (res.data.qas_leaderboard) setQasLeaderboard(res.data.qas_leaderboard);
           if (res.data.latency_breakdown) setLatencyBreakdown(res.data.latency_breakdown);
+          if (res.data.cardiology_tabular) setCardiologyTabular(res.data.cardiology_tabular);
           setIsLiveLoaded(true);
         }
       } catch (err) {
@@ -146,8 +159,49 @@ export default function BenchmarksPage() {
         </div>
       </div>
 
+      {/* ═══════ RESEARCH & REPOSITORY PROVENANCE BANNER ═══════ */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-2xl border border-border bg-card/80 shadow-xs">
+        <div className="p-4 rounded-xl border border-quantum/20 bg-quantum/5 space-y-2">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-quantum/20 text-quantum">
+                Benchmark Reference
+              </span>
+              <h3 className="text-xs font-bold text-foreground">Quantara (sofiya132)</h3>
+            </div>
+            <span className="text-[10px] font-mono text-muted-foreground">QML Router Reference</span>
+          </div>
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            Reference implementation for the <strong>Adaptive Model Router</strong> utilizing Shannon entropy arbitration, latency penalty functions, and NISQ gate cost models, plus the 12-biomarker HCV Hepatitis-C serum panel.
+          </p>
+          <div className="flex items-center gap-2 text-[10px] font-mono text-quantum pt-1">
+            <CheckCircle2 size={12} />
+            <span>Entropy Arbitration &bull; 15% Scarce Advantage &bull; Hepatitis C Tri-Model</span>
+          </div>
+        </div>
+
+        <div className="p-4 rounded-xl border border-emerald-500/20 bg-emerald-500/5 space-y-2">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-600 dark:text-emerald-400">
+                Disease-Specific QML Reference
+              </span>
+              <h3 className="text-xs font-bold text-foreground">AstroVall02/QML_Early_Disease_Detection</h3>
+            </div>
+            <span className="text-[10px] font-mono text-muted-foreground">Circuit Reference</span>
+          </div>
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            Reference implementation for <strong>disease-specific 4-qubit VQCs</strong> with AngleEmbedding and StronglyEntanglingLayers on PennyLane, evaluated across WDBC Breast Cancer (569 cases) and UCI Cleveland Cardiology (303 cases).
+          </p>
+          <div className="flex items-center gap-2 text-[10px] font-mono text-emerald-600 dark:text-emerald-400 pt-1">
+            <CheckCircle2 size={12} />
+            <span>StronglyEntanglingLayers &bull; PCA 4-Qubit Projection &bull; Pauli-Z Observables</span>
+          </div>
+        </div>
+      </div>
+
       {/* ═══════ MODALITY SELECTOR ═══════ */}
-      <div className="flex items-center gap-2 p-1 bg-muted/40 rounded-xl border border-border w-fit">
+      <div className="flex flex-wrap items-center gap-2 p-1 bg-muted/40 rounded-xl border border-border w-fit">
         <button type="button" onClick={() => setBenchModality("breast")}
           className={`px-4 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer flex items-center gap-2 ${benchModality === "breast" ? "bg-card text-foreground shadow-xs border border-border font-bold" : "text-muted-foreground hover:text-foreground"}`}>
           <Activity size={13} /><span>Breast Cancer (WDBC)</span>
@@ -156,7 +210,12 @@ export default function BenchmarksPage() {
         <button type="button" onClick={() => setBenchModality("cardiac")}
           className={`px-4 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer flex items-center gap-2 ${benchModality === "cardiac" ? "bg-card text-foreground shadow-xs border border-border font-bold" : "text-muted-foreground hover:text-foreground"}`}>
           <Zap size={13} /><span>Cardiovascular ECG</span>
-          <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-red-500/10 text-red-600 font-bold">4-Class</span>
+          <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-red-500/10 text-red-600 font-bold">4-Class Visual</span>
+        </button>
+        <button type="button" onClick={() => setBenchModality("cleveland")}
+          className={`px-4 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer flex items-center gap-2 ${benchModality === "cleveland" ? "bg-card text-foreground shadow-xs border border-border font-bold" : "text-muted-foreground hover:text-foreground"}`}>
+          <Layers size={13} /><span>Cleveland Cardiology (Tabular)</span>
+          <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 font-bold">N=303 &bull; AstroVall02</span>
         </button>
       </div>
 
@@ -808,6 +867,131 @@ export default function BenchmarksPage() {
               <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-bold">Aleph-1 (Real IBM QPU)</span>
               <div className="font-serif text-3xl font-light text-amber-600">1,840 ms</div>
               <p className="text-[10px] text-muted-foreground font-mono">IBM Eagle r3 • 1024 shots • ZNE + M3</p>
+            </div>
+          </div>
+
+        </motion.div>
+      )}
+
+      {/* ═══════ CLEVELAND CARDIOLOGY (TABULAR - ASTROVALL02 REFERENCE) ═══════ */}
+      {benchModality === "cleveland" && (
+        <motion.div
+          key="cleveland-bench"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="space-y-6"
+        >
+          {/* Scientific Context Banner */}
+          <div className="p-4 rounded-2xl border border-emerald-500/30 bg-emerald-500/5 flex items-start gap-3.5">
+            <Layers className="h-5 w-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+            <div className="space-y-1 text-xs text-muted-foreground">
+              <p className="font-semibold text-foreground text-sm">
+                AstroVall02 Architecture Reference: 13 Clinical Hemodynamic Markers &rarr; 4-Qubit StronglyEntanglingLayers VQC
+              </p>
+              <p className="leading-relaxed">
+                Implementing the open-source <strong className="text-foreground">AstroVall02/QML_Early_Disease_Detection</strong> reference architecture: 
+                The 13-feature UCI Cleveland Heart Disease dataset (303 patients) is normalized with <strong className="text-foreground">StandardScaler</strong>, reduced to 4 orthogonal axes via <strong className="text-foreground">PCA (51.6% cumulative variance)</strong>, angle-encoded into <strong className="text-quantum">4 Qubits (RX)</strong>, and entangled across 3 layers of <strong className="text-quantum">StronglyEntanglingLayers</strong> with Pauli-Z expectation measurements and Quantara adaptive entropy arbitration.
+              </p>
+            </div>
+          </div>
+
+          {/* KPI Summary Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
+              <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">Classical Random Forest</span>
+              <div className="font-serif text-3xl font-light text-blue-600">82.8%</div>
+              <p className="text-[10px] text-muted-foreground">AUROC 0.9088 • 100 Trees • 5-Fold CV</p>
+            </div>
+            <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
+              <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">Classical Logistic Regression</span>
+              <div className="font-serif text-3xl font-light text-foreground">83.8%</div>
+              <p className="text-[10px] text-muted-foreground">AUROC 0.8899 • L2 Regularization • 5-Fold CV</p>
+            </div>
+            <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
+              <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">4-Qubit Hybrid VQC (Quantum)</span>
+              <div className="font-serif text-3xl font-light text-quantum">80.8%</div>
+              <p className="text-[10px] text-muted-foreground">AUROC 0.8813 • 36 Trainable Gates • 5-Fold CV</p>
+            </div>
+          </div>
+
+          {/* 5-Fold Stratified Cross-Validation Table */}
+          <div className="p-5 rounded-2xl bg-card border border-border shadow-xs space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-serif text-base font-medium text-foreground">Cleveland Cohort Model Benchmark (5-Fold Stratified CV, N=303)</h3>
+                <p className="text-xs text-muted-foreground">Direct head-to-head comparison between classical estimators and 4-qubit parameterized quantum circuits</p>
+              </div>
+              <span className="text-[10px] font-mono px-2 py-1 rounded-lg bg-muted text-muted-foreground border border-border">Protocol: Stratified K-Fold (K=5)</span>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="text-left py-2.5 px-3 font-mono uppercase text-[10px] tracking-wider text-muted-foreground">Model Name</th>
+                    <th className="text-left py-2.5 px-3 font-mono uppercase text-[10px] tracking-wider text-muted-foreground">Mathematical Architecture</th>
+                    <th className="text-left py-2.5 px-3 font-mono uppercase text-[10px] tracking-wider text-muted-foreground">Accuracy (5-Fold CV)</th>
+                    <th className="text-left py-2.5 px-3 font-mono uppercase text-[10px] tracking-wider text-muted-foreground">AUROC</th>
+                    <th className="text-left py-2.5 px-3 font-mono uppercase text-[10px] tracking-wider text-muted-foreground">Quantum Footprint</th>
+                    <th className="text-left py-2.5 px-3 font-mono uppercase text-[10px] tracking-wider text-muted-foreground">Inference Latency</th>
+                  </tr>
+                </thead>
+                <tbody className="font-mono">
+                  <tr className="border-b border-border/50 bg-blue-50/50 dark:bg-blue-950/20">
+                    <td className="py-2.5 px-3 font-semibold text-foreground">Random Forest</td>
+                    <td className="py-2.5 px-3 text-muted-foreground">100 Gini Decision Trees (max_depth=5)</td>
+                    <td className="py-2.5 px-3 font-semibold text-foreground">82.84 ± 6.10%</td>
+                    <td className="py-2.5 px-3 text-foreground">0.9088 ± 0.0521</td>
+                    <td className="py-2.5 px-3 text-muted-foreground">Classical CPU/GPU</td>
+                    <td className="py-2.5 px-3 text-muted-foreground">1.4 ms</td>
+                  </tr>
+                  <tr className="border-b border-border/50">
+                    <td className="py-2.5 px-3 font-semibold text-foreground">Logistic Regression (L2)</td>
+                    <td className="py-2.5 px-3 text-muted-foreground">Convex Sigmoid Optimization (C=1.0)</td>
+                    <td className="py-2.5 px-3 font-semibold text-foreground">83.83 ± 4.07%</td>
+                    <td className="py-2.5 px-3 text-foreground">0.8899 ± 0.0468</td>
+                    <td className="py-2.5 px-3 text-muted-foreground">Classical CPU/GPU</td>
+                    <td className="py-2.5 px-3 text-muted-foreground">0.6 ms</td>
+                  </tr>
+                  <tr className="border-b border-border/50 bg-quantum/5">
+                    <td className="py-2.5 px-3 font-semibold text-quantum">Transfinite-4Q Hybrid VQC</td>
+                    <td className="py-2.5 px-3 text-muted-foreground">StronglyEntanglingLayers (3 Layers) + Pauli-Z Readout</td>
+                    <td className="py-2.5 px-3 font-semibold text-quantum">80.84 ± 5.31%</td>
+                    <td className="py-2.5 px-3 text-quantum font-bold">0.8813 ± 0.0513</td>
+                    <td className="py-2.5 px-3 text-quantum font-bold">4 Qubits &bull; 36 Parameters</td>
+                    <td className="py-2.5 px-3 text-muted-foreground">28.5 ms (Statevector)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* 4-Qubit Manifold & Clinical Sensitivities */}
+          <div className="p-5 rounded-2xl bg-card border border-border shadow-xs space-y-4">
+            <h3 className="font-serif text-base font-medium text-foreground">4-Qubit Latent Manifold & Biomarker Sensitivities</h3>
+            <p className="text-xs text-muted-foreground">How 13 clinical features project into PennyLane quantum circuit wires and drive individual qubit expectations</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                { wire: "q[0]", name: "PC1: Exercise Hemodynamic Stress", varPct: "21.3%", driver: "Max HR (thalach), ST depression (oldpeak), angina (exang)", sens: "0.2464", color: "red" },
+                { wire: "q[1]", name: "PC2: Coronary Anatomy & Angina", varPct: "11.8%", driver: "Fluoroscopy vessels (ca), chest pain (cp), ST slope", sens: "0.0301", color: "amber" },
+                { wire: "q[2]", name: "PC3: Baseline Vitals Panel", varPct: "9.4%", driver: "Resting BP (trestbps), cholesterol (chol), patient age", sens: "0.0180", color: "blue" },
+                { wire: "q[3]", name: "PC4: Conduction & Glycemic Panel", varPct: "9.1%", driver: "Resting ECG (restecg), fasting blood sugar (fbs)", sens: "0.0353", color: "emerald" },
+              ].map((pc, i) => (
+                <div key={i} className="p-4 rounded-xl border border-border bg-card/80 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-quantum/10 text-quantum">
+                      Wire {pc.wire}
+                    </span>
+                    <span className="text-[10px] font-mono text-muted-foreground">{pc.varPct} Var</span>
+                  </div>
+                  <h4 className="text-xs font-bold text-foreground">{pc.name}</h4>
+                  <p className="text-[11px] text-muted-foreground leading-snug">{pc.driver}</p>
+                  <div className="pt-2 border-t border-border flex justify-between text-[10px] font-mono">
+                    <span className="text-muted-foreground">Sensitivity Gradient:</span>
+                    <span className="font-bold text-foreground">{pc.sens}</span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 

@@ -1,0 +1,54 @@
+{
+  "dataset": "UCI Cleveland Heart Disease (AstroVall02 Reference)",
+  "n_samples": 303,
+  "n_features": 13,
+  "feature_names": [
+    "age",
+    "sex",
+    "cp",
+    "trestbps",
+    "chol",
+    "fbs",
+    "restecg",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "slope",
+    "ca",
+    "thal"
+  ],
+  "pca_explained_variance": [
+    0.21254053121851976,
+    0.11820707724327448,
+    0.0940641768820898,
+    0.09085734711607012
+  ],
+  "pca_cumulative_variance": 0.5156691324599542,
+  "qml_architecture": {
+    "n_qubits": 4,
+    "n_layers": 3,
+    "ansatz": "StronglyEntanglingLayers",
+    "embedding": "AngleEmbedding (RX)",
+    "observables": [
+      "<Z0>",
+      "<Z1>",
+      "<Z2>",
+      "<Z3>"
+    ],
+    "device": "PennyLane default.qubit"
+  },
+  "metrics": {
+    "random_forest": {
+      "accuracy": "82.84 \u00b1 6.10%",
+      "auroc": "0.9088 \u00b1 0.0521"
+    },
+    "logistic_regression": {
+      "accuracy": "83.83 \u00b1 4.07%",
+      "auroc": "0.8899 \u00b1 0.0468"
+    },
+    "hybrid_vqc_quantum": {
+      "accuracy": "80.84 \u00b1 5.31%",
+      "auroc": "0.8813 \u00b1 0.0513"
+    }
+  }
+}

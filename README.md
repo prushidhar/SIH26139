@@ -242,6 +242,22 @@ A fully functional hybrid quantum machine learning software platform capable of 
 
 ---
 
+## Research & Reference Provenance
+
+QureSight builds upon and elevates two foundational open-source research implementations:
+
+1. **Quantara (`sofiya132`) — Benchmark & QML Implementation Reference**
+   - **Adaptive Model Router:** Dynamic dispatch algorithm evaluating classical and quantum predictive probabilities against Shannon entropy $H(p) = -p\log_2(p) - (1-p)\log_2(1-p)$, confidence margins, and NISQ execution latency trade-offs.
+   - **Hepatology Serum Chemistry Panel:** 12-feature liver biomarker panel (Age, Sex, ALB, ALP, ALT, AST, BIL, CHE, CHOL, CREA, GGT, PROT) coupled to a 4-qubit ring-CNOT PennyLane VQC with differentiable latent sensitivity gradients.
+   - **Scarce-Data Advantage Benchmarking:** Subsampled clinical cohort cross-validation demonstrating statistically significant quantum advantage at $\le 15\%$ training samples.
+
+2. **AstroVall02 (`AstroVall02/QML_Early_Disease_Detection`) — Disease-Specific QML Reference**
+   - **Quantum Circuit Topology:** 4-Qubit `AngleEmbedding` (RX) paired with `StronglyEntanglingLayers` (3 layers) and Pauli-Z expectation measurements on PennyLane `default.qubit`.
+   - **Latent Space Preprocessing Pipeline:** Standardized `StandardScaler` $\to$ `PCA(4)` $\to$ `MinMaxScaler([-\pi, \pi])` projection preserving orthogonal variance while fitting within near-term NISQ qubit constraints.
+   - **Disease-Specific Validation:** Benchmarked across Wisconsin Diagnostic Breast Cancer (WDBC, 569 cases) and UCI Cleveland Heart Disease (303 cases, 13 hemodynamic features).
+
+---
+
 ## License
 
 This project is licensed under the **Apache License 2.0**. This allows for permissive use, modification, and distribution while providing explicit patent protections, in alignment with Smart India Hackathon 2026 guidelines.
@@ -250,9 +266,12 @@ This project is licensed under the **Apache License 2.0**. This allows for permi
 
 - **Egreen Quanta** — for posing Problem Statement 3 (SIH26139).
 - **Smart India Hackathon 2026** — [sih.gov.in](https://sih.gov.in)
+- **Quantara (`sofiya132`)** — for benchmark and router methodology reference.
+- **AstroVall02 (`AstroVall02/QML_Early_Disease_Detection`)** — for disease-specific QML architecture reference.
 - The **Qiskit** and **PennyLane** open-source quantum computing communities.
 - Public biomedical dataset providers: UCI Machine Learning Repository, PhysioNet (PTB-XL), and Cleveland Clinic Foundation.
 
 ---
 
 *Built by Team QureSight for SIH26139.*
+

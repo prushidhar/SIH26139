@@ -10,6 +10,7 @@ from models_v1 import (
     transfinite_1_pipeline,
     aleph_1_pipeline,
     hepatitis_pipeline,
+    heart_tabular_pipeline,
     AdaptiveModelRouter,
 )
 
@@ -271,6 +272,44 @@ async def run_hepatitis_inference(payload: HepatitisBiomarkerInput):
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Hepatology pipeline execution error: {str(e)}"
+        )
+
+
+# ==============================================================================
+# CARDIOLOGY TABULAR PILLAR: UCI CLEVELAND HEART DISEASE QML INFERENCE
+# (AstroVall02 Architecture Reference)
+# ==============================================================================
+
+class HeartTabularInput(BaseModel):
+    age: float = Field(default=55.0, description="Age in years")
+    sex: float = Field(default=1.0, description="Biological sex (1 = male, 0 = female)")
+    cp: float = Field(default=1.0, description="Chest pain type (0: typical, 1: atypical, 2: non-anginal, 3: asymptomatic)")
+    trestbps: float = Field(default=130.0, description="Resting blood pressure in mm Hg")
+    chol: float = Field(default=240.0, description="Serum cholestoral in mg/dl")
+    fbs: float = Field(default=0.0, description="Fasting blood sugar > 120 mg/dl (1 = true, 0 = false)")
+    restecg: float = Field(default=0.0, description="Resting ECG results (0-2)")
+    thalach: float = Field(default=150.0, description="Maximum heart rate achieved in bpm")
+    exang: float = Field(default=0.0, description="Exercise-induced angina (1 = yes, 0 = no)")
+    oldpeak: float = Field(default=1.0, description="ST depression induced by exercise relative to rest")
+    slope: float = Field(default=1.0, description="Slope of the peak exercise ST segment (0-2)")
+    ca: float = Field(default=0.0, description="Number of major vessels colored by flourosopy (0-3)")
+    thal: float = Field(default=2.0, description="Thallium scintigraphy stress test (1: normal, 2: fixed, 3: reversible)")
+
+
+@router.post("/heart-disease-tabular", status_code=status.HTTP_200_OK)
+async def run_heart_disease_tabular_inference(payload: HeartTabularInput):
+    """
+    Executes AstroVall02-referenced 4-Qubit StronglyEntanglingLayers QML Inference
+    on the 13-feature UCI Cleveland Cardiology panel with Quantara Adaptive Routing.
+    """
+    try:
+        raw_dict = payload.model_dump()
+        result = heart_tabular_pipeline.predict(raw_dict)
+        return {"success": True, "telemetry": result}
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Heart disease tabular pipeline execution error: {str(e)}"
         )
 
 
