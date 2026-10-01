@@ -4,6 +4,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from starlette.middleware.sessions import SessionMiddleware
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.core.config import settings
 from app.core.database import init_db
@@ -83,6 +84,34 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
         content={
             "detail": primary_msg,
             "message": primary_msg,
+        },
+    )
+
+
+# Explicit HTTP exception handler ensuring correct status codes and JSON formatting
+@app.exception_handler(StarletteHTTPException)
+async def custom_http_exception_handler(request: Request, exc: StarletteHTTPException):
+    detail = exc.detail if isinstance(exc.detail, str) else str(exc.detail)
+    headers = getattr(exc, "headers", None)
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "detail": detail,
+            "message": detail,
+        },
+        headers=headers,
+    )
+
+
+# General catch-all exception handler preventing opaque Uvicorn 500 HTML errors
+@app.exception_handler(Exception)
+async def general_exception_handler(request: Request, exc: Exception):
+    error_msg = str(exc) or "Internal server error"
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={
+            "detail": error_msg,
+            "message": error_msg,
         },
     )
 
