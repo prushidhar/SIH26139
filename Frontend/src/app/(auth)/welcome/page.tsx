@@ -81,10 +81,16 @@ export default function WelcomeTransitionPage() {
     const t1 = setTimeout(() => setShown([true, true, false]), 450);
     const t2 = setTimeout(() => setShown([true, true, true]), 1000);
 
+    // Safety fallback redirect if typing pauses
+    const safetyTimer = setTimeout(() => {
+      window.location.href = "/home";
+    }, 4000);
+
     return () => {
       clearTimeout(t0);
       clearTimeout(t1);
       clearTimeout(t2);
+      clearTimeout(safetyTimer);
     };
   }, []);
 
@@ -93,7 +99,7 @@ export default function WelcomeTransitionPage() {
     setTimeout(() => {
       setExiting(true);
       setTimeout(() => {
-        router.push("/home");
+        window.location.href = "/home";
       }, 250);
     }, 150);
   };

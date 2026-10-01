@@ -38,15 +38,24 @@ REFRESH_TOKEN_COOKIE = "refresh_token"
 ACCESS_TOKEN_COOKIE = "access_token"
 
 
-def set_auth_cookies(response: Response, auth_data: AuthResponse) -> None:
+def set_auth_cookies(response: Response, auth_data: AuthResponse, request: Request | None = None) -> None:
     """Sets HTTPOnly and client-accessible auth cookies for persistent browser sessions."""
+    is_secure = settings.COOKIE_SECURE
+    samesite = settings.COOKIE_SAMESITE
+
+    if request:
+        proto = request.headers.get("x-forwarded-proto", "")
+        if request.url.scheme == "https" or proto == "https":
+            is_secure = True
+            samesite = "none"
+
     # 7-day sliding refresh token cookie (HTTPOnly for XSS security)
     response.set_cookie(
         key=REFRESH_TOKEN_COOKIE,
         value=auth_data.refreshToken,
         httponly=True,
-        secure=settings.COOKIE_SECURE,
-        samesite=settings.COOKIE_SAMESITE,
+        secure=is_secure,
+        samesite=samesite,
         max_age=settings.SESSION_INACTIVITY_DAYS * 24 * 60 * 60,
         path="/",
     )
@@ -55,8 +64,8 @@ def set_auth_cookies(response: Response, auth_data: AuthResponse) -> None:
         key=ACCESS_TOKEN_COOKIE,
         value=auth_data.accessToken,
         httponly=False,
-        secure=settings.COOKIE_SECURE,
-        samesite=settings.COOKIE_SAMESITE,
+        secure=is_secure,
+        samesite=samesite,
         max_age=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
         path="/",
     )
@@ -92,7 +101,7 @@ async def register(
             detail=str(exc),
         ) from exc
 
-    set_auth_cookies(response, auth_data)
+    set_auth_cookies(response, auth_data, request)
     return auth_data
 
 
@@ -146,7 +155,7 @@ async def verify_email(
             user_agent=user_agent,
             ip_address=ip_address,
         )
-        set_auth_cookies(response, auth_data)
+        set_auth_cookies(response, auth_data, request)
         return auth_data
     except ValueError as exc:
         raise HTTPException(
@@ -179,7 +188,7 @@ async def login(
             user_agent=user_agent,
             ip_address=ip_address,
         )
-        set_auth_cookies(response, auth_data)
+        set_auth_cookies(response, auth_data, request)
         return auth_data
     except ValueError as exc:
         if str(exc) == "EMAIL_NOT_VERIFIED":
@@ -217,7 +226,7 @@ async def google_auth(
             user_agent=user_agent,
             ip_address=ip_address,
         )
-        set_auth_cookies(response, auth_data)
+        set_auth_cookies(response, auth_data, request)
         return auth_data
     except ValueError as exc:
         raise HTTPException(
@@ -338,7 +347,7 @@ async def refresh_token(
             user_agent=user_agent,
             ip_address=ip_address,
         )
-        set_auth_cookies(response, auth_data)
+        set_auth_cookies(response, auth_data, request)
         return auth_data
     except ValueError as exc:
         # Clear invalid cookies

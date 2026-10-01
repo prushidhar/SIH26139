@@ -196,18 +196,27 @@ export class AuthService {
   /**
    * Authenticate with Google OAuth credential.
    */
-  static async googleLogin(credential: string): Promise<AuthResponse> {
-    try {
-      const response = await apiClient.post<AuthResponse>('/auth/google', { credential });
-      const data = response.data;
+  static async googleLogin(credential: string, retries = 3): Promise<AuthResponse> {
+    let lastError: unknown;
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        const response = await apiClient.post<AuthResponse>('/auth/google', { credential });
+        const data = response.data;
 
-      setTokens(data.accessToken, data.refreshToken);
-      setUserData(data.user as unknown as Record<string, unknown>);
+        setTokens(data.accessToken, data.refreshToken);
+        setUserData(data.user as unknown as Record<string, unknown>);
 
-      return data;
-    } catch (error) {
-      throw new Error(extractErrorMessage(error));
+        return data;
+      } catch (error) {
+        lastError = error;
+        if (attempt < retries) {
+          // Cloud server waking up from standby, wait and retry
+          await new Promise((resolve) => setTimeout(resolve, 1500 * attempt));
+          continue;
+        }
+      }
     }
+    throw new Error(extractErrorMessage(lastError));
   }
 
   /**

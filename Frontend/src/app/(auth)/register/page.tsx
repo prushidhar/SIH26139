@@ -62,6 +62,7 @@ export default function RegisterPage() {
   const [agreeTerms, setAgreeTerms] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [isGisRendered, setIsGisRendered] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [waitElapsed, setWaitElapsed] = useState(0);
 
@@ -157,7 +158,7 @@ export default function RegisterPage() {
         }
       }
 
-      router.push(`/welcome?name=${encodeURIComponent(displayName)}`);
+      window.location.href = `/welcome?name=${encodeURIComponent(displayName)}`;
     } catch (err) {
       const raw = err instanceof Error ? err.message : "Unable to create account.";
       const cleanMessage = raw.includes("not defined") || raw.includes("ReferenceError")
@@ -168,25 +169,10 @@ export default function RegisterPage() {
     }
   };
 
-  const handleGoogleClick = () => {
-    setIsGoogleLoading(true);
-    setErrorMessage("");
-
+  const openGoogleOAuthPopup = () => {
     const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "903190452851-l6p03q6mo7vs5234cluhjs6enotpnamh.apps.googleusercontent.com";
     const redirectUri = typeof window !== "undefined" ? window.location.origin + "/register" : "http://localhost:3000/register";
 
-    // 1. Check if rendered GIS button exists and click it
-    const container = document.getElementById("g_id_signin_hidden_reg");
-    const renderedBtn = container?.querySelector("div[role=button], iframe") as HTMLElement | null;
-    if (renderedBtn) {
-      try {
-        renderedBtn.click();
-        setTimeout(() => setIsGoogleLoading(false), 3000);
-        return;
-      } catch {}
-    }
-
-    // 2. Open standard, trusted Google OAuth2 window
     const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?` + new URLSearchParams({
       client_id: googleClientId,
       redirect_uri: redirectUri,
@@ -236,6 +222,22 @@ export default function RegisterPage() {
     }, 400);
   };
 
+  const handleGoogleClick = () => {
+    setIsGoogleLoading(true);
+    setErrorMessage("");
+
+    if (typeof window !== "undefined" && window.google?.accounts?.id) {
+      window.google.accounts.id.prompt((notification) => {
+        if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+          openGoogleOAuthPopup();
+        }
+      });
+      return;
+    }
+
+    openGoogleOAuthPopup();
+  };
+
   const handleGoogleCredentialResponse = useCallback(async (response: { credential: string }) => {
     setIsGoogleLoading(true);
     setErrorMessage("");
@@ -255,13 +257,13 @@ export default function RegisterPage() {
         }
       }
 
-      router.push(`/welcome?name=${encodeURIComponent(displayName)}`);
+      window.location.href = `/welcome?name=${encodeURIComponent(displayName)}`;
     } catch (err) {
       const message = err instanceof Error ? err.message : "Google authentication failed.";
       setErrorMessage(message);
       setIsGoogleLoading(false);
     }
-  }, [router]);
+  }, []);
 
   const responseCallbackRef = React.useRef(handleGoogleCredentialResponse);
   responseCallbackRef.current = handleGoogleCredentialResponse;
@@ -305,14 +307,24 @@ export default function RegisterPage() {
           use_fedcm_for_prompt: true,
         });
 
-        const container = document.getElementById("g_id_signin_hidden_reg");
+        const container = document.getElementById("g_id_signin_button_reg");
         if (container) {
-          window.google.accounts.id.renderButton(container, {
-            type: "standard",
-            theme: "outline",
-            size: "large",
-          });
+          try {
+            window.google.accounts.id.renderButton(container, {
+              type: "standard",
+              theme: "outline",
+              size: "large",
+              text: "continue_with",
+              shape: "rectangular",
+              logo_alignment: "left",
+              width: 360,
+            });
+            setIsGisRendered(true);
+          } catch {}
         }
+
+        // Trigger One-Tap
+        window.google.accounts.id.prompt();
       }
     };
 
@@ -352,7 +364,7 @@ export default function RegisterPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.15, ease: easeOut }}
-          className="lg:col-span-6 p-8 sm:p-12 md:p-14 flex flex-col justify-between bg-parchment"
+          className="lg:col-span-6 p-8 sm:p-12 md:p-14 flex flex-col justify-between bg-parchment relative"
         >
           
           {/* Top Header Row with Logo & Pill Switcher */}
@@ -397,7 +409,7 @@ export default function RegisterPage() {
 
             {/* Error Message */}
             <AnimatePresence>
-              {errorMessage && !errorMessage.includes("server") && !errorMessage.includes("connect") && !errorMessage.includes("standby") && (
+              {errorMessage && (
                 <motion.div
                   initial={{ opacity: 0, height: 0, y: -8 }}
                   animate={{ opacity: 1, height: "auto", y: 0 }}
@@ -573,30 +585,52 @@ export default function RegisterPage() {
               </div>
 
               {/* Google Button */}
-              <motion.button
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.98 }}
-                type="button"
-                onClick={handleGoogleClick}
-                disabled={isLoading || isGoogleLoading}
-                className="w-full h-11 rounded-xl border border-hairline/90 bg-cream/60 hover:bg-cream text-ink font-medium text-sm transition-all flex items-center justify-center gap-3 shadow-2xs cursor-pointer disabled:opacity-50"
-              >
-                {isGoogleLoading ? (
-                  <>
-                    <Loader2 size={16} className="animate-spin" />
-                    <span>Connecting with Google...</span>
-                  </>
-                ) : (
-                  <>
-                    <GoogleIcon className="h-4 w-4 shrink-0" />
-                    <span>Sign up with Google</span>
-                  </>
+              <div className="relative w-full min-h-[44px] flex items-center justify-center">
+                <div
+                  id="g_id_signin_button_reg"
+                  className="w-full flex justify-center z-10"
+                />
+                {!isGisRendered && (
+                  <motion.button
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.98 }}
+                    type="button"
+                    onClick={handleGoogleClick}
+                    disabled={isLoading || isGoogleLoading}
+                    className="absolute inset-0 w-full h-11 rounded-xl border border-hairline/90 bg-cream/60 hover:bg-cream text-ink font-medium text-sm transition-all flex items-center justify-center gap-3 shadow-2xs cursor-pointer disabled:opacity-50"
+                  >
+                    {isGoogleLoading ? (
+                      <>
+                        <Loader2 size={16} className="animate-spin" />
+                        <span>Connecting with Google...</span>
+                      </>
+                    ) : (
+                      <>
+                        <GoogleIcon className="h-4 w-4 shrink-0" />
+                        <span>Sign up with Google</span>
+                      </>
+                    )}
+                  </motion.button>
                 )}
-              </motion.button>
-
-              <div id="g_id_signin_hidden_reg" style={{ position: "absolute", top: "-9999px", left: "-9999px", opacity: 0.001, pointerEvents: "none" }} aria-hidden="true" />
+              </div>
             </form>
           </div>
+
+          {/* Google Authentication in-flight overlay */}
+          <AnimatePresence>
+            {isGoogleLoading && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 bg-parchment/95 backdrop-blur-xs z-50 flex flex-col items-center justify-center p-6 text-center rounded-[2.5rem]"
+              >
+                <Loader2 size={36} className="animate-spin text-quantum mb-3" />
+                <h3 className="font-serif text-lg font-medium text-ink">Authorizing Clinical Registration</h3>
+                <p className="text-xs text-ink-soft mt-1">Verifying Google identity & establishing workspace credentials...</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Bottom Footer Switcher */}
           <div className="text-center text-xs text-ink-soft pt-2">
