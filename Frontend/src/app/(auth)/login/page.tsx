@@ -129,7 +129,18 @@ export default function LoginPage() {
     }
   };
 
+  // Safety timeout: if isGoogleLoading stays active for >40s, auto-cancel and alert user
+  useEffect(() => {
+    if (!isGoogleLoading) return;
+    const timeout = setTimeout(() => {
+      setIsGoogleLoading(false);
+      setErrorMessage("The server took too long to respond. If it was sleeping, please try again now.");
+    }, 42000);
+    return () => clearTimeout(timeout);
+  }, [isGoogleLoading]);
+
   const openGoogleOAuthPopup = () => {
+    setErrorMessage("");
     const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "903190452851-l6p03q6mo7vs5234cluhjs6enotpnamh.apps.googleusercontent.com";
     const redirectUri = typeof window !== "undefined" ? window.location.origin + "/login" : "http://localhost:3000/login";
 
@@ -166,6 +177,7 @@ export default function LoginPage() {
         }
         if (popup.location && popup.location.origin === window.location.origin) {
           const hash = popup.location.hash;
+          const search = popup.location.search;
           popup.close();
           clearInterval(pollInterval);
           if (hash) {
@@ -173,8 +185,25 @@ export default function LoginPage() {
             const idToken = params.get("id_token");
             if (idToken) {
               handleGoogleCredentialResponse({ credential: idToken });
+              return;
+            }
+            const err = params.get("error_description") || params.get("error");
+            if (err) {
+              setErrorMessage(`Google sign-in was not completed: ${err.replace(/_/g, " ")}`);
+              setIsGoogleLoading(false);
+              return;
             }
           }
+          if (search) {
+            const params = new URLSearchParams(search.substring(1));
+            const err = params.get("error_description") || params.get("error");
+            if (err) {
+              setErrorMessage(`Google sign-in was not completed: ${err.replace(/_/g, " ")}`);
+              setIsGoogleLoading(false);
+              return;
+            }
+          }
+          setIsGoogleLoading(false);
         }
       } catch {
         // Cross-origin before redirect is expected
@@ -183,7 +212,6 @@ export default function LoginPage() {
   };
 
   const handleGoogleClick = () => {
-    setIsGoogleLoading(true);
     setErrorMessage("");
 
     if (typeof window !== "undefined" && window.google?.accounts?.id) {
@@ -235,13 +263,29 @@ export default function LoginPage() {
   responseCallbackRef.current = handleGoogleCredentialResponse;
 
   useEffect(() => {
-    if (typeof window !== "undefined" && window.location.hash) {
-      const params = new URLSearchParams(window.location.hash.substring(1));
-      const idToken = params.get("id_token");
-      if (idToken) {
-        window.history.replaceState(null, "", window.location.pathname);
-        setIsGoogleLoading(true);
-        handleGoogleCredentialResponse({ credential: idToken });
+    if (typeof window !== "undefined") {
+      const hash = window.location.hash;
+      const search = window.location.search;
+      if (hash) {
+        const params = new URLSearchParams(hash.substring(1));
+        const idToken = params.get("id_token");
+        const err = params.get("error_description") || params.get("error");
+        if (idToken) {
+          window.history.replaceState(null, "", window.location.pathname);
+          handleGoogleCredentialResponse({ credential: idToken });
+        } else if (err) {
+          window.history.replaceState(null, "", window.location.pathname);
+          setErrorMessage(`Google sign-in was not completed: ${err.replace(/_/g, " ")}`);
+          setIsGoogleLoading(false);
+        }
+      } else if (search) {
+        const params = new URLSearchParams(search.substring(1));
+        const err = params.get("error_description") || params.get("error");
+        if (err) {
+          window.history.replaceState(null, "", window.location.pathname);
+          setErrorMessage(`Google sign-in was not completed: ${err.replace(/_/g, " ")}`);
+          setIsGoogleLoading(false);
+        }
       }
     }
   }, [handleGoogleCredentialResponse]);
@@ -578,6 +622,21 @@ export default function LoginPage() {
                 <Loader2 size={36} className="animate-spin text-quantum mb-3" />
                 <h3 className="font-serif text-lg font-medium text-ink">Signing in...</h3>
                 <p className="text-xs text-ink-soft mt-1">Verifying Google identity & establishing secure tokens...</p>
+                {waitElapsed > 8 && (
+                  <p className="text-[11px] text-amber-700 bg-amber-50/90 px-3 py-1.5 rounded-lg border border-amber-200/80 mt-3 max-w-xs animate-pulse">
+                    Connecting to cloud server ({waitElapsed}s). Standby wake-up may take up to ~35s...
+                  </p>
+                )}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsGoogleLoading(false);
+                    setErrorMessage("Google sign-in was cancelled.");
+                  }}
+                  className="mt-5 px-4 py-2 rounded-xl border border-hairline/80 bg-cream/70 hover:bg-cream text-xs font-medium text-ink-soft hover:text-ink transition-all cursor-pointer shadow-2xs hover:scale-105"
+                >
+                  Cancel & Return to Form
+                </button>
               </motion.div>
             )}
           </AnimatePresence>

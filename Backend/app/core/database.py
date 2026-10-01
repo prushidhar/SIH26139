@@ -70,14 +70,9 @@ FallbackSessionLocal = async_sessionmaker(
 
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
-    """Yields a database session with automatic fallback to local SQLite if primary drops."""
-    try:
-        async with AsyncSessionLocal() as session:
-            yield session
-    except Exception as exc:
-        print(f"[QureSight Database] Session error ({exc}), activating local session fallback...")
-        async with FallbackSessionLocal() as session:
-            yield session
+    """Yields a database session with robust session lifecycle management."""
+    async with AsyncSessionLocal() as session:
+        yield session
 
 
 async def init_db() -> None:

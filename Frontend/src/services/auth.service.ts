@@ -196,11 +196,15 @@ export class AuthService {
   /**
    * Authenticate with Google OAuth credential.
    */
-  static async googleLogin(credential: string, retries = 3): Promise<AuthResponse> {
+  static async googleLogin(credential: string, retries = 2): Promise<AuthResponse> {
     let lastError: unknown;
     for (let attempt = 1; attempt <= retries; attempt++) {
       try {
-        const response = await apiClient.post<AuthResponse>('/auth/google', { credential });
+        const response = await apiClient.post<AuthResponse>(
+          '/auth/google',
+          { credential },
+          { timeout: 35000 }
+        );
         const data = response.data;
 
         setTokens(data.accessToken, data.refreshToken);
@@ -209,6 +213,11 @@ export class AuthService {
         return data;
       } catch (error) {
         lastError = error;
+        const status = (error as { response?: { status?: number } })?.response?.status;
+        if (status && status >= 400 && status < 500) {
+          // Immediately propagate client errors (400, 401, 403, 422) without retrying
+          throw new Error(extractErrorMessage(error));
+        }
         if (attempt < retries) {
           // Cloud server waking up from standby, wait and retry
           await new Promise((resolve) => setTimeout(resolve, 1500 * attempt));
