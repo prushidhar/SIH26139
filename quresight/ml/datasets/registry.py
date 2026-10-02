@@ -101,12 +101,28 @@ class DatasetEngine:
             raise ValueError(f"Unknown dataset_id: {dataset_id}")
         
         info = DATASET_REGISTRY[dataset_id]
-        path = DATA_RAW_DIR / info["file_name"]
-        if not path.exists():
-            raise FileNotFoundError(f"Dataset file not found at: {path}")
-            
-        df = pd.read_csv(path)
-        return df
+        fname = info["file_name"]
+        
+        candidates = [
+            DATA_RAW_DIR / fname,
+            Path.cwd() / "quresight" / "data" / "raw" / fname,
+            Path.cwd().parent / "quresight" / "data" / "raw" / fname,
+            Path(__file__).resolve().parents[2] / "data" / "raw" / fname,
+            Path(__file__).resolve().parents[3] / "quresight" / "data" / "raw" / fname,
+            Path("/opt/render/project/src/quresight/data/raw") / fname,
+        ]
+        for p in candidates:
+            if p.exists():
+                return pd.read_csv(p)
+                
+        if dataset_id == "breast_cancer":
+            from sklearn.datasets import load_breast_cancer
+            data = load_breast_cancer(as_frame=True)
+            df = data.frame
+            df.columns = [c.replace(" ", "_") for c in df.columns]
+            return df
+
+        raise FileNotFoundError(f"Dataset file '{fname}' not found in search paths")
 
     @staticmethod
     def profile_dataframe(df: pd.DataFrame, dataset_name: str = "Dataset"):

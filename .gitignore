@@ -56,6 +56,7 @@ Models/v1 - Cardiovascular Disease/
 Models/Archieved/
 Models/**/data/
 data/
+!quresight/data/
 Models/Heart Model Final/Dataset/
 Models/breast_cancer_quantum_pipeline_deep_dive_and_circuit_mechanics.md
 Models/quantum_pipeline_deep_dive_and_circuit_mechanics.md
