@@ -50,10 +50,10 @@ const DISEASE_MODULES: DiseaseModule[] = [
     category: "Oncology",
     datasetName: "569 Biopsy Records",
     status: "active",
-    statusLabel: "Ready",
+    statusLabel: "Active Studio",
     icon: Microscope,
     image: "/images/disease-breast-cancer.jpg",
-    description: "Evaluates cell biopsy markers to assess tissue malignancy.",
+    description: "Evaluates cell biopsy markers to assess tissue malignancy with dual classical-quantum pipelines.",
     targetUrl: "/predict/breast-cancer",
     metrics: {
       cohortSize: "569 Cases",
@@ -67,10 +67,10 @@ const DISEASE_MODULES: DiseaseModule[] = [
     category: "Cardiology",
     datasetName: "12-Lead ECG Strips",
     status: "active",
-    statusLabel: "Ready",
+    statusLabel: "Active Studio",
     icon: Heart,
     image: "/images/disease-cardiovascular.jpg",
-    description: "Analyzes 12-lead ECGs for acute heart attack and arrhythmia.",
+    description: "Analyzes 12-lead ECGs for acute heart attack, myocardial ischemia, and arrhythmia.",
     targetUrl: "/predict/heart-disease",
     metrics: {
       cohortSize: "Clinical Cohort",
@@ -79,32 +79,15 @@ const DISEASE_MODULES: DiseaseModule[] = [
     }
   },
   {
-    key: "hepatitis_c",
-    title: "Hepatitis C & Liver Health",
-    category: "Hepatology",
-    datasetName: "615 Serum Panels",
-    status: "active",
-    statusLabel: "Ready",
-    icon: Droplets,
-    image: "/images/disease-breast-cancer.jpg",
-    description: "Screens blood chemistry markers for hepatitis and fibrosis.",
-    targetUrl: "/predict/hepatitis-c",
-    metrics: {
-      cohortSize: "615 Cases",
-      engine: "4-Qubit VQC",
-      accuracy: "99.2% Classical / 88.4% QML"
-    }
-  },
-  {
     key: "cardiomegaly",
     title: "Chest X-Ray Cardiomegaly",
     category: "Radiology",
     datasetName: "CheXpert CXR",
-    status: "active",
-    statusLabel: "Ready",
+    status: "beta_locked",
+    statusLabel: "Future Upgrade",
     icon: Layers,
     image: "/images/disease-cardiovascular.jpg",
-    description: "Detects heart enlargement from frontal chest radiographs.",
+    description: "Detects heart enlargement from frontal chest radiographs via DenseNet-121 + 6-Qubit VQC.",
     targetUrl: "/predict/cardiomegaly",
     metrics: {
       cohortSize: "1,200 Radiographs",
@@ -117,11 +100,11 @@ const DISEASE_MODULES: DiseaseModule[] = [
     title: "Cardiovascular Vitals (CAD)",
     category: "Cardiology",
     datasetName: "Cleveland Cohort",
-    status: "active",
-    statusLabel: "Ready",
+    status: "beta_locked",
+    statusLabel: "Future Upgrade",
     icon: Heart,
     image: "/images/disease-cardiovascular.jpg",
-    description: "Assesses coronary artery disease risk from clinical vitals.",
+    description: "Assesses coronary artery disease risk from hemodynamic clinical vitals.",
     targetUrl: "/predict/heart-tabular",
     metrics: {
       cohortSize: "303 Cases",
@@ -134,11 +117,11 @@ const DISEASE_MODULES: DiseaseModule[] = [
     title: "Liver Function Panel (ILPD)",
     category: "Hepatology",
     datasetName: "ILPD Cohort",
-    status: "active",
-    statusLabel: "Ready",
+    status: "beta_locked",
+    statusLabel: "Future Upgrade",
     icon: Droplets,
     image: "/images/disease-breast-cancer.jpg",
-    description: "Evaluates 10 liver enzyme markers for early impairment.",
+    description: "Evaluates 10 liver enzyme markers for early hepatic impairment.",
     targetUrl: "/predict/liver-ilpd",
     metrics: {
       cohortSize: "583 Records",
@@ -151,11 +134,11 @@ const DISEASE_MODULES: DiseaseModule[] = [
     title: "Brain Health & EEG",
     category: "Neurology",
     datasetName: "EEG & Psychomotor",
-    status: "active",
-    statusLabel: "Ready",
+    status: "beta_locked",
+    statusLabel: "Future Upgrade",
     icon: Activity,
     image: "/images/disease-neurological.jpg",
-    description: "Evaluates EEG spectral power and motor tremor for cognitive risk.",
+    description: "Evaluates EEG spectral power and motor tremor for early neuro-cognitive risk.",
     targetUrl: "/predict/neurological",
     metrics: {
       cohortSize: "400 Profiles",
@@ -168,23 +151,49 @@ const DISEASE_MODULES: DiseaseModule[] = [
     title: "Chronic Kidney Disease (CKD)",
     category: "Nephrology",
     datasetName: "400 Renal Records",
-    status: "active",
-    statusLabel: "Ready",
+    status: "beta_locked",
+    statusLabel: "Future Upgrade",
     icon: FlaskConical,
     image: "/images/disease-kidney-neural.jpg",
-    description: "Evaluates 8 renal panel markers with KDIGO staging and eGFR estimation.",
+    description: "Evaluates 8 renal panel markers with KDIGO staging and CKD-EPI eGFR estimation.",
     targetUrl: "/predict/chronic-kidney",
     metrics: {
       cohortSize: "400 Cases",
       engine: "4-Qubit VQC",
       accuracy: "96.4% Consensus"
     }
+  },
+  {
+    key: "hepatitis_c",
+    title: "Hepatitis C & Liver Health",
+    category: "Hepatology",
+    datasetName: "615 Serum Panels",
+    status: "beta_locked",
+    statusLabel: "Future Upgrade",
+    icon: Droplets,
+    image: "/images/disease-breast-cancer.jpg",
+    description: "Screens blood chemistry markers for hepatitis and fibrosis staging.",
+    targetUrl: "/predict/hepatitis-c",
+    metrics: {
+      cohortSize: "615 Cases",
+      engine: "4-Qubit VQC",
+      accuracy: "99.2% Classical / 88.4% QML"
+    }
   }
 ];
 
 export default function PredictHubPage() {
   const router = useRouter();
-  const [lockedModal, setLockedModal] = useState<{ isOpen: boolean; title: string; category: string } | null>(null);
+  const [lockedModal, setLockedModal] = useState<{
+    isOpen: boolean;
+    title: string;
+    category: string;
+    cohortSize: string;
+    engine: string;
+    accuracy: string;
+    targetUrl: string;
+    description: string;
+  } | null>(null);
 
   const handleModuleClick = (mod: DiseaseModule) => {
     if (mod.status === "active" && mod.targetUrl) {
@@ -193,7 +202,12 @@ export default function PredictHubPage() {
       setLockedModal({
         isOpen: true,
         title: mod.title,
-        category: mod.category
+        category: mod.category,
+        cohortSize: mod.metrics.cohortSize,
+        engine: mod.metrics.engine,
+        accuracy: mod.metrics.accuracy,
+        targetUrl: mod.targetUrl || "/predict",
+        description: mod.description,
       });
     }
   };
@@ -208,7 +222,7 @@ export default function PredictHubPage() {
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              className="relative w-full max-w-md overflow-hidden rounded-2xl border border-hairline bg-parchment p-6 shadow-2xl space-y-4"
+              className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-hairline bg-parchment p-6 shadow-2xl space-y-4"
             >
               <div className="flex items-center justify-between border-b border-hairline pb-3">
                 <div className="flex items-center gap-2.5">
@@ -220,7 +234,7 @@ export default function PredictHubPage() {
                       {lockedModal.title}
                     </h3>
                     <span className="text-[11px] font-mono text-amber-700 font-medium">
-                      Module Under Validation
+                      Future Upgrade • Phase 2 Roadmap
                     </span>
                   </div>
                 </div>
@@ -233,25 +247,53 @@ export default function PredictHubPage() {
                 </button>
               </div>
 
-              <div className="space-y-2.5 text-xs text-ink-soft leading-relaxed">
+              <div className="space-y-3 text-xs text-ink-soft leading-relaxed">
                 <p>
-                  The <strong className="text-ink">{lockedModal.title}</strong> module is currently undergoing multi-center validation and quantum noise mitigation before clinical deployment.
+                  The <strong className="text-ink">{lockedModal.title}</strong> module has completed initial hybrid quantum-classical verification and is designated for 127-qubit IBM Eagle QPU deployment in our Phase 2 clinical roadmap.
                 </p>
-                <div className="p-3 rounded-xl bg-cream/40 border border-hairline flex items-center gap-2.5 text-ink">
-                  <CheckCircle2 size={16} className="text-quantum shrink-0" />
-                  <span>
-                    Our <strong>Breast Cancer Cellular Screening Studio</strong> is fully active with dual classical-quantum pipelines ready for live screening.
-                  </span>
+
+                <div className="grid grid-cols-2 gap-2 p-3 rounded-xl bg-cream/40 border border-hairline text-[11px] font-mono">
+                  <div>
+                    <span className="text-ink-soft/70 block uppercase text-[9px]">Verified Cohort</span>
+                    <strong className="text-ink">{lockedModal.cohortSize}</strong>
+                  </div>
+                  <div>
+                    <span className="text-ink-soft/70 block uppercase text-[9px]">Quantum Engine</span>
+                    <strong className="text-ink">{lockedModal.engine}</strong>
+                  </div>
+                </div>
+
+                <div className="p-3 rounded-xl bg-quantum/5 border border-quantum/20 flex items-start gap-2.5 text-ink">
+                  <CheckCircle2 size={16} className="text-quantum shrink-0 mt-0.5" />
+                  <div className="text-[11px] leading-relaxed">
+                    <span>
+                      Our <strong>Breast Cancer Screening Studio</strong> and <strong>Cardiac 12-Lead ECG Studio</strong> are fully certified with live multi-modal upload, interactive explainability, and PDF reports.
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              <div className="pt-2 flex items-center justify-end gap-2.5">
+              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-2">
                 <button
                   type="button"
-                  onClick={() => setLockedModal(null)}
-                  className="px-3 py-1.5 rounded-xl border border-hairline text-xs text-ink hover:bg-cream cursor-pointer"
+                  onClick={() => {
+                    setLockedModal(null);
+                    router.push("/observatory");
+                  }}
+                  className="px-3 py-1.5 rounded-xl border border-hairline text-xs font-mono text-ink hover:bg-cream cursor-pointer"
                 >
-                  Close
+                  Explore in Observatory
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const dest = lockedModal.targetUrl;
+                    setLockedModal(null);
+                    router.push(dest);
+                  }}
+                  className="px-3 py-1.5 rounded-xl border border-quantum/40 bg-quantum/10 text-xs font-semibold text-quantum hover:bg-quantum/20 cursor-pointer"
+                >
+                  Launch Sandbox Preview
                 </button>
                 <button
                   type="button"
@@ -259,10 +301,10 @@ export default function PredictHubPage() {
                     setLockedModal(null);
                     router.push("/predict/breast-cancer");
                   }}
-                  className="px-4 py-1.5 rounded-xl bg-ink text-parchment text-xs font-semibold hover:bg-ink/90 flex items-center gap-1.5 shadow-xs cursor-pointer"
+                  className="px-3.5 py-1.5 rounded-xl bg-ink text-parchment text-xs font-semibold hover:bg-ink/90 flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
                 >
-                  <span>Open Breast Cancer Studio</span>
-                  <ArrowRight className="h-3.5 w-3.5" />
+                  <span>Active Studio</span>
+                  <ArrowRight className="h-3 w-3" />
                 </button>
               </div>
             </motion.div>
@@ -329,12 +371,12 @@ export default function PredictHubPage() {
                   {/* Status Badge */}
                   <div className="absolute top-2.5 right-2.5">
                     {isActive ? (
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-white/95 text-emerald-800 border border-emerald-300 shadow-2xs backdrop-blur-xs">
-                        ● READY
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-white/95 text-emerald-800 border border-emerald-300 shadow-2xs backdrop-blur-xs flex items-center gap-1">
+                        ● ACTIVE STUDIO
                       </span>
                     ) : (
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-white/95 text-amber-800 border border-amber-300 shadow-2xs backdrop-blur-xs flex items-center gap-1">
-                        <Lock size={10} /> PREVIEW
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-50/95 text-amber-800 border border-amber-300 shadow-2xs backdrop-blur-xs flex items-center gap-1">
+                        <Lock size={10} /> FUTURE UPGRADE
                       </span>
                     )}
                   </div>
@@ -384,7 +426,7 @@ export default function PredictHubPage() {
                     onClick={(e) => e.stopPropagation()}
                     className="w-full py-2.5 px-3 rounded-xl bg-ink hover:bg-ink/90 text-parchment text-xs font-semibold flex items-center justify-between transition-all shadow-2xs group-hover:shadow-xs"
                   >
-                    <span>Open Studio</span>
+                    <span>Open Clinical Studio</span>
                     <ArrowRight size={13} className="text-quantum group-hover:translate-x-0.5 transition-transform" />
                   </Link>
                 ) : (
@@ -394,10 +436,10 @@ export default function PredictHubPage() {
                       e.stopPropagation();
                       handleModuleClick(mod);
                     }}
-                    className="w-full py-2.5 px-3 rounded-xl bg-cream hover:bg-cream-deep/60 border border-hairline text-ink-soft hover:text-ink text-xs font-medium flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                    className="w-full py-2.5 px-3 rounded-xl bg-cream hover:bg-cream-deep/60 border border-hairline text-ink-soft hover:text-ink text-xs font-medium flex items-center justify-center gap-1.5 transition-all cursor-pointer font-mono"
                   >
                     <Lock size={12} className="text-amber-600" />
-                    <span>Preview Only</span>
+                    <span>Future Upgrade • Roadmap Specs</span>
                   </button>
                 )}
               </div>

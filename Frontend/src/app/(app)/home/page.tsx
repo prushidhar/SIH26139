@@ -23,6 +23,7 @@ import {
   Layers,
   Microscope,
   Brain,
+  Lock,
 } from "lucide-react";
 import HelpTooltip from "@/components/common/HelpTooltip";
 import { useQuantumBackend } from "@/hooks/useQuantumBackend";
@@ -39,19 +40,19 @@ interface DiseaseModuleItem {
   description: string;
   route: string;
   tooltip: string;
-  status: "active" | "locked";
+  status: "active" | "locked" | "beta_locked";
 }
 
 const DISEASE_MODULES: DiseaseModuleItem[] = [
   {
     key: "breast_cancer",
     title: "Breast Cancer Screening Studio",
-    category: "Active Clinical Pipeline",
+    category: "Certified Clinical Studio",
     icon: Microscope,
     dataset: "569 Biopsy Records (WDBC)",
     features: "Cell Shape & Texture Analysis",
     target: "Malignant vs Benign",
-    advantage: "Active",
+    advantage: "Active Studio",
     description: "Fine Needle Aspirate (WDBC) 8-qubit cytopathology classification with verified cross-validation.",
     route: "/predict/breast-cancer",
     tooltip: "Uses 8-qubit variational quantum circuits with 48 gates to evaluate cytopathology biopsy cells.",
@@ -60,12 +61,12 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
   {
     key: "heart_disease",
     title: "Cardiac ECG Waveform Analysis",
-    category: "Active Clinical Pipeline",
+    category: "Certified Clinical Studio",
     icon: Heart,
     dataset: "PTB-XL 12-Lead Diagnostic Strips",
     features: "ECG ST-Segment & Rhythm",
     target: "Acute MI & Arrhythmia Consensus",
-    advantage: "Active",
+    advantage: "Active Studio",
     description: "12-lead paper ECG image analysis with real-time Grad-CAM localization, cardiac risk scoring, and 8-qubit VQC.",
     route: "/predict/heart-disease",
     tooltip: "Live active screening studio for 12-lead electrocardiograms.",
@@ -74,86 +75,86 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
   {
     key: "heart_tabular",
     title: "Cardiovascular Vitals (CAD)",
-    category: "Active Clinical Pipeline",
+    category: "Phase 2 Roadmap",
     icon: Heart,
     dataset: "303 Cleveland Patients",
     features: "13 Hemodynamic Biomarkers",
     target: "Coronary Artery Disease",
-    advantage: "Active",
+    advantage: "Future Upgrade",
     description: "4-qubit variational circuit screening coronary artery disease risk from vitals.",
-    route: "/predict/heart-tabular",
+    route: "/predict",
     tooltip: "Evaluates blood pressure, cholesterol, ST depression, and fluoroscopy vessels.",
-    status: "active",
+    status: "locked",
   },
   {
     key: "cardiomegaly",
     title: "Chest X-Ray Cardiomegaly Studio",
-    category: "Active Clinical Pipeline",
+    category: "Phase 2 Roadmap",
     icon: Layers,
     dataset: "1,200 CheXpert Radiographs",
     features: "DenseNet-121 Latent + CTR",
     target: "Heart Enlargement Detection",
-    advantage: "Active",
+    advantage: "Future Upgrade",
     description: "Deep transfer learning pipeline combining DenseNet-121 with 6-qubit quantum classifier on chest radiographs.",
-    route: "/predict/cardiomegaly",
+    route: "/predict",
     tooltip: "Automated cardiothoracic ratio measurement and cardiac silhouette screening.",
-    status: "active",
+    status: "locked",
   },
   {
     key: "liver_ilpd",
     title: "Liver Function Panel (ILPD)",
-    category: "Active Clinical Pipeline",
+    category: "Phase 2 Roadmap",
     icon: Droplets,
     dataset: "583 ILPD Cohort Records",
     features: "10 Liver Enzyme Biomarkers",
     target: "Hepatic Dysregulation & Impairment",
-    advantage: "Active",
+    advantage: "Future Upgrade",
     description: "Compact 2-qubit quantum classifier evaluating hepatic biomarkers with high specificity.",
-    route: "/predict/liver-ilpd",
+    route: "/predict",
     tooltip: "Analyzes transaminases, bilirubin, proteins, and albumin ratios.",
-    status: "active",
+    status: "locked",
   },
   {
     key: "hepatitis_c",
     title: "Hepatitis C & Fibrosis Studio",
-    category: "Active Clinical Pipeline",
+    category: "Phase 2 Roadmap",
     icon: Droplets,
     dataset: "615 Serum Chemistry Panels",
     features: "12 Serum Biomarkers",
     target: "Cirrhosis & Fibrosis Staging",
-    advantage: "Active",
+    advantage: "Future Upgrade",
     description: "Screens blood chemistry markers for hepatitis C viral progression and liver fibrosis.",
-    route: "/predict/hepatitis-c",
+    route: "/predict",
     tooltip: "Screens serum enzymes, cholinesterase, and creatinine with 4-qubit VQC.",
-    status: "active",
+    status: "locked",
   },
   {
     key: "neurological",
     title: "Brain Health & Neurological Studio",
-    category: "Active Clinical Pipeline",
+    category: "Phase 2 Roadmap",
     icon: Brain,
     dataset: "400 Neuro-Cognitive Profiles",
     features: "EEG Spectra, Tremor, MMSE",
     target: "Early Neurodegenerative Risk",
-    advantage: "Active",
+    advantage: "Future Upgrade",
     description: "4-qubit PennyLane VQC analyzing cortical EEG rhythms, resting tremor, and psychomotor speed.",
-    route: "/predict/neurological",
+    route: "/predict",
     tooltip: "Multi-domain screening for early cognitive impairment and motor dysfunction.",
-    status: "active",
+    status: "locked",
   },
   {
     key: "chronic_kidney",
     title: "Nephrology & Renal Health Studio",
-    category: "Active Clinical Pipeline",
+    category: "Phase 2 Roadmap",
     icon: FlaskConical,
     dataset: "400 Renal Function Records",
     features: "Creatinine, eGFR, Albumin, Urea",
     target: "Early Glomerular Impairment",
-    advantage: "Active",
+    advantage: "Future Upgrade",
     description: "4-qubit PennyLane VQC assessing glomerular filtration rate, proteinuria, and KDIGO staging.",
-    route: "/predict/chronic-kidney",
+    route: "/predict",
     tooltip: "Screens 8 renal biomarkers with automated CKD-EPI eGFR calculation and KDIGO risk tiers.",
-    status: "active",
+    status: "locked",
   },
 ];
 
@@ -517,10 +518,11 @@ export default function HomePage() {
                     </Link>
                   ) : (
                     <Link
-                      href={disease.route}
-                      className="text-xs font-mono font-medium text-amber-800 bg-amber-500/10 px-2 py-1 rounded-md border border-amber-500/20 hover:bg-amber-500/20 transition-all flex items-center gap-1"
+                      href="/predict"
+                      className="text-[11px] font-mono font-medium text-amber-800 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20 hover:bg-amber-500/20 transition-all flex items-center gap-1.5"
                     >
-                      Coming Soon <ChevronRight size={11} />
+                      <Lock size={10} className="text-amber-700" />
+                      Future Upgrade <ChevronRight size={11} />
                     </Link>
                   )}
                 </div>

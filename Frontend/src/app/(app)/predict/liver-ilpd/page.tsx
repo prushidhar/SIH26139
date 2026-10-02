@@ -201,6 +201,24 @@ export default function LiverILPDStudioPage() {
         </button>
       </div>
 
+      {/* Phase 2 Roadmap & Future Upgrade Notice */}
+      <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2 font-mono">
+        <div className="flex items-center gap-2">
+          <span className="px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-800 dark:text-amber-300 font-bold text-[10px] uppercase shrink-0">
+            Phase 2 Roadmap • Future Upgrade
+          </span>
+          <span>
+            Hardware scaling for 127-qubit IBM Eagle QPU in progress. Controls below execute validated simulation sandbox.
+          </span>
+        </div>
+        <Link
+          href="/predict/breast-cancer"
+          className="text-xs font-semibold text-quantum hover:underline flex items-center gap-1 shrink-0"
+        >
+          Active Certified Studios <ArrowRight size={12} />
+        </Link>
+      </div>
+
       {/* Preset Cohort Selector */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
