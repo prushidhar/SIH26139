@@ -16,7 +16,7 @@ export default function CookiesPage() {
       iconType="cookie"
     >
       <section className="space-y-4">
-        <h2 className="text-2xl font-serif font-normal text-white border-b border-white/10 pb-2">
+        <h2 className="text-xl sm:text-2xl font-sans font-bold text-[#082827] border-b border-[#DFEBE8] pb-2.5">
           1. What Technologies We Use
         </h2>
         <p>
@@ -25,31 +25,31 @@ export default function CookiesPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-serif font-normal text-white border-b border-white/10 pb-2">
+        <h2 className="text-xl sm:text-2xl font-sans font-bold text-[#082827] border-b border-[#DFEBE8] pb-2.5">
           2. Specific Storage Keys
         </h2>
-        <div className="rounded-xl border border-white/10 overflow-hidden font-mono text-xs">
+        <div className="rounded-xl border border-[#DFEBE8] overflow-hidden font-mono text-xs">
           <table className="w-full text-left">
-            <thead className="bg-white/[0.06] text-white/90 border-b border-white/10">
+            <thead className="bg-[#E6F7F4]/80 text-[#082827] border-b border-[#DFEBE8]">
               <tr>
                 <th className="p-3">Key / Cookie Name</th>
                 <th className="p-3">Purpose</th>
                 <th className="p-3">Duration</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/10 text-white/70">
+            <tbody className="divide-y divide-[#DFEBE8] text-[#5A7470]">
               <tr>
-                <td className="p-3 text-quantum font-semibold">quresight_access_token</td>
+                <td className="p-3 text-[#006766] font-semibold">quresight_access_token</td>
                 <td className="p-3">JWT Bearer authentication for encrypted API routes</td>
                 <td className="p-3">15 minutes</td>
               </tr>
               <tr>
-                <td className="p-3 text-quantum font-semibold">quresight_refresh_token</td>
+                <td className="p-3 text-[#006766] font-semibold">quresight_refresh_token</td>
                 <td className="p-3">Automatic 7-day sliding session renewal</td>
                 <td className="p-3">7 days</td>
               </tr>
               <tr>
-                <td className="p-3 text-quantum font-semibold">quresight_user_data</td>
+                <td className="p-3 text-[#006766] font-semibold">quresight_user_data</td>
                 <td className="p-3">Caches user profile role and display preferences</td>
                 <td className="p-3">Session</td>
               </tr>
@@ -59,7 +59,7 @@ export default function CookiesPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-serif font-normal text-white border-b border-white/10 pb-2">
+        <h2 className="text-xl sm:text-2xl font-sans font-bold text-[#082827] border-b border-[#DFEBE8] pb-2.5">
           3. Zero Third-Party Advertising Trackers
         </h2>
         <p>

@@ -18,7 +18,7 @@
  */
 
 @theme inline {
-  --font-serif: "Newsreader", ui-serif, Georgia, serif;
+  --font-serif: "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
   --color-ink: var(--ink);
@@ -73,17 +73,17 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0.75rem;
 
-  /* QureSight warm research palette */
-  --ink: oklch(0.22 0.012 70);
-  --ink-soft: oklch(0.46 0.014 75);
-  --cream: oklch(0.977 0.011 88);
-  --cream-deep: oklch(0.952 0.016 86);
-  --parchment: oklch(0.988 0.008 90);
-  --hairline: oklch(0.882 0.014 84);
-  --quantum: oklch(0.52 0.086 195);
-  --quantum-soft: oklch(0.93 0.028 195);
+  /* Saskia Brink 'AI Diagnostics' Clinical MedTech Palette */
+  --ink: oklch(0.20 0.02 185);           /* #122422 Deep spruce slate */
+  --ink-soft: oklch(0.48 0.025 185);      /* #5A7470 Clinical slate */
+  --cream: oklch(0.978 0.008 180);       /* #F2F7F6 Clean mint-tinted neutral background */
+  --cream-deep: oklch(0.948 0.016 180);   /* #E4EEEC Soft container/secondary surface */
+  --parchment: oklch(1 0 0);              /* #FFFFFF Crisp pure white cards */
+  --hairline: oklch(0.915 0.012 180);     /* #DFEBE8 Subtle hairline border */
+  --quantum: oklch(0.68 0.145 175);       /* #14B8A6 Vibrant clinical teal/cyan */
+  --quantum-soft: oklch(0.955 0.035 175); /* #E6F7F4 Active pill soft mint fill */
 
   --background: var(--cream);
   --foreground: var(--ink);
@@ -91,33 +91,33 @@
   --card-foreground: var(--ink);
   --popover: var(--parchment);
   --popover-foreground: var(--ink);
-  --primary: var(--ink);
-  --primary-foreground: var(--parchment);
+  --primary: oklch(0.36 0.082 175);       /* #0D4F46 Deep pine forest teal */
+  --primary-foreground: oklch(0.99 0.002 180);
   --secondary: var(--cream-deep);
   --secondary-foreground: var(--ink);
   --muted: var(--cream-deep);
   --muted-foreground: var(--ink-soft);
   --accent: var(--quantum-soft);
-  --accent-foreground: var(--quantum);
+  --accent-foreground: oklch(0.36 0.082 175);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
   --border: var(--hairline);
   --input: var(--hairline);
   --ring: var(--quantum);
 
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+  --chart-1: oklch(0.68 0.145 175);
+  --chart-2: oklch(0.55 0.12 195);
+  --chart-3: oklch(0.42 0.09 175);
+  --chart-4: oklch(0.82 0.12 85);
+  --chart-5: oklch(0.72 0.15 150);
+  --sidebar: oklch(0.99 0.004 180);
+  --sidebar-foreground: oklch(0.20 0.02 185);
+  --sidebar-primary: oklch(0.36 0.082 175);
+  --sidebar-primary-foreground: oklch(0.99 0.002 180);
+  --sidebar-accent: oklch(0.955 0.035 175);
+  --sidebar-accent-foreground: oklch(0.36 0.082 175);
+  --sidebar-border: oklch(0.915 0.012 180);
+  --sidebar-ring: oklch(0.68 0.145 175);
 }
 
 .dark {
@@ -189,19 +189,6 @@
   scrollbar-width: none !important;
 }
 
-@keyframes rainbow-spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-rainbow-spin {
-  animation: rainbow-spin 4s linear infinite;
-}
-
 /* High-Contrast Clinical Display Mode */
 .high-contrast-mode {
   --hairline: rgba(0, 0, 0, 0.28);
@@ -213,4 +200,73 @@
 
 .high-contrast-mode * {
   border-color: rgba(0, 0, 0, 0.22) !important;
+}
+
+/* Saskia Brink Dribbble: Breathing Ripples & Diagnostic Pulses */
+@keyframes breath-expand {
+  0%, 100% {
+    transform: scale(0.85);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.95;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 103, 102, 0.35);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(0, 103, 102, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 103, 102, 0);
+  }
+}
+
+.animate-breath {
+  animation: breath-expand 6s ease-in-out infinite;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Dribbble UI Design System Utilities */
+.card-dribbble {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px -12px rgba(0, 103, 102, 0.06);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-dribbble-tint {
+  background-color: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary-dribbble {
+  background-color: #006766;
+  color: #ffffff;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  transition: all 0.15s ease-in-out;
+}
+.btn-primary-dribbble:hover {
+  background-color: #004F4E;
+}
+
+.pill-segmented-active {
+  background-color: #006766;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 103, 102, 0.25);
 }

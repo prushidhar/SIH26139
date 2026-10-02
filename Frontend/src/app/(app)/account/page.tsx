@@ -162,18 +162,18 @@ export default function AccountPage() {
       />
 
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#DFEBE8] pb-4">
         <div>
           <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-[11px] font-mono uppercase tracking-wider text-quantum font-semibold">
+            <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#006766] font-bold">
               Practitioner Identity & Telemetry
             </span>
           </div>
-          <h1 className="font-serif text-2xl sm:text-3xl font-light text-ink tracking-tight">
+          <h1 className="font-sans text-2xl sm:text-3xl font-bold text-[#082827] tracking-tight">
             Account & System Settings
           </h1>
-          <p className="text-xs text-ink-soft font-light">
+          <p className="text-xs text-[#5A7470] font-normal">
             Manage your clinical practitioner credentials, quantum hardware routing, session telemetry, and pipeline access.
           </p>
         </div>
@@ -182,20 +182,20 @@ export default function AccountPage() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-medium"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30 text-xs font-semibold"
           >
-            <CheckCircle2 size={14} className="text-emerald-600" />
+            <CheckCircle2 size={14} className="text-[#00B489]" />
             <span>Profile and system preferences saved</span>
           </motion.div>
         )}
       </div>
 
       {/* Profile Overview Card with Photo Upload */}
-      <div className="p-5 sm:p-6 rounded-2xl bg-parchment border border-hairline shadow-xs space-y-5">
+      <div className="p-5 sm:p-6 rounded-2xl bg-white border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)] space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center gap-5">
           {/* Avatar with Upload Hover Button */}
           <div className="relative group shrink-0">
-            <div className="w-20 h-20 rounded-full bg-ink text-parchment flex items-center justify-center font-serif text-2xl font-light overflow-hidden shadow-sm border-2 border-hairline">
+            <div className="w-20 h-20 rounded-full bg-[#006766] text-white flex items-center justify-center font-sans text-2xl font-bold overflow-hidden shadow-sm border-2 border-[#DFEBE8]">
               {userAvatar ? (
                 <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
               ) : (
@@ -206,7 +206,7 @@ export default function AccountPage() {
               type="button"
               onClick={() => fileInputRef.current?.click()}
               title="Click to Upload Profile Photo"
-              className="absolute inset-0 bg-ink/70 rounded-full flex flex-col items-center justify-center text-parchment opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer text-[10px] font-medium"
+              className="absolute inset-0 bg-[#082827]/70 rounded-full flex flex-col items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer text-[10px] font-medium"
             >
               <Camera size={18} />
               <span>Change</span>
@@ -215,32 +215,32 @@ export default function AccountPage() {
 
           <div className="space-y-1.5 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <h2 className="font-serif text-xl font-medium text-ink">{userName || "Clinical Researcher"}</h2>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-quantum/10 text-quantum border border-quantum/25 font-semibold">
+              <h2 className="font-sans text-xl font-bold text-[#082827]">{userName || "Clinical Researcher"}</h2>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30 font-bold">
                 {userProfile?.role ? userProfile.role.toUpperCase() : "RESEARCHER"}
               </span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center gap-1">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center gap-1 font-semibold">
                 <CheckCircle2 size={10} /> Verified Session
               </span>
             </div>
 
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-ink-soft">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#5A7470]">
               <span className="flex items-center gap-1">
-                <Mail size={12} className="text-ink-soft/70" /> {userEmail || "practitioner@quresight.ai"}
+                <Mail size={12} className="text-[#5A7470]/70" /> {userEmail || "practitioner@quresight.ai"}
               </span>
               <span className="flex items-center gap-1">
-                <Clock size={12} className="text-ink-soft/70" /> Member since {memberSinceFormatted}
+                <Clock size={12} className="text-[#5A7470]/70" /> Member since {memberSinceFormatted}
               </span>
-              <span className="flex items-center gap-1">
-                <KeyRound size={12} className="text-ink-soft/70" /> ID: #{userProfile?.id ? `QS-${userProfile.id}` : "QS-USR-101"}
+              <span className="flex items-center gap-1 font-mono">
+                <KeyRound size={12} className="text-[#5A7470]/70" /> ID: #{userProfile?.id ? `QS-${userProfile.id}` : "QS-USR-101"}
               </span>
             </div>
 
-            <div className="pt-1 flex items-center gap-3 text-[11px] text-ink-soft font-light">
+            <div className="pt-1 flex items-center gap-3 text-[11px] text-[#5A7470]">
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="text-quantum hover:underline cursor-pointer font-medium flex items-center gap-1"
+                className="text-[#006766] hover:underline cursor-pointer font-semibold flex items-center gap-1"
               >
                 <Camera size={12} /> Upload Photo
               </button>
@@ -256,7 +256,7 @@ export default function AccountPage() {
                       await AuthService.updateProfile({ profileImageUrl: null });
                     } catch {}
                   }}
-                  className="text-red-700 hover:underline cursor-pointer"
+                  className="text-red-700 hover:underline cursor-pointer font-medium"
                 >
                   Remove Photo
                 </button>
@@ -266,88 +266,88 @@ export default function AccountPage() {
         </div>
 
         {/* Profile Edit Form */}
-        <form onSubmit={handleSaveProfile} className="space-y-4 pt-4 border-t border-hairline">
+        <form onSubmit={handleSaveProfile} className="space-y-4 pt-4 border-t border-[#DFEBE8]">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-ink">Practitioner Full Name</label>
+              <label className="text-xs font-semibold text-[#082827]">Practitioner Full Name</label>
               <input
                 type="text"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
                 placeholder="Dr. Jane Doe"
                 required
-                className="w-full h-10 px-3 rounded-xl bg-cream/50 border border-hairline text-xs text-ink focus:outline-none focus:border-quantum shadow-2xs font-sans"
+                className="w-full h-11 px-3.5 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8] text-xs text-[#082827] focus:outline-none focus:border-[#006766] focus:bg-white shadow-2xs font-sans"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-ink">Clinical Email Address</label>
+              <label className="text-xs font-semibold text-[#082827]">Clinical Email Address</label>
               <input
                 type="email"
                 value={userEmail}
                 onChange={(e) => setUserEmail(e.target.value)}
                 placeholder="jane.doe@hospital.org"
                 required
-                className="w-full h-10 px-3 rounded-xl bg-cream/50 border border-hairline text-xs text-ink focus:outline-none focus:border-quantum shadow-2xs font-sans"
+                className="w-full h-11 px-3.5 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8] text-xs text-[#082827] focus:outline-none focus:border-[#006766] focus:bg-white shadow-2xs font-sans"
               />
             </div>
           </div>
 
           <div className="space-y-2 pt-2">
             <div className="flex items-center gap-1">
-              <label className="text-xs font-semibold text-ink">Preferred Quantum Computing Architecture</label>
+              <label className="text-xs font-semibold text-[#082827]">Preferred Quantum Computing Architecture</label>
               <HelpTooltip text="Select whether patient screening tensors are executed on high-performance VQC GPU statevector simulation or queued to physical IBM Quantum hardware." />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div
                 onClick={() => setPreferredBackend("gpu_simulator")}
-                className={`p-3.5 rounded-xl border cursor-pointer transition-all space-y-1.5 ${
+                className={`p-4 rounded-xl border cursor-pointer transition-all space-y-1.5 ${
                   preferredBackend === "gpu_simulator"
-                    ? "bg-cream border-quantum/60 shadow-xs ring-1 ring-quantum/30"
-                    : "bg-cream/40 hover:bg-cream border-hairline"
+                    ? "bg-[#E6F7F4]/60 border-[#006766] shadow-xs ring-1 ring-[#006766]/30"
+                    : "bg-[#F7FAF9] hover:bg-white border-[#DFEBE8]"
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-serif text-sm font-medium text-ink flex items-center gap-1.5">
-                    <Zap size={14} className="text-blue-700" /> Quantum Simulator (PennyLane)
+                  <span className="font-sans text-sm font-bold text-[#082827] flex items-center gap-1.5">
+                    <Zap size={15} className="text-[#006766]" /> Quantum Simulator (PennyLane)
                   </span>
-                  {preferredBackend === "gpu_simulator" && <CheckCircle2 size={14} className="text-quantum" />}
+                  {preferredBackend === "gpu_simulator" && <CheckCircle2 size={16} className="text-[#006766]" />}
                 </div>
-                <p className="text-[11px] text-ink-soft font-light leading-snug">
+                <p className="text-[11px] text-[#5A7470] font-normal leading-snug">
                   8-Qubit VQC continuous statevector simulation with 0.00% decoherence noise and sub-second execution.
                 </p>
-                <div className="flex items-center gap-2 pt-0.5 text-[10px] font-mono text-emerald-700">
+                <div className="flex items-center gap-2 pt-0.5 text-[10px] font-mono text-emerald-700 font-semibold">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" /> Active & Operational
                 </div>
               </div>
 
               <div
                 onClick={() => setPreferredBackend("ibmq_eagle")}
-                className={`p-3.5 rounded-xl border cursor-pointer transition-all space-y-1.5 ${
+                className={`p-4 rounded-xl border cursor-pointer transition-all space-y-1.5 ${
                   preferredBackend === "ibmq_eagle"
-                    ? "bg-cream border-quantum/60 shadow-xs ring-1 ring-quantum/30"
-                    : "bg-cream/40 hover:bg-cream border-hairline opacity-85"
+                    ? "bg-[#E6F7F4]/60 border-[#006766] shadow-xs ring-1 ring-[#006766]/30"
+                    : "bg-[#F7FAF9] hover:bg-white border-[#DFEBE8] opacity-85"
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-serif text-sm font-medium text-ink flex items-center gap-1.5">
-                    <Cpu size={14} className="text-quantum" /> IBM Quantum Hardware (Eagle QPU)
+                  <span className="font-sans text-sm font-bold text-[#082827] flex items-center gap-1.5">
+                    <Cpu size={15} className="text-[#006766]" /> IBM Quantum Hardware (Eagle QPU)
                   </span>
                   <div className="flex items-center gap-2">
-                    <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded border ${
+                    <span className={`text-[9px] font-mono px-2 py-0.5 rounded border ${
                       preferredBackend === "ibmq_eagle"
                         ? "text-emerald-700 bg-emerald-50 border-emerald-200 font-bold"
-                        : "text-amber-700 bg-amber-50 border-amber-200"
+                        : "text-amber-700 bg-amber-50 border-amber-200 font-semibold"
                     }`}>
                       {preferredBackend === "ibmq_eagle" ? "Active" : "Available"}
                     </span>
-                    {preferredBackend === "ibmq_eagle" && <CheckCircle2 size={14} className="text-quantum" />}
+                    {preferredBackend === "ibmq_eagle" && <CheckCircle2 size={16} className="text-[#006766]" />}
                   </div>
                 </div>
-                <p className="text-[11px] text-ink-soft font-light leading-snug">
+                <p className="text-[11px] text-[#5A7470] font-normal leading-snug">
                   127-Qubit IBM Eagle processor accessed via IBM Quantum Runtime.
                 </p>
-                <div className="flex items-center gap-2 pt-0.5 text-[10px] font-mono text-emerald-700">
+                <div className="flex items-center gap-2 pt-0.5 text-[10px] font-mono text-emerald-700 font-semibold">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" /> Superconducting QPU • Online
                 </div>
               </div>
@@ -358,9 +358,9 @@ export default function AccountPage() {
             <button
               type="submit"
               disabled={isSaving}
-              className="px-5 py-2.5 rounded-xl bg-ink text-parchment font-medium text-xs tracking-wider hover:opacity-90 transition-all shadow-sm flex items-center gap-2 cursor-pointer disabled:opacity-50"
+              className="px-5 py-2.5 rounded-xl bg-[#006766] hover:bg-[#0D4F46] text-white font-semibold text-xs tracking-wider transition-all shadow-sm shadow-[#006766]/20 flex items-center gap-2 cursor-pointer disabled:opacity-50"
             >
-              <Save size={13} /> {isSaving ? "Saving..." : "Save Account Changes"}
+              <Save size={13} /> {isSaving ? "Saving Changes..." : "Save Account Changes"}
             </button>
           </div>
         </form>
@@ -369,19 +369,19 @@ export default function AccountPage() {
       {/* Useful Clinical Telemetry & Metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {/* Card 1: Clinical Audit Records */}
-        <div className="p-4 rounded-xl bg-parchment border border-hairline space-y-2 shadow-2xs">
+        <div className="p-5 rounded-2xl bg-white border border-[#DFEBE8] space-y-2 shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)]">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft flex items-center gap-1">
-              <FileText size={12} className="text-quantum" /> Clinical Audit Log
+            <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470] flex items-center gap-1">
+              <FileText size={12} className="text-[#006766]" /> Clinical Audit Log
             </span>
-            <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-cream border border-hairline text-ink-soft">
+            <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-[#F2F7F6] border border-[#DFEBE8] text-[#5A7470] font-semibold">
               {totalScreenings === 0 ? "Zero State" : "Cloud Synced"}
             </span>
           </div>
-          <div className="font-serif text-2xl text-ink font-light">
-            {totalScreenings} <span className="text-xs font-sans text-ink-soft">patient records</span>
+          <div className="font-sans text-2xl sm:text-3xl text-[#082827] font-bold tracking-tight">
+            {totalScreenings} <span className="text-xs font-normal text-[#5A7470]">patient records</span>
           </div>
-          <p className="text-[11px] text-ink-soft font-light leading-snug">
+          <p className="text-[11px] text-[#5A7470] font-normal leading-snug">
             {totalScreenings === 0
               ? "No patient cases processed yet in this account."
               : `Latest case: ${lastScreeningDate}`}
@@ -389,22 +389,22 @@ export default function AccountPage() {
         </div>
 
         {/* Card 2: Quantum Consensus & Fidelity */}
-        <div className="p-4 rounded-xl bg-parchment border border-hairline space-y-2 shadow-2xs">
+        <div className="p-5 rounded-2xl bg-white border border-[#DFEBE8] space-y-2 shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)]">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft flex items-center gap-1">
-              <Sparkles size={12} className="text-quantum" /> Consensus Fidelity
+            <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470] flex items-center gap-1">
+              <Sparkles size={12} className="text-[#006766]" /> Consensus Fidelity
             </span>
-            <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-50 border border-emerald-200 text-emerald-700">
+            <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] font-semibold">
               {totalScreenings > 0 ? "Active" : "Benchmark"}
             </span>
           </div>
-          <div className="font-serif text-2xl text-emerald-700 font-light">
+          <div className="font-sans text-2xl sm:text-3xl text-[#006766] font-bold tracking-tight">
             {totalScreenings > 0 ? `${concordanceRate}%` : "98.4%"}
-            <span className="text-xs font-sans text-ink-soft ml-1">
+            <span className="text-xs font-normal text-[#5A7470] ml-1">
               {totalScreenings > 0 ? "concordance" : "baseline"}
             </span>
           </div>
-          <p className="text-[11px] text-ink-soft font-light leading-snug">
+          <p className="text-[11px] text-[#5A7470] font-normal leading-snug">
             {totalScreenings > 0
               ? `${concordantCount} of ${totalScreenings} cases aligned between Quantum & Classical.`
               : "Cross-validated across WDBC, LC-25000 & SIPaKMeD."}
@@ -412,83 +412,83 @@ export default function AccountPage() {
         </div>
 
         {/* Card 3: Active Compute Node */}
-        <div className="p-4 rounded-xl bg-parchment border border-hairline space-y-2 shadow-2xs">
+        <div className="p-5 rounded-2xl bg-white border border-[#DFEBE8] space-y-2 shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)]">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft flex items-center gap-1">
-              <Cpu size={12} className="text-quantum" /> Compute Engine
+            <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470] flex items-center gap-1">
+              <Cpu size={12} className="text-[#006766]" /> Compute Engine
             </span>
-            <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-blue-50 border border-blue-200 text-blue-700">
+            <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 font-semibold">
               8-Qubit VQC
             </span>
           </div>
-          <div className="font-serif text-2xl text-ink font-light">
+          <div className="font-sans text-2xl sm:text-3xl text-[#082827] font-bold tracking-tight">
             {preferredBackend === "ibmq_eagle" ? "IBM Eagle QPU" : "Quantum Simulator"}
           </div>
-          <p className="text-[11px] text-ink-soft font-light leading-snug">
+          <p className="text-[11px] text-[#5A7470] font-normal leading-snug">
             0.00% decoherence noise • Continuous statevector simulation.
           </p>
         </div>
       </div>
 
       {/* Disease Model Pipelines & Clinical Quotas */}
-      <div className="p-5 sm:p-6 rounded-2xl bg-parchment border border-hairline shadow-xs space-y-4">
+      <div className="p-5 sm:p-6 rounded-2xl bg-white border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)] space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="font-serif text-base font-medium text-ink">Authorized Clinical Pipelines</h3>
-            <p className="text-xs text-ink-soft font-light">
+            <h3 className="font-sans text-base font-bold text-[#082827]">Authorized Clinical Pipelines</h3>
+            <p className="text-xs text-[#5A7470] font-normal">
               Scientific protocol validation status across QureSight diagnostic models.
             </p>
           </div>
-          <span className="px-2.5 py-1 rounded-full text-[10px] font-mono bg-emerald-50 text-emerald-800 border border-emerald-200">
+          <span className="px-3 py-1 rounded-full text-[10px] font-mono bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30 font-semibold">
             1 Active • 2 Offline
           </span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
           {/* Pipeline 1: Breast Oncology */}
-          <div className="p-3.5 rounded-xl bg-cream/40 border border-hairline space-y-2">
+          <div className="p-4 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8] space-y-2">
             <div className="flex items-center justify-between">
-              <span className="font-semibold text-xs text-ink">Breast Cytology (WDBC)</span>
-              <span className="text-[9px] font-mono text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 font-semibold">
+              <span className="font-bold text-xs text-[#082827]">Breast Cytology (WDBC)</span>
+              <span className="text-[9px] font-mono text-[#006766] bg-[#E6F7F4] px-2 py-0.5 rounded-full border border-[#00B489]/30 font-bold">
                 87.9% VQC / 98.2% SVM
               </span>
             </div>
-            <p className="text-[11px] text-ink-soft font-light leading-snug">
+            <p className="text-[11px] text-[#5A7470] font-normal leading-snug">
               Fine Needle Aspirate (FNA) cytology analysis using 8-Qubit VQC with 48 parameterized rotation gates.
             </p>
-            <div className="text-[10px] font-mono text-quantum pt-1">
+            <div className="text-[10px] font-mono text-[#006766] font-semibold pt-1">
               Model: 8-Qubit VQC • Status: Active
             </div>
           </div>
 
           {/* Pipeline 2: Cardiovascular */}
-          <div className="p-3.5 rounded-xl bg-cream/40 border border-hairline space-y-2 opacity-80">
+          <div className="p-4 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8] space-y-2 opacity-85">
             <div className="flex items-center justify-between">
-              <span className="font-semibold text-xs text-ink">Cardiovascular Risk</span>
-              <span className="text-[9px] font-mono text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 font-semibold">
+              <span className="font-bold text-xs text-[#082827]">Cardiovascular Risk</span>
+              <span className="text-[9px] font-mono text-[#006766] bg-[#E6F7F4] px-2 py-0.5 rounded-full border border-[#00B489]/30 font-bold">
                 Active
               </span>
             </div>
-            <p className="text-[11px] text-ink-soft font-light leading-snug">
+            <p className="text-[11px] text-[#5A7470] font-normal leading-snug">
               12-Lead ECG analysis and cardiac risk screening.
             </p>
-            <div className="text-[10px] font-mono text-amber-700 pt-1">
+            <div className="text-[10px] font-mono text-amber-700 font-semibold pt-1">
               Model: Dual-Engine (VQC + ResNet) • Status: Active
             </div>
           </div>
 
           {/* Pipeline 3: Neurological Disorders */}
-          <div className="p-3.5 rounded-xl bg-cream/40 border border-hairline space-y-2 opacity-80">
+          <div className="p-4 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8] space-y-2 opacity-85">
             <div className="flex items-center justify-between">
-              <span className="font-semibold text-xs text-ink">Neurological Disorders</span>
-              <span className="text-[9px] font-mono text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 font-semibold">
+              <span className="font-bold text-xs text-[#082827]">Neurological Disorders</span>
+              <span className="text-[9px] font-mono text-[#006766] bg-[#E6F7F4] px-2 py-0.5 rounded-full border border-[#00B489]/30 font-bold">
                 Active
               </span>
             </div>
-            <p className="text-[11px] text-ink-soft font-light leading-snug">
+            <p className="text-[11px] text-[#5A7470] font-normal leading-snug">
               Multi-channel EEG spectral dynamics and cognitive latency indices undergoing prospective validation.
             </p>
-            <div className="text-[10px] font-mono text-amber-700 pt-1">
+            <div className="text-[10px] font-mono text-amber-700 font-semibold pt-1">
               Model: Dual-Engine (VQC + ResNet) • Status: Active
             </div>
           </div>

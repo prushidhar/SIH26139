@@ -16,8 +16,8 @@ export default function PrivacyPage() {
       iconType="lock"
     >
       <section className="space-y-4">
-        <h2 className="text-2xl font-serif font-normal text-white border-b border-white/10 pb-2">
-          1. Data Minimization & Zero-Leakage Architecture
+        <h2 className="text-xl sm:text-2xl font-sans font-bold text-[#082827] border-b border-[#DFEBE8] pb-2.5">
+          1. Data Minimization &amp; Zero-Leakage Architecture
         </h2>
         <p>
           QureSight operates under strict data minimization principles. We do not collect, store, or sell personal identifiers or raw patient biological specimens. All computational workloads entering the preprocessing pipeline are normalized into bounded feature vectors prior to quantum angle encoding.
@@ -25,25 +25,25 @@ export default function PrivacyPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-serif font-normal text-white border-b border-white/10 pb-2">
+        <h2 className="text-xl sm:text-2xl font-sans font-bold text-[#082827] border-b border-[#DFEBE8] pb-2.5">
           2. Information We Process
         </h2>
-        <ul className="list-disc pl-6 space-y-2 text-white/70">
+        <ul className="list-disc pl-6 space-y-2 text-[#5A7470]">
           <li>
-            <strong>Authentication Data:</strong> Email address, hashed credentials (Argon2id/bcrypt), or Google OAuth tokens necessary for managing secure user sessions.
+            <strong className="text-[#082827]">Authentication Data:</strong> Email address, hashed credentials (Argon2id/bcrypt), or Google OAuth tokens necessary for managing secure user sessions.
           </li>
           <li>
-            <strong>Diagnostic Feature Tensors:</strong> De-identified numerical vectors representing continuous biometric markers (e.g., nuclear perimeter, area, concavity, or transcriptomic counts).
+            <strong className="text-[#082827]">Diagnostic Feature Tensors:</strong> De-identified numerical vectors representing continuous biometric markers (e.g., nuclear perimeter, area, concavity, or transcriptomic counts).
           </li>
           <li>
-            <strong>Execution Provenance:</strong> Algorithmic runtime telemetry, including optimization loss curves, parameter-shift gradients, and QPU shot counts.
+            <strong className="text-[#082827]">Execution Provenance:</strong> Algorithmic runtime telemetry, including optimization loss curves, parameter-shift gradients, and QPU shot counts.
           </li>
         </ul>
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-serif font-normal text-white border-b border-white/10 pb-2">
-          3. Quantum Cloud Transmission & IBM Runtime
+        <h2 className="text-xl sm:text-2xl font-sans font-bold text-[#082827] border-b border-[#DFEBE8] pb-2.5">
+          3. Quantum Cloud Transmission &amp; IBM Runtime
         </h2>
         <p>
           When real hardware execution mode is selected, parameterized quantum circuits are transpiled to native basis gates (CX, Rz, SX) and transmitted to IBM Quantum Runtime endpoints over TLS 1.3 encrypted connections. Only abstract circuit instructions and rotation angles are communicated to physical cryostats; no clinical patient context is ever exposed to external QPU schedulers.
@@ -51,7 +51,7 @@ export default function PrivacyPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-serif font-normal text-white border-b border-white/10 pb-2">
+        <h2 className="text-xl sm:text-2xl font-sans font-bold text-[#082827] border-b border-[#DFEBE8] pb-2.5">
           4. Cryptographic Receipt Provenance
         </h2>
         <p>
@@ -60,8 +60,8 @@ export default function PrivacyPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-serif font-normal text-white border-b border-white/10 pb-2">
-          5. User Rights & Data Deletion
+        <h2 className="text-xl sm:text-2xl font-sans font-bold text-[#082827] border-b border-[#DFEBE8] pb-2.5">
+          5. User Rights &amp; Data Deletion
         </h2>
         <p>
           You hold the absolute right to purge your uploaded datasets, custom model checkpoints, and analytical logs from our encrypted databases at any time through the Settings dashboard or by dispatching a deletion request to our compliance team.

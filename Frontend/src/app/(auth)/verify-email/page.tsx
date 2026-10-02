@@ -90,40 +90,34 @@ function VerifyEmailForm() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-cream flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans selection:bg-ink selection:text-parchment overflow-hidden relative">
+    <div className="min-h-screen w-full bg-[#F2F7F6] flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans selection:bg-[#006766] selection:text-white overflow-hidden relative">
       {/* Top-Right Cross Button to Landing (Outside Card) */}
       <Link
         href="/"
         aria-label="Back to landing page"
-        className="fixed top-6 right-6 z-50 w-10 h-10 rounded-full bg-parchment/90 hover:bg-parchment border border-hairline/90 backdrop-blur-md flex items-center justify-center text-ink-soft hover:text-ink transition-all hover:scale-105 shadow-sm group cursor-pointer"
+        className="fixed top-6 right-6 z-50 w-10 h-10 rounded-full bg-white/90 hover:bg-white border border-[#DFEBE8] backdrop-blur-md flex items-center justify-center text-[#5A7470] hover:text-[#082827] transition-all hover:scale-105 shadow-sm group cursor-pointer"
       >
         <X size={18} className="group-hover:rotate-90 transition-transform duration-200" />
       </Link>
 
       {/* Luxury Split Card Container */}
       <motion.div 
-        initial={{ opacity: 0, scale: 0.96, y: 20 }}
+        initial={{ opacity: 0, scale: 0.98, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.7, ease: easeOut }}
-        className="w-full max-w-6xl min-h-[700px] bg-parchment rounded-[2.5rem] border border-hairline/90 shadow-[0_24px_60px_-30px_rgba(60,50,35,0.4)] overflow-hidden grid grid-cols-1 lg:grid-cols-12"
+        className="w-full max-w-6xl min-h-[700px] bg-white rounded-[2.5rem] border border-[#DFEBE8] shadow-[0_24px_60px_-20px_rgba(0,103,102,0.12)] overflow-hidden grid grid-cols-1 lg:grid-cols-12"
       >
         
-        {/* Left Column: Quantum Coherence Card */}
+        {/* Left Column: MedTech Visual Presentation Card */}
         <motion.div 
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: easeOut }}
-          className="hidden lg:flex lg:col-span-6 relative bg-ink p-12 flex-col justify-between overflow-hidden rounded-[2.2rem] m-3"
+          className="hidden lg:flex lg:col-span-6 relative bg-gradient-to-br from-[#0D4F46] via-[#006766] to-[#04332D] p-12 flex-col justify-between overflow-hidden rounded-[2.2rem] m-3 text-white shadow-inner"
         >
-          <motion.img
-            src="/images/auth-coherence.jpg"
-            alt="Identity Verification Enclave"
-            animate={{ scale: [1, 1.04, 1], rotate: [0, -0.4, 0] }}
-            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-0 w-full h-full object-cover object-center opacity-85"
-          />
-          
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-ink/40 pointer-events-none" />
+          {/* Subtle Ambient Radial Glows */}
+          <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#00B489]/20 blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-[#74D0D2]/15 blur-3xl pointer-events-none" />
 
           {/* Top Brand Quote Header */}
           <motion.div 
@@ -132,42 +126,63 @@ function VerifyEmailForm() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="relative z-10"
           >
-            <div className="flex items-center gap-3">
-              <span className="text-[11px] font-mono tracking-[0.25em] uppercase font-semibold text-parchment/90 drop-shadow-sm">
-                IDENTITY PROTOCOL
-              </span>
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="h-[1px] w-12 bg-parchment/50" 
-              />
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs font-mono tracking-wider uppercase text-emerald-200 font-semibold shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
+              AID-IDENTITY PROTOCOL
             </div>
           </motion.div>
 
+          {/* MedTech Presentation Content */}
+          <div className="relative z-10 my-auto py-8">
+            <div className="space-y-4 max-w-md">
+              <span className="inline-block text-xs uppercase tracking-widest font-mono font-bold text-[#74D0D2]">
+                Cohort Verification
+              </span>
+              <h1 className="font-sans text-4xl sm:text-5xl font-bold tracking-tight text-white leading-[1.12]">
+                Verify Institutional <br />
+                Identity
+              </h1>
+              <p className="text-white/80 text-sm sm:text-base font-normal leading-relaxed">
+                We ensure authentic cohort credentials before granting access to high-performance quantum screening execution queues.
+              </p>
+            </div>
+
+            {/* MedTech Metric Floating Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="mt-8 p-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 space-y-3"
+            >
+              <div className="flex items-center justify-between text-xs text-white/70">
+                <span className="font-mono uppercase tracking-wider">Authentication Nonce</span>
+                <span className="text-emerald-300 font-semibold flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00B489]" /> 15m Expiry
+                </span>
+              </div>
+              <div className="flex items-baseline gap-3">
+                <span className="text-3xl font-bold text-white tracking-tight font-sans">6 Digits</span>
+                <span className="text-xs text-emerald-200">Zero Trust Confirmation</span>
+              </div>
+              <p className="text-[11px] text-white/70 font-light leading-snug">
+                One-time code sent directly to your registered institutional email inbox.
+              </p>
+            </motion.div>
+          </div>
+
           {/* Bottom Editorial Quote */}
-          <motion.div 
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4, ease: easeOut }}
-            className="relative z-10 space-y-4 max-w-md"
-          >
-            <h1 className="font-serif text-4xl sm:text-5xl font-light tracking-tight text-parchment leading-[1.12]">
-              Verify Institutional <br />
-              Identity
-            </h1>
-            <p className="text-parchment/75 text-sm sm:text-base font-light leading-relaxed">
-              We ensure authentic cohort credentials before granting access to high-performance quantum screening execution queues.
-            </p>
-          </motion.div>
+          <div className="relative z-10 flex items-center justify-between text-xs text-white/60 pt-4 border-t border-white/10 font-mono">
+            <span>IDENTITY VERIFICATION SYSTEM</span>
+            <span>PROTECTED GATEWAY</span>
+          </div>
         </motion.div>
 
-        {/* Right Column: Clean Cream Form */}
+        {/* Right Column: Clean White Form */}
         <motion.div 
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.15, ease: easeOut }}
-          className="lg:col-span-6 p-8 sm:p-12 md:p-16 flex flex-col justify-between bg-parchment"
+          className="lg:col-span-6 p-8 sm:p-12 md:p-16 flex flex-col justify-between bg-white"
         >
           
           {/* Top Header */}
@@ -177,7 +192,7 @@ function VerifyEmailForm() {
             <motion.div whileHover={{ x: -3 }}>
               <Link 
                 href="/login"
-                className="text-xs font-mono uppercase tracking-wider text-ink-soft hover:text-ink transition-colors flex items-center gap-1.5"
+                className="text-xs font-semibold text-[#5A7470] hover:text-[#082827] transition-colors flex items-center gap-1.5"
               >
                 <ArrowLeft size={14} /> Back to Sign In
               </Link>
@@ -199,16 +214,16 @@ function VerifyEmailForm() {
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
-                    className="w-12 h-12 rounded-2xl bg-quantum/10 border border-quantum/30 text-quantum mx-auto flex items-center justify-center shadow-xs mb-3"
+                    className="w-14 h-14 rounded-2xl bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] mx-auto flex items-center justify-center shadow-xs mb-3"
                   >
-                    <Mail size={20} />
+                    <Mail size={22} />
                   </motion.div>
-                  <h2 className="font-serif text-3xl sm:text-4xl font-light text-ink tracking-tight mb-2">
+                  <h2 className="font-sans text-3xl sm:text-4xl font-bold text-[#082827] tracking-tight mb-2">
                     Check Your Inbox
                   </h2>
-                  <p className="text-ink-soft text-xs sm:text-sm font-light leading-relaxed">
+                  <p className="text-[#5A7470] text-xs sm:text-sm font-normal leading-relaxed">
                     We've dispatched a 6-digit verification code to <br/>
-                    <span className="font-semibold text-ink font-mono">{email || "your institutional email"}</span>
+                    <span className="font-semibold text-[#082827] font-mono">{email || "your institutional email"}</span>
                   </p>
                 </div>
 
@@ -217,7 +232,7 @@ function VerifyEmailForm() {
                   <motion.div 
                     initial={{ opacity: 0, y: -6 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mb-4 p-3.5 rounded-xl bg-red-50/80 border border-red-200 text-red-700 text-xs flex items-center gap-2"
+                    className="mb-4 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2"
                   >
                     <div className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0" />
                     <span>{errorMessage}</span>
@@ -229,9 +244,9 @@ function VerifyEmailForm() {
                   <motion.div 
                     initial={{ opacity: 0, y: -6 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mb-4 p-3.5 rounded-xl bg-teal-50/80 border border-teal-200 text-teal-800 text-xs flex items-center gap-2"
+                    className="mb-4 p-3.5 rounded-xl bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] text-xs flex items-center gap-2"
                   >
-                    <CheckCircle2 size={14} className="text-teal-600 shrink-0" />
+                    <CheckCircle2 size={14} className="text-[#00B489] shrink-0" />
                     <span>{successMessage}</span>
                   </motion.div>
                 )}
@@ -239,10 +254,10 @@ function VerifyEmailForm() {
                 <form onSubmit={handleVerify} className="space-y-4">
                   <div className="space-y-1.5">
                     <div className="flex items-center justify-between">
-                      <label className="block text-xs font-semibold text-ink/80">
+                      <label className="block text-xs font-semibold text-[#082827]">
                         6-Digit Security Code
                       </label>
-                      <span className="text-[10px] font-mono text-muted-foreground">Expires in 15 mins</span>
+                      <span className="text-[10px] font-mono text-[#5A7470]">Expires in 15 mins</span>
                     </div>
                     <input
                       type="text"
@@ -250,7 +265,7 @@ function VerifyEmailForm() {
                       onChange={(e) => setToken(e.target.value.replace(/[^0-9]/g, '').slice(0, 6))}
                       placeholder="000000"
                       maxLength={6}
-                      className="w-full h-14 px-4 rounded-xl bg-cream/70 border border-hairline text-2xl text-center tracking-[0.5em] font-mono text-ink placeholder:text-muted-foreground/30 focus:outline-none focus:border-quantum/60 focus:bg-parchment transition-all shadow-2xs"
+                      className="w-full h-14 px-4 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8] text-2xl text-center tracking-[0.5em] font-mono text-[#082827] placeholder:text-[#5A7470]/30 focus:outline-none focus:border-[#006766] focus:bg-white transition-all shadow-2xs"
                       required
                       autoFocus
                     />
@@ -261,7 +276,7 @@ function VerifyEmailForm() {
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={isLoading || token.length !== 6}
-                    className="w-full h-12 mt-2 rounded-xl bg-ink text-parchment font-medium text-sm hover:opacity-90 transition-all flex items-center justify-center gap-2 shadow-sm disabled:opacity-50 cursor-pointer"
+                    className="w-full h-12 mt-2 rounded-xl bg-[#006766] hover:bg-[#0D4F46] text-white font-semibold text-sm transition-all flex items-center justify-center gap-2 shadow-sm shadow-[#006766]/20 disabled:opacity-50 cursor-pointer"
                   >
                     {isLoading ? (
                       <>
@@ -275,18 +290,18 @@ function VerifyEmailForm() {
                 </form>
 
                 {/* Resend Code Button & Countdown Timer */}
-                <div className="mt-5 p-3 rounded-xl bg-cream-deep/30 border border-hairline flex items-center justify-between text-xs">
-                  <span className="text-ink-soft">Didn't receive the email?</span>
+                <div className="mt-5 p-3 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8] flex items-center justify-between text-xs">
+                  <span className="text-[#5A7470]">Didn't receive the email?</span>
                   {resendCooldown > 0 ? (
-                    <span className="font-mono font-medium text-ink-soft text-[11px]">
-                      Resend in <span className="text-ink font-semibold">{resendCooldown}s</span>
+                    <span className="font-mono font-medium text-[#5A7470] text-[11px]">
+                      Resend in <span className="text-[#082827] font-semibold">{resendCooldown}s</span>
                     </span>
                   ) : (
                     <button
                       type="button"
                       onClick={handleResend}
                       disabled={isResending}
-                      className="inline-flex items-center gap-1.5 font-semibold text-quantum hover:underline cursor-pointer disabled:opacity-50"
+                      className="inline-flex items-center gap-1.5 font-semibold text-[#006766] hover:underline cursor-pointer disabled:opacity-50"
                     >
                       {isResending ? (
                         <>
@@ -307,9 +322,9 @@ function VerifyEmailForm() {
           </div>
 
           {/* Bottom Footer Switcher */}
-          <div className="text-center text-xs text-ink-soft pt-4">
+          <div className="text-center text-xs text-[#5A7470] pt-4">
             Wrong email address?{" "}
-            <Link href="/register" className="font-semibold text-ink hover:underline">
+            <Link href="/register" className="font-semibold text-[#006766] hover:underline">
               Create account with another email
             </Link>
           </div>
@@ -324,8 +339,8 @@ function VerifyEmailForm() {
 export default function VerifyEmailPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-cream flex items-center justify-center">
-        <Loader2 className="animate-spin text-ink" size={32} />
+      <div className="min-h-screen bg-[#F2F7F6] flex items-center justify-center">
+        <Loader2 className="animate-spin text-[#006766]" size={32} />
       </div>
     }>
       <VerifyEmailForm />

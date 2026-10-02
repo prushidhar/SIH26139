@@ -354,38 +354,38 @@ export default function HistoryPage() {
       className="space-y-4 w-full min-w-0 max-w-full pb-4"
     >
       {/* Header with Non-Deletable Compliance Badge */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-hairline pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DFEBE8] pb-4">
         <div>
           <div className="flex items-center gap-1.5 mb-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-quantum" />
-            <span className="text-[11px] font-mono uppercase tracking-wider text-quantum font-semibold">
+            <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#006766] font-bold">
               Permanent Medical Records
             </span>
           </div>
-          <h1 className="font-serif text-2xl sm:text-3xl font-light text-ink tracking-tight">
+          <h1 className="font-sans text-2xl sm:text-3xl font-bold text-[#082827] tracking-tight">
             Patient Screening History
           </h1>
-          <p className="text-xs text-ink-soft font-light">
+          <p className="text-xs text-[#5A7470] font-normal">
             Immutable clinical audit log of multi-model patient screenings.
           </p>
         </div>
 
         {/* Permanent Audit Trail Seal (Non-Deletable Record Lock) */}
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-mono font-bold shadow-2xs self-start sm:self-auto shrink-0 whitespace-nowrap">
-          <Lock size={13} className="text-emerald-700 shrink-0" />
+        <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30 text-xs font-mono font-bold shadow-2xs self-start sm:self-auto shrink-0 whitespace-nowrap">
+          <Lock size={13} className="text-[#006766] shrink-0" />
           <span>Immutable Audit Log · Non-Deletable</span>
         </div>
       </div>
 
       {/* View Switcher: Individual Patients vs Batch Screening Sessions */}
-      <div className="flex items-center gap-2 p-1 bg-cream/70 rounded-xl border border-hairline w-fit">
+      <div className="flex items-center gap-2 p-1 bg-[#F2F7F6] rounded-xl border border-[#DFEBE8] w-fit">
         <button
           type="button"
           onClick={() => setActiveHistoryTab("individual")}
           className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer ${
             activeHistoryTab === "individual"
-              ? "bg-white text-ink shadow-xs border border-hairline font-bold"
-              : "text-ink-soft hover:text-ink"
+              ? "bg-[#006766] text-white shadow-xs font-bold"
+              : "text-[#5A7470] hover:text-[#082827]"
           }`}
         >
           <User size={13} />
@@ -396,8 +396,8 @@ export default function HistoryPage() {
           onClick={() => setActiveHistoryTab("batch")}
           className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer ${
             activeHistoryTab === "batch"
-              ? "bg-white text-ink shadow-xs border border-hairline font-bold"
-              : "text-ink-soft hover:text-ink"
+              ? "bg-[#006766] text-white shadow-xs font-bold"
+              : "text-[#5A7470] hover:text-[#082827]"
           }`}
         >
           <Users size={13} />
@@ -411,25 +411,25 @@ export default function HistoryPage() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 w-full min-w-0">
             {/* Search */}
             <div className="relative max-w-sm w-full">
-              <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-soft" />
+              <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#5A7470]" />
               <input
                 type="text"
                 placeholder="Search by Patient Name, Case ID, Cohort..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full h-9 pl-9 pr-3 rounded-xl bg-white border border-hairline text-xs text-ink placeholder:text-ink-soft/60 focus:outline-none focus:border-quantum/60 shadow-2xs font-sans"
+                className="w-full h-10 pl-9 pr-3 rounded-xl bg-white border border-[#DFEBE8] text-xs text-[#082827] placeholder:text-[#5A7470]/60 focus:outline-none focus:border-[#006766] shadow-2xs font-sans"
               />
             </div>
 
             {/* Risk Filter Buttons */}
-            <div className="flex items-center gap-1.5 p-1 bg-cream/70 rounded-xl border border-hairline text-xs font-sans shrink-0">
+            <div className="flex items-center gap-1.5 p-1 bg-[#F2F7F6] rounded-xl border border-[#DFEBE8] text-xs font-sans shrink-0">
               <button
                 type="button"
                 onClick={() => setRiskFilter("ALL")}
-                className={`px-3 py-1 rounded-lg transition-all text-xs cursor-pointer ${
+                className={`px-3 py-1.5 rounded-lg transition-all text-xs cursor-pointer ${
                   riskFilter === "ALL"
-                    ? "bg-white text-ink shadow-xs border border-hairline font-bold"
-                    : "text-ink-soft hover:text-ink"
+                    ? "bg-white text-[#082827] shadow-xs border border-[#DFEBE8] font-bold"
+                    : "text-[#5A7470] hover:text-[#082827]"
                 }`}
               >
                 All Screenings ({predictions.length})
@@ -437,10 +437,10 @@ export default function HistoryPage() {
               <button
                 type="button"
                 onClick={() => setRiskFilter("High")}
-                className={`px-3 py-1 rounded-lg transition-all text-xs cursor-pointer ${
+                className={`px-3 py-1.5 rounded-lg transition-all text-xs cursor-pointer ${
                   riskFilter === "High"
                     ? "bg-red-50 text-red-700 shadow-xs border border-red-200 font-bold"
-                    : "text-ink-soft hover:text-ink"
+                    : "text-[#5A7470] hover:text-[#082827]"
                 }`}
               >
                 High Risk ({predictions.filter((p) => p.riskLevel === "High").length})
@@ -448,10 +448,10 @@ export default function HistoryPage() {
               <button
                 type="button"
                 onClick={() => setRiskFilter("Low")}
-                className={`px-3 py-1 rounded-lg transition-all text-xs cursor-pointer ${
+                className={`px-3 py-1.5 rounded-lg transition-all text-xs cursor-pointer ${
                   riskFilter === "Low"
-                    ? "bg-emerald-50 text-emerald-700 shadow-xs border border-emerald-200 font-bold"
-                    : "text-ink-soft hover:text-ink"
+                    ? "bg-[#E6F7F4] text-[#006766] shadow-xs border border-[#00B489]/30 font-bold"
+                    : "text-[#5A7470] hover:text-[#082827]"
                 }`}
               >
                 Low Risk ({predictions.filter((p) => p.riskLevel === "Low").length})
@@ -461,61 +461,61 @@ export default function HistoryPage() {
 
       {/* Main Table: Proper Clinical Columns matching Diagnosis Page */}
       {predictions.length === 0 ? (
-        <div className="p-8 sm:p-12 rounded-2xl bg-white border border-hairline shadow-xs text-center space-y-4">
-          <div className="w-12 h-12 rounded-2xl bg-cream border border-hairline text-ink-soft mx-auto flex items-center justify-center">
-            <Inbox size={22} className="text-ink-soft" />
+        <div className="p-8 sm:p-12 rounded-2xl bg-white border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)] text-center space-y-4">
+          <div className="w-14 h-14 rounded-2xl bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] mx-auto flex items-center justify-center">
+            <Inbox size={24} className="text-[#006766]" />
           </div>
           <div className="space-y-1 max-w-md mx-auto">
-            <h3 className="font-serif text-lg font-medium text-ink">
+            <h3 className="font-sans text-lg font-bold text-[#082827]">
               No screening records found
             </h3>
-            <p className="text-xs text-ink-soft font-light leading-relaxed">
-              When you perform screening evaluations in the Breast Cancer Screening Studio, every result is permanently saved to this log.
+            <p className="text-xs text-[#5A7470] font-normal leading-relaxed">
+              When you perform screening evaluations in the Breast Cancer Screening Studio or Auscultation Suite, every result is permanently saved to this log.
             </p>
           </div>
           <div className="pt-2">
             <Link
               href="/predict/breast-cancer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-ink text-parchment font-medium text-xs tracking-wider hover:opacity-90 transition-all shadow-sm cursor-pointer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#006766] hover:bg-[#0D4F46] text-white font-semibold text-xs tracking-wider transition-all shadow-sm shadow-[#006766]/20 cursor-pointer"
             >
-              <Sparkles size={13} className="text-quantum" /> Start New Patient Screening
+              <Sparkles size={14} className="text-[#74D0D2]" /> Start New Patient Screening
             </Link>
           </div>
         </div>
       ) : filteredPredictions.length === 0 ? (
-        <div className="p-8 rounded-2xl bg-white border border-hairline text-center space-y-2">
-          <p className="text-xs text-ink-soft">No screening cases match your search query or filter.</p>
+        <div className="p-8 rounded-2xl bg-white border border-[#DFEBE8] text-center space-y-2">
+          <p className="text-xs text-[#5A7470]">No screening cases match your search query or filter.</p>
           <button
             type="button"
             onClick={() => {
               setSearchQuery("");
               setRiskFilter("ALL");
             }}
-            className="text-xs font-semibold text-quantum hover:underline cursor-pointer"
+            className="text-xs font-semibold text-[#006766] hover:underline cursor-pointer"
           >
             Reset search filters
           </button>
         </div>
       ) : (
         /* Unified White Clinical Table Card */
-        <div className="bg-white rounded-2xl border border-hairline shadow-xs overflow-hidden w-full min-w-0">
-          <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-210px)] w-full min-w-0 scrollbar-thin scrollbar-thumb-hairline scrollbar-track-cream/30">
+        <div className="bg-white rounded-2xl border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)] overflow-hidden w-full min-w-0">
+          <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-210px)] w-full min-w-0 scrollbar-thin scrollbar-thumb-[#DFEBE8] scrollbar-track-[#F7FAF9]">
             <table className="w-full text-left text-xs font-sans min-w-[980px]">
-              <thead className="sticky top-0 bg-[#fbf9f4]/95 backdrop-blur-xs border-b border-hairline text-[10px] font-mono uppercase tracking-wider text-ink-soft z-10">
+              <thead className="sticky top-0 bg-[#F7FAF9]/95 backdrop-blur-xs border-b border-[#DFEBE8] text-[10px] font-mono uppercase tracking-wider text-[#5A7470] z-10">
                 <tr>
-                  <th className="py-2.5 px-3 font-semibold whitespace-nowrap">Case / Patient ID</th>
-                  <th className="py-2.5 px-3 font-semibold whitespace-nowrap">Patient Name</th>
-                  <th className="py-2.5 px-3 font-semibold whitespace-nowrap">Demographics</th>
-                  <th className="py-2.5 px-3 font-semibold whitespace-nowrap">Clinical Cohort</th>
-                  <th className="py-2.5 px-3 font-semibold text-purple-700 whitespace-nowrap">Hybrid Quantum (VQC)</th>
-                  <th className="py-2.5 px-3 font-semibold text-blue-700 whitespace-nowrap">Classical Benchmark</th>
-                  <th className="py-2.5 px-3 font-semibold whitespace-nowrap">Key Risk Factor</th>
-                  <th className="py-2.5 px-3 font-semibold whitespace-nowrap">Consensus</th>
-                  <th className="py-2.5 px-3 font-semibold whitespace-nowrap">Test Date</th>
-                  <th className="py-2.5 px-3 font-semibold text-right whitespace-nowrap">Actions</th>
+                  <th className="py-3 px-3.5 font-semibold whitespace-nowrap">Case / Patient ID</th>
+                  <th className="py-3 px-3.5 font-semibold whitespace-nowrap">Patient Name</th>
+                  <th className="py-3 px-3.5 font-semibold whitespace-nowrap">Demographics</th>
+                  <th className="py-3 px-3.5 font-semibold whitespace-nowrap">Clinical Cohort</th>
+                  <th className="py-3 px-3.5 font-semibold text-[#006766] whitespace-nowrap">Hybrid Quantum (VQC)</th>
+                  <th className="py-3 px-3.5 font-semibold text-blue-700 whitespace-nowrap">Classical Benchmark</th>
+                  <th className="py-3 px-3.5 font-semibold whitespace-nowrap">Key Risk Factor</th>
+                  <th className="py-3 px-3.5 font-semibold whitespace-nowrap">Consensus</th>
+                  <th className="py-3 px-3.5 font-semibold whitespace-nowrap">Test Date</th>
+                  <th className="py-3 px-3.5 font-semibold text-right whitespace-nowrap">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-hairline text-ink">
+              <tbody className="divide-y divide-[#DFEBE8]/60 text-[#082827]">
                 {filteredPredictions.map((pred) => {
                   const isMalignant = pred.quantumPrediction === "Malignant" || pred.riskLevel === "High";
                   const isCardiac =
@@ -562,37 +562,37 @@ export default function HistoryPage() {
                     <tr
                       key={pred.id}
                       onClick={() => setSelectedCase(pred)}
-                      className="hover:bg-cream/20 transition-colors cursor-pointer"
+                      className="hover:bg-[#F2F7F6]/60 transition-colors cursor-pointer"
                     >
                       {/* 1. Case ID */}
-                      <td className="py-2.5 px-3 font-mono text-xs font-bold text-quantum whitespace-nowrap">
+                      <td className="py-3 px-3.5 font-mono text-xs font-bold text-[#006766] whitespace-nowrap">
                         {pred.id}
                       </td>
 
                       {/* 2. Patient Name */}
-                      <td className="py-2.5 px-3 font-bold text-xs text-ink whitespace-nowrap">
+                      <td className="py-3 px-3.5 font-bold text-xs text-[#082827] whitespace-nowrap">
                         {pred.patientName || "Not specified"}
                       </td>
 
                       {/* 3. Demographics */}
-                      <td className="py-2.5 px-3 text-xs text-ink-soft whitespace-nowrap">
+                      <td className="py-3 px-3.5 text-xs text-[#5A7470] whitespace-nowrap">
                         {genderLabel} • Age {ageLabel}
                       </td>
 
                       {/* 4. Clinical Cohort */}
-                      <td className="py-2.5 px-3 text-xs text-ink-soft whitespace-nowrap">
+                      <td className="py-3 px-3.5 text-xs text-[#5A7470] whitespace-nowrap">
                         <span className="max-w-[190px] truncate block" title={cohortLabel}>
                           {cohortLabel}
                         </span>
                       </td>
 
                       {/* 5. Hybrid Quantum (VQC) */}
-                      <td className="py-2.5 px-3 whitespace-nowrap">
+                      <td className="py-3 px-3.5 whitespace-nowrap">
                         <span
                           className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold border ${
                             isMalignant
                               ? "bg-red-50 text-red-700 border-red-200"
-                              : "bg-purple-50 text-purple-700 border-purple-200"
+                              : "bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30"
                           }`}
                         >
                           <Sparkles size={11} className="shrink-0" />
@@ -601,7 +601,7 @@ export default function HistoryPage() {
                       </td>
 
                       {/* 6. Classical Baseline */}
-                      <td className="py-2.5 px-3 whitespace-nowrap">
+                      <td className="py-3 px-3.5 whitespace-nowrap">
                         <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-blue-50 text-blue-700 border border-blue-200">
                           <Activity size={11} className="shrink-0" />
                           <span>{pred.classicalPrediction} ({cRisk}%)</span>
@@ -609,7 +609,7 @@ export default function HistoryPage() {
                       </td>
 
                       {/* 7. Key Risk Factor */}
-                      <td className="py-2.5 px-3 text-xs whitespace-nowrap font-medium text-ink">
+                      <td className="py-3 px-3.5 text-xs whitespace-nowrap font-medium text-[#082827]">
                         <div className="max-w-[190px] truncate" title={`${pred.topDriver || (isCardiac ? "Lead V2 (Septal)" : "Cell Size (Radius)")}`}>
                           <span>{pred.topDriver || (isCardiac ? "Lead V2 (Septal)" : "Cell Size (Radius)")}</span>
                           {pred.topDriverImpact !== undefined && pred.topDriverImpact !== null && Number(pred.topDriverImpact) > 0 ? (
@@ -625,9 +625,9 @@ export default function HistoryPage() {
                       </td>
 
                       {/* 8. Consensus */}
-                      <td className="py-2.5 px-3 whitespace-nowrap">
+                      <td className="py-3 px-3.5 whitespace-nowrap">
                         <span
-                          className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold uppercase ${
+                          className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold uppercase ${
                             pred.consensusStatus === "Discordant"
                               ? "bg-amber-50 text-amber-700 border border-amber-200"
                               : "bg-emerald-50 text-emerald-700 border border-emerald-200"
@@ -638,25 +638,25 @@ export default function HistoryPage() {
                       </td>
 
                       {/* 9. Test Date */}
-                      <td className="py-2.5 px-3 text-xs text-ink-soft font-mono whitespace-nowrap">
+                      <td className="py-3 px-3.5 text-xs text-[#5A7470] font-mono whitespace-nowrap">
                         {pred.timestamp}
                       </td>
 
-                      {/* 10. Actions (NO DELETE BUTTON - ONLY VIEW & DOWNLOAD) */}
-                      <td className="py-2.5 px-3 text-right space-x-1.5 whitespace-nowrap">
+                      {/* 10. Actions */}
+                      <td className="py-3 px-3.5 text-right space-x-1.5 whitespace-nowrap">
                         <button
                           type="button"
                           onClick={(e) => handleViewAnalysis(pred, e)}
-                          className="px-2.5 py-1 rounded-lg bg-cream hover:bg-cream-deep border border-hairline text-ink font-semibold text-[11px] inline-flex items-center gap-1 transition-colors cursor-pointer shadow-2xs"
+                          className="px-2.5 py-1.5 rounded-lg bg-[#006766] hover:bg-[#0D4F46] text-white font-semibold text-[11px] inline-flex items-center gap-1 transition-colors cursor-pointer shadow-xs shadow-[#006766]/15"
                           title="Open Full Analysis Page"
                         >
-                          <Eye size={12} className="text-quantum" />
+                          <Eye size={12} className="text-[#74D0D2]" />
                           <span>Analyze</span>
                         </button>
                         <button
                           type="button"
                           onClick={(e) => handleExportReport(pred, e)}
-                          className="p-1.5 rounded-lg bg-cream hover:bg-cream-deep border border-hairline text-ink-soft hover:text-ink transition-colors cursor-pointer shadow-2xs"
+                          className="p-1.5 rounded-lg bg-[#F2F7F6] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#5A7470] hover:text-[#082827] transition-colors cursor-pointer shadow-2xs"
                           title="Download Clinical Report (.pdf)"
                         >
                           <Download size={13} />
@@ -677,31 +677,31 @@ export default function HistoryPage() {
       {activeHistoryTab === "batch" && (
         <div className="space-y-4">
           {batchSessions.length === 0 ? (
-            <div className="p-8 sm:p-12 rounded-2xl bg-white border border-hairline shadow-xs text-center space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-cream border border-hairline text-ink-soft mx-auto flex items-center justify-center">
-                <Users size={22} className="text-quantum" />
+            <div className="p-8 sm:p-12 rounded-2xl bg-white border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)] text-center space-y-4">
+              <div className="w-14 h-14 rounded-2xl bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] mx-auto flex items-center justify-center">
+                <Users size={24} className="text-[#006766]" />
               </div>
               <div className="space-y-1 max-w-md mx-auto">
-                <h3 className="font-serif text-lg font-medium text-ink">
+                <h3 className="font-sans text-lg font-bold text-[#082827]">
                   No Batch Screening Sessions Recorded
                 </h3>
-                <p className="text-xs text-ink-soft font-light leading-relaxed">
+                <p className="text-xs text-[#5A7470] font-normal leading-relaxed">
                   Run high-throughput multi-patient screenings (up to 50,000 records) in the Breast Cancer or Heart Attack studios using CSV, JSON, ZIP, or bulk ECG image uploads.
                 </p>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                 <Link
                   href="/predict/breast-cancer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-ink text-parchment font-medium text-xs hover:opacity-90 transition-all shadow-sm cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#006766] hover:bg-[#0D4F46] text-white font-semibold text-xs tracking-wider transition-all shadow-sm shadow-[#006766]/20 cursor-pointer"
                 >
-                  <Microscope size={13} className="text-quantum" />
+                  <Microscope size={14} className="text-[#74D0D2]" />
                   <span>Breast Cancer Batch Screening</span>
                 </Link>
                 <Link
                   href="/predict/heart-disease"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-cream hover:bg-cream-deep border border-hairline text-ink font-medium text-xs transition-all shadow-2xs cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#F2F7F6] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#082827] font-semibold text-xs tracking-wider transition-all shadow-2xs cursor-pointer"
                 >
-                  <Activity size={13} className="text-red-500" />
+                  <Activity size={14} className="text-[#006766]" />
                   <span>Cardiac ECG Bulk Screening</span>
                 </Link>
               </div>
@@ -711,28 +711,28 @@ export default function HistoryPage() {
               {batchSessions.map((session) => (
                 <div
                   key={session.batchId}
-                  className="rounded-2xl bg-white border border-hairline shadow-xs p-5 hover:border-quantum/40 transition-all"
+                  className="rounded-2xl bg-white border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)] p-5 hover:border-[#006766]/40 transition-all"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-hairline/60">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#DFEBE8]">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-cream border border-hairline flex items-center justify-center text-quantum shrink-0">
+                      <div className="w-10 h-10 rounded-xl bg-[#E6F7F4] border border-[#00B489]/30 flex items-center justify-center text-[#006766] shrink-0">
                         {session.diseaseType.includes("Cardiac") ? (
                           <Activity size={20} className="text-red-500" />
                         ) : (
-                          <FileSpreadsheet size={20} className="text-emerald-600" />
+                          <FileSpreadsheet size={20} className="text-[#006766]" />
                         )}
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-mono text-xs font-bold text-ink">
+                          <span className="font-mono text-xs font-bold text-[#082827]">
                             {session.batchId}
                           </span>
-                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-quantum/10 border border-quantum/20 text-quantum font-semibold">
+                          <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] font-semibold">
                             {session.diseaseType}
                           </span>
                         </div>
-                        <p className="text-[11px] text-ink-soft mt-0.5">
-                          Source: <strong className="text-ink">{session.uploadedFileName}</strong> • Started {new Date(session.startTime).toLocaleString()}
+                        <p className="text-[11px] text-[#5A7470] mt-0.5">
+                          Source: <strong className="text-[#082827] font-semibold">{session.uploadedFileName}</strong> • Started {new Date(session.startTime).toLocaleString()}
                         </p>
                       </div>
                     </div>
@@ -742,15 +742,15 @@ export default function HistoryPage() {
                       <button
                         type="button"
                         onClick={() => exportBatchAsCSV(session)}
-                        className="px-3 py-1.5 rounded-lg bg-cream hover:bg-cream-deep border border-hairline text-xs font-medium text-ink flex items-center gap-1.5 transition-colors cursor-pointer"
+                        className="px-3 py-1.5 rounded-xl bg-[#F2F7F6] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-xs font-semibold text-[#082827] flex items-center gap-1.5 transition-colors cursor-pointer"
                       >
-                        <FileSpreadsheet size={12} className="text-emerald-600" />
+                        <FileSpreadsheet size={12} className="text-[#006766]" />
                         <span>CSV</span>
                       </button>
                       <button
                         type="button"
                         onClick={() => exportBatchAsJSON(session)}
-                        className="px-3 py-1.5 rounded-lg bg-cream hover:bg-cream-deep border border-hairline text-xs font-medium text-ink flex items-center gap-1.5 transition-colors cursor-pointer"
+                        className="px-3 py-1.5 rounded-xl bg-[#F2F7F6] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-xs font-semibold text-[#082827] flex items-center gap-1.5 transition-colors cursor-pointer"
                       >
                         <FileJson size={12} className="text-blue-600" />
                         <span>JSON</span>
@@ -759,16 +759,16 @@ export default function HistoryPage() {
                         type="button"
                         onClick={() => handleExportBatchPdf(session)}
                         disabled={exportingBatchId === session.batchId}
-                        className="px-3 py-1.5 rounded-lg bg-ink hover:bg-ink/90 text-parchment text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs disabled:opacity-50"
+                        className="px-3.5 py-1.5 rounded-xl bg-[#006766] hover:bg-[#0D4F46] text-white text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs shadow-[#006766]/20 disabled:opacity-50"
                       >
                         {exportingBatchId === session.batchId ? (
                           <>
-                            <Loader2 size={12} className="animate-spin text-quantum" />
+                            <Loader2 size={12} className="animate-spin text-white" />
                             <span>{batchPdfProgress.current}/{batchPdfProgress.total}</span>
                           </>
                         ) : (
                           <>
-                            <Archive size={12} className="text-quantum" />
+                            <Archive size={12} className="text-[#74D0D2]" />
                             <span>PDF ZIP</span>
                           </>
                         )}
@@ -778,31 +778,31 @@ export default function HistoryPage() {
 
                   {/* Summary Metric Counters */}
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 pt-3">
-                    <div className="p-2.5 rounded-xl bg-cream/50 border border-hairline">
-                      <span className="text-[10px] text-ink-soft uppercase font-mono block">Records</span>
-                      <strong className="text-xs text-ink">{session.totalRecords.toLocaleString()}</strong>
+                    <div className="p-2.5 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8]">
+                      <span className="text-[10px] text-[#5A7470] uppercase font-mono block font-semibold">Records</span>
+                      <strong className="text-xs text-[#082827]">{session.totalRecords.toLocaleString()}</strong>
                     </div>
-                    <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200">
-                      <span className="text-[10px] text-emerald-700 uppercase font-mono block">Success</span>
-                      <strong className="text-xs text-emerald-800">{session.successCount.toLocaleString()}</strong>
+                    <div className="p-2.5 rounded-xl bg-[#E6F7F4] border border-[#00B489]/30">
+                      <span className="text-[10px] text-[#006766] uppercase font-mono block font-semibold">Success</span>
+                      <strong className="text-xs text-[#006766]">{session.successCount.toLocaleString()}</strong>
                     </div>
                     <div className="p-2.5 rounded-xl bg-red-50 border border-red-200">
-                      <span className="text-[10px] text-red-700 uppercase font-mono block">High Risk</span>
+                      <span className="text-[10px] text-red-700 uppercase font-mono block font-semibold">High Risk</span>
                       <strong className="text-xs text-red-800">{session.highRiskCount}</strong>
                     </div>
                     <div className="p-2.5 rounded-xl bg-blue-50 border border-blue-200">
-                      <span className="text-[10px] text-blue-700 uppercase font-mono block">Concordant</span>
+                      <span className="text-[10px] text-blue-700 uppercase font-mono block font-semibold">Concordant</span>
                       <strong className="text-xs text-blue-800">
                         {session.concordantCount} ({session.successCount > 0 ? ((session.concordantCount / session.successCount) * 100).toFixed(0) : 0}%)
                       </strong>
                     </div>
                     <div className="p-2.5 rounded-xl bg-purple-50 border border-purple-200">
-                      <span className="text-[10px] text-purple-700 uppercase font-mono block">Avg Risk</span>
+                      <span className="text-[10px] text-purple-700 uppercase font-mono block font-semibold">Avg Risk</span>
                       <strong className="text-xs text-purple-800">{session.averageRiskScore.toFixed(1)} / 100</strong>
                     </div>
-                    <div className="p-2.5 rounded-xl bg-cream/50 border border-hairline">
-                      <span className="text-[10px] text-ink-soft uppercase font-mono block">Duration</span>
-                      <strong className="text-xs text-ink">{(session.executionTimeMs / 1000).toFixed(1)}s</strong>
+                    <div className="p-2.5 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8]">
+                      <span className="text-[10px] text-[#5A7470] uppercase font-mono block font-semibold">Duration</span>
+                      <strong className="text-xs text-[#082827]">{(session.executionTimeMs / 1000).toFixed(1)}s</strong>
                     </div>
                   </div>
                 </div>
@@ -821,24 +821,24 @@ export default function HistoryPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedCase(null)}
-              className="fixed inset-0 bg-ink/30 backdrop-blur-xs z-50"
+              className="fixed inset-0 bg-black/50 backdrop-blur-xs z-50"
             />
             <motion.div
               initial={{ opacity: 0, scale: 0.96, y: 12 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 12 }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-white rounded-2xl border border-hairline shadow-2xl z-50 p-6 space-y-4 max-h-[90vh] overflow-y-auto"
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-white rounded-2xl border border-[#DFEBE8] shadow-2xl z-50 p-6 space-y-4 max-h-[90vh] overflow-y-auto"
             >
-              <div className="flex items-center justify-between border-b border-hairline pb-3">
+              <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-quantum/10 text-quantum flex items-center justify-center border border-quantum/20">
-                    <Microscope size={16} />
+                  <div className="w-9 h-9 rounded-xl bg-[#E6F7F4] text-[#006766] flex items-center justify-center border border-[#00B489]/30">
+                    <Microscope size={18} />
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-quantum font-bold">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#006766] font-bold">
                       Verified Screening Record
                     </span>
-                    <h3 className="font-serif text-lg font-medium text-ink">
+                    <h3 className="font-sans text-lg font-bold text-[#082827]">
                       {selectedCase.patientName} ({selectedCase.id})
                     </h3>
                   </div>
@@ -846,67 +846,67 @@ export default function HistoryPage() {
                 <button
                   type="button"
                   onClick={() => setSelectedCase(null)}
-                  className="w-7 h-7 rounded-full bg-cream border border-hairline flex items-center justify-center text-ink-soft hover:text-ink cursor-pointer"
+                  className="w-8 h-8 rounded-full bg-[#F2F7F6] border border-[#DFEBE8] flex items-center justify-center text-[#5A7470] hover:text-[#082827] cursor-pointer"
                 >
-                  <X size={14} />
+                  <X size={15} />
                 </button>
               </div>
 
               <div className="space-y-3 text-xs">
                 {/* Patient Summary Card */}
-                <div className="grid grid-cols-2 gap-3 p-4 rounded-xl bg-cream/30 border border-hairline">
+                <div className="grid grid-cols-2 gap-3 p-4 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8]">
                   <div>
-                    <span className="text-[10px] text-ink-soft uppercase font-mono font-semibold">Patient Name</span>
-                    <p className="font-bold text-ink">{selectedCase.patientName}</p>
+                    <span className="text-[10px] text-[#5A7470] uppercase font-mono font-semibold">Patient Name</span>
+                    <p className="font-bold text-[#082827]">{selectedCase.patientName}</p>
                   </div>
                   <div>
-                    <span className="text-[10px] text-ink-soft uppercase font-mono font-semibold">Demographics</span>
-                    <p className="font-medium text-ink">{selectedCase.patientGender || "Female"} • Age {selectedCase.patientAge || 55}</p>
+                    <span className="text-[10px] text-[#5A7470] uppercase font-mono font-semibold">Demographics</span>
+                    <p className="font-medium text-[#082827]">{selectedCase.patientGender || "Female"} • Age {selectedCase.patientAge || 55}</p>
                   </div>
                   <div>
-                    <span className="text-[10px] text-ink-soft uppercase font-mono font-semibold">Biopsy Cohort</span>
-                    <p className="font-medium text-ink">{selectedCase.diseaseType}</p>
+                    <span className="text-[10px] text-[#5A7470] uppercase font-mono font-semibold">Biopsy Cohort</span>
+                    <p className="font-medium text-[#082827]">{selectedCase.diseaseType}</p>
                   </div>
                   <div>
-                    <span className="text-[10px] text-ink-soft uppercase font-mono font-semibold">Timestamp</span>
-                    <p className="font-mono text-ink">{selectedCase.timestamp}</p>
+                    <span className="text-[10px] text-[#5A7470] uppercase font-mono font-semibold">Timestamp</span>
+                    <p className="font-mono text-[#082827]">{selectedCase.timestamp}</p>
                   </div>
                 </div>
 
                 {/* Dual Model Results Grid */}
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="p-3.5 rounded-xl border border-purple-200 bg-purple-50/40 space-y-1">
-                    <span className="text-[10px] font-mono font-bold text-purple-700 uppercase">Hybrid Quantum (8-Qubit VQC)</span>
-                    <div className="text-lg font-mono font-black text-purple-800">
+                  <div className="p-3.5 rounded-xl border border-[#00B489]/30 bg-[#E6F7F4]/70 space-y-1">
+                    <span className="text-[10px] font-mono font-bold text-[#006766] uppercase">Hybrid Quantum (8-Qubit VQC)</span>
+                    <div className="text-lg font-mono font-black text-[#006766]">
                       {selectedCase.quantumPrediction}
                     </div>
-                    <p className="text-[11px] text-ink-soft">
+                    <p className="text-[11px] text-[#5A7470]">
                       Risk Score: <strong>{selectedCase.quantumRiskScore ?? 42.4}%</strong> • Conf: {selectedCase.quantumConfidence}%
                     </p>
                   </div>
 
-                  <div className="p-3.5 rounded-xl border border-blue-200 bg-blue-50/40 space-y-1">
+                  <div className="p-3.5 rounded-xl border border-blue-200 bg-blue-50/60 space-y-1">
                     <span className="text-[10px] font-mono font-bold text-blue-700 uppercase">Classical Baseline</span>
                     <div className="text-lg font-mono font-black text-blue-800">
                       {selectedCase.classicalPrediction}
                     </div>
-                    <p className="text-[11px] text-ink-soft">
+                    <p className="text-[11px] text-[#5A7470]">
                       Risk Score: <strong>{selectedCase.classicalRiskScore ?? 44.1}%</strong> • Conf: {selectedCase.classicalConfidence}%
                     </p>
                   </div>
                 </div>
 
                 {/* Key Driver & Consensus */}
-                <div className="p-3 rounded-xl bg-white border border-hairline flex items-center justify-between">
+                <div className="p-3 rounded-xl bg-white border border-[#DFEBE8] flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] text-ink-soft block font-mono uppercase">Primary Risk Driver</span>
-                    <strong className="text-xs text-ink">{selectedCase.topDriver || "Cell Size (Radius)"}</strong>
+                    <span className="text-[10px] text-[#5A7470] block font-mono uppercase font-semibold">Primary Risk Driver</span>
+                    <strong className="text-xs text-[#082827]">{selectedCase.topDriver || "Cell Size (Radius)"}</strong>
                   </div>
                   <span
                     className={`text-[10px] font-mono px-2.5 py-1 rounded-full font-bold uppercase ${
                       selectedCase.consensusStatus === "Discordant"
                         ? "bg-amber-50 text-amber-700 border border-amber-200"
-                        : "text-emerald-700 bg-emerald-50 border border-emerald-200"
+                        : "text-[#006766] bg-[#E6F7F4] border border-[#00B489]/30"
                     }`}
                   >
                     {selectedCase.consensusStatus || "Concordant"}
@@ -915,11 +915,11 @@ export default function HistoryPage() {
               </div>
 
               {/* Action Buttons inside Modal */}
-              <div className="pt-2 flex items-center justify-end gap-2 border-t border-hairline">
+              <div className="pt-2 flex items-center justify-end gap-2 border-t border-[#DFEBE8]">
                 <button
                   type="button"
                   onClick={(e) => handleExportReport(selectedCase, e)}
-                  className="px-3.5 py-2 rounded-xl bg-white hover:bg-cream border border-hairline text-ink font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
+                  className="px-3.5 py-2 rounded-xl bg-[#F2F7F6] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#082827] font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
                 >
                   <Download size={13} />
                   <span>Download Clinical Report (.pdf)</span>
@@ -927,9 +927,9 @@ export default function HistoryPage() {
                 <button
                   type="button"
                   onClick={(e) => handleViewAnalysis(selectedCase, e)}
-                  className="px-4 py-2 rounded-xl bg-ink hover:bg-ink/90 text-parchment font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
+                  className="px-4 py-2 rounded-xl bg-[#006766] hover:bg-[#0D4F46] text-white font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs shadow-[#006766]/20"
                 >
-                  <Eye size={13} className="text-quantum" />
+                  <Eye size={13} className="text-[#74D0D2]" />
                   <span>View Full Analysis</span>
                 </button>
               </div>

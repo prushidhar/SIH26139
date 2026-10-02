@@ -18,6 +18,7 @@ import {
   CircleDot,
   Globe2,
 } from "lucide-react";
+import BrandLogo from "@/components/common/BrandLogo";
 
 function GithubIcon({ size = 15, className = "" }: { size?: number; className?: string }) {
   return (
@@ -73,8 +74,8 @@ function Reveal({
 
 function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-      <span className="h-px w-8 bg-quantum/50" />
+    <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.22em] text-[#006766] font-semibold">
+      <span className="h-1.5 w-1.5 rounded-full bg-[#00B489]" />
       {children}
     </div>
   );
@@ -83,7 +84,7 @@ function Eyebrow({ children }: { children: ReactNode }) {
 function Glass({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
     <div
-      className={`rounded-2xl border border-hairline/80 bg-parchment/55 shadow-[0_1px_0_0_rgba(255,255,255,0.7)_inset,0_18px_40px_-32px_rgba(60,50,35,0.5)] backdrop-blur-xl ${className}`}
+      className={`rounded-2xl border border-[#DFEBE8] bg-white/80 shadow-[0_10px_30px_-12px_rgba(0,103,102,0.06)] backdrop-blur-xl ${className}`}
     >
       {children}
     </div>
@@ -114,16 +115,14 @@ function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-2.5 sm:px-4 pt-2.5 sm:pt-4">
       <div
-        className={`mx-auto flex max-w-6xl items-center justify-between rounded-full border px-3 sm:px-5 transition-all duration-500 ${scrolled
-          ? "border-hairline/90 bg-parchment/80 py-2 sm:py-2.5 shadow-[0_16px_40px_-34px_rgba(60,50,35,0.8)] backdrop-blur-xl"
-          : "border-hairline/30 bg-parchment/40 sm:border-transparent sm:bg-transparent py-2 sm:py-4 backdrop-blur-xs sm:backdrop-blur-none"
-          }`}
+        className={`mx-auto flex max-w-6xl items-center justify-between rounded-full border px-3 sm:px-5 transition-all duration-500 ${
+          scrolled
+            ? "border-[#DFEBE8] bg-white/90 py-2 sm:py-2.5 shadow-[0_10px_30px_-12px_rgba(0,103,102,0.08)] backdrop-blur-xl"
+            : "border-[#DFEBE8]/60 bg-white/60 py-2 sm:py-3 backdrop-blur-md"
+        }`}
       >
-        <a href="#top" className="flex items-baseline gap-2 shrink-0">
-          <span className="font-serif text-[17px] sm:text-[19px] tracking-tight text-ink font-normal">QureSight</span>
-          <span className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground sm:inline">
-            Diagnostic Intelligence
-          </span>
+        <a href="#top" className="flex items-center gap-2 shrink-0">
+          <BrandLogo size="sm" showBadge={false} />
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -131,23 +130,23 @@ function Nav() {
             <a
               key={l.label}
               href={l.href}
-              className="text-[13.5px] text-ink-soft transition-colors hover:text-ink"
+              className="text-[13.5px] text-[#5A7470] font-medium transition-colors hover:text-[#082827]"
             >
               {l.label}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <div className="flex items-center gap-2 shrink-0">
           <Link
             href="/login"
-            className="rounded-full border border-hairline px-3 sm:px-4 py-1.5 text-xs sm:text-[13px] text-ink transition-colors hover:bg-cream-deep whitespace-nowrap"
+            className="rounded-full border border-[#DFEBE8] bg-white px-4 py-1.5 text-xs text-[#082827] font-semibold hover:bg-[#F2F7F6] transition-colors shadow-xs"
           >
             Login
           </Link>
           <Link
             href="/register"
-            className="rounded-full bg-ink px-3 sm:px-4 py-1.5 text-xs sm:text-[13px] text-parchment transition-opacity hover:opacity-88 whitespace-nowrap"
+            className="rounded-full bg-[#006766] px-4 py-1.5 text-xs text-white font-semibold hover:bg-[#0D4F46] transition-colors shadow-xs"
           >
             Register
           </Link>
@@ -169,22 +168,22 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.85], [1, reduce ? 1 : 0.15]);
 
   return (
-    <section id="top" ref={ref} className="relative overflow-hidden px-4 sm:px-6 pb-20 sm:pb-28 pt-28 sm:pt-36 md:pt-52">
+    <section id="top" ref={ref} className="relative overflow-hidden px-4 sm:px-6 pb-20 sm:pb-28 pt-28 sm:pt-36 md:pt-48">
       {/* atmosphere */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
           backgroundImage:
-            "radial-gradient(60rem 32rem at 22% -8%, var(--quantum-soft), transparent 62%), radial-gradient(48rem 28rem at 88% 6%, var(--cream-deep), transparent 60%)",
+            "radial-gradient(55rem 30rem at 20% -5%, rgba(0, 180, 137, 0.08), transparent 60%), radial-gradient(48rem 28rem at 85% 10%, rgba(0, 103, 102, 0.06), transparent 60%)",
         }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35]"
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.4]"
         style={{
           backgroundImage:
-            "linear-gradient(var(--hairline) 1px, transparent 1px), linear-gradient(90deg, var(--hairline) 1px, transparent 1px)",
+            "linear-gradient(#DFEBE8 1px, transparent 1px), linear-gradient(90deg, #DFEBE8 1px, transparent 1px)",
           backgroundSize: "72px 72px",
           maskImage: "radial-gradient(48rem 30rem at 50% 0%, black, transparent 78%)",
         }}
@@ -196,14 +195,14 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={0.06}>
-          <h1 className="mt-7 max-w-4xl font-serif text-[clamp(2.6rem,6vw,4.6rem)] font-light leading-[1.03] tracking-[-0.02em] text-ink">
+          <h1 className="mt-6 max-w-4xl font-sans text-[clamp(2.5rem,5.5vw,4.4rem)] font-bold leading-[1.05] tracking-tight text-[#082827]">
             Screen for multiple diseases
-            <span className="text-ink-soft"> from routine clinical data — in seconds.</span>
+            <span className="text-[#5A7470]"> from routine clinical data — in seconds.</span>
           </h1>
         </Reveal>
 
         <Reveal delay={0.12}>
-          <p className="mt-8 max-w-2xl text-[17px] leading-[1.7] text-ink-soft">
+          <p className="mt-7 max-w-2xl text-[16.5px] leading-[1.7] text-[#5A7470] font-normal">
             QureSight combines quantum-enhanced machine learning with classical baselines to detect
             early signs of breast cancer, heart disease, liver disorders, and more. Upload patient
             data, get risk scores with full explainability, and verify every result against
@@ -212,16 +211,16 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={0.18}>
-          <div className="mt-11 flex flex-wrap items-center gap-3">
+          <div className="mt-10 flex flex-wrap items-center gap-3">
             <a
               href="#live-demo"
-              className="rounded-full border border-hairline bg-parchment/70 px-6 py-3 text-[14px] text-ink backdrop-blur transition-colors hover:bg-cream-deep"
+              className="rounded-full border border-[#DFEBE8] bg-white px-6 py-3 text-[14px] font-semibold text-[#082827] shadow-xs transition-colors hover:bg-[#F2F7F6]"
             >
               See it in action
             </a>
             <Link
               href="/home"
-              className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-[14px] text-parchment transition-opacity hover:opacity-88"
+              className="group inline-flex items-center gap-2 rounded-full bg-[#006766] px-6 py-3 text-[14px] font-semibold text-white transition-all shadow-xs hover:bg-[#0D4F46]"
             >
               Start screening
               <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
@@ -230,7 +229,7 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={0.24}>
-          <dl className="mt-20 grid max-w-3xl grid-cols-2 gap-x-8 gap-y-8 border-t border-hairline pt-8 sm:grid-cols-4">
+          <dl className="mt-16 grid max-w-3xl grid-cols-2 gap-x-8 gap-y-8 border-t border-[#DFEBE8] pt-8 sm:grid-cols-4">
             {[
               ["7+", "disease screening modules"],
               ["6", "clinical validation cohorts"],
@@ -238,8 +237,8 @@ function Hero() {
               ["100%", "explainable predictions"],
             ].map(([v, k]) => (
               <div key={k}>
-                <dt className="font-serif text-2xl text-ink">{v}</dt>
-                <dd className="mt-1.5 text-[12.5px] leading-snug text-muted-foreground">{k}</dd>
+                <dt className="font-sans text-2xl sm:text-3xl font-bold text-[#082827]">{v}</dt>
+                <dd className="mt-1.5 text-[12px] leading-snug text-[#5A7470] font-medium">{k}</dd>
               </div>
             ))}
           </dl>
@@ -278,31 +277,31 @@ const CHALLENGES = [
 
 function ClinicalReality() {
   return (
-    <section id="how-it-works" className="relative border-t border-hairline bg-cream-deep/40 px-6 py-28">
+    <section id="how-it-works" className="relative border-t border-[#DFEBE8] bg-[#F2F7F6]/60 px-6 py-28">
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <Eyebrow>Why QureSight</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-6 max-w-3xl font-serif text-[clamp(2rem,4vw,3.1rem)] font-light leading-[1.1] tracking-[-0.015em] text-ink">
-            The challenges we solve
+          <h2 className="mt-6 max-w-3xl font-sans text-[clamp(2rem,4vw,3.1rem)] font-bold leading-[1.1] tracking-tight text-[#082827]">
+            The clinical challenges we solve
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
-          <p className="mt-6 max-w-2xl text-[16px] leading-[1.7] text-ink-soft">
+          <p className="mt-6 max-w-2xl text-[16px] leading-[1.7] text-[#5A7470] font-normal">
             Traditional screening tools look at one test at a time. QureSight analyzes the full
             picture — combining multiple biomarkers, patient history, and imaging data to catch
             diseases earlier and more accurately.
           </p>
         </Reveal>
 
-        <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-hairline bg-hairline md:grid-cols-2">
+        <div className="mt-14 grid gap-5 md:grid-cols-2">
           {CHALLENGES.map((f, i) => (
-            <Reveal key={f.n} delay={0.05 * i} className="bg-parchment/70 backdrop-blur-sm">
-              <div className="h-full p-8 md:p-10">
-                <span className="font-mono text-[11px] tracking-[0.2em] text-quantum">{f.n}</span>
-                <h3 className="mt-4 font-serif text-[22px] leading-snug text-ink">{f.title}</h3>
-                <p className="mt-4 text-[14.5px] leading-[1.75] text-ink-soft">{f.body}</p>
+            <Reveal key={f.n} delay={0.05 * i}>
+              <div className="h-full p-8 md:p-9 rounded-2xl border border-[#DFEBE8] bg-white shadow-[0_10px_30px_-12px_rgba(0,103,102,0.06)] transition-all hover:border-[#00B489]/40">
+                <span className="font-mono text-[11px] tracking-[0.2em] text-[#006766] font-bold">{f.n}</span>
+                <h3 className="mt-3 font-sans text-[20px] font-bold leading-snug text-[#082827]">{f.title}</h3>
+                <p className="mt-3 text-[14.5px] leading-[1.75] text-[#5A7470] font-normal">{f.body}</p>
               </div>
             </Reveal>
           ))}
@@ -353,50 +352,50 @@ function Pipeline() {
   const railHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="screening" className="relative border-t border-hairline px-6 py-28">
+    <section id="screening" className="relative border-t border-[#DFEBE8] bg-white px-6 py-28">
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <Eyebrow>Screening pipeline</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-6 max-w-3xl font-serif text-[clamp(2rem,4vw,3.1rem)] font-light leading-[1.1] tracking-[-0.015em] text-ink">
+          <h2 className="mt-6 max-w-3xl font-sans text-[clamp(2rem,4vw,3.1rem)] font-bold leading-[1.1] tracking-tight text-[#082827]">
             From patient data to actionable insight
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
-          <p className="mt-6 max-w-2xl text-[16px] leading-[1.7] text-ink-soft">
+          <p className="mt-6 max-w-2xl text-[16px] leading-[1.7] text-[#5A7470] font-normal">
             Four steps, fully transparent. Every screening run is logged with its inputs, model
             versions, and outputs — so results are always reproducible and auditable.
           </p>
         </Reveal>
 
         <div ref={ref} className="relative mt-20 pl-8 md:pl-16">
-          <div className="absolute left-0 top-2 bottom-2 w-px bg-hairline md:left-6" />
+          <div className="absolute left-0 top-2 bottom-2 w-px bg-[#DFEBE8] md:left-6" />
           <motion.div
             style={{ height: railHeight }}
-            className="absolute left-0 top-2 w-px origin-top bg-quantum md:left-6"
+            className="absolute left-0 top-2 w-px origin-top bg-[#006766] md:left-6"
           />
 
           <div className="space-y-6">
             {STAGES.map((s, i) => (
               <Reveal key={s.id} delay={0.04 * i}>
                 <div className="relative">
-                  <span className="absolute -left-8 top-9 h-2 w-2 rounded-full bg-quantum ring-4 ring-cream md:-left-[2.85rem]" />
-                  <Glass className="p-8 transition-colors duration-500 hover:bg-parchment/80 md:p-10">
+                  <span className="absolute -left-8 top-9 h-2.5 w-2.5 rounded-full bg-[#00B489] ring-4 ring-[#E6F7F4] md:-left-[2.85rem]" />
+                  <Glass className="p-8 transition-all duration-300 hover:border-[#00B489]/30 md:p-10">
                     <div className="flex flex-col gap-8 md:flex-row md:items-start">
                       <div className="md:w-52 md:shrink-0">
-                        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-quantum">
+                        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#006766] font-bold">
                           {s.label}
                         </span>
-                        <h3 className="mt-3 font-serif text-[24px] leading-tight text-ink">{s.title}</h3>
+                        <h3 className="mt-2.5 font-sans text-[22px] font-bold leading-tight text-[#082827]">{s.title}</h3>
                       </div>
                       <div className="flex-1">
-                        <p className="text-[15px] leading-[1.78] text-ink-soft">{s.body}</p>
+                        <p className="text-[15px] leading-[1.78] text-[#5A7470] font-normal">{s.body}</p>
                         <div className="mt-6 flex flex-wrap gap-2">
                           {s.meta.map((m) => (
                             <span
                               key={m}
-                              className="rounded-full border border-hairline bg-cream-deep/60 px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.12em] text-muted-foreground"
+                              className="rounded-full border border-[#DFEBE8] bg-[#E6F7F4]/60 px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.12em] text-[#006766] font-semibold"
                             >
                               {m}
                             </span>
@@ -429,7 +428,7 @@ const ROWS = [
 
 function Benchmarking() {
   return (
-    <section id="results" className="relative border-t border-hairline bg-cream-deep/40 px-6 py-28">
+    <section id="results" className="relative border-t border-[#DFEBE8] bg-[#F2F7F6]/60 px-6 py-28">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-16 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
@@ -437,12 +436,12 @@ function Benchmarking() {
               <Eyebrow>Verified results</Eyebrow>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="mt-6 font-serif text-[clamp(2rem,4vw,3.1rem)] font-light leading-[1.1] tracking-[-0.015em] text-ink">
+              <h2 className="mt-6 font-sans text-[clamp(2rem,4vw,3.1rem)] font-bold leading-[1.1] tracking-tight text-[#082827]">
                 Every claim backed by numbers
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <div className="mt-7 space-y-5 text-[15.5px] leading-[1.78] text-ink-soft">
+              <div className="mt-7 space-y-5 text-[15.5px] leading-[1.78] text-[#5A7470] font-normal">
                 <p>
                   All models are trained and tested on identical data splits with the same
                   preprocessing. No cherry-picking, no test-set tuning. When the classical model
@@ -455,8 +454,8 @@ function Benchmarking() {
               </div>
             </Reveal>
             <Reveal delay={0.15}>
-              <div className="mt-9 border-l-2 border-quantum/60 pl-5">
-                <p className="font-serif text-[17px] italic leading-relaxed text-ink">
+              <div className="mt-9 border-l-2 border-[#00B489] pl-5">
+                <p className="font-sans text-[16px] italic leading-relaxed text-[#082827] font-medium">
                   "Honest benchmarks build clinical trust. We publish negative results alongside
                   positive ones."
                 </p>
@@ -465,42 +464,43 @@ function Benchmarking() {
           </div>
 
           <Reveal delay={0.1}>
-            <Glass className="overflow-hidden">
-              <div className="flex items-center justify-between border-b border-hairline px-6 py-4">
-                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+            <Glass className="overflow-hidden bg-white border border-[#DFEBE8] shadow-[0_10px_30px_-12px_rgba(0,103,102,0.06)]">
+              <div className="flex items-center justify-between border-b border-[#DFEBE8] px-6 py-4">
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#5A7470] font-semibold">
                   Screening performance · breast cancer cohort
                 </span>
-                <span className="font-mono text-[11px] text-quantum">5-fold CV</span>
+                <span className="font-mono text-[11px] text-[#006766] font-bold">5-fold CV</span>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-[13px]">
                   <thead>
-                    <tr className="border-b border-hairline text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
-                      <th className="px-6 py-3 font-normal">Model</th>
-                      <th className="px-4 py-3 font-normal">AUC</th>
-                      <th className="px-4 py-3 font-normal">Sens.</th>
-                      <th className="px-4 py-3 font-normal">Spec.</th>
-                      <th className="px-6 py-3 font-normal">p-val</th>
+                    <tr className="border-b border-[#DFEBE8] text-[11px] uppercase tracking-[0.12em] text-[#5A7470] bg-[#F2F7F6]/50">
+                      <th className="px-6 py-3 font-semibold">Model</th>
+                      <th className="px-4 py-3 font-semibold">AUC</th>
+                      <th className="px-4 py-3 font-semibold">Sens.</th>
+                      <th className="px-4 py-3 font-semibold">Spec.</th>
+                      <th className="px-6 py-3 font-semibold">p-val</th>
                     </tr>
                   </thead>
                   <tbody>
                     {ROWS.map((r, i) => (
                       <tr
                         key={r[0]}
-                        className={`border-b border-hairline/60 last:border-0 ${i >= 3 ? "bg-quantum-soft/40" : ""
-                          }`}
+                        className={`border-b border-[#DFEBE8]/70 last:border-0 ${
+                          i >= 3 ? "bg-[#E6F7F4]/60 font-medium" : ""
+                        }`}
                       >
-                        <td className="px-6 py-3.5 text-ink">{r[0]}</td>
-                        <td className="px-4 py-3.5 font-mono text-ink">{r[1]}</td>
-                        <td className="px-4 py-3.5 font-mono text-ink-soft">{r[2]}</td>
-                        <td className="px-4 py-3.5 font-mono text-ink-soft">{r[3]}</td>
-                        <td className="px-6 py-3.5 font-mono text-ink-soft">{r[4]}</td>
+                        <td className="px-6 py-3.5 text-[#082827] font-medium">{r[0]}</td>
+                        <td className="px-4 py-3.5 font-mono text-[#082827] font-semibold">{r[1]}</td>
+                        <td className="px-4 py-3.5 font-mono text-[#5A7470]">{r[2]}</td>
+                        <td className="px-4 py-3.5 font-mono text-[#5A7470]">{r[3]}</td>
+                        <td className="px-6 py-3.5 font-mono text-[#5A7470]">{r[4]}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-              <p className="border-t border-hairline px-6 py-4 text-[12px] leading-relaxed text-muted-foreground">
+              <p className="border-t border-[#DFEBE8] px-6 py-4 text-[12px] leading-relaxed text-[#5A7470]">
                 Representative results from the Wisconsin Breast Cancer cohort. QureSight hybrid rows
                 are highlighted. All comparisons use paired statistical tests with correction for
                 multiple comparisons.
@@ -540,10 +540,10 @@ function MoveToTop() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.8 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 left-8 z-[999] p-3.5 rounded-full bg-black text-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] hover:scale-110 hover:bg-black transition-all border border-white/10"
+          className="fixed bottom-8 left-8 z-[999] p-3 rounded-full bg-[#006766] text-white shadow-[0_10px_30px_-8px_rgba(0,103,102,0.4)] hover:scale-110 hover:bg-[#0D4F46] transition-all border border-[#00B489]/30 cursor-pointer"
           aria-label="Scroll to top"
         >
-          <ArrowUp size={20} />
+          <ArrowUp size={18} />
         </motion.button>
       )}
     </AnimatePresence>
@@ -614,7 +614,7 @@ function Footer() {
   const barInView = useInView(barRef, { once: true, amount: 0.5 });
 
   return (
-    <footer className="relative border-t border-white/10 bg-black text-white overflow-hidden">
+    <footer className="relative border-t border-[#006766]/30 bg-[#082827] text-white overflow-hidden">
       {/* Top Statement Section */}
       <div
         ref={heroRef}
@@ -625,21 +625,21 @@ function Footer() {
             initial={{ opacity: 0, y: 10 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="font-mono text-white/50 mb-6 flex items-center gap-3 text-[11px] uppercase tracking-widest"
+            className="font-mono text-white/60 mb-6 flex items-center gap-3 text-[11px] uppercase tracking-widest"
           >
             <div className="flex items-center gap-2.5">
-              <span className="h-2 w-2 rounded-full bg-quantum animate-pulse" />
-              <span className="font-serif text-xl font-medium tracking-tight text-white">QureSight</span>
-              <span className="text-white/40">· Intelligent Disease Screening</span>
+              <span className="h-2 w-2 rounded-full bg-[#00B489] animate-pulse" />
+              <span className="font-sans text-xl font-bold tracking-tight text-white">QureSight</span>
+              <span className="text-white/50">· Clinical Diagnostic Suite</span>
             </div>
           </motion.div>
           <motion.h2
             initial={{ clipPath: "inset(0 100% 0 0)" }}
             animate={heroInView ? { clipPath: "inset(0 0% 0 0)" } : {}}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-            className="text-4xl md:text-5xl lg:text-[60px] font-light leading-[1.02] tracking-tight max-w-[24ch] text-[#FDFBF7] font-serif"
+            className="text-4xl md:text-5xl lg:text-[56px] font-bold leading-[1.04] tracking-tight max-w-[24ch] text-white font-sans"
           >
-            Catch diseases earlier with quantum-enhanced screening — verified, explainable, and built for real clinical workflows.
+            Catch diseases earlier with clinical-grade screening — verified, explainable, and built for real medical workflows.
           </motion.h2>
         </div>
 
@@ -653,7 +653,7 @@ function Footer() {
             transition={{ duration: 0.6, delay: 0.4 }}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="rounded-full px-6 h-14 flex items-center justify-between gap-3 group bg-white/[0.05] border border-white/10 hover:bg-white hover:text-black transition-colors backdrop-blur-md"
+            className="rounded-full px-6 h-14 flex items-center justify-between gap-3 group bg-white/[0.08] border border-white/15 hover:bg-white hover:text-[#082827] transition-all backdrop-blur-md"
           >
             <span className="font-mono text-xs uppercase tracking-widest font-semibold flex items-center gap-2">
               <GithubIcon size={15} /> VISIT GITHUB
@@ -671,10 +671,10 @@ function Footer() {
             transition={{ duration: 0.6, delay: 0.55 }}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="rounded-full px-6 h-14 flex items-center justify-between gap-3 group bg-white/[0.05] border border-white/10 hover:bg-white hover:text-black transition-colors backdrop-blur-md cursor-pointer"
+            className="rounded-full px-6 h-14 flex items-center justify-between gap-3 group bg-[#006766] border border-[#00B489]/40 hover:bg-[#00B489] hover:text-[#082827] text-white transition-all backdrop-blur-md cursor-pointer shadow-xs"
           >
             <span className="font-mono text-xs uppercase tracking-widest font-semibold flex items-center gap-2">
-              <Sparkles size={14} className="text-quantum" /> QURESIGHT
+              <Sparkles size={14} className="text-[#00B489] group-hover:text-[#082827]" /> LAUNCH PLATFORM
             </span>
             <ArrowUpRight
               size={16}
@@ -696,7 +696,7 @@ function Footer() {
             animate={gridInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 + colIdx * 0.1 }}
           >
-            <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#38bdf8] mb-5 pb-2 border-b border-white/10">
+            <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#00B489] font-bold mb-5 pb-2 border-b border-white/10">
               {c.title}
             </div>
             <ul className="space-y-2.5">
@@ -715,14 +715,14 @@ function Footer() {
                         href={it.path}
                         target={it.path.startsWith("http") ? "_blank" : undefined}
                         rel={it.path.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="text-[15px] md:text-lg text-white/80 hover:text-white transition-colors"
+                        className="text-[14px] md:text-base text-white/70 hover:text-white transition-colors"
                       >
                         {it.name}
                       </a>
                     ) : (
                       <Link
                         href={it.path}
-                        className="text-[15px] md:text-lg text-white/80 hover:text-white transition-colors"
+                        className="text-[14px] md:text-base text-white/70 hover:text-white transition-colors"
                       >
                         {it.name}
                       </Link>
@@ -741,7 +741,7 @@ function Footer() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="col-span-2 md:col-span-2"
         >
-          <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#38bdf8] mb-5 pb-2 border-b border-white/10 flex items-center gap-2">
+          <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#00B489] font-bold mb-5 pb-2 border-b border-white/10 flex items-center gap-2">
             <Cpu size={12} /> Built with · Advanced Technology Stack
           </div>
           <div className="flex flex-wrap gap-2.5">
@@ -751,9 +751,9 @@ function Footer() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={gridInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.4, delay: 0.45 + i * 0.04 }}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/10 text-[11px] font-medium text-white/70 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-[11px] font-medium text-white/80 hover:text-white hover:bg-white/15 transition-colors cursor-pointer"
               >
-                <CircleDot size={9} className="text-[#38bdf8]" /> {c}
+                <CircleDot size={9} className="text-[#00B489]" /> {c}
               </motion.span>
             ))}
           </div>
@@ -761,7 +761,7 @@ function Footer() {
             initial={{ opacity: 0 }}
             animate={gridInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="mt-6 text-xs text-white/45 leading-relaxed max-w-md"
+            className="mt-6 text-xs text-white/50 leading-relaxed max-w-md"
           >
             QureSight is an advanced multi-disease screening platform engineered for SIH26139 that pairs quantum-enhanced machine learning with classical baselines. Every prediction is explainable, every benchmark is reproducible.
           </motion.p>
@@ -772,7 +772,7 @@ function Footer() {
       <div ref={wordmarkRef} className="border-t border-white/10 overflow-hidden">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10 pt-10 pb-2">
           <div
-            className="leading-[0.82] tracking-tighter select-none text-[clamp(80px,21vw,340px)] flex text-[#FDFBF7] font-serif"
+            className="leading-[0.82] tracking-tighter select-none text-[clamp(80px,21vw,340px)] flex text-white/90 font-sans font-bold"
           >
             {"QureSight".split("").map((char, i) => (
               <motion.span
@@ -792,7 +792,7 @@ function Footer() {
               initial={{ opacity: 0, scale: 0 }}
               animate={wordmarkInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.4, delay: 0.55, type: "spring", stiffness: 300 }}
-              className="text-quantum"
+              className="text-[#00B489]"
             >
               .
             </motion.span>
@@ -801,12 +801,12 @@ function Footer() {
       </div>
 
       {/* Clinical Research Regulatory Disclaimer Banner */}
-      <div className="border-t border-white/10 bg-white/[0.02]">
+      <div className="border-t border-white/10 bg-white/[0.03]">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10 py-6">
-          <p className="font-mono text-[10px] leading-relaxed text-white/50 tracking-wider">
-            <strong className="text-white/80 font-semibold">RESEARCH USE ONLY:</strong> QureSight is an investigational research tool designed for clinical decision support and educational purposes. It is not certified as a standalone diagnostic device. All screening results require qualified medical professional review. Provided &ldquo;AS IS&rdquo; for authorized research use.
+          <p className="font-mono text-[10px] leading-relaxed text-white/60 tracking-wider">
+            <strong className="text-white/90 font-semibold">RESEARCH USE ONLY:</strong> QureSight is an investigational research tool designed for clinical decision support and educational purposes. It is not certified as a standalone diagnostic device. All screening results require qualified medical professional review. Provided &ldquo;AS IS&rdquo; for authorized research use.
           </p>
-          <p className="font-mono text-[9px] text-white/30 tracking-widest mt-2">
+          <p className="font-mono text-[9px] text-white/40 tracking-widest mt-2">
             Developed for Smart India Hackathon — Quantum-Enhanced Healthcare Screening © 2026.
           </p>
         </div>
@@ -814,7 +814,7 @@ function Footer() {
 
       {/* Bottom bar with subtle parallax */}
       <div ref={barRef} className="border-t border-white/10">
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10 py-6 flex flex-wrap items-center justify-between gap-4 font-mono text-[9px] uppercase tracking-[0.2em] text-white/40">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-10 py-6 flex flex-wrap items-center justify-between gap-4 font-mono text-[9px] uppercase tracking-[0.2em] text-white/50">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={barInView ? { opacity: 1, x: 0 } : {}}
@@ -822,16 +822,16 @@ function Footer() {
             className="flex items-center gap-4"
           >
             <span>© {new Date().getFullYear()} QURESIGHT — SCREEN SMARTER.</span>
-            <Link href="/terms" className="hover:text-white transition-colors hidden md:inline-block border-l border-white/10 pl-4">
+            <Link href="/terms" className="hover:text-[#00B489] transition-colors hidden md:inline-block border-l border-white/10 pl-4">
               Terms
             </Link>
-            <Link href="/privacy" className="hover:text-white transition-colors hidden md:inline-block border-l border-white/10 pl-4">
+            <Link href="/privacy" className="hover:text-[#00B489] transition-colors hidden md:inline-block border-l border-white/10 pl-4">
               Privacy
             </Link>
-            <Link href="/disclaimer" className="hover:text-white transition-colors hidden md:inline-block border-l border-white/10 pl-4">
+            <Link href="/disclaimer" className="hover:text-[#00B489] transition-colors hidden md:inline-block border-l border-white/10 pl-4">
               Disclaimer
             </Link>
-            <Link href="/cookies" className="hover:text-white transition-colors hidden md:inline-block border-l border-white/10 pl-4">
+            <Link href="/cookies" className="hover:text-[#00B489] transition-colors hidden md:inline-block border-l border-white/10 pl-4">
               Cookies
             </Link>
           </motion.div>
@@ -1200,12 +1200,12 @@ function TranslationalWorkflow() {
               <Eyebrow>Interactive preview</Eyebrow>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="mt-6 font-serif text-[clamp(2rem,4vw,3.1rem)] font-light leading-[1.1] tracking-[-0.015em] text-ink">
+              <h2 className="mt-6 font-sans text-[clamp(2rem,4vw,3.1rem)] font-bold leading-[1.1] tracking-tight text-[#082827]">
                 Explore real screening workflows
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="mt-6 text-[16px] leading-[1.7] text-ink-soft">
+              <p className="mt-6 text-[16px] leading-[1.7] text-[#5A7470] font-normal">
                 See how QureSight processes patient data in real time. Click through the interactive views below to explore cohort analysis, kernel visualization, and gate-level explainability.
               </p>
             </Reveal>
@@ -1218,20 +1218,21 @@ function TranslationalWorkflow() {
                     <button
                       key={section.id}
                       onClick={() => setActiveTab(idx)}
-                      className={`w-full rounded-2xl border p-5 text-left transition-all duration-300 ${isSelected
-                        ? "border-hairline/90 bg-parchment shadow-[0_12px_32px_-20px_rgba(60,50,35,0.4)]"
-                        : "border-transparent hover:bg-parchment/40"
-                        }`}
+                      className={`w-full rounded-2xl border p-5 text-left transition-all duration-300 cursor-pointer ${
+                        isSelected
+                          ? "border-[#00B489]/50 bg-white shadow-[0_4px_20px_-4px_rgba(0,180,137,0.15)] ring-1 ring-[#00B489]/20"
+                          : "border-[#DFEBE8] bg-white/60 hover:bg-white"
+                      }`}
                     >
                       <div className="flex items-center justify-between">
-                        <h3 className={`font-serif text-[18px] transition-colors ${isSelected ? "text-ink font-medium" : "text-ink-soft"}`}>
+                        <h3 className={`font-sans text-[17px] transition-colors ${isSelected ? "text-[#082827] font-bold" : "text-[#5A7470] font-medium"}`}>
                           {section.title}
                         </h3>
-                        <span className={`font-mono text-[11px] ${isSelected ? "text-quantum font-bold" : "text-muted-foreground"}`}>
+                        <span className={`font-mono text-[11px] ${isSelected ? "text-[#006766] font-bold" : "text-[#5A7470]"}`}>
                           0{idx + 1}
                         </span>
                       </div>
-                      <p className="mt-2 text-[13.5px] leading-relaxed text-ink-soft">
+                      <p className="mt-2 text-[13.5px] leading-relaxed text-[#5A7470] font-normal">
                         {section.description}
                       </p>
                     </button>
@@ -1243,7 +1244,7 @@ function TranslationalWorkflow() {
 
           {/* Right Live Interactive Visual Terminal */}
           <Reveal delay={0.2} className="h-full">
-            <Glass className="overflow-hidden min-h-[540px] flex flex-col justify-center">
+            <Glass className="overflow-hidden min-h-[540px] flex flex-col justify-center bg-white border border-[#DFEBE8] shadow-[0_10px_30px_-12px_rgba(0,103,102,0.06)]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active.id}
@@ -1268,7 +1269,7 @@ function TranslationalWorkflow() {
 
 export default function Page() {
   return (
-    <main className="min-h-screen scroll-smooth bg-cream font-sans text-ink antialiased">
+    <main className="min-h-screen scroll-smooth bg-[#F2F7F6] font-sans text-[#082827] antialiased">
       <MoveToTop />
       <Nav />
       <Hero />

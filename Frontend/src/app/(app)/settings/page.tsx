@@ -224,25 +224,25 @@ export default function SettingsPage() {
       className="space-y-5 pb-12 w-full"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#DFEBE8] pb-4">
         <div>
           <div className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-quantum" />
-            <span className="text-[11px] font-mono uppercase tracking-wider text-quantum font-semibold">
+            <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#006766] font-bold">
               Preferences &amp; System Configuration
             </span>
           </div>
-          <h1 className="font-serif text-2xl sm:text-3xl font-light text-ink tracking-tight">
+          <h1 className="font-sans text-2xl sm:text-3xl font-bold text-[#082827] tracking-tight">
             Application Settings
           </h1>
-          <p className="text-xs text-ink-soft font-light">
+          <p className="text-xs text-[#5A7470] font-normal">
             Configure screening automation, diagnostic display preferences, and local data retention.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cream border border-hairline text-ink-soft text-[11px] font-mono">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] text-[11px] font-mono font-semibold">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00B489] animate-pulse" />
             <span>Auto-saving active {lastSavedTime ? `· ${lastSavedTime}` : ""}</span>
           </div>
         </div>
@@ -251,25 +251,25 @@ export default function SettingsPage() {
       {/* Grid of Settings Sections */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* 1. Screening Automation */}
-        <div className="p-5 rounded-2xl bg-parchment border border-hairline shadow-xs space-y-4">
-          <div className="flex items-center gap-2 border-b border-hairline pb-2.5">
-            <div className="w-7 h-7 rounded-lg bg-quantum/10 text-quantum flex items-center justify-center">
-              <Zap size={15} />
+        <div className="p-5 rounded-2xl bg-white border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)] space-y-4">
+          <div className="flex items-center gap-2.5 border-b border-[#DFEBE8] pb-3">
+            <div className="w-8 h-8 rounded-xl bg-[#E6F7F4] text-[#006766] flex items-center justify-center">
+              <Zap size={16} />
             </div>
             <div>
-              <h2 className="font-serif text-base font-medium text-ink">Screening Automation</h2>
-              <p className="text-[11px] text-ink-soft">Control diagnostic test behaviors</p>
+              <h2 className="font-sans text-base font-bold text-[#082827]">Screening Automation</h2>
+              <p className="text-[11px] text-[#5A7470]">Control diagnostic test behaviors</p>
             </div>
           </div>
 
           <div className="space-y-3 text-xs">
-            <div className="flex items-center justify-between p-3 rounded-xl bg-cream/40 border border-hairline">
+            <div className="flex items-center justify-between p-3.5 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8]">
               <div className="space-y-0.5 max-w-[280px]">
                 <div className="flex items-center gap-1">
-                  <span className="font-medium text-ink">Auto-Save Screening Cases</span>
+                  <span className="font-bold text-[#082827]">Auto-Save Screening Cases</span>
                   <HelpTooltip text="Automatically saves every patient diagnosis directly to the Supabase database." />
                 </div>
-                <p className="text-[11px] text-ink-soft font-light">
+                <p className="text-[11px] text-[#5A7470] font-normal">
                   Save new test runs automatically to your audit trail.
                 </p>
               </div>
@@ -277,17 +277,17 @@ export default function SettingsPage() {
                 type="checkbox"
                 checked={autoSaveHistory}
                 onChange={(e) => handleToggleAutoSave(e.target.checked)}
-                className="w-4 h-4 accent-quantum cursor-pointer rounded"
+                className="w-4 h-4 accent-[#006766] cursor-pointer rounded"
               />
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-xl bg-cream/40 border border-hairline">
+            <div className="flex items-center justify-between p-3.5 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8]">
               <div className="space-y-0.5 max-w-[280px]">
                 <div className="flex items-center gap-1">
-                  <span className="font-medium text-ink">Auto-Generate Report File</span>
+                  <span className="font-bold text-[#082827]">Auto-Generate Report File</span>
                   <HelpTooltip text="Generates a downloadable summary report immediately when a screening finishes." />
                 </div>
-                <p className="text-[11px] text-ink-soft font-light">
+                <p className="text-[11px] text-[#5A7470] font-normal">
                   Trigger report download on screening completion.
                 </p>
               </div>
@@ -295,32 +295,32 @@ export default function SettingsPage() {
                 type="checkbox"
                 checked={autoDownloadReport}
                 onChange={(e) => handleToggleAutoDownload(e.target.checked)}
-                className="w-4 h-4 accent-quantum cursor-pointer rounded"
+                className="w-4 h-4 accent-[#006766] cursor-pointer rounded"
               />
             </div>
           </div>
         </div>
 
         {/* 2. Display & Interface */}
-        <div className="p-5 rounded-2xl bg-parchment border border-hairline shadow-xs space-y-4">
-          <div className="flex items-center gap-2 border-b border-hairline pb-2.5">
-            <div className="w-7 h-7 rounded-lg bg-cream-deep text-ink flex items-center justify-center">
-              <Sliders size={15} />
+        <div className="p-5 rounded-2xl bg-white border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)] space-y-4">
+          <div className="flex items-center gap-2.5 border-b border-[#DFEBE8] pb-3">
+            <div className="w-8 h-8 rounded-xl bg-[#E6F7F4] text-[#006766] flex items-center justify-center">
+              <Sliders size={16} />
             </div>
             <div>
-              <h2 className="font-serif text-base font-medium text-ink">Interface &amp; Display</h2>
-              <p className="text-[11px] text-ink-soft">Visual contrast and ergonomics</p>
+              <h2 className="font-sans text-base font-bold text-[#082827]">Interface &amp; Display</h2>
+              <p className="text-[11px] text-[#5A7470]">Visual contrast and ergonomics</p>
             </div>
           </div>
 
           <div className="space-y-3 text-xs">
-            <div className="flex items-center justify-between p-3 rounded-xl bg-cream/40 border border-hairline">
+            <div className="flex items-center justify-between p-3.5 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8]">
               <div className="space-y-0.5 max-w-[280px]">
                 <div className="flex items-center gap-1">
-                  <span className="font-medium text-ink">High-Contrast Medical Mode</span>
+                  <span className="font-bold text-[#082827]">High-Contrast Medical Mode</span>
                   <HelpTooltip text="Increases border contrast and darkens text elements for clinical viewing environments." />
                 </div>
-                <p className="text-[11px] text-ink-soft font-light">
+                <p className="text-[11px] text-[#5A7470] font-normal">
                   Enhanced clarity on bright medical displays.
                 </p>
               </div>
@@ -328,24 +328,24 @@ export default function SettingsPage() {
                 type="checkbox"
                 checked={highContrastMode}
                 onChange={(e) => handleToggleHighContrast(e.target.checked)}
-                className="w-4 h-4 accent-quantum cursor-pointer rounded"
+                className="w-4 h-4 accent-[#006766] cursor-pointer rounded"
               />
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-xl bg-cream/40 border border-hairline">
+            <div className="flex items-center justify-between p-3.5 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8]">
               <div className="space-y-0.5 max-w-[280px]">
                 <div className="flex items-center gap-2">
-                  <span className="font-medium text-ink">Interactive Audio Feedback</span>
+                  <span className="font-bold text-[#082827]">Interactive Audio Feedback</span>
                   <button
                     type="button"
                     onClick={() => playQuantumCompletionSound(true)}
                     title="Test Completion Sound"
-                    className="inline-flex items-center gap-1 text-[10px] font-mono text-quantum hover:underline cursor-pointer font-semibold"
+                    className="inline-flex items-center gap-1 text-[10px] font-mono text-[#006766] hover:underline cursor-pointer font-bold"
                   >
                     <Volume2 size={11} /> Test Sound
                   </button>
                 </div>
-                <p className="text-[11px] text-ink-soft font-light">
+                <p className="text-[11px] text-[#5A7470] font-normal">
                   Plays an audio chime when a screening completes.
                 </p>
               </div>
@@ -353,7 +353,7 @@ export default function SettingsPage() {
                 type="checkbox"
                 checked={soundEffects}
                 onChange={(e) => handleToggleAudio(e.target.checked)}
-                className="w-4 h-4 accent-quantum cursor-pointer rounded"
+                className="w-4 h-4 accent-[#006766] cursor-pointer rounded"
               />
             </div>
           </div>
@@ -361,22 +361,22 @@ export default function SettingsPage() {
       </div>
 
       {/* Data Management Section */}
-      <div className="p-5 rounded-2xl bg-parchment border border-hairline shadow-xs space-y-4">
-        <div className="flex items-center justify-between border-b border-hairline pb-2.5">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-cream-deep text-ink flex items-center justify-center">
-              <ShieldCheck size={15} />
+      <div className="p-5 rounded-2xl bg-white border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)] space-y-4">
+        <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-[#E6F7F4] text-[#006766] flex items-center justify-center">
+              <ShieldCheck size={16} />
             </div>
             <div>
-              <h2 className="font-serif text-base font-medium text-ink">Data Retention &amp; Privacy</h2>
-              <p className="text-[11px] text-ink-soft">Manage stored records and data exports</p>
+              <h2 className="font-sans text-base font-bold text-[#082827]">Data Retention &amp; Privacy</h2>
+              <p className="text-[11px] text-[#5A7470]">Manage stored records and data exports</p>
             </div>
           </div>
-          <span className="text-xs font-mono text-ink-soft">{historyCount} records stored</span>
+          <span className="text-xs font-mono text-[#5A7470] font-semibold">{historyCount} records stored</span>
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-          <p className="text-ink-soft font-light max-w-md">
+          <p className="text-[#5A7470] font-normal max-w-md">
             All screening data is stored securely in your database. You can export the raw audit trail or clear records at any time.
           </p>
 
@@ -384,14 +384,14 @@ export default function SettingsPage() {
             <button
               type="button"
               onClick={handleExportAllData}
-              className="px-3.5 py-2 rounded-xl bg-cream-deep/70 hover:bg-cream border border-hairline text-ink font-medium text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-[#F2F7F6] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#082827] font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
             >
               <Download size={13} /> Export Audit JSON
             </button>
             <button
               type="button"
               onClick={() => setIsClearModalOpen(true)}
-              className="px-3.5 py-2 rounded-xl bg-red-50 hover:bg-red-100 border border-red-200 text-red-700 font-medium text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-red-50 hover:bg-red-100 border border-red-200 text-red-700 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
             >
               <Trash2 size={13} /> Clear Stored History
             </button>
@@ -400,32 +400,32 @@ export default function SettingsPage() {
       </div>
 
       {/* Session & Authentication Section */}
-      <div className="p-5 rounded-2xl bg-parchment border border-hairline shadow-xs space-y-4">
-        <div className="flex items-center justify-between border-b border-hairline pb-2.5">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-cream-deep text-ink flex items-center justify-center">
-              <LogOut size={15} />
+      <div className="p-5 rounded-2xl bg-white border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)] space-y-4">
+        <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-[#E6F7F4] text-[#006766] flex items-center justify-center">
+              <LogOut size={16} />
             </div>
             <div>
-              <h2 className="font-serif text-base font-medium text-ink">Session &amp; Authentication</h2>
-              <p className="text-[11px] text-ink-soft">Active researcher profile and security credentials</p>
+              <h2 className="font-sans text-base font-bold text-[#082827]">Session &amp; Authentication</h2>
+              <p className="text-[11px] text-[#5A7470]">Active researcher profile and security credentials</p>
             </div>
           </div>
-          <span className="text-[11px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+          <span className="text-[11px] font-mono text-[#006766] bg-[#E6F7F4] px-2.5 py-0.5 rounded-full border border-[#00B489]/30 font-semibold">
             Authenticated
           </span>
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
           <div>
-            <div className="font-serif text-sm font-medium text-ink">{userName}</div>
-            <div className="text-ink-soft font-mono text-[11px]">{userEmail || "investigator@quresight.internal"}</div>
+            <div className="font-sans text-sm font-bold text-[#082827]">{userName}</div>
+            <div className="text-[#5A7470] font-mono text-[11px]">{userEmail || "investigator@quresight.internal"}</div>
           </div>
 
           <button
             type="button"
             onClick={handleSignOut}
-            className="px-4 py-2 rounded-xl border border-hairline bg-cream hover:bg-cream-deep text-ink font-medium text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+            className="px-4 py-2.5 rounded-xl border border-[#DFEBE8] bg-[#F2F7F6] hover:bg-[#E6F7F4] text-[#082827] font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
           >
             <LogOut size={13} /> Sign Out of Session
           </button>
@@ -433,24 +433,24 @@ export default function SettingsPage() {
       </div>
 
       {/* Danger Zone: Permanent Account Deletion */}
-      <div className="p-5 rounded-2xl bg-red-50/40 border border-red-200/90 shadow-2xs space-y-4">
-        <div className="flex items-center justify-between border-b border-red-200/60 pb-2.5">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-red-100 text-red-700 flex items-center justify-center">
-              <ShieldAlert size={15} />
+      <div className="p-5 rounded-2xl bg-red-50/50 border border-red-200 shadow-2xs space-y-4">
+        <div className="flex items-center justify-between border-b border-red-200 pb-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-red-100 text-red-700 flex items-center justify-center">
+              <ShieldAlert size={16} />
             </div>
             <div>
-              <h2 className="font-serif text-base font-medium text-red-900">Danger Zone</h2>
-              <p className="text-[11px] text-red-700/80">Permanent account &amp; data deletion</p>
+              <h2 className="font-sans text-base font-bold text-red-900">Danger Zone</h2>
+              <p className="text-[11px] text-red-700">Permanent account &amp; data deletion</p>
             </div>
           </div>
-          <span className="text-[10px] font-mono uppercase tracking-wider text-red-700 bg-red-100 px-2 py-0.5 rounded font-semibold">
+          <span className="text-[10px] font-mono uppercase tracking-wider text-red-700 bg-red-100 px-2.5 py-0.5 rounded-full font-bold">
             Irreversible
           </span>
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-          <p className="text-red-800/80 font-light max-w-lg leading-relaxed">
+          <p className="text-red-800 font-normal max-w-lg leading-relaxed">
             Permanently delete your user account, active session tokens, all saved patient screening cases, and notification records from Supabase. This action cannot be recovered.
           </p>
 
@@ -460,7 +460,7 @@ export default function SettingsPage() {
               setDeleteConfirmText("");
               setIsDeleteModalOpen(true);
             }}
-            className="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-medium text-xs flex items-center gap-2 transition-all cursor-pointer shadow-xs shrink-0"
+            className="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold text-xs flex items-center gap-2 transition-all cursor-pointer shadow-xs shrink-0"
           >
             <Trash2 size={13} /> Delete Account Permanently
           </button>
@@ -482,26 +482,26 @@ export default function SettingsPage() {
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              className="relative w-full max-w-md bg-parchment rounded-3xl border border-hairline shadow-2xl p-6 space-y-4 overflow-hidden z-10"
+              className="relative w-full max-w-md bg-white rounded-3xl border border-[#DFEBE8] shadow-2xl p-6 space-y-4 overflow-hidden z-10"
             >
               {/* Modal Top Header with Cross X Button */}
-              <div className="flex items-center justify-between border-b border-hairline pb-3">
+              <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
                 <div className="flex items-center gap-2 text-red-700">
                   <Trash2 size={18} />
-                  <h3 className="font-serif text-base font-medium text-ink">Clear Screening History</h3>
+                  <h3 className="font-sans text-base font-bold text-[#082827]">Clear Screening History</h3>
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsClearModalOpen(false)}
                   disabled={isClearing}
                   aria-label="Cancel"
-                  className="p-1 rounded-lg hover:bg-cream-deep text-ink-soft hover:text-ink transition-colors cursor-pointer"
+                  className="p-1.5 rounded-lg hover:bg-[#F2F7F6] text-[#5A7470] hover:text-[#082827] transition-colors cursor-pointer"
                 >
                   <X size={16} />
                 </button>
               </div>
 
-              <p className="text-xs text-ink-soft leading-relaxed">
+              <p className="text-xs text-[#5A7470] leading-relaxed">
                 Are you sure you want to permanently delete all <strong>{historyCount}</strong> saved patient diagnosis records from the Supabase cloud database?
               </p>
 
@@ -510,7 +510,7 @@ export default function SettingsPage() {
                   type="button"
                   onClick={() => setIsClearModalOpen(false)}
                   disabled={isClearing}
-                  className="px-4 py-2 rounded-xl border border-hairline bg-cream hover:bg-cream-deep text-xs font-medium text-ink transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-xl border border-[#DFEBE8] bg-[#F2F7F6] hover:bg-[#E6F7F4] text-xs font-semibold text-[#082827] transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -518,7 +518,7 @@ export default function SettingsPage() {
                   type="button"
                   onClick={handleConfirmClearHistory}
                   disabled={isClearing}
-                  className="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-medium transition-all shadow-xs flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                  className="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-semibold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
                 >
                   {isClearing ? <Loader2 size={13} className="animate-spin" /> : <Trash2 size={13} />}
                   <span>{isClearing ? "Clearing..." : "Yes, Clear All History"}</span>
@@ -544,13 +544,13 @@ export default function SettingsPage() {
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              className="relative w-full max-w-lg bg-parchment rounded-3xl border border-red-200 shadow-2xl p-6 space-y-4 overflow-hidden z-10"
+              className="relative w-full max-w-lg bg-white rounded-3xl border border-red-200 shadow-2xl p-6 space-y-4 overflow-hidden z-10"
             >
               {/* Header with Close Cross Button */}
-              <div className="flex items-center justify-between border-b border-hairline pb-3">
+              <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
                 <div className="flex items-center gap-2 text-red-600">
                   <AlertTriangle size={20} />
-                  <h3 className="font-serif text-lg font-medium text-red-950">
+                  <h3 className="font-sans text-lg font-bold text-red-950">
                     Delete Account Permanently
                   </h3>
                 </div>
@@ -559,25 +559,25 @@ export default function SettingsPage() {
                   onClick={() => setIsDeleteModalOpen(false)}
                   disabled={isDeleting}
                   aria-label="Close dialog"
-                  className="p-1.5 rounded-xl hover:bg-red-100 text-ink-soft hover:text-ink transition-colors cursor-pointer group"
+                  className="p-1.5 rounded-xl hover:bg-red-100 text-[#5A7470] hover:text-[#082827] transition-colors cursor-pointer group"
                 >
                   <X size={17} className="group-hover:rotate-90 transition-transform duration-150" />
                 </button>
               </div>
 
               {/* Warning Content */}
-              <div className="space-y-2 text-xs text-ink-soft leading-relaxed">
+              <div className="space-y-2 text-xs text-[#5A7470] leading-relaxed">
                 <p className="text-red-900 font-medium bg-red-50 p-3 rounded-2xl border border-red-200">
                   ⚠️ This action is permanent and cannot be undone. All your login credentials, profile data, patient screenings, feature attributions, and notifications will be wiped from Supabase immediately.
                 </p>
                 <p>
-                  Target Account: <strong className="text-ink">{userEmail || userName}</strong>
+                  Target Account: <strong className="text-[#082827] font-semibold">{userEmail || userName}</strong>
                 </p>
               </div>
 
               {/* Safety Typing Verification */}
               <div className="space-y-1.5 pt-1">
-                <label className="block text-[11px] font-mono uppercase tracking-wider text-ink-soft font-semibold">
+                <label className="block text-[11px] font-mono uppercase tracking-wider text-[#5A7470] font-bold">
                   Type <span className="text-red-600 font-bold">DELETE</span> to confirm:
                 </label>
                 <input
@@ -586,17 +586,17 @@ export default function SettingsPage() {
                   onChange={(e) => setDeleteConfirmText(e.target.value)}
                   placeholder="DELETE"
                   disabled={isDeleting}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-cream border border-red-300 font-mono text-xs text-ink placeholder:text-ink-soft/50 focus:outline-none focus:ring-1 focus:ring-red-600 focus:border-red-600 transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#F7FAF9] border border-red-300 font-mono text-xs text-[#082827] placeholder:text-[#5A7470]/50 focus:outline-none focus:ring-1 focus:ring-red-600 focus:border-red-600 transition-all"
                 />
               </div>
 
               {/* Action Buttons */}
-              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-hairline">
+              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#DFEBE8]">
                 <button
                   type="button"
                   onClick={() => setIsDeleteModalOpen(false)}
                   disabled={isDeleting}
-                  className="px-4 py-2 rounded-xl border border-hairline bg-cream hover:bg-cream-deep text-xs font-medium text-ink transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-xl border border-[#DFEBE8] bg-[#F2F7F6] hover:bg-[#E6F7F4] text-xs font-semibold text-[#082827] transition-colors cursor-pointer"
                 >
                   Cancel &amp; Keep Account
                 </button>
@@ -604,7 +604,7 @@ export default function SettingsPage() {
                   type="button"
                   onClick={handleConfirmDeleteAccount}
                   disabled={deleteConfirmText.trim().toUpperCase() !== "DELETE" || isDeleting}
-                  className="px-5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-medium transition-all shadow-xs flex items-center gap-2 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="px-5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-semibold transition-all shadow-xs flex items-center gap-2 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   {isDeleting ? <Loader2 size={14} className="animate-spin" /> : <Trash2 size={14} />}
                   <span>{isDeleting ? "Purging Account..." : "Permanently Delete"}</span>

@@ -384,44 +384,59 @@ export default function LoginPage() {
         initial={{ opacity: 0, scale: 0.97, y: 15 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.6, ease: easeOut }}
-        className="w-full max-w-6xl min-h-[720px] bg-parchment rounded-[2.5rem] border border-hairline/90 shadow-[0_24px_60px_-30px_rgba(60,50,35,0.4)] overflow-hidden grid grid-cols-1 lg:grid-cols-12"
+        className="w-full max-w-6xl min-h-[720px] bg-parchment rounded-[2.5rem] border border-hairline/90 shadow-[0_24px_60px_-30px_rgba(0,103,102,0.12)] overflow-hidden grid grid-cols-1 lg:grid-cols-12"
       >
-        {/* LEFT COLUMN: 3D Quantum Manifold Artwork */}
+        {/* LEFT COLUMN: Dribbble MedTech AI Diagnostics Presentation Card */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.1, ease: easeOut }}
-          className="hidden lg:flex lg:col-span-6 relative bg-ink p-12 flex-col justify-between overflow-hidden rounded-[2.2rem] m-3 shadow-md"
+          className="hidden lg:flex lg:col-span-6 relative bg-gradient-to-br from-[#006766] via-[#084E4D] to-[#033433] p-10 flex-col justify-between overflow-hidden rounded-[2.2rem] m-3 shadow-lg text-white"
         >
-          <motion.img
-            src="/images/auth-manifold.jpg"
-            alt="Abstract geometric visualization"
-            animate={{ scale: [1, 1.04, 1], rotate: [0, 0.4, 0] }}
-            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-0 w-full h-full object-cover object-center opacity-90"
-          />
-          
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-ink/30 pointer-events-none" />
+          {/* Subtle Diagnostic Pulse Background Ornaments */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-quantum/15 blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-10 -right-10 w-72 h-72 rounded-full bg-white/5 blur-2xl pointer-events-none" />
 
           {/* Top Label */}
           <div className="relative z-10">
             <div className="flex items-center gap-3">
-              <span className="text-[11px] font-mono tracking-[0.25em] uppercase font-semibold text-parchment/90 drop-shadow-sm">
-                CLINICAL INTELLIGENCE PLATFORM
+              <span className="text-[10px] font-mono tracking-[0.25em] uppercase font-bold text-white/90 px-3 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-xs">
+                AI DIAGNOSTICS SUITE
               </span>
-              <div className="h-[1px] w-12 bg-parchment/50" />
+              <div className="h-[1px] w-12 bg-white/20" />
             </div>
           </div>
 
-          {/* Bottom Quote */}
-          <div className="relative z-10 space-y-4 max-w-md">
-            <h1 className="font-serif text-4xl sm:text-5xl font-light tracking-tight text-parchment leading-[1.12]">
-              Recovering <br />
-              Pre-Symptomatic Signal
+          {/* Center: Dribbble High-Impact Medical Stats Cards */}
+          <div className="relative z-10 space-y-4 my-auto py-6">
+            <h1 className="font-sans text-3xl sm:text-4xl font-bold tracking-tight text-white leading-[1.15]">
+              AI-Powered Early <br />
+              Disease Detection
             </h1>
-            <p className="text-parchment/75 text-sm sm:text-base font-light leading-relaxed">
-              Quantum-enhanced models uncover subtle biomarker relationships that classical methods miss.
+            <p className="text-white/80 text-sm font-normal leading-relaxed max-w-md">
+              Clinical diagnostic models uncovering early pathology across pulmonary auscultation, cytology, and 12-lead waveforms.
             </p>
+
+            {/* Metric Cards matching Dribbble shot */}
+            <div className="grid grid-cols-2 gap-3 pt-4">
+              <div className="p-4 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md space-y-1">
+                <span className="font-sans text-3xl font-extrabold text-white tracking-tight">63%</span>
+                <p className="text-xs text-white/80 leading-snug">reduction in missed positive clinical diagnoses.</p>
+              </div>
+              <div className="p-4 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md space-y-1">
+                <span className="font-sans text-3xl font-extrabold text-white tracking-tight">2.7x</span>
+                <p className="text-xs text-white/80 leading-snug">more effective than standard symptomatic screening.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Device & Calibration Status */}
+          <div className="relative z-10 pt-4 border-t border-white/15 flex items-center justify-between text-xs text-white/80 font-mono">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Digital Sensor Calibrated</span>
+            </div>
+            <span className="text-white/60">Ver 2.4.0</span>
           </div>
         </motion.div>
 
@@ -430,7 +445,7 @@ export default function LoginPage() {
           initial={{ opacity: 0, x: 25 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: easeOut }}
-          className="lg:col-span-6 p-8 sm:p-12 md:p-16 flex flex-col justify-between bg-parchment"
+          className="lg:col-span-6 p-8 sm:p-12 md:p-14 flex flex-col justify-between bg-parchment"
         >
           
           {/* Top Header Row with Logo & Pill Switcher */}
@@ -439,13 +454,13 @@ export default function LoginPage() {
 
             {/* Pill Switcher */}
             <div className="flex items-center p-1 bg-cream-deep/60 rounded-full border border-hairline text-xs font-medium">
-              <div className="relative px-3.5 py-1.5 text-ink rounded-full">
+              <div className="relative px-3.5 py-1.5 text-white rounded-full">
                 <motion.div
                   layoutId="auth-tab-pill"
-                  className="absolute inset-0 bg-parchment rounded-full border border-hairline/80 shadow-xs"
+                  className="absolute inset-0 bg-primary rounded-full shadow-xs"
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
-                <span className="relative z-10 font-semibold">Sign In</span>
+                <span className="relative z-10 font-semibold text-white">Sign In</span>
               </div>
               <Link 
                 href="/register" 
@@ -464,11 +479,11 @@ export default function LoginPage() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-center mb-8"
             >
-              <h2 className="font-serif text-3xl sm:text-4xl font-light text-ink tracking-tight mb-2">
+              <h2 className="font-sans text-3xl sm:text-4xl font-bold text-ink tracking-tight mb-2">
                 Welcome Back
               </h2>
-              <p className="text-ink-soft text-xs sm:text-sm font-light">
-                Enter your email and password to sign in
+              <p className="text-ink-soft text-xs sm:text-sm font-normal">
+                Enter your credentials to access the diagnostic workbench
               </p>
               <BackendStandbyBanner />
             </motion.div>
@@ -491,7 +506,7 @@ export default function LoginPage() {
             <form onSubmit={handleLogin} className="space-y-4">
               {/* Email */}
               <div className="space-y-1.5">
-                <label className="block text-xs font-semibold text-ink/80">
+                <label className="block text-xs font-semibold text-ink">
                   Email Address
                 </label>
                 <input
@@ -499,14 +514,14 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="w-full h-12 px-4 rounded-xl bg-cream/70 border border-hairline text-sm text-ink placeholder:text-muted-foreground/50 focus:outline-none focus:border-quantum/60 focus:bg-parchment transition-all shadow-2xs font-sans"
+                  className="w-full h-12 px-4 rounded-xl bg-cream/70 border border-hairline text-sm text-ink placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-parchment transition-all shadow-2xs font-sans"
                   required
                 />
               </div>
 
               {/* Password */}
               <div className="space-y-1.5">
-                <label className="block text-xs font-semibold text-ink/80">
+                <label className="block text-xs font-semibold text-ink">
                   Password
                 </label>
                 <div className="relative">
@@ -516,7 +531,7 @@ export default function LoginPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     maxLength={72}
                     placeholder="Enter your password"
-                    className="w-full h-12 pl-4 pr-11 rounded-xl bg-cream/70 border border-hairline text-sm text-ink placeholder:text-muted-foreground/50 focus:outline-none focus:border-quantum/60 focus:bg-parchment transition-all shadow-2xs font-sans"
+                    className="w-full h-12 pl-4 pr-11 rounded-xl bg-cream/70 border border-hairline text-sm text-ink placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-parchment transition-all shadow-2xs font-sans"
                     required
                   />
                   <button
@@ -536,7 +551,7 @@ export default function LoginPage() {
                   className="flex items-center gap-2.5 cursor-pointer select-none"
                 >
                   <div className={`w-9 h-5 flex items-center rounded-full p-0.5 transition-colors duration-300 ${
-                    rememberMe ? "bg-ink" : "bg-hairline"
+                    rememberMe ? "bg-primary" : "bg-hairline"
                   }`}>
                     <motion.div 
                       layout
@@ -546,12 +561,12 @@ export default function LoginPage() {
                       }`} 
                     />
                   </div>
-                  <span className="text-ink-soft">Remember me</span>
+                  <span className="text-ink-soft font-medium">Remember me</span>
                 </div>
 
                 <Link
                   href="/forgot-password"
-                  className="font-medium text-ink-soft hover:text-ink transition-colors hover:underline"
+                  className="font-semibold text-primary hover:underline transition-colors"
                 >
                   Forgot Password?
                 </Link>
@@ -563,7 +578,7 @@ export default function LoginPage() {
                 whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={isAnyLoading}
-                className="w-full h-12 mt-2 rounded-xl bg-ink text-parchment font-medium text-sm hover:opacity-90 transition-all flex items-center justify-center gap-2 shadow-sm disabled:opacity-50 cursor-pointer"
+                className="w-full h-12 mt-2 rounded-xl bg-primary hover:bg-primary/90 text-white font-semibold text-sm transition-all flex items-center justify-center gap-2 shadow-xs disabled:opacity-50 cursor-pointer"
               >
                 {isLoading ? (
                   <>
@@ -598,7 +613,7 @@ export default function LoginPage() {
                     type="button"
                     onClick={handleGoogleClick}
                     disabled={isAnyLoading}
-                    className="absolute inset-0 w-full h-12 rounded-xl border border-hairline/90 bg-cream/60 hover:bg-cream text-ink font-medium text-sm transition-all flex items-center justify-center gap-3 shadow-2xs cursor-pointer disabled:opacity-50"
+                    className="absolute inset-0 w-full h-12 rounded-xl border border-hairline/90 bg-cream/60 hover:bg-cream text-ink font-semibold text-sm transition-all flex items-center justify-center gap-3 shadow-2xs cursor-pointer disabled:opacity-50"
                   >
                     {isGoogleLoading ? (
                       <>
@@ -626,8 +641,8 @@ export default function LoginPage() {
                 exit={{ opacity: 0 }}
                 className="absolute inset-0 bg-parchment/95 backdrop-blur-xs z-50 flex flex-col items-center justify-center p-6 text-center rounded-[2.5rem]"
               >
-                <Loader2 size={36} className="animate-spin text-quantum mb-3" />
-                <h3 className="font-serif text-lg font-medium text-ink">Signing in...</h3>
+                <Loader2 size={36} className="animate-spin text-primary mb-3" />
+                <h3 className="font-sans text-lg font-bold text-ink">Signing in...</h3>
                 <p className="text-xs text-ink-soft mt-1">Verifying Google identity & establishing secure tokens...</p>
                 {waitElapsed > 4 && (
                   <p className="text-[11px] text-amber-700 bg-amber-50/90 px-3 py-1.5 rounded-lg border border-amber-200/80 mt-3 max-w-xs animate-pulse">
@@ -640,7 +655,7 @@ export default function LoginPage() {
                     setIsGoogleLoading(false);
                     setErrorMessage("Google sign-in was cancelled.");
                   }}
-                  className="mt-5 px-4 py-2 rounded-xl border border-hairline/80 bg-cream/70 hover:bg-cream text-xs font-medium text-ink-soft hover:text-ink transition-all cursor-pointer shadow-2xs hover:scale-105"
+                  className="mt-5 px-4 py-2 rounded-xl border border-hairline/80 bg-cream/70 hover:bg-cream text-xs font-semibold text-ink-soft hover:text-ink transition-all cursor-pointer shadow-2xs hover:scale-105"
                 >
                   Cancel & Return to Form
                 </button>
@@ -651,7 +666,7 @@ export default function LoginPage() {
           {/* Bottom Footer Switcher */}
           <div className="text-center text-xs text-ink-soft pt-4">
             Don't have an account?{" "}
-            <Link href="/register" className="font-semibold text-ink hover:underline">
+            <Link href="/register" className="font-semibold text-primary hover:underline">
               Sign Up
             </Link>
           </div>
