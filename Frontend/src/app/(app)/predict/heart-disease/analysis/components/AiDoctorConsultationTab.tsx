@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { Send, ShieldAlert, User as UserIcon, Sparkles, HeartPulse, Stethoscope } from "lucide-react";
+import ChatMarkdownRenderer from "@/components/chat/ChatMarkdownRenderer";
 
 interface AiDoctorConsultationTabProps {
   patientInfo: {
@@ -41,55 +42,7 @@ function QureSightLogo({ size = 26 }: { size?: number }) {
 }
 
 function FormattedMessageContent({ content }: { content: string }) {
-  const lines = content.split("\n");
-
-  return (
-    <div className="space-y-2 text-xs leading-relaxed">
-      {lines.map((line, lIdx) => {
-        const trimmed = line.trim();
-        if (!trimmed) return <div key={lIdx} className="h-1" />;
-
-        if (trimmed === "---" || trimmed === "___") {
-          return <hr key={lIdx} className="my-2 border-hairline/60" />;
-        }
-
-        const isBullet = trimmed.startsWith("•") || trimmed.startsWith("- ");
-        const rawLine = isBullet ? trimmed.replace(/^[•\-]\s*/, "") : line;
-
-        const elements: React.ReactNode[] = [];
-        let lastIndex = 0;
-        const boldRegex = /\*\*(.*?)\*\*/g;
-        let match;
-
-        while ((match = boldRegex.exec(rawLine)) !== null) {
-          if (match.index > lastIndex) {
-            elements.push(rawLine.substring(lastIndex, match.index));
-          }
-          elements.push(
-            <strong key={match.index} className="font-bold text-ink">
-              {match[1]}
-            </strong>
-          );
-          lastIndex = match.index + match[0].length;
-        }
-
-        if (lastIndex < rawLine.length) {
-          elements.push(rawLine.substring(lastIndex));
-        }
-
-        if (isBullet) {
-          return (
-            <div key={lIdx} className="flex items-start gap-2 pl-1">
-              <span className="text-quantum font-bold shrink-0">•</span>
-              <span className="flex-1">{elements}</span>
-            </div>
-          );
-        }
-
-        return <div key={lIdx}>{elements}</div>;
-      })}
-    </div>
-  );
+  return <ChatMarkdownRenderer content={content} isBot={true} />;
 }
 
 export default function AiDoctorConsultationTab({

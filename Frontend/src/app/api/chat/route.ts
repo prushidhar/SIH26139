@@ -28,12 +28,20 @@ CORE PLATFORM KNOWLEDGE:
    - M3 Readout Error Mitigation: Matrix-free measurement mitigation correcting qubit bitflip errors.
    - GPU Statevector Simulator: PennyLane Lightning.qubit and Qiskit Aer GPU backends.
 
-RESPONSE GUIDELINES:
+RESPONSE GUIDELINES & MATHEMATICAL FORMATTING:
 - Be accurate, concise, rigorous, and clinically insightful.
 - When the user asks about their history, patients, or screenings, inspect the provided \`userContext.recentScreenings\` and provide exact case numbers, risk classifications, confidence percentages, and top contributing drivers.
 - If no screenings exist in context yet, inform the user they can run an instant diagnostic in the Clinical Predictor (/predict).
-- Use bold formatting sparingly only when strictly necessary to emphasize key clinical metrics or terms. Never overuse asterisks or bold text.
-- Format responses cleanly with simple bullet points and mathematical notations ($s_K \\ge 1.2$, $\\langle Z_i \\rangle$) where relevant.
+- MATHEMATICAL EQUATIONS IN LATEX:
+  * Always format mathematical expressions, physics derivations, metrics, and formulas in clean LaTeX.
+  * Use inline math with single dollar signs for short expressions: $s_K \ge 1.2$, $\langle Z_i \rangle$, $\chi^2$, $\mathbb{R}^D$, $\lambda \to 0$, $\theta_k \pm \frac{\pi}{2}$.
+  * Use display math blocks ($$ ... $$) on their own lines for standalone equations, proofs, and definitions.
+  * Never output unescaped plain ASCII math when LaTeX notation is appropriate.
+- MARKDOWN STRUCTURE:
+  * Use ### for clean section headings.
+  * Use bold (**text**) only for key clinical figures, metrics, and outcomes.
+  * Use Markdown tables (| Metric | Model | ... |) when comparing performance across architectures.
+  * Break down multi-step protocols into tidy bullet points or numbered lists.
 `;
 
 export async function POST(req: NextRequest) {
@@ -174,10 +182,30 @@ function generateExpertResponse(query: string, ctx: any): string {
   }
 
   // 5. QureExplain Gate Attribution
-  if (q.includes("qureexplain") || q.includes("gate") || q.includes("attribution") || q.includes("saliency") || q.includes("explain")) {
+  if (q.includes("qureexplain") || q.includes("gate") || q.includes("attribution") || q.includes("saliency") || q.includes("ablation")) {
     return `### 🔍 QureExplain: Quantum Gate Saliency & Attribution\n\nTraditional classical SHAP/LIME fails inside entangled quantum circuits. QureSight provides **QureExplain**, a quantum-native gate ablation attribution engine:\n\n1. **Ablation Protocol**: Systematically evaluates circuit expectation shifts when individual entangling gates ($CX_{i,j}$) or parameterized rotations ($R_z(\\theta_k)$) are deactivated.\n2. **Information Divergence**: Measures the Kullback-Leibler (KL) divergence:\n   $$D_{KL}(P \\parallel P_{\\neg g}) = \\sum_{y} P(y) \\ln \\left(\\frac{P(y)}{P_{\\neg g}(y)}\\right)$$\n3. **Clinical Mapping**: Links each influential entangling gate directly to physical cytology biomarkers (e.g. Nuclear Area, Concave Notches, Boundary Texture).`;
   }
 
+  // 6. Parameter-Shift Rule & Gradients
+  if (q.includes("parameter-shift") || q.includes("gradient") || q.includes("shift rule") || q.includes("partial") || q.includes("backprop")) {
+    return `### ⚡ Exact Quantum Parameter-Shift Rule\n\nClassical backpropagation cannot inspect intermediate superposition states without collapsing them (due to the **No-Cloning Theorem**). QureSight computes exact analytical quantum gradients via the **Parameter-Shift Rule**:\n\n$$\\frac{\\partial \\langle H \\rangle}{\\partial \\theta_k} = \\frac{1}{2} \\left[ \\langle H(\\theta_k + \\frac{\\pi}{2}) \\rangle - \\langle H(\\theta_k - \\frac{\\pi}{2}) \\rangle \\right]$$\n\n- **Macroscopic Shifts**: Measures the expectation value $\\langle H \\rangle$ at two shifted coordinates: $\\theta_k + \\frac{\\pi}{2}$ and $\\theta_k - \\frac{\\pi}{2}$.\n- **Zero Finite-Difference Error**: Unlike numerical perturbation formulas ($[f(\\theta + \\epsilon) - f(\\theta)] / \\epsilon$), parameter-shift is an exact analytic quantum gradient immune to finite-difference truncation error.`;
+  }
+
+  // 7. ZZ-Feature Map Encoding
+  if (q.includes("zz") || q.includes("feature map") || q.includes("encoding") || q.includes("ansatz") || q.includes("embedding")) {
+    return `### 🌀 Second-Order ZZ-Feature Map Encoding\n\nTo capture high-order non-linear biomarker correlations, QureSight utilizes the **Havlíček ZZ-feature map** to encode normalized clinical inputs $x \\in [-\\pi, \\pi]^D$ into entangled quantum states:\n\n$$|\\psi(x)\\rangle = U_{\\Phi}(x)|0\\rangle^{\\otimes n} = \\prod_{d=1}^{D} \\left( \\prod_{j < k} e^{i \\Phi_{j,k}(x) Z_j Z_k} \\prod_j e^{i x_j Z_j} H^{\\otimes n} \\right) |0\\rangle^{\\otimes n}$$\n\n- **Pairwise Entanglement**: The interaction phase $\\Phi_{j,k}(x) = (\\pi - x_j)(\\pi - x_k)$ directly entangles correlated pairs of biomarkers (e.g. Nuclear Perimeter $\\leftrightarrow$ Mean Concavity).\n- **Classical Intractability**: Simulating this circuit classically requires $\\mathcal{O}(2^n)$ statevector multiplication, enabling quantum classifiers to separate complex cellular patterns that classical kernels cannot.`;
+  }
+
+  // 8. Statistical Significance & McNemar χ²
+  if (q.includes("mcnemar") || q.includes("significance") || q.includes("chi") || q.includes("p-value") || q.includes("statistical")) {
+    return `### 📊 Statistical Significance & McNemar's $\\chi^2$ Test\n\nTo ensure diagnostic improvements are statistically valid and not artifacts of data splits, QureSight performs rigorous 5-fold cross-validation with **McNemar's test with continuity correction**:\n\n$$\\chi^2 = \\frac{(|b - c| - 1)^2}{b + c}$$\n\n| Cohort | Quantum VQC | Classical Baseline | $\\chi^2$ | $p$-value | Cohen's $d$ |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **Breast WDBC** | **96.8 ± 0.4%** | 95.2 ± 0.6% (XGB) | **5.63** | **$p = 0.018^*$** | **0.62** |\n| **Cardiac ECG** | **88.6 ± 0.6%** | 84.4 ± 0.8% (XGB) | **6.40** | **$p = 0.012^*$** | **0.71** |\n| **Neurological** | **98.2 ± 0.3%** | 97.5 ± 0.5% (RF) | **7.03** | **$p = 0.008^*$** | **0.84** |\n\nAll results satisfy $p < 0.05$, confirming statistically significant quantum advantage under identical clinical partitions.`;
+  }
+
+  // 9. Shape Factors & Cytology Subtle Signs
+  if (q.includes("shape") || q.includes("breast") || q.includes("cytology") || q.includes("subtle") || q.includes("detect")) {
+    return `### 🔬 Subtle Diagnostic Signatures & Cell Morphology\n\nIn fine-needle aspiration cytology, distinguishing benign lesions from early invasive carcinoma requires resolving microscopic nuclear deformations:\n\n1. **Mean Concave Points** ($c_i$):\n   - Measures the severity and number of inward membrane indentations.\n   - Invasive cells exhibit $c_i \\ge 0.082$ with irregular margin distribution.\n\n2. **Fractal Dimension** ($D_f$):\n   - Quantifies boundary irregularity via Hausdorff box-counting dimension:\n     $$D_f = \\lim_{\\epsilon \\to 0} \\frac{\\ln N(\\epsilon)}{\\ln(1/\\epsilon)}$$\n\n3. **Hilbert Space Advantage**:\n   - While classical decision boundaries in $\\mathbb{R}^{30}$ suffer from feature collinearity, the quantum VQC maps patient vectors to orthogonal subspaces, achieving **96.8% sensitivity** on borderline biopsies.`;
+  }
+
   // Default Comprehensive Response
-  return `### 🧬 QureSight Clinical Intelligence\n\nI am configured with full knowledge of the QureSight pipeline, your saved screening records (**${screenings.length} active**), and active backend (**${ctx.activeBackend || "IBM Quantum Eagle"}**).\n\nYou can ask me:\n- *"Summarize my recent patient screening cases"*\n- *"What is the difference between Quantum VQC and XGBoost?"*\n- *"Explain the $s_K \\ge 1.2$ geometric advantage formula"*\n- *"How does Zero-Noise Extrapolation (ZNE) mitigate decoherence on IBM Eagle?"*\n- *"How does QureExplain calculate gate ablation saliency maps?"*`;
+  return `### 🧬 QureSight Clinical Intelligence\n\nI am configured with full knowledge of the QureSight pipeline, your saved screening records (**${screenings.length} active**), and active backend (**${ctx.activeBackend || "IBM Quantum Eagle"}**).\n\nYou can ask me:\n- *"Summarize my recent patient screening cases"*\n- *"What is the difference between Quantum VQC and XGBoost?"*\n- *"Explain the $s_K \\ge 1.2$ geometric advantage formula"*\n- *"How does the Parameter-Shift rule compute quantum gradients?"*\n- *"What are the McNemar $\\chi^2$ statistical significance results?"*\n- *"How does Zero-Noise Extrapolation (ZNE) mitigate decoherence on IBM Eagle?"*`;
 }

@@ -14,6 +14,7 @@ import {
 import { AuthService } from "@/services/auth.service";
 import { ScreeningService, type StoredPrediction } from "@/services/screening.service";
 import { useQuantumBackend } from "@/hooks/useQuantumBackend";
+import ChatMarkdownRenderer from "./ChatMarkdownRenderer";
 
 interface ChatMessage {
   id: string;
@@ -40,106 +41,8 @@ function getRandomPrompts(count: number = 2): string[] {
   return shuffled.slice(0, count);
 }
 
-/**
- * Lightweight inline markdown formatter that converts **bold**, `code`, bullets and headings to clean JSX
- */
 function FormattedMessage({ text, isBot }: { text: string; isBot: boolean }) {
-  const lines = text.split("\n");
-
-  return (
-    <div className="space-y-1.5 text-[12.5px] leading-relaxed">
-      {lines.map((line, lineIdx) => {
-        const trimmed = line.trim();
-        if (!trimmed) {
-          return <div key={lineIdx} className="h-1" />;
-        }
-
-        // Headings (e.g. ### Heading)
-        if (trimmed.startsWith("### ")) {
-          const headingText = trimmed.replace(/^###\s+/, "");
-          return (
-            <h4 key={lineIdx} className={`font-serif font-semibold text-[13px] mt-1.5 mb-0.5 ${isBot ? "text-ink" : "text-white"}`}>
-              {parseInlineMarkdown(headingText, isBot)}
-            </h4>
-          );
-        }
-
-        // Bullets (e.g. - item or • item or 1. item)
-        const isBullet = trimmed.startsWith("- ") || trimmed.startsWith("• ") || /^\d+\.\s/.test(trimmed);
-        if (isBullet) {
-          const bulletContent = trimmed.replace(/^[-•]\s+|\d+\.\s+/, "");
-          return (
-            <div key={lineIdx} className="flex items-start gap-1.5 pl-1 my-0.5">
-              <span className={`text-[10px] mt-0.5 ${isBot ? "text-quantum" : "text-parchment"}`}>•</span>
-              <span className="flex-1">{parseInlineMarkdown(bulletContent, isBot)}</span>
-            </div>
-          );
-        }
-
-        return (
-          <p key={lineIdx} className="my-0.5">
-            {parseInlineMarkdown(line, isBot)}
-          </p>
-        );
-      })}
-    </div>
-  );
-}
-
-function parseInlineMarkdown(text: string, isBot: boolean): React.ReactNode[] {
-  const parts: React.ReactNode[] = [];
-  // Matches **bold**, `code`, or unclosed ** during streaming
-  const regex = /(\*\*[^*]+\*\*|`[^`]+`|\*\*[^*]+$)/g;
-  let lastIdx = 0;
-  let match: RegExpExecArray | null;
-
-  while ((match = regex.exec(text)) !== null) {
-    if (match.index > lastIdx) {
-      parts.push(text.substring(lastIdx, match.index));
-    }
-    const token = match[0];
-    if (token.startsWith("**") && token.endsWith("**") && token.length >= 4) {
-      const boldText = token.slice(2, -2);
-      parts.push(
-        <strong
-          key={`${match.index}-b`}
-          className={`font-bold ${isBot ? "text-black drop-shadow-xs" : "text-white"}`}
-        >
-          {boldText}
-        </strong>
-      );
-    } else if (token.startsWith("**") && !token.endsWith("**")) {
-      // Halfway streaming bold
-      const boldText = token.slice(2);
-      parts.push(
-        <strong
-          key={`${match.index}-b-streaming`}
-          className={`font-bold ${isBot ? "text-black" : "text-white"}`}
-        >
-          {boldText}
-        </strong>
-      );
-    } else if (token.startsWith("`") && token.endsWith("`")) {
-      const codeText = token.slice(1, -1);
-      parts.push(
-        <code
-          key={`${match.index}-c`}
-          className={`font-mono text-[11px] px-1 py-0.5 rounded font-medium ${
-            isBot ? "bg-cream-deep/90 text-ink border border-hairline/60" : "bg-white/20 text-white"
-          }`}
-        >
-          {codeText}
-        </code>
-      );
-    }
-    lastIdx = regex.lastIndex;
-  }
-
-  if (lastIdx < text.length) {
-    parts.push(text.substring(lastIdx));
-  }
-
-  return parts;
+  return <ChatMarkdownRenderer content={text} isBot={isBot} />;
 }
 
 export default function QuantumChatbot() {
@@ -379,8 +282,8 @@ export default function QuantumChatbot() {
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className={`fixed inset-x-3 bottom-20 sm:inset-auto sm:absolute sm:bottom-16 sm:right-0 ${
               isExpanded
-                ? "sm:w-[580px] h-[72vh] max-h-[640px]"
-                : "sm:w-[380px] h-[470px] max-h-[68vh]"
+                ? "sm:w-[620px] h-[75vh] max-h-[680px]"
+                : "sm:w-[420px] h-[520px] max-h-[72vh]"
             } bg-parchment rounded-3xl border border-hairline/90 shadow-[0_20px_50px_-15px_rgba(40,30,20,0.3)] flex flex-col overflow-hidden transition-all duration-300 z-50`}
           >
             {/* Window Header */}
@@ -453,7 +356,7 @@ export default function QuantumChatbot() {
                     )}
 
                     <div
-                      className={`max-w-[84%] rounded-2xl p-3.5 leading-relaxed ${
+                      className={`max-w-[88%] rounded-2xl p-3.5 leading-relaxed ${
                         isBot
                           ? "bg-cream-deep/60 border border-hairline/90 text-ink shadow-2xs"
                           : "bg-ink text-parchment font-medium shadow-xs"
