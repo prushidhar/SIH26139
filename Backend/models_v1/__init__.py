@@ -18,6 +18,7 @@ from .heart_tabular_pipeline import heart_tabular_pipeline, HeartTabularPipeline
 from .cxr_transfer_pipeline import cxr_transfer_pipeline, CXRCardiomegalyQMLPipeline
 from .donaire_liver_pipeline import donaire_liver_pipeline, DonaireLiverQMLPipeline
 from .neurological_pipeline import neurological_pipeline, NeurologicalPipeline
+from .ckd_pipeline import ckd_pipeline, ChronicKidneyPipeline
 
 __all__ = [
     "cx_01_pipeline",
@@ -36,6 +37,8 @@ __all__ = [
     "DonaireLiverQMLPipeline",
     "neurological_pipeline",
     "NeurologicalPipeline",
+    "ckd_pipeline",
+    "ChronicKidneyPipeline",
     "AdaptiveModelRouter",
     "compute_calibrated_clinical_risk",
     "calculate_morphometric_evidence_index",

@@ -16,11 +16,16 @@ class Base(DeclarativeBase):
     pass
 
 
+_BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+_SQLITE_PATH = os.path.join(_BACKEND_DIR, "quresight.db").replace("\\", "/")
+DEFAULT_SQLITE_URL = f"sqlite+aiosqlite:///{_SQLITE_PATH}"
+
+
 def resolve_db_url() -> str:
     url = os.getenv("DATABASE_URL") or settings.DATABASE_URL
-    # If using the defunct / paused Supabase tenant reference or empty, default to resilient local SQLite
-    if not url or "vknujqpzwbxmfhdcgxpa" in url:
-        return "sqlite+aiosqlite:///./quresight.db"
+    # If using the defunct / paused Supabase tenant reference, empty, or default relative sqlite, normalize to absolute SQLite
+    if not url or "vknujqpzwbxmfhdcgxpa" in url or "./quresight.db" in url:
+        return DEFAULT_SQLITE_URL
 
     # If postgres is specified, normalize dialect and check if driver is available
     if url.startswith("postgres://") or url.startswith("postgresql"):
@@ -33,7 +38,7 @@ def resolve_db_url() -> str:
             return url
         except ImportError:
             print("[QureSight Database] asyncpg not installed; defaulting to local SQLite (quresight.db).")
-            return "sqlite+aiosqlite:///./quresight.db"
+            return DEFAULT_SQLITE_URL
 
     return url
 
@@ -42,7 +47,7 @@ ACTIVE_DB_URL = resolve_db_url()
 
 # Resilient SQLite fallback engine that is always available and fully functional
 fallback_engine = create_async_engine(
-    "sqlite+aiosqlite:///./quresight.db",
+    DEFAULT_SQLITE_URL,
     connect_args={"check_same_thread": False},
     echo=False,
 )

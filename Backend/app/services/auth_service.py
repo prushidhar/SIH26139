@@ -61,7 +61,7 @@ def validate_email_deliverability(email: str) -> str:
 def is_expired(exp_dt: datetime) -> bool:
     """Checks expiration safely whether datetime is offset-naive or offset-aware."""
     if exp_dt.tzinfo is None:
-        return exp_dt < datetime.utcnow()
+        return exp_dt < datetime.now(timezone.utc).replace(tzinfo=None)
     return exp_dt < datetime.now(timezone.utc)
 
 

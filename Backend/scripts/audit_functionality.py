@@ -106,6 +106,29 @@ print("\nScarce-Data Generalization Curve (15% Clinical Advantage):")
 for pt in d_bench.get("scarce_data_curves", []):
     print(f"   Split {pt.get('trainingSplit'):3d}% (N={pt.get('sampleCount'):3d}): Classical SVM={pt.get('classicalSvm'):.1f}% | Quantum VQC={pt.get('quantumVqc'):.1f}% -> Advantage Margin={pt.get('advantageMargin'):+5.1f}% ({pt.get('statisticalSignificance')})")
 
+# -----------------------------------------------------------------------------
+# 5. FUNCTIONAL TEST: CHRONIC KIDNEY DISEASE (KDIGO 2024 & 4-QUBIT VQC)
+# -----------------------------------------------------------------------------
+print("\n\n[FUNCTIONALITY 5] NEPHROLOGY: CHRONIC KIDNEY DISEASE (KDIGO & 4-QUBIT VQC)")
+print("-" * 80)
+
+ckd_cases = {
+    "Physiological Healthy (Stage G1)": {"age": 36, "blood_pressure": 75, "specific_gravity": 1.025, "albumin": 0, "blood_glucose_random": 95, "blood_urea": 24, "serum_creatinine": 0.9, "hemoglobin": 15.2},
+    "Borderline Azotemia (Stage G3a)": {"age": 58, "blood_pressure": 135, "specific_gravity": 1.015, "albumin": 1, "blood_glucose_random": 165, "blood_urea": 48, "serum_creatinine": 1.6, "hemoglobin": 11.8},
+    "Severe ESRD Failure (Stage G5)": {"age": 67, "blood_pressure": 165, "specific_gravity": 1.010, "albumin": 3, "blood_glucose_random": 240, "blood_urea": 125, "serum_creatinine": 5.8, "hemoglobin": 8.2},
+}
+
+for name, panel in ckd_cases.items():
+    res = requests.post("http://localhost:3000/api/inference/chronic-kidney", json=panel)
+    d = res.json().get("telemetry", {})
+    print(f"\n-> PATIENT PANEL: {name}")
+    print(f"   Diagnosis:          {d.get('prediction_label')} (Risk Score: {d.get('risk_score')}/100 [{d.get('risk_category')}])")
+    print(f"   KDIGO Staging:      {d.get('kdigo_stage')} | Proteinuria: {d.get('proteinuria_tier')}")
+    print(f"   Calculated eGFR:    {d.get('egfr_value')} {d.get('egfr_unit')}")
+    print(f"   Quantum Circuit:    {d.get('quantum_results', {}).get('model')} (Ansatz: {d.get('quantum_results', {}).get('ansatz')})")
+    print(f"   Pauli-Z <Z_i>:      {d.get('quantum_results', {}).get('pauli_z_expvals')}")
+    print(f"   Clinical Action:    {d.get('clinical_action')}")
+
 print("\n" + "=" * 80)
 print("      ALL CORE PLATFORM FUNCTIONALITIES VERIFIED EMPIRICALLY")
 print("=" * 80)

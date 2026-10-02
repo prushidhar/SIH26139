@@ -141,6 +141,20 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     tooltip: "Multi-domain screening for early cognitive impairment and motor dysfunction.",
     status: "active",
   },
+  {
+    key: "chronic_kidney",
+    title: "Nephrology & Renal Health Studio",
+    category: "Active Clinical Pipeline",
+    icon: FlaskConical,
+    dataset: "400 Renal Function Records",
+    features: "Creatinine, eGFR, Albumin, Urea",
+    target: "Early Glomerular Impairment",
+    advantage: "Active",
+    description: "4-qubit PennyLane VQC assessing glomerular filtration rate, proteinuria, and KDIGO staging.",
+    route: "/predict/chronic-kidney",
+    tooltip: "Screens 8 renal biomarkers with automated CKD-EPI eGFR calculation and KDIGO risk tiers.",
+    status: "active",
+  },
 ];
 
 import { AuthService } from "@/services/auth.service";

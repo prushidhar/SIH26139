@@ -15,6 +15,7 @@ from models_v1 import (
     cxr_transfer_pipeline,
     donaire_liver_pipeline,
     neurological_pipeline,
+    ckd_pipeline,
     AdaptiveModelRouter,
 )
 
@@ -445,3 +446,36 @@ async def run_neurological_inference(payload: NeurologicalInput):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Neurological QML pipeline execution error: {str(e)}"
         )
+
+
+# ==============================================================================
+# NEPHROLOGY PILLAR: CHRONIC KIDNEY DISEASE (CKD) 4-QUBIT VQC INFERENCE
+# ==============================================================================
+
+class ChronicKidneyInput(BaseModel):
+    age: float = Field(default=55.0, description="Patient age in years (10 - 100)")
+    blood_pressure: float = Field(default=80.0, description="Systolic blood pressure in mmHg (50 - 200)")
+    specific_gravity: float = Field(default=1.020, description="Urine specific gravity (1.005 - 1.035)")
+    albumin: float = Field(default=0.0, description="Albuminuria level (0 - 5)")
+    blood_glucose_random: float = Field(default=110.0, description="Random blood glucose in mg/dL (50 - 500)")
+    blood_urea: float = Field(default=35.0, description="Blood urea nitrogen in mg/dL (10 - 250)")
+    serum_creatinine: float = Field(default=1.1, description="Serum creatinine in mg/dL (0.3 - 15.0)")
+    hemoglobin: float = Field(default=14.5, description="Hemoglobin in g/dL (3.0 - 20.0)")
+
+
+@router.post("/chronic-kidney", status_code=status.HTTP_200_OK)
+async def run_chronic_kidney_inference(payload: ChronicKidneyInput):
+    """
+    Executes PennyLane 4-Qubit Variational Quantum Classification and
+    Classical Ensemble on 8 renal panel biomarkers with KDIGO staging and eGFR estimation.
+    """
+    try:
+        raw_dict = payload.model_dump()
+        telemetry = ckd_pipeline.predict(raw_dict)
+        return {"success": True, "telemetry": telemetry}
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Chronic kidney disease QML pipeline execution error: {str(e)}"
+        )
+

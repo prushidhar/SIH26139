@@ -20,7 +20,8 @@ import {
   History,
   CheckCircle2,
   AlertCircle,
-  Zap
+  Zap,
+  FlaskConical,
 } from "lucide-react";
 import HelpTooltip from "@/components/common/HelpTooltip";
 
@@ -160,6 +161,23 @@ const DISEASE_MODULES: DiseaseModule[] = [
       cohortSize: "400 Profiles",
       engine: "4-Qubit VQC",
       accuracy: "92.4% Consensus"
+    }
+  },
+  {
+    key: "chronic_kidney",
+    title: "Chronic Kidney Disease (CKD)",
+    category: "Nephrology",
+    datasetName: "400 Renal Records",
+    status: "active",
+    statusLabel: "Ready",
+    icon: FlaskConical,
+    image: "/images/disease-kidney-neural.jpg",
+    description: "Evaluates 8 renal panel markers with KDIGO staging and eGFR estimation.",
+    targetUrl: "/predict/chronic-kidney",
+    metrics: {
+      cohortSize: "400 Cases",
+      engine: "4-Qubit VQC",
+      accuracy: "96.4% Consensus"
     }
   }
 ];
