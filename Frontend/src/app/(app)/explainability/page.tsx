@@ -99,6 +99,7 @@ export default function ExplainabilityPage() {
             <option value="cardiomegaly_cxr">CheXpert Chest Radiography (CXR)</option>
             <option value="ilpd_liver">Indian Liver Patient Dataset (ILPD)</option>
             <option value="diabetes">NIDDK Diabetes Screening Cohort</option>
+            <option value="chronic_kidney">Chronic Kidney Disease (KDIGO Cohort)</option>
           </select>
         </div>
 

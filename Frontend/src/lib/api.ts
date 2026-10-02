@@ -10,9 +10,21 @@ import axios, { AxiosError, InternalAxiosRequestConfig, AxiosResponse } from 'ax
 export function resolveApiBaseUrl(): string {
   if (typeof window !== 'undefined') {
     const host = window.location.hostname;
+    // CRITICAL: Localhost or local dev in browser must ALWAYS hit local backend
+    if (
+      host === 'localhost' ||
+      host === '127.0.0.1' ||
+      host === '0.0.0.0' ||
+      host.endsWith('.local')
+    ) {
+      return 'http://localhost:8000';
+    }
     if (host.includes('onrender.com') || host.includes('vercel.app')) {
       return 'https://quresight-backend.onrender.com';
     }
+  }
+  if (process.env.BACKEND_INTERNAL_URL && process.env.BACKEND_INTERNAL_URL.trim() !== '') {
+    return process.env.BACKEND_INTERNAL_URL.trim().replace(/\/$/, '');
   }
   if (process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL.trim() !== '') {
     const url = process.env.NEXT_PUBLIC_API_URL.trim();
@@ -116,12 +128,7 @@ export function isAuthenticated(): boolean {
 // ----------------------------------------------------------------------------
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    if (typeof window !== 'undefined') {
-      const host = window.location.hostname;
-      if (host.includes('onrender.com') || host.includes('vercel.app')) {
-        config.baseURL = 'https://quresight-backend.onrender.com';
-      }
-    }
+    config.baseURL = resolveApiBaseUrl();
     const token = getAccessToken();
     
     if (token && config.headers) {

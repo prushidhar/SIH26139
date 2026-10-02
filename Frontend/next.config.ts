@@ -31,6 +31,14 @@ const nextConfig: NextConfig = {
         source: '/user/:path*',
         destination: `${backendUrl}/user/:path*`,
       },
+      {
+        source: '/research/:path*',
+        destination: `${backendUrl}/research/:path*`,
+      },
+      {
+        source: '/inference/:path*',
+        destination: `${backendUrl}/inference/:path*`,
+      },
     ];
   },
 };
