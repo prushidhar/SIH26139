@@ -25,7 +25,7 @@ const geistMono = Geist_Mono({
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://quresight.vercel.app";
 
 export const viewport: Viewport = {
-  themeColor: "#1E3A8A",
+  themeColor: "#006766",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,

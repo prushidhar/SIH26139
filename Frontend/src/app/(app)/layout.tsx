@@ -60,6 +60,12 @@ const NAV_SECTIONS: NavSection[] = [
     title: "Clinical Workstation",
     items: [
       {
+        label: "Home Dashboard",
+        href: "/home",
+        icon: LayoutDashboard,
+        description: "Overview & diagnostic quick actions",
+      },
+      {
         label: "Clinical Screening",
         href: "/predict",
         icon: Stethoscope,
@@ -309,8 +315,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
             <Link href="/home" className="cursor-pointer hover:opacity-85 transition-opacity flex items-center gap-3">
               <BrandLogo href={false} />
               <div className="h-4 w-[1px] bg-hairline" />
-              <span className="text-xs font-serif tracking-tight text-ink font-medium">
-                Medical Workbench
+              <span className="text-xs font-sans tracking-tight text-ink-soft font-semibold">
+                Screening Suite
               </span>
             </Link>
           </div>
@@ -669,7 +675,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
               {userAvatar ? (
                 <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
               ) : (
-                <span className="font-serif font-medium text-xs">
+                <span className="font-sans font-bold text-xs">
                   {userName.charAt(0).toUpperCase()}
                 </span>
               )}
@@ -726,46 +732,32 @@ export default function AppLayout({ children }: AppLayoutProps) {
                         <Link
                           href={item.href}
                           title={!sidebarOpen ? item.label : undefined}
-                          className={`group flex items-center ${sidebarOpen ? "justify-between px-3 py-2" : "justify-center p-2.5"
-                            } rounded-xl text-xs font-medium transition-all ${isActive
-                              ? "bg-ink text-parchment shadow-xs font-semibold"
-                              : "text-ink-soft hover:text-ink hover:bg-cream-deep/50"
-                            }`}
+                          className={`group flex items-center ${
+                            sidebarOpen ? "justify-between px-3 py-2.5" : "justify-center p-2.5"
+                          } rounded-xl text-xs transition-all ${
+                            isActive
+                              ? "bg-primary text-primary-foreground shadow-xs font-semibold"
+                              : "text-[#082827]/80 hover:text-[#006766] hover:bg-[#E6F7F4]/60 font-medium"
+                          }`}
                         >
                           <div className="flex items-center gap-2.5">
                             <div className="relative flex items-center justify-center shrink-0">
-                              {isActive && (
-                                <div className="absolute -inset-[2px] rounded-full overflow-hidden opacity-95">
-                                  <div
-                                    className="w-full h-full animate-rainbow-spin"
-                                    style={{
-                                      background:
-                                        "conic-gradient(from 0deg, #ff4545, #00ffcc, #0070f3, #7928ca, #ff007a, #ffbb00, #00ffcc, #ff4545)",
-                                    }}
-                                  />
-                                </div>
-                              )}
-                              <div className={`relative ${isActive ? "w-6 h-6 rounded-full bg-ink flex items-center justify-center z-10" : ""}`}>
+                              <div className={`relative flex items-center justify-center ${isActive ? "w-6 h-6 rounded-lg bg-white/15" : ""}`}>
                                 <Icon
-                                  size={isActive ? 13 : 15}
-                                  className={isActive ? "text-white" : "text-ink-soft group-hover:text-ink"}
+                                  size={15}
+                                  className={isActive ? "text-white" : "text-[#5A7470] group-hover:text-[#006766]"}
                                 />
                               </div>
                             </div>
-                            <AnimatePresence>
-                              {sidebarOpen && (
-                                <motion.span
-                                  initial={{ opacity: 0, x: -8 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  exit={{ opacity: 0, x: -8 }}
-                                  transition={{ duration: 0.22, delay: animDelay + 0.05, ease: "easeOut" }}
-                                  className="truncate font-medium"
-                                >
-                                  {item.label}
-                                </motion.span>
-                              )}
-                            </AnimatePresence>
+                            {sidebarOpen && (
+                              <span className="truncate font-medium">
+                                {item.label}
+                              </span>
+                            )}
                           </div>
+                          {isActive && sidebarOpen && (
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#00B489]" />
+                          )}
                         </Link>
                       </motion.div>
                     );
@@ -776,7 +768,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
           </div>
 
           {/* Bottom Sidebar: Clean borderless Account row + Settings + Red Sign Out row */}
-          <div className="space-y-0.5 pt-2 border-t border-hairline">
+          <div className="space-y-1 pt-2 border-t border-hairline">
             {/* Account Row (Unbordered, sleek) */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
@@ -788,23 +780,12 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 title={!sidebarOpen ? `Account: ${userName}` : undefined}
                 className={`w-full flex items-center ${sidebarOpen ? "justify-start gap-2.5 px-3 py-2" : "justify-center p-2.5"
                   } rounded-xl text-xs font-medium ${pathname === "/account"
-                    ? "bg-ink text-parchment shadow-xs font-semibold"
-                    : "text-ink hover:bg-cream-deep/50"
+                    ? "bg-primary text-primary-foreground shadow-xs font-semibold"
+                    : "text-ink hover:bg-cream-deep/60"
                   } transition-all cursor-pointer`}
               >
                 <div className="relative flex items-center justify-center shrink-0">
-                  {pathname === "/account" && (
-                    <div className="absolute -inset-[2px] rounded-full overflow-hidden opacity-95">
-                      <div
-                        className="w-full h-full animate-rainbow-spin"
-                        style={{
-                          background:
-                            "conic-gradient(from 0deg, #ff4545, #00ffcc, #0070f3, #7928ca, #ff007a, #ffbb00, #00ffcc, #ff4545)",
-                        }}
-                      />
-                    </div>
-                  )}
-                  <div className="relative w-6 h-6 rounded-full bg-parchment text-ink flex items-center justify-center font-serif text-[11px] overflow-hidden shrink-0 z-10">
+                  <div className="relative w-6 h-6 rounded-full bg-parchment text-ink flex items-center justify-center font-sans font-bold text-[10px] overflow-hidden shrink-0 border border-hairline">
                     {userAvatar ? (
                       <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
                     ) : (
@@ -822,13 +803,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
                       className="flex flex-col text-left overflow-hidden"
                     >
                       <span
-                        className={`text-xs font-semibold leading-tight truncate ${pathname === "/account" ? "text-parchment" : "text-ink"
+                        className={`text-xs font-semibold leading-tight truncate ${pathname === "/account" ? "text-primary-foreground" : "text-ink"
                           }`}
                       >
                         {userName}
                       </span>
                       <span
-                        className={`text-[10px] truncate ${pathname === "/account" ? "text-parchment/75 font-light" : "text-ink-soft"
+                        className={`text-[10px] truncate ${pathname === "/account" ? "text-primary-foreground/80 font-light" : "text-ink-soft"
                           }`}
                       >
                         {userEmail}
@@ -850,25 +831,14 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 title={!sidebarOpen ? "Settings" : undefined}
                 className={`w-full flex items-center ${sidebarOpen ? "justify-start gap-2.5 px-3 py-2" : "justify-center p-2.5"
                   } rounded-xl text-xs font-medium ${pathname === "/settings"
-                    ? "bg-ink text-parchment shadow-xs font-semibold"
-                    : "text-ink-soft hover:text-ink hover:bg-cream-deep/50"
+                    ? "bg-primary text-primary-foreground shadow-xs font-semibold"
+                    : "text-ink-soft hover:text-ink hover:bg-cream-deep/60"
                   } transition-all cursor-pointer`}
               >
                 <div className="relative flex items-center justify-center shrink-0">
-                  {pathname === "/settings" && (
-                    <div className="absolute -inset-[2px] rounded-full overflow-hidden opacity-95">
-                      <div
-                        className="w-full h-full animate-rainbow-spin"
-                        style={{
-                          background:
-                            "conic-gradient(from 0deg, #ff4545, #00ffcc, #0070f3, #7928ca, #ff007a, #ffbb00, #00ffcc, #ff4545)",
-                        }}
-                      />
-                    </div>
-                  )}
-                  <div className={`relative ${pathname === "/settings" ? "w-6 h-6 rounded-full bg-ink flex items-center justify-center z-10" : ""}`}>
+                  <div className={`relative flex items-center justify-center ${pathname === "/settings" ? "w-6 h-6 rounded-lg bg-white/15" : ""}`}>
                     <Settings
-                      size={pathname === "/settings" ? 13 : 15}
+                      size={15}
                       className={pathname === "/settings" ? "text-white" : "text-ink-soft shrink-0"}
                     />
                   </div>
@@ -880,7 +850,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -8 }}
                       transition={{ duration: 0.22, delay: 0.4, ease: "easeOut" }}
-                      className={pathname === "/settings" ? "text-parchment font-semibold" : "text-ink"}
+                      className={pathname === "/settings" ? "text-primary-foreground font-semibold" : "text-ink"}
                     >
                       Settings
                     </motion.span>
@@ -958,27 +928,14 @@ export default function AppLayout({ children }: AppLayoutProps) {
                             key={item.href}
                             href={item.href}
                             onClick={() => setMobileMenuOpen(false)}
-                            className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all ${isActive
-                              ? "bg-ink text-parchment shadow-xs font-semibold"
+                            className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-medium transition-all ${isActive
+                              ? "bg-primary text-primary-foreground shadow-xs font-semibold"
                               : "text-ink-soft hover:text-ink hover:bg-cream-deep/40"
                               }`}
                           >
                             <div className="flex items-center gap-3">
-                              <div className="relative flex items-center justify-center shrink-0">
-                                {isActive && (
-                                  <div className="absolute -inset-[2px] rounded-full overflow-hidden opacity-95">
-                                    <div
-                                      className="w-full h-full animate-rainbow-spin"
-                                      style={{
-                                        background:
-                                          "conic-gradient(from 0deg, #ff4545, #00ffcc, #0070f3, #7928ca, #ff007a, #ffbb00, #00ffcc, #ff4545)",
-                                      }}
-                                    />
-                                  </div>
-                                )}
-                                <div className={`relative ${isActive ? "w-6 h-6 rounded-full bg-ink flex items-center justify-center z-10" : ""}`}>
-                                  <Icon size={isActive ? 13 : 16} className={isActive ? "text-white" : "text-ink-soft"} />
-                                </div>
+                              <div className={`relative flex items-center justify-center shrink-0 ${isActive ? "w-6 h-6 rounded-lg bg-white/15" : ""}`}>
+                                <Icon size={15} className={isActive ? "text-white" : "text-ink-soft"} />
                               </div>
                               <span>{item.label}</span>
                             </div>
@@ -996,23 +953,12 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     href="/account"
                     onClick={() => setMobileMenuOpen(false)}
                     className={`p-2.5 rounded-xl flex items-center gap-2.5 cursor-pointer transition-colors ${pathname === "/account"
-                      ? "bg-ink text-parchment shadow-xs font-semibold"
+                      ? "bg-primary text-primary-foreground shadow-xs font-semibold"
                       : "hover:bg-cream-deep/50 text-ink"
                       }`}
                   >
                     <div className="relative flex items-center justify-center shrink-0">
-                      {pathname === "/account" && (
-                        <div className="absolute -inset-[2px] rounded-full overflow-hidden opacity-95">
-                          <div
-                            className="w-full h-full animate-rainbow-spin"
-                            style={{
-                              background:
-                                "conic-gradient(from 0deg, #ff4545, #00ffcc, #0070f3, #7928ca, #ff007a, #ffbb00, #00ffcc, #ff4545)",
-                            }}
-                          />
-                        </div>
-                      )}
-                      <div className="relative w-8 h-8 rounded-full bg-parchment text-ink flex items-center justify-center font-serif text-xs overflow-hidden shrink-0 z-10">
+                      <div className="relative w-8 h-8 rounded-full bg-parchment text-ink flex items-center justify-center font-sans font-bold text-xs overflow-hidden shrink-0 border border-hairline">
                         {userAvatar ? (
                           <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
                         ) : (
@@ -1022,13 +968,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     </div>
                     <div className="overflow-hidden">
                       <span
-                        className={`text-xs font-semibold block truncate ${pathname === "/account" ? "text-parchment" : "text-ink"
+                        className={`text-xs font-semibold block truncate ${pathname === "/account" ? "text-primary-foreground" : "text-ink"
                           }`}
                       >
                         {userName}
                       </span>
                       <span
-                        className={`text-[10px] block truncate ${pathname === "/account" ? "text-parchment/75" : "text-ink-soft"
+                        className={`text-[10px] block truncate ${pathname === "/account" ? "text-primary-foreground/80" : "text-ink-soft"
                           }`}
                       >
                         {userEmail}
@@ -1040,24 +986,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     href="/settings"
                     onClick={() => setMobileMenuOpen(false)}
                     className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium transition-colors ${pathname === "/settings"
-                      ? "bg-ink text-parchment shadow-xs font-semibold"
+                      ? "bg-primary text-primary-foreground shadow-xs font-semibold"
                       : "text-ink-soft hover:text-ink hover:bg-cream-deep/40"
                       }`}
                   >
                     <div className="relative flex items-center justify-center shrink-0">
-                      {pathname === "/settings" && (
-                        <div className="absolute -inset-[2px] rounded-full overflow-hidden opacity-95">
-                          <div
-                            className="w-full h-full animate-rainbow-spin"
-                            style={{
-                              background:
-                                "conic-gradient(from 0deg, #ff4545, #00ffcc, #0070f3, #7928ca, #ff007a, #ffbb00, #00ffcc, #ff4545)",
-                            }}
-                          />
-                        </div>
-                      )}
-                      <div className={`relative ${pathname === "/settings" ? "w-6 h-6 rounded-full bg-ink flex items-center justify-center z-10" : ""}`}>
-                        <Settings size={pathname === "/settings" ? 13 : 15} />
+                      <div className={`relative flex items-center justify-center ${pathname === "/settings" ? "w-6 h-6 rounded-lg bg-white/15" : ""}`}>
+                        <Settings size={15} className={pathname === "/settings" ? "text-white" : "text-ink-soft"} />
                       </div>
                     </div>
                     <span>Settings</span>

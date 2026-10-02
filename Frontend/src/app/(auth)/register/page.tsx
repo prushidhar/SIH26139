@@ -408,7 +408,7 @@ export default function RegisterPage() {
         initial={{ opacity: 0, scale: 0.97, y: 15 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.6, ease: easeOut }}
-        className="w-full max-w-6xl min-h-[740px] bg-parchment rounded-[2.5rem] border border-hairline/90 shadow-[0_24px_60px_-30px_rgba(60,50,35,0.4)] overflow-hidden grid grid-cols-1 lg:grid-cols-12"
+        className="w-full max-w-6xl min-h-[740px] bg-parchment rounded-[2.5rem] border border-hairline/90 shadow-[0_24px_60px_-30px_rgba(0,103,102,0.12)] overflow-hidden grid grid-cols-1 lg:grid-cols-12"
       >
         {/* LEFT COLUMN: Clean Cream Sign Up Form */}
         <motion.div 
@@ -426,17 +426,17 @@ export default function RegisterPage() {
             <div className="flex items-center p-1 bg-cream-deep/60 rounded-full border border-hairline text-xs font-medium">
               <Link 
                 href="/login" 
-                className="relative px-3.5 py-1.5 text-ink-soft hover:text-ink transition-colors rounded-full"
+                className="relative px-3.5 py-1.5 text-ink-soft hover:text-ink transition-colors rounded-full font-medium"
               >
                 Sign In
               </Link>
-              <div className="relative px-3.5 py-1.5 text-ink rounded-full">
+              <div className="relative px-3.5 py-1.5 text-white rounded-full">
                 <motion.div
                   layoutId="auth-tab-pill"
-                  className="absolute inset-0 bg-parchment rounded-full border border-hairline/80 shadow-xs"
+                  className="absolute inset-0 bg-primary rounded-full shadow-xs"
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
-                <span className="relative z-10 font-semibold">Sign Up</span>
+                <span className="relative z-10 font-semibold text-white">Sign Up</span>
               </div>
             </div>
           </div>
@@ -449,11 +449,11 @@ export default function RegisterPage() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-center mb-5"
             >
-              <h2 className="font-serif text-3xl sm:text-4xl font-light text-ink tracking-tight mb-1">
+              <h2 className="font-sans text-3xl sm:text-4xl font-bold text-ink tracking-tight mb-1">
                 Create Account
               </h2>
-              <p className="text-ink-soft text-xs sm:text-sm font-light">
-                Enter your details to create an account
+              <p className="text-ink-soft text-xs sm:text-sm font-normal">
+                Register clinical credentials to access screening suites
               </p>
               <BackendStandbyBanner />
             </motion.div>
@@ -476,7 +476,7 @@ export default function RegisterPage() {
             <form onSubmit={handleRegister} className="space-y-3">
               {/* Full Name */}
               <div className="space-y-1">
-                <label className="block text-xs font-semibold text-ink/80">
+                <label className="block text-xs font-semibold text-ink">
                   Full Name
                 </label>
                 <input
@@ -484,14 +484,14 @@ export default function RegisterPage() {
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="Enter your full name"
-                  className="w-full h-11 px-4 rounded-xl bg-cream/70 border border-hairline text-sm text-ink placeholder:text-muted-foreground/50 focus:outline-none focus:border-quantum/60 focus:bg-parchment transition-all shadow-2xs font-sans"
+                  className="w-full h-11 px-4 rounded-xl bg-cream/70 border border-hairline text-sm text-ink placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-parchment transition-all shadow-2xs font-sans"
                   required
                 />
               </div>
 
               {/* Email */}
               <div className="space-y-1">
-                <label className="block text-xs font-semibold text-ink/80">
+                <label className="block text-xs font-semibold text-ink">
                   Email Address
                 </label>
                 <input
@@ -499,7 +499,7 @@ export default function RegisterPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="w-full h-11 px-4 rounded-xl bg-cream/70 border border-hairline text-sm text-ink placeholder:text-muted-foreground/50 focus:outline-none focus:border-quantum/60 focus:bg-parchment transition-all shadow-2xs font-sans"
+                  className="w-full h-11 px-4 rounded-xl bg-cream/70 border border-hairline text-sm text-ink placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-parchment transition-all shadow-2xs font-sans"
                   required
                 />
               </div>
@@ -507,11 +507,11 @@ export default function RegisterPage() {
               {/* Password & Segmented Strength Bar */}
               <div className="space-y-1">
                 <div className="flex items-center justify-between">
-                  <label className="block text-xs font-semibold text-ink/80">
+                  <label className="block text-xs font-semibold text-ink">
                     Password
                   </label>
                   {password.length > 0 && (
-                    <div className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-medium border ${strengthMeta.badgeBg} ${strengthMeta.border} ${strengthMeta.text}`}>
+                    <div className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-semibold border ${strengthMeta.badgeBg} ${strengthMeta.border} ${strengthMeta.text}`}>
                       <span className={`w-1.5 h-1.5 rounded-full ${strengthMeta.color}`} />
                       <span>{strengthMeta.label}</span>
                     </div>
@@ -525,7 +525,7 @@ export default function RegisterPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     maxLength={72}
                     placeholder="Enter your password"
-                    className="w-full h-11 pl-4 pr-11 rounded-xl bg-cream/70 border border-hairline text-sm text-ink placeholder:text-muted-foreground/50 focus:outline-none focus:border-quantum/60 focus:bg-parchment transition-all shadow-2xs font-sans"
+                    className="w-full h-11 pl-4 pr-11 rounded-xl bg-cream/70 border border-hairline text-sm text-ink placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-parchment transition-all shadow-2xs font-sans"
                     required
                   />
                   <button
@@ -547,7 +547,7 @@ export default function RegisterPage() {
                             className={`h-full transition-all duration-300 ${
                               step <= strengthScore
                                 ? strengthScore === 4
-                                  ? "bg-quantum w-full"
+                                  ? "bg-primary w-full"
                                   : strengthScore === 3
                                   ? "bg-teal-600 w-full"
                                   : strengthScore === 2
@@ -565,7 +565,7 @@ export default function RegisterPage() {
 
               {/* Confirm Password */}
               <div className="space-y-1">
-                <label className="block text-xs font-semibold text-ink/80">
+                <label className="block text-xs font-semibold text-ink">
                   Confirm Password
                 </label>
                 <div className="relative">
@@ -575,7 +575,7 @@ export default function RegisterPage() {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     maxLength={72}
                     placeholder="Confirm your password"
-                    className="w-full h-11 pl-4 pr-11 rounded-xl bg-cream/70 border border-hairline text-sm text-ink placeholder:text-muted-foreground/50 focus:outline-none focus:border-quantum/60 focus:bg-parchment transition-all shadow-2xs font-sans"
+                    className="w-full h-11 pl-4 pr-11 rounded-xl bg-cream/70 border border-hairline text-sm text-ink placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-parchment transition-all shadow-2xs font-sans"
                     required
                   />
                   <button
@@ -593,11 +593,11 @@ export default function RegisterPage() {
                 onClick={() => setAgreeTerms(!agreeTerms)}
                 className="flex items-center justify-between p-2 rounded-xl bg-cream-deep/40 border border-hairline cursor-pointer select-none"
               >
-                <span className="text-[11px] text-ink-soft pr-2">
-                  I agree to the <span className="font-semibold text-ink underline">Terms</span> & <span className="font-semibold text-ink underline">Privacy Policy</span>
+                <span className="text-[11px] text-ink-soft pr-2 font-medium">
+                  I agree to the <span className="font-semibold text-primary underline">Terms</span> & <span className="font-semibold text-primary underline">Privacy Policy</span>
                 </span>
                 <div className={`w-8 h-4.5 flex items-center rounded-full p-0.5 transition-colors shrink-0 ${
-                  agreeTerms ? "bg-ink" : "bg-hairline"
+                  agreeTerms ? "bg-primary" : "bg-hairline"
                 }`}>
                   <motion.div 
                     layout
@@ -613,7 +613,7 @@ export default function RegisterPage() {
                 whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={isLoading || isGoogleLoading}
-                className="w-full h-11 rounded-xl bg-ink text-parchment font-medium text-sm hover:opacity-90 transition-all flex items-center justify-center gap-2 shadow-sm disabled:opacity-50 cursor-pointer"
+                className="w-full h-11 rounded-xl bg-primary hover:bg-primary/90 text-white font-semibold text-sm transition-all flex items-center justify-center gap-2 shadow-xs disabled:opacity-50 cursor-pointer"
               >
                 {isLoading ? (
                   <>
@@ -648,7 +648,7 @@ export default function RegisterPage() {
                     type="button"
                     onClick={handleGoogleClick}
                     disabled={isLoading || isGoogleLoading}
-                    className="absolute inset-0 w-full h-11 rounded-xl border border-hairline/90 bg-cream/60 hover:bg-cream text-ink font-medium text-sm transition-all flex items-center justify-center gap-3 shadow-2xs cursor-pointer disabled:opacity-50"
+                    className="absolute inset-0 w-full h-11 rounded-xl border border-hairline/90 bg-cream/60 hover:bg-cream text-ink font-semibold text-sm transition-all flex items-center justify-center gap-3 shadow-2xs cursor-pointer disabled:opacity-50"
                   >
                     {isGoogleLoading ? (
                       <>
@@ -676,8 +676,8 @@ export default function RegisterPage() {
                 exit={{ opacity: 0 }}
                 className="absolute inset-0 bg-parchment/95 backdrop-blur-xs z-50 flex flex-col items-center justify-center p-6 text-center rounded-[2.5rem]"
               >
-                <Loader2 size={36} className="animate-spin text-quantum mb-3" />
-                <h3 className="font-serif text-lg font-medium text-ink">Creating your account...</h3>
+                <Loader2 size={36} className="animate-spin text-primary mb-3" />
+                <h3 className="font-sans text-lg font-bold text-ink">Creating your account...</h3>
                 <p className="text-xs text-ink-soft mt-1">Verifying Google identity & establishing workspace credentials...</p>
                 {waitElapsed > 4 && (
                   <p className="text-[11px] text-amber-700 bg-amber-50/90 px-3 py-1.5 rounded-lg border border-amber-200/80 mt-3 max-w-xs animate-pulse">
@@ -690,7 +690,7 @@ export default function RegisterPage() {
                     setIsGoogleLoading(false);
                     setErrorMessage("Google sign-in was cancelled.");
                   }}
-                  className="mt-5 px-4 py-2 rounded-xl border border-hairline/80 bg-cream/70 hover:bg-cream text-xs font-medium text-ink-soft hover:text-ink transition-all cursor-pointer shadow-2xs hover:scale-105"
+                  className="mt-5 px-4 py-2 rounded-xl border border-hairline/80 bg-cream/70 hover:bg-cream text-xs font-semibold text-ink-soft hover:text-ink transition-all cursor-pointer shadow-2xs hover:scale-105"
                 >
                   Cancel & Return to Form
                 </button>
@@ -701,49 +701,64 @@ export default function RegisterPage() {
           {/* Bottom Footer Switcher */}
           <div className="text-center text-xs text-ink-soft pt-2">
             Already have an account?{" "}
-            <Link href="/login" className="font-semibold text-ink hover:underline">
+            <Link href="/login" className="font-semibold text-primary hover:underline">
               Sign In
             </Link>
           </div>
 
         </motion.div>
 
-        {/* RIGHT COLUMN (Opposite side!): 3D Topological Coherence Artwork */}
+        {/* RIGHT COLUMN: Dribbble MedTech Presentation Card */}
         <motion.div 
           initial={{ opacity: 0, x: 25 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: easeOut }}
-          className="hidden lg:flex lg:col-span-6 relative bg-ink p-12 flex-col justify-between overflow-hidden rounded-[2.2rem] m-3 shadow-md"
+          className="hidden lg:flex lg:col-span-6 relative bg-gradient-to-br from-[#006766] via-[#084E4D] to-[#033433] p-10 flex-col justify-between overflow-hidden rounded-[2.2rem] m-3 shadow-lg text-white"
         >
-          <motion.img
-            src="/images/auth-coherence.jpg"
-            alt="Abstract quantum visualization"
-            animate={{ scale: [1, 1.04, 1], rotate: [0, -0.4, 0] }}
-            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-0 w-full h-full object-cover object-center opacity-90"
-          />
-          
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-ink/30 pointer-events-none" />
+          {/* Diagnostic Pulse Background Ornaments */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-quantum/15 blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-10 -left-10 w-72 h-72 rounded-full bg-white/5 blur-2xl pointer-events-none" />
 
           {/* Top Label */}
           <div className="relative z-10">
             <div className="flex items-center gap-3">
-              <span className="text-[11px] font-mono tracking-[0.25em] uppercase font-semibold text-parchment/90 drop-shadow-sm">
-                RESEARCH PLATFORM
+              <span className="text-[10px] font-mono tracking-[0.25em] uppercase font-bold text-white/90 px-3 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-xs">
+                CLINICAL PLATFORM
               </span>
-              <div className="h-[1px] w-12 bg-parchment/50" />
+              <div className="h-[1px] w-12 bg-white/20" />
             </div>
           </div>
 
-          {/* Bottom Quote */}
-          <div className="relative z-10 space-y-4 max-w-md">
-            <h1 className="font-serif text-4xl sm:text-5xl font-light tracking-tight text-parchment leading-[1.12]">
-              High-Fidelity <br />
-              Quantum Machine Learning
+          {/* Bottom Content Area */}
+          <div className="relative z-10 space-y-4 my-auto py-6">
+            <h1 className="font-sans text-3xl sm:text-4xl font-bold tracking-tight text-white leading-[1.15]">
+              High-Precision <br />
+              Screening Technology
             </h1>
-            <p className="text-parchment/75 text-sm sm:text-base font-light leading-relaxed">
-              Screen for diseases using quantum-enhanced ML models benchmarked against classical baselines on real clinical data.
+            <p className="text-white/80 text-sm font-normal leading-relaxed max-w-md">
+              Combining multi-modal physiological acoustic data and biomarkers with validated consensus pipelines.
             </p>
+
+            {/* Dribbble stats pills */}
+            <div className="grid grid-cols-2 gap-3 pt-4">
+              <div className="p-4 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md space-y-1">
+                <span className="font-sans text-3xl font-extrabold text-white tracking-tight">100%</span>
+                <p className="text-xs text-white/80 leading-snug">auditable explainability for every patient case.</p>
+              </div>
+              <div className="p-4 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md space-y-1">
+                <span className="font-sans text-3xl font-extrabold text-white tracking-tight">&lt; 3s</span>
+                <p className="text-xs text-white/80 leading-snug">rapid point-of-care screening inference.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Accreditation */}
+          <div className="relative z-10 pt-4 border-t border-white/15 flex items-center justify-between text-xs text-white/80 font-mono">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Diagnostic Core Online</span>
+            </div>
+            <span className="text-white/60">Peer-Reviewed Models</span>
           </div>
         </motion.div>
 

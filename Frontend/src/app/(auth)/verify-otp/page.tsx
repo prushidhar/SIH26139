@@ -14,8 +14,8 @@ function VerifyOtpRedirect() {
   }, [router, searchParams]);
 
   return (
-    <div className="min-h-screen bg-cream flex items-center justify-center">
-      <Loader2 className="animate-spin text-ink" size={32} />
+    <div className="min-h-screen bg-[#F2F7F6] flex items-center justify-center">
+      <Loader2 className="animate-spin text-[#006766]" size={32} />
     </div>
   );
 }
@@ -23,8 +23,8 @@ function VerifyOtpRedirect() {
 export default function VerifyOtpPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-cream flex items-center justify-center">
-        <Loader2 className="animate-spin text-ink" size={32} />
+      <div className="min-h-screen bg-[#F2F7F6] flex items-center justify-center">
+        <Loader2 className="animate-spin text-[#006766]" size={32} />
       </div>
     }>
       <VerifyOtpRedirect />

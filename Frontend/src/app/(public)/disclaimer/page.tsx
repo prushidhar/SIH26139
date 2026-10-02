@@ -16,18 +16,18 @@ export default function DisclaimerPage() {
       badge="Regulatory Disclosures"
       iconType="shield"
     >
-      <div className="rounded-2xl border border-amber-500/30 bg-amber-500/5 p-6 text-white/90 space-y-2">
-        <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-amber-400 font-bold">
+      <div className="rounded-2xl border border-amber-300 bg-amber-50/80 p-6 text-[#082827] space-y-2 shadow-xs">
+        <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-amber-800 font-bold">
           <AlertTriangle size={15} />
           <span>Non-Diagnostic Regulatory Status</span>
         </div>
-        <p className="text-sm leading-relaxed text-white/80">
+        <p className="text-sm leading-relaxed text-[#5A7470]">
           QureSight is an exploratory computational platform developed for academic research, algorithm validation, and comparative benchmarking between classical machine learning ensembles and parameterized quantum circuits. It is not an FDA-cleared diagnostic device.
         </p>
       </div>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-serif font-normal text-white border-b border-white/10 pb-2">
+        <h2 className="text-xl sm:text-2xl font-sans font-bold text-[#082827] border-b border-[#DFEBE8] pb-2.5">
           1. No Medical Advice or Treatment Recommendations
         </h2>
         <p>
@@ -36,13 +36,13 @@ export default function DisclaimerPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-serif font-normal text-white border-b border-white/10 pb-2">
-          2. Probabilistic & Noisy Intermediate-Scale Quantum (NISQ) Realities
+        <h2 className="text-xl sm:text-2xl font-sans font-bold text-[#082827] border-b border-[#DFEBE8] pb-2.5">
+          2. Probabilistic &amp; Noisy Intermediate-Scale Quantum (NISQ) Realities
         </h2>
         <p>
           Quantum machine learning algorithms executed on current NISQ physical processors are inherently susceptible to environmental decoherence, thermal relaxation and two-qubit gate crosstalk. Although QureSight incorporates Zero-Noise Extrapolation (ZNE) and M3 readout error mitigation:
         </p>
-        <ul className="list-disc pl-6 space-y-2 text-white/70">
+        <ul className="list-disc pl-6 space-y-2 text-[#5A7470]">
           <li>
             Hardware shot variance may cause minor fluctuations in expectation values.
           </li>
@@ -53,7 +53,7 @@ export default function DisclaimerPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-serif font-normal text-white border-b border-white/10 pb-2">
+        <h2 className="text-xl sm:text-2xl font-sans font-bold text-[#082827] border-b border-[#DFEBE8] pb-2.5">
           3. Clinician-in-the-Loop Requirement
         </h2>
         <p>

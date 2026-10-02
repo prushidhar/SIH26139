@@ -45,6 +45,20 @@ interface DiseaseModuleItem {
 
 const DISEASE_MODULES: DiseaseModuleItem[] = [
   {
+    key: "ai_diagnostics",
+    title: "AI Diagnostics & Auscultation Suite",
+    category: "Pulmonary & Respiratory Screening",
+    icon: Stethoscope,
+    dataset: "6-Point Auscultation & Clinical Symptoms",
+    features: "Acoustic Lung Sound Analysis & Chronicity",
+    target: "Pulmonary Pathology & TB Consensus",
+    advantage: "Active Studio",
+    description: "Interactive 6-point digital stethoscope auscultation, animated breathing visualizer, and multi-modal quantum consensus screening.",
+    route: "/predict",
+    tooltip: "Full multi-step diagnostic screening suite with live anatomical guide and breathing visualizer.",
+    status: "active",
+  },
+  {
     key: "breast_cancer",
     title: "Breast Cancer Screening Studio",
     category: "Certified Clinical Studio",
@@ -355,91 +369,91 @@ export default function HomePage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.35 }}
-        className="w-full bg-parchment rounded-2xl border border-hairline/90 p-5 sm:p-6 md:p-7 shadow-xs relative overflow-hidden"
+        className="w-full bg-white rounded-2xl border border-[#DFEBE8] p-6 sm:p-7 shadow-[0_10px_30px_-12px_rgba(0,103,102,0.06)] relative overflow-hidden"
       >
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 relative z-10">
           <div className="space-y-1.5 max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cream-deep/60 border border-hairline text-[11px] font-mono text-ink-soft">
-              <span className="w-1.5 h-1.5 rounded-full bg-quantum" />
-              <span>QureSight Dashboard</span>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-[11px] font-mono text-[#006766] font-semibold">
+              <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
+              <span>AID Clinical Intelligence</span>
             </div>
-            <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-light text-ink tracking-tight">
-              Welcome back, <span className="italic font-normal">{userName}</span>
+            <h1 className="font-sans text-2xl sm:text-3xl md:text-4xl font-bold text-[#082827] tracking-tight">
+              Welcome back, <span className="text-[#006766]">{userName}</span>
             </h1>
-            <p className="text-ink-soft text-xs sm:text-sm font-light leading-relaxed">
-              Select a disease module to begin screening, or explore tools to analyze and explain results.
+            <p className="text-[#5A7470] text-xs sm:text-sm font-normal leading-relaxed">
+              Select a clinical disease module below to run diagnostic screening, or inspect consensus telemetry.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <Link
               href="/predict"
-              className="px-4 py-2 rounded-lg bg-ink text-parchment font-medium text-xs tracking-wider hover:opacity-90 transition-all shadow-sm flex items-center gap-1.5 cursor-pointer font-sans"
+              className="px-4 py-2.5 rounded-xl bg-[#006766] hover:bg-[#0D4F46] text-white font-semibold text-xs tracking-wider transition-all shadow-sm shadow-[#006766]/20 flex items-center gap-2 cursor-pointer font-sans"
             >
-              <Sparkles size={13} className="text-quantum-soft" /> Clinical Screening
+              <Sparkles size={14} className="text-[#74D0D2]" /> Clinical Screening
             </Link>
             <Link
               href="/benchmarks"
-              className="px-4 py-2 rounded-lg bg-cream-deep/70 hover:bg-cream border border-hairline text-ink font-medium text-xs tracking-wider transition-all flex items-center gap-1.5 cursor-pointer font-sans"
+              className="px-4 py-2.5 rounded-xl bg-[#F2F7F6] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#082827] font-semibold text-xs tracking-wider transition-all flex items-center gap-1.5 cursor-pointer font-sans"
             >
-              <Activity size={13} /> Model Benchmarks
+              <Activity size={14} className="text-[#006766]" /> Model Benchmarks
             </Link>
           </div>
         </div>
 
         {/* Quick Platform Navigation Strip */}
-        <div className="pt-4 mt-5 border-t border-hairline flex items-center justify-between gap-2 overflow-x-auto text-[11px] font-mono text-ink-soft whitespace-nowrap">
-          <Link href="/predict" className="hover:text-quantum transition-colors font-medium">Screening Studios</Link>
-          <span>•</span>
-          <Link href="/history" className="hover:text-quantum transition-colors">Screening Records</Link>
-          <span>•</span>
-          <Link href="/observatory" className="hover:text-quantum transition-colors">Dataset Explorer</Link>
-          <span>•</span>
-          <Link href="/benchmarks" className="hover:text-quantum transition-colors">Model Benchmarks</Link>
-          <span>•</span>
-          <Link href="/explainability" className="hover:text-quantum transition-colors">Explainability Studio</Link>
-          <span>•</span>
-          <Link href="/hardware" className="hover:text-quantum transition-colors">Compute Infrastructure</Link>
+        <div className="pt-4 mt-5 border-t border-[#DFEBE8] flex items-center justify-between gap-2 overflow-x-auto text-[11px] font-mono text-[#5A7470] whitespace-nowrap">
+          <Link href="/predict" className="hover:text-[#006766] transition-colors font-medium">Screening Studios</Link>
+          <span className="text-[#DFEBE8]">•</span>
+          <Link href="/history" className="hover:text-[#006766] transition-colors">Screening Records</Link>
+          <span className="text-[#DFEBE8]">•</span>
+          <Link href="/observatory" className="hover:text-[#006766] transition-colors">Dataset Explorer</Link>
+          <span className="text-[#DFEBE8]">•</span>
+          <Link href="/benchmarks" className="hover:text-[#006766] transition-colors">Model Benchmarks</Link>
+          <span className="text-[#DFEBE8]">•</span>
+          <Link href="/explainability" className="hover:text-[#006766] transition-colors">Explainability Studio</Link>
+          <span className="text-[#DFEBE8]">•</span>
+          <Link href="/hardware" className="hover:text-[#006766] transition-colors">Compute Infrastructure</Link>
         </div>
 
         {/* 4 Summary Stats Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-5 mt-5 border-t border-hairline">
-          <div className="space-y-0.5">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-5 mt-5 border-t border-[#DFEBE8]">
+          <div className="space-y-1">
             <div className="flex items-center gap-1">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft">Clinical Modalities</span>
+              <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470]">Clinical Modalities</span>
               <HelpTooltip text="7 active multi-disease quantum and classical screening studios across oncology, cardiology, hepatology, radiology, and neurology." />
             </div>
-            <div className="font-serif text-xl sm:text-2xl text-ink font-light">7 <span className="text-[10px] font-sans text-ink-soft">Active Studios</span></div>
-            <p className="text-[10px] text-ink-soft font-light">Full Multi-Disease Suite</p>
+            <div className="font-sans text-2xl sm:text-3xl text-[#082827] font-bold tracking-tight">7 <span className="text-xs font-normal text-[#5A7470]">Studios</span></div>
+            <p className="text-[11px] text-[#5A7470] font-normal">Full Multi-Disease Suite</p>
           </div>
 
-          <div className="space-y-0.5">
+          <div className="space-y-1">
             <div className="flex items-center gap-1">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft">Model Advantage</span>
+              <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470]">Model Advantage</span>
               <HelpTooltip text="In scarce clinical data regimes (15% sample size), Quantum VQC achieves +8.30% higher test accuracy over tuned classical SVM (p = 0.0153)." />
             </div>
-            <div className="font-serif text-xl sm:text-2xl text-quantum font-light">+8.3% <span className="text-[10px] font-sans text-ink-soft">on limited data</span></div>
-            <p className="text-[10px] text-ink-soft font-light">15% Cohort Regime (p = 0.0153)</p>
+            <div className="font-sans text-2xl sm:text-3xl text-[#006766] font-bold tracking-tight">+8.3% <span className="text-xs font-normal text-[#5A7470]">on limited data</span></div>
+            <p className="text-[11px] text-[#5A7470] font-normal">15% Cohort Regime (p = 0.0153)</p>
           </div>
 
-          <div className="space-y-0.5">
+          <div className="space-y-1">
             <div className="flex items-center gap-1">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft">Screenings Run</span>
+              <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470]">Screenings Run</span>
               <HelpTooltip text="Total number of patients screened in this browser session." />
             </div>
-            <div className="font-serif text-xl sm:text-2xl text-ink font-light">{recentPredictions.length} <span className="text-[10px] font-sans text-ink-soft">patients</span></div>
-            <p className="text-[10px] text-ink-soft font-light">In your active session</p>
+            <div className="font-sans text-2xl sm:text-3xl text-[#082827] font-bold tracking-tight">{recentPredictions.length} <span className="text-xs font-normal text-[#5A7470]">patients</span></div>
+            <p className="text-[11px] text-[#5A7470] font-normal">In your active session</p>
           </div>
 
-          <div className="space-y-0.5">
+          <div className="space-y-1">
             <div className="flex items-center gap-1">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft">Compute</span>
+              <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470]">Compute</span>
               <HelpTooltip text="The quantum processor or simulation engine actively analyzing patient data." />
             </div>
-            <div className="font-serif text-xl sm:text-2xl text-ink font-light">
+            <div className="font-sans text-2xl sm:text-3xl text-[#082827] font-bold tracking-tight">
               Quantum + Classical
             </div>
-            <p className="text-[10px] text-ink-soft font-light">
+            <p className="text-[11px] text-[#5A7470] font-normal">
               {backend === "ibmq_eagle" ? "IBM Quantum Processor" : "GPU Matrix Engine Active"}
             </p>
           </div>
@@ -452,76 +466,76 @@ export default function HomePage() {
       <section className="space-y-3">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="font-serif text-xl sm:text-2xl font-light text-ink tracking-tight">
+            <h2 className="font-sans text-xl sm:text-2xl font-bold text-[#082827] tracking-tight">
               Diagnostic Categories
             </h2>
-            <p className="text-xs text-ink-soft font-light">
-              Select a medical condition below to open the screening test form.
+            <p className="text-xs text-[#5A7470] font-normal">
+              Select a medical condition below to open the screening test studio.
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {DISEASE_MODULES.map((disease) => {
             const Icon = disease.icon;
             return (
               <motion.div
                 key={disease.key}
                 whileHover={{ y: -2 }}
-                className="p-4 sm:p-5 rounded-xl border border-hairline bg-parchment flex flex-col justify-between shadow-2xs hover:shadow-xs transition-all"
+                className="p-5 rounded-2xl border border-[#DFEBE8] bg-white flex flex-col justify-between shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)] hover:shadow-[0_12px_28px_-8px_rgba(0,103,102,0.12)] hover:border-[#006766]/40 transition-all group"
               >
-                <div className="space-y-2.5">
+                <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-quantum/10 text-quantum flex items-center justify-center">
-                        <Icon size={16} />
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-9 h-9 rounded-xl bg-[#E6F7F4] text-[#006766] flex items-center justify-center">
+                        <Icon size={18} />
                       </div>
-                      <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-quantum">
+                      <span className="text-[10px] uppercase font-mono tracking-wider font-bold text-[#006766]">
                         {disease.category}
                       </span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <span className="text-[10px] font-mono text-ink-soft">{disease.advantage}</span>
+                      <span className="text-[10px] font-mono text-[#5A7470]">{disease.advantage}</span>
                       <HelpTooltip text={disease.tooltip} />
                     </div>
                   </div>
 
                   <div>
-                    <h3 className="font-serif text-base sm:text-lg font-medium text-ink leading-snug">
+                    <h3 className="font-sans text-base sm:text-lg font-bold text-[#082827] leading-snug group-hover:text-[#006766] transition-colors">
                       {disease.title}
                     </h3>
-                    <p className="text-[11px] text-ink-soft font-light line-clamp-3 mt-1 leading-relaxed">
+                    <p className="text-xs text-[#5A7470] font-normal line-clamp-3 mt-1.5 leading-relaxed">
                       {disease.description}
                     </p>
                   </div>
 
-                  <div className="space-y-1 pt-1 font-mono text-[10px] text-ink-soft">
+                  <div className="space-y-1.5 pt-1.5 font-mono text-[10px] text-[#5A7470] border-t border-[#DFEBE8]/60">
                     <div className="flex justify-between">
                       <span>Validation Data:</span>
-                      <span className="text-ink truncate max-w-[140px]">{disease.dataset}</span>
+                      <span className="text-[#082827] font-semibold truncate max-w-[140px]">{disease.dataset}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Analyzed Factors:</span>
-                      <span className="text-ink truncate max-w-[140px]">{disease.features}</span>
+                      <span className="text-[#082827] font-semibold truncate max-w-[140px]">{disease.features}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-3 mt-3 border-t border-hairline flex items-center justify-between">
-                  <span className="text-[10px] font-mono text-quantum font-medium">{disease.target}</span>
+                <div className="pt-3.5 mt-3.5 border-t border-[#DFEBE8] flex items-center justify-between">
+                  <span className="text-[10px] font-mono text-[#006766] font-semibold">{disease.target}</span>
                   {disease.status === "active" ? (
                     <Link
                       href={disease.route}
-                      className="text-xs font-semibold text-ink hover:text-quantum flex items-center gap-1 transition-colors"
+                      className="text-xs font-bold text-[#006766] hover:text-[#0D4F46] flex items-center gap-1 transition-colors"
                     >
-                      Screen Patient <ChevronRight size={13} />
+                      Screen Patient <ChevronRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
                     </Link>
                   ) : (
                     <Link
                       href="/predict"
-                      className="text-[11px] font-mono font-medium text-amber-800 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20 hover:bg-amber-500/20 transition-all flex items-center gap-1.5"
+                      className="text-[11px] font-mono font-medium text-amber-800 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200 hover:bg-amber-100 transition-all flex items-center gap-1.5"
                     >
-                      <Lock size={10} className="text-amber-700" />
+                      <Lock size={11} className="text-amber-700" />
                       Future Upgrade <ChevronRight size={11} />
                     </Link>
                   )}
@@ -538,10 +552,10 @@ export default function HomePage() {
       <section className="space-y-3 pt-2">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="font-serif text-xl sm:text-2xl font-light text-ink tracking-tight">
+            <h2 className="font-sans text-xl sm:text-2xl font-bold text-[#082827] tracking-tight">
               Recent Patient Screenings
             </h2>
-            <p className="text-xs text-ink-soft font-light">
+            <p className="text-xs text-[#5A7470] font-normal">
               History of diagnostic tests executed during your current session.
             </p>
           </div>
@@ -549,7 +563,7 @@ export default function HomePage() {
           {recentPredictions.length > 0 && (
             <Link
               href="/history"
-              className="text-xs font-semibold text-ink hover:text-quantum flex items-center gap-1 transition-colors"
+              className="text-xs font-bold text-[#006766] hover:text-[#0D4F46] flex items-center gap-1 transition-colors"
             >
               View Full History ({recentPredictions.length}) <ArrowRight size={13} />
             </Link>
@@ -558,33 +572,33 @@ export default function HomePage() {
 
         {recentPredictions.length === 0 ? (
           /* GENUINE REAL EMPTY STATE */
-          <div className="p-8 sm:p-12 rounded-2xl bg-parchment border border-hairline shadow-2xs text-center space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-cream-deep/60 border border-hairline text-ink-soft mx-auto flex items-center justify-center">
-              <Inbox size={22} className="text-ink-soft" />
+          <div className="p-8 sm:p-12 rounded-2xl bg-white border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)] text-center space-y-4">
+            <div className="w-14 h-14 rounded-2xl bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] mx-auto flex items-center justify-center">
+              <Inbox size={24} className="text-[#006766]" />
             </div>
             <div className="space-y-1 max-w-md mx-auto">
-              <h3 className="font-serif text-lg font-medium text-ink">
+              <h3 className="font-sans text-lg font-bold text-[#082827]">
                 No patient screenings run yet
               </h3>
-              <p className="text-xs text-ink-soft font-light leading-relaxed">
+              <p className="text-xs text-[#5A7470] font-normal leading-relaxed">
                 Click below to start your first patient screening and compare quantum and traditional computer predictions.
               </p>
             </div>
             <div className="pt-2">
               <Link
                 href="/predict"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-ink text-parchment font-medium text-xs tracking-wider hover:opacity-90 transition-all shadow-sm cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#006766] hover:bg-[#0D4F46] text-white font-semibold text-xs tracking-wider transition-all shadow-sm shadow-[#006766]/20 cursor-pointer"
               >
-                <Sparkles size={13} className="text-quantum" /> Start Patient Screening
+                <Sparkles size={14} className="text-[#74D0D2]" /> Start Patient Screening
               </Link>
             </div>
           </div>
         ) : (
           /* POPULATED ACTIVITY TABLE */
-          <div className="bg-parchment rounded-2xl border border-hairline shadow-xs overflow-hidden">
+          <div className="bg-white rounded-2xl border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)] overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-sans">
-                <thead className="bg-cream-deep/40 border-b border-hairline text-[11px] font-mono uppercase tracking-wider text-ink-soft">
+                <thead className="bg-[#F7FAF9] border-b border-[#DFEBE8] text-[11px] font-mono uppercase tracking-wider text-[#5A7470]">
                   <tr>
                     <th className="py-3.5 px-4 font-semibold">Case ID</th>
                     <th className="py-3.5 px-4 font-semibold">Patient Name</th>
@@ -595,37 +609,37 @@ export default function HomePage() {
                     <th className="py-3.5 px-4 font-semibold">Time</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-hairline text-ink">
+                <tbody className="divide-y divide-[#DFEBE8]/60 text-[#082827]">
                   {recentPredictions.map((pred, i) => (
                     <tr
                       key={i}
                       onClick={() => handleViewScreening(pred)}
-                      className="hover:bg-cream/60 transition-colors cursor-pointer group"
+                      className="hover:bg-[#F2F7F6]/60 transition-colors cursor-pointer group"
                     >
-                      <td className="py-3.5 px-4 font-mono text-xs font-semibold text-quantum">
+                      <td className="py-3.5 px-4 font-mono text-xs font-semibold text-[#006766]">
                         <div className="flex items-center gap-1.5 group-hover:underline">
                           <span>{pred.id}</span>
-                          <ChevronRight size={12} className="opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-quantum" />
+                          <ChevronRight size={12} className="opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-[#006766]" />
                         </div>
                       </td>
-                      <td className="py-3.5 px-4 font-medium text-xs text-ink">{pred.patientName}</td>
-                      <td className="py-3.5 px-4 text-ink-soft text-xs">{pred.disease}</td>
+                      <td className="py-3.5 px-4 font-semibold text-xs text-[#082827]">{pred.patientName}</td>
+                      <td className="py-3.5 px-4 text-[#5A7470] text-xs">{pred.disease}</td>
                       <td className="py-3.5 px-4 font-mono font-medium">
-                        <span className={`inline-block px-2.5 py-1 rounded-full text-[10px] ${
+                        <span className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-semibold ${
                           pred.riskLevel === "High"
                             ? "bg-red-50 text-red-700 border border-red-200"
-                            : "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                            : "bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30"
                         }`}>
                           {pred.quantumPrediction} ({pred.quantumConfidence}%)
                         </span>
                       </td>
-                      <td className="py-3.5 px-4 font-mono text-ink-soft text-xs">
+                      <td className="py-3.5 px-4 font-mono text-[#5A7470] text-xs">
                         {pred.classicalPrediction} ({pred.classicalConfidence}%)
                       </td>
-                      <td className="py-3.5 px-4 text-xs font-mono text-ink truncate max-w-[180px]">
+                      <td className="py-3.5 px-4 text-xs font-mono text-[#082827] truncate max-w-[180px]">
                         {pred.topDriver}
                       </td>
-                      <td className="py-3.5 px-4 text-xs text-ink-soft font-mono">{pred.timestamp}</td>
+                      <td className="py-3.5 px-4 text-xs text-[#5A7470] font-mono">{pred.timestamp}</td>
                     </tr>
                   ))}
                 </tbody>

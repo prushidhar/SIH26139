@@ -24,6 +24,7 @@ import {
   FlaskConical,
 } from "lucide-react";
 import HelpTooltip from "@/components/common/HelpTooltip";
+import AiDiagnosticsApp from "@/components/diagnostics/AiDiagnosticsApp";
 
 interface DiseaseModule {
   key: string;
@@ -184,6 +185,7 @@ const DISEASE_MODULES: DiseaseModule[] = [
 
 export default function PredictHubPage() {
   const router = useRouter();
+  const [activeTab, setActiveTab] = useState<"dribbble_suite" | "studios">("dribbble_suite");
   const [lockedModal, setLockedModal] = useState<{
     isOpen: boolean;
     title: string;
@@ -214,23 +216,65 @@ export default function PredictHubPage() {
 
   return (
     <div className="space-y-6 pb-16 w-full">
+      {/* MODE SELECTOR HEADER */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-3.5 rounded-2xl border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)]">
+        <div className="flex items-center gap-2.5">
+          <div className="h-8 w-8 rounded-xl bg-[#006766] text-white flex items-center justify-center font-bold text-xs shadow-xs">
+            AID
+          </div>
+          <div>
+            <h2 className="text-sm font-bold text-[#082827]">Clinical Diagnostic Workspace</h2>
+            <p className="text-[11px] text-[#5A7470]">Switch between the interactive Dribbble MedTech Suite and Disease Studios</p>
+          </div>
+        </div>
+
+        <div className="flex items-center p-1 bg-[#F2F7F6] rounded-xl border border-[#DFEBE8] text-xs">
+          <button
+            type="button"
+            onClick={() => setActiveTab("dribbble_suite")}
+            className={`px-4 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${
+              activeTab === "dribbble_suite"
+                ? "bg-[#006766] text-white shadow-xs"
+                : "text-[#5A7470] hover:text-[#082827]"
+            }`}
+          >
+            AI Diagnostics Suite
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("studios")}
+            className={`px-4 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${
+              activeTab === "studios"
+                ? "bg-[#006766] text-white shadow-xs"
+                : "text-[#5A7470] hover:text-[#082827]"
+            }`}
+          >
+            Disease Studios
+          </button>
+        </div>
+      </div>
+
+      {/* CONDITIONAL RENDER: DRIBBLE MEDTECH SUITE */}
+      {activeTab === "dribbble_suite" && (
+        <AiDiagnosticsApp />
+      )}
       {/* LOCKED NOTICE MODAL */}
       <AnimatePresence>
         {lockedModal?.isOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-hairline bg-parchment p-6 shadow-2xl space-y-4"
+              className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-[#DFEBE8] bg-white p-6 shadow-2xl space-y-4"
             >
-              <div className="flex items-center justify-between border-b border-hairline pb-3">
+              <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
                 <div className="flex items-center gap-2.5">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-50 text-amber-700 border border-amber-200">
                     <Lock className="h-4 w-4" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-semibold text-ink">
+                    <h3 className="text-sm font-bold text-[#082827]">
                       {lockedModal.title}
                     </h3>
                     <span className="text-[11px] font-mono text-amber-700 font-medium">
@@ -241,33 +285,33 @@ export default function PredictHubPage() {
                 <button
                   type="button"
                   onClick={() => setLockedModal(null)}
-                  className="rounded-lg p-1.5 text-ink-soft hover:bg-cream hover:text-ink cursor-pointer"
+                  className="rounded-lg p-1.5 text-[#5A7470] hover:bg-[#F2F7F6] hover:text-[#082827] cursor-pointer"
                 >
                   <X className="h-4 w-4" />
                 </button>
               </div>
 
-              <div className="space-y-3 text-xs text-ink-soft leading-relaxed">
+              <div className="space-y-3 text-xs text-[#5A7470] leading-relaxed">
                 <p>
-                  The <strong className="text-ink">{lockedModal.title}</strong> module has completed initial hybrid quantum-classical verification and is designated for 127-qubit IBM Eagle QPU deployment in our Phase 2 clinical roadmap.
+                  The <strong className="text-[#082827] font-semibold">{lockedModal.title}</strong> module has completed initial hybrid quantum-classical verification and is designated for 127-qubit IBM Eagle QPU deployment in our Phase 2 clinical roadmap.
                 </p>
 
-                <div className="grid grid-cols-2 gap-2 p-3 rounded-xl bg-cream/40 border border-hairline text-[11px] font-mono">
+                <div className="grid grid-cols-2 gap-2 p-3 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8] text-[11px] font-mono">
                   <div>
-                    <span className="text-ink-soft/70 block uppercase text-[9px]">Verified Cohort</span>
-                    <strong className="text-ink">{lockedModal.cohortSize}</strong>
+                    <span className="text-[#5A7470] block uppercase text-[9px] font-semibold">Verified Cohort</span>
+                    <strong className="text-[#082827] font-bold">{lockedModal.cohortSize}</strong>
                   </div>
                   <div>
-                    <span className="text-ink-soft/70 block uppercase text-[9px]">Quantum Engine</span>
-                    <strong className="text-ink">{lockedModal.engine}</strong>
+                    <span className="text-[#5A7470] block uppercase text-[9px] font-semibold">Quantum Engine</span>
+                    <strong className="text-[#082827] font-bold">{lockedModal.engine}</strong>
                   </div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-quantum/5 border border-quantum/20 flex items-start gap-2.5 text-ink">
-                  <CheckCircle2 size={16} className="text-quantum shrink-0 mt-0.5" />
+                <div className="p-3 rounded-xl bg-[#E6F7F4] border border-[#00B489]/30 flex items-start gap-2.5 text-[#082827]">
+                  <CheckCircle2 size={16} className="text-[#006766] shrink-0 mt-0.5" />
                   <div className="text-[11px] leading-relaxed">
                     <span>
-                      Our <strong>Breast Cancer Screening Studio</strong> and <strong>Cardiac 12-Lead ECG Studio</strong> are fully certified with live multi-modal upload, interactive explainability, and PDF reports.
+                      Our <strong className="text-[#006766] font-semibold">Breast Cancer Screening Studio</strong> and <strong className="text-[#006766] font-semibold">Cardiac 12-Lead ECG Studio</strong> are fully certified with live multi-modal upload, interactive explainability, and PDF reports.
                     </span>
                   </div>
                 </div>
@@ -280,7 +324,7 @@ export default function PredictHubPage() {
                     setLockedModal(null);
                     router.push("/observatory");
                   }}
-                  className="px-3 py-1.5 rounded-xl border border-hairline text-xs font-mono text-ink hover:bg-cream cursor-pointer"
+                  className="px-3 py-2 rounded-xl border border-[#DFEBE8] text-xs font-mono text-[#082827] hover:bg-[#F2F7F6] cursor-pointer"
                 >
                   Explore in Observatory
                 </button>
@@ -291,7 +335,7 @@ export default function PredictHubPage() {
                     setLockedModal(null);
                     router.push(dest);
                   }}
-                  className="px-3 py-1.5 rounded-xl border border-quantum/40 bg-quantum/10 text-xs font-semibold text-quantum hover:bg-quantum/20 cursor-pointer"
+                  className="px-3.5 py-2 rounded-xl border border-[#00B489]/40 bg-[#E6F7F4] text-xs font-semibold text-[#006766] hover:bg-[#CCECEE] cursor-pointer"
                 >
                   Launch Sandbox Preview
                 </button>
@@ -301,10 +345,10 @@ export default function PredictHubPage() {
                     setLockedModal(null);
                     router.push("/predict/breast-cancer");
                   }}
-                  className="px-3.5 py-1.5 rounded-xl bg-ink text-parchment text-xs font-semibold hover:bg-ink/90 flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
+                  className="px-4 py-2 rounded-xl bg-[#006766] hover:bg-[#0D4F46] text-white text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
                 >
                   <span>Active Studio</span>
-                  <ArrowRight className="h-3 w-3" />
+                  <ArrowRight className="h-3.5 w-3.5" />
                 </button>
               </div>
             </motion.div>
@@ -312,31 +356,34 @@ export default function PredictHubPage() {
         )}
       </AnimatePresence>
 
-      {/* TOP DIRECTORY HEADER */}
-      <div className="border-b border-hairline pb-5 space-y-1">
+      {/* CONDITIONAL RENDER: STUDIOS VIEW */}
+      {activeTab === "studios" && (
+        <>
+          {/* TOP DIRECTORY HEADER */}
+          <div className="border-b border-[#DFEBE8] pb-5 space-y-1">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-quantum" />
-          <span className="text-[11px] font-mono uppercase tracking-wider text-quantum font-bold">
+          <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
+          <span className="text-[11px] font-mono uppercase tracking-wider text-[#006766] font-bold">
             DIAGNOSTIC SCREENING PORTAL
           </span>
         </div>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="font-serif text-2xl sm:text-3xl font-light text-ink tracking-tight">
+            <h1 className="font-sans text-2xl sm:text-3xl font-bold text-[#082827] tracking-tight">
               Patient Screening Hub
             </h1>
-            <p className="text-xs text-ink-soft font-light">
+            <p className="text-xs text-[#5A7470] font-normal">
               Select a screening studio to evaluate clinical risk.
             </p>
           </div>
           <div className="flex items-center gap-2">
             <Link
               href="/predict/breast-cancer"
-              className="px-3.5 py-2 rounded-xl bg-ink hover:bg-ink/90 text-parchment text-xs font-semibold flex items-center gap-2 transition-all shadow-xs"
+              className="px-4 py-2 rounded-xl bg-[#006766] hover:bg-[#0D4F46] text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-xs"
             >
-              <Microscope size={14} className="text-quantum" />
+              <Microscope size={14} className="text-[#74D0D2]" />
               <span>Launch Studio</span>
-              <ArrowRight size={13} className="text-parchment/70" />
+              <ArrowRight size={13} className="text-white/70" />
             </Link>
           </div>
         </div>
@@ -352,15 +399,15 @@ export default function PredictHubPage() {
             <div
               key={mod.key}
               onClick={() => handleModuleClick(mod)}
-              className={`group rounded-2xl border p-4.5 sm:p-5 flex flex-col justify-between transition-all relative overflow-hidden cursor-pointer shadow-xs ${
+              className={`group rounded-2xl border p-5 flex flex-col justify-between transition-all relative overflow-hidden cursor-pointer shadow-xs ${
                 isActive
-                  ? "bg-white border-quantum/40 hover:border-quantum hover:shadow-md ring-1 ring-quantum/20"
-                  : "bg-parchment border-hairline opacity-90 hover:opacity-100 hover:border-amber-300"
+                  ? "bg-white border-[#00B489]/40 hover:border-[#006766] hover:shadow-[0_12px_28px_-8px_rgba(0,103,102,0.15)] ring-1 ring-[#006766]/10"
+                  : "bg-white/80 border-[#DFEBE8] hover:border-amber-300 hover:shadow-xs"
               }`}
             >
               {/* Card Top: Visual Art Banner + Badges */}
               <div className="space-y-4">
-                <div className="relative w-full h-40 rounded-xl overflow-hidden border border-hairline bg-cream/30">
+                <div className="relative w-full h-40 rounded-xl overflow-hidden border border-[#DFEBE8] bg-[#F7FAF9]">
                   <img
                     src={mod.image}
                     alt={mod.title}
@@ -384,7 +431,7 @@ export default function PredictHubPage() {
                   {/* Bottom Category Tag */}
                   <div className="absolute bottom-2.5 left-2.5 flex items-center gap-2">
                     <div className={`w-7 h-7 rounded-lg flex items-center justify-center shadow-xs backdrop-blur-xs ${
-                      isActive ? "bg-white/95 text-quantum border border-quantum/30" : "bg-white/95 text-amber-700 border border-amber-300"
+                      isActive ? "bg-white/95 text-[#006766] border border-[#00B489]/30" : "bg-white/95 text-amber-700 border border-amber-300"
                     }`}>
                       <IconComp size={15} />
                     </div>
@@ -396,24 +443,24 @@ export default function PredictHubPage() {
 
                 {/* Module Details */}
                 <div className="space-y-1.5">
-                  <h3 className="font-serif text-lg font-medium text-ink leading-tight group-hover:text-quantum transition-colors">
+                  <h3 className="font-sans text-lg font-bold text-[#082827] leading-tight group-hover:text-[#006766] transition-colors">
                     {mod.title}
                   </h3>
-                  <p className="text-xs text-ink-soft leading-relaxed line-clamp-3">
+                  <p className="text-xs text-[#5A7470] font-normal leading-relaxed line-clamp-3">
                     {mod.description}
                   </p>
                 </div>
               </div>
 
               {/* Card Bottom: Metrics & Action */}
-              <div className="pt-3.5 border-t border-hairline mt-4 space-y-3">
-                <div className="grid grid-cols-2 gap-2 text-[11px] font-mono text-ink-soft">
+              <div className="pt-3.5 border-t border-[#DFEBE8] mt-4 space-y-3">
+                <div className="grid grid-cols-2 gap-2 text-[11px] font-mono text-[#5A7470]">
                   <div>
-                    <span className="block text-[9px] uppercase font-semibold text-ink-soft/70">Cohort</span>
-                    <strong className="text-ink">{mod.metrics.cohortSize}</strong>
+                    <span className="block text-[9px] uppercase font-semibold text-[#5A7470]/70">Cohort</span>
+                    <strong className="text-[#082827]">{mod.metrics.cohortSize}</strong>
                   </div>
                   <div className="text-right">
-                    <span className="block text-[9px] uppercase font-semibold text-ink-soft/70">Validation</span>
+                    <span className="block text-[9px] uppercase font-semibold text-[#5A7470]/70">Validation</span>
                     <strong className={isActive ? "text-emerald-700" : "text-amber-700"}>
                       {mod.metrics.accuracy}
                     </strong>
@@ -424,10 +471,10 @@ export default function PredictHubPage() {
                   <Link
                     href={mod.targetUrl!}
                     onClick={(e) => e.stopPropagation()}
-                    className="w-full py-2.5 px-3 rounded-xl bg-ink hover:bg-ink/90 text-parchment text-xs font-semibold flex items-center justify-between transition-all shadow-2xs group-hover:shadow-xs"
+                    className="w-full py-2.5 px-3 rounded-xl bg-[#006766] hover:bg-[#0D4F46] text-white text-xs font-semibold flex items-center justify-between transition-all shadow-2xs group-hover:shadow-xs"
                   >
                     <span>Open Clinical Studio</span>
-                    <ArrowRight size={13} className="text-quantum group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight size={13} className="text-[#74D0D2] group-hover:translate-x-0.5 transition-transform" />
                   </Link>
                 ) : (
                   <button
@@ -436,7 +483,7 @@ export default function PredictHubPage() {
                       e.stopPropagation();
                       handleModuleClick(mod);
                     }}
-                    className="w-full py-2.5 px-3 rounded-xl bg-cream hover:bg-cream-deep/60 border border-hairline text-ink-soft hover:text-ink text-xs font-medium flex items-center justify-center gap-1.5 transition-all cursor-pointer font-mono"
+                    className="w-full py-2.5 px-3 rounded-xl bg-[#F7FAF9] hover:bg-[#F2F7F6] border border-[#DFEBE8] text-[#5A7470] hover:text-[#082827] text-xs font-medium flex items-center justify-center gap-1.5 transition-all cursor-pointer font-mono"
                   >
                     <Lock size={12} className="text-amber-600" />
                     <span>Future Upgrade • Roadmap Specs</span>
@@ -447,6 +494,8 @@ export default function PredictHubPage() {
           );
         })}
       </div>
+      </>
+      )}
 
     </div>
   );

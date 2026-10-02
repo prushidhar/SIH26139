@@ -19,6 +19,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { showToast } from "@/components/common/ToastNotification";
+import AiDiagnosticsApp from "@/components/diagnostics/AiDiagnosticsApp";
 
 interface DemoCase {
   id: string;
@@ -152,6 +153,7 @@ const DEMO_CASES: DemoCase[] = [
 ];
 
 export default function DemoSandboxPage() {
+  const [activeMode, setActiveMode] = useState<"dribbble" | "sandbox">("dribbble");
   const [runningId, setRunningId] = useState<string | null>(null);
   const [results, setResults] = useState<Record<string, any>>({});
 
@@ -188,33 +190,67 @@ export default function DemoSandboxPage() {
   };
 
   return (
-    <div className="min-h-screen bg-cream px-4 sm:px-6 py-8 font-sans text-ink">
-      <div className="max-w-5xl mx-auto space-y-6">
-        {/* Top Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-hairline pb-5">
-          <div className="space-y-1">
+    <div className="min-h-screen bg-[#F2F7F6] px-4 sm:px-6 py-8 font-sans text-[#082827]">
+      <div className="max-w-6xl mx-auto space-y-6">
+        {/* Mode Selector Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border border-[#DFEBE8] bg-white p-3 rounded-2xl shadow-xs">
+          <div className="flex items-center gap-3">
             <Link
               href="/predict"
-              className="inline-flex items-center gap-1.5 text-xs text-ink-soft hover:text-ink transition-colors font-medium mb-1"
+              className="inline-flex items-center gap-1.5 text-xs text-[#5A7470] hover:text-[#006766] transition-colors font-medium px-2 py-1 rounded-lg hover:bg-[#F2F7F6]"
             >
               <ArrowLeft size={13} /> Back to Screening Hub
             </Link>
-            <h1 className="text-2xl sm:text-3xl font-serif font-light tracking-tight text-ink">
-              Instant Detection Sandbox
-            </h1>
-            <p className="text-xs text-ink-soft">
-              One-click screening across verified clinical cohorts.
-            </p>
           </div>
 
-          <Link
-            href="/predict"
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-ink text-parchment text-xs font-medium hover:bg-ink/90 transition-all self-start sm:self-center"
-          >
-            <span>Screening Hub</span>
-            <ArrowRight size={13} />
-          </Link>
+          <div className="flex items-center p-1 bg-[#E6F7F4]/60 rounded-xl border border-[#DFEBE8] text-xs">
+            <button
+              type="button"
+              onClick={() => setActiveMode("dribbble")}
+              className={`px-4 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${
+                activeMode === "dribbble"
+                  ? "bg-[#006766] text-white shadow-xs"
+                  : "text-[#5A7470] hover:text-[#082827]"
+              }`}
+            >
+              AI Diagnostics Suite
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveMode("sandbox")}
+              className={`px-4 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${
+                activeMode === "sandbox"
+                  ? "bg-[#006766] text-white shadow-xs"
+                  : "text-[#5A7470] hover:text-[#082827]"
+              }`}
+            >
+              Detection Sandbox
+            </button>
+          </div>
         </div>
+
+        {/* View 1: Dribbble MedTech Flow */}
+        {activeMode === "dribbble" && (
+          <AiDiagnosticsApp />
+        )}
+
+        {/* View 2: Multi-case Benchmark Sandbox */}
+        {activeMode === "sandbox" && (
+          <>
+            <div className="space-y-1">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-[#00B489]" />
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#006766] font-semibold">
+                  Multi-Cohort Evaluation
+                </span>
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-sans font-bold tracking-tight text-[#082827] mt-1">
+                Instant Detection Sandbox
+              </h1>
+              <p className="text-xs text-[#5A7470] font-normal">
+                One-click clinical screening across verified peer-reviewed datasets.
+              </p>
+            </div>
 
         {/* Demo Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -226,28 +262,28 @@ export default function DemoSandboxPage() {
             return (
               <div
                 key={demo.id}
-                className="p-5 rounded-2xl border border-hairline bg-white shadow-xs space-y-4 flex flex-col justify-between"
+                className="p-5 rounded-2xl border border-[#DFEBE8] bg-white shadow-xs space-y-4 flex flex-col justify-between"
               >
                 <div className="space-y-3">
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-quantum/10 text-quantum flex items-center justify-center shrink-0">
+                      <div className="w-9 h-9 rounded-xl bg-[#E6F7F4] text-[#006766] border border-[#00B489]/20 flex items-center justify-center shrink-0">
                         <IconComp size={16} />
                       </div>
                       <div>
-                        <h3 className="text-sm font-semibold text-ink leading-tight">{demo.title}</h3>
-                        <span className="text-[11px] font-mono text-ink-soft block">{demo.disease}</span>
+                        <h3 className="text-sm font-bold text-[#082827] leading-tight font-sans">{demo.title}</h3>
+                        <span className="text-[11px] font-mono text-[#5A7470] block">{demo.disease}</span>
                       </div>
                     </div>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cream text-ink-soft border border-hairline">
+                    <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#E6F7F4] text-[#006766] border border-[#00B489]/20 font-medium">
                       {demo.circuitInfo}
                     </span>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-cream/40 border border-hairline text-xs space-y-1">
-                    <span className="text-[10px] font-mono uppercase text-ink-soft block">Reference Benchmark</span>
-                    <p className="text-ink font-mono text-[11px] font-medium">{demo.sampleDescription}</p>
-                    <span className="text-[10px] text-ink-soft block italic">{demo.provenance}</span>
+                  <div className="p-3 rounded-xl bg-[#F2F7F6] border border-[#DFEBE8] text-xs space-y-1">
+                    <span className="text-[10px] font-mono uppercase text-[#5A7470] block font-semibold">Reference Benchmark</span>
+                    <p className="text-[#082827] font-mono text-[11px] font-medium">{demo.sampleDescription}</p>
+                    <span className="text-[10px] text-[#5A7470] block italic">{demo.provenance}</span>
                   </div>
 
                   {/* Inline Result If Available */}
@@ -255,17 +291,17 @@ export default function DemoSandboxPage() {
                     <motion.div
                       initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="p-3 rounded-xl bg-quantum/5 border border-quantum/20 space-y-2 text-xs"
+                      className="p-3 rounded-xl bg-[#E6F7F4]/80 border border-[#00B489]/30 space-y-2 text-xs"
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-semibold text-quantum flex items-center gap-1.5">
-                          <CheckCircle2 size={13} />
+                        <span className="font-semibold text-[#006766] flex items-center gap-1.5">
+                          <CheckCircle2 size={13} className="text-[#00B489]" />
                           {result.diagnosis ||
                             result.prediction_label ||
                             result.prediction?.clinical_title ||
                             "Analysis Complete"}
                         </span>
-                        <span className="font-mono font-bold text-ink">
+                        <span className="font-mono font-bold text-[#082827]">
                           {result.cardiomegaly_probability
                             ? `${(result.cardiomegaly_probability * 100).toFixed(1)}% Prob`
                             : result.liver_disease_probability
@@ -282,7 +318,7 @@ export default function DemoSandboxPage() {
 
                       {/* Small Router or Observation note */}
                       {result.router_telemetry?.selected_engine && (
-                        <span className="text-[10px] font-mono text-ink-soft block">
+                        <span className="text-[10px] font-mono text-[#5A7470] block">
                           Engine: {result.router_telemetry.selected_engine}
                         </span>
                       )}
@@ -290,10 +326,10 @@ export default function DemoSandboxPage() {
                   )}
                 </div>
 
-                <div className="pt-2 border-t border-hairline flex items-center justify-between gap-3">
+                <div className="pt-3 border-t border-[#DFEBE8] flex items-center justify-between gap-3">
                   <Link
                     href={demo.targetStudio}
-                    className="text-xs text-ink-soft hover:text-quantum font-medium flex items-center gap-1"
+                    className="text-xs text-[#5A7470] hover:text-[#006766] font-medium flex items-center gap-1 transition-colors"
                   >
                     <span>Full Studio</span>
                     <ArrowRight size={11} />
@@ -303,7 +339,7 @@ export default function DemoSandboxPage() {
                     type="button"
                     onClick={() => runDetection(demo)}
                     disabled={isRunning}
-                    className="px-4 py-2 rounded-xl bg-ink text-parchment hover:bg-ink/90 text-xs font-semibold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer disabled:opacity-50"
+                    className="px-4 py-2 rounded-xl bg-[#006766] text-white hover:bg-[#0D4F46] text-xs font-semibold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer disabled:opacity-50 active:scale-95"
                   >
                     {isRunning ? (
                       <>
@@ -312,7 +348,7 @@ export default function DemoSandboxPage() {
                       </>
                     ) : (
                       <>
-                        <Zap size={13} className="text-quantum" />
+                        <Zap size={13} className="text-[#00B489]" />
                         <span>Run Detection</span>
                       </>
                     )}
@@ -322,6 +358,8 @@ export default function DemoSandboxPage() {
             );
           })}
         </div>
+        </>
+        )}
       </div>
     </div>
   );
