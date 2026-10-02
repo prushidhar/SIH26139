@@ -132,7 +132,7 @@ export default function NeurologicalStudioPage() {
       if (res.ok && data.success && data.telemetry) {
         setTelemetry(data.telemetry);
 
-        const prob = Number(data.telemetry.neurological_risk_probability ?? 0.25);
+        const prob = Number(data.telemetry.neurological_risk_probability ?? data.telemetry.consensus_probability ?? (data.telemetry.risk_score != null ? data.telemetry.risk_score / 100 : 0.25));
         const isHigh = prob >= 0.5;
 
         // Persist screening to patient database
