@@ -117,13 +117,13 @@ export default function ExperimentVaultPage() {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-ink-soft">
             <Archive className="w-3.5 h-3.5 text-quantum" />
-            <span>Research Archive</span>
+            <span>Immutable Clinical Trial Ledger</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1 tracking-tight">
-            Experiment Vault
+            Clinical Study &amp; Experiment Vault
           </h1>
           <p className="text-xs sm:text-sm text-ink-soft mt-1">
-            Auditable, reproducible experiment records with immutable audit locks.
+            Auditable, peer-reviewed clinical validation records with cryptographic state verification and provenance locks.
           </p>
         </div>
 

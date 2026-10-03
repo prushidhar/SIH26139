@@ -181,11 +181,11 @@ export default function BenchmarksPage() {
           </p>
         </div>
 
-        <div className="p-3.5 rounded-xl border border-teal-500/20 bg-teal-500/5 space-y-1.5">
-          <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-teal-500/20 text-teal-600 dark:text-teal-400">
+        <div className="p-3.5 rounded-xl border border-cyan-500/20 bg-cyan-500/5 space-y-1.5">
+          <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-600 dark:text-cyan-400">
             Hardware Execution
           </span>
-          <h3 className="text-xs font-bold text-foreground">Simulation & QPU Profiling</h3>
+          <h3 className="text-xs font-bold text-foreground">Simulation &amp; QPU Profiling</h3>
           <p className="text-[11px] text-muted-foreground leading-relaxed">
             Direct telemetry comparing local statevector simulation against real superconducting quantum processors.
           </p>
@@ -196,7 +196,7 @@ export default function BenchmarksPage() {
       <div className="flex flex-wrap items-center gap-2 p-1 bg-muted/40 rounded-xl border border-border w-fit">
         <button type="button" onClick={() => setBenchModality("breast")}
           className={`px-4 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer flex items-center gap-2 ${benchModality === "breast" ? "bg-card text-foreground shadow-xs border border-border font-bold" : "text-muted-foreground hover:text-foreground"}`}>
-          <Activity size={13} /><span>Breast Cancer (WDBC)</span>
+          <Activity size={13} /><span>Breast Cytopathology (WDBC)</span>
           <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-pink-500/10 text-pink-600 font-bold">N=569</span>
         </button>
         <button type="button" onClick={() => setBenchModality("cardiac")}
@@ -206,18 +206,18 @@ export default function BenchmarksPage() {
         </button>
         <button type="button" onClick={() => setBenchModality("cleveland")}
           className={`px-4 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer flex items-center gap-2 ${benchModality === "cleveland" ? "bg-card text-foreground shadow-xs border border-border font-bold" : "text-muted-foreground hover:text-foreground"}`}>
-          <Layers size={13} /><span>Cleveland Cardiology (Tabular)</span>
+          <Layers size={13} /><span>Cleveland Cardiology (CAD)</span>
           <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 font-bold">N=303 &bull; Tabular</span>
         </button>
         <button type="button" onClick={() => setBenchModality("radiography")}
           className={`px-4 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer flex items-center gap-2 ${benchModality === "radiography" ? "bg-card text-foreground shadow-xs border border-border font-bold" : "text-muted-foreground hover:text-foreground"}`}>
-          <Cpu size={13} /><span>Cardiomegaly CXR (Radiography)</span>
+          <Cpu size={13} /><span>Cardiomegaly CXR (Radiology)</span>
           <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 font-bold">N=1,200 &bull; Imaging</span>
         </button>
         <button type="button" onClick={() => setBenchModality("liver")}
           className={`px-4 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer flex items-center gap-2 ${benchModality === "liver" ? "bg-card text-foreground shadow-xs border border-border font-bold" : "text-muted-foreground hover:text-foreground"}`}>
-          <Database size={13} /><span>Liver Disease (ILPD)</span>
-          <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-teal-500/10 text-teal-600 font-bold">N=583 &bull; ILPD</span>
+          <Database size={13} /><span>Liver Biomarkers (ILPD)</span>
+          <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-600 font-bold">N=583 &bull; ILPD</span>
         </button>
       </div>
 

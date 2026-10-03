@@ -52,13 +52,13 @@ export default function EvidenceMatrixPage() {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-ink-soft">
             <TableProperties className="w-3.5 h-3.5 text-quantum" />
-            <span>Performance Comparison</span>
+            <span>Statistical Verification Ledger</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1 tracking-tight">
-            Performance Matrix
+            Multidimensional Clinical Evidence Matrix
           </h1>
           <p className="text-xs sm:text-sm text-ink-soft mt-1">
-            Compare models across accuracy, speed, and data efficiency.
+            Rigorous 9-dimensional statistical audit comparing classical algorithms against variational quantum circuits across accuracy, sample efficiency, and latency.
           </p>
         </div>
 
@@ -67,7 +67,7 @@ export default function EvidenceMatrixPage() {
             href="/explainability"
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-ink text-parchment hover:bg-ink/90 text-xs font-medium transition-colors"
           >
-            <span>Next: Explainability</span>
+            <span>Biomarker Attributions</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>

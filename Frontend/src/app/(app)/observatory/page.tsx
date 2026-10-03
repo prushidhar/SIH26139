@@ -251,13 +251,13 @@ export default function DatasetObservatoryPage() {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-ink-soft">
             <Database className="w-3.5 h-3.5 text-quantum" />
-            <span>Data Explorer</span>
+            <span>Biomedical Cohort Registry</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1 tracking-tight">
-            Dataset Explorer
+            Clinical Cohort &amp; Biomarker Observatory
           </h1>
           <p className="text-xs sm:text-sm text-ink-soft mt-1">
-            Browse and inspect clinical datasets before running models.
+            Audit prospective clinical cohorts, biomarker distributions, completeness ratios, and cross-feature collinearity matrices.
           </p>
         </div>
 
@@ -266,7 +266,7 @@ export default function DatasetObservatoryPage() {
             href="/benchmarks"
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-ink text-parchment hover:bg-ink/90 text-xs font-medium transition-colors"
           >
-            <span>View Model Benchmarks</span>
+            <span>Algorithmic Benchmarks</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>

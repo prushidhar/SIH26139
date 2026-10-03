@@ -250,14 +250,14 @@ export default function ModelAnalysisPage() {
           <div className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-quantum" />
             <span className="text-[11px] font-mono uppercase tracking-wider text-quantum font-semibold">
-              Performance Tracking
+              Telemetry &amp; Audit Console
             </span>
           </div>
           <h1 className="font-serif text-2xl sm:text-3xl font-light text-ink tracking-tight">
-            Model Performance
+            Clinical Model Concordance &amp; Telemetry
           </h1>
           <p className="text-xs text-ink-soft font-light">
-            Track screening accuracy, precision, and model confidence across sessions.
+            Continuous real-time verification of diagnostic accuracy, clinical sensitivity, and physician concordance.
           </p>
         </div>
 
@@ -268,7 +268,7 @@ export default function ModelAnalysisPage() {
             className="px-3.5 py-1.5 rounded-xl bg-ink text-parchment hover:bg-ink/90 text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
           >
             <BarChart3 size={13} className="text-quantum" />
-            <span>View More Analysis</span>
+            <span>Benchmark Analytics</span>
             <ArrowRight size={12} className="text-parchment/70" />
           </Link>
 
@@ -281,7 +281,7 @@ export default function ModelAnalysisPage() {
             title="Sync authentic patient screenings from Supabase and live backend"
           >
             <RefreshCw size={13} className={`text-quantum ${isRefreshing ? "animate-spin" : ""}`} />
-            <span>{isRefreshing ? "Syncing Records..." : "Sync Live Records"}</span>
+            <span>{isRefreshing ? "Syncing Records..." : "Sync Clinical Records"}</span>
           </button>
 
           <button

@@ -76,13 +76,13 @@ export default function SignalStudioPage() {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-ink-soft">
             <Sliders className="w-3.5 h-3.5 text-quantum" />
-            <span>Signal Processing Studio</span>
+            <span>Biomarker Signal Decomposition</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1 tracking-tight">
-            Signal Studio
+            Biomarker Signal Processing &amp; Hilbert Embedding
           </h1>
           <p className="text-xs sm:text-sm text-ink-soft mt-1">
-            Biomarker ranking, PCA projection, and quantum rotation angle encoding.
+            Dimensionality reduction, PCA latent space projection, and quantum Bloch sphere rotation angle encoding.
           </p>
         </div>
 

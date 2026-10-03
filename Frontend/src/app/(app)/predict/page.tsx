@@ -46,117 +46,66 @@ interface DiseaseModule {
 
 const DISEASE_MODULES: DiseaseModule[] = [
   {
-    key: "breast_cancer",
-    title: "Breast Cancer Screening",
-    category: "Oncology",
-    datasetName: "569 Biopsy Records",
-    status: "active",
-    statusLabel: "Active Studio",
-    icon: Microscope,
-    image: "/images/disease-breast-cancer.jpg",
-    description: "Evaluates cell biopsy markers to assess tissue malignancy with dual classical-quantum pipelines.",
-    targetUrl: "/predict/breast-cancer",
-    metrics: {
-      cohortSize: "569 Cases",
-      engine: "Dual Quantum-Classical",
-      accuracy: "98.2% Consensus"
-    }
-  },
-  {
     key: "heart_disease",
-    title: "Cardiac ECG Analysis",
-    category: "Cardiology",
-    datasetName: "12-Lead ECG Strips",
+    title: "12-Lead Electrocardiogram (ECG) Analysis",
+    category: "Cardiac Electrophysiology",
+    datasetName: "PTB-XL 12-Lead Strips",
     status: "active",
-    statusLabel: "Active Studio",
+    statusLabel: "Active Terminal",
     icon: Heart,
     image: "/images/disease-cardiovascular.jpg",
-    description: "Analyzes 12-lead ECGs for acute heart attack, myocardial ischemia, and arrhythmia.",
+    description: "Analyzes 12-lead ECGs for acute myocardial infarction, ischemia patterns, and rhythm conduction defects.",
     targetUrl: "/predict/heart-disease",
     metrics: {
-      cohortSize: "Clinical Cohort",
+      cohortSize: "21,799 Records",
       engine: "ResNet-18 + 8Q VQC",
       accuracy: "98.8% Consensus"
     }
   },
   {
-    key: "cardiomegaly",
-    title: "Chest X-Ray Cardiomegaly",
-    category: "Radiology",
-    datasetName: "CheXpert CXR",
+    key: "breast_cancer",
+    title: "Breast Cytopathology Biopsy Studio",
+    category: "Histopathology & Oncology",
+    datasetName: "569 Biopsy Records (WDBC)",
     status: "active",
-    statusLabel: "Active Studio",
-    icon: Layers,
-    image: "/images/disease-cardiovascular.jpg",
-    description: "Detects heart enlargement from frontal chest radiographs via DenseNet-121 + 6-Qubit VQC.",
-    targetUrl: "/predict/cardiomegaly",
+    statusLabel: "Active Terminal",
+    icon: Microscope,
+    image: "/images/disease-breast-cancer.jpg",
+    description: "Evaluates nuclear pleomorphism, texture, and perimeter to determine benign vs malignant tissue diagnosis.",
+    targetUrl: "/predict/breast-cancer",
     metrics: {
-      cohortSize: "1,200 Radiographs",
-      engine: "6-Qubit Transfer VQC",
-      accuracy: "0.930 ROC-AUC"
+      cohortSize: "569 Biopsies",
+      engine: "Dual Quantum-Classical",
+      accuracy: "98.2% Consensus"
     }
   },
   {
     key: "heart_tabular",
-    title: "Cardiovascular Vitals (CAD)",
-    category: "Cardiology",
-    datasetName: "Cleveland Cohort",
+    title: "Cardiovascular Hemodynamics (CAD)",
+    category: "Preventive Cardiology",
+    datasetName: "Cleveland Clinic Cohort",
     status: "active",
-    statusLabel: "Active Studio",
+    statusLabel: "Active Terminal",
     icon: Heart,
     image: "/images/disease-cardiovascular.jpg",
-    description: "Assesses coronary artery disease risk from hemodynamic clinical vitals.",
+    description: "Evaluates resting vitals, cholesterol, fluoroscopy vessels, and exercise stress ST depression for CAD risk.",
     targetUrl: "/predict/heart-tabular",
     metrics: {
-      cohortSize: "303 Cases",
+      cohortSize: "303 Patients",
       engine: "4-Qubit VQC",
       accuracy: "0.918 ROC-AUC"
     }
   },
   {
-    key: "liver_ilpd",
-    title: "Liver Function Panel (ILPD)",
-    category: "Hepatology",
-    datasetName: "ILPD Cohort",
-    status: "active",
-    statusLabel: "Active Studio",
-    icon: Droplets,
-    image: "/images/disease-breast-cancer.jpg",
-    description: "Evaluates 10 liver enzyme markers for early hepatic impairment via 2-qubit minimal VQC.",
-    targetUrl: "/predict/liver-ilpd",
-    metrics: {
-      cohortSize: "583 Records",
-      engine: "2-Qubit Minimal VQC",
-      accuracy: "0.772 ROC-AUC"
-    }
-  },
-  {
-    key: "neurological",
-    title: "Brain Health & EEG",
-    category: "Neurology",
-    datasetName: "EEG & Psychomotor",
-    status: "active",
-    statusLabel: "Active Studio",
-    icon: Activity,
-    image: "/images/disease-neurological.jpg",
-    description: "Evaluates EEG spectral power and motor tremor for early neuro-cognitive risk.",
-    targetUrl: "/predict/neurological",
-    metrics: {
-      cohortSize: "400 Profiles",
-      engine: "4-Qubit VQC",
-      accuracy: "92.4% Consensus"
-    }
-  },
-  {
     key: "chronic_kidney",
-    title: "Chronic Kidney Disease (CKD)",
-    category: "Nephrology",
-    datasetName: "400 Renal Records",
+    title: "Nephrology & Glomerular Health Studio",
+    category: "Renal Function & Filtration",
+    datasetName: "400 Renal Function Records",
     status: "active",
-    statusLabel: "Active Studio",
+    statusLabel: "Active Terminal",
     icon: FlaskConical,
     image: "/images/disease-kidney-neural.jpg",
-    description: "Evaluates 8 renal panel markers with KDIGO staging and CKD-EPI eGFR estimation.",
+    description: "Evaluates 8 renal panel markers with automated CKD-EPI eGFR calculation and KDIGO chronic kidney disease staging.",
     targetUrl: "/predict/chronic-kidney",
     metrics: {
       cohortSize: "400 Cases",
@@ -165,20 +114,71 @@ const DISEASE_MODULES: DiseaseModule[] = [
     }
   },
   {
-    key: "hepatitis_c",
-    title: "Hepatitis C & Liver Health",
-    category: "Hepatology",
-    datasetName: "615 Serum Panels",
+    key: "liver_ilpd",
+    title: "Hepatic Functional Biomarker Panel",
+    category: "Hepatology & Metabolism",
+    datasetName: "583 ILPD Clinical Records",
     status: "active",
-    statusLabel: "Active Studio",
+    statusLabel: "Active Terminal",
     icon: Droplets,
     image: "/images/disease-breast-cancer.jpg",
-    description: "Screens blood chemistry markers for hepatitis and fibrosis staging.",
+    description: "Screens 10 hepatic enzyme markers, transaminases, and albumin/globulin ratios with a 2-qubit minimal quantum circuit.",
+    targetUrl: "/predict/liver-ilpd",
+    metrics: {
+      cohortSize: "583 Records",
+      engine: "2-Qubit Minimal VQC",
+      accuracy: "0.772 ROC-AUC"
+    }
+  },
+  {
+    key: "cardiomegaly",
+    title: "Thoracic Radiograph (CXR) Cardiomegaly",
+    category: "Diagnostic Radiology",
+    datasetName: "1,200 CheXpert Radiographs",
+    status: "active",
+    statusLabel: "Active Terminal",
+    icon: Layers,
+    image: "/images/disease-cardiovascular.jpg",
+    description: "Screens for cardiac silhouette enlargement and calculates automated cardiothoracic ratio from chest radiographs.",
+    targetUrl: "/predict/cardiomegaly",
+    metrics: {
+      cohortSize: "1,200 CXRs",
+      engine: "6-Qubit Transfer VQC",
+      accuracy: "0.930 ROC-AUC"
+    }
+  },
+  {
+    key: "hepatitis_c",
+    title: "Hepatitis C Staging & Fibrosis",
+    category: "Viral Pathology & Fibrosis",
+    datasetName: "615 Serum Chemistry Panels",
+    status: "active",
+    statusLabel: "Active Terminal",
+    icon: Droplets,
+    image: "/images/disease-breast-cancer.jpg",
+    description: "Evaluates serum chemistry enzymes, cholinesterase, and AST/ALT indices for hepatitis C fibrosis staging.",
     targetUrl: "/predict/hepatitis-c",
     metrics: {
-      cohortSize: "615 Cases",
+      cohortSize: "615 Panels",
       engine: "4-Qubit VQC",
       accuracy: "99.2% Classical / 88.4% QML"
+    }
+  },
+  {
+    key: "neurological",
+    title: "Cognitive Profile & Neurological Studio",
+    category: "Neuro-Cognitive Health",
+    datasetName: "400 Neuro-Cognitive Profiles",
+    status: "active",
+    statusLabel: "Active Terminal",
+    icon: Activity,
+    image: "/images/disease-neurological.jpg",
+    description: "Evaluates cortical EEG spectral power, resting motor tremor, and psychomotor speed for early impairment screening.",
+    targetUrl: "/predict/neurological",
+    metrics: {
+      cohortSize: "400 Profiles",
+      engine: "4-Qubit VQC",
+      accuracy: "92.4% Consensus"
     }
   }
 ];
@@ -219,12 +219,12 @@ export default function PredictHubPage() {
       {/* MODE SELECTOR HEADER */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-3.5 rounded-2xl border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)]">
         <div className="flex items-center gap-2.5">
-          <div className="h-8 w-8 rounded-xl bg-[#006766] text-white flex items-center justify-center font-bold text-xs shadow-xs">
-            AID
+          <div className="h-8 w-8 rounded-xl bg-[#006766] text-white flex items-center justify-center font-bold text-xs shadow-xs font-mono">
+            QST
           </div>
           <div>
-            <h2 className="text-sm font-bold text-[#082827]">Clinical Diagnostic Workspace</h2>
-            <p className="text-[11px] text-[#5A7470]">Switch between the interactive Dribbble MedTech Suite and Disease Studios</p>
+            <h2 className="text-sm font-bold text-[#082827]">Clinical Examination Suites</h2>
+            <p className="text-[11px] text-[#5A7470]">Toggle between digital stethoscope auscultation and disease screening terminals</p>
           </div>
         </div>
 
@@ -238,7 +238,7 @@ export default function PredictHubPage() {
                 : "text-[#5A7470] hover:text-[#082827]"
             }`}
           >
-            QureSight Diagnostic Studio
+            Digital Auscultation Studio
           </button>
           <button
             type="button"
@@ -249,7 +249,7 @@ export default function PredictHubPage() {
                 : "text-[#5A7470] hover:text-[#082827]"
             }`}
           >
-            Disease Studios
+            Screening Terminals
           </button>
         </div>
       </div>

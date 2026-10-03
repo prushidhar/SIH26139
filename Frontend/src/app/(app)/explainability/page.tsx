@@ -64,13 +64,13 @@ export default function ExplainabilityPage() {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-ink-soft">
             <Sparkles className="w-3.5 h-3.5 text-quantum" />
-            <span>Biomarker Interpretability</span>
+            <span>Clinical Attribution &amp; SHAP Engine</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1 tracking-tight">
-            Feature Explainability & SHAP
+            Biomarker Attribution &amp; Gradient SHAP
           </h1>
           <p className="text-xs sm:text-sm text-ink-soft mt-1">
-            Analyze which clinical features and laboratory biomarkers drive model predictions across classical and quantum models.
+            Quantify the clinical weight, Shapley contributions, and quantum parameter-shift gradients driving diagnostic predictions.
           </p>
         </div>
 
@@ -79,7 +79,7 @@ export default function ExplainabilityPage() {
             href="/predict"
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-ink text-parchment hover:bg-ink/90 text-xs font-medium transition-colors"
           >
-            <span>Run Clinical Screening</span>
+            <span>Launch Patient Examination</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>

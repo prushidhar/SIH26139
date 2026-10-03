@@ -253,14 +253,14 @@ export default function HardwarePage() {
           <div className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-quantum" />
             <span className="text-[11px] font-mono uppercase tracking-wider text-quantum font-semibold">
-              Compute Infrastructure
+              Quantum &amp; Classical Compute Matrix
             </span>
           </div>
           <h1 className="font-serif text-2xl sm:text-3xl font-light text-ink tracking-tight">
-            Compute &amp; Hardware
+            Hardware Execution &amp; QPU Telemetry
           </h1>
           <p className="text-xs text-ink-soft font-light">
-            Real-time status of quantum processors, simulators, and local compute.
+            Active cluster telemetry, superconducting transmon gateway status, and error mitigation pipeline configuration.
           </p>
         </div>
 

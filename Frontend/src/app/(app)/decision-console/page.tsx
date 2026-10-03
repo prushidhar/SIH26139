@@ -80,13 +80,13 @@ export default function DecisionConsolePage() {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-ink-soft">
             <Cpu className="w-3.5 h-3.5 text-quantum" />
-            <span>Routing & Safety</span>
+            <span>Clinical Consensus &amp; Arbitration</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1 tracking-tight">
-            Decision Console
+            Diagnostic Arbitration Console
           </h1>
           <p className="text-xs sm:text-sm text-ink-soft mt-1">
-            See how QureSight routes predictions between classical and quantum models based on confidence levels.
+            Tiered arbitration router dispatching rapid classical inference or deep quantum statevector evaluation based on entropy bounds.
           </p>
         </div>
 

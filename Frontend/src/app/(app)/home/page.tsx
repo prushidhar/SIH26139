@@ -47,127 +47,127 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
   {
     key: "ai_diagnostics",
     title: "QureSight Diagnostics & Auscultation Suite",
-    category: "Pulmonary & Respiratory Screening",
+    category: "Pulmonary & Respiratory Triage",
     icon: Stethoscope,
     dataset: "6-Point Auscultation & Clinical Symptoms",
-    features: "Acoustic Lung Sound Analysis & Chronicity",
+    features: "Acoustic Wheeze/Crackle & Symptom Chronicity",
     target: "Pulmonary Pathology & TB Consensus",
-    advantage: "Active Studio",
-    description: "Interactive 6-point digital stethoscope auscultation, animated breathing visualizer, and multi-modal quantum consensus screening.",
+    advantage: "Active Terminal",
+    description: "Interactive 6-point digital stethoscope auscultation, animated breathing cadence visualizer, and multi-engine respiratory triage.",
     route: "/predict",
     tooltip: "Full multi-step diagnostic screening suite with live anatomical guide and breathing visualizer.",
     status: "active",
   },
   {
+    key: "heart_disease",
+    title: "12-Lead Electrocardiogram (ECG) Analysis",
+    category: "Cardiac Electrophysiology",
+    icon: Heart,
+    dataset: "PTB-XL 12-Lead Diagnostic Strips",
+    features: "ST-Segment Deviation & Rhythm Morphology",
+    target: "Acute MI & Arrhythmia Consensus",
+    advantage: "Active Terminal",
+    description: "Paper 12-lead ECG strip digitizer with real-time Grad-CAM localization, acute ischemic injury scoring, and 8-qubit circuit consensus.",
+    route: "/predict/heart-disease",
+    tooltip: "Live active screening terminal for 12-lead electrocardiograms.",
+    status: "active",
+  },
+  {
     key: "breast_cancer",
-    title: "Breast Cancer Screening Studio",
-    category: "Certified Clinical Studio",
+    title: "Breast Cytopathology Biopsy Studio",
+    category: "Histopathology & Oncology",
     icon: Microscope,
     dataset: "569 Biopsy Records (WDBC)",
-    features: "Cell Shape & Texture Analysis",
+    features: "Nuclear Pleomorphism, Texture & Perimeter",
     target: "Malignant vs Benign",
-    advantage: "Active Studio",
-    description: "Fine Needle Aspirate (WDBC) 8-qubit cytopathology classification with verified cross-validation.",
+    advantage: "Active Terminal",
+    description: "Fine needle aspirate (WDBC) 8-qubit variational classifier evaluating nuclear morphometry with verified cross-validation.",
     route: "/predict/breast-cancer",
     tooltip: "Uses 8-qubit variational quantum circuits with 48 gates to evaluate cytopathology biopsy cells.",
     status: "active",
   },
   {
-    key: "heart_disease",
-    title: "Cardiac ECG Waveform Analysis",
-    category: "Certified Clinical Studio",
-    icon: Heart,
-    dataset: "PTB-XL 12-Lead Diagnostic Strips",
-    features: "ECG ST-Segment & Rhythm",
-    target: "Acute MI & Arrhythmia Consensus",
-    advantage: "Active Studio",
-    description: "12-lead paper ECG image analysis with real-time Grad-CAM localization, cardiac risk scoring, and 8-qubit VQC.",
-    route: "/predict/heart-disease",
-    tooltip: "Live active screening studio for 12-lead electrocardiograms.",
-    status: "active",
-  },
-  {
     key: "heart_tabular",
-    title: "Cardiovascular Vitals (CAD)",
-    category: "Certified Clinical Studio",
+    title: "Cardiovascular Hemodynamics (CAD)",
+    category: "Preventive Cardiology",
     icon: Heart,
-    dataset: "303 Cleveland Patients",
-    features: "13 Hemodynamic Biomarkers",
-    target: "Coronary Artery Disease",
-    advantage: "Active Studio",
-    description: "4-qubit variational circuit screening coronary artery disease risk from vitals.",
+    dataset: "303 Cleveland Clinic Cohort",
+    features: "13 Hemodynamic Biomarkers & Exercise Stress",
+    target: "Coronary Artery Disease Risk",
+    advantage: "Active Terminal",
+    description: "Evaluates resting blood pressure, serum cholesterol, exercise ST depression, and fluoroscopy coronary vessels.",
     route: "/predict/heart-tabular",
     tooltip: "Evaluates blood pressure, cholesterol, ST depression, and fluoroscopy vessels.",
     status: "active",
   },
   {
-    key: "cardiomegaly",
-    title: "Chest X-Ray Cardiomegaly Studio",
-    category: "Certified Clinical Studio",
-    icon: Layers,
-    dataset: "1,200 CheXpert Radiographs",
-    features: "DenseNet-121 Latent + CTR",
-    target: "Heart Enlargement Detection",
-    advantage: "Active Studio",
-    description: "Deep transfer learning pipeline combining DenseNet-121 with 6-qubit quantum classifier on chest radiographs.",
-    route: "/predict/cardiomegaly",
-    tooltip: "Automated cardiothoracic ratio measurement and cardiac silhouette screening.",
-    status: "active",
-  },
-  {
     key: "liver_ilpd",
-    title: "Liver Function Panel (ILPD)",
-    category: "Certified Clinical Studio",
+    title: "Hepatic Functional Biomarker Panel",
+    category: "Hepatology & Metabolic Health",
     icon: Droplets,
-    dataset: "583 ILPD Cohort Records",
-    features: "10 Liver Enzyme Biomarkers",
+    dataset: "583 ILPD Clinical Records",
+    features: "10 Liver Enzyme Biomarkers & Bilirubin Ratios",
     target: "Hepatic Dysregulation & Impairment",
-    advantage: "Active Studio",
-    description: "Compact 2-qubit quantum classifier evaluating hepatic biomarkers with high specificity.",
+    advantage: "Active Terminal",
+    description: "Minimal 2-qubit quantum classifier screening transaminases, alkaline phosphatase, and albumin/globulin ratios.",
     route: "/predict/liver-ilpd",
     tooltip: "Analyzes transaminases, bilirubin, proteins, and albumin ratios with 2-qubit minimal VQC.",
     status: "active",
   },
   {
+    key: "chronic_kidney",
+    title: "Nephrology & Glomerular Health Studio",
+    category: "Renal Function & Filtration",
+    icon: FlaskConical,
+    dataset: "400 Renal Function Records",
+    features: "Serum Creatinine, eGFR, Blood Urea, Albumin",
+    target: "Early Glomerular Impairment",
+    advantage: "Active Terminal",
+    description: "4-qubit variational circuit assessing glomerular filtration rate, proteinuria severity, and KDIGO risk tiers.",
+    route: "/predict/chronic-kidney",
+    tooltip: "Screens 8 renal biomarkers with automated CKD-EPI eGFR calculation and KDIGO risk tiers.",
+    status: "active",
+  },
+  {
+    key: "cardiomegaly",
+    title: "Thoracic Radiograph (CXR) Cardiomegaly",
+    category: "Diagnostic Radiology",
+    icon: Layers,
+    dataset: "1,200 CheXpert Radiographs",
+    features: "DenseNet-121 Latent + Cardiothoracic Ratio",
+    target: "Cardiac Silhouette Enlargement",
+    advantage: "Active Terminal",
+    description: "Deep transfer learning pipeline combining DenseNet-121 feature embeddings with quantum classification on chest radiographs.",
+    route: "/predict/cardiomegaly",
+    tooltip: "Automated cardiothoracic ratio measurement and cardiac silhouette screening.",
+    status: "active",
+  },
+  {
     key: "hepatitis_c",
-    title: "Hepatitis C & Fibrosis Studio",
-    category: "Certified Clinical Studio",
+    title: "Hepatitis C Staging & Fibrosis",
+    category: "Viral Pathology & Fibrosis",
     icon: Droplets,
     dataset: "615 Serum Chemistry Panels",
-    features: "12 Serum Biomarkers",
+    features: "12 Serum Biomarkers & Cholinesterase",
     target: "Cirrhosis & Fibrosis Staging",
-    advantage: "Active Studio",
-    description: "Screens blood chemistry markers for hepatitis C viral progression and liver fibrosis.",
+    advantage: "Active Terminal",
+    description: "Screens serum enzymes and metabolic blood chemistry markers for hepatitis C viral progression and liver fibrosis.",
     route: "/predict/hepatitis-c",
     tooltip: "Screens serum enzymes, cholinesterase, and creatinine with 4-qubit VQC.",
     status: "active",
   },
   {
     key: "neurological",
-    title: "Brain Health & Neurological Studio",
-    category: "Certified Clinical Studio",
+    title: "Cognitive Profile & Neurological Studio",
+    category: "Neuro-Cognitive Health",
     icon: Brain,
     dataset: "400 Neuro-Cognitive Profiles",
-    features: "EEG Spectra, Tremor, MMSE",
+    features: "Cortical EEG Power Spectra, Tremor, MMSE",
     target: "Early Neurodegenerative Risk",
-    advantage: "Active Studio",
-    description: "4-qubit PennyLane VQC analyzing cortical EEG rhythms, resting tremor, and psychomotor speed.",
+    advantage: "Active Terminal",
+    description: "4-qubit PennyLane VQC analyzing cortical EEG rhythms, resting motor tremor, and psychomotor processing speed.",
     route: "/predict/neurological",
     tooltip: "Multi-domain screening for early cognitive impairment and motor dysfunction.",
-    status: "active",
-  },
-  {
-    key: "chronic_kidney",
-    title: "Nephrology & Renal Health Studio",
-    category: "Certified Clinical Studio",
-    icon: FlaskConical,
-    dataset: "400 Renal Function Records",
-    features: "Creatinine, eGFR, Albumin, Urea",
-    target: "Early Glomerular Impairment",
-    advantage: "Active Studio",
-    description: "4-qubit PennyLane VQC assessing glomerular filtration rate, proteinuria, and KDIGO staging.",
-    route: "/predict/chronic-kidney",
-    tooltip: "Screens 8 renal biomarkers with automated CKD-EPI eGFR calculation and KDIGO risk tiers.",
     status: "active",
   },
 ];
@@ -375,13 +375,13 @@ export default function HomePage() {
           <div className="space-y-1.5 max-w-2xl">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-[11px] font-mono text-[#006766] font-semibold">
               <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
-              <span>AID Clinical Intelligence</span>
+              <span>QureSight Triage Station</span>
             </div>
             <h1 className="font-sans text-2xl sm:text-3xl md:text-4xl font-bold text-[#082827] tracking-tight">
-              Welcome back, <span className="text-[#006766]">{userName}</span>
+              Clinical Triage Console, <span className="text-[#006766]">{userName}</span>
             </h1>
             <p className="text-[#5A7470] text-xs sm:text-sm font-normal leading-relaxed">
-              Select a clinical disease module below to run diagnostic screening, or inspect consensus telemetry.
+              Launch multimodal disease examinations, evaluate acoustic lung sounds, or review consensus audit records.
             </p>
           </div>
 
@@ -390,28 +390,28 @@ export default function HomePage() {
               href="/predict"
               className="px-4 py-2.5 rounded-xl bg-[#006766] hover:bg-[#0D4F46] text-white font-semibold text-xs tracking-wider transition-all shadow-sm shadow-[#006766]/20 flex items-center gap-2 cursor-pointer font-sans"
             >
-              <Sparkles size={14} className="text-[#74D0D2]" /> Clinical Screening
+              <Sparkles size={14} className="text-[#74D0D2]" /> Patient Examination
             </Link>
             <Link
               href="/benchmarks"
               className="px-4 py-2.5 rounded-xl bg-[#F2F7F6] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#082827] font-semibold text-xs tracking-wider transition-all flex items-center gap-1.5 cursor-pointer font-sans"
             >
-              <Activity size={14} className="text-[#006766]" /> Model Benchmarks
+              <Activity size={14} className="text-[#006766]" /> Validation Telemetry
             </Link>
           </div>
         </div>
 
         {/* Quick Platform Navigation Strip */}
         <div className="pt-4 mt-5 border-t border-[#DFEBE8] flex items-center justify-between gap-2 overflow-x-auto text-[11px] font-mono text-[#5A7470] whitespace-nowrap">
-          <Link href="/predict" className="hover:text-[#006766] transition-colors font-medium">Screening Studios</Link>
+          <Link href="/predict" className="hover:text-[#006766] transition-colors font-medium">Examination Terminals</Link>
           <span className="text-[#DFEBE8]">•</span>
-          <Link href="/history" className="hover:text-[#006766] transition-colors">Screening Records</Link>
+          <Link href="/history" className="hover:text-[#006766] transition-colors">Patient Audit Trail</Link>
           <span className="text-[#DFEBE8]">•</span>
-          <Link href="/observatory" className="hover:text-[#006766] transition-colors">Dataset Explorer</Link>
+          <Link href="/observatory" className="hover:text-[#006766] transition-colors">Biomarker Observatory</Link>
           <span className="text-[#DFEBE8]">•</span>
           <Link href="/benchmarks" className="hover:text-[#006766] transition-colors">Model Benchmarks</Link>
           <span className="text-[#DFEBE8]">•</span>
-          <Link href="/explainability" className="hover:text-[#006766] transition-colors">Explainability Studio</Link>
+          <Link href="/explainability" className="hover:text-[#006766] transition-colors">Biomarker Attributions</Link>
           <span className="text-[#DFEBE8]">•</span>
           <Link href="/hardware" className="hover:text-[#006766] transition-colors">Compute Infrastructure</Link>
         </div>
@@ -420,41 +420,41 @@ export default function HomePage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-5 mt-5 border-t border-[#DFEBE8]">
           <div className="space-y-1">
             <div className="flex items-center gap-1">
-              <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470]">Clinical Modalities</span>
-              <HelpTooltip text="7 active multi-disease quantum and classical screening studios across oncology, cardiology, hepatology, radiology, and neurology." />
+              <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470]">Active Terminals</span>
+              <HelpTooltip text="Active multimodal quantum and classical examination terminals across oncology, cardiology, hepatology, radiology, and nephrology." />
             </div>
-            <div className="font-sans text-2xl sm:text-3xl text-[#082827] font-bold tracking-tight">7 <span className="text-xs font-normal text-[#5A7470]">Studios</span></div>
-            <p className="text-[11px] text-[#5A7470] font-normal">Full Multi-Disease Suite</p>
+            <div className="font-sans text-2xl sm:text-3xl text-[#082827] font-bold tracking-tight">8 <span className="text-xs font-normal text-[#5A7470]">Terminals</span></div>
+            <p className="text-[11px] text-[#5A7470] font-normal">Multimodal Examination Suite</p>
           </div>
 
           <div className="space-y-1">
             <div className="flex items-center gap-1">
-              <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470]">Model Advantage</span>
+              <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470]">Generalization Gain</span>
               <HelpTooltip text="In scarce clinical data regimes (15% sample size), Quantum VQC achieves +8.30% higher test accuracy over tuned classical SVM (p = 0.0153)." />
             </div>
-            <div className="font-sans text-2xl sm:text-3xl text-[#006766] font-bold tracking-tight">+8.3% <span className="text-xs font-normal text-[#5A7470]">on limited data</span></div>
-            <p className="text-[11px] text-[#5A7470] font-normal">15% Cohort Regime (p = 0.0153)</p>
+            <div className="font-sans text-2xl sm:text-3xl text-[#006766] font-bold tracking-tight">+8.3% <span className="text-xs font-normal text-[#5A7470]">scarce-cohort</span></div>
+            <p className="text-[11px] text-[#5A7470] font-normal">Verified Statistical Edge</p>
           </div>
 
           <div className="space-y-1">
             <div className="flex items-center gap-1">
-              <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470]">Screenings Run</span>
+              <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470]">Screened Cohort</span>
               <HelpTooltip text="Total number of patients screened in this browser session." />
             </div>
-            <div className="font-sans text-2xl sm:text-3xl text-[#082827] font-bold tracking-tight">{recentPredictions.length} <span className="text-xs font-normal text-[#5A7470]">patients</span></div>
-            <p className="text-[11px] text-[#5A7470] font-normal">In your active session</p>
+            <div className="font-sans text-2xl sm:text-3xl text-[#082827] font-bold tracking-tight">{recentPredictions.length} <span className="text-xs font-normal text-[#5A7470]">records</span></div>
+            <p className="text-[11px] text-[#5A7470] font-normal">Session Examination Count</p>
           </div>
 
           <div className="space-y-1">
             <div className="flex items-center gap-1">
-              <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470]">Compute</span>
+              <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470]">Engine Stack</span>
               <HelpTooltip text="The quantum processor or simulation engine actively analyzing patient data." />
             </div>
             <div className="font-sans text-2xl sm:text-3xl text-[#082827] font-bold tracking-tight">
-              Quantum + Classical
+              Hybrid Ensemble
             </div>
             <p className="text-[11px] text-[#5A7470] font-normal">
-              {backend === "ibmq_eagle" ? "IBM Quantum Processor" : "GPU Matrix Engine Active"}
+              {backend === "ibmq_eagle" ? "IBM Eagle Hardware" : "Statevector Simulator"}
             </p>
           </div>
         </div>
@@ -467,10 +467,10 @@ export default function HomePage() {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="font-sans text-xl sm:text-2xl font-bold text-[#082827] tracking-tight">
-              Diagnostic Categories
+              Clinical Examination Terminals
             </h2>
             <p className="text-xs text-[#5A7470] font-normal">
-              Select a medical condition below to open the screening test studio.
+              Select an active clinical screening terminal to perform patient intake and run algorithmic diagnostics.
             </p>
           </div>
         </div>

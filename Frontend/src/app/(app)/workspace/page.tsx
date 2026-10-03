@@ -77,10 +77,10 @@ export default function ResearchWorkspacePage() {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-ink-soft">
             <Compass className="w-3.5 h-3.5 text-quantum" />
-            <span>Clinical Intelligence Platform</span>
+            <span>Clinical Research &amp; Investigation Hub</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1 tracking-tight">
-            Research Workspace
+            Physician Investigation Station
           </h1>
           <p className="text-xs sm:text-sm text-ink-soft mt-1">
             Evidence-driven biomedical intelligence: evaluating quantum representation on complex clinical cohorts.
