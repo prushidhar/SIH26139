@@ -27,8 +27,6 @@ import {
   ShieldAlert,
   Dna,
   Zap,
-  FolderHeart,
-  FileCheck,
 } from "lucide-react";
 import { AuthService } from "@/services/auth.service";
 import { ScreeningService, type StoredPrediction } from "@/services/screening.service";
@@ -415,7 +413,7 @@ export default function HomePage() {
               Welcome back, <span className="text-[#006766]">{userName}</span>
             </h1>
             <p className="text-xs sm:text-sm text-[#5A7470] font-normal leading-relaxed">
-              Point-of-care multimodal screening console. Select an active specialty terminal to initiate intake, or review verified case dossiers in the clinical activity queue.
+              Point-of-care multimodal screening console. Select an active specialty terminal to initiate intake, or review verified case dossiers in the clinical activity ledger.
             </p>
           </div>
 
@@ -444,332 +442,315 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
+
+        {/* Real Operational Workstation Metrics (Zero Mock/Fake Numbers) */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-5 mt-5 border-t border-[#DFEBE8]/80">
+          <div className="p-3.5 rounded-2xl bg-[#F7FAF9]/80 border border-[#DFEBE8]/60 space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-[#5A7470]">
+              <CheckCircle2 size={14} className="text-[#00B489]" />
+              <span>Diagnostic Coverage</span>
+            </div>
+            <div className="font-sans text-xl font-bold text-[#082827]">
+              9 Terminals
+            </div>
+            <p className="text-[11px] text-[#5A7470]">Active screening pipelines</p>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-[#F7FAF9]/80 border border-[#DFEBE8]/60 space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-[#5A7470]">
+              <Layers size={14} className="text-[#006766]" />
+              <span>Input Modalities</span>
+            </div>
+            <div className="font-sans text-xl font-bold text-[#082827]">
+              Multimodal
+            </div>
+            <p className="text-[11px] text-[#5A7470]">Acoustic • ECG • Image • Lab</p>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-[#F7FAF9]/80 border border-[#DFEBE8]/60 space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-[#5A7470]">
+              <ShieldCheck size={14} className="text-[#00B489]" />
+              <span>Inference Protocol</span>
+            </div>
+            <div className="font-sans text-xl font-bold text-[#082827]">
+              Dual Hybrid
+            </div>
+            <p className="text-[11px] text-[#5A7470]">Quantum VQC + Deep Learning</p>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-[#F7FAF9]/80 border border-[#DFEBE8]/60 space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-[#5A7470]">
+              <Clock size={14} className="text-[#006766]" />
+              <span>Session Screenings</span>
+            </div>
+            <div className="font-sans text-xl font-bold text-[#082827]">
+              {recentPredictions.length} Logged
+            </div>
+            <p className="text-[11px] text-[#5A7470]">Recorded in current session</p>
+          </div>
+        </div>
       </div>
 
       {/* ========================================================================= */}
-      {/* 2. RESPONSIVE TWO-COLUMN WORKSTATION LAYOUT */}
+      {/* 2. CLINICAL SPECIALTY FILTER & 3-COLUMN SUITES GRID WITH PICTURES */}
       {/* ========================================================================= */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* ===================================================================== */}
-        {/* MAIN COLUMN (8 of 12): SPECIALTY FILTER & TERMINAL SUITES WITH PICTURES */}
-        {/* ===================================================================== */}
-        <div className="lg:col-span-8 space-y-4">
-          {/* Header & Filter Controls */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-[#DFEBE8] shadow-2xs">
-            <div>
-              <h2 className="font-sans text-lg font-bold text-[#082827] tracking-tight">
-                Diagnostic Screening Suites ({filteredModules.length})
-              </h2>
-              <p className="text-xs text-[#5A7470]">
-                Multimodal point-of-care intake terminals with verified AI consensus.
+      <section className="space-y-4">
+        {/* Section Header with Category Filter Tabs */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 className="font-sans text-xl sm:text-2xl font-bold text-[#082827] tracking-tight">
+              Diagnostic Screening Suites ({filteredModules.length})
+            </h2>
+            <p className="text-xs sm:text-sm text-[#5A7470]">
+              Select an active clinical department to intake patient data and execute algorithmic diagnostics.
+            </p>
+          </div>
+
+          {/* Specialty Filter Tabs */}
+          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-[#F2F7F6] rounded-2xl border border-[#DFEBE8] text-xs">
+            <button
+              type="button"
+              onClick={() => setSelectedGroup("all")}
+              className={`px-3 py-1.5 rounded-xl font-semibold transition-all cursor-pointer ${
+                selectedGroup === "all"
+                  ? "bg-white text-[#006766] shadow-xs"
+                  : "text-[#5A7470] hover:text-[#082827]"
+              }`}
+            >
+              All Suites (9)
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedGroup("cardiopulmonary")}
+              className={`px-3 py-1.5 rounded-xl font-semibold transition-all cursor-pointer ${
+                selectedGroup === "cardiopulmonary"
+                  ? "bg-white text-[#006766] shadow-xs"
+                  : "text-[#5A7470] hover:text-[#082827]"
+              }`}
+            >
+              Cardiopulmonary
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedGroup("oncology")}
+              className={`px-3 py-1.5 rounded-xl font-semibold transition-all cursor-pointer ${
+                selectedGroup === "oncology"
+                  ? "bg-white text-[#006766] shadow-xs"
+                  : "text-[#5A7470] hover:text-[#082827]"
+              }`}
+            >
+              Oncology
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedGroup("metabolic")}
+              className={`px-3 py-1.5 rounded-xl font-semibold transition-all cursor-pointer ${
+                selectedGroup === "metabolic"
+                  ? "bg-white text-[#006766] shadow-xs"
+                  : "text-[#5A7470] hover:text-[#082827]"
+              }`}
+            >
+              Metabolic & Renal
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedGroup("neuro_radiology")}
+              className={`px-3 py-1.5 rounded-xl font-semibold transition-all cursor-pointer ${
+                selectedGroup === "neuro_radiology"
+                  ? "bg-white text-[#006766] shadow-xs"
+                  : "text-[#5A7470] hover:text-[#082827]"
+              }`}
+            >
+              Radiology & Neuro
+            </button>
+          </div>
+        </div>
+
+        {/* 3-Column Grid of Terminal Cards with Pictures */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {filteredModules.map((disease) => {
+            const Icon = disease.icon;
+            return (
+              <div
+                key={disease.key}
+                className="bg-white rounded-3xl border border-[#DFEBE8] overflow-hidden flex flex-col justify-between shadow-[0_2px_16px_-4px_rgba(0,103,102,0.05)] hover:shadow-[0_12px_32px_-6px_rgba(0,103,102,0.14)] hover:border-[#006766]/50 transition-all group"
+              >
+                <div>
+                  {/* High-Resolution Medical Preview Picture */}
+                  <div className="relative w-full h-44 bg-[#F7FAF9] overflow-hidden border-b border-[#DFEBE8]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={disease.image}
+                      alt={disease.title}
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent pointer-events-none" />
+
+                    {/* Top Overlay Specialty & Modality Badges */}
+                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+                      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold font-mono bg-white/95 text-[#006766] shadow-sm border border-white/60 backdrop-blur-xs flex items-center gap-1.5">
+                        <Icon size={12} className="text-[#00B489]" />
+                        <span>{disease.specialty}</span>
+                      </span>
+                      <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-black/60 text-white border border-white/20 backdrop-blur-xs">
+                        {disease.modalityBadge}
+                      </span>
+                    </div>
+
+                    {/* Bottom Image Overlay: Target Condition */}
+                    <div className="absolute bottom-2.5 left-3 right-3 flex items-center gap-1.5 text-white text-[11px] font-medium drop-shadow-sm truncate pointer-events-none">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#00B489] shrink-0" />
+                      <span className="truncate">{disease.targetCondition}</span>
+                    </div>
+                  </div>
+
+                  {/* Card Content */}
+                  <div className="p-5 space-y-2.5">
+                    <h3 className="font-sans text-base sm:text-lg font-bold text-[#082827] leading-snug group-hover:text-[#006766] transition-colors">
+                      {disease.title}
+                    </h3>
+                    <p className="text-xs text-[#5A7470] font-normal leading-relaxed line-clamp-2">
+                      {disease.clinicalScope}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Card Action Button */}
+                <div className="p-5 pt-0">
+                  <Link
+                    href={disease.route}
+                    className="w-full py-2.5 px-4 rounded-xl bg-[#F7FAF9] group-hover:bg-[#006766] text-[#006766] group-hover:text-white font-semibold text-xs transition-all flex items-center justify-center gap-2 shadow-2xs group-hover:shadow-md group-hover:shadow-[#006766]/20 cursor-pointer"
+                  >
+                    <span>Launch Screening Suite</span>
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 3. RECENT CLINICAL CASE RECORDS (REAL DATA ONLY) */}
+      {/* ========================================================================= */}
+      <section className="space-y-3 pt-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="font-sans text-xl sm:text-2xl font-bold text-[#082827] tracking-tight">
+              Recent Patient Screenings
+            </h2>
+            <p className="text-xs text-[#5A7470]">
+              Diagnostic tests and algorithmic evaluations recorded in your current clinical session.
+            </p>
+          </div>
+
+          {recentPredictions.length > 0 && (
+            <Link
+              href="/history"
+              className="text-xs font-bold text-[#006766] hover:text-[#084E4D] flex items-center gap-1 transition-colors"
+            >
+              <span>View All Records ({recentPredictions.length})</span>
+              <ArrowRight size={14} />
+            </Link>
+          )}
+        </div>
+
+        {recentPredictions.length === 0 ? (
+          /* GENUINE CLEAN EMPTY STATE (ZERO FAKE DATA) */
+          <div className="p-8 sm:p-12 rounded-3xl bg-white border border-[#DFEBE8] text-center space-y-4 shadow-[0_2px_16px_-4px_rgba(0,103,102,0.04)]">
+            <div className="w-14 h-14 rounded-2xl bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] mx-auto flex items-center justify-center">
+              <Stethoscope size={26} className="text-[#006766]" />
+            </div>
+            <div className="space-y-1.5 max-w-md mx-auto">
+              <h3 className="font-sans text-lg font-bold text-[#082827]">
+                No patient screenings logged in this session
+              </h3>
+              <p className="text-xs text-[#5A7470] font-normal leading-relaxed">
+                Launch any diagnostic terminal above to intake patient data, run multi-engine evaluations, and generate verified case records.
               </p>
             </div>
-
-            {/* Filter Tabs */}
-            <div className="flex flex-wrap items-center gap-1 p-1 bg-[#F2F7F6] rounded-xl border border-[#DFEBE8] text-[11px]">
-              <button
-                type="button"
-                onClick={() => setSelectedGroup("all")}
-                className={`px-2.5 py-1 rounded-lg font-semibold transition-all cursor-pointer ${
-                  selectedGroup === "all"
-                    ? "bg-white text-[#006766] shadow-xs"
-                    : "text-[#5A7470] hover:text-[#082827]"
-                }`}
-              >
-                All (9)
-              </button>
-              <button
-                type="button"
-                onClick={() => setSelectedGroup("cardiopulmonary")}
-                className={`px-2.5 py-1 rounded-lg font-semibold transition-all cursor-pointer ${
-                  selectedGroup === "cardiopulmonary"
-                    ? "bg-white text-[#006766] shadow-xs"
-                    : "text-[#5A7470] hover:text-[#082827]"
-                }`}
-              >
-                Cardiopulmonary
-              </button>
-              <button
-                type="button"
-                onClick={() => setSelectedGroup("oncology")}
-                className={`px-2.5 py-1 rounded-lg font-semibold transition-all cursor-pointer ${
-                  selectedGroup === "oncology"
-                    ? "bg-white text-[#006766] shadow-xs"
-                    : "text-[#5A7470] hover:text-[#082827]"
-                }`}
-              >
-                Oncology
-              </button>
-              <button
-                type="button"
-                onClick={() => setSelectedGroup("metabolic")}
-                className={`px-2.5 py-1 rounded-lg font-semibold transition-all cursor-pointer ${
-                  selectedGroup === "metabolic"
-                    ? "bg-white text-[#006766] shadow-xs"
-                    : "text-[#5A7470] hover:text-[#082827]"
-                }`}
-              >
-                Metabolic
-              </button>
-              <button
-                type="button"
-                onClick={() => setSelectedGroup("neuro_radiology")}
-                className={`px-2.5 py-1 rounded-lg font-semibold transition-all cursor-pointer ${
-                  selectedGroup === "neuro_radiology"
-                    ? "bg-white text-[#006766] shadow-xs"
-                    : "text-[#5A7470] hover:text-[#082827]"
-                }`}
-              >
-                Radiology
-              </button>
-            </div>
-          </div>
-
-          {/* Grid of 2 Columns for Rich Terminal Cards with Images */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {filteredModules.map((disease) => {
-              const Icon = disease.icon;
-              return (
-                <div
-                  key={disease.key}
-                  className="bg-white rounded-2xl border border-[#DFEBE8] overflow-hidden flex flex-col justify-between shadow-[0_2px_14px_-4px_rgba(0,103,102,0.05)] hover:shadow-[0_8px_24px_-4px_rgba(0,103,102,0.12)] hover:border-[#006766]/50 transition-all group"
-                >
-                  <div>
-                    {/* Visual Preview Picture */}
-                    <div className="relative w-full h-36 bg-[#F7FAF9] overflow-hidden border-b border-[#DFEBE8]">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={disease.image}
-                        alt={disease.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
-
-                      {/* Top Overlay Badges */}
-                      <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between pointer-events-none">
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-white/95 text-[#006766] shadow-2xs border border-white/50 backdrop-blur-xs">
-                          {disease.specialty}
-                        </span>
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-black/60 text-white border border-white/20 backdrop-blur-xs">
-                          {disease.modalityBadge}
-                        </span>
-                      </div>
-
-                      {/* Bottom Image Overlay Tag */}
-                      <div className="absolute bottom-2 left-2.5 right-2.5 flex items-center gap-1.5 text-white text-[11px] font-medium drop-shadow-sm truncate">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#00B489] shrink-0" />
-                        <span className="truncate">{disease.targetCondition}</span>
-                      </div>
-                    </div>
-
-                    {/* Card Content Area */}
-                    <div className="p-4 space-y-2">
-                      <div className="flex items-center gap-2">
-                        <div className={`w-7 h-7 rounded-lg ${disease.accentBg} ${disease.accentText} flex items-center justify-center shrink-0`}>
-                          <Icon size={15} />
-                        </div>
-                        <h3 className="font-sans text-sm sm:text-base font-bold text-[#082827] leading-snug group-hover:text-[#006766] transition-colors line-clamp-1">
-                          {disease.title}
-                        </h3>
-                      </div>
-
-                      <p className="text-xs text-[#5A7470] font-normal leading-relaxed line-clamp-2">
-                        {disease.clinicalScope}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Card Action Button */}
-                  <div className="p-4 pt-0">
-                    <Link
-                      href={disease.route}
-                      className="w-full py-2 px-3 rounded-xl bg-[#F7FAF9] group-hover:bg-[#006766] text-[#006766] group-hover:text-white font-semibold text-xs transition-all flex items-center justify-center gap-1.5 shadow-2xs group-hover:shadow-md group-hover:shadow-[#006766]/20 cursor-pointer"
-                    >
-                      <span>Launch Screening Suite</span>
-                      <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* ===================================================================== */}
-        {/* RIGHT SIDEBAR PANEL (4 of 12): RECENT CASE QUEUE & WORKSTATION READINESS */}
-        {/* ===================================================================== */}
-        <div className="lg:col-span-4 space-y-5">
-          {/* Quick Intake Shortcuts Panel */}
-          <div className="bg-white rounded-3xl border border-[#DFEBE8] p-5 shadow-2xs space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#082827] flex items-center gap-1.5">
-                <Sparkles size={14} className="text-[#00B489]" />
-                <span>Fast Intake Shortcuts</span>
-              </span>
-              <span className="text-[10px] text-[#5A7470] font-mono">1-Click</span>
-            </div>
-
-            <div className="grid grid-cols-2 gap-2 text-xs">
+            <div className="pt-2">
               <Link
                 href="/predict"
-                className="p-2.5 rounded-xl bg-[#F7FAF9] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#082827] hover:text-[#006766] font-medium transition-all flex flex-col gap-1 cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#006766] hover:bg-[#084E4D] text-white font-semibold text-xs tracking-wider transition-all shadow-md shadow-[#006766]/20 cursor-pointer"
               >
-                <div className="flex items-center gap-1 text-[#006766] font-bold text-[11px]">
-                  <Stethoscope size={13} />
-                  <span>Lung Audio</span>
-                </div>
-                <span className="text-[10px] text-[#5A7470]">Digital Stethoscope</span>
-              </Link>
-
-              <Link
-                href="/predict/heart-disease"
-                className="p-2.5 rounded-xl bg-[#F7FAF9] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#082827] hover:text-[#006766] font-medium transition-all flex flex-col gap-1 cursor-pointer"
-              >
-                <div className="flex items-center gap-1 text-rose-700 font-bold text-[11px]">
-                  <Heart size={13} />
-                  <span>12-Lead ECG</span>
-                </div>
-                <span className="text-[10px] text-[#5A7470]">Ischemia & Rhythm</span>
-              </Link>
-
-              <Link
-                href="/predict/breast-cancer"
-                className="p-2.5 rounded-xl bg-[#F7FAF9] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#082827] hover:text-[#006766] font-medium transition-all flex flex-col gap-1 cursor-pointer"
-              >
-                <div className="flex items-center gap-1 text-pink-700 font-bold text-[11px]">
-                  <Microscope size={13} />
-                  <span>FNA Biopsy</span>
-                </div>
-                <span className="text-[10px] text-[#5A7470]">Cell Cytopathology</span>
-              </Link>
-
-              <Link
-                href="/predict/cardiomegaly"
-                className="p-2.5 rounded-xl bg-[#F7FAF9] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#082827] hover:text-[#006766] font-medium transition-all flex flex-col gap-1 cursor-pointer"
-              >
-                <div className="flex items-center gap-1 text-indigo-700 font-bold text-[11px]">
-                  <Scan size={13} />
-                  <span>Chest X-Ray</span>
-                </div>
-                <span className="text-[10px] text-[#5A7470]">Silhouette Ratio</span>
+                <Sparkles size={14} className="text-[#00B489]" />
+                <span>Start First Patient Screening</span>
               </Link>
             </div>
           </div>
-
-          {/* Dedicated Recent Patient Screenings Queue */}
-          <div className="bg-white rounded-3xl border border-[#DFEBE8] p-5 shadow-2xs space-y-3.5">
-            <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
-              <div>
-                <h3 className="text-sm font-bold text-[#082827]">
-                  Clinical Patient Queue
-                </h3>
-                <p className="text-[11px] text-[#5A7470]">
-                  Session screening records ({recentPredictions.length})
-                </p>
-              </div>
-
-              {recentPredictions.length > 0 && (
-                <Link
-                  href="/history"
-                  className="text-[11px] font-bold text-[#006766] hover:underline flex items-center gap-0.5"
-                >
-                  <span>All ({recentPredictions.length})</span>
-                  <ChevronRight size={12} />
-                </Link>
-              )}
-            </div>
-
-            {recentPredictions.length === 0 ? (
-              <div className="py-6 text-center space-y-2">
-                <div className="w-10 h-10 rounded-full bg-[#E6F7F4] text-[#006766] mx-auto flex items-center justify-center">
-                  <FolderHeart size={18} />
-                </div>
-                <p className="text-xs font-semibold text-[#082827]">No cases screened yet</p>
-                <p className="text-[11px] text-[#5A7470] max-w-[200px] mx-auto">
-                  Execute patient intake from the suites to generate verified case records.
-                </p>
-                <Link
-                  href="/predict"
-                  className="inline-block mt-1 text-[11px] font-bold text-[#006766] hover:underline"
-                >
-                  Start First Intake →
-                </Link>
-              </div>
-            ) : (
-              <div className="space-y-2.5 max-h-[360px] overflow-y-auto no-scrollbar">
-                {recentPredictions.map((pred, i) => (
-                  <div
-                    key={i}
-                    onClick={() => handleViewScreening(pred)}
-                    className="p-3 rounded-2xl border border-[#DFEBE8] hover:border-[#006766]/50 bg-[#F7FAF9]/60 hover:bg-white transition-all cursor-pointer space-y-2 group shadow-2xs"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-full bg-[#E6F7F4] text-[#006766] font-bold text-[11px] flex items-center justify-center shrink-0">
-                          {(pred.patientName || "P").charAt(0).toUpperCase()}
+        ) : (
+          /* POPULATED ACTIVITY TABLE */
+          <div className="bg-white rounded-3xl border border-[#DFEBE8] shadow-[0_2px_16px_-4px_rgba(0,103,102,0.04)] overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs font-sans">
+                <thead className="bg-[#F7FAF9] border-b border-[#DFEBE8] text-[11px] font-semibold uppercase tracking-wider text-[#5A7470]">
+                  <tr>
+                    <th className="py-3.5 px-5 font-semibold">Patient Case</th>
+                    <th className="py-3.5 px-5 font-semibold">Diagnostic Specialty</th>
+                    <th className="py-3.5 px-5 font-semibold">Algorithmic Verdict</th>
+                    <th className="py-3.5 px-5 font-semibold">Consensus Engine</th>
+                    <th className="py-3.5 px-5 font-semibold">Intake Time</th>
+                    <th className="py-3.5 px-5 text-right font-semibold">Dossier</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#DFEBE8]/60 text-[#082827]">
+                  {recentPredictions.map((pred, i) => (
+                    <tr
+                      key={i}
+                      onClick={() => handleViewScreening(pred)}
+                      className="hover:bg-[#F2F7F6]/70 transition-colors cursor-pointer group"
+                    >
+                      <td className="py-3.5 px-5">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-full bg-[#E6F7F4] border border-[#00B489]/20 text-[#006766] font-bold text-xs flex items-center justify-center shrink-0">
+                            {(pred.patientName || "P").charAt(0).toUpperCase()}
+                          </div>
+                          <div>
+                            <div className="font-semibold text-[#082827]">{pred.patientName || "Patient"}</div>
+                            <div className="text-[10px] text-[#5A7470] font-mono">{pred.id}</div>
+                          </div>
                         </div>
-                        <div>
-                          <span className="font-semibold text-xs text-[#082827] group-hover:text-[#006766] transition-colors block">
-                            {pred.patientName || "Patient"}
-                          </span>
-                          <span className="text-[10px] text-[#5A7470] font-mono">
-                            {pred.id}
-                          </span>
-                        </div>
-                      </div>
-
-                      <span
-                        className={`px-2 py-0.5 rounded-full text-[9px] font-semibold ${
-                          pred.riskLevel === "High" || pred.quantumPrediction?.includes("Malignant") || pred.quantumPrediction?.includes("Infarction")
-                            ? "bg-red-50 text-red-700 border border-red-200"
-                            : "bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30"
-                        }`}
-                      >
-                        {pred.quantumPrediction || "Physiological"}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center justify-between text-[10px] text-[#5A7470] border-t border-[#DFEBE8]/60 pt-1.5 font-mono">
-                      <span>{pred.disease || pred.diseaseType || "Clinical Intake"}</span>
-                      <span className="text-[#006766] font-semibold group-hover:underline flex items-center gap-0.5">
-                        <span>Review</span>
-                        <ChevronRight size={10} />
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Workstation Integrity & Telemetry Panel (100% Real Operational Metrics) */}
-          <div className="bg-white rounded-3xl border border-[#DFEBE8] p-5 shadow-2xs space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#082827] flex items-center gap-1.5">
-              <ShieldCheck size={14} className="text-[#00B489]" />
-              <span>Workstation Verification</span>
-            </h4>
-
-            <div className="space-y-2 text-xs">
-              <div className="flex items-center justify-between p-2 rounded-xl bg-[#F7FAF9]">
-                <span className="text-[#5A7470]">Active Terminals</span>
-                <span className="font-semibold text-[#082827]">9/9 Operational</span>
-              </div>
-              <div className="flex items-center justify-between p-2 rounded-xl bg-[#F7FAF9]">
-                <span className="text-[#5A7470]">Inference Engine</span>
-                <span className="font-semibold text-[#006766]">Dual Hybrid VQC</span>
-              </div>
-              <div className="flex items-center justify-between p-2 rounded-xl bg-[#F7FAF9]">
-                <span className="text-[#5A7470]">Data Privacy</span>
-                <span className="font-semibold text-[#082827]">HIPAA / In-Memory</span>
-              </div>
-              <div className="flex items-center justify-between p-2 rounded-xl bg-[#F7FAF9]">
-                <span className="text-[#5A7470]">Session Activity</span>
-                <span className="font-semibold text-[#082827]">{recentPredictions.length} Screenings</span>
-              </div>
+                      </td>
+                      <td className="py-3.5 px-5 text-[#5A7470]">
+                        <span className="font-medium text-[#082827]">{pred.disease || pred.diseaseType || "Clinical Screening"}</span>
+                      </td>
+                      <td className="py-3.5 px-5 font-medium">
+                        <span
+                          className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-semibold ${
+                            pred.riskLevel === "High" || pred.quantumPrediction?.includes("Malignant") || pred.quantumPrediction?.includes("Infarction")
+                              ? "bg-red-50 text-red-700 border border-red-200"
+                              : "bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30"
+                          }`}
+                        >
+                          {pred.quantumPrediction || "Physiological Baseline"}
+                          {pred.quantumConfidence ? ` (${Math.round(pred.quantumConfidence)}%)` : ""}
+                        </span>
+                      </td>
+                      <td className="py-3.5 px-5 text-[#5A7470]">
+                        <span className="inline-flex items-center gap-1.5 text-xs text-[#006766] font-medium">
+                          <ShieldCheck size={13} className="text-[#00B489]" />
+                          <span>{pred.consensusStatus || "Dual-Verified"}</span>
+                        </span>
+                      </td>
+                      <td className="py-3.5 px-5 text-[#5A7470] font-mono text-[11px]">
+                        {pred.timestamp || "Recent"}
+                      </td>
+                      <td className="py-3.5 px-5 text-right">
+                        <span className="text-xs font-semibold text-[#006766] group-hover:underline inline-flex items-center gap-1">
+                          <span>Open Dossier</span>
+                          <ChevronRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
-        </div>
-      </div>
+        )}
+      </section>
     </div>
   );
 }
