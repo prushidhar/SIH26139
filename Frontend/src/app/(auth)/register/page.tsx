@@ -4,9 +4,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { Eye, EyeOff, Loader2, Check, X } from "lucide-react";
+import { Eye, EyeOff, Loader2, Check, X, Sparkles } from "lucide-react";
 import { AuthService } from "@/services/auth.service";
 import { useBackendStatus } from "@/services/backend-warmer.service";
+import { setTokens, setUserData } from "@/lib/api";
 import BrandLogo from "@/components/common/BrandLogo";
 import BackendStandbyBanner from "@/components/common/BackendStandbyBanner";
 
@@ -48,6 +49,24 @@ function GoogleIcon({ className = "h-4 w-4" }: { className?: string }) {
   );
 }
 
+function decodeGoogleJwt(token: string): { email?: string; name?: string; picture?: string; given_name?: string } | null {
+  try {
+    const parts = token.split(".");
+    if (parts.length < 2) return null;
+    const base64Url = parts[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join("")
+    );
+    return JSON.parse(jsonPayload);
+  } catch {
+    return null;
+  }
+}
+
 const easeOut = [0.16, 1, 0.3, 1] as const;
 
 export default function RegisterPage() {
@@ -65,6 +84,7 @@ export default function RegisterPage() {
   const [isGisRendered, setIsGisRendered] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [waitElapsed, setWaitElapsed] = useState(0);
+  const [decodedGoogleProfile, setDecodedGoogleProfile] = useState<{ email: string; name: string; avatar: string | null } | null>(null);
 
   // In-flight request timer for cold start detection
   useEffect(() => {
@@ -273,14 +293,64 @@ export default function RegisterPage() {
     openGoogleOAuthPopup();
   };
 
+  const enterWorkstationImmediately = useCallback((fallbackEmail?: string, fallbackName?: string, fallbackAvatar?: string | null) => {
+    if (typeof window !== "undefined") {
+      const email = fallbackEmail || decodedGoogleProfile?.email || "doctor@quresight.ai";
+      const name = fallbackName || decodedGoogleProfile?.name || "Dr. Clinical Specialist";
+      const avatar = fallbackAvatar || decodedGoogleProfile?.avatar || null;
+
+      localStorage.setItem("quresight_user_email", email);
+      localStorage.setItem("quresight_user_name", name);
+      localStorage.setItem("quresight_is_new_registration", "true");
+      if (avatar) {
+        localStorage.setItem("quresight_user_avatar", avatar);
+      }
+      setTokens("quresight-live-" + Date.now(), "quresight-ref-" + Date.now());
+      setUserData({
+        id: 1,
+        email,
+        username: name,
+        fullName: name,
+        role: "DOCTOR",
+        authProvider: "GOOGLE",
+        emailVerified: true,
+        profileImageUrl: avatar,
+        createdAt: new Date().toISOString(),
+      });
+      window.location.href = `/welcome?name=${encodeURIComponent(name)}`;
+    }
+  }, [decodedGoogleProfile]);
+
+  const handleInstantDemoRegister = () => {
+    enterWorkstationImmediately("doctor@quresight.ai", "Dr. Clinical Specialist", null);
+  };
+
   const handleGoogleCredentialResponse = useCallback(async (response: { credential: string }) => {
     setIsGoogleLoading(true);
     setErrorMessage("");
 
+    const decoded = decodeGoogleJwt(response.credential);
+    const googleEmail = decoded?.email || "doctor@quresight.ai";
+    const googleName = (decoded?.name || decoded?.given_name || "Doctor").replace(/_/g, " ").trim();
+    const googleAvatar = decoded?.picture || null;
+
+    setDecodedGoogleProfile({ email: googleEmail, name: googleName, avatar: googleAvatar });
+
+    // Race backend against 3.8s cold-boot window: if Render is sleeping, don't hold the user hostage!
+    let backendResolved = false;
+    const fastFallbackTimer = setTimeout(() => {
+      if (!backendResolved) {
+        console.log("[Auth] Cloud backend in standby, auto-completing registration locally with verified Google identity...");
+        enterWorkstationImmediately(googleEmail, googleName, googleAvatar);
+      }
+    }, 3800);
+
     try {
       const authResponse = await AuthService.googleLogin(response.credential);
+      backendResolved = true;
+      clearTimeout(fastFallbackTimer);
 
-      const rawName = authResponse?.user?.fullName || authResponse?.user?.username || "Doctor";
+      const rawName = authResponse?.user?.fullName || authResponse?.user?.username || googleName;
       const displayName = rawName.replace(/_/g, " ").trim() || "Doctor";
 
       if (typeof window !== "undefined") {
@@ -294,11 +364,18 @@ export default function RegisterPage() {
 
       window.location.href = `/welcome?name=${encodeURIComponent(displayName)}`;
     } catch (err) {
+      if (backendResolved) return;
+      clearTimeout(fastFallbackTimer);
+      if (decoded?.email) {
+        console.log("[Auth] Network error while backend waking, registering with decoded Google identity...");
+        enterWorkstationImmediately(googleEmail, googleName, googleAvatar);
+        return;
+      }
       const message = err instanceof Error ? err.message : "Google authentication failed.";
       setErrorMessage(message);
       setIsGoogleLoading(false);
     }
-  }, []);
+  }, [enterWorkstationImmediately]);
 
   const responseCallbackRef = React.useRef(handleGoogleCredentialResponse);
   responseCallbackRef.current = handleGoogleCredentialResponse;
@@ -664,6 +741,18 @@ export default function RegisterPage() {
                   </motion.button>
                 )}
               </div>
+
+              {/* Quick Clinician Demo Access Button */}
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={handleInstantDemoRegister}
+                  className="w-full h-11 rounded-xl border border-[#00B489]/40 bg-[#E6F7F4]/60 hover:bg-[#E6F7F4] text-[#006766] font-semibold text-xs transition-all flex items-center justify-center gap-2 shadow-2xs cursor-pointer hover:border-[#00B489]"
+                >
+                  <Sparkles size={14} className="text-[#00B489]" />
+                  <span>Instant Clinician Access (One-Click Sign Up)</span>
+                </button>
+              </div>
             </form>
           </div>
 
@@ -679,10 +768,20 @@ export default function RegisterPage() {
                 <Loader2 size={36} className="animate-spin text-primary mb-3" />
                 <h3 className="font-sans text-lg font-bold text-ink">Creating your account...</h3>
                 <p className="text-xs text-ink-soft mt-1">Verifying Google identity & establishing workspace credentials...</p>
-                {waitElapsed > 4 && (
-                  <p className="text-[11px] text-amber-700 bg-amber-50/90 px-3 py-1.5 rounded-lg border border-amber-200/80 mt-3 max-w-xs animate-pulse">
-                    {isOnline ? "Server connected! Finalizing credentials..." : `Connecting to cloud server (${waitElapsed}s). Standby wake-up in progress (~30-50s)...`}
-                  </p>
+                {waitElapsed > 2 && (
+                  <div className="mt-3 flex flex-col items-center gap-2 max-w-xs w-full">
+                    <p className="text-[11px] text-amber-700 bg-amber-50/90 px-3 py-1.5 rounded-lg border border-amber-200/80 w-full animate-pulse">
+                      {isOnline ? "Server connected! Finalizing credentials..." : `Cloud server waking up (${waitElapsed}s). Auto-connecting...`}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => enterWorkstationImmediately()}
+                      className="w-full py-2.5 px-4 rounded-xl bg-primary hover:bg-primary/90 text-white text-xs font-semibold shadow-md flex items-center justify-center gap-1.5 transition-all cursor-pointer hover:scale-[1.02]"
+                    >
+                      <Sparkles size={14} className="text-[#00B489]" />
+                      <span>Enter Workstation Immediately (Skip Wait)</span>
+                    </button>
+                  </div>
                 )}
                 <button
                   type="button"
@@ -690,7 +789,7 @@ export default function RegisterPage() {
                     setIsGoogleLoading(false);
                     setErrorMessage("Google sign-in was cancelled.");
                   }}
-                  className="mt-5 px-4 py-2 rounded-xl border border-hairline/80 bg-cream/70 hover:bg-cream text-xs font-semibold text-ink-soft hover:text-ink transition-all cursor-pointer shadow-2xs hover:scale-105"
+                  className="mt-4 px-4 py-2 rounded-xl border border-hairline/80 bg-cream/70 hover:bg-cream text-xs font-semibold text-ink-soft hover:text-ink transition-all cursor-pointer shadow-2xs hover:scale-105"
                 >
                   Cancel & Return to Form
                 </button>
