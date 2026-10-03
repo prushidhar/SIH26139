@@ -250,6 +250,36 @@ export default function CardiomegalyStudioPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left: Radiographic Anatomy & Feature Controls */}
         <div className="lg:col-span-7 space-y-6">
+          {/* Digital Studio Clinical Radiograph Analysis */}
+          <div className="rounded-2xl border border-border/50 bg-card/60 overflow-hidden shadow-xs">
+            <div className="p-4 border-b border-border/40 flex items-center justify-between bg-muted/20">
+              <div className="flex items-center gap-2">
+                <Layers size={16} className="text-teal-600 dark:text-teal-400" />
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+                  Frontal Chest Radiograph (CXR) & CTR Analysis
+                </h3>
+              </div>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-700 dark:text-teal-300 border border-teal-500/20 font-bold">
+                CheXpert Reference Cohort
+              </span>
+            </div>
+            <div className="relative aspect-[16/7] w-full bg-[#1A1A18] overflow-hidden group">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/studios/cardiomegaly-cxr-analysis.png"
+                alt="Chest X-Ray Cardiomegaly Analysis with CTR 0.65"
+                className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
+              />
+              <div className="absolute bottom-2 left-3 right-3 flex items-center justify-between text-[11px] font-mono text-white/90 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 pointer-events-none">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
+                  <span>Cardiothoracic Ratio (CTR) Calibration · Cutoff 0.50</span>
+                </span>
+                <span className="text-emerald-400 font-bold">Simultaneous ECG Rhythm</span>
+              </div>
+            </div>
+          </div>
+
           {/* Anatomical CTR Card */}
           <div className="p-5 rounded-2xl border border-border/50 bg-card/60 space-y-4">
             <div className="flex items-center justify-between">

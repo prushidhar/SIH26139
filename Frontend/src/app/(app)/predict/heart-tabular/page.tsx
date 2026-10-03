@@ -305,6 +305,36 @@ export default function HeartTabularStudioPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left: Input Hemodynamics */}
         <div className="lg:col-span-7 space-y-5">
+          {/* Digital Studio Coronary Angiogram & FFR Telemetry Panel */}
+          <div className="rounded-2xl border border-border/50 bg-card/60 overflow-hidden shadow-xs">
+            <div className="p-4 border-b border-border/40 flex items-center justify-between bg-muted/20">
+              <div className="flex items-center gap-2">
+                <Heart size={16} className="text-indigo-600 dark:text-indigo-400" />
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+                  Coronary Angiogram & Fractional Flow Reserve (FFR)
+                </h3>
+              </div>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20 font-bold">
+                FFR &lt; 0.80 Ischemia Cutoff
+              </span>
+            </div>
+            <div className="relative aspect-[16/7] w-full bg-[#181816] overflow-hidden group">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/studios/cad-coronary-angiogram.png"
+                alt="Coronary Angiogram LAD Lesion and FFR Analysis"
+                className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
+              />
+              <div className="absolute bottom-2 left-3 right-3 flex items-center justify-between text-[11px] font-mono text-white/90 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 pointer-events-none">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
+                  <span>LAD Lesion Localization · FFR 0.72 Stenosis Confirmed</span>
+                </span>
+                <span className="text-emerald-400 font-bold">P-QRS-T Synchronized</span>
+              </div>
+            </div>
+          </div>
+
           <div className="p-5 rounded-2xl border border-border/50 bg-card/60 space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">

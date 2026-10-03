@@ -273,8 +273,40 @@ export default function NeurologicalStudioPage() {
 
       {/* Interactive Controls & Live Output */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* Sliders Input Panel */}
-        <div className="lg:col-span-7 rounded-2xl border border-hairline bg-parchment p-5 sm:p-6 space-y-5 shadow-xs">
+        {/* Left Column: Clinical Anatomical Brain/EEG Panel & Sliders */}
+        <div className="lg:col-span-7 space-y-6">
+          {/* Digital Studio Anatomical Brain & EEG Analysis */}
+          <div className="rounded-2xl border border-hairline bg-parchment overflow-hidden shadow-xs">
+            <div className="p-4 border-b border-hairline flex items-center justify-between bg-cream-deep/40">
+              <div className="flex items-center gap-2">
+                <Brain size={16} className="text-quantum" />
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-ink">
+                  Cortical Neuro-Anatomy & Spectral EEG Analysis
+                </h3>
+              </div>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 font-bold">
+                Alpha Rhythm: 10.5 Hz (Calibrated)
+              </span>
+            </div>
+            <div className="relative aspect-[16/7] w-full bg-[#161614] overflow-hidden group">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/studios/brain-health-eeg-analysis.png"
+                alt="Digital Anatomical Brain Visualization and EEG Analysis"
+                className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
+              />
+              <div className="absolute bottom-2 left-3 right-3 flex items-center justify-between text-[11px] font-mono text-white/90 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 pointer-events-none">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>Frontal Lobe Cognitive Area · Normal Alpha Rhythms</span>
+                </span>
+                <span className="text-teal-300 font-bold">EEG Power Spectrum Active</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Sliders Input Panel */}
+          <div className="rounded-2xl border border-hairline bg-parchment p-5 sm:p-6 space-y-5 shadow-xs">
           <div className="flex items-center justify-between border-b border-hairline pb-3">
             <div className="flex items-center gap-2">
               <Sliders size={16} className="text-quantum" />
@@ -481,6 +513,7 @@ export default function NeurologicalStudioPage() {
             )}
           </button>
         </div>
+      </div>
 
         {/* Telemetry & Results Column */}
         <div className="lg:col-span-5 space-y-4">

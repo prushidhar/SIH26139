@@ -87,7 +87,7 @@ const DISEASE_MODULES: DiseaseModule[] = [
     status: "active",
     statusLabel: "Active Terminal",
     icon: Heart,
-    image: "/images/disease-cardiovascular.jpg",
+    image: "/images/studios/cad-coronary-angiogram.png",
     description: "Evaluates resting vitals, cholesterol, fluoroscopy vessels, and exercise stress ST depression for CAD risk.",
     targetUrl: "/predict/heart-tabular",
     metrics: {
@@ -121,7 +121,7 @@ const DISEASE_MODULES: DiseaseModule[] = [
     status: "active",
     statusLabel: "Active Terminal",
     icon: Droplets,
-    image: "/images/disease-breast-cancer.jpg",
+    image: "/images/studios/liver-function-panel-analysis.png",
     description: "Screens 10 hepatic enzyme markers, transaminases, and albumin/globulin ratios with a 2-qubit minimal quantum circuit.",
     targetUrl: "/predict/liver-ilpd",
     metrics: {
@@ -138,7 +138,7 @@ const DISEASE_MODULES: DiseaseModule[] = [
     status: "active",
     statusLabel: "Active Terminal",
     icon: Layers,
-    image: "/images/disease-cardiovascular.jpg",
+    image: "/images/studios/cardiomegaly-cxr-analysis.png",
     description: "Screens for cardiac silhouette enlargement and calculates automated cardiothoracic ratio from chest radiographs.",
     targetUrl: "/predict/cardiomegaly",
     metrics: {
@@ -155,7 +155,7 @@ const DISEASE_MODULES: DiseaseModule[] = [
     status: "active",
     statusLabel: "Active Terminal",
     icon: Droplets,
-    image: "/images/disease-breast-cancer.jpg",
+    image: "/images/studios/liver-function-panel-analysis.png",
     description: "Evaluates serum chemistry enzymes, cholinesterase, and AST/ALT indices for hepatitis C fibrosis staging.",
     targetUrl: "/predict/hepatitis-c",
     metrics: {
@@ -172,7 +172,7 @@ const DISEASE_MODULES: DiseaseModule[] = [
     status: "active",
     statusLabel: "Active Terminal",
     icon: Activity,
-    image: "/images/disease-neurological.jpg",
+    image: "/images/studios/brain-health-eeg-analysis.png",
     description: "Evaluates cortical EEG spectral power, resting motor tremor, and psychomotor speed for early impairment screening.",
     targetUrl: "/predict/neurological",
     metrics: {

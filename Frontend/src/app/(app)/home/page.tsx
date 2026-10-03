@@ -41,6 +41,7 @@ interface DiseaseModuleItem {
   route: string;
   tooltip: string;
   status: "active" | "locked" | "beta_locked";
+  image?: string;
 }
 
 const DISEASE_MODULES: DiseaseModuleItem[] = [
@@ -57,6 +58,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     route: "/predict",
     tooltip: "Full multi-step diagnostic screening suite with live anatomical guide and breathing visualizer.",
     status: "active",
+    image: "/images/disease-cardiovascular.jpg",
   },
   {
     key: "heart_disease",
@@ -71,6 +73,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     route: "/predict/heart-disease",
     tooltip: "Live active screening terminal for 12-lead electrocardiograms.",
     status: "active",
+    image: "/images/disease-cardiovascular.jpg",
   },
   {
     key: "breast_cancer",
@@ -85,6 +88,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     route: "/predict/breast-cancer",
     tooltip: "Uses 8-qubit variational quantum circuits with 48 gates to evaluate cytopathology biopsy cells.",
     status: "active",
+    image: "/images/disease-breast-cancer.jpg",
   },
   {
     key: "heart_tabular",
@@ -99,6 +103,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     route: "/predict/heart-tabular",
     tooltip: "Evaluates blood pressure, cholesterol, ST depression, and fluoroscopy vessels.",
     status: "active",
+    image: "/images/studios/cad-coronary-angiogram.png",
   },
   {
     key: "liver_ilpd",
@@ -113,6 +118,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     route: "/predict/liver-ilpd",
     tooltip: "Analyzes transaminases, bilirubin, proteins, and albumin ratios with 2-qubit minimal VQC.",
     status: "active",
+    image: "/images/studios/liver-function-panel-analysis.png",
   },
   {
     key: "chronic_kidney",
@@ -127,6 +133,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     route: "/predict/chronic-kidney",
     tooltip: "Screens 8 renal biomarkers with automated CKD-EPI eGFR calculation and KDIGO risk tiers.",
     status: "active",
+    image: "/images/disease-kidney-neural.jpg",
   },
   {
     key: "cardiomegaly",
@@ -141,6 +148,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     route: "/predict/cardiomegaly",
     tooltip: "Automated cardiothoracic ratio measurement and cardiac silhouette screening.",
     status: "active",
+    image: "/images/studios/cardiomegaly-cxr-analysis.png",
   },
   {
     key: "hepatitis_c",
@@ -155,6 +163,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     route: "/predict/hepatitis-c",
     tooltip: "Screens serum enzymes, cholinesterase, and creatinine with 4-qubit VQC.",
     status: "active",
+    image: "/images/studios/liver-function-panel-analysis.png",
   },
   {
     key: "neurological",
@@ -169,6 +178,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     route: "/predict/neurological",
     tooltip: "Multi-domain screening for early cognitive impairment and motor dysfunction.",
     status: "active",
+    image: "/images/studios/brain-health-eeg-analysis.png",
   },
 ];
 
@@ -485,6 +495,23 @@ export default function HomePage() {
                 className="p-5 rounded-2xl border border-[#DFEBE8] bg-white flex flex-col justify-between shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)] hover:shadow-[0_12px_28px_-8px_rgba(0,103,102,0.12)] hover:border-[#006766]/40 transition-all group"
               >
                 <div className="space-y-3">
+                  {disease.image && (
+                    <div className="relative w-full h-36 rounded-xl overflow-hidden border border-[#DFEBE8] bg-[#F7FAF9]">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={disease.image}
+                        alt={disease.title}
+                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute top-2 right-2">
+                        <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-white/95 text-emerald-800 border border-emerald-300 shadow-2xs">
+                          ● ACTIVE STUDIO
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
                       <div className="w-9 h-9 rounded-xl bg-[#E6F7F4] text-[#006766] flex items-center justify-center">
