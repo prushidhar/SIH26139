@@ -401,7 +401,7 @@ export default function LoginPage() {
           <div className="relative z-10">
             <div className="flex items-center gap-3">
               <span className="text-[10px] font-mono tracking-[0.25em] uppercase font-bold text-white/90 px-3 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-xs">
-                AI DIAGNOSTICS SUITE
+                QURESIGHT CLINICAL SUITE
               </span>
               <div className="h-[1px] w-12 bg-white/20" />
             </div>

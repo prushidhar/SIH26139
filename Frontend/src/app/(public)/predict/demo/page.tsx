@@ -213,7 +213,7 @@ export default function DemoSandboxPage() {
                   : "text-[#5A7470] hover:text-[#082827]"
               }`}
             >
-              AI Diagnostics Suite
+              QureSight Diagnostic Studio
             </button>
             <button
               type="button"

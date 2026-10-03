@@ -238,7 +238,7 @@ export default function PredictHubPage() {
                 : "text-[#5A7470] hover:text-[#082827]"
             }`}
           >
-            AI Diagnostics Suite
+            QureSight Diagnostic Studio
           </button>
           <button
             type="button"

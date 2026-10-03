@@ -64,6 +64,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/images/quresight-emblem.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [
+      { url: "/images/quresight-emblem.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     title: "QureSight — Hybrid Quantum-Classical ML for Early Disease Detection",
     description:
@@ -99,10 +108,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  icons: {
-    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
-    apple: [{ url: "/apple-icon.svg", type: "image/svg+xml" }],
   },
 };
 

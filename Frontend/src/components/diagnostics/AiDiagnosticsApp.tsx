@@ -25,6 +25,7 @@ import {
   Cpu,
 } from "lucide-react";
 import { showToast } from "@/components/common/ToastNotification";
+import BrandLogo from "@/components/common/BrandLogo";
 
 type StepType = "patient" | "demo" | "screening" | "visualizer" | "results";
 
@@ -183,19 +184,9 @@ export default function AiDiagnosticsApp({
         {/* HEADER BAR: Brand Logo, Stepper & Exit */}
         {/* ========================================================================= */}
         <header className="flex items-center justify-between px-6 sm:px-10 py-5 border-b border-hairline/60 bg-parchment/90 backdrop-blur-md">
-          {/* Logo Mark - Monogram Squircle Badge matching Dribbble shot */}
+          {/* Brand Logo with QureSight official emblem */}
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground font-sans font-bold text-xs tracking-tight shadow-sm border border-primary/20">
-              <span>AID</span>
-            </div>
-            <div className="hidden sm:flex flex-col">
-              <span className="font-sans font-semibold text-sm text-ink leading-tight">
-                AI Diagnostics
-              </span>
-              <span className="text-[10px] text-ink-soft uppercase tracking-wider font-mono">
-                Screening Suite
-              </span>
-            </div>
+            <BrandLogo href={false} size="sm" showSubtitle={true} />
           </div>
 
           {/* Stepper Navigation */}

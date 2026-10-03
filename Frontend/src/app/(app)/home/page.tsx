@@ -46,7 +46,7 @@ interface DiseaseModuleItem {
 const DISEASE_MODULES: DiseaseModuleItem[] = [
   {
     key: "ai_diagnostics",
-    title: "AI Diagnostics & Auscultation Suite",
+    title: "QureSight Diagnostics & Auscultation Suite",
     category: "Pulmonary & Respiratory Screening",
     icon: Stethoscope,
     dataset: "6-Point Auscultation & Clinical Symptoms",
