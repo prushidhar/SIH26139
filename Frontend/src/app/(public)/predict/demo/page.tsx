@@ -19,7 +19,6 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { showToast } from "@/components/common/ToastNotification";
-import AiDiagnosticsApp from "@/components/diagnostics/AiDiagnosticsApp";
 
 interface DemoCase {
   id: string;
@@ -153,7 +152,6 @@ const DEMO_CASES: DemoCase[] = [
 ];
 
 export default function DemoSandboxPage() {
-  const [activeMode, setActiveMode] = useState<"dribbble" | "sandbox">("dribbble");
   const [runningId, setRunningId] = useState<string | null>(null);
   const [results, setResults] = useState<Record<string, any>>({});
 
@@ -192,58 +190,28 @@ export default function DemoSandboxPage() {
   return (
     <div className="min-h-screen bg-[#F2F7F6] px-4 sm:px-6 py-8 font-sans text-[#082827]">
       <div className="max-w-6xl mx-auto space-y-6">
-        {/* Mode Selector Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border border-[#DFEBE8] bg-white p-3 rounded-2xl shadow-xs">
-          <div className="flex items-center gap-3">
-            <Link
-              href="/predict"
-              className="inline-flex items-center gap-1.5 text-xs text-[#5A7470] hover:text-[#006766] transition-colors font-medium px-2 py-1 rounded-lg hover:bg-[#F2F7F6]"
-            >
-              <ArrowLeft size={13} /> Back to Screening Hub
-            </Link>
-          </div>
-
-          <div className="flex items-center p-1 bg-[#E6F7F4]/60 rounded-xl border border-[#DFEBE8] text-xs">
-            <button
-              type="button"
-              onClick={() => setActiveMode("dribbble")}
-              className={`px-4 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${
-                activeMode === "dribbble"
-                  ? "bg-[#006766] text-white shadow-xs"
-                  : "text-[#5A7470] hover:text-[#082827]"
-              }`}
-            >
-              QureSight Diagnostic Studio
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveMode("sandbox")}
-              className={`px-4 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${
-                activeMode === "sandbox"
-                  ? "bg-[#006766] text-white shadow-xs"
-                  : "text-[#5A7470] hover:text-[#082827]"
-              }`}
-            >
-              Detection Sandbox
-            </button>
+        {/* Navigation Header */}
+        <div className="flex items-center justify-between border border-[#DFEBE8] bg-white p-3 rounded-2xl shadow-xs">
+          <Link
+            href="/predict"
+            className="inline-flex items-center gap-1.5 text-xs text-[#5A7470] hover:text-[#006766] transition-colors font-medium px-2 py-1 rounded-lg hover:bg-[#F2F7F6]"
+          >
+            <ArrowLeft size={13} /> Back to Screening Hub
+          </Link>
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
+            <span className="text-xs font-semibold text-[#006766]">Live Verification Sandbox</span>
           </div>
         </div>
 
-        {/* View 1: Dribbble MedTech Flow */}
-        {activeMode === "dribbble" && (
-          <AiDiagnosticsApp />
-        )}
-
-        {/* View 2: Multi-case Benchmark Sandbox */}
-        {activeMode === "sandbox" && (
-          <>
-            <div className="space-y-1">
-              <div className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-[#00B489]" />
-                <span className="text-[11px] font-mono uppercase tracking-wider text-[#006766] font-semibold">
-                  Multi-Cohort Evaluation
-                </span>
-              </div>
+        {/* Multi-case Benchmark Sandbox */}
+        <div className="space-y-1">
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-[#00B489]" />
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#006766] font-semibold">
+              Multi-Cohort Evaluation
+            </span>
+          </div>
               <h1 className="text-2xl sm:text-3xl font-sans font-bold tracking-tight text-[#082827] mt-1">
                 Instant Detection Sandbox
               </h1>
@@ -358,8 +326,6 @@ export default function DemoSandboxPage() {
             );
           })}
         </div>
-        </>
-        )}
       </div>
     </div>
   );

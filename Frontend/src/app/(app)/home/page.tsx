@@ -53,23 +53,6 @@ interface DiseaseModuleItem {
 
 const DISEASE_MODULES: DiseaseModuleItem[] = [
   {
-    key: "ai_diagnostics",
-    title: "Pulmonary Auscultation & Breath Sounds",
-    specialty: "Pulmonary Medicine",
-    modality: "6-Point Digital Auscultation",
-    modalityBadge: "Acoustic Audio",
-    icon: Stethoscope,
-    targetCondition: "Wheeze, Crackle & Respiratory Triage",
-    clinicalScope: "Interactive 6-point digital stethoscope auscultation, breathing visualizer, and multi-engine respiratory triage.",
-    route: "/predict",
-    accentBg: "bg-teal-50",
-    accentText: "text-teal-700",
-    badgeBg: "bg-teal-100/80",
-    badgeText: "text-teal-800",
-    group: "cardiopulmonary",
-    image: "/images/disease-cardiovascular.jpg",
-  },
-  {
     key: "heart_disease",
     title: "12-Lead Electrocardiogram (ECG)",
     specialty: "Cardiac Electrophysiology",
@@ -451,7 +434,7 @@ export default function HomePage() {
               <span>Diagnostic Coverage</span>
             </div>
             <div className="font-sans text-xl font-bold text-[#082827]">
-              9 Terminals
+              8 Terminals
             </div>
             <p className="text-[11px] text-[#5A7470]">Active screening pipelines</p>
           </div>
@@ -464,7 +447,7 @@ export default function HomePage() {
             <div className="font-sans text-xl font-bold text-[#082827]">
               Multimodal
             </div>
-            <p className="text-[11px] text-[#5A7470]">Acoustic • ECG • Image • Lab</p>
+            <p className="text-[11px] text-[#5A7470]">ECG • Biopsy • CXR • Lab • EEG</p>
           </div>
 
           <div className="p-3.5 rounded-2xl bg-[#F7FAF9]/80 border border-[#DFEBE8]/60 space-y-1">
@@ -517,7 +500,7 @@ export default function HomePage() {
                   : "text-[#5A7470] hover:text-[#082827]"
               }`}
             >
-              All Suites (9)
+              All Suites (8)
             </button>
             <button
               type="button"
@@ -528,7 +511,7 @@ export default function HomePage() {
                   : "text-[#5A7470] hover:text-[#082827]"
               }`}
             >
-              Cardiopulmonary
+              Cardiopulmonary (2)
             </button>
             <button
               type="button"
@@ -539,7 +522,7 @@ export default function HomePage() {
                   : "text-[#5A7470] hover:text-[#082827]"
               }`}
             >
-              Oncology
+              Oncology (1)
             </button>
             <button
               type="button"
@@ -550,7 +533,7 @@ export default function HomePage() {
                   : "text-[#5A7470] hover:text-[#082827]"
               }`}
             >
-              Metabolic & Renal
+              Metabolic & Renal (3)
             </button>
             <button
               type="button"
@@ -561,7 +544,7 @@ export default function HomePage() {
                   : "text-[#5A7470] hover:text-[#082827]"
               }`}
             >
-              Radiology & Neuro
+              Radiology & Neuro (2)
             </button>
           </div>
         </div>
