@@ -148,25 +148,48 @@ class DonaireLiverQMLPipeline:
         q_prob = float(np.clip(q_prob, 0.05, 0.95))
         q_latency_ms = round((time.perf_counter() - t0) * 1000.0, 2)
 
-        # 4. Parameter-Shift Sensitivity Gradients for the 2 Wires
-        gradients = [
-            {
-                "qubit": 0,
-                "latent_axis": "PC1: Transaminase Injury (ALT/AST/Bilirubin)",
-                "angle_rad": round(float(angles[0]), 3),
-                "pauli_z": round(float(z_arr[0]), 4),
-                "sensitivity": round(float(0.24 * np.sin(angles[0])), 4),
-            },
-            {
-                "qubit": 1,
-                "latent_axis": "PC2: Protein Synthesis (Albumin/Total Protein)",
-                "angle_rad": round(float(angles[1]), 3),
-                "pauli_z": round(float(z_arr[1]), 4),
-                "sensitivity": round(float(0.19 * np.sin(angles[1])), 4),
-            },
-        ]
+        # 4. De Ritis Ratio (AST / ALT) & Hepatic Enzyme Diagnostics
+        ast_val = float(raw_data.get("Aspartate_Aminotransferase", 64.0))
+        alt_val = float(raw_data.get("Alamine_Aminotransferase", 52.0))
+        tb_val = float(raw_data.get("Total_Bilirubin", 2.4))
+        db_val = float(raw_data.get("Direct_Bilirubin", 1.1))
 
-        # 5. Adaptive Shannon Entropy Routing
+        de_ritis_ratio = round(ast_val / max(alt_val, 1.0), 2)
+        if de_ritis_ratio > 2.0:
+            de_ritis_interpretation = "Severe Alcoholic Hepatitis / Advanced Fibrotic Distortion"
+        elif de_ritis_ratio >= 1.0:
+            de_ritis_interpretation = "Chronic Active Hepatitis / Progressive Fibrosis"
+        else:
+            de_ritis_interpretation = "Acute Hepatocellular Injury / NAFLD Pattern"
+
+        db_fraction = round(db_val / max(tb_val, 0.1), 2)
+        cholestatic_pattern = "Conjugated / Cholestatic Biliary Stasis" if db_fraction > 0.50 else "Hepatocellular Clearance Deficit"
+
+        # 5. Exact Parameter-Shift Sensitivity Gradients for the 2 Wires
+        shift = np.pi / 2.0
+        gradients = []
+        for q_idx in range(2):
+            if HAVE_PENNYLANE:
+                a_plus = angles.copy()
+                a_plus[q_idx] += shift
+                exp_plus = liver_2q_circuit(self.weights, a_plus)
+                a_minus = angles.copy()
+                a_minus[q_idx] -= shift
+                exp_minus = liver_2q_circuit(self.weights, a_minus)
+                grad_shift = abs(float(exp_plus[q_idx]) - float(exp_minus[q_idx])) / 2.0
+            else:
+                grad_shift = abs(float(0.24 * np.sin(angles[q_idx])))
+
+            gradients.append({
+                "qubit": q_idx,
+                "latent_axis": "PC1: Transaminase Injury (ALT/AST/Bilirubin)" if q_idx == 0 else "PC2: Protein Synthesis (Albumin/Total Protein)",
+                "angle_rad": round(float(angles[q_idx]), 3),
+                "pauli_z": round(float(z_arr[q_idx]), 4),
+                "sensitivity": round(float(grad_shift), 4),
+                "gradient_method": "Exact Parameter-Shift Rule (±π/2)" if HAVE_PENNYLANE else "Harmonic Approximation",
+            })
+
+        # 6. Adaptive Shannon Entropy Routing
         router_decision = AdaptiveModelRouter.route(
             classical_prob=c_prob,
             quantum_prob=q_prob,
@@ -195,6 +218,14 @@ class DonaireLiverQMLPipeline:
             "classical_probability": round(c_prob, 4),
             "quantum_probability": round(q_prob, 4),
             "risk_tier": risk_tier,
+            "de_ritis_clinical_marker": {
+                "ratio": de_ritis_ratio,
+                "ast_u_l": ast_val,
+                "alt_u_l": alt_val,
+                "interpretation": de_ritis_interpretation,
+                "direct_bilirubin_fraction": db_fraction,
+                "cholestatic_status": cholestatic_pattern,
+            },
             "minimal_qml_telemetry": {
                 "qubit_count": 2,
                 "variational_parameters": 12,

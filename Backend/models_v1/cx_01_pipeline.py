@@ -112,10 +112,27 @@ class CX01ClassicalPipeline:
         p_rf = float(self.rf_model.predict_proba(x_scaled)[0, 1])
 
         # Classical Ensemble: SVM Champion (0.50) + XGBoost (0.35) + RF (0.15)
-        p_ensemble = float(0.50 * p_svm + 0.35 * p_xgb + 0.15 * p_rf)
+        p_raw = float(0.50 * p_svm + 0.35 * p_xgb + 0.15 * p_rf)
+        # Platt-style temperature calibration (T=1.05) to prevent overconfident edge saturation
+        logit_ens = math.log(max(1e-6, min(1.0 - 1e-6, p_raw)) / (1.0 - max(1e-6, min(1.0 - 1e-6, p_raw))))
+        p_ensemble = float(1.0 / (1.0 + math.exp(-logit_ens / 1.05)))
+        p_ensemble = float(np.clip(p_ensemble, 0.005, 0.995))
         
         pred_label = "Malignant" if p_ensemble >= 0.50 else "Benign"
         confidence = float((p_ensemble if pred_label == "Malignant" else (1.0 - p_ensemble)) * 100.0)
+
+        # Nottingham Histological Grade (NHG) Nuclear Pleomorphism Assessment
+        r_val = raw_8[0]
+        c_val = raw_8[6]
+        if r_val < 13.5 and c_val < 0.05:
+            nhg_score = 1
+            nhg_desc = "Grade 1: Uniform, small regular nuclei with fine chromatin pattern"
+        elif r_val <= 17.0 and c_val <= 0.12:
+            nhg_score = 2
+            nhg_desc = "Grade 2: Moderate nuclear enlargement, visible nucleoli, mild irregularity"
+        else:
+            nhg_score = 3
+            nhg_desc = "Grade 3: Marked nuclear pleomorphism, vesicular chromatin, contour angulation"
 
         shap_attributions = self.compute_shap_attributions(raw_8, x_scaled)
         risk_data = compute_calibrated_clinical_risk(p_ensemble, biomarkers, self.model_name)
@@ -129,6 +146,13 @@ class CX01ClassicalPipeline:
             "prediction_label": pred_label,
             "confidence_percentage": confidence,
             "calibrated_malignancy_prob": p_ensemble * 100.0,
+            "calibrated_probability": round(p_ensemble, 4),
+            "nottingham_pleomorphism": {
+                "score": nhg_score,
+                "classification": nhg_desc,
+                "nuclear_radius_mean": round(r_val, 2),
+                "nuclear_concavity_mean": round(c_val, 4),
+            },
             "composite_risk_score": risk_data["composite_risk_score"],
             "risk_tier": risk_data["risk_tier"],
             "risk_tag": risk_data["risk_tag"],

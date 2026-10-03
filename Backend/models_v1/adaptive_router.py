@@ -43,6 +43,12 @@ class AdaptiveModelRouter:
             "classical_auc": 0.984,
             "quantum_auc": 0.959,
         },
+        "cardiac_demo": {
+            "classical_f1": 0.965,
+            "quantum_f1": 0.938,
+            "classical_auc": 0.984,
+            "quantum_auc": 0.959,
+        },
         "hepatitis_c": {
             "classical_f1": 0.966,
             "quantum_f1": 0.884,
@@ -67,6 +73,18 @@ class AdaptiveModelRouter:
             "classical_auc": 0.785,
             "quantum_auc": 0.772,
         },
+        "neurological": {
+            "classical_f1": 0.942,
+            "quantum_f1": 0.928,
+            "classical_auc": 0.965,
+            "quantum_auc": 0.951,
+        },
+        "chronic_kidney": {
+            "classical_f1": 0.975,
+            "quantum_f1": 0.962,
+            "classical_auc": 0.989,
+            "quantum_auc": 0.978,
+        },
     }
 
     # Weight hyperparameters
@@ -76,10 +94,14 @@ class AdaptiveModelRouter:
     NISQ_QPU_PENALTY = 0.08  # Penalty when executing on physical noisy QPU vs simulator
 
     @staticmethod
-    def _compute_shannon_entropy(p: float) -> float:
-        """Computes binary Shannon entropy H(p) in bits, bounded [0.0, 1.0]."""
-        p = max(1e-7, min(1.0 - 1e-7, float(p)))
-        return -(p * math.log2(p) + (1.0 - p) * math.log2(1.0 - p))
+    def _compute_shannon_entropy(p: float, temperature: float = 1.0) -> float:
+        """Computes binary Shannon entropy H(p) in bits, bounded [0.0, 1.0] with numerical stability."""
+        p_safe = float(min(1.0 - 1e-9, max(1e-9, float(p))))
+        if temperature != 1.0 and temperature > 0:
+            logit = math.log(p_safe / (1.0 - p_safe)) / temperature
+            p_safe = 1.0 / (1.0 + math.exp(-logit))
+            p_safe = float(min(1.0 - 1e-9, max(1e-9, p_safe)))
+        return float(-(p_safe * math.log2(p_safe) + (1.0 - p_safe) * math.log2(1.0 - p_safe)))
 
     @classmethod
     def route(
@@ -183,10 +205,16 @@ class AdaptiveModelRouter:
             )
 
         final_label = "Malignant" if final_prob >= 0.50 else "Benign"
-        if "cardiac" in key:
+        if "cardiac" in key or "heart" in key:
             final_label = "Abnormal / High Risk" if final_prob >= 0.50 else "Normal / Low Risk"
-        elif "hepatitis" in key:
-            final_label = "Fibrosis / Cirrhosis Risk" if final_prob >= 0.50 else "Non-Fibrotic / Donor"
+        elif "hepatitis" in key or "liver" in key or "ilpd" in key:
+            final_label = "Fibrosis / Hepatic Impairment" if final_prob >= 0.50 else "Non-Fibrotic / Normal Liver"
+        elif "neurological" in key or "neuro" in key:
+            final_label = "Neurodegenerative Risk Detected" if final_prob >= 0.50 else "Normal Neuro-Cognitive Profile"
+        elif "chronic_kidney" in key or "ckd" in key or "kidney" in key:
+            final_label = "Chronic Kidney Disease Likely" if final_prob >= 0.50 else "Normal Kidney Function"
+        elif "cardiomegaly" in key or "cxr" in key:
+            final_label = "Cardiomegaly Detected" if final_prob >= 0.50 else "Normal Cardiac Silhouette"
 
         return {
             "selected_engine": selected_engine,

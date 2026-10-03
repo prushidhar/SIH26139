@@ -189,20 +189,26 @@ class NeurologicalPipeline:
             z_mean = float(np.mean(expvals_float))
             p_quantum = float(np.clip(1.0 / (1.0 + np.exp(2.8 * z_mean)), 0.02, 0.98))
 
-            # Finite-difference parameter gradient sensitivity per qubit
+            # Exact Parameter-Shift Analytic Quantum Gradients: (f(x + pi/2) - f(x - pi/2)) / 2
             sensitivities = []
-            eps = 0.05
+            shift = math.pi / 2.0
             for i in range(N_QUBITS):
                 angles_p = list(angles)
-                angles_p[i] += eps
+                angles_p[i] += shift
                 exp_p = neuro_vqc_circuit(self._vqc_weights, angles_p)
-                grad = abs(float(np.mean(exp_p) - np.mean(expvals))) / eps
+
+                angles_m = list(angles)
+                angles_m[i] -= shift
+                exp_m = neuro_vqc_circuit(self._vqc_weights, angles_m)
+
+                grad = abs(float(np.mean(exp_p) - np.mean(exp_m))) / 2.0
                 sensitivities.append({
                     "component": COMPONENT_CLINICAL_MAP[i]["name"],
                     "clinical_description": COMPONENT_CLINICAL_MAP[i]["description"],
                     "qubit_wire": COMPONENT_CLINICAL_MAP[i]["qubit"],
                     "sensitivity_gradient": round(float(grad), 4),
                     "quantum_angle_rad": round(float(angles[i]), 4),
+                    "gradient_method": "Exact Parameter-Shift Rule (±π/2)",
                 })
             sensitivities.sort(key=lambda s: s["sensitivity_gradient"], reverse=True)
         else:
@@ -215,6 +221,7 @@ class NeurologicalPipeline:
                     "qubit_wire": COMPONENT_CLINICAL_MAP[i]["qubit"],
                     "sensitivity_gradient": round(0.12 - i * 0.02, 4),
                     "quantum_angle_rad": round(float(angles[i]), 4),
+                    "gradient_method": "Harmonic Fallback",
                 }
                 for i in range(4)
             ]
@@ -232,6 +239,44 @@ class NeurologicalPipeline:
         )
 
         composite_risk_score = round(p_consensus * 100.0, 1)
+
+        # Clinical Score Calculations
+        # 1. MDS-UPDRS Part III Resting Tremor Phenotype
+        tremor_hz = features["motor_tremor_hz"]
+        if tremor_hz < 2.0:
+            updrs_tremor_score = 0
+            updrs_desc = "Score 0: Physiological / No Resting Tremor Detected"
+        elif tremor_hz < 4.0:
+            updrs_tremor_score = 1
+            updrs_desc = "Score 1: Slight Intermittent / Postural Tremor"
+        elif tremor_hz <= 7.0:
+            updrs_tremor_score = 3
+            updrs_desc = "Score 3: Moderate Resting Tremor (Characteristic 4-6 Hz Parkinsonian Phenotype)"
+        else:
+            updrs_tremor_score = 4
+            updrs_desc = "Score 4: Severe High-Frequency Action/Postural Tremor"
+
+        # 2. MMSE Cognitive Reserve Staging
+        mmse_score = features["cognitive_mmse"]
+        if mmse_score >= 27.0:
+            mmse_stage = "Normal Cognitive Reserve (MMSE 27-30)"
+        elif mmse_score >= 21.0:
+            mmse_stage = "Mild Cognitive Impairment / Early Prodromal (MMSE 21-26)"
+        elif mmse_score >= 10.0:
+            mmse_stage = "Moderate Neurocognitive Impairment (MMSE 10-20)"
+        else:
+            mmse_stage = "Severe Cognitive Impairment (MMSE < 10)"
+
+        # 3. EEG Spectral Deceleration & Synchronization Index
+        ab_ratio = features["eeg_alpha_beta_ratio"]
+        theta_p = features["eeg_theta_power"]
+        slowing_index = round((theta_p / 25.0) / max(0.5, ab_ratio), 2)
+        if slowing_index > 1.8:
+            slowing_status = "Pronounced Cortical Slowing (Elevated Theta / Attenuated Alpha-Beta Ratio)"
+        elif slowing_index > 1.2:
+            slowing_status = "Mild Subcortical Spectral Deceleration"
+        else:
+            slowing_status = "Normal Cortical Spectral Synchronization"
 
         # Clinical Risk Stratification
         if composite_risk_score < 30.0:
@@ -262,6 +307,21 @@ class NeurologicalPipeline:
             "risk_tier": risk_tier,
             "urgency": urgency,
             "confidence_percentage": round(confidence_pct, 1),
+            "mds_updrs_tremor": {
+                "subscore": updrs_tremor_score,
+                "measured_frequency_hz": tremor_hz,
+                "clinical_classification": updrs_desc,
+            },
+            "cognitive_mmse_staging": {
+                "score": mmse_score,
+                "stage": mmse_stage,
+            },
+            "eeg_spectral_analysis": {
+                "alpha_beta_ratio": ab_ratio,
+                "theta_power_uv2": theta_p,
+                "cortical_slowing_index": slowing_index,
+                "spectral_status": slowing_status,
+            },
             "classical_probability": round(p_classical, 4),
             "quantum_probability": round(p_quantum, 4),
             "consensus_probability": round(p_consensus, 4),

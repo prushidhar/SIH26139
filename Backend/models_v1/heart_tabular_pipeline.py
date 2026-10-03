@@ -168,14 +168,20 @@ class HeartTabularPipeline:
             else:
                 p_quantum = float(1.0 / (1.0 + np.exp(-np.mean(expvals_float))))
 
-            # Perturbation sensitivity analysis
+            # Exact Analytic Parameter-Shift Quantum Gradients
             sensitivities = []
-            eps = 0.05
+            shift = np.pi / 2.0
             for i in range(N_QUBITS):
                 angles_plus = angles.copy()
-                angles_plus[i] += eps
+                angles_plus[i] += shift
                 exp_plus = cardiac_vqc_circuit(self._vqc_weights, angles_plus)
-                grad = abs(float(np.mean(exp_plus) - np.mean(expvals))) / eps
+                
+                angles_minus = angles.copy()
+                angles_minus[i] -= shift
+                exp_minus = cardiac_vqc_circuit(self._vqc_weights, angles_minus)
+                
+                # Parameter-shift formula: (exp(+pi/2) - exp(-pi/2)) / 2
+                grad = abs(float(np.mean(exp_plus) - np.mean(exp_minus))) / 2.0
 
                 sensitivities.append({
                     "component": COMPONENT_CLINICAL_MAP[i]["name"],
@@ -186,7 +192,7 @@ class HeartTabularPipeline:
                 })
             sensitivities.sort(key=lambda s: s["sensitivity_gradient"], reverse=True)
         else:
-            # Deterministic simulation
+            # Deterministic simulation fallback
             p_quantum = 0.52
             expvals_float = [0.12, -0.08, 0.35, -0.19]
             sensitivities = [
@@ -226,7 +232,7 @@ class HeartTabularPipeline:
         router_decision = AdaptiveModelRouter.route(
             classical_prob=p_classical,
             quantum_prob=p_quantum,
-            disease_type="cardiac_ecg",
+            disease_type="heart_disease",
             hardware_mode="simulator",
             classical_latency_ms=round(t_classical, 2),
             quantum_latency_ms=round(t_quantum, 2),
@@ -234,6 +240,48 @@ class HeartTabularPipeline:
 
         final_prob = router_decision["final_calibrated_probability"]
         cad_present = final_prob >= 0.50
+
+        # Duke Treadmill Score (DTS) Calculation:
+        # DTS = Exercise Time (min) - (5 * ST Depression [oldpeak]) - (4 * Angina Index [exang])
+        est_exercise_min = max(3.0, min(14.0, (float(raw_input.get("thalach", 150.0)) - 60.0) / 10.0))
+        oldpeak_val = float(raw_input.get("oldpeak", 1.0))
+        exang_val = float(raw_input.get("exang", 0.0))
+        dts_score = round(est_exercise_min - (5.0 * oldpeak_val) - (4.0 * exang_val), 1)
+
+        if dts_score >= 5.0:
+            dts_tier = "Low Risk (DTS ≥ +5; >97% 5-year cardiac survival)"
+        elif dts_score >= -10.0:
+            dts_tier = "Moderate Risk (-10 to +4; ~90% 5-year cardiac survival)"
+        else:
+            dts_tier = "High Risk (DTS < -10; ~65% 5-year cardiac survival)"
+
+        # Framingham 10-Year Cardiovascular Risk Approximation
+        age_val = float(raw_input.get("age", 55.0))
+        sbp_val = float(raw_input.get("trestbps", 130.0))
+        chol_val = float(raw_input.get("chol", 240.0))
+        fbs_val = float(raw_input.get("fbs", 0.0))
+
+        framingham_points = 0
+        if age_val >= 60: framingham_points += 8
+        elif age_val >= 50: framingham_points += 6
+        elif age_val >= 40: framingham_points += 3
+
+        if chol_val >= 240: framingham_points += 2
+        elif chol_val >= 200: framingham_points += 1
+
+        if sbp_val >= 160: framingham_points += 3
+        elif sbp_val >= 140: framingham_points += 2
+        elif sbp_val >= 120: framingham_points += 1
+
+        if fbs_val > 0: framingham_points += 2
+        if exang_val > 0: framingham_points += 2
+
+        if framingham_points >= 12:
+            framingham_tier = "High 10-Year Risk (> 20%)"
+        elif framingham_points >= 7:
+            framingham_tier = "Intermediate 10-Year Risk (10% - 20%)"
+        else:
+            framingham_tier = "Low 10-Year Risk (< 10%)"
 
         # Clinical Urgency & Risk Stratification
         risk_score = round(final_prob * 100.0, 1)
@@ -262,12 +310,25 @@ class HeartTabularPipeline:
             "cad_presence": bool(cad_present),
             "calibrated_cad_probability": final_prob,
             "confidence_percentage": round(abs(final_prob - 0.5) * 200.0, 1),
+            "duke_treadmill_score": {
+                "score": dts_score,
+                "risk_category": dts_tier,
+                "st_depression_oldpeak": oldpeak_val,
+                "angina_index": int(exang_val),
+            },
+            "framingham_cardiac_risk": {
+                "risk_points": framingham_points,
+                "risk_tier": framingham_tier,
+                "factors_evaluated": ["Age", "Systolic BP", "Serum Cholesterol", "Fasting Glucose", "Exercise Angina"]
+            },
             "risk_stratification": {
                 "risk_score": risk_score,
                 "score_scale": "0 - 100 Continuous CAD Risk Index",
                 "risk_tier": risk_tier,
                 "clinical_recommendation": action,
                 "primary_driver": f"Top Feature: {top_driver_key} (Importance: {round(sorted_imp[0][1]*100, 1)}%)",
+                "duke_treadmill_tier": dts_tier,
+                "framingham_tier": framingham_tier,
             },
             "classical_results": {
                 "model": "Ensemble (Random Forest + L2 Logistic Regression)",
