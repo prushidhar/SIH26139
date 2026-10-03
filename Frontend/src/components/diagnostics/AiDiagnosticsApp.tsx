@@ -180,22 +180,21 @@ export default function AiDiagnosticsApp({
     <div className="w-full max-w-6xl mx-auto my-4 transition-all">
       {/* OUTER SHOT FRAME CONTAINER */}
       <div className="relative overflow-hidden rounded-3xl border border-hairline/80 bg-parchment shadow-xl transition-all">
-        {/* ========================================================================= */}
-        {/* HEADER BAR: Brand Logo, Stepper & Exit */}
-        {/* ========================================================================= */}
-        <header className="flex items-center justify-between px-6 sm:px-10 py-5 border-b border-hairline/60 bg-parchment/90 backdrop-blur-md">
-          {/* Brand Logo with QureSight official emblem */}
-          <div className="flex items-center gap-3">
-            <BrandLogo href={false} size="sm" showSubtitle={true} />
+        <header className="flex items-center justify-between px-6 sm:px-10 py-4 border-b border-hairline/60 bg-parchment/90 backdrop-blur-md">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
+            <span className="text-xs font-mono font-bold text-[#006766] uppercase tracking-wider">
+              Patient Intake Protocol
+            </span>
           </div>
 
           {/* Stepper Navigation */}
-          <nav aria-label="Diagnostic Progress" className="flex items-center gap-1 sm:gap-4">
+          <nav aria-label="Diagnostic Progress" className="flex items-center gap-1 sm:gap-3">
             {/* Step 1: Patient */}
             <button
               type="button"
               onClick={() => setCurrentStep("patient")}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all ${
                 currentStep === "patient"
                   ? "bg-accent text-accent-foreground font-semibold shadow-xs"
                   : "text-ink-soft hover:text-ink"
@@ -211,7 +210,7 @@ export default function AiDiagnosticsApp({
             <button
               type="button"
               onClick={() => setCurrentStep("demo")}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all ${
                 currentStep === "demo"
                   ? "bg-accent text-accent-foreground font-semibold shadow-xs"
                   : "text-ink-soft hover:text-ink"
@@ -227,7 +226,7 @@ export default function AiDiagnosticsApp({
             <button
               type="button"
               onClick={() => setCurrentStep("screening")}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all ${
                 currentStep === "screening" || currentStep === "visualizer"
                   ? "bg-accent text-accent-foreground font-semibold shadow-xs"
                   : "text-ink-soft hover:text-ink"
@@ -243,7 +242,7 @@ export default function AiDiagnosticsApp({
             <button
               type="button"
               onClick={() => setCurrentStep("results")}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all ${
                 currentStep === "results"
                   ? "bg-accent text-accent-foreground font-semibold shadow-xs"
                   : "text-ink-soft hover:text-ink"
@@ -253,15 +252,6 @@ export default function AiDiagnosticsApp({
               <span className="hidden md:inline">Results</span>
             </button>
           </nav>
-
-          {/* Exit Action */}
-          <Link
-            href="/home"
-            className="flex items-center gap-1 text-xs font-semibold text-ink-soft hover:text-ink px-3 py-1.5 rounded-lg hover:bg-secondary transition-colors"
-          >
-            <span>Exit</span>
-            <LogOut className="h-3.5 w-3.5 ml-0.5" />
-          </Link>
         </header>
 
         {/* ========================================================================= */}
