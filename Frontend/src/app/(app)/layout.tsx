@@ -60,16 +60,16 @@ const NAV_SECTIONS: NavSection[] = [
     title: "Clinical Core",
     items: [
       {
-        label: "Patient Intake",
-        href: "/predict",
-        icon: Stethoscope,
-        description: "Point-of-care patient intake & diagnostic screening",
-      },
-      {
         label: "Clinical Workstation",
         href: "/home",
         icon: LayoutDashboard,
         description: "Specialty terminal launcher & triage overview",
+      },
+      {
+        label: "Patient Intake",
+        href: "/predict",
+        icon: Stethoscope,
+        description: "Point-of-care patient intake & diagnostic screening",
       },
       {
         label: "Patient Case History",
@@ -77,69 +77,16 @@ const NAV_SECTIONS: NavSection[] = [
         icon: History,
         description: "Certified patient records & diagnostic reports",
       },
-      {
-        label: "Diagnostic Workspace",
-        href: "/workspace",
-        icon: Sliders,
-        description: "Interactive multi-engine clinical workspace",
-      },
     ],
   },
   {
-    title: "Intelligence & Evidence",
+    title: "Intelligence & Analytics",
     items: [
-      {
-        label: "Evidence Ledger",
-        href: "/evidence-matrix",
-        icon: TableProperties,
-        description: "Cross-validated trial evidence & performance bounds",
-      },
-      {
-        label: "Biomarker Registry",
-        href: "/observatory",
-        icon: Database,
-        description: "Biomedical cohort distributions & feature baselines",
-      },
       {
         label: "Performance Tracking",
         href: "/analysis",
         icon: Activity,
         description: "Live model accuracy & clinical concordance metrics",
-      },
-      {
-        label: "Attribution & Insights",
-        href: "/explainability",
-        icon: Sparkles,
-        description: "Feature attributions & clinical risk factor weights",
-      },
-      {
-        label: "Consensus Arbitration",
-        href: "/decision-console",
-        icon: Gauge,
-        description: "Consensus arbitration & diagnostic thresholds",
-      },
-    ],
-  },
-  {
-    title: "Architecture & Verification",
-    items: [
-      {
-        label: "Compute Backends",
-        href: "/hardware",
-        icon: Zap,
-        description: "Statevector simulator & quantum hardware status",
-      },
-      {
-        label: "Validation Benchmarks",
-        href: "/benchmarks",
-        icon: TrendingUp,
-        description: "Rigorous MLflow telemetry against classical baselines",
-      },
-      {
-        label: "Compliance Vault",
-        href: "/vault",
-        icon: Lock,
-        description: "Certified immutable logs & HIPAA compliance audit",
       },
     ],
   },

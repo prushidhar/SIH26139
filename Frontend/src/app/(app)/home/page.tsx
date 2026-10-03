@@ -434,11 +434,11 @@ export default function HomePage() {
               <span>Case Dossiers ({recentPredictions.length})</span>
             </Link>
             <Link
-              href="/evidence-matrix"
+              href="/analysis"
               className="px-4 py-2.5 rounded-xl bg-[#F7FAF9] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#082827] font-semibold text-xs tracking-wider transition-all flex items-center gap-1.5 cursor-pointer hover:border-[#006766]/40"
             >
-              <FileText size={14} className="text-[#006766]" />
-              <span>Evidence Ledger</span>
+              <Activity size={14} className="text-[#006766]" />
+              <span>Performance Analytics</span>
             </Link>
           </div>
         </div>
