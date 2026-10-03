@@ -6,7 +6,8 @@ import { motion, AnimatePresence } from "motion/react";
 import {
   X,
   Send,
-  Sparkles,
+  BotMessageSquare,
+  Bot,
   RotateCcw,
   Maximize2,
   Minimize2,
@@ -265,7 +266,7 @@ export default function QuantumChatbot() {
                 exit={{ rotate: -90, opacity: 0 }}
                 className="flex items-center justify-center"
               >
-                <Sparkles size={20} className="text-white" />
+                <BotMessageSquare size={22} className="text-white" />
               </motion.div>
             )}
           </AnimatePresence>
@@ -290,7 +291,7 @@ export default function QuantumChatbot() {
             <div className="px-5 py-4 border-b border-[#DFEBE8] bg-[#F2F7F6]/85 backdrop-blur-md flex items-center justify-between shrink-0">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-2xl bg-[#006766] text-white flex items-center justify-center shadow-xs">
-                  <Sparkles size={16} className="text-[#00B489]" />
+                  <BotMessageSquare size={17} className="text-[#00B489]" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
@@ -351,7 +352,7 @@ export default function QuantumChatbot() {
                   >
                     {isBot && (
                       <div className="w-7 h-7 rounded-xl bg-[#006766] text-white shrink-0 flex items-center justify-center mt-0.5 shadow-2xs">
-                        <Sparkles size={13} className="text-[#00B489]" />
+                        <Bot size={14} className="text-[#00B489]" />
                       </div>
                     )}
 
@@ -394,7 +395,7 @@ export default function QuantumChatbot() {
                   className="flex items-center gap-2.5 text-xs text-[#5A7470]"
                 >
                   <div className="w-7 h-7 rounded-xl bg-[#006766] text-white shrink-0 flex items-center justify-center shadow-2xs">
-                    <Sparkles size={13} className="text-[#00B489]" />
+                    <Bot size={14} className="text-[#00B489]" />
                   </div>
                   <div className="bg-[#F2F7F6] border border-[#DFEBE8] px-3.5 py-2.5 rounded-2xl flex items-center gap-1.5 shadow-2xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#00B489] animate-bounce [animation-delay:-0.3s]" />
