@@ -8,15 +8,18 @@ const STORAGE_KEY = "quresight_backend";
 const EVENT_NAME = "quresight_backend_change";
 
 export function useQuantumBackend() {
-  const [backend, setBackendState] = useState<QuantumBackendType>("ibmq_eagle");
+  // Default to verified local PennyLane statevector quantum simulator
+  const [backend, setBackendState] = useState<QuantumBackendType>("gpu_simulator");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const stored = localStorage.getItem(STORAGE_KEY) as QuantumBackendType | null;
-      if (stored === "gpu_simulator" || stored === "ibmq_eagle") {
-        setBackendState(stored);
+      // QPU is locked unless credentials exist; always ensure simulator is active default
+      if (stored === "gpu_simulator") {
+        setBackendState("gpu_simulator");
       } else {
-        localStorage.setItem(STORAGE_KEY, "ibmq_eagle");
+        localStorage.setItem(STORAGE_KEY, "gpu_simulator");
+        setBackendState("gpu_simulator");
       }
 
       const handleCustomEvent = (e: Event) => {

@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import HelpTooltip from "@/components/common/HelpTooltip";
 import { useQuantumBackend } from "@/hooks/useQuantumBackend";
+import { showToast } from "@/components/common/ToastNotification";
 
 import { AuthService, UserProfile } from "@/services/auth.service";
 import { ScreeningService, StoredPrediction } from "@/services/screening.service";
@@ -322,33 +323,30 @@ export default function AccountPage() {
               </div>
 
               <div
-                onClick={() => setPreferredBackend("ibmq_eagle")}
-                className={`p-4 rounded-xl border cursor-pointer transition-all space-y-1.5 ${
-                  preferredBackend === "ibmq_eagle"
-                    ? "bg-[#E6F7F4]/60 border-[#006766] shadow-xs ring-1 ring-[#006766]/30"
-                    : "bg-[#F7FAF9] hover:bg-white border-[#DFEBE8] opacity-85"
-                }`}
+                onClick={() => {
+                  showToast({
+                    title: "Hardware Access Locked",
+                    message: "IBM Quantum QPU access is locked. Requires authenticated IBM Quantum API credentials.",
+                    type: "warning",
+                  });
+                }}
+                className="p-4 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9] opacity-75 cursor-not-allowed space-y-1.5"
               >
                 <div className="flex items-center justify-between">
                   <span className="font-sans text-sm font-bold text-[#082827] flex items-center gap-1.5">
-                    <Cpu size={15} className="text-[#006766]" /> IBM Quantum Hardware (Eagle QPU)
+                    <Cpu size={15} className="text-[#5A7470]" /> IBM Quantum Hardware (Eagle QPU)
                   </span>
                   <div className="flex items-center gap-2">
-                    <span className={`text-[9px] font-mono px-2 py-0.5 rounded border ${
-                      preferredBackend === "ibmq_eagle"
-                        ? "text-emerald-700 bg-emerald-50 border-emerald-200 font-bold"
-                        : "text-amber-700 bg-amber-50 border-amber-200 font-semibold"
-                    }`}>
-                      {preferredBackend === "ibmq_eagle" ? "Active" : "Available"}
+                    <span className="text-[9px] font-mono px-2 py-0.5 rounded border text-amber-800 bg-amber-50 border-amber-300 font-semibold flex items-center gap-1">
+                      <Lock size={9} /> Locked
                     </span>
-                    {preferredBackend === "ibmq_eagle" && <CheckCircle2 size={16} className="text-[#006766]" />}
                   </div>
                 </div>
                 <p className="text-[11px] text-[#5A7470] font-normal leading-snug">
-                  127-Qubit IBM Eagle processor accessed via IBM Quantum Runtime.
+                  127-Qubit IBM Eagle processor via IBM Quantum Runtime (requires authenticated API token in environment).
                 </p>
-                <div className="flex items-center gap-2 pt-0.5 text-[10px] font-mono text-emerald-700 font-semibold">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" /> Superconducting QPU • Online
+                <div className="flex items-center gap-2 pt-0.5 text-[10px] font-mono text-amber-700 font-semibold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 inline-block" /> Cloud Access Locked • API Key Required
                 </div>
               </div>
             </div>

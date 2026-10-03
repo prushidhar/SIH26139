@@ -839,23 +839,22 @@ export default function BreastCancerDetailPage() {
               <span>Quantum Simulator</span>
             </button>
             <button
-              disabled={hasInferred}
-              onClick={() => setExecutionMode("real_ibm_qpu")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
-                executionMode === "real_ibm_qpu"
-                  ? "bg-amber-500 text-black shadow-xs font-bold"
-                  : "text-ink-soft hover:text-ink"
-              } ${hasInferred ? "cursor-not-allowed opacity-80" : "cursor-pointer"}`}
-              title="IBM Quantum Eagle QPU — Cloud Hardware"
+              type="button"
+              onClick={() => {
+                showToast({
+                  title: "Hardware QPU Access Locked",
+                  message: "IBM Quantum QPU hardware execution is locked. Live QPU runtime requires authenticated IBM Quantum API credentials in Settings. Defaulting to Quantum Simulator.",
+                  type: "warning",
+                });
+              }}
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-ink-soft hover:text-ink opacity-80 hover:opacity-100 cursor-pointer"
+              title="IBM Quantum Eagle QPU — Hardware Locked (Requires Cloud API Token)"
             >
-              <Cpu size={13} className={executionMode === "real_ibm_qpu" ? "text-black" : "text-amber-500"} />
+              <Cpu size={13} className="text-amber-500" />
               <span>IBM Quantum (QPU)</span>
-              <span className={`text-[9px] font-mono px-1 py-0.2 rounded border ${
-                executionMode === "real_ibm_qpu"
-                  ? "bg-amber-100 text-amber-900 border-amber-300 font-bold"
-                  : "bg-amber-50 text-amber-700 border-amber-200"
-              }`}>
-                {executionMode === "real_ibm_qpu" ? "Active" : "QPU"}
+              <span className="text-[9px] font-mono px-1.5 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-300 font-semibold flex items-center gap-0.5">
+                <Lock size={8} />
+                Locked
               </span>
             </button>
           </div>

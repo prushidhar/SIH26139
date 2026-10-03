@@ -39,7 +39,7 @@ import { NotificationService, type NotificationItem } from "@/services/notificat
 import { useQuantumBackend } from "@/hooks/useQuantumBackend";
 import QuantumChatbot from "@/components/chat/QuantumChatbot";
 import WelcomeModal from "@/components/common/WelcomeModal";
-import ToastContainer from "@/components/common/ToastNotification";
+import ToastContainer, { showToast } from "@/components/common/ToastNotification";
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -305,39 +305,38 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
           {/* Right: Quantum System Selector + Notification Icon + Account Icon */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Quantum Processing System Selector (Consistent Locked Nomenclature) */}
+            {/* Quantum Processing System Selector (Active Simulator + Locked Hardware) */}
             <div className="flex items-center p-0.5 bg-cream-deep/60 rounded-xl border border-hairline text-xs font-sans">
               <button
                 type="button"
                 onClick={() => handleBackendChange("gpu_simulator")}
-                className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer text-[11px] font-medium ${
-                  quantumBackend === "gpu_simulator"
-                    ? "bg-parchment text-ink shadow-2xs border border-hairline/80 font-bold text-quantum"
-                    : "text-ink-soft hover:text-ink"
-                }`}
+                className="px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer text-[11px] font-medium bg-parchment text-ink shadow-2xs border border-hairline/80 font-bold text-quantum"
+                title="PennyLane Statevector Simulator — Verified & Active"
               >
                 <Sparkles size={12} className="text-quantum" />
                 <span>Quantum Simulator</span>
+                <span className="text-[9px] font-mono px-1 py-0.2 rounded border bg-teal-50 text-teal-800 border-teal-300 font-bold">
+                  Active
+                </span>
               </button>
               <button
                 type="button"
-                onClick={() => handleBackendChange("ibmq_eagle")}
-                className={`px-2.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
-                  quantumBackend === "ibmq_eagle"
-                    ? "bg-parchment text-ink shadow-2xs border border-hairline/80 font-bold text-amber-600"
-                    : "text-ink-soft hover:text-ink"
-                }`}
-                title="IBM Quantum Eagle QPU — Cloud Hardware"
+                onClick={() => {
+                  showToast({
+                    title: "Hardware QPU Access Locked",
+                    message: "IBM Quantum QPU hardware execution is locked. Live QPU runtime requires authenticated IBM Quantum API credentials in Settings. Defaulting to Quantum Simulator.",
+                    type: "warning",
+                  });
+                }}
+                className="px-2.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer text-ink-soft hover:text-ink opacity-80 hover:opacity-100"
+                title="IBM Quantum (QPU) — Hardware Locked (API Token Required)"
               >
-                <Cpu size={12} className={quantumBackend === "ibmq_eagle" ? "text-amber-600" : "text-amber-500"} />
+                <Cpu size={12} className="text-amber-500" />
                 <span className="hidden sm:inline">IBM Quantum (QPU)</span>
                 <span className="sm:hidden">IBM QPU</span>
-                <span className={`text-[9px] font-mono px-1 py-0.2 rounded border ${
-                  quantumBackend === "ibmq_eagle"
-                    ? "bg-amber-100 text-amber-800 border-amber-300 font-bold"
-                    : "bg-amber-50 text-amber-700 border-amber-200"
-                }`}>
-                  {quantumBackend === "ibmq_eagle" ? "Active" : "QPU"}
+                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-300 font-semibold flex items-center gap-0.5">
+                  <Lock size={8} />
+                  Locked
                 </span>
               </button>
             </div>
@@ -514,21 +513,24 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 <span className="xs:hidden">Sim</span>
               </button>
 
-              {/* IBM Quantum QPU */}
+              {/* IBM Quantum QPU - Locked */}
               <button
                 type="button"
-                onClick={() => handleBackendChange("ibmq_eagle")}
-                className={`px-1.5 py-0.5 rounded-md transition-all flex items-center gap-1 font-medium cursor-pointer ${
-                  quantumBackend === "ibmq_eagle"
-                    ? "bg-parchment text-amber-600 shadow-2xs border border-hairline/80 font-bold"
-                    : "text-ink-soft hover:text-ink"
-                }`}
-                title="IBM Quantum Eagle QPU — Cloud Hardware"
+                onClick={() => {
+                  showToast({
+                    title: "Hardware QPU Locked",
+                    message: "IBM Quantum hardware access is locked. Requires authenticated API token in Settings.",
+                    type: "warning",
+                  });
+                }}
+                className="px-1.5 py-0.5 rounded-md transition-all flex items-center gap-1 font-medium cursor-pointer text-ink-soft hover:text-ink opacity-80"
+                title="IBM Quantum Eagle QPU — Hardware Locked"
               >
                 <Cpu size={10} className="text-amber-500 shrink-0" />
                 <span>IBM QPU</span>
-                <span className="hidden xs:inline text-[8px] font-mono text-amber-700 bg-amber-50 px-0.5 py-0.1 rounded border border-amber-200">
-                  {quantumBackend === "ibmq_eagle" ? "Active" : "QPU"}
+                <span className="hidden xs:inline text-[8px] font-mono text-amber-800 bg-amber-50 px-1 py-0.2 rounded border border-amber-300 flex items-center gap-0.5">
+                  <Lock size={7} />
+                  Locked
                 </span>
               </button>
             </div>
