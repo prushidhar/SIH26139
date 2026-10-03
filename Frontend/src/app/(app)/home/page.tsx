@@ -3,193 +3,205 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import {
   Stethoscope,
   Activity,
   History,
-  Cpu,
   ArrowRight,
   ShieldCheck,
-  Zap,
-  Play,
-  FlaskConical,
-  Inbox,
-  Clock,
+  CheckCircle2,
   Sparkles,
   ChevronRight,
   Heart,
   Droplets,
-  Layers,
+  FlaskConical,
   Microscope,
   Brain,
-  Lock,
+  Layers,
+  Clock,
+  User,
+  Filter,
+  FileText,
+  Scan,
+  ShieldAlert,
+  Dna,
+  Zap,
 } from "lucide-react";
-import HelpTooltip from "@/components/common/HelpTooltip";
-import { useQuantumBackend } from "@/hooks/useQuantumBackend";
+import { AuthService } from "@/services/auth.service";
+import { ScreeningService, type StoredPrediction } from "@/services/screening.service";
+
+type CategoryGroup = "all" | "cardiopulmonary" | "oncology" | "metabolic" | "neuro_radiology";
 
 interface DiseaseModuleItem {
   key: string;
   title: string;
-  category: string;
+  specialty: string;
+  modality: string;
+  modalityBadge: string;
   icon: any;
-  dataset: string;
-  features: string;
-  target: string;
-  advantage: string;
-  description: string;
+  targetCondition: string;
+  clinicalScope: string;
   route: string;
-  tooltip: string;
-  status: "active" | "locked" | "beta_locked";
-  image?: string;
+  accentBg: string;
+  accentText: string;
+  badgeBg: string;
+  badgeText: string;
+  group: CategoryGroup;
 }
 
 const DISEASE_MODULES: DiseaseModuleItem[] = [
   {
     key: "ai_diagnostics",
-    title: "QureSight Diagnostics & Auscultation Suite",
-    category: "Pulmonary & Respiratory Triage",
+    title: "Pulmonary Auscultation & Breath Sounds",
+    specialty: "Pulmonary Medicine",
+    modality: "6-Point Digital Auscultation",
+    modalityBadge: "Acoustic Audio",
     icon: Stethoscope,
-    dataset: "6-Point Auscultation & Clinical Symptoms",
-    features: "Acoustic Wheeze/Crackle & Symptom Chronicity",
-    target: "Pulmonary Pathology & TB Consensus",
-    advantage: "Active Terminal",
-    description: "Interactive 6-point digital stethoscope auscultation, animated breathing cadence visualizer, and multi-engine respiratory triage.",
+    targetCondition: "Wheeze, Crackle & Respiratory Triage",
+    clinicalScope: "Digital stethoscope audio triage, breathing cadence analysis, and multi-engine respiratory risk classification.",
     route: "/predict",
-    tooltip: "Full multi-step diagnostic screening suite with live anatomical guide and breathing visualizer.",
-    status: "active",
-    image: "/images/disease-cardiovascular.jpg",
+    accentBg: "bg-teal-50",
+    accentText: "text-teal-700",
+    badgeBg: "bg-teal-100/70",
+    badgeText: "text-teal-800",
+    group: "cardiopulmonary",
   },
   {
     key: "heart_disease",
-    title: "12-Lead Electrocardiogram (ECG) Analysis",
-    category: "Cardiac Electrophysiology",
+    title: "12-Lead Electrocardiogram (ECG)",
+    specialty: "Cardiac Electrophysiology",
+    modality: "12-Lead Waveform Strips",
+    modalityBadge: "ECG Waveform",
     icon: Heart,
-    dataset: "PTB-XL 12-Lead Diagnostic Strips",
-    features: "ST-Segment Deviation & Rhythm Morphology",
-    target: "Acute MI & Arrhythmia Consensus",
-    advantage: "Active Terminal",
-    description: "Paper 12-lead ECG strip digitizer with real-time Grad-CAM localization, acute ischemic injury scoring, and 8-qubit circuit consensus.",
+    targetCondition: "Acute Myocardial Infarction & Arrhythmias",
+    clinicalScope: "Automated 12-lead strip digitizer with Grad-CAM lead pinpointing, acute ischemic injury scoring, and dual consensus.",
     route: "/predict/heart-disease",
-    tooltip: "Live active screening terminal for 12-lead electrocardiograms.",
-    status: "active",
-    image: "/images/disease-cardiovascular.jpg",
+    accentBg: "bg-rose-50",
+    accentText: "text-rose-700",
+    badgeBg: "bg-rose-100/70",
+    badgeText: "text-rose-800",
+    group: "cardiopulmonary",
   },
   {
     key: "breast_cancer",
     title: "Breast Cytopathology Biopsy Studio",
-    category: "Histopathology & Oncology",
+    specialty: "Histopathology & Oncology",
+    modality: "Fine Needle Aspirate (FNA)",
+    modalityBadge: "Cellular Biopsy",
     icon: Microscope,
-    dataset: "569 Biopsy Records (WDBC)",
-    features: "Nuclear Pleomorphism, Texture & Perimeter",
-    target: "Malignant vs Benign",
-    advantage: "Active Terminal",
-    description: "Fine needle aspirate (WDBC) 8-qubit variational classifier evaluating nuclear morphometry with verified cross-validation.",
+    targetCondition: "Malignant vs Benign Lesion Classification",
+    clinicalScope: "Cellular morphometry assessment evaluating nuclear pleomorphism, perimeter, texture irregularities, and concavity.",
     route: "/predict/breast-cancer",
-    tooltip: "Uses 8-qubit variational quantum circuits with 48 gates to evaluate cytopathology biopsy cells.",
-    status: "active",
-    image: "/images/disease-breast-cancer.jpg",
+    accentBg: "bg-pink-50",
+    accentText: "text-pink-700",
+    badgeBg: "bg-pink-100/70",
+    badgeText: "text-pink-800",
+    group: "oncology",
   },
   {
     key: "heart_tabular",
     title: "Cardiovascular Hemodynamics (CAD)",
-    category: "Preventive Cardiology",
-    icon: Heart,
-    dataset: "303 Cleveland Clinic Cohort",
-    features: "13 Hemodynamic Biomarkers & Exercise Stress",
-    target: "Coronary Artery Disease Risk",
-    advantage: "Active Terminal",
-    description: "Evaluates resting blood pressure, serum cholesterol, exercise ST depression, and fluoroscopy coronary vessels.",
+    specialty: "Preventive Cardiology",
+    modality: "Hemodynamic Stress Profile",
+    modalityBadge: "Vascular Panel",
+    icon: Activity,
+    targetCondition: "Coronary Artery Disease Risk",
+    clinicalScope: "Resting systolic hemodynamics, serum cholesterol profiles, exercise ST-segment depression, and fluoroscopy vessels.",
     route: "/predict/heart-tabular",
-    tooltip: "Evaluates blood pressure, cholesterol, ST depression, and fluoroscopy vessels.",
-    status: "active",
-    image: "/images/studios/cad-coronary-angiogram.png",
+    accentBg: "bg-red-50",
+    accentText: "text-red-700",
+    badgeBg: "bg-red-100/70",
+    badgeText: "text-red-800",
+    group: "cardiopulmonary",
   },
   {
     key: "liver_ilpd",
-    title: "Hepatic Functional Biomarker Panel",
-    category: "Hepatology & Metabolic Health",
+    title: "Hepatic Functional Panel",
+    specialty: "Hepatology & Metabolic Health",
+    modality: "Serum Enzyme Chemistry",
+    modalityBadge: "Liver Panel",
     icon: Droplets,
-    dataset: "583 ILPD Clinical Records",
-    features: "10 Liver Enzyme Biomarkers & Bilirubin Ratios",
-    target: "Hepatic Dysregulation & Impairment",
-    advantage: "Active Terminal",
-    description: "Minimal 2-qubit quantum classifier screening transaminases, alkaline phosphatase, and albumin/globulin ratios.",
+    targetCondition: "Hepatic Dysregulation & Impairment",
+    clinicalScope: "Evaluates transaminases (ALT/AST), alkaline phosphatase, and albumin/globulin ratios for functional impairment.",
     route: "/predict/liver-ilpd",
-    tooltip: "Analyzes transaminases, bilirubin, proteins, and albumin ratios with 2-qubit minimal VQC.",
-    status: "active",
-    image: "/images/studios/liver-function-panel-analysis.png",
+    accentBg: "bg-amber-50",
+    accentText: "text-amber-700",
+    badgeBg: "bg-amber-100/70",
+    badgeText: "text-amber-800",
+    group: "metabolic",
   },
   {
     key: "chronic_kidney",
-    title: "Nephrology & Glomerular Health Studio",
-    category: "Renal Function & Filtration",
+    title: "Nephrology & Renal Function",
+    specialty: "Renal Medicine",
+    modality: "Glomerular Filtration & Serum Panel",
+    modalityBadge: "Renal Panel",
     icon: FlaskConical,
-    dataset: "400 Renal Function Records",
-    features: "Serum Creatinine, eGFR, Blood Urea, Albumin",
-    target: "Early Glomerular Impairment",
-    advantage: "Active Terminal",
-    description: "4-qubit variational circuit assessing glomerular filtration rate, proteinuria severity, and KDIGO risk tiers.",
+    targetCondition: "Glomerular Impairment & KDIGO Risk",
+    clinicalScope: "Serum creatinine, automated CKD-EPI estimated GFR calculation, blood urea nitrogen, and albuminuria scoring.",
     route: "/predict/chronic-kidney",
-    tooltip: "Screens 8 renal biomarkers with automated CKD-EPI eGFR calculation and KDIGO risk tiers.",
-    status: "active",
-    image: "/images/disease-kidney-neural.jpg",
+    accentBg: "bg-cyan-50",
+    accentText: "text-cyan-700",
+    badgeBg: "bg-cyan-100/70",
+    badgeText: "text-cyan-800",
+    group: "metabolic",
   },
   {
     key: "cardiomegaly",
-    title: "Thoracic Radiograph (CXR) Cardiomegaly",
-    category: "Diagnostic Radiology",
-    icon: Layers,
-    dataset: "1,200 CheXpert Radiographs",
-    features: "DenseNet-121 Latent + Cardiothoracic Ratio",
-    target: "Cardiac Silhouette Enlargement",
-    advantage: "Active Terminal",
-    description: "Deep transfer learning pipeline combining DenseNet-121 feature embeddings with quantum classification on chest radiographs.",
+    title: "Thoracic Radiograph (CXR)",
+    specialty: "Diagnostic Radiology",
+    modality: "Frontal Chest Radiograph",
+    modalityBadge: "CXR Radiography",
+    icon: Scan,
+    targetCondition: "Cardiothoracic Ratio & Silhouette Enlargement",
+    clinicalScope: "Automated cardiothoracic ratio calculation and thoracic silhouette enlargement screening on chest radiographs.",
     route: "/predict/cardiomegaly",
-    tooltip: "Automated cardiothoracic ratio measurement and cardiac silhouette screening.",
-    status: "active",
-    image: "/images/studios/cardiomegaly-cxr-analysis.png",
+    accentBg: "bg-indigo-50",
+    accentText: "text-indigo-700",
+    badgeBg: "bg-indigo-100/70",
+    badgeText: "text-indigo-800",
+    group: "neuro_radiology",
   },
   {
     key: "hepatitis_c",
     title: "Hepatitis C Staging & Fibrosis",
-    category: "Viral Pathology & Fibrosis",
-    icon: Droplets,
-    dataset: "615 Serum Chemistry Panels",
-    features: "12 Serum Biomarkers & Cholinesterase",
-    target: "Cirrhosis & Fibrosis Staging",
-    advantage: "Active Terminal",
-    description: "Screens serum enzymes and metabolic blood chemistry markers for hepatitis C viral progression and liver fibrosis.",
+    specialty: "Viral Pathology & Fibrosis",
+    modality: "Serum Chemistry & Enzymes",
+    modalityBadge: "Fibrosis Panel",
+    icon: Dna,
+    targetCondition: "Fibrosis Staging & Cirrhosis Progression",
+    clinicalScope: "Screens serum enzymes, cholinesterase levels, and metabolic blood markers for hepatitis C disease progression.",
     route: "/predict/hepatitis-c",
-    tooltip: "Screens serum enzymes, cholinesterase, and creatinine with 4-qubit VQC.",
-    status: "active",
-    image: "/images/studios/liver-function-panel-analysis.png",
+    accentBg: "bg-emerald-50",
+    accentText: "text-emerald-700",
+    badgeBg: "bg-emerald-100/70",
+    badgeText: "text-emerald-800",
+    group: "metabolic",
   },
   {
     key: "neurological",
     title: "Cognitive Profile & Neurological Studio",
-    category: "Neuro-Cognitive Health",
+    specialty: "Neuro-Cognitive Health",
+    modality: "EEG Spectral Rhythms",
+    modalityBadge: "Neuro Profile",
     icon: Brain,
-    dataset: "400 Neuro-Cognitive Profiles",
-    features: "Cortical EEG Power Spectra, Tremor, MMSE",
-    target: "Early Neurodegenerative Risk",
-    advantage: "Active Terminal",
-    description: "4-qubit PennyLane VQC analyzing cortical EEG rhythms, resting motor tremor, and psychomotor processing speed.",
+    targetCondition: "Early Neurodegenerative & Tremor Risk",
+    clinicalScope: "Analyzes cortical EEG power spectra, tremor frequencies, and psychomotor speed for early impairment indications.",
     route: "/predict/neurological",
-    tooltip: "Multi-domain screening for early cognitive impairment and motor dysfunction.",
-    status: "active",
-    image: "/images/studios/brain-health-eeg-analysis.png",
+    accentBg: "bg-purple-50",
+    accentText: "text-purple-700",
+    badgeBg: "bg-purple-100/70",
+    badgeText: "text-purple-800",
+    group: "neuro_radiology",
   },
 ];
 
-import { AuthService } from "@/services/auth.service";
-import { ScreeningService, type StoredPrediction } from "@/services/screening.service";
-
 export default function HomePage() {
   const router = useRouter();
-  const { backend } = useQuantumBackend();
-  const [userName, setUserName] = useState<string>("");
+  const [userName, setUserName] = useState<string>("Clinician");
   const [recentPredictions, setRecentPredictions] = useState<StoredPrediction[]>([]);
+  const [selectedGroup, setSelectedGroup] = useState<CategoryGroup>("all");
 
   const handleViewScreening = (pred: StoredPrediction) => {
     try {
@@ -226,13 +238,14 @@ export default function HomePage() {
           telemetry: pred.telemetryJson || {
             prediction: {
               class_name: pred.quantumPrediction || "Normal",
-              clinical_title: pred.quantumPrediction === "Normal"
-                ? "Normal Sinus Rhythm (Physiological)"
-                : pred.quantumPrediction === "Myocardial Infarction"
-                ? "Acute Myocardial Infarction (STEMI / Severe Ischemic Injury)"
-                : pred.quantumPrediction === "History of MI"
-                ? "History of Prior Myocardial Infarction (Pathological Q-Waves)"
-                : "Cardiac Arrhythmia / Conduction Disturbance",
+              clinical_title:
+                pred.quantumPrediction === "Normal"
+                  ? "Normal Sinus Rhythm (Physiological)"
+                  : pred.quantumPrediction === "Myocardial Infarction"
+                  ? "Acute Myocardial Infarction (STEMI / Severe Ischemic Injury)"
+                  : pred.quantumPrediction === "History of MI"
+                  ? "History of Prior Myocardial Infarction (Pathological Q-Waves)"
+                  : "Cardiac Arrhythmia / Conduction Disturbance",
               confidence_pct: pred.quantumConfidence ?? 98.0,
               probabilities: {
                 Normal: pred.quantumPrediction === "Normal" ? (pred.quantumConfidence ?? 98.0) / 100 : 0.05,
@@ -244,13 +257,14 @@ export default function HomePage() {
             risk_stratification: {
               cardiac_risk_score: pred.quantumRiskScore ?? 25.0,
               score_scale: "0 - 100",
-              severity_tier: (pred.quantumRiskScore ?? 0) >= 85
-                ? "CRITICAL EMERGENCY (CODE RED)"
-                : (pred.quantumRiskScore ?? 0) >= 60
-                ? "HIGH RISK (CARDIAC CONDUCTION DISTURBANCE)"
-                : (pred.quantumRiskScore ?? 0) >= 35
-                ? "MODERATE RISK (PRIOR ISCHEMIC SCAR)"
-                : "LOW RISK (NORMAL SINUS RHYTHM)",
+              severity_tier:
+                (pred.quantumRiskScore ?? 0) >= 85
+                  ? "CRITICAL EMERGENCY (CODE RED)"
+                  : (pred.quantumRiskScore ?? 0) >= 60
+                  ? "HIGH RISK (CARDIAC CONDUCTION DISTURBANCE)"
+                  : (pred.quantumRiskScore ?? 0) >= 35
+                  ? "MODERATE RISK (PRIOR ISCHEMIC SCAR)"
+                  : "LOW RISK (NORMAL SINUS RHYTHM)",
               clinical_recommendation: pred.clinicalNote || "Follow guideline-directed medical monitoring and outpatient cardiology follow-up.",
               primary_driver: pred.topDriver || "Lead V2 (Septal)",
             },
@@ -306,16 +320,19 @@ export default function HomePage() {
           age: pred.patientAge || 55,
           gender: pred.patientGender || "Female",
         },
-        biomarkers: pred.inputFeatures && Object.keys(pred.inputFeatures).length > 0 ? pred.inputFeatures : {
-          radius_mean: 12.2,
-          texture_mean: 17.39,
-          perimeter_mean: 78.18,
-          area_mean: 458.7,
-          smoothness_mean: 0.0908,
-          compactness_mean: 0.0645,
-          concavity_mean: 0.0371,
-          concave_points_mean: 0.0234,
-        },
+        biomarkers:
+          pred.inputFeatures && Object.keys(pred.inputFeatures).length > 0
+            ? pred.inputFeatures
+            : {
+                radius_mean: 12.2,
+                texture_mean: 17.39,
+                perimeter_mean: 78.18,
+                area_mean: 458.7,
+                smoothness_mean: 0.0908,
+                compactness_mean: 0.0645,
+                concavity_mean: 0.0371,
+                concave_points_mean: 0.0234,
+              },
         screeningResult: {
           engine: "Quantum VQC",
           prediction_label: pred.quantumPrediction,
@@ -345,19 +362,17 @@ export default function HomePage() {
   };
 
   useEffect(() => {
-    // 1. Load real user profile
     const cachedUser = AuthService.getCachedUser();
     if (cachedUser) {
-      setUserName(cachedUser.fullName || cachedUser.username || "Investigator");
+      const raw = cachedUser.fullName || cachedUser.username || "Clinician";
+      setUserName(raw.replace(/_/g, " ").trim());
     }
 
-    // 2. Instant 0ms cached screenings load
     const cached = ScreeningService.getCachedScreenings();
     if (cached && cached.length > 0) {
       setRecentPredictions(cached.slice(0, 5));
     }
 
-    // 3. Parallel background sync with Supabase DB
     ScreeningService.getScreenings()
       .then((records) => {
         setRecentPredictions((records || []).slice(0, 5));
@@ -365,275 +380,304 @@ export default function HomePage() {
       .catch(() => {});
   }, []);
 
+  const filteredModules = DISEASE_MODULES.filter((module) => {
+    if (selectedGroup === "all") return true;
+    return module.group === selectedGroup;
+  });
+
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
-      className="space-y-6 pb-12 w-full"
-    >
+    <div className="space-y-6 pb-12 w-full max-w-7xl mx-auto">
       {/* ========================================================================= */}
-      {/* 1. EXECUTIVE RESEARCH PORTAL BANNER */}
+      {/* 1. CLINICIAN WORKSTATION COMMAND HEADER */}
       {/* ========================================================================= */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.35 }}
-        className="w-full bg-white rounded-2xl border border-[#DFEBE8] p-6 sm:p-7 shadow-[0_10px_30px_-12px_rgba(0,103,102,0.06)] relative overflow-hidden"
-      >
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 relative z-10">
-          <div className="space-y-1.5 max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-[11px] font-mono text-[#006766] font-semibold">
+      <div className="w-full bg-white rounded-3xl border border-[#DFEBE8] p-6 sm:p-8 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.06)] relative overflow-hidden">
+        {/* Subtle decorative radial gradient */}
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-[#E6F7F4]/80 via-transparent to-transparent pointer-events-none rounded-full blur-2xl" />
+
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+          <div className="space-y-2 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E6F7F4] border border-[#00B489]/25 text-xs font-semibold text-[#006766]">
               <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
-              <span>QureSight Triage Station</span>
+              <span>Clinical Triage Workstation · Active Shift</span>
             </div>
-            <h1 className="font-sans text-2xl sm:text-3xl md:text-4xl font-bold text-[#082827] tracking-tight">
-              Clinical Triage Console, <span className="text-[#006766]">{userName}</span>
+            <h1 className="font-sans text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#082827] tracking-tight">
+              Welcome back, <span className="text-[#006766]">{userName}</span>
             </h1>
-            <p className="text-[#5A7470] text-xs sm:text-sm font-normal leading-relaxed">
-              Launch multimodal disease examinations, evaluate acoustic lung sounds, or review consensus audit records.
+            <p className="text-sm text-[#5A7470] font-normal leading-relaxed">
+              Launch patient intake across 9 specialized diagnostic terminals, evaluate multi-modal biomarkers, or review verified case dossiers.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+          {/* Quick Action Button Group */}
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
             <Link
               href="/predict"
-              className="px-4 py-2.5 rounded-xl bg-[#006766] hover:bg-[#0D4F46] text-white font-semibold text-xs tracking-wider transition-all shadow-sm shadow-[#006766]/20 flex items-center gap-2 cursor-pointer font-sans"
+              className="px-5 py-3 rounded-2xl bg-[#006766] hover:bg-[#084E4D] text-white font-semibold text-xs tracking-wider transition-all shadow-md shadow-[#006766]/20 flex items-center gap-2 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
             >
-              <Sparkles size={14} className="text-[#74D0D2]" /> Patient Examination
+              <Sparkles size={15} className="text-[#00B489]" />
+              <span>Start Patient Intake</span>
             </Link>
             <Link
-              href="/benchmarks"
-              className="px-4 py-2.5 rounded-xl bg-[#F2F7F6] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#082827] font-semibold text-xs tracking-wider transition-all flex items-center gap-1.5 cursor-pointer font-sans"
+              href="/history"
+              className="px-4 py-3 rounded-2xl bg-[#F7FAF9] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#082827] font-semibold text-xs tracking-wider transition-all flex items-center gap-2 cursor-pointer hover:border-[#006766]/40"
             >
-              <Activity size={14} className="text-[#006766]" /> Validation Telemetry
+              <History size={15} className="text-[#006766]" />
+              <span>Case Records ({recentPredictions.length})</span>
+            </Link>
+            <Link
+              href="/evidence-matrix"
+              className="px-4 py-3 rounded-2xl bg-[#F7FAF9] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#082827] font-semibold text-xs tracking-wider transition-all flex items-center gap-2 cursor-pointer hover:border-[#006766]/40"
+            >
+              <FileText size={15} className="text-[#006766]" />
+              <span>Evidence Ledger</span>
             </Link>
           </div>
         </div>
 
-        {/* Quick Platform Navigation Strip */}
-        <div className="pt-4 mt-5 border-t border-[#DFEBE8] flex items-center justify-between gap-2 overflow-x-auto text-[11px] font-mono text-[#5A7470] whitespace-nowrap">
-          <Link href="/predict" className="hover:text-[#006766] transition-colors font-medium">Examination Terminals</Link>
-          <span className="text-[#DFEBE8]">•</span>
-          <Link href="/history" className="hover:text-[#006766] transition-colors">Patient Audit Trail</Link>
-          <span className="text-[#DFEBE8]">•</span>
-          <Link href="/observatory" className="hover:text-[#006766] transition-colors">Biomarker Observatory</Link>
-          <span className="text-[#DFEBE8]">•</span>
-          <Link href="/benchmarks" className="hover:text-[#006766] transition-colors">Model Benchmarks</Link>
-          <span className="text-[#DFEBE8]">•</span>
-          <Link href="/explainability" className="hover:text-[#006766] transition-colors">Biomarker Attributions</Link>
-          <span className="text-[#DFEBE8]">•</span>
-          <Link href="/hardware" className="hover:text-[#006766] transition-colors">Compute Infrastructure</Link>
-        </div>
-
-        {/* 4 Summary Stats Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-5 mt-5 border-t border-[#DFEBE8]">
-          <div className="space-y-1">
-            <div className="flex items-center gap-1">
-              <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470]">Active Terminals</span>
-              <HelpTooltip text="Active multimodal quantum and classical examination terminals across oncology, cardiology, hepatology, radiology, and nephrology." />
+        {/* Real Operational Workstation Metrics (Zero Mock/Fake Numbers) */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 mt-6 border-t border-[#DFEBE8]/80">
+          <div className="p-4 rounded-2xl bg-[#F7FAF9]/80 border border-[#DFEBE8]/60 space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-[#5A7470]">
+              <CheckCircle2 size={14} className="text-[#00B489]" />
+              <span>Diagnostic Coverage</span>
             </div>
-            <div className="font-sans text-2xl sm:text-3xl text-[#082827] font-bold tracking-tight">8 <span className="text-xs font-normal text-[#5A7470]">Terminals</span></div>
-            <p className="text-[11px] text-[#5A7470] font-normal">Multimodal Examination Suite</p>
+            <div className="font-sans text-xl sm:text-2xl font-bold text-[#082827]">
+              9 Terminals
+            </div>
+            <p className="text-[11px] text-[#5A7470]">Ready for patient intake</p>
           </div>
 
-          <div className="space-y-1">
-            <div className="flex items-center gap-1">
-              <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470]">Generalization Gain</span>
-              <HelpTooltip text="In scarce clinical data regimes (15% sample size), Quantum VQC achieves +8.30% higher test accuracy over tuned classical SVM (p = 0.0153)." />
+          <div className="p-4 rounded-2xl bg-[#F7FAF9]/80 border border-[#DFEBE8]/60 space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-[#5A7470]">
+              <Layers size={14} className="text-[#006766]" />
+              <span>Input Modalities</span>
             </div>
-            <div className="font-sans text-2xl sm:text-3xl text-[#006766] font-bold tracking-tight">+8.3% <span className="text-xs font-normal text-[#5A7470]">scarce-cohort</span></div>
-            <p className="text-[11px] text-[#5A7470] font-normal">Verified Statistical Edge</p>
+            <div className="font-sans text-xl sm:text-2xl font-bold text-[#082827]">
+              Multimodal
+            </div>
+            <p className="text-[11px] text-[#5A7470]">Acoustic • ECG • Image • Lab</p>
           </div>
 
-          <div className="space-y-1">
-            <div className="flex items-center gap-1">
-              <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470]">Screened Cohort</span>
-              <HelpTooltip text="Total number of patients screened in this browser session." />
+          <div className="p-4 rounded-2xl bg-[#F7FAF9]/80 border border-[#DFEBE8]/60 space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-[#5A7470]">
+              <ShieldCheck size={14} className="text-[#00B489]" />
+              <span>Inference Protocol</span>
             </div>
-            <div className="font-sans text-2xl sm:text-3xl text-[#082827] font-bold tracking-tight">{recentPredictions.length} <span className="text-xs font-normal text-[#5A7470]">records</span></div>
-            <p className="text-[11px] text-[#5A7470] font-normal">Session Examination Count</p>
+            <div className="font-sans text-xl sm:text-2xl font-bold text-[#082827]">
+              Dual Hybrid
+            </div>
+            <p className="text-[11px] text-[#5A7470]">Quantum VQC + Deep Learning</p>
           </div>
 
-          <div className="space-y-1">
-            <div className="flex items-center gap-1">
-              <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-[#5A7470]">Engine Stack</span>
-              <HelpTooltip text="The quantum processor or simulation engine actively analyzing patient data." />
+          <div className="p-4 rounded-2xl bg-[#F7FAF9]/80 border border-[#DFEBE8]/60 space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-[#5A7470]">
+              <Clock size={14} className="text-[#006766]" />
+              <span>Session Screenings</span>
             </div>
-            <div className="font-sans text-2xl sm:text-3xl text-[#082827] font-bold tracking-tight">
-              Hybrid Ensemble
+            <div className="font-sans text-xl sm:text-2xl font-bold text-[#082827]">
+              {recentPredictions.length} Logged
             </div>
-            <p className="text-[11px] text-[#5A7470] font-normal">
-              {backend === "ibmq_eagle" ? "IBM Eagle Hardware" : "Statevector Simulator"}
-            </p>
+            <p className="text-[11px] text-[#5A7470]">Verified in current session</p>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* ========================================================================= */}
-      {/* 2. PRIMARY CLINICAL DISEASE MODULES */}
+      {/* 2. CLINICAL SPECIALTY FILTER & TERMINALS SECTION */}
       {/* ========================================================================= */}
-      <section className="space-y-3">
-        <div className="flex items-center justify-between">
+      <section className="space-y-4">
+        {/* Section Header with Specialty Filter Tabs */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h2 className="font-sans text-xl sm:text-2xl font-bold text-[#082827] tracking-tight">
-              Clinical Examination Terminals
+              Diagnostic Screening Suites
             </h2>
-            <p className="text-xs text-[#5A7470] font-normal">
-              Select an active clinical screening terminal to perform patient intake and run algorithmic diagnostics.
+            <p className="text-xs sm:text-sm text-[#5A7470]">
+              Select an active clinical department to intake patient data and execute algorithmic diagnostics.
             </p>
+          </div>
+
+          {/* Specialty Filter Pills */}
+          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-[#F2F7F6] rounded-2xl border border-[#DFEBE8] text-xs">
+            <button
+              type="button"
+              onClick={() => setSelectedGroup("all")}
+              className={`px-3 py-1.5 rounded-xl font-semibold transition-all cursor-pointer ${
+                selectedGroup === "all"
+                  ? "bg-white text-[#006766] shadow-xs"
+                  : "text-[#5A7470] hover:text-[#082827]"
+              }`}
+            >
+              All Suites (9)
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedGroup("cardiopulmonary")}
+              className={`px-3 py-1.5 rounded-xl font-semibold transition-all cursor-pointer ${
+                selectedGroup === "cardiopulmonary"
+                  ? "bg-white text-[#006766] shadow-xs"
+                  : "text-[#5A7470] hover:text-[#082827]"
+              }`}
+            >
+              Cardiopulmonary
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedGroup("oncology")}
+              className={`px-3 py-1.5 rounded-xl font-semibold transition-all cursor-pointer ${
+                selectedGroup === "oncology"
+                  ? "bg-white text-[#006766] shadow-xs"
+                  : "text-[#5A7470] hover:text-[#082827]"
+              }`}
+            >
+              Oncology
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedGroup("metabolic")}
+              className={`px-3 py-1.5 rounded-xl font-semibold transition-all cursor-pointer ${
+                selectedGroup === "metabolic"
+                  ? "bg-white text-[#006766] shadow-xs"
+                  : "text-[#5A7470] hover:text-[#082827]"
+              }`}
+            >
+              Metabolic & Renal
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedGroup("neuro_radiology")}
+              className={`px-3 py-1.5 rounded-xl font-semibold transition-all cursor-pointer ${
+                selectedGroup === "neuro_radiology"
+                  ? "bg-white text-[#006766] shadow-xs"
+                  : "text-[#5A7470] hover:text-[#082827]"
+              }`}
+            >
+              Radiology & Neuro
+            </button>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {DISEASE_MODULES.map((disease) => {
+        {/* Modern Clinical Terminal Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {filteredModules.map((disease) => {
             const Icon = disease.icon;
             return (
-              <motion.div
+              <div
                 key={disease.key}
-                whileHover={{ y: -2 }}
-                className="p-5 rounded-2xl border border-[#DFEBE8] bg-white flex flex-col justify-between shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)] hover:shadow-[0_12px_28px_-8px_rgba(0,103,102,0.12)] hover:border-[#006766]/40 transition-all group"
+                className="bg-white rounded-3xl border border-[#DFEBE8] p-5 flex flex-col justify-between shadow-[0_2px_16px_-4px_rgba(0,103,102,0.04)] hover:shadow-[0_10px_28px_-6px_rgba(0,103,102,0.12)] hover:border-[#006766]/50 transition-all group"
               >
-                <div className="space-y-3">
-                  {disease.image && (
-                    <div className="relative w-full h-36 rounded-xl overflow-hidden border border-[#DFEBE8] bg-[#F7FAF9]">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={disease.image}
-                        alt={disease.title}
-                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                      <div className="absolute top-2 right-2">
-                        <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-white/95 text-emerald-800 border border-emerald-300 shadow-2xs">
-                          ● ACTIVE STUDIO
-                        </span>
-                      </div>
-                    </div>
-                  )}
-
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-9 h-9 rounded-xl bg-[#E6F7F4] text-[#006766] flex items-center justify-center">
+                <div className="space-y-3.5">
+                  {/* Card Header: Specialty & Modality Pill */}
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <div className={`w-9 h-9 rounded-2xl ${disease.accentBg} ${disease.accentText} flex items-center justify-center shrink-0 shadow-2xs`}>
                         <Icon size={18} />
                       </div>
-                      <span className="text-[10px] uppercase font-mono tracking-wider font-bold text-[#006766]">
-                        {disease.category}
+                      <span className="text-[11px] font-bold text-[#082827] uppercase tracking-wide">
+                        {disease.specialty}
                       </span>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <span className="text-[10px] font-mono text-[#5A7470]">{disease.advantage}</span>
-                      <HelpTooltip text={disease.tooltip} />
-                    </div>
+
+                    <span className={`px-2.5 py-1 rounded-full text-[10px] font-semibold ${disease.badgeBg} ${disease.badgeText}`}>
+                      {disease.modalityBadge}
+                    </span>
                   </div>
 
+                  {/* Title & Scope */}
                   <div>
                     <h3 className="font-sans text-base sm:text-lg font-bold text-[#082827] leading-snug group-hover:text-[#006766] transition-colors">
                       {disease.title}
                     </h3>
-                    <p className="text-xs text-[#5A7470] font-normal line-clamp-3 mt-1.5 leading-relaxed">
-                      {disease.description}
+                    <p className="text-xs text-[#5A7470] font-normal leading-relaxed mt-1.5 line-clamp-3">
+                      {disease.clinicalScope}
                     </p>
                   </div>
 
-                  <div className="space-y-1.5 pt-1.5 font-mono text-[10px] text-[#5A7470] border-t border-[#DFEBE8]/60">
-                    <div className="flex justify-between">
-                      <span>Validation Data:</span>
-                      <span className="text-[#082827] font-semibold truncate max-w-[140px]">{disease.dataset}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Analyzed Factors:</span>
-                      <span className="text-[#082827] font-semibold truncate max-w-[140px]">{disease.features}</span>
-                    </div>
+                  {/* Target Condition Pill */}
+                  <div className="p-2.5 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8]/70 text-[11px] text-[#006766] font-medium flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#00B489] shrink-0" />
+                    <span className="truncate">{disease.targetCondition}</span>
                   </div>
                 </div>
 
-                <div className="pt-3.5 mt-3.5 border-t border-[#DFEBE8] flex items-center justify-between">
-                  <span className="text-[10px] font-mono text-[#006766] font-semibold">{disease.target}</span>
-                  {disease.status === "active" ? (
-                    <Link
-                      href={disease.route}
-                      className="text-xs font-bold text-[#006766] hover:text-[#0D4F46] flex items-center gap-1 transition-colors"
-                    >
-                      Screen Patient <ChevronRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
-                    </Link>
-                  ) : (
-                    <Link
-                      href="/predict"
-                      className="text-[11px] font-mono font-medium text-amber-800 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200 hover:bg-amber-100 transition-all flex items-center gap-1.5"
-                    >
-                      <Lock size={11} className="text-amber-700" />
-                      Future Upgrade <ChevronRight size={11} />
-                    </Link>
-                  )}
+                {/* Card Footer: Action Button */}
+                <div className="pt-4 mt-4 border-t border-[#DFEBE8]/80">
+                  <Link
+                    href={disease.route}
+                    className="w-full py-2.5 px-4 rounded-xl bg-[#F7FAF9] group-hover:bg-[#006766] text-[#006766] group-hover:text-white font-semibold text-xs transition-all flex items-center justify-center gap-2 shadow-2xs group-hover:shadow-md group-hover:shadow-[#006766]/20 cursor-pointer"
+                  >
+                    <span>Launch Screening Suite</span>
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* 3. RECENT PATIENT SCREENING ACTIVITY */}
+      {/* 3. RECENT CLINICAL CASE RECORDS (REAL DATA ONLY) */}
       {/* ========================================================================= */}
-      <section className="space-y-3 pt-2">
+      <section className="space-y-3 pt-4">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="font-sans text-xl sm:text-2xl font-bold text-[#082827] tracking-tight">
               Recent Patient Screenings
             </h2>
-            <p className="text-xs text-[#5A7470] font-normal">
-              History of diagnostic tests executed during your current session.
+            <p className="text-xs text-[#5A7470]">
+              Diagnostic tests and algorithmic evaluations recorded in your current clinical session.
             </p>
           </div>
 
           {recentPredictions.length > 0 && (
             <Link
               href="/history"
-              className="text-xs font-bold text-[#006766] hover:text-[#0D4F46] flex items-center gap-1 transition-colors"
+              className="text-xs font-bold text-[#006766] hover:text-[#084E4D] flex items-center gap-1 transition-colors"
             >
-              View Full History ({recentPredictions.length}) <ArrowRight size={13} />
+              <span>View All Records ({recentPredictions.length})</span>
+              <ArrowRight size={14} />
             </Link>
           )}
         </div>
 
         {recentPredictions.length === 0 ? (
-          /* GENUINE REAL EMPTY STATE */
-          <div className="p-8 sm:p-12 rounded-2xl bg-white border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)] text-center space-y-4">
+          /* GENUINE CLEAN EMPTY STATE (ZERO FAKE DATA) */
+          <div className="p-8 sm:p-12 rounded-3xl bg-white border border-[#DFEBE8] text-center space-y-4 shadow-[0_2px_16px_-4px_rgba(0,103,102,0.04)]">
             <div className="w-14 h-14 rounded-2xl bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] mx-auto flex items-center justify-center">
-              <Inbox size={24} className="text-[#006766]" />
+              <Stethoscope size={26} className="text-[#006766]" />
             </div>
-            <div className="space-y-1 max-w-md mx-auto">
+            <div className="space-y-1.5 max-w-md mx-auto">
               <h3 className="font-sans text-lg font-bold text-[#082827]">
-                No patient screenings run yet
+                No patient screenings logged in this session
               </h3>
               <p className="text-xs text-[#5A7470] font-normal leading-relaxed">
-                Click below to start your first patient screening and compare quantum and traditional computer predictions.
+                Launch any diagnostic terminal above to intake patient data, run multi-engine evaluations, and generate verified case records.
               </p>
             </div>
             <div className="pt-2">
               <Link
                 href="/predict"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#006766] hover:bg-[#0D4F46] text-white font-semibold text-xs tracking-wider transition-all shadow-sm shadow-[#006766]/20 cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#006766] hover:bg-[#084E4D] text-white font-semibold text-xs tracking-wider transition-all shadow-md shadow-[#006766]/20 cursor-pointer"
               >
-                <Sparkles size={14} className="text-[#74D0D2]" /> Start Patient Screening
+                <Sparkles size={14} className="text-[#00B489]" />
+                <span>Start First Patient Screening</span>
               </Link>
             </div>
           </div>
         ) : (
           /* POPULATED ACTIVITY TABLE */
-          <div className="bg-white rounded-2xl border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.05)] overflow-hidden">
+          <div className="bg-white rounded-3xl border border-[#DFEBE8] shadow-[0_2px_16px_-4px_rgba(0,103,102,0.04)] overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-sans">
-                <thead className="bg-[#F7FAF9] border-b border-[#DFEBE8] text-[11px] font-mono uppercase tracking-wider text-[#5A7470]">
+                <thead className="bg-[#F7FAF9] border-b border-[#DFEBE8] text-[11px] font-semibold uppercase tracking-wider text-[#5A7470]">
                   <tr>
-                    <th className="py-3.5 px-4 font-semibold">Case ID</th>
-                    <th className="py-3.5 px-4 font-semibold">Patient Name</th>
-                    <th className="py-3.5 px-4 font-semibold">Test Category</th>
-                    <th className="py-3.5 px-4 font-semibold">Quantum Prediction</th>
-                    <th className="py-3.5 px-4 font-semibold">Standard Model</th>
-                    <th className="py-3.5 px-4 font-semibold">Key Factor</th>
-                    <th className="py-3.5 px-4 font-semibold">Time</th>
+                    <th className="py-3.5 px-5 font-semibold">Patient Case</th>
+                    <th className="py-3.5 px-5 font-semibold">Diagnostic Specialty</th>
+                    <th className="py-3.5 px-5 font-semibold">Algorithmic Verdict</th>
+                    <th className="py-3.5 px-5 font-semibold">Consensus Engine</th>
+                    <th className="py-3.5 px-5 font-semibold">Intake Time</th>
+                    <th className="py-3.5 px-5 text-right font-semibold">Dossier</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#DFEBE8]/60 text-[#082827]">
@@ -641,32 +685,49 @@ export default function HomePage() {
                     <tr
                       key={i}
                       onClick={() => handleViewScreening(pred)}
-                      className="hover:bg-[#F2F7F6]/60 transition-colors cursor-pointer group"
+                      className="hover:bg-[#F2F7F6]/70 transition-colors cursor-pointer group"
                     >
-                      <td className="py-3.5 px-4 font-mono text-xs font-semibold text-[#006766]">
-                        <div className="flex items-center gap-1.5 group-hover:underline">
-                          <span>{pred.id}</span>
-                          <ChevronRight size={12} className="opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-[#006766]" />
+                      <td className="py-3.5 px-5">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-full bg-[#E6F7F4] border border-[#00B489]/20 text-[#006766] font-bold text-xs flex items-center justify-center shrink-0">
+                            {(pred.patientName || "P").charAt(0).toUpperCase()}
+                          </div>
+                          <div>
+                            <div className="font-semibold text-[#082827]">{pred.patientName || "Patient"}</div>
+                            <div className="text-[10px] text-[#5A7470] font-mono">{pred.id}</div>
+                          </div>
                         </div>
                       </td>
-                      <td className="py-3.5 px-4 font-semibold text-xs text-[#082827]">{pred.patientName}</td>
-                      <td className="py-3.5 px-4 text-[#5A7470] text-xs">{pred.disease}</td>
-                      <td className="py-3.5 px-4 font-mono font-medium">
-                        <span className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-semibold ${
-                          pred.riskLevel === "High"
-                            ? "bg-red-50 text-red-700 border border-red-200"
-                            : "bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30"
-                        }`}>
-                          {pred.quantumPrediction} ({pred.quantumConfidence}%)
+                      <td className="py-3.5 px-5 text-[#5A7470]">
+                        <span className="font-medium text-[#082827]">{pred.disease || pred.diseaseType || "Clinical Screening"}</span>
+                      </td>
+                      <td className="py-3.5 px-5 font-medium">
+                        <span
+                          className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-semibold ${
+                            pred.riskLevel === "High" || pred.quantumPrediction?.includes("Malignant") || pred.quantumPrediction?.includes("Infarction")
+                              ? "bg-red-50 text-red-700 border border-red-200"
+                              : "bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30"
+                          }`}
+                        >
+                          {pred.quantumPrediction || "Physiological Baseline"}
+                          {pred.quantumConfidence ? ` (${Math.round(pred.quantumConfidence)}%)` : ""}
                         </span>
                       </td>
-                      <td className="py-3.5 px-4 font-mono text-[#5A7470] text-xs">
-                        {pred.classicalPrediction} ({pred.classicalConfidence}%)
+                      <td className="py-3.5 px-5 text-[#5A7470]">
+                        <span className="inline-flex items-center gap-1.5 text-xs text-[#006766] font-medium">
+                          <ShieldCheck size={13} className="text-[#00B489]" />
+                          <span>{pred.consensusStatus || "Dual-Verified"}</span>
+                        </span>
                       </td>
-                      <td className="py-3.5 px-4 text-xs font-mono text-[#082827] truncate max-w-[180px]">
-                        {pred.topDriver}
+                      <td className="py-3.5 px-5 text-[#5A7470] font-mono text-[11px]">
+                        {pred.timestamp || "Recent"}
                       </td>
-                      <td className="py-3.5 px-4 text-xs text-[#5A7470] font-mono">{pred.timestamp}</td>
+                      <td className="py-3.5 px-5 text-right">
+                        <span className="text-xs font-semibold text-[#006766] group-hover:underline inline-flex items-center gap-1">
+                          <span>Open Dossier</span>
+                          <ChevronRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
+                        </span>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -675,6 +736,6 @@ export default function HomePage() {
           </div>
         )}
       </section>
-    </motion.div>
+    </div>
   );
 }

@@ -57,57 +57,63 @@ interface NavSection {
 
 const NAV_SECTIONS: NavSection[] = [
   {
-    title: "Diagnostic Services",
+    title: "Clinical Core",
     items: [
       {
-        label: "Triage Dashboard",
-        href: "/home",
-        icon: LayoutDashboard,
-        description: "Physician triage console & diagnostic quick actions",
-      },
-      {
-        label: "Patient Examination",
+        label: "Patient Intake",
         href: "/predict",
         icon: Stethoscope,
-        description: "Multimodal AI screening & digital auscultation",
+        description: "Point-of-care patient intake & diagnostic screening",
       },
       {
-        label: "Clinical Records",
+        label: "Clinical Workstation",
+        href: "/home",
+        icon: LayoutDashboard,
+        description: "Specialty terminal launcher & triage overview",
+      },
+      {
+        label: "Patient Case History",
         href: "/history",
         icon: History,
-        description: "Patient test records & certified reports",
+        description: "Certified patient records & diagnostic reports",
       },
       {
-        label: "Clinical Workspace",
+        label: "Diagnostic Workspace",
         href: "/workspace",
         icon: Sliders,
-        description: "Active diagnostic case workspace",
+        description: "Interactive multi-engine clinical workspace",
       },
     ],
   },
   {
-    title: "Clinical Intelligence",
+    title: "Intelligence & Evidence",
     items: [
       {
-        label: "Model Telemetry",
-        href: "/analysis",
-        icon: Activity,
-        description: "Live model accuracy & clinical concordance",
+        label: "Evidence Ledger",
+        href: "/evidence-matrix",
+        icon: TableProperties,
+        description: "Cross-validated trial evidence & performance bounds",
       },
       {
-        label: "Biomarker Observatory",
+        label: "Biomarker Registry",
         href: "/observatory",
         icon: Database,
-        description: "Clinical cohorts & biomarker baseline distributions",
+        description: "Biomedical cohort distributions & feature baselines",
       },
       {
-        label: "Attribution & SHAP",
+        label: "Performance Tracking",
+        href: "/analysis",
+        icon: Activity,
+        description: "Live model accuracy & clinical concordance metrics",
+      },
+      {
+        label: "Attribution & Insights",
         href: "/explainability",
         icon: Sparkles,
         description: "Feature attributions & clinical risk factor weights",
       },
       {
-        label: "Decision Arbitration",
+        label: "Consensus Arbitration",
         href: "/decision-console",
         icon: Gauge,
         description: "Consensus arbitration & diagnostic thresholds",
@@ -115,31 +121,25 @@ const NAV_SECTIONS: NavSection[] = [
     ],
   },
   {
-    title: "Infrastructure & Audit",
+    title: "Architecture & Verification",
     items: [
+      {
+        label: "Compute Backends",
+        href: "/hardware",
+        icon: Zap,
+        description: "Statevector simulator & quantum hardware status",
+      },
       {
         label: "Validation Benchmarks",
         href: "/benchmarks",
         icon: TrendingUp,
-        description: "Comparative validation against classical baselines",
+        description: "Rigorous MLflow telemetry against classical baselines",
       },
       {
-        label: "Evidence Matrix",
-        href: "/evidence-matrix",
-        icon: TableProperties,
-        description: "Multi-study statistical evidence ledger",
-      },
-      {
-        label: "Quantum Compute Engine",
-        href: "/hardware",
-        icon: Zap,
-        description: "Hardware telemetry & noise mitigation status",
-      },
-      {
-        label: "Audit Vault",
+        label: "Compliance Vault",
         href: "/vault",
-        icon: Archive,
-        description: "Immutable ledger & verification records",
+        icon: Lock,
+        description: "Certified immutable logs & HIPAA compliance audit",
       },
     ],
   },
@@ -351,7 +351,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
               <BrandLogo href={false} />
               <div className="h-4 w-[1px] bg-hairline" />
               <span className="text-xs font-sans tracking-tight text-ink-soft font-semibold">
-                Screening Suite
+                Clinical Intelligence Suite
               </span>
             </Link>
           </div>
