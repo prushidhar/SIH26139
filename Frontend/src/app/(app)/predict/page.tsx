@@ -220,7 +220,18 @@ export default function PatientIntakePage() {
   };
 
   const handleLaunchTerminal = (terminalRoute: string) => {
-    // Navigate straight to the diagnostic terminal
+    try {
+      sessionStorage.setItem(
+        "quresight_patient_intake",
+        JSON.stringify({
+          patientId,
+          patientAge,
+          patientGender: patientSex,
+          chiefComplaint,
+          triageUrgency,
+        })
+      );
+    } catch {}
     router.push(terminalRoute);
   };
 

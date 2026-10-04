@@ -201,6 +201,18 @@ export default function HeartDiseaseStudioPage() {
     generateNewPatientId();
     const today = new Date().toISOString().split("T")[0];
     setIntakeDate(today);
+    try {
+      const stored = sessionStorage.getItem("quresight_patient_intake");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.patientId) setPatientId(parsed.patientId);
+        if (parsed.patientAge) {
+          const numAge = parseInt(parsed.patientAge, 10);
+          if (!isNaN(numAge)) setPatientAge(numAge);
+        }
+        if (parsed.patientGender) setPatientGender(parsed.patientGender);
+      }
+    } catch {}
   }, []);
 
   const generateNewPatientId = () => {

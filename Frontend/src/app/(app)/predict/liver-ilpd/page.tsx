@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -17,87 +17,21 @@ import {
   Cpu,
   Layers,
   FlaskConical,
+  UploadCloud,
+  User,
 } from "lucide-react";
 import { showToast } from "@/components/common/ToastNotification";
 import { ScreeningService } from "@/services/screening.service";
+import BiomarkerUploadModal from "@/components/predict/BiomarkerUploadModal";
+import { PatientMetadata } from "@/lib/medicalReportParser";
 
-interface ILPDPreset {
-  name: string;
-  badge: string;
-  color: string;
-  description: string;
-  values: {
-    Age: number;
-    Gender: number;
-    Total_Bilirubin: number;
-    Direct_Bilirubin: number;
-    Alkaline_Phosphotase: number;
-    Alamine_Aminotransferase: number;
-    Aspartate_Aminotransferase: number;
-    Total_Protiens: number;
-    Albumin: number;
-    Albumin_and_Globulin_Ratio: number;
-  };
-}
 
-const PRESETS: ILPDPreset[] = [
-  {
-    name: "Physiological Normal",
-    badge: "Low Risk",
-    color: "emerald",
-    description: "Normal liver enzymes and healthy protein synthesis.",
-    values: {
-      Age: 38,
-      Gender: 1,
-      Total_Bilirubin: 0.8,
-      Direct_Bilirubin: 0.2,
-      Alkaline_Phosphotase: 160,
-      Alamine_Aminotransferase: 22,
-      Aspartate_Aminotransferase: 25,
-      Total_Protiens: 7.2,
-      Albumin: 4.1,
-      Albumin_and_Globulin_Ratio: 1.1,
-    },
-  },
-  {
-    name: "Borderline Dysfunction",
-    badge: "Moderate Risk",
-    color: "amber",
-    description: "Moderate transaminase elevation; triggers quantum arbitration.",
-    values: {
-      Age: 45,
-      Gender: 1,
-      Total_Bilirubin: 2.1,
-      Direct_Bilirubin: 0.9,
-      Alkaline_Phosphotase: 280,
-      Alamine_Aminotransferase: 54,
-      Aspartate_Aminotransferase: 68,
-      Total_Protiens: 6.6,
-      Albumin: 3.2,
-      Albumin_and_Globulin_Ratio: 0.85,
-    },
-  },
-  {
-    name: "Severe Hepatic Impairment",
-    badge: "Critical Risk",
-    color: "rose",
-    description: "High transaminases, elevated bilirubin, depleted albumin.",
-    values: {
-      Age: 56,
-      Gender: 1,
-      Total_Bilirubin: 4.8,
-      Direct_Bilirubin: 2.4,
-      Alkaline_Phosphotase: 420,
-      Alamine_Aminotransferase: 120,
-      Aspartate_Aminotransferase: 145,
-      Total_Protiens: 5.4,
-      Albumin: 2.4,
-      Albumin_and_Globulin_Ratio: 0.65,
-    },
-  },
-];
 
 export default function LiverILPDStudioPage() {
+  const [patientName, setPatientName] = useState("");
+  const [patientId, setPatientId] = useState("");
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+
   const [values, setValues] = useState({
     Age: 45,
     Gender: 1,
@@ -114,14 +48,41 @@ export default function LiverILPDStudioPage() {
   const [isEvaluating, setIsEvaluating] = useState<boolean>(false);
   const [telemetry, setTelemetry] = useState<any>(null);
 
-  const applyPreset = (preset: ILPDPreset) => {
-    setValues({ ...preset.values });
+  const handleApplyExtractedData = (extractedValues: Record<string, number>, metadata: PatientMetadata) => {
+    setValues((prev) => {
+      const updated = { ...prev };
+      Object.keys(prev).forEach((k) => {
+        if (k in extractedValues) {
+          (updated as any)[k] = extractedValues[k];
+        }
+      });
+      return updated;
+    });
+    if (metadata.patientName) setPatientName(metadata.patientName);
+    if (metadata.patientId) setPatientId(metadata.patientId);
     showToast({
-      title: "Preset Loaded",
-      message: `${preset.name} (${preset.badge})`,
-      type: "info",
+      title: "Medical Report Imported",
+      message: `Hepatic panel biomarkers populated for ${metadata.patientName || "Patient"}.`,
+      type: "quantum",
     });
   };
+
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem("quresight_patient_intake");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.patientId) setPatientId(parsed.patientId);
+        if (parsed.patientAge) {
+          const numAge = parseInt(parsed.patientAge, 10);
+          if (!isNaN(numAge)) setValues((v) => ({ ...v, Age: numAge }));
+        }
+        if (parsed.patientGender) {
+          setValues((v) => ({ ...v, Gender: parsed.patientGender.toLowerCase().startsWith("f") ? 0 : 1 }));
+        }
+      }
+    } catch {}
+  }, []);
 
   const handleValueChange = (key: string, val: number) => {
     setValues((prev) => ({ ...prev, [key]: val }));
@@ -150,8 +111,8 @@ export default function LiverILPDStudioPage() {
         // Save screening to local & remote history so it displays in Screening History & Chatbot
         try {
           await ScreeningService.createScreening({
-            id: `QS-LIV-${Math.floor(1000 + Math.random() * 9000)}`,
-            patientName: "Hepatic Panel Patient",
+            id: patientId || `QS-LIV-${Math.floor(1000 + Math.random() * 9000)}`,
+            patientName: patientName || "Hepatic Panel Patient",
             patientAge: values.Age,
             patientGender: values.Gender === 1 ? "Male" : "Female",
             diseaseType: "Hepatic Dysregulation & Liver Function",
@@ -219,21 +180,30 @@ export default function LiverILPDStudioPage() {
           </div>
         </div>
 
-        <button
-          onClick={runEvaluation}
-          disabled={isEvaluating}
-          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-medium text-xs shadow-md shadow-teal-600/20 disabled:opacity-50 transition-all cursor-pointer"
-        >
-          {isEvaluating ? (
-            <>
-              <Loader2 size={15} className="animate-spin" /> Evaluating Biomarkers...
-            </>
-          ) : (
-            <>
-              <Zap size={15} /> Screen Liver Function
-            </>
-          )}
-        </button>
+        <div className="flex items-center gap-2.5">
+          <button
+            type="button"
+            onClick={() => setIsUploadModalOpen(true)}
+            className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-teal-200 dark:border-teal-800/60 bg-white dark:bg-card text-teal-700 dark:text-teal-300 hover:bg-teal-50 dark:hover:bg-teal-950/40 font-medium text-xs transition-all shadow-xs cursor-pointer"
+          >
+            <UploadCloud size={14} /> Upload Lab Report
+          </button>
+          <button
+            onClick={runEvaluation}
+            disabled={isEvaluating}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-medium text-xs shadow-md shadow-teal-600/20 disabled:opacity-50 transition-all cursor-pointer"
+          >
+            {isEvaluating ? (
+              <>
+                <Loader2 size={15} className="animate-spin" /> Evaluating Biomarkers...
+              </>
+            ) : (
+              <>
+                <Zap size={15} /> Screen Liver Function
+              </>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Active Studio Status Banner */}
@@ -248,47 +218,72 @@ export default function LiverILPDStudioPage() {
         </div>
         <div className="flex items-center gap-1.5 text-[11px] text-teal-700 dark:text-teal-300 font-medium shrink-0">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>Online & Verified</span>
+          <span>Online &amp; Verified</span>
         </div>
       </div>
 
-      {/* Preset Cohort Selector */}
-      <div className="space-y-2">
+      {/* Patient Clinical Intake Profile */}
+      <div className="p-4 rounded-2xl border border-border bg-card/60 backdrop-blur-xs shadow-xs space-y-3">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
-            Reference Profiles
-          </span>
-          <span className="text-[11px] text-muted-foreground">Verified ILPD Presets</span>
+          <div className="flex items-center gap-2 text-xs font-semibold text-foreground">
+            <User size={14} className="text-teal-600 dark:text-teal-400" />
+            <span>Patient Clinical Intake Profile</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsUploadModalOpen(true)}
+            className="text-[11px] font-medium text-teal-600 dark:text-teal-400 hover:underline flex items-center gap-1 cursor-pointer"
+          >
+            <UploadCloud size={12} /> Auto-fill from Lab Report (.PDF, .CSV, .JSON)
+          </button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {PRESETS.map((preset) => (
-            <button
-              key={preset.name}
-              type="button"
-              onClick={() => applyPreset(preset)}
-              className="text-left p-3.5 rounded-2xl border border-border/50 bg-card/60 hover:bg-card hover:border-teal-500/40 transition-all cursor-pointer space-y-1.5"
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <div>
+            <label className="text-[11px] font-mono text-muted-foreground block mb-1">Patient Full Name</label>
+            <input
+              type="text"
+              placeholder="e.g. Ramesh Chandra"
+              value={patientName}
+              onChange={(e) => setPatientName(e.target.value)}
+              className="w-full px-3 py-1.5 rounded-xl border border-border bg-background text-xs text-foreground focus:ring-1 focus:ring-teal-500 outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-[11px] font-mono text-muted-foreground block mb-1">Patient ID / MRN</label>
+            <input
+              type="text"
+              placeholder="e.g. MRN-51082"
+              value={patientId}
+              onChange={(e) => setPatientId(e.target.value)}
+              className="w-full px-3 py-1.5 rounded-xl border border-border bg-background text-xs text-foreground focus:ring-1 focus:ring-teal-500 outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-[11px] font-mono text-muted-foreground block mb-1">Patient Age (Years)</label>
+            <input
+              type="number"
+              min={10}
+              max={100}
+              value={values.Age}
+              onChange={(e) => handleValueChange("Age", parseInt(e.target.value) || 0)}
+              className="w-full px-3 py-1.5 rounded-xl border border-border bg-background text-xs text-foreground focus:ring-1 focus:ring-teal-500 outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-[11px] font-mono text-muted-foreground block mb-1">Biological Gender</label>
+            <select
+              value={values.Gender}
+              onChange={(e) => handleValueChange("Gender", parseInt(e.target.value))}
+              className="w-full px-3 py-1.5 rounded-xl border border-border bg-background text-xs text-foreground focus:ring-1 focus:ring-teal-500 outline-none"
             >
-              <div className="flex items-center justify-between">
-                <span className="font-medium text-xs text-foreground">{preset.name}</span>
-                <span
-                  className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-medium ${
-                    preset.color === "emerald"
-                      ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
-                      : preset.color === "amber"
-                      ? "bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"
-                      : "bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20"
-                  }`}
-                >
-                  {preset.badge}
-                </span>
-              </div>
-              <p className="text-[11px] text-muted-foreground leading-relaxed">
-                {preset.description}
-              </p>
-            </button>
-          ))}
+              <option value={1}>Male (1)</option>
+              <option value={0}>Female (0)</option>
+            </select>
+          </div>
         </div>
       </div>
+
+
 
       {/* Main Studio Interactive Panel */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -594,6 +589,14 @@ export default function LiverILPDStudioPage() {
           )}
         </div>
       </div>
+
+      <BiomarkerUploadModal
+        isOpen={isUploadModalOpen}
+        onClose={() => setIsUploadModalOpen(false)}
+        onApplyData={handleApplyExtractedData}
+        schemaType="liver-ilpd"
+        diseaseTitle="Liver Function (ILPD)"
+      />
     </div>
   );
 }

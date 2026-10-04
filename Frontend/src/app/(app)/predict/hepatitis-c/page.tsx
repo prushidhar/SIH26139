@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -20,9 +20,13 @@ import {
   HelpCircle,
   FlaskConical,
   Zap,
+  UploadCloud,
+  User,
 } from "lucide-react";
 import { showToast } from "@/components/common/ToastNotification";
 import { ScreeningService } from "@/services/screening.service";
+import BiomarkerUploadModal from "@/components/predict/BiomarkerUploadModal";
+import { PatientMetadata } from "@/lib/medicalReportParser";
 
 interface BiomarkerField {
   key: string;
@@ -127,51 +131,7 @@ const HCV_FIELDS: BiomarkerField[] = [
   },
 ];
 
-interface PresetConfig {
-  name: string;
-  badge: string;
-  color: string;
-  sex: string;
-  values: Record<string, number>;
-}
 
-const PRESETS: PresetConfig[] = [
-  {
-    name: "Healthy Blood Donor",
-    badge: "Normal Liver",
-    color: "emerald",
-    sex: "m",
-    values: { AST: 22, ALT: 20, GGT: 21, ALP: 55, ALB: 44.0, CHE: 9.5, BIL: 8.0, CREA: 75, Age: 36 },
-  },
-  {
-    name: "Active Hepatitis C",
-    badge: "High Transaminases",
-    color: "amber",
-    sex: "m",
-    values: { AST: 112, ALT: 145, GGT: 120, ALP: 92, ALB: 38.0, CHE: 6.8, BIL: 22.0, CREA: 82, Age: 48 },
-  },
-  {
-    name: "Advanced Cirrhosis",
-    badge: "Severe Fibrosis",
-    color: "rose",
-    sex: "f",
-    values: { AST: 185, ALT: 95, GGT: 240, ALP: 165, ALB: 26.5, CHE: 2.8, BIL: 58.0, CREA: 135, Age: 59 },
-  },
-  {
-    name: "Borderline Triage Case",
-    badge: "Quantum Router Zone",
-    color: "purple",
-    sex: "m",
-    values: { AST: 52, ALT: 48, GGT: 68, ALP: 85, ALB: 35.0, CHE: 5.5, BIL: 18.5, CREA: 89, Age: 52 },
-  },
-  {
-    name: "ILPD Hepatic Biomarker Case",
-    badge: "2-Qubit Minimal VQC Target",
-    color: "teal",
-    sex: "m",
-    values: { AST: 65, ALT: 72, GGT: 85, ALP: 198, ALB: 31.0, CHE: 5.0, BIL: 24.5, CREA: 95, Age: 45 },
-  },
-];
 
 export default function HepatitisStudioPage() {
   const [values, setValues] = useState<Record<string, number>>({
@@ -188,23 +148,54 @@ export default function HepatitisStudioPage() {
     PROT: 72.0,
   });
   const [sex, setSex] = useState<string>("m");
-  const [patientName, setPatientName] = useState<string>("Sample Patient");
+  const [patientName, setPatientName] = useState<string>("");
+  const [patientId, setPatientId] = useState<string>("");
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState<boolean>(false);
   const [isEvaluating, setIsEvaluating] = useState<boolean>(false);
   const [telemetry, setTelemetry] = useState<any>(null);
+
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem("quresight_patient_intake");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.patientId) setPatientId(parsed.patientId);
+        if (parsed.patientAge) {
+          const numAge = parseInt(parsed.patientAge, 10);
+          if (!isNaN(numAge)) setValues((v) => ({ ...v, Age: numAge }));
+        }
+        if (parsed.patientGender) {
+          setSex(parsed.patientGender.toLowerCase().startsWith("f") ? "f" : "m");
+        }
+      }
+    } catch {}
+  }, []);
+
+  const handleApplyExtractedData = (extractedValues: Record<string, number>, metadata: PatientMetadata) => {
+    setValues((prev) => {
+      const updated = { ...prev };
+      Object.keys(extractedValues).forEach((k) => {
+        if (k in updated || k.toUpperCase() in updated) {
+          const targetKey = k in updated ? k : k.toUpperCase();
+          updated[targetKey] = extractedValues[k];
+        }
+      });
+      return updated;
+    });
+    if (metadata.patientName) setPatientName(metadata.patientName);
+    if (metadata.patientId) setPatientId(metadata.patientId);
+    if (metadata.patientGender) setSex(metadata.patientGender.toLowerCase().startsWith("f") ? "f" : "m");
+    showToast({
+      title: "Medical Report Imported",
+      message: `Hepatitis serum chemistry populated for ${metadata.patientName || "Patient"}.`,
+      type: "quantum",
+    });
+  };
 
   const handleSliderChange = (key: string, val: number) => {
     setValues((prev) => ({ ...prev, [key]: val }));
   };
 
-  const applyPreset = (preset: PresetConfig) => {
-    setValues((prev) => ({ ...prev, ...preset.values }));
-    setSex(preset.sex);
-    showToast({
-      title: "Clinical Preset Loaded",
-      message: `${preset.name} (${preset.badge})`,
-      type: "info",
-    });
-  };
 
   const runDiagnosticTriage = async () => {
     setIsEvaluating(true);
@@ -230,7 +221,7 @@ export default function HepatitisStudioPage() {
         // Persist screening to patient database
         try {
           await ScreeningService.createScreening({
-            id: `QS-HCV-${Math.floor(1000 + Math.random() * 9000)}`,
+            id: patientId || `QS-HCV-${Math.floor(1000 + Math.random() * 9000)}`,
             patientName: patientName || "Hepatology Patient",
             patientAge: Number(values.Age ?? 45),
             patientGender: sex === "m" ? "Male" : "Female",
@@ -299,24 +290,33 @@ export default function HepatitisStudioPage() {
           </div>
         </div>
 
-        {/* Action Button */}
-        <button
-          onClick={runDiagnosticTriage}
-          disabled={isEvaluating}
-          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-md shadow-indigo-600/20 disabled:opacity-50 transition-all cursor-pointer"
-        >
-          {isEvaluating ? (
-            <>
-              <Loader2 size={15} className="animate-spin" />
-              Evaluating Biomarkers...
-            </>
-          ) : (
-            <>
-              <Zap size={15} />
-              Screen Liver Biomarkers
-            </>
-          )}
-        </button>
+        {/* Action Buttons */}
+        <div className="flex items-center gap-2.5">
+          <button
+            type="button"
+            onClick={() => setIsUploadModalOpen(true)}
+            className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-indigo-200 dark:border-indigo-800/60 bg-white dark:bg-card text-indigo-700 dark:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 font-medium text-xs transition-all shadow-xs cursor-pointer"
+          >
+            <UploadCloud size={14} /> Upload Lab Report
+          </button>
+          <button
+            onClick={runDiagnosticTriage}
+            disabled={isEvaluating}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-md shadow-indigo-600/20 disabled:opacity-50 transition-all cursor-pointer"
+          >
+            {isEvaluating ? (
+              <>
+                <Loader2 size={15} className="animate-spin" />
+                Evaluating Biomarkers...
+              </>
+            ) : (
+              <>
+                <Zap size={15} />
+                Screen Liver Biomarkers
+              </>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Active Certified Studio Status Banner */}
@@ -331,30 +331,72 @@ export default function HepatitisStudioPage() {
         </div>
         <div className="flex items-center gap-1.5 text-[11px] text-teal-700 dark:text-teal-300 font-medium shrink-0">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>Online & Verified</span>
+          <span>Online &amp; Verified</span>
         </div>
       </div>
 
-      {/* Presets Bar */}
-      <div className="space-y-2">
-        <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground font-semibold flex items-center gap-1.5">
-          <FlaskConical size={12} /> Reference Profiles
-        </span>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-          {PRESETS.map((p) => (
-            <button
-              key={p.name}
-              onClick={() => applyPreset(p)}
-              className="p-3 rounded-xl border border-border bg-card/60 hover:bg-card hover:border-indigo-500/30 text-left transition-all cursor-pointer space-y-1"
+      {/* Patient Clinical Intake Profile */}
+      <div className="p-4 rounded-2xl border border-border bg-card/60 backdrop-blur-xs shadow-xs space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-xs font-semibold text-foreground">
+            <User size={14} className="text-indigo-600 dark:text-indigo-400" />
+            <span>Patient Clinical Intake Profile</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsUploadModalOpen(true)}
+            className="text-[11px] font-medium text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1 cursor-pointer"
+          >
+            <UploadCloud size={12} /> Auto-fill from Lab Report (.PDF, .CSV, .JSON)
+          </button>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <div>
+            <label className="text-[11px] font-mono text-muted-foreground block mb-1">Patient Full Name</label>
+            <input
+              type="text"
+              placeholder="e.g. Dr. Priya Sharma"
+              value={patientName}
+              onChange={(e) => setPatientName(e.target.value)}
+              className="w-full px-3 py-1.5 rounded-xl border border-border bg-background text-xs text-foreground focus:ring-1 focus:ring-indigo-500 outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-[11px] font-mono text-muted-foreground block mb-1">Patient ID / MRN</label>
+            <input
+              type="text"
+              placeholder="e.g. MRN-91044"
+              value={patientId}
+              onChange={(e) => setPatientId(e.target.value)}
+              className="w-full px-3 py-1.5 rounded-xl border border-border bg-background text-xs text-foreground focus:ring-1 focus:ring-indigo-500 outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-[11px] font-mono text-muted-foreground block mb-1">Patient Age (Years)</label>
+            <input
+              type="number"
+              min={18}
+              max={95}
+              value={values.Age}
+              onChange={(e) => handleSliderChange("Age", parseInt(e.target.value) || 0)}
+              className="w-full px-3 py-1.5 rounded-xl border border-border bg-background text-xs text-foreground focus:ring-1 focus:ring-indigo-500 outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-[11px] font-mono text-muted-foreground block mb-1">Biological Sex</label>
+            <select
+              value={sex}
+              onChange={(e) => setSex(e.target.value)}
+              className="w-full px-3 py-1.5 rounded-xl border border-border bg-background text-xs text-foreground focus:ring-1 focus:ring-indigo-500 outline-none"
             >
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-foreground">{p.name}</span>
-              </div>
-              <span className="text-[10px] font-mono text-muted-foreground block">{p.badge}</span>
-            </button>
-          ))}
+              <option value="m">Male (m)</option>
+              <option value="f">Female (f)</option>
+            </select>
+          </div>
         </div>
       </div>
+
+
 
       {/* Main Grid: Controls & Telemetry */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -542,6 +584,14 @@ export default function HepatitisStudioPage() {
           )}
         </div>
       </div>
+
+      <BiomarkerUploadModal
+        isOpen={isUploadModalOpen}
+        onClose={() => setIsUploadModalOpen(false)}
+        onApplyData={handleApplyExtractedData}
+        schemaType="hepatitis-c"
+        diseaseTitle="Hepatitis C & Fibrosis"
+      />
     </div>
   );
 }

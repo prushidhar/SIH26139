@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -21,76 +21,16 @@ import {
 } from "lucide-react";
 import { showToast } from "@/components/common/ToastNotification";
 import { ScreeningService } from "@/services/screening.service";
-
-interface NeuroPreset {
-  name: string;
-  badge: string;
-  color: string;
-  description: string;
-  values: {
-    eeg_alpha_beta_ratio: number;
-    eeg_theta_power: number;
-    motor_tremor_hz: number;
-    reaction_time_ms: number;
-    speech_jitter_pct: number;
-    speech_shimmer_db: number;
-    cognitive_mmse: number;
-    age: number;
-  };
-}
-
-const PRESETS: NeuroPreset[] = [
-  {
-    name: "Healthy Cognitive Baseline",
-    badge: "Low Risk",
-    color: "emerald",
-    description: "Intact cortical rhythms, physiological tremor, normal MMSE score.",
-    values: {
-      eeg_alpha_beta_ratio: 2.4,
-      eeg_theta_power: 18.0,
-      motor_tremor_hz: 0.8,
-      reaction_time_ms: 215.0,
-      speech_jitter_pct: 0.28,
-      speech_shimmer_db: 0.12,
-      cognitive_mmse: 29.0,
-      age: 58.0,
-    },
-  },
-  {
-    name: "Mild Cognitive Impairment (MCI)",
-    badge: "Borderline",
-    color: "amber",
-    description: "Subtle EEG spectral deceleration, mild psychomotor latency delay.",
-    values: {
-      eeg_alpha_beta_ratio: 1.65,
-      eeg_theta_power: 36.0,
-      motor_tremor_hz: 2.8,
-      reaction_time_ms: 325.0,
-      speech_jitter_pct: 0.62,
-      speech_shimmer_db: 0.28,
-      cognitive_mmse: 25.0,
-      age: 67.0,
-    },
-  },
-  {
-    name: "Early Neurodegenerative Risk",
-    badge: "High Risk",
-    color: "rose",
-    description: "Prominent resting motor tremor, depressed Alpha/Beta, impaired MMSE.",
-    values: {
-      eeg_alpha_beta_ratio: 1.15,
-      eeg_theta_power: 54.0,
-      motor_tremor_hz: 5.8,
-      reaction_time_ms: 440.0,
-      speech_jitter_pct: 1.25,
-      speech_shimmer_db: 0.65,
-      cognitive_mmse: 21.0,
-      age: 72.0,
-    },
-  },
-];
+import BiomarkerUploadModal from "@/components/predict/BiomarkerUploadModal";
+import { PatientMetadata } from "@/lib/medicalReportParser";
+import { UploadCloud, User } from "lucide-react";
 
 export default function NeurologicalStudioPage() {
+  const [patientName, setPatientName] = useState("");
+  const [patientId, setPatientId] = useState("");
+  const [patientGender, setPatientGender] = useState("Female");
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+
   const [values, setValues] = useState({
     eeg_alpha_beta_ratio: 2.2,
     eeg_theta_power: 25.0,
@@ -102,15 +42,42 @@ export default function NeurologicalStudioPage() {
     age: 62.0,
   });
 
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem("quresight_patient_intake");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.patientId) setPatientId(parsed.patientId);
+        if (parsed.patientAge) {
+          const numAge = parseInt(parsed.patientAge, 10);
+          if (!isNaN(numAge)) setValues((v) => ({ ...v, age: numAge }));
+        }
+        if (parsed.patientGender) setPatientGender(parsed.patientGender);
+      }
+    } catch {}
+  }, []);
+
   const [isEvaluating, setIsEvaluating] = useState<boolean>(false);
   const [telemetry, setTelemetry] = useState<any>(null);
 
-  const applyPreset = (preset: NeuroPreset) => {
-    setValues({ ...preset.values });
+  const handleApplyExtractedData = (extractedValues: Record<string, number>, metadata: PatientMetadata) => {
+    setValues((prev) => ({
+      eeg_alpha_beta_ratio: extractedValues.eeg_alpha_beta_ratio ?? prev.eeg_alpha_beta_ratio,
+      eeg_theta_power: extractedValues.eeg_theta_power ?? prev.eeg_theta_power,
+      motor_tremor_hz: extractedValues.motor_tremor_hz ?? prev.motor_tremor_hz,
+      reaction_time_ms: extractedValues.reaction_time_ms ?? prev.reaction_time_ms,
+      speech_jitter_pct: extractedValues.speech_jitter_pct ?? prev.speech_jitter_pct,
+      speech_shimmer_db: extractedValues.speech_shimmer_db ?? prev.speech_shimmer_db,
+      cognitive_mmse: extractedValues.cognitive_mmse ?? prev.cognitive_mmse,
+      age: extractedValues.age ?? prev.age,
+    }));
+    if (metadata.patientName) setPatientName(metadata.patientName);
+    if (metadata.patientId) setPatientId(metadata.patientId);
+    if (metadata.patientGender) setPatientGender(metadata.patientGender);
     showToast({
-      title: "Preset Loaded",
-      message: `${preset.name} (${preset.badge})`,
-      type: "info",
+      title: "Neurological Report Imported",
+      message: `Biomarkers & cognitive scores extracted for ${metadata.patientName || "Patient"}.`,
+      type: "success",
     });
   };
 
@@ -138,10 +105,11 @@ export default function NeurologicalStudioPage() {
         // Persist screening to patient database
         try {
           await ScreeningService.createScreening({
-            id: `QS-NEU-${Math.floor(1000 + Math.random() * 9000)}`,
-            patientName: "Neurological Cohort Patient",
-            patientAge: values.age,
-            patientGender: "Unspecified",
+            id: patientId || `QS-NEU-${Math.floor(1000 + Math.random() * 9000)}`,
+            patientId: patientId || `QS-NEU-${Math.floor(1000 + Math.random() * 9000)}`,
+            patientName: patientName.trim() || "Neurology Patient",
+            patientAge: Number(values.age),
+            patientGender: patientGender || "Female",
             diseaseType: "Brain Health & EEG Spectral Dynamics",
             disease: "Neurological Disorders (MCI / Tremor)",
             cohort: "EEG Spectral & Psychomotor Cohort",
@@ -210,7 +178,15 @@ export default function NeurologicalStudioPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
+          <button
+            type="button"
+            onClick={() => setIsUploadModalOpen(true)}
+            className="text-xs font-mono px-3.5 py-1.5 rounded-lg border border-indigo-600/30 bg-indigo-50 text-indigo-800 hover:bg-indigo-100 transition-colors cursor-pointer flex items-center gap-1.5 shadow-2xs font-semibold"
+          >
+            <UploadCloud size={13} className="text-indigo-600" />
+            Upload Neuro Report
+          </button>
           <span className="px-3 py-1 rounded-full text-[11px] font-mono font-medium bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             <span>PennyLane 4-Qubit VQC Certified</span>
@@ -230,44 +206,68 @@ export default function NeurologicalStudioPage() {
         </div>
         <div className="flex items-center gap-1.5 text-[11px] text-indigo-700 dark:text-indigo-300 font-medium shrink-0">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>Online & Verified</span>
+          <span>Online &amp; Verified</span>
         </div>
       </div>
 
-      {/* Preset Selector */}
-      <div className="space-y-2">
-        <span className="text-[11px] font-mono uppercase tracking-wider text-ink-soft font-semibold">
-          Reference Clinical Cases
-        </span>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {PRESETS.map((p) => (
-            <button
-              key={p.name}
-              type="button"
-              onClick={() => applyPreset(p)}
-              className="p-3.5 rounded-xl border border-hairline bg-parchment hover:bg-cream-deep/60 transition-all text-left space-y-1 cursor-pointer group shadow-2xs"
+      {/* Patient Clinical Intake Profile */}
+      <div className="p-4 rounded-2xl border border-hairline bg-white shadow-xs space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-xs font-semibold text-ink">
+            <User size={14} className="text-quantum" />
+            <span>Patient Clinical Intake Profile</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsUploadModalOpen(true)}
+            className="text-[11px] font-medium text-quantum hover:underline flex items-center gap-1 cursor-pointer"
+          >
+            <UploadCloud size={12} /> Auto-fill from Neuro Lab Report (.PDF, .CSV, .JSON, .TXT)
+          </button>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <div>
+            <label className="text-[11px] font-mono text-ink-soft block mb-1">Patient Full Name</label>
+            <input
+              type="text"
+              placeholder="e.g. Sumanth Rao"
+              value={patientName}
+              onChange={(e) => setPatientName(e.target.value)}
+              className="w-full text-xs px-3 py-1.5 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono text-ink"
+            />
+          </div>
+          <div>
+            <label className="text-[11px] font-mono text-ink-soft block mb-1">Patient ID / MRN</label>
+            <input
+              type="text"
+              placeholder="e.g. MRN-70491"
+              value={patientId}
+              onChange={(e) => setPatientId(e.target.value)}
+              className="w-full text-xs px-3 py-1.5 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono text-ink"
+            />
+          </div>
+          <div>
+            <label className="text-[11px] font-mono text-ink-soft block mb-1">Patient Age (Years)</label>
+            <input
+              type="number"
+              min={18}
+              max={95}
+              value={values.age}
+              onChange={(e) => handleValueChange("age", parseInt(e.target.value) || 0)}
+              className="w-full text-xs px-3 py-1.5 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono text-ink"
+            />
+          </div>
+          <div>
+            <label className="text-[11px] font-mono text-ink-soft block mb-1">Biological Sex</label>
+            <select
+              value={patientGender}
+              onChange={(e) => setPatientGender(e.target.value)}
+              className="w-full text-xs px-3 py-1.5 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono text-ink"
             >
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-ink group-hover:text-quantum transition-colors">
-                  {p.name}
-                </span>
-                <span
-                  className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold ${
-                    p.color === "emerald"
-                      ? "bg-emerald-100 text-emerald-800"
-                      : p.color === "amber"
-                      ? "bg-amber-100 text-amber-800"
-                      : "bg-rose-100 text-rose-800"
-                  }`}
-                >
-                  {p.badge}
-                </span>
-              </div>
-              <p className="text-[11px] text-ink-soft leading-snug line-clamp-2">
-                {p.description}
-              </p>
-            </button>
-          ))}
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -673,12 +673,21 @@ export default function NeurologicalStudioPage() {
                 Ready for Screening
               </h3>
               <p className="text-xs text-ink-soft leading-relaxed max-w-xs mx-auto">
-                Adjust the 8 neuro-cognitive sliders or load a clinical preset, then click &ldquo;Screen Neuro-Cognitive Health&rdquo; to execute the 4-qubit quantum classifier.
+                Enter patient demographics, upload a clinical neuro report, or calibrate the 8 neuro-cognitive biomarker sliders, then click &ldquo;Screen Neuro-Cognitive Health&rdquo; to execute the 4-qubit quantum classifier.
               </p>
             </div>
           )}
         </div>
       </div>
+
+      {/* Medical Document / Biomarker Ingestion Modal */}
+      <BiomarkerUploadModal
+        isOpen={isUploadModalOpen}
+        onClose={() => setIsUploadModalOpen(false)}
+        onApplyData={handleApplyExtractedData}
+        schemaType="neurological"
+        diseaseTitle="Neurological &amp; Cognitive Diagnostics"
+      />
     </motion.div>
   );
 }

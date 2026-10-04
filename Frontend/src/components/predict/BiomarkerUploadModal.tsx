@@ -28,12 +28,16 @@ interface BiomarkerUploadModalProps {
   isOpen: boolean;
   onClose: () => void;
   onApplyData: (extractedValues: Record<string, number>, metadata: PatientMetadata) => void;
+  schemaType?: string;
+  diseaseTitle?: string;
 }
 
 export default function BiomarkerUploadModal({
   isOpen,
   onClose,
   onApplyData,
+  schemaType = "breast-cancer",
+  diseaseTitle,
 }: BiomarkerUploadModalProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -60,7 +64,7 @@ export default function BiomarkerUploadModal({
     const ext = file.name.split(".").pop()?.toLowerCase() || "";
     if (["jpg", "jpeg", "png", "webp", "bmp", "gif", "tif", "tiff"].includes(ext) || file.type.startsWith("image/")) {
       setErrorMessage(
-        `Image files cannot be processed in Breast Cancer screening. "${file.name}" appears to be an image scan. The Breast Cancer Screening Studio exclusively processes tabular biopsy data (.CSV, .JSON, .PDF lab reports). For 12-lead ECG image analysis, please use the Heart Attack & Cardiac ECG Studio.`
+        `Image files cannot be processed for tabular lab reports. "${file.name}" appears to be an image. This clinical studio exclusively processes structured and unstructured lab reports (.CSV, .JSON, .PDF, .TXT). For 12-lead ECG or Chest X-Ray image analysis, please use the specialized imaging studios.`
       );
       setIsProcessing(false);
       playSound("error");
@@ -68,11 +72,11 @@ export default function BiomarkerUploadModal({
     }
 
     try {
-      const result = await parseMedicalReportFile(file);
+      const result = await parseMedicalReportFile(file, schemaType);
       const nonDefaultMatches = result.fieldMatches?.filter((m) => m.matchType !== "default") || [];
       if (nonDefaultMatches.length === 0) {
         setErrorMessage(
-          `No breast cancer cytopathology features or FNA biopsy measurements (e.g. cell radius, texture, perimeter, area) were detected in "${file.name}". Please ensure you upload fine-needle aspirate biopsy reports or CSV/JSON sheets containing standard cellular features.`
+          `No clinical measurements or biomarkers for ${diseaseTitle || "this diagnostic studio"} were detected in "${file.name}". Please verify the uploaded file contains standard laboratory or diagnostic markers.`
         );
         setIsProcessing(false);
         playSound("error");
@@ -119,9 +123,9 @@ export default function BiomarkerUploadModal({
     if (!parseResult) return;
     playSound("quantum");
     const meta: PatientMetadata = parseResult.metadata || {
-      patientId: patientId || `Patient-BC-${Math.floor(1000 + Math.random() * 9000)}`,
-      patientName: "Jane Doe",
-      patientGender: "Female",
+      patientId: patientId || `Patient-${(schemaType || "cli").toUpperCase().slice(0, 3)}-${Math.floor(1000 + Math.random() * 9000)}`,
+      patientName: "Patient Intake",
+      patientGender: "Unspecified",
       intakeDate: new Date().toISOString().split("T")[0],
     };
     if (patientId) meta.patientId = patientId;
@@ -168,10 +172,10 @@ export default function BiomarkerUploadModal({
             </div>
             <div>
               <h2 className="text-base font-semibold text-foreground">
-                Import Patient Medical Report
+                {diseaseTitle ? `Import ${diseaseTitle} Report` : "Import Patient Medical Report"}
               </h2>
               <p className="text-xs text-muted-foreground">
-                AI-assisted extraction for CSV, PDF, JSON, and pathology lab sheets
+                Automated extraction for CSV, PDF, JSON, and clinical lab sheets
               </p>
             </div>
           </div>

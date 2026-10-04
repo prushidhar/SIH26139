@@ -58,11 +58,11 @@ export function LegalPageLayout({
 
         <div className="flex items-center gap-3">
           <Link
-            href="/predict/demo"
+            href="/predict"
             className="rounded-full px-4 py-2 text-xs font-mono uppercase tracking-wider text-[#006766] border border-[#006766]/20 bg-[#E6F7F4]/60 hover:bg-[#E6F7F4] transition-all hidden sm:inline-flex items-center gap-1.5 font-semibold"
           >
             <Activity size={12} className="text-[#00B489]" />
-            Launch Demo
+            Screening
           </Link>
           <Link
             href="/login"
@@ -117,10 +117,10 @@ export function LegalPageLayout({
               </p>
             </div>
             <Link
-              href="/predict/demo"
+              href="/predict"
               className="shrink-0 px-6 py-2.5 rounded-full bg-[#006766] text-white font-semibold text-xs uppercase tracking-wider hover:bg-[#0D4F46] transition-all shadow-xs"
             >
-              Test Pipeline
+              Diagnostic Studios
             </Link>
           </div>
         </motion.div>

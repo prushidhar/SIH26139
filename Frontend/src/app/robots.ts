@@ -10,7 +10,6 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: [
           "/",
-          "/predict/demo",
           "/terms",
           "/privacy",
           "/disclaimer",

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { BREAST_CANCER_CANONICAL_SCHEMA, parseUnstructuredMedicalText } from "@/lib/medicalReportParser";
+import { BREAST_CANCER_CANONICAL_SCHEMA, parseUnstructuredMedicalText, getSchemaByType } from "@/lib/medicalReportParser";
 import zlib from "zlib";
 
 function extractTextFromPdfBuffer(buffer: Buffer): string {
@@ -29,7 +29,7 @@ function extractTextFromPdfBuffer(buffer: Buffer): string {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    let { rawText, base64Data, fileName = "medical_report.pdf" } = body;
+    let { rawText, base64Data, fileName = "medical_report.pdf", schemaType = "breast-cancer" } = body;
 
     if (base64Data && (!rawText || rawText.length < 50)) {
       const buf = Buffer.from(base64Data, "base64");
@@ -44,27 +44,25 @@ export async function POST(req: NextRequest) {
     }
 
     // 1. First-pass rule & regex alias parsing
-    const firstPassResult = parseUnstructuredMedicalText(rawText, fileName);
+    const firstPassResult = parseUnstructuredMedicalText(rawText, fileName, schemaType);
 
     // 2. Check if GEMINI_API_KEY is present for deep semantic resolution of unmapped items
     const apiKey = process.env.GEMINI_API_KEY;
     if (apiKey && firstPassResult.missingFieldKeys.length > 0) {
       try {
-        const prompt = `You are a strict medical pathology data extractor for breast cancer cellular features.
-Given the following medical text, extract the numerical values for the target fields.
+        const schema = getSchemaByType(schemaType);
+        const targetFieldsDescription = schema
+          .map((f) => `- ${f.key} (${f.label} in ${f.unit}, typical range ${f.min}-${f.max})`)
+          .join("\n");
+
+        const prompt = `You are a strict clinical laboratory data extractor for ${schemaType} medical screening.
+Given the following medical text, extract the exact numerical values for the target fields.
 TARGET FIELDS:
-- radius_mean (Cell Size / Nuclear Radius in μm, range 6.0-30.0)
-- texture_mean (Surface Texture / gray-scale variance in std, range 9.0-40.0)
-- perimeter_mean (Cell Perimeter in μm, range 40.0-190.0)
-- area_mean (Nuclear Area in μm², range 140.0-2500.0)
-- smoothness_mean (Border Smoothness index, range 0.05-0.25)
-- compactness_mean (Compactness index, range 0.01-0.35)
-- concavity_mean (Indentation Depth index, range 0.0-0.45)
-- concave_points_mean (Indentation Count count, range 0.0-0.25)
+${targetFieldsDescription}
 
 CRITICAL RULES:
 1. ONLY map the variable names. NEVER modify, round, or alter any numbers. Copy exact numbers.
-2. Return ONLY a valid JSON object matching: {"patient_id": "...", "fields": {"radius_mean": 18.25, ...}}
+2. Return ONLY a valid JSON object matching: {"patient_id": "...", "fields": {"${schema[0]?.key || "feature"}": 1.0}}
 
 MEDICAL TEXT:
 ${rawText.slice(0, 3000)}`;

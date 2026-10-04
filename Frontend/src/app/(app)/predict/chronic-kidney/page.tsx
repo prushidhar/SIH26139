@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -17,79 +17,21 @@ import {
   Layers,
   FlaskConical,
   HeartPulse,
+  UploadCloud,
+  User,
 } from "lucide-react";
 import { showToast } from "@/components/common/ToastNotification";
 import { ScreeningService } from "@/services/screening.service";
+import BiomarkerUploadModal from "@/components/predict/BiomarkerUploadModal";
+import { PatientMetadata } from "@/lib/medicalReportParser";
 
-interface CKDPreset {
-  name: string;
-  badge: string;
-  color: string;
-  description: string;
-  values: {
-    age: number;
-    blood_pressure: number;
-    specific_gravity: number;
-    albumin: number;
-    blood_glucose_random: number;
-    blood_urea: number;
-    serum_creatinine: number;
-    hemoglobin: number;
-  };
-}
 
-const PRESETS: CKDPreset[] = [
-  {
-    name: "Physiological Normal",
-    badge: "Stage G1 • Low Risk",
-    color: "emerald",
-    description: "Intact glomerular filtration, normoalbuminuria, and normal creatinine.",
-    values: {
-      age: 36,
-      blood_pressure: 75,
-      specific_gravity: 1.025,
-      albumin: 0,
-      blood_glucose_random: 95,
-      blood_urea: 24,
-      serum_creatinine: 0.9,
-      hemoglobin: 15.2,
-    },
-  },
-  {
-    name: "Borderline Impairment",
-    badge: "Stage G3a • Moderate Risk",
-    color: "amber",
-    description: "Early diabetic glomerulosclerosis, microalbuminuria, and mild azotemia.",
-    values: {
-      age: 58,
-      blood_pressure: 135,
-      specific_gravity: 1.015,
-      albumin: 1,
-      blood_glucose_random: 165,
-      blood_urea: 48,
-      serum_creatinine: 1.6,
-      hemoglobin: 11.8,
-    },
-  },
-  {
-    name: "Severe Renal Failure",
-    badge: "Stage G5 • Critical ESRD",
-    color: "rose",
-    description: "Advanced uremic syndrome, severe proteinuria, and severe anemia.",
-    values: {
-      age: 67,
-      blood_pressure: 165,
-      specific_gravity: 1.010,
-      albumin: 3,
-      blood_glucose_random: 240,
-      blood_urea: 125,
-      serum_creatinine: 5.8,
-      hemoglobin: 8.2,
-    },
-  },
-];
 
 export default function ChronicKidneyStudioPage() {
+  const [patientName, setPatientName] = useState("");
+  const [patientId, setPatientId] = useState("");
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+
   const [values, setValues] = useState({
     age: 52,
     blood_pressure: 80,
@@ -104,14 +46,40 @@ export default function ChronicKidneyStudioPage() {
   const [isEvaluating, setIsEvaluating] = useState<boolean>(false);
   const [telemetry, setTelemetry] = useState<any>(null);
 
-  const applyPreset = (preset: CKDPreset) => {
-    setValues({ ...preset.values });
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem("quresight_patient_intake");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.patientId) setPatientId(parsed.patientId);
+        if (parsed.patientAge) {
+          const numAge = parseInt(parsed.patientAge, 10);
+          if (!isNaN(numAge)) setValues((v) => ({ ...v, age: numAge }));
+        }
+      }
+    } catch {}
+  }, []);
+
+  const handleApplyExtractedData = (extractedValues: Record<string, number>, metadata: PatientMetadata) => {
+    setValues((prev) => ({
+      age: extractedValues.age ?? extractedValues.patient_age ?? prev.age,
+      blood_pressure: extractedValues.bp ?? extractedValues.blood_pressure ?? prev.blood_pressure,
+      specific_gravity: extractedValues.sg ?? extractedValues.specific_gravity ?? prev.specific_gravity,
+      albumin: extractedValues.al ?? extractedValues.albumin ?? prev.albumin,
+      blood_glucose_random: extractedValues.bgr ?? extractedValues.blood_glucose_random ?? prev.blood_glucose_random,
+      blood_urea: extractedValues.bu ?? extractedValues.blood_urea ?? prev.blood_urea,
+      serum_creatinine: extractedValues.sc ?? extractedValues.serum_creatinine ?? prev.serum_creatinine,
+      hemoglobin: extractedValues.hemo ?? extractedValues.hemoglobin ?? prev.hemoglobin,
+    }));
+    if (metadata.patientName) setPatientName(metadata.patientName);
+    if (metadata.patientId) setPatientId(metadata.patientId);
     showToast({
-      title: "Preset Loaded",
-      message: `${preset.name} (${preset.badge})`,
+      title: "Medical Report Imported",
+      message: `Renal biomarkers mapped successfully for ${metadata.patientName || "Patient"}.`,
       type: "success",
     });
   };
+
 
   const handleEvaluate = async () => {
     setIsEvaluating(true);
@@ -136,8 +104,8 @@ export default function ChronicKidneyStudioPage() {
         // Persist screening to patient database
         try {
           await ScreeningService.createScreening({
-            id: `QS-CKD-${Math.floor(1000 + Math.random() * 9000)}`,
-            patientName: "Renal Function Patient",
+            id: patientId || `QS-CKD-${Math.floor(1000 + Math.random() * 9000)}`,
+            patientName: patientName || "Renal Function Patient",
             patientAge: values.age,
             patientGender: "Unspecified",
             diseaseType: "Renal Biomarkers & KDIGO Staging",
@@ -199,27 +167,16 @@ export default function ChronicKidneyStudioPage() {
           </p>
         </div>
 
-        {/* Quick Presets */}
+        {/* Document Ingestion & Action Panel */}
         <div className="flex flex-wrap items-center gap-2">
-          {PRESETS.map((p) => (
-            <button
-              key={p.name}
-              type="button"
-              onClick={() => applyPreset(p)}
-              className="text-xs font-mono px-3 py-1.5 rounded-lg border border-hairline bg-cream hover:bg-cream-deep text-ink transition-colors cursor-pointer flex items-center gap-1.5 shadow-2xs"
-            >
-              <span
-                className={`w-2 h-2 rounded-full ${
-                  p.color === "emerald"
-                    ? "bg-emerald-500"
-                    : p.color === "amber"
-                    ? "bg-amber-500"
-                    : "bg-rose-500"
-                }`}
-              />
-              {p.name}
-            </button>
-          ))}
+          <button
+            type="button"
+            onClick={() => setIsUploadModalOpen(true)}
+            className="text-xs font-mono px-3.5 py-1.5 rounded-lg border border-teal-600/30 bg-teal-50 text-teal-800 hover:bg-teal-100 transition-colors cursor-pointer flex items-center gap-1.5 shadow-2xs font-semibold"
+          >
+            <UploadCloud size={13} className="text-teal-600" />
+            Upload Lab Report
+          </button>
         </div>
       </div>
 
@@ -235,7 +192,57 @@ export default function ChronicKidneyStudioPage() {
         </div>
         <div className="flex items-center gap-1.5 text-[11px] text-teal-700 dark:text-teal-300 font-medium shrink-0">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>Online & Verified</span>
+          <span>Online &amp; Verified</span>
+        </div>
+      </div>
+
+      {/* Patient Clinical Intake Profile */}
+      <div className="p-4 rounded-2xl border border-hairline bg-white shadow-xs space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-xs font-semibold text-ink">
+            <User size={14} className="text-quantum" />
+            <span>Patient Clinical Intake Profile</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsUploadModalOpen(true)}
+            className="text-[11px] font-medium text-quantum hover:underline flex items-center gap-1 cursor-pointer"
+          >
+            <UploadCloud size={12} /> Auto-fill from Lab Report (.PDF, .CSV, .JSON)
+          </button>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label className="text-[11px] font-mono text-ink-soft block mb-1">Patient Full Name</label>
+            <input
+              type="text"
+              placeholder="e.g. Anand Sharma"
+              value={patientName}
+              onChange={(e) => setPatientName(e.target.value)}
+              className="w-full text-xs px-3 py-1.5 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
+            />
+          </div>
+          <div>
+            <label className="text-[11px] font-mono text-ink-soft block mb-1">Patient ID / MRN</label>
+            <input
+              type="text"
+              placeholder="e.g. MRN-39104"
+              value={patientId}
+              onChange={(e) => setPatientId(e.target.value)}
+              className="w-full text-xs px-3 py-1.5 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
+            />
+          </div>
+          <div>
+            <label className="text-[11px] font-mono text-ink-soft block mb-1">Patient Age (Years)</label>
+            <input
+              type="number"
+              min={18}
+              max={95}
+              value={values.age}
+              onChange={(e) => setValues({ ...values, age: parseFloat(e.target.value) || 0 })}
+              className="w-full text-xs px-3 py-1.5 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
+            />
+          </div>
         </div>
       </div>
 
@@ -577,6 +584,14 @@ export default function ChronicKidneyStudioPage() {
           )}
         </div>
       </div>
+
+      <BiomarkerUploadModal
+        isOpen={isUploadModalOpen}
+        onClose={() => setIsUploadModalOpen(false)}
+        onApplyData={handleApplyExtractedData}
+        schemaType="chronic-kidney"
+        diseaseTitle="Renal Function (CKD)"
+      />
     </div>
   );
 }

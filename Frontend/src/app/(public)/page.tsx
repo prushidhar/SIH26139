@@ -217,14 +217,6 @@ function Hero() {
                   <Activity size={15} className="text-[#006766]" />
                   <span>Screening Terminals</span>
                 </Link>
-
-                <Link
-                  href="/predict/demo"
-                  className="inline-flex items-center gap-1.5 px-4 py-3 text-[13px] font-semibold text-[#006766] hover:text-[#0D4F46] transition-colors"
-                >
-                  <span>Interactive Verification Demo</span>
-                  <ArrowUpRight size={14} />
-                </Link>
               </div>
             </Reveal>
 
@@ -786,7 +778,7 @@ function ActionBanner() {
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-white/70">
               Launch the physician workstation to evaluate screening modules, review patient telemetry,
-              or test clinical verification cases in the interactive demo.
+              or access specialized screening terminals for patient intake, medical report uploads, and dual-engine screening.
             </p>
           </div>
 
@@ -799,10 +791,11 @@ function ActionBanner() {
               <span>Launch Workstation</span>
             </Link>
             <Link
-              href="/predict/demo"
+              href="/predict"
               className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3.5 font-sans text-[14px] font-semibold text-white transition-colors hover:bg-white/20"
             >
-              <span>Interactive Demo</span>
+              <Activity size={16} className="text-[#00B489]" />
+              <span>Screening Terminals</span>
             </Link>
           </div>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -17,99 +17,21 @@ import {
   Cpu,
   Layers,
   FlaskConical,
+  UploadCloud,
+  User,
 } from "lucide-react";
 import { showToast } from "@/components/common/ToastNotification";
 import { ScreeningService } from "@/services/screening.service";
+import BiomarkerUploadModal from "@/components/predict/BiomarkerUploadModal";
+import { PatientMetadata } from "@/lib/medicalReportParser";
 
-interface TabularPreset {
-  name: string;
-  badge: string;
-  color: string;
-  description: string;
-  values: {
-    age: number;
-    sex: number;
-    cp: number;
-    trestbps: number;
-    chol: number;
-    fbs: number;
-    restecg: number;
-    thalach: number;
-    exang: number;
-    oldpeak: number;
-    slope: number;
-    ca: number;
-    thal: number;
-  };
-}
 
-const PRESETS: TabularPreset[] = [
-  {
-    name: "Physiological Normal",
-    badge: "Low Risk",
-    color: "emerald",
-    description: "Normal resting blood pressure, no exercise-induced ischemia.",
-    values: {
-      age: 44,
-      sex: 1,
-      cp: 0,
-      trestbps: 120,
-      chol: 210,
-      fbs: 0,
-      restecg: 0,
-      thalach: 168,
-      exang: 0,
-      oldpeak: 0.0,
-      slope: 1,
-      ca: 0,
-      thal: 2,
-    },
-  },
-  {
-    name: "Atypical Ischemic Stress",
-    badge: "Ambiguity Zone",
-    color: "amber",
-    description: "Moderate ST depression with elevated cholesterol; triggers quantum routing.",
-    values: {
-      age: 56,
-      sex: 1,
-      cp: 1,
-      trestbps: 135,
-      chol: 260,
-      fbs: 0,
-      restecg: 1,
-      thalach: 142,
-      exang: 1,
-      oldpeak: 1.4,
-      slope: 2,
-      ca: 1,
-      thal: 2,
-    },
-  },
-  {
-    name: "Obstructive Coronary Artery Disease",
-    badge: "Critical Risk",
-    color: "rose",
-    description: "High resting BP, severe ST depression, multivessel fluoroscopy defect.",
-    values: {
-      age: 63,
-      sex: 1,
-      cp: 3,
-      trestbps: 155,
-      chol: 310,
-      fbs: 1,
-      restecg: 2,
-      thalach: 118,
-      exang: 1,
-      oldpeak: 2.8,
-      slope: 2,
-      ca: 2,
-      thal: 3,
-    },
-  },
-];
 
 export default function HeartTabularStudioPage() {
+  const [patientName, setPatientName] = useState("");
+  const [patientId, setPatientId] = useState("");
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+
   const [values, setValues] = useState({
     age: 55,
     sex: 1,
@@ -129,14 +51,42 @@ export default function HeartTabularStudioPage() {
   const [isEvaluating, setIsEvaluating] = useState<boolean>(false);
   const [telemetry, setTelemetry] = useState<any>(null);
 
-  const applyPreset = (preset: TabularPreset) => {
-    setValues({ ...preset.values });
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem("quresight_patient_intake");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.patientId) setPatientId(parsed.patientId);
+        if (parsed.patientAge) {
+          const numAge = parseInt(parsed.patientAge, 10);
+          if (!isNaN(numAge)) setValues((v) => ({ ...v, age: numAge }));
+        }
+        if (parsed.patientGender) {
+          setValues((v) => ({ ...v, sex: parsed.patientGender.toLowerCase().startsWith("f") ? 0 : 1 }));
+        }
+      }
+    } catch {}
+  }, []);
+
+  const handleApplyExtractedData = (extractedValues: Record<string, number>, metadata: PatientMetadata) => {
+    setValues((prev) => {
+      const updated = { ...prev };
+      Object.keys(prev).forEach((k) => {
+        if (k in extractedValues) {
+          (updated as any)[k] = extractedValues[k];
+        }
+      });
+      return updated;
+    });
+    if (metadata.patientName) setPatientName(metadata.patientName);
+    if (metadata.patientId) setPatientId(metadata.patientId);
     showToast({
-      title: "Preset Loaded",
-      message: `${preset.name} (${preset.badge})`,
-      type: "info",
+      title: "Medical Report Imported",
+      message: `Cardiovascular vitals populated for ${metadata.patientName || "Patient"}.`,
+      type: "quantum",
     });
   };
+
 
   const handleValueChange = (key: string, val: number) => {
     setValues((prev) => ({ ...prev, [key]: val }));
@@ -161,8 +111,8 @@ export default function HeartTabularStudioPage() {
         // Persist screening to patient database
         try {
           await ScreeningService.createScreening({
-            id: `QS-CAD-${Math.floor(1000 + Math.random() * 9000)}`,
-            patientName: "Cardiovascular Panel Patient",
+            id: patientId || `QS-CAD-${Math.floor(1000 + Math.random() * 9000)}`,
+            patientName: patientName || "Cardiovascular Patient",
             patientAge: values.age,
             patientGender: values.sex === 1 ? "Male" : "Female",
             diseaseType: "Cardiovascular Vitals & Hemodynamics",
@@ -230,21 +180,30 @@ export default function HeartTabularStudioPage() {
           </div>
         </div>
 
-        <button
-          onClick={runEvaluation}
-          disabled={isEvaluating}
-          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-md shadow-indigo-600/20 disabled:opacity-50 transition-all cursor-pointer"
-        >
-          {isEvaluating ? (
-            <>
-              <Loader2 size={15} className="animate-spin" /> Evaluating Vitals...
-            </>
-          ) : (
-            <>
-              <Zap size={15} /> Evaluate Cardiovascular Risk
-            </>
-          )}
-        </button>
+        <div className="flex items-center gap-2.5">
+          <button
+            type="button"
+            onClick={() => setIsUploadModalOpen(true)}
+            className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-indigo-200 dark:border-indigo-800/60 bg-white dark:bg-card text-indigo-700 dark:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 font-medium text-xs transition-all shadow-xs cursor-pointer"
+          >
+            <UploadCloud size={14} /> Upload Lab Report
+          </button>
+          <button
+            onClick={runEvaluation}
+            disabled={isEvaluating}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-md shadow-indigo-600/20 disabled:opacity-50 transition-all cursor-pointer"
+          >
+            {isEvaluating ? (
+              <>
+                <Loader2 size={15} className="animate-spin" /> Evaluating Vitals...
+              </>
+            ) : (
+              <>
+                <Zap size={15} /> Evaluate Cardiovascular Risk
+              </>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Active Certified Studio Status Banner */}
@@ -259,47 +218,72 @@ export default function HeartTabularStudioPage() {
         </div>
         <div className="flex items-center gap-1.5 text-[11px] text-indigo-700 dark:text-indigo-300 font-medium shrink-0">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>Online & Verified</span>
+          <span>Online &amp; Verified</span>
         </div>
       </div>
 
-      {/* Preset Cohort Selector */}
-      <div className="space-y-2">
+      {/* Patient Intake Profile */}
+      <div className="p-4 rounded-2xl border border-border bg-card/60 backdrop-blur-xs shadow-xs space-y-3">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
-            Reference Profiles
-          </span>
-          <span className="text-[11px] text-muted-foreground">Verified Cleveland Presets</span>
+          <div className="flex items-center gap-2 text-xs font-semibold text-foreground">
+            <User size={14} className="text-indigo-600 dark:text-indigo-400" />
+            <span>Patient Clinical Intake Profile</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsUploadModalOpen(true)}
+            className="text-[11px] font-medium text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1 cursor-pointer"
+          >
+            <UploadCloud size={12} /> Auto-fill from Lab Report (.PDF, .CSV, .JSON)
+          </button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {PRESETS.map((preset) => (
-            <button
-              key={preset.name}
-              type="button"
-              onClick={() => applyPreset(preset)}
-              className="text-left p-3.5 rounded-2xl border border-border/50 bg-card/60 hover:bg-card hover:border-indigo-500/40 transition-all cursor-pointer space-y-1.5"
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <div>
+            <label className="text-[11px] font-mono text-muted-foreground block mb-1">Patient Full Name</label>
+            <input
+              type="text"
+              placeholder="e.g. Devendra Rao"
+              value={patientName}
+              onChange={(e) => setPatientName(e.target.value)}
+              className="w-full px-3 py-1.5 rounded-xl border border-border bg-background text-xs text-foreground focus:ring-1 focus:ring-indigo-500 outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-[11px] font-mono text-muted-foreground block mb-1">Patient ID / MRN</label>
+            <input
+              type="text"
+              placeholder="e.g. MRN-82914"
+              value={patientId}
+              onChange={(e) => setPatientId(e.target.value)}
+              className="w-full px-3 py-1.5 rounded-xl border border-border bg-background text-xs text-foreground focus:ring-1 focus:ring-indigo-500 outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-[11px] font-mono text-muted-foreground block mb-1">Patient Age (Years)</label>
+            <input
+              type="number"
+              min={18}
+              max={100}
+              value={values.age}
+              onChange={(e) => handleValueChange("age", parseInt(e.target.value) || 0)}
+              className="w-full px-3 py-1.5 rounded-xl border border-border bg-background text-xs text-foreground focus:ring-1 focus:ring-indigo-500 outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-[11px] font-mono text-muted-foreground block mb-1">Biological Sex</label>
+            <select
+              value={values.sex}
+              onChange={(e) => handleValueChange("sex", parseInt(e.target.value))}
+              className="w-full px-3 py-1.5 rounded-xl border border-border bg-background text-xs text-foreground focus:ring-1 focus:ring-indigo-500 outline-none"
             >
-              <div className="flex items-center justify-between">
-                <span className="font-medium text-xs text-foreground">{preset.name}</span>
-                <span
-                  className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-medium ${
-                    preset.color === "emerald"
-                      ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
-                      : preset.color === "amber"
-                      ? "bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"
-                      : "bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20"
-                  }`}
-                >
-                  {preset.badge}
-                </span>
-              </div>
-              <p className="text-[11px] text-muted-foreground leading-relaxed">
-                {preset.description}
-              </p>
-            </button>
-          ))}
+              <option value={1}>Male (1)</option>
+              <option value={0}>Female (0)</option>
+            </select>
+          </div>
         </div>
       </div>
+
+
 
       {/* Main Studio Interactive Panel */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -569,6 +553,14 @@ export default function HeartTabularStudioPage() {
           )}
         </div>
       </div>
+
+      <BiomarkerUploadModal
+        isOpen={isUploadModalOpen}
+        onClose={() => setIsUploadModalOpen(false)}
+        onApplyData={handleApplyExtractedData}
+        schemaType="heart-tabular"
+        diseaseTitle="Cardiovascular (CAD)"
+      />
     </div>
   );
 }

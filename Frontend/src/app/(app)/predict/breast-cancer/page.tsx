@@ -169,65 +169,10 @@ const FIELDS: FieldConfig[] = [
   },
 ];
 
-const PRESETS = [
-  {
-    name: "Case A: Low-Risk Normal (Ananya Mehta)",
-    patientName: "Ananya Mehta",
-    patientAge: 27,
-    patientGender: "Female",
-    description: "Benign Fibroadenoma: uniform small nuclei, smooth contours, minimal concavity.",
-    values: {
-      radius_mean: 12.184,
-      texture_mean: 12.731,
-      perimeter_mean: 77.214,
-      area_mean: 451.823,
-      smoothness_mean: 0.073,
-      compactness_mean: 0.048,
-      concavity_mean: 0.026,
-      concave_points_mean: 0.018,
-    },
-  },
-  {
-    name: "Case B: Borderline Atypia (Riya Kulkarni)",
-    patientName: "Riya Kulkarni",
-    patientAge: 46,
-    patientGender: "Female",
-    description: "Atypical Ductal Hyperplasia / Gray Zone: intermediate cellular atypia in overlap zone.",
-    values: {
-      radius_mean: 15.672,
-      texture_mean: 19.384,
-      perimeter_mean: 101.826,
-      area_mean: 712.458,
-      smoothness_mean: 0.087,
-      compactness_mean: 0.112,
-      concavity_mean: 0.074,
-      concave_points_mean: 0.046,
-    },
-  },
-  {
-    name: "Case C: Clear High Risk (Priya Sharma)",
-    patientName: "Priya Sharma",
-    patientAge: 58,
-    patientGender: "Female",
-    description: "Infiltrating Ductal Carcinoma: severe nuclear pleomorphism, jagged borders, high density.",
-    values: {
-      radius_mean: 22.418,
-      texture_mean: 27.631,
-      perimeter_mean: 151.274,
-      area_mean: 1578.642,
-      smoothness_mean: 0.103,
-      compactness_mean: 0.284,
-      concavity_mean: 0.318,
-      concave_points_mean: 0.174,
-    },
-  },
-];
-
 export default function BreastCancerDetailPage() {
   const router = useRouter();
   const [formValues, setFormValues] = useState<Record<string, number>>({});
   const [derivedNotes, setDerivedNotes] = useState<Record<string, string>>({});
-  const [selectedPresetName, setSelectedPresetName] = useState<string | null>(null);
 
   // ── Batch Mode State ──────────────────────────────────────────────────
   const [screeningMode, setScreeningMode] = useState<"single" | "batch">("single");
@@ -318,6 +263,18 @@ export default function BreastCancerDetailPage() {
     });
     setFormValues(initial);
     generateNewPatientIdentity();
+    try {
+      const stored = sessionStorage.getItem("quresight_patient_intake");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.patientId) setPatientId(parsed.patientId);
+        if (parsed.patientAge) {
+          const numAge = parseInt(parsed.patientAge, 10);
+          if (!isNaN(numAge)) setPatientAge(numAge);
+        }
+        if (parsed.patientGender) setPatientGender(parsed.patientGender);
+      }
+    } catch {}
   }, []);
 
   const triggerTypewriter = (text: string) => {
@@ -429,16 +386,6 @@ export default function BreastCancerDetailPage() {
     router.push("/predict/breast-cancer/analysis");
   };
 
-  const handleSelectPreset = (preset: typeof PRESETS[0]) => {
-    if (hasInferred) return; // Prevent changing when locked
-    setFormValues(preset.values);
-    setDerivedNotes({});
-    setSelectedPresetName(preset.name);
-    setPatientName(preset.patientName);
-    setPatientAge(preset.patientAge);
-    setPatientGender(preset.patientGender);
-  };
-
   const handleStartNewScreening = () => {
     const initial: Record<string, number> = {};
     FIELDS.forEach((f) => {
@@ -446,7 +393,6 @@ export default function BreastCancerDetailPage() {
     });
     setFormValues(initial);
     setDerivedNotes({});
-    setSelectedPresetName(null);
     setPatientName("");
     setPatientAge("");
     generateNewPatientIdentity();
@@ -518,7 +464,7 @@ export default function BreastCancerDetailPage() {
         ScreeningService.createScreening({
           id: pId,
           patientId: pId,
-          patientName: pName || "Yuki",
+          patientName: pName || "Patient Record",
           patientAge: typeof pAge === "number" ? pAge : 55,
           patientGender: pGender || "Female",
           diseaseType: "Breast Cytology (Fine Needle Aspirate)",
@@ -593,7 +539,6 @@ export default function BreastCancerDetailPage() {
   const handleApplyExtractedData = (extractedValues: Record<string, number>, metadata: PatientMetadata) => {
     setFormValues(extractedValues);
     setDerivedNotes({});
-    setSelectedPresetName(null);
 
     const name = metadata.patientName || patientName || "Imported Patient";
     const id = metadata.patientId || patientId;
@@ -657,7 +602,6 @@ export default function BreastCancerDetailPage() {
 
   const handleValueChange = (key: string, numVal: number, fromDerivation?: string) => {
     if (hasInferred) return; // Prevent changing values after inference
-    setSelectedPresetName(null);
     setFormValues((prev) => {
       const updated = { ...prev, [key]: numVal };
 
@@ -693,7 +637,6 @@ export default function BreastCancerDetailPage() {
     });
     setFormValues(initial);
     setDerivedNotes({});
-    setSelectedPresetName(null);
   };
 
   const getEssentialRiskInfo = (data: any) => {
@@ -1052,26 +995,6 @@ export default function BreastCancerDetailPage() {
             </div>
             
             <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
-              {/* Geometry Ratio Lock (Locked) */}
-              <div
-                className="px-2.5 py-1.5 rounded-xl border border-hairline bg-cream/40 text-ink-soft text-xs font-medium flex items-center gap-1.5 cursor-not-allowed opacity-80 shadow-2xs"
-                title="Geometry Ratio Lock - Calibrated to exact mathematical cellular proportions"
-              >
-                <Lock size={12} className="text-amber-600" />
-                <span>Geometry Ratio Lock</span>
-                <span className="text-[9px] font-mono text-amber-700 bg-amber-50 px-1 py-0.2 rounded border border-amber-200">Locked</span>
-              </div>
-
-              {/* Parametric Derivation (Locked) */}
-              <div
-                className="px-2.5 py-1.5 rounded-xl border border-hairline bg-cream/40 text-ink-soft text-xs font-medium flex items-center gap-1.5 cursor-not-allowed opacity-80 shadow-2xs"
-                title="Parametric Derivation - Calibrated to certified laboratory equations"
-              >
-                <Lock size={12} className="text-amber-600" />
-                <span>Parametric Derivation</span>
-                <span className="text-[9px] font-mono text-amber-700 bg-amber-50 px-1 py-0.2 rounded border border-amber-200">Locked</span>
-              </div>
-
               <button
                 type="button"
                 onClick={() => setIsUploadModalOpen(true)}
