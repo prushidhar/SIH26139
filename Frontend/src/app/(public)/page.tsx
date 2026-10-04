@@ -27,6 +27,7 @@ import {
   Database,
   Lock,
   GitBranch,
+  Brain,
 } from "lucide-react";
 import BrandLogo from "@/components/common/BrandLogo";
 
@@ -191,8 +192,8 @@ function Hero() {
 
             <Reveal delay={0.12}>
               <p className="mt-6 max-w-2xl text-[16px] sm:text-[17px] leading-[1.75] text-[#5A7470]">
-                QureSight assists healthcare professionals in evaluating routine patient telemetry,
-                12-lead ECGs, cardiopulmonary sound patterns, and biopsy biomarkers. By pairing
+                QureSight assists healthcare professionals in evaluating clinical chemistry,
+                12-lead ECGs, thoracic radiographs, neurological rhythms, and biopsy biomarkers. By pairing
                 quantum-enhanced feature mapping with validated classical baselines, the platform delivers
                 deterministic risk stratification with transparent feature attribution.
               </p>
@@ -213,7 +214,7 @@ function Hero() {
                   href="/predict"
                   className="inline-flex items-center gap-2 rounded-full border border-[#DFEBE8] bg-white px-5 py-3 text-[14px] font-semibold text-[#082827] shadow-xs transition-colors hover:bg-[#F2F7F6]"
                 >
-                  <Stethoscope size={15} className="text-[#006766]" />
+                  <Activity size={15} className="text-[#006766]" />
                   <span>Screening Terminals</span>
                 </Link>
 
@@ -232,7 +233,7 @@ function Hero() {
               <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-6 border-t border-[#DFEBE8] pt-7">
                 {[
                   { value: "8 Modules", label: "Specialty Screening Suites" },
-                  { value: "Multi-Modal", label: "ECG, Acoustic, Tabular & CXR" },
+                  { value: "Multi-Modal", label: "ECG, CXR, EEG & Clinical Tabular" },
                   { value: "Dual-Engine", label: "Quantum VQC + Classical Trees" },
                   { value: "Explainable", label: "Feature Attribution Tracking" },
                 ].map((s) => (
@@ -272,7 +273,7 @@ function Hero() {
                     <div>
                       <h4 className="font-bold text-[#082827]">Multimodal Telemetry Normalization</h4>
                       <p className="text-[#5A7470] mt-0.5 leading-relaxed text-[12.5px]">
-                        Ingests patient biomarker values, 12-lead ECG waveforms, cardiopulmonary stethoscope audio, and chest X-rays.
+                        Ingests patient biomarker values, 12-lead ECG waveforms, neurological rhythms, and chest X-rays.
                       </p>
                     </div>
                   </div>
@@ -355,18 +356,18 @@ const CLINICAL_MODULES: ModuleInfo[] = [
     description: "Evaluates rhythm patterns and ST-segment telemetry for myocardial infarction and conduction anomalies.",
     modality: "Waveform Telemetry",
     inputs: "12-Lead ECG Voltage Series, Heart Rate, PR Interval, QRS Axis",
-    href: "/predict/cardiovascular",
+    href: "/predict/heart-disease",
     icon: Activity,
   },
   {
-    id: "auscultation",
-    category: "Pulmonary & Cardiopulmonary",
-    title: "Acoustic Stethoscope Auscultation",
-    description: "Multi-point cardiac valve and pulmonary sound analysis with acoustic frequency decomposition.",
-    modality: "Audio & Symptoms",
-    inputs: "Acoustic Recordings, Wheeze/Crackle Flags, Respiratory Rate",
-    href: "/predict",
-    icon: Stethoscope,
+    id: "cad",
+    category: "Cardiovascular",
+    title: "Cardiovascular Hemodynamics (CAD)",
+    description: "Evaluates resting blood pressure, serum cholesterol, exercise ST depression, and fluoroscopy vessels.",
+    modality: "Vascular Panel",
+    inputs: "Resting BP, Serum Chol, Max HR, ST Depression, Fluoroscopy Vessels",
+    href: "/predict/heart-tabular",
+    icon: HeartPulse,
   },
   {
     id: "breast",
@@ -380,7 +381,7 @@ const CLINICAL_MODULES: ModuleInfo[] = [
   },
   {
     id: "cxr",
-    category: "Cardiovascular & Radiology",
+    category: "Neurology & Radiology",
     title: "CXR Cardiothoracic Ratio (CTR)",
     description: "Thoracic radiography evaluation measuring transverse cardiac diameter relative to thoracic width.",
     modality: "Radiography",
@@ -390,7 +391,7 @@ const CLINICAL_MODULES: ModuleInfo[] = [
   },
   {
     id: "liver",
-    category: "Hepatology & Metabolic",
+    category: "Metabolic & Renal",
     title: "Hepatic Metabolic Profile",
     description: "Screens liver functional integrity, enzyme levels, and protein ratios for early fibrosis identification.",
     modality: "Blood Chemistry",
@@ -400,17 +401,17 @@ const CLINICAL_MODULES: ModuleInfo[] = [
   },
   {
     id: "kidney",
-    category: "Nephrology & Renal",
+    category: "Metabolic & Renal",
     title: "Renal Functional Impairment",
     description: "Assesses glomerular filtration, serum creatinine, and urea nitrogen for chronic kidney disease staging.",
     modality: "Serum Panel",
     inputs: "Serum Creatinine, Blood Urea Nitrogen, eGFR, Hemoglobin",
-    href: "/predict/kidney-ckd",
+    href: "/predict/chronic-kidney",
     icon: ShieldCheck,
   },
   {
     id: "hcv",
-    category: "Virology & Serology",
+    category: "Metabolic & Renal",
     title: "Hepatitis C Progression Staging",
     description: "Classifies liver enzyme dynamic patterns and serological markers across viral hepatitis stages.",
     modality: "Serology Panel",
@@ -419,14 +420,14 @@ const CLINICAL_MODULES: ModuleInfo[] = [
     icon: FileText,
   },
   {
-    id: "consensus",
-    category: "System Telemetry",
-    title: "Dual-Engine Consensus Arena",
-    description: "Side-by-side evaluation comparing quantum circuit predictions against classical model ensembles.",
-    modality: "Dual-Engine Telemetry",
-    inputs: "Cross-Validation Datasets, Hilbert States, Ensemble Outputs",
-    href: "/model-arena",
-    icon: Cpu,
+    id: "neurological",
+    category: "Neurology & Radiology",
+    title: "Cognitive Profile & Neurological Studio",
+    description: "Analyzes cortical EEG power spectra, tremor frequencies, and psychomotor speed for early impairment indications.",
+    modality: "EEG Spectral Rhythms",
+    inputs: "Alpha/Theta/Delta Rhythms, Tremor Frequency, Psychomotor Score",
+    href: "/predict/neurological",
+    icon: Brain,
   },
 ];
 
@@ -436,19 +437,15 @@ function ModuleCatalog() {
   const categories = [
     { id: "all", label: "All Modules" },
     { id: "Cardiovascular", label: "Cardiovascular" },
-    { id: "Pulmonary & Cardiopulmonary", label: "Pulmonary" },
     { id: "Oncology", label: "Oncology" },
-    { id: "Hepatology & Metabolic", label: "Metabolic & Renal" },
+    { id: "Metabolic & Renal", label: "Metabolic & Renal" },
+    { id: "Neurology & Radiology", label: "Neuro & Radiology" },
   ];
 
   const filtered =
     selectedCategory === "all"
       ? CLINICAL_MODULES
-      : CLINICAL_MODULES.filter((m) =>
-          selectedCategory === "Hepatology & Metabolic"
-            ? m.category.includes("Metabolic") || m.category.includes("Renal") || m.category.includes("Virology")
-            : m.category.includes(selectedCategory)
-        );
+      : CLINICAL_MODULES.filter((m) => m.category === selectedCategory);
 
   return (
     <section id="modules" className="relative border-t border-[#DFEBE8] bg-[#F2F7F6]/60 px-4 sm:px-6 py-24 sm:py-28">
@@ -465,8 +462,8 @@ function ModuleCatalog() {
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mt-4 max-w-2xl text-[15.5px] leading-relaxed text-[#5A7470]">
-                Covering primary diagnostic domains from electrophysiology and acoustic auscultation to
-                biochemistry and cytology.
+                Covering primary diagnostic domains from electrophysiology and medical imaging to
+                biochemistry, nephrology, and neurology.
               </p>
             </Reveal>
           </div>
@@ -823,12 +820,14 @@ function Footer() {
     {
       title: "Diagnostic Terminals",
       items: [
-        { label: "12-Lead ECG", href: "/predict/cardiovascular" },
-        { label: "Stethoscope Audio", href: "/predict" },
+        { label: "12-Lead ECG", href: "/predict/heart-disease" },
+        { label: "Cardiovascular (CAD)", href: "/predict/heart-tabular" },
         { label: "Breast Cytopathology", href: "/predict/breast-cancer" },
         { label: "CXR Cardiomegaly", href: "/predict/cardiomegaly" },
         { label: "Hepatic Panel", href: "/predict/liver-ilpd" },
-        { label: "Renal Function", href: "/predict/kidney-ckd" },
+        { label: "Renal Function (CKD)", href: "/predict/chronic-kidney" },
+        { label: "Hepatitis C Staging", href: "/predict/hepatitis-c" },
+        { label: "Neurological Studio", href: "/predict/neurological" },
       ],
     },
     {
