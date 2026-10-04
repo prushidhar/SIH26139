@@ -27,10 +27,7 @@ import {
   Lock,
   Compass,
   Database,
-  Sliders,
-  Swords,
   Gauge,
-  TableProperties,
   Archive,
 } from "lucide-react";
 import BrandLogo from "@/components/common/BrandLogo";
@@ -80,8 +77,14 @@ const NAV_SECTIONS: NavSection[] = [
     ],
   },
   {
-    title: "Intelligence & Research",
+    title: "Intelligence & Compute",
     items: [
+      {
+        label: "Model Benchmarks",
+        href: "/benchmarks",
+        icon: Gauge,
+        description: "Cross-validated runs & hardware execution telemetry",
+      },
       {
         label: "Performance Tracking",
         href: "/analysis",
@@ -89,39 +92,10 @@ const NAV_SECTIONS: NavSection[] = [
         description: "Live model accuracy & clinical concordance metrics",
       },
       {
-        label: "Model Arena",
-        href: "/model-arena",
-        icon: Swords,
-        description: "Head-to-head quantum and classical comparisons",
-      },
-      {
         label: "Dataset Explorer",
         href: "/observatory",
         icon: Database,
         description: "Clinical cohorts, distributions & biomarker panel",
-      },
-      {
-        label: "Performance Matrix",
-        href: "/evidence-matrix",
-        icon: TableProperties,
-        description: "Multidimensional evidence & validation telemetry",
-      },
-      {
-        label: "Model Benchmarks",
-        href: "/benchmarks",
-        icon: Gauge,
-        description: "Cross-validated runs & hardware execution telemetry",
-      },
-    ],
-  },
-  {
-    title: "Safety & Compute",
-    items: [
-      {
-        label: "Decision Console",
-        href: "/decision-console",
-        icon: Sliders,
-        description: "Adaptive confidence routing & safety thresholds",
       },
       {
         label: "Compute & Hardware",
