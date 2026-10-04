@@ -314,39 +314,43 @@ export default function ModelArenaPage() {
   return (
     <div className="space-y-6 max-w-7xl mx-auto px-4 sm:px-6 py-6 font-sans">
       {/* Stage Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-hairline/70 pb-5">
-        <div>
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-ink-soft">
-            <Swords className="w-3.5 h-3.5 text-quantum" />
-            <span>Model Comparison</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1 tracking-tight">
-            Model Comparison
-          </h1>
-          <p className="text-xs sm:text-sm text-ink-soft mt-1">
-            Compare classical and quantum models side by side.
-          </p>
-        </div>
+      <div className="rounded-3xl border border-[#DFEBE8] bg-gradient-to-br from-white via-[#FAFDFD] to-[#EBF7F5]/50 p-6 sm:p-7 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-[#00B489]/10 via-[#006766]/5 to-transparent pointer-events-none rounded-full blur-3xl" />
 
-        <div className="flex items-center gap-2 self-start sm:self-center">
-          <Link
-            href="/explainability"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-ink text-parchment hover:bg-ink/90 text-xs font-medium transition-colors"
-          >
-            <span>View Feature Explainability</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+          <div className="space-y-1.5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-xs font-semibold text-[#006766] shadow-2xs">
+              <Swords className="w-3.5 h-3.5 text-[#00B489]" />
+              <span>Comparative Benchmarks • Algorithmic Arena</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-sans font-extrabold text-[#082827] mt-1 tracking-tight">
+              Model Comparison Arena
+            </h1>
+            <p className="text-xs sm:text-sm text-[#5A7470] mt-1 font-normal leading-relaxed">
+              Empirical head-to-head evaluation: compare classical machine learning against quantum variational circuits side by side.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2 self-start sm:self-center shrink-0">
+            <Link
+              href="/explainability"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white text-xs font-semibold transition-all shadow-md shadow-[#006766]/20 active:scale-98"
+            >
+              <span>View Feature Explainability</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </div>
       </div>
 
       {/* Cohort Selector */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl border border-hairline bg-parchment">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-2xl border border-[#DFEBE8] bg-white shadow-2xs">
         <div className="flex items-center gap-3">
-          <span className="text-xs font-mono uppercase text-ink-soft font-semibold">Cohort Protocol:</span>
+          <span className="text-xs font-mono uppercase text-[#5A7470] font-bold">Cohort Protocol:</span>
           <select
             value={datasetId}
             onChange={(e) => setDatasetId(e.target.value)}
-            className="px-3 py-1.5 rounded-md border border-hairline bg-cream-deep/60 text-ink text-xs font-mono focus:outline-none focus:ring-1 focus:ring-quantum"
+            className="px-3.5 py-2 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9] text-[#082827] text-xs font-medium focus:outline-none focus:border-[#006766] cursor-pointer"
           >
             <option value="breast_cancer">Wisconsin Diagnostic Breast Cancer (WDBC)</option>
             <option value="heart_disease">UCI Cleveland Heart Disease</option>
@@ -355,7 +359,7 @@ export default function ModelArenaPage() {
           </select>
         </div>
 
-        <div className="text-xs font-mono text-ink-soft flex items-center gap-1.5">
+        <div className="text-xs font-mono text-[#5A7470] flex items-center gap-1.5">
           <CheckCircle2 className="w-4 h-4 text-emerald-600" />
           <span>{data?.evaluation_protocol || "Stratified 5-Fold Cross Validation"}</span>
         </div>

@@ -737,80 +737,85 @@ export default function BreastCancerDetailPage() {
       className="space-y-6 pb-12 w-full"
     >
       {/* HEADER SECTION */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-hairline pb-4">
-        <div className="space-y-1">
-          <Link
-            href="/predict"
-            className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-soft hover:text-ink transition-colors mb-1 cursor-pointer"
-          >
-            <ArrowLeft size={13} /> Back to Disease Directory
-          </Link>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-quantum/10 border border-quantum/30 text-quantum flex items-center justify-center shadow-xs">
-              <Microscope size={20} />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="font-serif text-2xl sm:text-3xl font-light text-ink tracking-tight">
-                  Breast Cancer Screening Studio
-                </h1>
-                <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-quantum/10 border border-quantum/30 text-quantum font-semibold">
-                  v1.0.0-PROD
-                </span>
+      {/* HEADER SECTION */}
+      <div className="rounded-3xl border border-[#DFEBE8] bg-gradient-to-br from-white via-[#FAFDFD] to-[#EBF7F5]/50 p-6 sm:p-7 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-[#00B489]/10 via-[#006766]/5 to-transparent pointer-events-none rounded-full blur-3xl" />
+
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
+          <div className="space-y-1.5">
+            <Link
+              href="/predict"
+              className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5A7470] hover:text-[#006766] transition-colors mb-1 cursor-pointer"
+            >
+              <ArrowLeft size={13} /> Back to Screening Terminals
+            </Link>
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-2xl bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] flex items-center justify-center shadow-xs">
+                <Microscope size={22} />
               </div>
-              <p className="text-xs text-ink-soft">
-                Fine-Needle Biopsy Screening • Cellular Nuclear Size, Shape &amp; Structure Analysis
-              </p>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#082827] tracking-tight">
+                    Breast Cytopathology Biopsy Studio
+                  </h1>
+                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] font-bold">
+                    ACTIVE • VQC
+                  </span>
+                </div>
+                <p className="text-xs text-[#5A7470]">
+                  Fine-Needle Biopsy Screening • Cellular Nuclear Size, Shape &amp; Structure Analysis
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Action Controls & Hardware Selector */}
-        <div className="flex flex-wrap items-center gap-2.5">
-          {/* Compact Hardware Selector */}
-          <div className="inline-flex p-1 rounded-xl bg-cream border border-hairline shadow-2xs">
-            <button
-              disabled={hasInferred}
-              onClick={() => setExecutionMode("simulator")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
-                executionMode === "simulator"
-                  ? "bg-quantum text-black shadow-xs font-bold"
-                  : "text-ink-soft hover:text-ink"
-              } ${hasInferred ? "cursor-not-allowed opacity-80" : "cursor-pointer"}`}
-            >
-              <Sparkles size={13} />
-              <span>Quantum Simulator</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                showToast({
-                  title: "Hardware QPU Access Locked",
-                  message: "IBM Quantum QPU hardware execution is locked. Live QPU runtime requires authenticated IBM Quantum API credentials in Settings. Defaulting to Quantum Simulator.",
-                  type: "warning",
-                });
-              }}
-              className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-ink-soft hover:text-ink opacity-80 hover:opacity-100 cursor-pointer"
-              title="IBM Quantum Eagle QPU — Hardware Locked (Requires Cloud API Token)"
-            >
-              <Cpu size={13} className="text-amber-500" />
-              <span>IBM Quantum (QPU)</span>
-              <span className="text-[9px] font-mono px-1.5 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-300 font-semibold flex items-center gap-0.5">
-                <Lock size={8} />
-                Locked
-              </span>
-            </button>
+          {/* Action Controls & Hardware Selector */}
+          <div className="flex flex-wrap items-center gap-2.5">
+            {/* Compact Hardware Selector */}
+            <div className="inline-flex p-1 rounded-xl bg-white border border-[#DFEBE8] shadow-2xs">
+              <button
+                disabled={hasInferred}
+                onClick={() => setExecutionMode("simulator")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
+                  executionMode === "simulator"
+                    ? "bg-[#006766] text-white shadow-xs font-bold"
+                    : "text-[#5A7470] hover:text-[#082827]"
+                } ${hasInferred ? "cursor-not-allowed opacity-80" : "cursor-pointer"}`}
+              >
+                <Sparkles size={13} className="text-[#00B489]" />
+                <span>Quantum Simulator</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  showToast({
+                    title: "Hardware QPU Access Locked",
+                    message: "IBM Quantum QPU hardware execution is locked. Live QPU runtime requires authenticated IBM Quantum API credentials in Settings. Defaulting to Quantum Simulator.",
+                    type: "warning",
+                  });
+                }}
+                className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-[#5A7470] hover:text-[#082827] opacity-80 hover:opacity-100 cursor-pointer"
+                title="IBM Quantum Eagle QPU — Hardware Locked (Requires Cloud API Token)"
+              >
+                <Cpu size={13} className="text-amber-500" />
+                <span>IBM Quantum (QPU)</span>
+                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-300 font-semibold flex items-center gap-0.5">
+                  <Lock size={8} />
+                  Locked
+                </span>
+              </button>
+            </div>
+
+            {hasInferred && (
+              <button
+                onClick={handleStartNewScreening}
+                className="px-4 py-2 rounded-xl bg-[#006766] hover:bg-[#084E4D] text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-md shadow-[#006766]/20 cursor-pointer"
+              >
+                <RotateCcw size={13} className="text-[#00B489]" />
+                <span>Start New Patient</span>
+              </button>
+            )}
           </div>
-
-          {hasInferred && (
-            <button
-              onClick={handleStartNewScreening}
-              className="px-3.5 py-2 rounded-xl bg-ink hover:bg-ink/90 text-parchment text-xs font-semibold flex items-center gap-2 transition-all shadow-xs cursor-pointer"
-            >
-              <RotateCcw size={13} className="text-quantum" />
-              <span>Start New Patient</span>
-            </button>
-          )}
         </div>
       </div>
 
@@ -1074,25 +1079,25 @@ export default function BreastCancerDetailPage() {
           {hasInferred ? (
             <button
               onClick={handleStartNewScreening}
-              className="w-full py-3 rounded-xl bg-ink hover:bg-ink/90 text-parchment font-semibold text-xs flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer"
+              className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white font-semibold text-xs flex items-center justify-center gap-2 transition-all shadow-md shadow-[#006766]/20 cursor-pointer active:scale-98"
             >
-              <RotateCcw size={14} className="text-quantum" />
+              <RotateCcw size={14} className="text-[#00B489]" />
               <span>Start New Patient Screening (Reset Parameters)</span>
             </button>
           ) : (
             <button
               onClick={handleRunInference}
               disabled={isInferring}
-              className="w-full py-3 rounded-xl bg-ink hover:bg-ink/90 text-parchment font-semibold text-xs flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer disabled:opacity-50"
+              className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white font-semibold text-xs flex items-center justify-center gap-2.5 transition-all shadow-md shadow-[#006766]/25 cursor-pointer disabled:opacity-50 active:scale-98"
             >
               {isInferring ? (
                 <>
-                  <div className="h-3.5 w-3.5 rounded-full border-2 border-parchment border-t-transparent animate-spin" />
+                  <div className="h-3.5 w-3.5 rounded-full border-2 border-white border-t-transparent animate-spin" />
                   <span>Executing Simultaneous Dual-Engine Pipeline...</span>
                 </>
               ) : (
                 <>
-                  <Play size={14} className="text-quantum fill-quantum" />
+                  <Play size={14} className="text-[#00B489] fill-[#00B489]" />
                   <span>Run Dual-Engine Screening (Quantum &amp; Classical)</span>
                 </>
               )}
@@ -1100,8 +1105,9 @@ export default function BreastCancerDetailPage() {
           )}
         </div>
 
-        {/* RIGHT: Results Panel with Clean Simple Loading State */}
-        <div className="lg:col-span-6 bg-parchment rounded-2xl border border-hairline p-5 space-y-5 shadow-xs min-h-[500px] flex flex-col justify-between">
+        {/* RIGHT: Results Panel with Clean High-Contrast Styling */}
+        <div className="lg:col-span-6 bg-white rounded-3xl border border-[#DFEBE8] p-6 space-y-5 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] min-h-[520px] flex flex-col justify-between relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-bl from-[#00B489]/5 via-transparent to-transparent pointer-events-none rounded-full blur-2xl" />
           <AnimatePresence mode="wait">
             {/* 1. CLEAN SIMPLE LOADING STATE */}
             {isInferring ? (
@@ -1528,39 +1534,39 @@ export default function BreastCancerDetailPage() {
                 </div>
 
                 {/* Navigation and Action Buttons */}
-                <div className="pt-2 space-y-2">
+                <div className="pt-3 space-y-2.5">
                   <button
                     type="button"
                     onClick={handleNavigateToAnalysis}
-                    className="w-full py-3.5 px-4 rounded-xl bg-ink hover:bg-ink/90 text-parchment font-semibold text-xs flex items-center justify-between transition-all shadow-md cursor-pointer border border-ink"
+                    className="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white font-semibold text-xs flex items-center justify-between transition-all shadow-md shadow-[#006766]/20 cursor-pointer active:scale-98"
                   >
-                    <div className="flex items-center gap-2">
-                      <Microscope size={16} className="text-quantum" />
-                      <span>🔬 View Full Patient Analysis Report</span>
+                    <div className="flex items-center gap-2.5">
+                      <Microscope size={16} className="text-[#00B489]" />
+                      <span>View Comprehensive Diagnostic Dossier &amp; Explainability</span>
                     </div>
-                    <ChevronRight size={15} className="text-parchment/70" />
+                    <ChevronRight size={15} className="text-white/80" />
                   </button>
 
                   <button
                     type="button"
                     onClick={handleStartNewScreening}
-                    className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-cream border border-hairline text-ink font-semibold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs"
+                    className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-[#F2F7F6] border border-[#DFEBE8] text-[#082827] font-semibold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs hover:border-[#006766]/30"
                   >
-                    <RotateCcw size={13} className="text-quantum" />
+                    <RotateCcw size={13} className="text-[#006766]" />
                     <span>Start New Patient Screening</span>
                   </button>
                 </div>
               </motion.div>
             ) : (
               /* 3. INITIAL EMPTY / READY STATE */
-              <div className="my-auto text-center space-y-3 py-16">
-                <div className="w-12 h-12 rounded-2xl bg-cream-deep text-ink-soft mx-auto flex items-center justify-center">
-                  <Sliders size={22} />
+              <div className="my-auto text-center space-y-4 py-20 px-4">
+                <div className="w-16 h-16 rounded-3xl bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] mx-auto flex items-center justify-center shadow-xs">
+                  <Microscope size={28} className="text-[#006766]" />
                 </div>
-                <div className="space-y-1 max-w-xs mx-auto">
-                  <h3 className="font-serif text-lg text-ink font-medium">Ready to Screen</h3>
-                  <p className="text-xs text-ink-soft leading-relaxed">
-                    Enter the patient&apos;s Name and Age, select a calibration cohort or adjust sliders on the left, then click &ldquo;Run Screening&rdquo;.
+                <div className="space-y-1.5 max-w-sm mx-auto">
+                  <h3 className="font-sans text-lg text-[#082827] font-bold">Ready for Biopsy Screening</h3>
+                  <p className="text-xs text-[#5A7470] leading-relaxed">
+                    Enter patient intake details above, adjust cell measurements or upload an FNA lab report, and launch simultaneous dual-engine algorithmic inference.
                   </p>
                 </div>
               </div>

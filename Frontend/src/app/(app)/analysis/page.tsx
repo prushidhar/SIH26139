@@ -245,109 +245,111 @@ export default function ModelAnalysisPage() {
       className="space-y-5 pb-12 w-full font-sans"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
-        <div>
-          <div className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-quantum" />
-            <span className="text-[11px] font-mono uppercase tracking-wider text-quantum font-semibold">
-              Telemetry &amp; Audit Console
-            </span>
+      <div className="rounded-3xl border border-[#DFEBE8] bg-gradient-to-br from-white via-[#FAFDFD] to-[#EBF7F5]/50 p-6 sm:p-7 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-[#00B489]/10 via-[#006766]/5 to-transparent pointer-events-none rounded-full blur-3xl" />
+
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+          <div className="space-y-1.5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-xs font-semibold text-[#006766] shadow-2xs">
+              <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
+              <span>Telemetry &amp; Audit Console • Live Validation</span>
+            </div>
+            <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#082827] tracking-tight">
+              Clinical Model Concordance &amp; Telemetry
+            </h1>
+            <p className="text-xs sm:text-sm text-[#5A7470] font-normal leading-relaxed">
+              Continuous real-time verification of diagnostic accuracy, clinical sensitivity, and physician concordance.
+            </p>
           </div>
-          <h1 className="font-serif text-2xl sm:text-3xl font-light text-ink tracking-tight">
-            Clinical Model Concordance &amp; Telemetry
-          </h1>
-          <p className="text-xs text-ink-soft font-light">
-            Continuous real-time verification of diagnostic accuracy, clinical sensitivity, and physician concordance.
-          </p>
-        </div>
 
-        <div className="flex items-center gap-2 flex-wrap">
-          {/* View More Deep Analysis (SIH26139) Button */}
-          <Link
-            href="/analysis/charts"
-            className="px-3.5 py-1.5 rounded-xl bg-ink text-parchment hover:bg-ink/90 text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
-          >
-            <BarChart3 size={13} className="text-quantum" />
-            <span>Benchmark Analytics</span>
-            <ArrowRight size={12} className="text-parchment/70" />
-          </Link>
+          <div className="flex items-center gap-2 flex-wrap shrink-0">
+            {/* View More Deep Analysis (SIH26139) Button */}
+            <Link
+              href="/analysis/charts"
+              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-md shadow-[#006766]/20 active:scale-98"
+            >
+              <BarChart3 size={14} className="text-[#00B489]" />
+              <span>Benchmark Analytics</span>
+              <ArrowRight size={13} className="text-white/80" />
+            </Link>
 
-          {/* Sync Real Screening Records from Database */}
-          <button
-            type="button"
-            onClick={() => loadHistoryAndFeedback()}
-            disabled={isRefreshing}
-            className="px-3 py-1.5 rounded-xl border border-hairline bg-white hover:bg-cream text-ink text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs disabled:opacity-60"
-            title="Sync authentic patient screenings from Supabase and live backend"
-          >
-            <RefreshCw size={13} className={`text-quantum ${isRefreshing ? "animate-spin" : ""}`} />
-            <span>{isRefreshing ? "Syncing Records..." : "Sync Clinical Records"}</span>
-          </button>
+            {/* Sync Real Screening Records from Database */}
+            <button
+              type="button"
+              onClick={() => loadHistoryAndFeedback()}
+              disabled={isRefreshing}
+              className="px-3.5 py-2.5 rounded-xl border border-[#DFEBE8] bg-white hover:bg-[#E6F7F4] text-[#082827] text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs disabled:opacity-60 hover:border-[#006766]/40"
+              title="Sync authentic patient screenings from Supabase and live backend"
+            >
+              <RefreshCw size={13} className={`text-[#006766] ${isRefreshing ? "animate-spin" : ""}`} />
+              <span>{isRefreshing ? "Syncing..." : "Sync Records"}</span>
+            </button>
 
-          <button
-            type="button"
-            onClick={handleResetAnalysis}
-            className="px-3 py-1.5 rounded-xl border border-hairline bg-white hover:bg-cream text-ink-soft hover:text-ink text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
-          >
-            <RotateCcw size={13} /> Reset
-          </button>
+            <button
+              type="button"
+              onClick={handleResetAnalysis}
+              className="px-3 py-2.5 rounded-xl border border-[#DFEBE8] bg-white hover:bg-[#F2F7F6] text-[#5A7470] hover:text-[#082827] text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
+            >
+              <RotateCcw size={13} /> Reset
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Real-Time Live Performance Metrics Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
         {/* Live Accuracy */}
-        <div className="p-4 rounded-xl bg-white border border-hairline space-y-1 shadow-2xs">
+        <div className="p-4.5 rounded-2xl bg-white border border-[#DFEBE8] space-y-1.5 shadow-[0_2px_12px_-4px_rgba(0,103,102,0.04)] hover:shadow-md hover:border-[#00B489]/40 transition-all group">
           <div className="flex items-center gap-1">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft">Real-Time Accuracy</span>
+            <span className="text-[10px] uppercase font-mono font-bold tracking-wider text-[#5A7470]">Real-Time Accuracy</span>
             <HelpTooltip text="Percentage of evaluated cases where QureSight's prediction matched verified medical findings." />
           </div>
-          <div className="font-serif text-2xl sm:text-3xl text-quantum font-light">
+          <div className="font-sans text-2xl sm:text-3xl text-[#006766] font-extrabold group-hover:scale-105 transition-transform origin-left">
             {accuracy !== "—" ? `${accuracy}%` : "—"}
           </div>
-          <p className="text-[11px] text-ink-soft font-light">
+          <p className="text-[11px] text-[#5A7470] font-normal">
             {totalEvaluated > 0 ? `${tp + tn} of ${totalEvaluated} cases verified` : "No cases evaluated yet"}
           </p>
         </div>
 
         {/* Live Precision */}
-        <div className="p-4 rounded-xl bg-white border border-hairline space-y-1 shadow-2xs">
+        <div className="p-4.5 rounded-2xl bg-white border border-[#DFEBE8] space-y-1.5 shadow-[0_2px_12px_-4px_rgba(0,103,102,0.04)] hover:shadow-md hover:border-[#00B489]/40 transition-all group">
           <div className="flex items-center gap-1">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft">Clinical Precision</span>
+            <span className="text-[10px] uppercase font-mono font-bold tracking-wider text-[#5A7470]">Clinical Precision</span>
             <HelpTooltip text="Ratio of true high-risk cases among all cases QureSight flagged as high risk (minimizes false alarms)." />
           </div>
-          <div className="font-serif text-2xl sm:text-3xl text-ink font-light">
+          <div className="font-sans text-2xl sm:text-3xl text-[#082827] font-extrabold group-hover:scale-105 transition-transform origin-left">
             {precision !== "—" ? `${precision}%` : "—"}
           </div>
-          <p className="text-[11px] text-ink-soft font-light">
+          <p className="text-[11px] text-[#5A7470] font-normal">
             {tp + fp > 0 ? `${tp} TP / ${tp + fp} Positive Calls` : "No positive calls yet"}
           </p>
         </div>
 
         {/* Sensitivity / Recall */}
-        <div className="p-4 rounded-xl bg-white border border-hairline space-y-1 shadow-2xs">
+        <div className="p-4.5 rounded-2xl bg-white border border-[#DFEBE8] space-y-1.5 shadow-[0_2px_12px_-4px_rgba(0,103,102,0.04)] hover:shadow-md hover:border-[#00B489]/40 transition-all group">
           <div className="flex items-center gap-1">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft">Sensitivity (Recall)</span>
+            <span className="text-[10px] uppercase font-mono font-bold tracking-wider text-[#5A7470]">Sensitivity (Recall)</span>
             <HelpTooltip text="Ability of the quantum model to catch all true disease cases without missing any." />
           </div>
-          <div className="font-serif text-2xl sm:text-3xl text-emerald-700 font-light">
+          <div className="font-sans text-2xl sm:text-3xl text-emerald-700 font-extrabold group-hover:scale-105 transition-transform origin-left">
             {recall !== "—" ? `${recall}%` : "—"}
           </div>
-          <p className="text-[11px] text-ink-soft font-light">
+          <p className="text-[11px] text-[#5A7470] font-normal">
             {tp + fn > 0 ? `${tp} Caught / ${tp + fn} Actual High Risk` : "No high risk cases yet"}
           </p>
         </div>
 
         {/* Total Evaluated Cases */}
-        <div className="p-4 rounded-xl bg-white border border-hairline space-y-1 shadow-2xs">
+        <div className="p-4.5 rounded-2xl bg-white border border-[#DFEBE8] space-y-1.5 shadow-[0_2px_12px_-4px_rgba(0,103,102,0.04)] hover:shadow-md hover:border-[#00B489]/40 transition-all group">
           <div className="flex items-center gap-1">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft">F1-Score (Harmonic Mean)</span>
+            <span className="text-[10px] uppercase font-mono font-bold tracking-wider text-[#5A7470]">F1-Score (Harmonic Mean)</span>
             <HelpTooltip text="Balanced score between precision and sensitivity across difficult diagnostic cases." />
           </div>
-          <div className="font-serif text-2xl sm:text-3xl text-ink font-light">
+          <div className="font-sans text-2xl sm:text-3xl text-[#082827] font-extrabold group-hover:scale-105 transition-transform origin-left">
             {f1 !== "—" ? `${f1}%` : "—"}
           </div>
-          <p className="text-[11px] text-ink-soft font-light">
+          <p className="text-[11px] text-[#5A7470] font-normal">
             {totalEvaluated > 0 ? `${totalEvaluated} total verified patients` : "Awaiting patient screenings"}
           </p>
         </div>

@@ -808,78 +808,83 @@ export default function HeartDiseaseStudioPage() {
       transition={{ duration: 0.35 }}
       className="space-y-6 pb-12 w-full"
     >
-      {/* HEADER SECTION (Matching Breast Cancer style) */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-hairline pb-4">
-        <div className="space-y-1">
-          <Link
-            href="/predict"
-            className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-soft hover:text-ink transition-colors mb-1 cursor-pointer"
-          >
-            <ArrowLeft size={13} /> Back to Disease Directory
-          </Link>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 flex items-center justify-center shadow-xs">
-              <Heart size={20} />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="font-serif text-2xl sm:text-3xl font-light text-ink tracking-tight">
-                  12-Lead ECG Cardiac Studio
-                </h1>
-                <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-quantum/10 border border-quantum/30 text-quantum font-semibold">
-                  v1.0.0-PROD
-                </span>
+      {/* HEADER SECTION (Matching MedTech Workstation Design) */}
+      <div className="rounded-3xl border border-[#DFEBE8] bg-gradient-to-br from-white via-[#FAFDFD] to-[#EBF7F5]/50 p-6 sm:p-7 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-[#00B489]/10 via-[#006766]/5 to-transparent pointer-events-none rounded-full blur-3xl" />
+
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
+          <div className="space-y-1.5">
+            <Link
+              href="/predict"
+              className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5A7470] hover:text-[#006766] transition-colors mb-1 cursor-pointer"
+            >
+              <ArrowLeft size={13} /> Back to Screening Terminals
+            </Link>
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 flex items-center justify-center shadow-xs">
+                <Heart size={22} />
               </div>
-              <p className="text-xs text-ink-soft">
-                Cardiovascular Screening • 12-Lead Rhythm Strip, ST-Segment Pinpointing &amp; Continuous Risk Scoring
-              </p>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#082827] tracking-tight">
+                    12-Lead ECG Cardiac Studio
+                  </h1>
+                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] font-bold">
+                    ACTIVE • RESNET + VQC
+                  </span>
+                </div>
+                <p className="text-xs text-[#5A7470]">
+                  Cardiovascular Screening • 12-Lead Rhythm Strip, ST-Segment Pinpointing &amp; Continuous Risk Scoring
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Hardware Selector & Reset Actions */}
-        <div className="flex flex-wrap items-center gap-2.5">
-          <div className="inline-flex p-1 rounded-xl bg-cream border border-hairline shadow-2xs">
-            <button
-              onClick={() => setExecutionMode("simulator")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${executionMode === "simulator"
-                  ? "bg-quantum text-black shadow-xs font-bold"
-                  : "text-ink-soft hover:text-ink"
+          {/* Hardware Selector & Reset Actions */}
+          <div className="flex flex-wrap items-center gap-2.5">
+            <div className="inline-flex p-1 rounded-xl bg-white border border-[#DFEBE8] shadow-2xs">
+              <button
+                onClick={() => setExecutionMode("simulator")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
+                  executionMode === "simulator"
+                    ? "bg-[#006766] text-white shadow-xs font-bold"
+                    : "text-[#5A7470] hover:text-[#082827]"
                 } cursor-pointer`}
-            >
-              <Sparkles size={13} />
-              <span>Quantum Simulator</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                showToast({
-                  title: "Hardware QPU Access Locked",
-                  message: "IBM Quantum QPU hardware execution is locked. Live QPU runtime requires authenticated IBM Quantum API credentials in Settings. Defaulting to Quantum Simulator.",
-                  type: "warning",
-                });
-              }}
-              className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-ink-soft hover:text-ink opacity-80 hover:opacity-100 cursor-pointer"
-              title="IBM Quantum (QPU) — Hardware Locked (Requires Cloud API Token)"
-            >
-              <Cpu size={13} className="text-amber-500" />
-              <span>IBM Quantum (QPU)</span>
-              <span className="text-[9px] font-mono px-1.5 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-300 font-semibold flex items-center gap-0.5">
-                <Lock size={8} />
-                Locked
-              </span>
-            </button>
-          </div>
+              >
+                <Sparkles size={13} className="text-[#00B489]" />
+                <span>Quantum Simulator</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  showToast({
+                    title: "Hardware QPU Access Locked",
+                    message: "IBM Quantum QPU hardware execution is locked. Live QPU runtime requires authenticated IBM Quantum API credentials in Settings. Defaulting to Quantum Simulator.",
+                    type: "warning",
+                  });
+                }}
+                className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-[#5A7470] hover:text-[#082827] opacity-80 hover:opacity-100 cursor-pointer"
+                title="IBM Quantum (QPU) — Hardware Locked (Requires Cloud API Token)"
+              >
+                <Cpu size={13} className="text-amber-500" />
+                <span>IBM Quantum (QPU)</span>
+                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-300 font-semibold flex items-center gap-0.5">
+                  <Lock size={8} />
+                  Locked
+                </span>
+              </button>
+            </div>
 
-          {telemetry && (
-            <button
-              onClick={handleStartNewPatient}
-              className="px-3.5 py-2 rounded-xl bg-ink hover:bg-ink/90 text-parchment text-xs font-semibold flex items-center gap-2 transition-all shadow-xs cursor-pointer"
-            >
-              <RotateCcw size={13} className="text-quantum" />
-              <span>Start New Patient</span>
-            </button>
-          )}
+            {telemetry && (
+              <button
+                onClick={handleStartNewPatient}
+                className="px-4 py-2 rounded-xl bg-[#006766] hover:bg-[#084E4D] text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-md shadow-[#006766]/20 cursor-pointer"
+              >
+                <RotateCcw size={13} className="text-[#00B489]" />
+                <span>Start New Patient</span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
@@ -1288,9 +1293,9 @@ export default function HeartDiseaseStudioPage() {
                   <button
                     onClick={executeScreening}
                     disabled={isProcessing}
-                    className="w-full py-3.5 px-6 rounded-xl bg-ink hover:bg-ink/90 text-parchment text-xs font-semibold flex items-center justify-center gap-2.5 transition-all shadow-sm cursor-pointer disabled:opacity-50"
+                    className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white font-semibold text-xs flex items-center justify-center gap-2.5 transition-all shadow-md shadow-[#006766]/25 cursor-pointer disabled:opacity-50 active:scale-98"
                   >
-                    <Zap size={14} className="text-quantum" />
+                    <Zap size={14} className="text-[#00B489]" />
                     <span>Run Quantum-Classical Dual Screening</span>
                   </button>
                 </div>
@@ -1735,21 +1740,21 @@ export default function HeartDiseaseStudioPage() {
               <button
                 type="button"
                 onClick={handleNavigateToAnalysis}
-                className="w-full py-3.5 px-4 rounded-xl bg-ink hover:bg-ink/90 text-parchment font-semibold text-xs flex items-center justify-between transition-all shadow-md cursor-pointer border border-ink"
+                className="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white font-semibold text-xs flex items-center justify-between transition-all shadow-md shadow-[#006766]/20 cursor-pointer active:scale-98"
               >
-                <div className="flex items-center gap-2">
-                  <Microscope size={16} className="text-quantum" />
-                  <span>🔬 View Full Patient Analysis Report</span>
+                <div className="flex items-center gap-2.5">
+                  <Microscope size={16} className="text-[#00B489]" />
+                  <span>View Comprehensive Diagnostic Dossier &amp; Grad-CAM Heatmap</span>
                 </div>
-                <ChevronRight size={15} className="text-parchment/70" />
+                <ChevronRight size={15} className="text-white/80" />
               </button>
 
               <button
                 type="button"
                 onClick={handleStartNewPatient}
-                className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-cream border border-hairline text-ink font-semibold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs"
+                className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-[#F2F7F6] border border-[#DFEBE8] text-[#082827] font-semibold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs hover:border-[#006766]/30"
               >
-                <RotateCcw size={13} className="text-quantum" />
+                <RotateCcw size={13} className="text-[#006766]" />
                 <span>Start New Patient Screening</span>
               </button>
             </div>
