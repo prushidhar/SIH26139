@@ -81,7 +81,7 @@ export default function ModelComparisonTab({
   return (
     <div className="space-y-6">
       {/* 1. TOP CONSENSUS BANNER */}
-      <div className="bg-white rounded-2xl border border-hairline p-5 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white rounded-2xl border border-[#DFEBE8] p-5 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
           <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
             isConcordant
@@ -92,7 +92,7 @@ export default function ModelComparisonTab({
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="font-serif text-base font-medium text-ink">
+              <h3 className="font-sans font-bold text-base font-medium text-[#082827]">
                 Dual-Engine Cross-Validation: {isConcordant ? "Concordant Agreement" : "Discordant / Borderline"}
               </h3>
               <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border ${
@@ -101,27 +101,27 @@ export default function ModelComparisonTab({
                 {isConcordant ? "High Concordance" : "Borderline Review"}
               </span>
             </div>
-            <p className="text-xs text-ink-soft mt-0.5">
+            <p className="text-xs text-[#5A7470] mt-0.5">
               Comparison between Classical ResNet-34 and PennyLane 8-Qubit Variational Quantum Circuit
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-4 text-right self-end sm:self-auto border-t sm:border-t-0 pt-2 sm:pt-0 border-hairline w-full sm:w-auto justify-between sm:justify-end">
+        <div className="flex items-center gap-4 text-right self-end sm:self-auto border-t sm:border-t-0 pt-2 sm:pt-0 border-[#DFEBE8] w-full sm:w-auto justify-between sm:justify-end">
           <div>
-            <span className="text-[10px] font-mono uppercase text-ink-soft block font-semibold">
+            <span className="text-[10px] font-mono uppercase text-[#5A7470] block font-semibold">
               Consensus Confidence
             </span>
-            <span className="text-base font-bold font-mono text-ink">
+            <span className="text-base font-bold font-mono text-[#082827]">
               {consensus.consensus_confidence ?? 100.0}%
             </span>
           </div>
           <div className="h-7 w-px bg-hairline hidden sm:block" />
           <div>
-            <span className="text-[10px] font-mono uppercase text-ink-soft block font-semibold">
+            <span className="text-[10px] font-mono uppercase text-[#5A7470] block font-semibold">
               Combined Latency
             </span>
-            <span className="text-base font-bold font-mono text-ink">
+            <span className="text-base font-bold font-mono text-[#082827]">
               {consensus.total_latency_ms ?? 89.6} ms
             </span>
           </div>
@@ -132,16 +132,16 @@ export default function ModelComparisonTab({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Classical ResNet-34 */}
         <div className={`p-5 rounded-2xl border transition-all ${
-          !isHybrid ? "bg-white border-blue-300 shadow-xs" : "bg-white border-hairline opacity-80"
+          !isHybrid ? "bg-white border-blue-300 shadow-xs" : "bg-white border-[#DFEBE8] opacity-80"
         }`}>
-          <div className="flex items-center justify-between border-b border-hairline pb-3">
+          <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center">
                 <Cpu size={16} />
               </div>
               <div>
-                <h4 className="text-xs font-bold text-ink">QureSight Classical Baseline</h4>
-                <p className="text-[10px] font-mono text-ink-soft">ResNet-34 Convolutional Architecture</p>
+                <h4 className="text-xs font-bold text-[#082827]">QureSight Classical Baseline</h4>
+                <p className="text-[10px] font-mono text-[#5A7470]">ResNet-34 Convolutional Architecture</p>
               </div>
             </div>
             <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-bold">
@@ -150,37 +150,37 @@ export default function ModelComparisonTab({
           </div>
 
           <div className="grid grid-cols-3 gap-2 text-center py-4">
-            <div className="p-2 rounded-xl bg-cream/30 border border-hairline">
-              <span className="text-[10px] text-ink-soft block">Parameters</span>
-              <strong className="text-sm font-mono text-ink">11.2M</strong>
+            <div className="p-2 rounded-xl bg-[#F7FAF9]/30 border border-[#DFEBE8]">
+              <span className="text-[10px] text-[#5A7470] block">Parameters</span>
+              <strong className="text-sm font-mono text-[#082827]">11.2M</strong>
             </div>
-            <div className="p-2 rounded-xl bg-cream/30 border border-hairline">
-              <span className="text-[10px] text-ink-soft block">Latency</span>
-              <strong className="text-sm font-mono text-ink">{cxData.latency_ms || 35.3}ms</strong>
+            <div className="p-2 rounded-xl bg-[#F7FAF9]/30 border border-[#DFEBE8]">
+              <span className="text-[10px] text-[#5A7470] block">Latency</span>
+              <strong className="text-sm font-mono text-[#082827]">{cxData.latency_ms || 35.3}ms</strong>
             </div>
-            <div className="p-2 rounded-xl bg-cream/30 border border-hairline">
-              <span className="text-[10px] text-ink-soft block">Accuracy</span>
-              <strong className="text-sm font-mono text-ink">98.4%</strong>
+            <div className="p-2 rounded-xl bg-[#F7FAF9]/30 border border-[#DFEBE8]">
+              <span className="text-[10px] text-[#5A7470] block">Accuracy</span>
+              <strong className="text-sm font-mono text-[#082827]">98.4%</strong>
             </div>
           </div>
 
-          <p className="text-xs text-ink-soft leading-relaxed border-t border-hairline pt-3">
+          <p className="text-xs text-[#5A7470] leading-relaxed border-t border-[#DFEBE8] pt-3">
             Standard clinical deep learning baseline trained on over 4,000 real Kaggle 12-lead ECG images. Provides verified convolutional feature extraction and Grad-CAM backpropagation.
           </p>
         </div>
 
         {/* Hybrid Quantum VQC */}
         <div className={`p-5 rounded-2xl border transition-all ${
-          isHybrid ? "bg-white border-quantum shadow-xs" : "bg-white border-hairline opacity-80"
+          isHybrid ? "bg-white border-quantum shadow-xs" : "bg-white border-[#DFEBE8] opacity-80"
         }`}>
-          <div className="flex items-center justify-between border-b border-hairline pb-3">
+          <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-quantum/10 text-quantum flex items-center justify-center">
                 <Sparkles size={16} />
               </div>
               <div>
-                <h4 className="text-xs font-bold text-ink">{tfData.signature || "QureSight 8-Qubit VQC"}</h4>
-                <p className="text-[10px] font-mono text-ink-soft">8-Qubit Strongly Entangled VQC</p>
+                <h4 className="text-xs font-bold text-[#082827]">{tfData.signature || "QureSight 8-Qubit VQC"}</h4>
+                <p className="text-[10px] font-mono text-[#5A7470]">8-Qubit Strongly Entangled VQC</p>
               </div>
             </div>
             <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-quantum/15 text-quantum border border-quantum/30 font-bold">
@@ -189,52 +189,52 @@ export default function ModelComparisonTab({
           </div>
 
           <div className="grid grid-cols-3 gap-2 text-center py-4">
-            <div className="p-2 rounded-xl bg-cream/30 border border-hairline">
-              <span className="text-[10px] text-ink-soft block">Parameters</span>
+            <div className="p-2 rounded-xl bg-[#F7FAF9]/30 border border-[#DFEBE8]">
+              <span className="text-[10px] text-[#5A7470] block">Parameters</span>
               <strong className="text-sm font-mono text-quantum">48 (233k× less)</strong>
             </div>
-            <div className="p-2 rounded-xl bg-cream/30 border border-hairline">
-              <span className="text-[10px] text-ink-soft block">Latency</span>
-              <strong className="text-sm font-mono text-ink">{tfData.latency_ms || 54.3}ms</strong>
+            <div className="p-2 rounded-xl bg-[#F7FAF9]/30 border border-[#DFEBE8]">
+              <span className="text-[10px] text-[#5A7470] block">Latency</span>
+              <strong className="text-sm font-mono text-[#082827]">{tfData.latency_ms || 54.3}ms</strong>
             </div>
-            <div className="p-2 rounded-xl bg-cream/30 border border-hairline">
-              <span className="text-[10px] text-ink-soft block">State Space</span>
+            <div className="p-2 rounded-xl bg-[#F7FAF9]/30 border border-[#DFEBE8]">
+              <span className="text-[10px] text-[#5A7470] block">State Space</span>
               <strong className="text-sm font-mono text-quantum">2⁸ (256 dims)</strong>
             </div>
           </div>
 
-          <p className="text-xs text-ink-soft leading-relaxed border-t border-hairline pt-3">
+          <p className="text-xs text-[#5A7470] leading-relaxed border-t border-[#DFEBE8] pt-3">
             8-Qubit variational quantum circuit (VQC) executing on PennyLane simulator. Projects compressed high-dimensional ECG features into Hilbert space via parameterized quantum entangling gates.
           </p>
         </div>
       </div>
 
       {/* 3. DETAILED BENCHMARK COMPARISON TABLE */}
-      <div className="bg-white rounded-2xl border border-hairline shadow-xs overflow-hidden">
-        <div className="p-4 border-b border-hairline bg-cream/20 flex items-center justify-between">
-          <h3 className="font-serif text-sm font-medium text-ink">
+      <div className="bg-white rounded-2xl border border-[#DFEBE8] shadow-xs overflow-hidden">
+        <div className="p-4 border-b border-[#DFEBE8] bg-[#F7FAF9]/20 flex items-center justify-between">
+          <h3 className="font-sans font-bold text-sm font-medium text-[#082827]">
             Quantitative Model Benchmark Evaluation
           </h3>
-          <span className="text-[11px] font-mono text-ink-soft">
+          <span className="text-[11px] font-mono text-[#5A7470]">
             Evaluated on Physical ECG Test Cohort (N=800)
           </span>
         </div>
 
         <div className="divide-y divide-hairline text-xs">
           {comparisonRows.map((row, idx) => (
-            <div key={idx} className="p-4 grid grid-cols-1 md:grid-cols-12 gap-3 items-center hover:bg-cream/10 transition-colors">
-              <div className="md:col-span-3 font-semibold text-ink">
+            <div key={idx} className="p-4 grid grid-cols-1 md:grid-cols-12 gap-3 items-center hover:bg-[#F7FAF9]/10 transition-colors">
+              <div className="md:col-span-3 font-semibold text-[#082827]">
                 {row.factor}
               </div>
               <div className="md:col-span-3 font-mono text-blue-700 bg-blue-50/50 p-2 rounded-lg border border-blue-100">
-                <span className="text-[10px] uppercase font-mono text-ink-soft block font-bold">Classical Baseline</span>
+                <span className="text-[10px] uppercase font-mono text-[#5A7470] block font-bold">Classical Baseline</span>
                 {row.cx}
               </div>
               <div className="md:col-span-3 font-mono text-emerald-800 bg-emerald-50/50 p-2 rounded-lg border border-emerald-100">
-                <span className="text-[10px] uppercase font-mono text-ink-soft block font-bold">Quantum VQC (Hybrid)</span>
+                <span className="text-[10px] uppercase font-mono text-[#5A7470] block font-bold">Quantum VQC (Hybrid)</span>
                 {row.tf}
               </div>
-              <div className="md:col-span-3 text-ink-soft text-[11px] leading-snug">
+              <div className="md:col-span-3 text-[#5A7470] text-[11px] leading-snug">
                 {row.takeaway}
               </div>
             </div>

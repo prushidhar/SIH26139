@@ -374,33 +374,33 @@ export default function ModelArenaPage() {
 
       {/* Head-to-Head Comparison Workspace */}
       {candA && candB && (
-        <div className="rounded-xl border border-hairline bg-parchment p-5">
+        <div className="rounded-xl border border-[#DFEBE8] bg-white p-5">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-xs font-mono uppercase tracking-wider text-ink-soft flex items-center gap-1.5">
+            <span className="text-xs font-mono uppercase tracking-wider text-[#5A7470] flex items-center gap-1.5">
               <Scale className="w-4 h-4 text-quantum" />
               Side-by-Side Comparison
             </span>
-            <span className="text-xs font-mono text-ink-soft">
+            <span className="text-xs font-mono text-[#5A7470]">
               {candA.name} vs. {candB.name}
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 rounded-lg bg-cream-deep/40 border border-hairline">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 rounded-lg bg-[#F2F7F6]/40 border border-[#DFEBE8]">
             {/* Candidate A Column */}
             <div className="space-y-1">
-              <div className="text-xs font-mono text-ink-soft uppercase">Candidate [A]</div>
-              <h4 className="text-base font-bold text-ink">{candA.name}</h4>
-              <div className="text-xs text-ink-soft">{candA.architecture}</div>
+              <div className="text-xs font-mono text-[#5A7470] uppercase">Candidate [A]</div>
+              <h4 className="text-base font-bold text-[#082827]">{candA.name}</h4>
+              <div className="text-xs text-[#5A7470]">{candA.architecture}</div>
               <div className="mt-3 font-mono text-xs space-y-1">
-                <div>Accuracy: <strong className="text-ink">{candA.accuracy}</strong></div>
-                <div>AUROC: <strong className="text-ink">{candA.auroc.toFixed(4)}</strong></div>
-                <div>Runtime: <strong className="text-ink">{candA.runtime_ms} ms</strong></div>
+                <div>Accuracy: <strong className="text-[#082827]">{candA.accuracy}</strong></div>
+                <div>AUROC: <strong className="text-[#082827]">{candA.auroc.toFixed(4)}</strong></div>
+                <div>Runtime: <strong className="text-[#082827]">{candA.runtime_ms} ms</strong></div>
               </div>
             </div>
 
             {/* Differential Delta Column */}
-            <div className="p-3 rounded-lg bg-white border border-hairline flex flex-col justify-center items-center text-center space-y-2 font-mono">
-              <span className="text-[10px] text-ink-soft uppercase tracking-wider">AUROC Differential</span>
+            <div className="p-3 rounded-lg bg-white border border-[#DFEBE8] flex flex-col justify-center items-center text-center space-y-2 font-mono">
+              <span className="text-[10px] text-[#5A7470] uppercase tracking-wider">AUROC Differential</span>
               <div
                 className={`text-xl font-bold ${
                   candA.auroc >= candB.auroc ? "text-stone-900" : "text-quantum"
@@ -409,7 +409,7 @@ export default function ModelArenaPage() {
                 {(candA.auroc - candB.auroc >= 0 ? "+" : "")}
                 {(candA.auroc - candB.auroc).toFixed(4)}
               </div>
-              <span className="text-[11px] text-ink-soft">
+              <span className="text-[11px] text-[#5A7470]">
                 Latency: {(candB.runtime_ms / (candA.runtime_ms || 1)).toFixed(1)}x difference
               </span>
             </div>
@@ -417,12 +417,12 @@ export default function ModelArenaPage() {
             {/* Candidate B Column */}
             <div className="space-y-1 md:text-right">
               <div className="text-xs font-mono text-quantum uppercase">Candidate [B]</div>
-              <h4 className="text-base font-bold text-ink">{candB.name}</h4>
-              <div className="text-xs text-ink-soft">{candB.architecture}</div>
+              <h4 className="text-base font-bold text-[#082827]">{candB.name}</h4>
+              <div className="text-xs text-[#5A7470]">{candB.architecture}</div>
               <div className="mt-3 font-mono text-xs space-y-1">
-                <div>Accuracy: <strong className="text-ink">{candB.accuracy}</strong></div>
-                <div>AUROC: <strong className="text-ink">{candB.auroc.toFixed(4)}</strong></div>
-                <div>Runtime: <strong className="text-ink">{candB.runtime_ms} ms</strong></div>
+                <div>Accuracy: <strong className="text-[#082827]">{candB.accuracy}</strong></div>
+                <div>AUROC: <strong className="text-[#082827]">{candB.auroc.toFixed(4)}</strong></div>
+                <div>Runtime: <strong className="text-[#082827]">{candB.runtime_ms} ms</strong></div>
               </div>
             </div>
           </div>
@@ -433,10 +433,10 @@ export default function ModelArenaPage() {
       {data && (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-mono uppercase tracking-wider text-ink-soft">
+            <span className="text-xs font-mono uppercase tracking-wider text-[#5A7470]">
               Select any candidate below to update differential comparison
             </span>
-            <span className="text-xs font-mono text-ink-soft">
+            <span className="text-xs font-mono text-[#5A7470]">
               {data.candidates.length} Models Profiled
             </span>
           </div>

@@ -297,7 +297,7 @@ export default function HardwarePage() {
               type: "quantum",
             });
           }}
-          className={`p-5 rounded-2xl border transition-all cursor-pointer space-y-3 relative overflow-hidden bg-parchment border-quantum shadow-xs ring-1 ring-quantum/30`}
+          className={`p-5 rounded-2xl border transition-all cursor-pointer space-y-3 relative overflow-hidden bg-white border-quantum shadow-xs ring-1 ring-quantum/30`}
         >
           <div className="absolute top-3 right-3 flex items-center gap-1.5">
             <span className="relative flex h-2 w-2">
@@ -314,27 +314,27 @@ export default function HardwarePage() {
               <Sparkles size={20} />
             </div>
             <div>
-              <h3 className="font-serif text-base font-semibold text-ink">Quantum Simulator</h3>
-              <span className="text-[10px] font-mono text-ink-soft">8-Qubit Variational Quantum Circuit (VQC) Engine</span>
+              <h3 className="font-sans font-bold text-base font-semibold text-[#082827]">Quantum Simulator</h3>
+              <span className="text-[10px] font-mono text-[#5A7470]">8-Qubit Variational Quantum Circuit (VQC) Engine</span>
             </div>
           </div>
 
-          <p className="text-xs text-ink-soft font-light leading-relaxed">
+          <p className="text-xs text-[#5A7470] font-light leading-relaxed">
             Local statevector simulator for testing and validation. Computes quantum expectation values quickly with zero noise.
           </p>
 
-          <div className="grid grid-cols-3 gap-2 pt-2 border-t border-hairline font-mono text-[11px]">
+          <div className="grid grid-cols-3 gap-2 pt-2 border-t border-[#DFEBE8] font-mono text-[11px]">
             <div>
-              <span className="text-[9px] text-ink-soft uppercase block">Execution Latency</span>
-              <span className="font-semibold text-ink">&lt; 15.0 ms</span>
+              <span className="text-[9px] text-[#5A7470] uppercase block">Execution Latency</span>
+              <span className="font-semibold text-[#082827]">&lt; 15.0 ms</span>
             </div>
             <div>
-              <span className="text-[9px] text-ink-soft uppercase block">Decoherence Noise</span>
+              <span className="text-[9px] text-[#5A7470] uppercase block">Decoherence Noise</span>
               <span className="font-semibold text-emerald-700">None</span>
             </div>
             <div>
-              <span className="text-[9px] text-ink-soft uppercase block">Math Precision</span>
-              <span className="font-semibold text-ink">64-bit Float</span>
+              <span className="text-[9px] text-[#5A7470] uppercase block">Math Precision</span>
+              <span className="font-semibold text-[#082827]">64-bit Float</span>
             </div>
           </div>
         </div>
@@ -349,7 +349,7 @@ export default function HardwarePage() {
               type: "success",
             });
           }}
-          className={`p-5 rounded-2xl border transition-all cursor-pointer space-y-3 relative overflow-hidden bg-parchment hover:bg-parchment/80 border-hairline ${
+          className={`p-5 rounded-2xl border transition-all cursor-pointer space-y-3 relative overflow-hidden bg-white hover:bg-white/80 border-[#DFEBE8] ${
             activeBackend === "ibmq_eagle" ? "ring-2 ring-amber-500 shadow-md" : ""
           }`}
         >
@@ -369,32 +369,32 @@ export default function HardwarePage() {
               <Cpu size={20} />
             </div>
             <div>
-              <h3 className="font-serif text-base font-medium text-ink">IBM Quantum QPU</h3>
-              <span className="text-[10px] font-mono text-ink-soft">127-Qubit Superconducting Processor</span>
+              <h3 className="font-sans font-bold text-base font-medium text-[#082827]">IBM Quantum QPU</h3>
+              <span className="text-[10px] font-mono text-[#5A7470]">127-Qubit Superconducting Processor</span>
             </div>
           </div>
 
-          <p className="text-xs text-ink-soft font-light leading-relaxed">
+          <p className="text-xs text-[#5A7470] font-light leading-relaxed">
             Physical quantum hardware routed through the IBM Quantum Cloud. Connects real qubits for complex calculations.
           </p>
 
-          <div className="grid grid-cols-3 gap-2 pt-2 border-t border-hairline font-mono text-[11px]">
+          <div className="grid grid-cols-3 gap-2 pt-2 border-t border-[#DFEBE8] font-mono text-[11px]">
             <div>
-              <span className="text-[9px] text-ink-soft uppercase flex items-center gap-0.5">
+              <span className="text-[9px] text-[#5A7470] uppercase flex items-center gap-0.5">
                 Coherence (T₁)
                 <HelpTooltip text="Average time quantum information remains stable before environmental thermal noise disrupts it." />
               </span>
-              <span className="font-semibold text-ink">184.2 μs</span>
+              <span className="font-semibold text-[#082827]">184.2 μs</span>
             </div>
             <div>
-              <span className="text-[9px] text-ink-soft uppercase flex items-center gap-0.5">
+              <span className="text-[9px] text-[#5A7470] uppercase flex items-center gap-0.5">
                 Dephasing (T₂)
                 <HelpTooltip text="Measure of quantum phase stability during multi-gate calculations." />
               </span>
-              <span className="font-semibold text-ink">142.6 μs</span>
+              <span className="font-semibold text-[#082827]">142.6 μs</span>
             </div>
             <div>
-              <span className="text-[9px] text-ink-soft uppercase flex items-center gap-0.5">
+              <span className="text-[9px] text-[#5A7470] uppercase flex items-center gap-0.5">
                 Gate Fidelity
                 <HelpTooltip text="Physical operation fidelity when entangling two superconducting qubits." />
               </span>
@@ -405,15 +405,15 @@ export default function HardwarePage() {
       </div>
 
       {/* Local Client Hardware & Device Diagnostics Scanner */}
-      <div className="p-5 rounded-2xl bg-white border border-hairline shadow-xs space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
+      <div className="p-5 rounded-2xl bg-white border border-[#DFEBE8] shadow-xs space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#DFEBE8] pb-3">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-ink text-parchment flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-[#082827] text-white flex items-center justify-center">
               {clientInfo?.deviceType === "Mobile Smartphone" ? <Smartphone size={16} /> : <Laptop size={16} />}
             </div>
             <div>
-              <h3 className="font-serif text-base font-bold text-ink">Local Client Device &amp; Compute Node</h3>
-              <p className="text-xs text-ink-soft">
+              <h3 className="font-sans font-bold text-base font-bold text-[#082827]">Local Client Device &amp; Compute Node</h3>
+              <p className="text-xs text-[#5A7470]">
                 Live browser telemetry and hardware specifications detected on your active client device.
               </p>
             </div>
@@ -427,11 +427,11 @@ export default function HardwarePage() {
         {clientInfo ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {/* 1. Device Model & Form Factor */}
-            <div className="p-4 rounded-xl bg-cream/40 border border-hairline space-y-1.5 shadow-2xs">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-ink-soft block font-semibold">
+            <div className="p-4 rounded-xl bg-[#F7FAF9]/40 border border-[#DFEBE8] space-y-1.5 shadow-2xs">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#5A7470] block font-semibold">
                 Device Model &amp; Form
               </span>
-              <div className="font-serif text-sm font-bold text-ink truncate" title={clientInfo.deviceModel}>
+              <div className="font-sans font-bold text-sm font-bold text-[#082827] truncate" title={clientInfo.deviceModel}>
                 {clientInfo.deviceModel}
               </div>
               <span className="text-[10px] text-quantum font-mono block font-medium">
@@ -440,24 +440,24 @@ export default function HardwarePage() {
             </div>
 
             {/* 2. Operating System & Display */}
-            <div className="p-4 rounded-xl bg-cream/40 border border-hairline space-y-1.5 shadow-2xs">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-ink-soft block font-semibold">
+            <div className="p-4 rounded-xl bg-[#F7FAF9]/40 border border-[#DFEBE8] space-y-1.5 shadow-2xs">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#5A7470] block font-semibold">
                 Client OS &amp; Display Engine
               </span>
-              <div className="font-serif text-sm font-bold text-ink truncate" title={clientInfo.osName}>
+              <div className="font-sans font-bold text-sm font-bold text-[#082827] truncate" title={clientInfo.osName}>
                 {clientInfo.osName}
               </div>
-              <span className="text-[10px] text-ink-soft font-mono block">
+              <span className="text-[10px] text-[#5A7470] font-mono block">
                 {clientInfo.screenResolution} ({clientInfo.colorDepth})
               </span>
             </div>
 
             {/* 3. CPU & Parallel Cores */}
-            <div className="p-4 rounded-xl bg-cream/40 border border-hairline space-y-1.5 shadow-2xs">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-ink-soft block font-semibold">
+            <div className="p-4 rounded-xl bg-[#F7FAF9]/40 border border-[#DFEBE8] space-y-1.5 shadow-2xs">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#5A7470] block font-semibold">
                 CPU Compute Concurrency
               </span>
-              <div className="font-serif text-sm font-bold text-ink">
+              <div className="font-sans font-bold text-sm font-bold text-[#082827]">
                 {clientInfo.cpuCores} Logical CPU Cores
               </div>
               <span className="text-[10px] text-emerald-700 font-mono block font-semibold">
@@ -466,40 +466,40 @@ export default function HardwarePage() {
             </div>
 
             {/* 4. Real GPU Hardware Renderer */}
-            <div className="p-4 rounded-xl bg-cream/40 border border-hairline space-y-1.5 shadow-2xs">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-ink-soft block font-semibold">
+            <div className="p-4 rounded-xl bg-[#F7FAF9]/40 border border-[#DFEBE8] space-y-1.5 shadow-2xs">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#5A7470] block font-semibold">
                 Detected GPU Graphics Chip
               </span>
-              <div className="font-serif text-sm font-bold text-ink truncate" title={clientInfo.gpuRenderer}>
+              <div className="font-sans font-bold text-sm font-bold text-[#082827] truncate" title={clientInfo.gpuRenderer}>
                 {clientInfo.gpuRenderer}
               </div>
-              <span className="text-[10px] text-ink-soft font-mono block truncate" title={clientInfo.gpuVendor}>
+              <span className="text-[10px] text-[#5A7470] font-mono block truncate" title={clientInfo.gpuVendor}>
                 {clientInfo.gpuVendor} • {clientInfo.webgl2Supported ? "WebGL 2.0" : "WebGL"}
               </span>
             </div>
 
             {/* 5. Memory & Input Sensor */}
-            <div className="p-4 rounded-xl bg-cream/40 border border-hairline space-y-1.5 shadow-2xs">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-ink-soft block font-semibold">
+            <div className="p-4 rounded-xl bg-[#F7FAF9]/40 border border-[#DFEBE8] space-y-1.5 shadow-2xs">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#5A7470] block font-semibold">
                 Client RAM &amp; Sensor Interface
               </span>
-              <div className="font-serif text-sm font-bold text-ink">
+              <div className="font-sans font-bold text-sm font-bold text-[#082827]">
                 {clientInfo.deviceMemory}
               </div>
-              <span className="text-[10px] text-ink-soft font-mono block">
+              <span className="text-[10px] text-[#5A7470] font-mono block">
                 {clientInfo.touchSupport}
               </span>
             </div>
 
             {/* 6. Tensor FLOP Execution Benchmark */}
-            <div className="p-4 rounded-xl bg-cream/40 border border-hairline space-y-1.5 shadow-2xs">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-ink-soft block font-semibold">
+            <div className="p-4 rounded-xl bg-[#F7FAF9]/40 border border-[#DFEBE8] space-y-1.5 shadow-2xs">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#5A7470] block font-semibold">
                 Local Engine Math Latency
               </span>
-              <div className="font-serif text-sm font-bold text-emerald-700 flex items-center gap-1.5">
+              <div className="font-sans font-bold text-sm font-bold text-emerald-700 flex items-center gap-1.5">
                 <Zap size={14} className="text-emerald-600" />
                 <span>{clientInfo.benchmarkLatencyMs} ms</span>
-                <span className="text-[10px] font-mono text-ink-soft font-normal">(Local Compute Benchmark)</span>
+                <span className="text-[10px] font-mono text-[#5A7470] font-normal">(Local Compute Benchmark)</span>
               </div>
               <span className="text-[10px] text-quantum font-mono block font-medium">
                 {clientInfo.webAssemblySupported ? "WebAssembly SIMD Vectorized" : "JavaScript V8 Vectorized"}
@@ -507,7 +507,7 @@ export default function HardwarePage() {
             </div>
           </div>
         ) : (
-          <div className="py-8 text-center text-xs text-ink-soft flex items-center justify-center gap-2">
+          <div className="py-8 text-center text-xs text-[#5A7470] flex items-center justify-center gap-2">
             <RefreshCw size={14} className="animate-spin text-quantum" />
             <span>Scanning real-time client hardware and WebGL graphics sensors...</span>
           </div>
@@ -515,14 +515,14 @@ export default function HardwarePage() {
       </div>
 
       {/* Noise Reduction Protocols */}
-      <div className="p-5 rounded-2xl bg-parchment border border-hairline space-y-4 shadow-xs">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
+      <div className="p-5 rounded-2xl bg-white border border-[#DFEBE8] space-y-4 shadow-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#DFEBE8] pb-3">
           <div>
             <div className="flex items-center gap-1.5">
-              <h3 className="font-serif text-base font-medium text-ink">Error Correction Methods</h3>
+              <h3 className="font-sans font-bold text-base font-medium text-[#082827]">Error Correction Methods</h3>
               <HelpTooltip text="Methods used to filter out noise during physical quantum hardware runs." />
             </div>
-            <p className="text-xs text-ink-soft font-light">
+            <p className="text-xs text-[#5A7470] font-light">
               Error mitigation algorithms designed for physical quantum processors.
             </p>
           </div>
@@ -550,13 +550,13 @@ export default function HardwarePage() {
                 type: "quantum",
               });
             }}
-            className="p-3.5 rounded-xl border border-hairline bg-cream/40 opacity-85 hover:opacity-100 transition-all space-y-1.5 cursor-pointer"
+            className="p-3.5 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9]/40 opacity-85 hover:opacity-100 transition-all space-y-1.5 cursor-pointer"
           >
             <div className="flex items-center justify-between">
-              <span className="font-serif text-sm font-semibold text-ink">Zero-Noise Extrapolation (ZNE)</span>
+              <span className="font-sans font-bold text-sm font-semibold text-[#082827]">Zero-Noise Extrapolation (ZNE)</span>
               <span className="text-[9px] font-mono bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Active</span>
             </div>
-            <p className="text-[11px] text-ink-soft font-light leading-snug">
+            <p className="text-[11px] text-[#5A7470] font-light leading-snug">
               Estimates the zero-noise limit by intentionally scaling noise and extrapolating backwards.
             </p>
           </div>
@@ -570,13 +570,13 @@ export default function HardwarePage() {
                 type: "quantum",
               });
             }}
-            className="p-3.5 rounded-xl border border-hairline bg-cream/40 opacity-85 hover:opacity-100 transition-all space-y-1.5 cursor-pointer"
+            className="p-3.5 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9]/40 opacity-85 hover:opacity-100 transition-all space-y-1.5 cursor-pointer"
           >
             <div className="flex items-center justify-between">
-              <span className="font-serif text-sm font-semibold text-ink">Matrix-Free Measurement (M3)</span>
+              <span className="font-sans font-bold text-sm font-semibold text-[#082827]">Matrix-Free Measurement (M3)</span>
               <span className="text-[9px] font-mono bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Active</span>
             </div>
-            <p className="text-[11px] text-ink-soft font-light leading-snug">
+            <p className="text-[11px] text-[#5A7470] font-light leading-snug">
               Corrects readout assignment errors using a matrix-free solver.
             </p>
           </div>
@@ -590,13 +590,13 @@ export default function HardwarePage() {
                 type: "quantum",
               });
             }}
-            className="p-3.5 rounded-xl border border-hairline bg-cream/40 opacity-85 hover:opacity-100 transition-all space-y-1.5 cursor-pointer"
+            className="p-3.5 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9]/40 opacity-85 hover:opacity-100 transition-all space-y-1.5 cursor-pointer"
           >
             <div className="flex items-center justify-between">
-              <span className="font-serif text-sm font-semibold text-ink">Dynamical Decoupling (DD)</span>
+              <span className="font-sans font-bold text-sm font-semibold text-[#082827]">Dynamical Decoupling (DD)</span>
               <span className="text-[9px] font-mono bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Active</span>
             </div>
-            <p className="text-[11px] text-ink-soft font-light leading-snug">
+            <p className="text-[11px] text-[#5A7470] font-light leading-snug">
               Injects pulse sequences to protect idle qubits from environmental drift.
             </p>
           </div>

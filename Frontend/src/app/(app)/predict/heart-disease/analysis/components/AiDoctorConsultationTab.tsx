@@ -169,30 +169,30 @@ ${summaryText || recommendation}
   ];
 
   return (
-    <div className="bg-white rounded-2xl border border-hairline shadow-xs overflow-hidden flex flex-col h-[640px]">
+    <div className="bg-white rounded-2xl border border-[#DFEBE8] shadow-xs overflow-hidden flex flex-col h-[640px]">
       {/* Consultation Header */}
-      <div className="p-4 border-b border-hairline flex items-center justify-between bg-cream/20">
+      <div className="p-4 border-b border-[#DFEBE8] flex items-center justify-between bg-[#F7FAF9]/20">
         <div className="flex items-center gap-3">
           <QureSightLogo size={32} />
           <div>
-            <h3 className="text-xs font-bold text-ink uppercase tracking-wider flex items-center gap-1.5">
+            <h3 className="text-xs font-bold text-[#082827] uppercase tracking-wider flex items-center gap-1.5">
               <span>QureSight AI Cardiologist</span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             </h3>
-            <p className="text-[11px] text-ink-soft">
+            <p className="text-[11px] text-[#5A7470]">
               Real-time clinical consultation for {pName} ({pId}) • {diagTitle}
             </p>
           </div>
         </div>
 
-        <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-ink-soft">
+        <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-[#5A7470]">
           <Stethoscope size={14} className="text-quantum" />
           <span>SIH26139 ACC/AHA Standard</span>
         </div>
       </div>
 
       {/* Messages Scroll Area */}
-      <div className="flex-1 p-4 sm:p-5 overflow-y-auto space-y-4 bg-cream/10">
+      <div className="flex-1 p-4 sm:p-5 overflow-y-auto space-y-4 bg-[#F7FAF9]/10">
         {messages.map((msg, idx) => {
           const isUser = msg.role === "user";
           return (
@@ -201,7 +201,7 @@ ${summaryText || recommendation}
               className={`flex gap-3 max-w-3xl ${isUser ? "ml-auto flex-row-reverse" : "mr-auto"}`}
             >
               {isUser ? (
-                <div className="w-7 h-7 rounded-lg bg-ink text-parchment flex items-center justify-center shrink-0 text-xs font-bold shadow-xs">
+                <div className="w-7 h-7 rounded-lg bg-[#082827] text-white flex items-center justify-center shrink-0 text-xs font-bold shadow-xs">
                   <UserIcon size={14} />
                 </div>
               ) : (
@@ -211,14 +211,14 @@ ${summaryText || recommendation}
               <div
                 className={`p-3.5 sm:p-4 rounded-2xl text-xs leading-relaxed shadow-xs ${
                   isUser
-                    ? "bg-ink text-parchment rounded-tr-xs"
-                    : "bg-white text-ink border border-hairline rounded-tl-xs"
+                    ? "bg-[#082827] text-white rounded-tr-xs"
+                    : "bg-white text-[#082827] border border-[#DFEBE8] rounded-tl-xs"
                 }`}
               >
                 <FormattedMessageContent content={msg.content} />
                 <span
                   className={`text-[9px] font-mono block mt-2 ${
-                    isUser ? "text-parchment/60 text-right" : "text-ink-soft"
+                    isUser ? "text-white/60 text-right" : "text-[#5A7470]"
                   }`}
                 >
                   {msg.timestamp}
@@ -231,7 +231,7 @@ ${summaryText || recommendation}
         {isTyping && (
           <div className="flex gap-3 max-w-xl mr-auto">
             <QureSightLogo size={28} />
-            <div className="p-3.5 rounded-2xl bg-white border border-hairline text-xs font-mono text-ink-soft flex items-center gap-2">
+            <div className="p-3.5 rounded-2xl bg-white border border-[#DFEBE8] text-xs font-mono text-[#5A7470] flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-quantum animate-bounce [animation-delay:-0.3s]" />
               <span className="w-1.5 h-1.5 rounded-full bg-quantum animate-bounce [animation-delay:-0.15s]" />
               <span className="w-1.5 h-1.5 rounded-full bg-quantum animate-bounce" />
@@ -243,15 +243,15 @@ ${summaryText || recommendation}
       </div>
 
       {/* Suggested Questions Pills */}
-      <div className="px-4 py-2 border-t border-hairline bg-cream/30 flex items-center gap-2 overflow-x-auto">
-        <span className="text-[10px] font-mono text-ink-soft shrink-0">Quick Inquiries:</span>
+      <div className="px-4 py-2 border-t border-[#DFEBE8] bg-[#F7FAF9]/30 flex items-center gap-2 overflow-x-auto">
+        <span className="text-[10px] font-mono text-[#5A7470] shrink-0">Quick Inquiries:</span>
         {SUGGESTED_QUESTIONS.map((q, qIdx) => (
           <button
             key={qIdx}
             type="button"
             onClick={() => handleSendMessage(q)}
             disabled={isTyping}
-            className="text-[11px] px-2.5 py-1 rounded-lg bg-white hover:bg-cream border border-hairline text-ink shrink-0 transition-all cursor-pointer shadow-2xs hover:border-quantum disabled:opacity-50"
+            className="text-[11px] px-2.5 py-1 rounded-lg bg-white hover:bg-[#F7FAF9] border border-[#DFEBE8] text-[#082827] shrink-0 transition-all cursor-pointer shadow-2xs hover:border-quantum disabled:opacity-50"
           >
             {q}
           </button>
@@ -264,7 +264,7 @@ ${summaryText || recommendation}
           e.preventDefault();
           handleSendMessage();
         }}
-        className="p-3 border-t border-hairline bg-white flex items-center gap-2"
+        className="p-3 border-t border-[#DFEBE8] bg-white flex items-center gap-2"
       >
         <input
           type="text"
@@ -272,12 +272,12 @@ ${summaryText || recommendation}
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="Ask AI Cardiologist about ECG waveforms, emergency protocols, medications..."
           disabled={isTyping}
-          className="flex-1 px-3.5 py-2.5 rounded-xl border border-hairline bg-cream/20 hover:bg-cream/40 focus:bg-white text-xs text-ink focus:outline-none focus:border-quantum disabled:opacity-50"
+          className="flex-1 px-3.5 py-2.5 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9]/20 hover:bg-[#F7FAF9]/40 focus:bg-white text-xs text-[#082827] focus:outline-none focus:border-quantum disabled:opacity-50"
         />
         <button
           type="submit"
           disabled={isTyping || !inputValue.trim()}
-          className="px-4 py-2.5 rounded-xl bg-ink hover:bg-ink/90 text-parchment text-xs font-semibold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer disabled:opacity-40"
+          className="px-4 py-2.5 rounded-xl bg-[#082827] hover:bg-[#082827]/90 text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer disabled:opacity-40"
         >
           <Send size={13} className="text-quantum" />
           <span>Consult</span>

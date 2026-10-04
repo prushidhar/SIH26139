@@ -125,7 +125,7 @@ export default function SignalStudioPage() {
 
             {/* Qubit / Component Count */}
             <div className="space-y-1">
-              <label className="text-ink-soft uppercase text-[10px] tracking-wider font-semibold">
+              <label className="text-[#5A7470] uppercase text-[10px] tracking-wider font-semibold">
                 PCA Components / Qubits ({nComponents})
               </label>
               <div className="flex items-center gap-2">
@@ -135,8 +135,8 @@ export default function SignalStudioPage() {
                     onClick={() => setNComponents(n)}
                     className={`px-2.5 py-1 rounded text-xs font-mono font-medium transition-colors ${
                       nComponents === n
-                        ? "bg-ink text-parchment"
-                        : "bg-cream-deep text-ink border border-hairline hover:bg-cream-deep/80"
+                        ? "bg-[#082827] text-white"
+                        : "bg-[#F2F7F6] text-[#082827] border border-[#DFEBE8] hover:bg-[#F2F7F6]/80"
                     }`}
                   >
                     {n}Q
@@ -147,7 +147,7 @@ export default function SignalStudioPage() {
 
             {/* Top Features Selected */}
             <div className="space-y-1">
-              <label className="text-ink-soft uppercase text-[10px] tracking-wider font-semibold">
+              <label className="text-[#5A7470] uppercase text-[10px] tracking-wider font-semibold">
                 Gini Rank Biomarkers ({nTopFeatures})
               </label>
               <div className="flex items-center gap-2">
@@ -157,8 +157,8 @@ export default function SignalStudioPage() {
                     onClick={() => setNTopFeatures(n)}
                     className={`px-2.5 py-1 rounded text-xs font-mono font-medium transition-colors ${
                       nTopFeatures === n
-                        ? "bg-ink text-parchment"
-                        : "bg-cream-deep text-ink border border-hairline hover:bg-cream-deep/80"
+                        ? "bg-[#082827] text-white"
+                        : "bg-[#F2F7F6] text-[#082827] border border-[#DFEBE8] hover:bg-[#F2F7F6]/80"
                     }`}
                   >
                     {n}
@@ -171,9 +171,9 @@ export default function SignalStudioPage() {
           <button
             onClick={runTransform}
             disabled={loading}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-hairline bg-cream-deep hover:bg-cream-deep/80 text-ink text-xs font-mono font-medium transition-colors self-start md:self-end"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#DFEBE8] bg-[#F2F7F6] hover:bg-[#F2F7F6]/80 text-[#082827] text-xs font-mono font-medium transition-colors self-start md:self-end"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin text-quantum" : "text-ink-soft"}`} />
+            <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin text-quantum" : "text-[#5A7470]"}`} />
             <span>Re-compute Angles</span>
           </button>
         </div>
@@ -187,7 +187,7 @@ export default function SignalStudioPage() {
       )}
 
       {loading && !data ? (
-        <div className="p-16 text-center text-xs font-mono text-ink-soft">
+        <div className="p-16 text-center text-xs font-mono text-[#5A7470]">
           <RefreshCw className="w-5 h-5 animate-spin mx-auto text-quantum mb-2" />
           Computing Random Forest Gini impurity & PCA rotation angles...
         </div>

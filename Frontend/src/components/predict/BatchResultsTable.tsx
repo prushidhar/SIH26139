@@ -423,9 +423,9 @@ export default function BatchResultsTable({
       </div>
 
       {/* Results count */}
-      <div className="text-[11px] text-ink-soft px-1">
-        Showing <span className="font-semibold text-ink">{displayedRecords.length}</span> of{" "}
-        <span className="font-semibold text-ink">{filteredRecords.length}</span> records
+      <div className="text-[11px] text-[#5A7470] px-1">
+        Showing <span className="font-semibold text-[#082827]">{displayedRecords.length}</span> of{" "}
+        <span className="font-semibold text-[#082827]">{filteredRecords.length}</span> records
         {filteredRecords.length !== session.records.length && (
           <span> (filtered from {session.records.length} total)</span>
         )}
@@ -433,34 +433,34 @@ export default function BatchResultsTable({
 
       {/* Table */}
       <div
-        className="rounded-2xl bg-white border border-hairline shadow-xs overflow-hidden"
+        className="rounded-2xl bg-white border border-[#DFEBE8] shadow-xs overflow-hidden"
         onScroll={handleScroll}
       >
         <div className="overflow-x-auto max-h-[70vh] overflow-y-auto">
           <table className="w-full text-xs">
-            <thead className="sticky top-0 z-10 bg-cream border-b border-hairline">
+            <thead className="sticky top-0 z-10 bg-[#F7FAF9] border-b border-[#DFEBE8]">
               <tr>
                 <th
-                  className="px-3 py-3 text-left font-semibold text-ink-soft cursor-pointer hover:text-ink transition-colors"
+                  className="px-3 py-3 text-left font-semibold text-[#5A7470] cursor-pointer hover:text-[#082827] transition-colors"
                   onClick={() => toggleSort("rowIndex")}
                 >
                   <div className="flex items-center gap-1">
                     # <ArrowUpDown size={10} className={sortField === "rowIndex" ? "text-quantum" : ""} />
                   </div>
                 </th>
-                <th className="px-3 py-3 text-left font-semibold text-ink-soft">Patient ID</th>
+                <th className="px-3 py-3 text-left font-semibold text-[#5A7470]">Patient ID</th>
                 <th
-                  className="px-3 py-3 text-left font-semibold text-ink-soft cursor-pointer hover:text-ink transition-colors"
+                  className="px-3 py-3 text-left font-semibold text-[#5A7470] cursor-pointer hover:text-[#082827] transition-colors"
                   onClick={() => toggleSort("patientName")}
                 >
                   <div className="flex items-center gap-1">
                     Name <ArrowUpDown size={10} className={sortField === "patientName" ? "text-quantum" : ""} />
                   </div>
                 </th>
-                <th className="px-3 py-3 text-left font-semibold text-ink-soft">Quantum</th>
-                <th className="px-3 py-3 text-left font-semibold text-ink-soft">Classical</th>
+                <th className="px-3 py-3 text-left font-semibold text-[#5A7470]">Quantum</th>
+                <th className="px-3 py-3 text-left font-semibold text-[#5A7470]">Classical</th>
                 <th
-                  className="px-3 py-3 text-left font-semibold text-ink-soft cursor-pointer hover:text-ink transition-colors"
+                  className="px-3 py-3 text-left font-semibold text-[#5A7470] cursor-pointer hover:text-[#082827] transition-colors"
                   onClick={() => toggleSort("riskScore")}
                 >
                   <div className="flex items-center gap-1">
@@ -468,14 +468,14 @@ export default function BatchResultsTable({
                   </div>
                 </th>
                 <th
-                  className="px-3 py-3 text-left font-semibold text-ink-soft cursor-pointer hover:text-ink transition-colors"
+                  className="px-3 py-3 text-left font-semibold text-[#5A7470] cursor-pointer hover:text-[#082827] transition-colors"
                   onClick={() => toggleSort("consensusStatus")}
                 >
                   <div className="flex items-center gap-1">
                     Consensus <ArrowUpDown size={10} className={sortField === "consensusStatus" ? "text-quantum" : ""} />
                   </div>
                 </th>
-                <th className="px-3 py-3 text-right font-semibold text-ink-soft">Action</th>
+                <th className="px-3 py-3 text-right font-semibold text-[#5A7470]">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -486,19 +486,19 @@ export default function BatchResultsTable({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: Math.min(i * 0.01, 0.3) }}
-                    className={`border-b border-hairline/50 hover:bg-cream/50 transition-colors ${
+                    className={`border-b border-[#DFEBE8]/50 hover:bg-[#F7FAF9]/50 transition-colors ${
                       record.status === "error" ? "bg-red-50/30" : ""
                     }`}
                   >
-                    <td className="px-3 py-2.5 font-mono text-ink-soft">
+                    <td className="px-3 py-2.5 font-mono text-[#5A7470]">
                       {record.rowIndex + 1}
                     </td>
                     <td className="px-3 py-2.5">
-                      <span className="font-mono text-[10px] bg-cream px-1.5 py-0.5 rounded border border-hairline text-ink-soft">
+                      <span className="font-mono text-[10px] bg-[#F7FAF9] px-1.5 py-0.5 rounded border border-[#DFEBE8] text-[#5A7470]">
                         {record.patientId}
                       </span>
                     </td>
-                    <td className="px-3 py-2.5 font-medium text-ink">
+                    <td className="px-3 py-2.5 font-medium text-[#082827]">
                       {record.patientName}
                     </td>
                     <td className="px-3 py-2.5">
@@ -546,7 +546,7 @@ export default function BatchResultsTable({
                           <AlertTriangle size={12} /> Discordant
                         </span>
                       ) : (
-                        <span className="text-ink-soft text-[10px]">—</span>
+                        <span className="text-[#5A7470] text-[10px]">—</span>
                       )}
                     </td>
                     <td className="px-3 py-2.5 text-right">
@@ -555,13 +555,13 @@ export default function BatchResultsTable({
                           <button
                             onClick={(e) => handleDownloadSingleRecord(record, e)}
                             title="Download Clinical PDF Report"
-                            className="p-1 rounded-lg bg-cream border border-hairline text-ink hover:bg-quantum hover:text-black transition-all cursor-pointer"
+                            className="p-1 rounded-lg bg-[#F7FAF9] border border-[#DFEBE8] text-[#082827] hover:bg-quantum hover:text-black transition-all cursor-pointer"
                           >
                             <Download size={11} />
                           </button>
                           <button
                             onClick={() => onViewDetails(record)}
-                            className="px-2.5 py-1 rounded-lg bg-cream border border-hairline text-[10px] font-medium text-ink hover:bg-ink hover:text-parchment transition-all cursor-pointer flex items-center gap-1"
+                            className="px-2.5 py-1 rounded-lg bg-[#F7FAF9] border border-[#DFEBE8] text-[10px] font-medium text-[#082827] hover:bg-[#082827] hover:text-white transition-all cursor-pointer flex items-center gap-1"
                           >
                             <Eye size={11} /> View
                           </button>
@@ -589,7 +589,7 @@ export default function BatchResultsTable({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="fixed bottom-8 right-8 w-10 h-10 rounded-full bg-ink text-parchment shadow-lg flex items-center justify-center cursor-pointer z-50 hover:bg-ink/90 transition-colors"
+            className="fixed bottom-8 right-8 w-10 h-10 rounded-full bg-[#082827] text-white shadow-lg flex items-center justify-center cursor-pointer z-50 hover:bg-[#082827]/90 transition-colors"
           >
             <ArrowUp size={18} />
           </motion.button>

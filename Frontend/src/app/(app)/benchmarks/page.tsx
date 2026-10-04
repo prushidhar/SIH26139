@@ -314,7 +314,7 @@ export default function BenchmarksPage() {
                   Statistically Significant
                 </span>
               </div>
-              <div className="font-serif text-3xl font-light text-emerald-600 dark:text-emerald-400">
+              <div className="font-sans font-bold text-3xl font-light text-emerald-600 dark:text-emerald-400">
                 +8.3%
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed">
@@ -329,7 +329,7 @@ export default function BenchmarksPage() {
                 </span>
                 <HelpTooltip text="Quantum kernels require far fewer clinical patients to separate malignant vs benign boundaries in high-dimensional Hilbert space." />
               </div>
-              <div className="font-serif text-3xl font-light text-quantum">
+              <div className="font-sans font-bold text-3xl font-light text-quantum">
                 1.42&times;
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed">
@@ -344,7 +344,7 @@ export default function BenchmarksPage() {
                 </span>
                 <HelpTooltip text="Measures the separation capability of the quantum model compared to classical baselines." />
               </div>
-              <div className="font-serif text-3xl font-light text-foreground">
+              <div className="font-sans font-bold text-3xl font-light text-foreground">
                 2.079
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed">
@@ -357,7 +357,7 @@ export default function BenchmarksPage() {
           <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-sm">
             <div className="p-4 bg-muted/20 border-b border-border flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
-                <h3 className="font-serif text-base font-medium text-foreground">
+                <h3 className="font-sans font-bold text-base font-medium text-foreground">
                   Sample-Size Sensitivity Curve (Cross-Validated Progression)
                 </h3>
                 <p className="text-xs text-muted-foreground">
@@ -440,7 +440,7 @@ export default function BenchmarksPage() {
           <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-sm">
             <div className="p-4 bg-muted/20 border-b border-border flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
-                <h3 className="font-serif text-base font-medium text-foreground">
+                <h3 className="font-sans font-bold text-base font-medium text-foreground">
                   Full Dataset Cross-Validation (WDBC Cohort &bull; N=569)
                 </h3>
                 <p className="text-xs text-muted-foreground">
@@ -520,7 +520,7 @@ export default function BenchmarksPage() {
           <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-sm">
             <div className="p-4 bg-muted/20 border-b border-border flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
-                <h3 className="font-serif text-base font-medium text-foreground">
+                <h3 className="font-sans font-bold text-base font-medium text-foreground">
                   Quantum Architecture Search (QAS) Telemetry Table
                 </h3>
                 <p className="text-xs text-muted-foreground">
@@ -610,7 +610,7 @@ export default function BenchmarksPage() {
                 </span>
               </div>
               <div className="space-y-1">
-                <div className="font-serif text-3xl font-light text-foreground">
+                <div className="font-sans font-bold text-3xl font-light text-foreground">
                   {latencyBreakdown.classical?.inferenceTimeMs} ms
                 </div>
                 <p className="text-xs text-muted-foreground font-mono">
@@ -634,7 +634,7 @@ export default function BenchmarksPage() {
                 </span>
               </div>
               <div className="space-y-1">
-                <div className="font-serif text-3xl font-light text-foreground">
+                <div className="font-sans font-bold text-3xl font-light text-foreground">
                   {latencyBreakdown.quantum_simulator?.inferenceTimeMs} ms
                 </div>
                 <p className="text-xs text-muted-foreground font-mono">
@@ -658,7 +658,7 @@ export default function BenchmarksPage() {
                 </span>
               </div>
               <div className="space-y-1">
-                <div className="font-serif text-3xl font-light text-foreground">
+                <div className="font-sans font-bold text-3xl font-light text-foreground">
                   {latencyBreakdown.quantum_hardware?.inferenceTimeMs} ms
                 </div>
                 <p className="text-xs text-muted-foreground font-mono">
@@ -703,22 +703,22 @@ export default function BenchmarksPage() {
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
             <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
               <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">Classical (ResNet-34)</span>
-              <div className="font-serif text-3xl font-light text-blue-600">96.8%</div>
+              <div className="font-sans font-bold text-3xl font-light text-blue-600">96.8%</div>
               <p className="text-[10px] text-muted-foreground">ResNet-34 CNN • 4-class • 21.3M params</p>
             </div>
             <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
               <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">Quantum VQC (Hybrid)</span>
-              <div className="font-serif text-3xl font-light text-quantum">89.2%</div>
+              <div className="font-sans font-bold text-3xl font-light text-quantum">89.2%</div>
               <p className="text-[10px] text-muted-foreground">8-Qubit PQC • StronglyEntanglingLayers</p>
             </div>
             <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
               <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">Scarce-Data Quantum Advantage</span>
-              <div className="font-serif text-3xl font-light text-emerald-600">+6.7%</div>
+              <div className="font-sans font-bold text-3xl font-light text-emerald-600">+6.7%</div>
               <p className="text-[10px] text-muted-foreground">At 15% training data (≈120 labeled ECGs)</p>
             </div>
             <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
               <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">Macro AUROC</span>
-              <div className="font-serif text-3xl font-light text-foreground">0.972</div>
+              <div className="font-sans font-bold text-3xl font-light text-foreground">0.972</div>
               <p className="text-[10px] text-muted-foreground">Weighted average across 4 diagnostic classes</p>
             </div>
           </div>
@@ -727,7 +727,7 @@ export default function BenchmarksPage() {
           <div className="p-5 rounded-2xl bg-card border border-border shadow-xs space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-serif text-base font-medium text-foreground">Full Cohort Model Performance (Stratified K-Fold, K=5)</h3>
+                <h3 className="font-sans font-bold text-base font-medium text-foreground">Full Cohort Model Performance (Stratified K-Fold, K=5)</h3>
                 <p className="text-xs text-muted-foreground">4-class: Normal Sinus Rhythm • Myocardial Infarction • History of MI • Arrhythmia</p>
               </div>
               <span className="text-[10px] font-mono px-2 py-1 rounded-lg bg-muted text-muted-foreground border border-border">Protocol: 5-Fold Stratified CV</span>
@@ -771,7 +771,7 @@ export default function BenchmarksPage() {
 
           {/* Per-Class Breakdown */}
           <div className="p-5 rounded-2xl bg-card border border-border shadow-xs space-y-4">
-            <h3 className="font-serif text-base font-medium text-foreground">Per-Class Diagnostic Accuracy Breakdown</h3>
+            <h3 className="font-sans font-bold text-base font-medium text-foreground">Per-Class Diagnostic Accuracy Breakdown</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
                 { cls: "Normal Sinus Rhythm", cxAcc: 98.2, qAcc: 93.5, color: "emerald" },
@@ -810,7 +810,7 @@ export default function BenchmarksPage() {
           <div className="p-5 rounded-2xl bg-card border border-border shadow-xs space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-serif text-base font-medium text-foreground">ECG Scarce-Data Sensitivity Curve</h3>
+                <h3 className="font-sans font-bold text-base font-medium text-foreground">ECG Scarce-Data Sensitivity Curve</h3>
                 <p className="text-xs text-muted-foreground">Quantum advantage emerges when labeled ECG training data is limited (rare pathology cohorts)</p>
               </div>
             </div>
@@ -858,17 +858,17 @@ export default function BenchmarksPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="p-5 rounded-2xl bg-card border border-border space-y-2 shadow-xs">
               <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-bold">Classical Inference</span>
-              <div className="font-serif text-3xl font-light text-foreground">12.4 ms</div>
+              <div className="font-sans font-bold text-3xl font-light text-foreground">12.4 ms</div>
               <p className="text-[10px] text-muted-foreground font-mono">PyTorch CUDA/CPU • 21.3M params • 3.67 GFLOPs</p>
             </div>
             <div className="p-5 rounded-2xl bg-card border border-border space-y-2 shadow-xs">
               <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-bold">Quantum VQC Inference</span>
-              <div className="font-serif text-3xl font-light text-quantum">54.3 ms</div>
+              <div className="font-sans font-bold text-3xl font-light text-quantum">54.3 ms</div>
               <p className="text-[10px] text-muted-foreground font-mono">PennyLane Statevector • 112 trainable params</p>
             </div>
             <div className="p-5 rounded-2xl bg-card border border-border space-y-2 shadow-xs">
               <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-bold">IBM Quantum (Eagle QPU)</span>
-              <div className="font-serif text-3xl font-light text-amber-600">1,840 ms</div>
+              <div className="font-sans font-bold text-3xl font-light text-amber-600">1,840 ms</div>
               <p className="text-[10px] text-muted-foreground font-mono">IBM Eagle r3 • 1024 shots • ZNE + M3</p>
             </div>
           </div>
@@ -902,17 +902,17 @@ export default function BenchmarksPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
               <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">Classical Random Forest</span>
-              <div className="font-serif text-3xl font-light text-blue-600">82.8%</div>
+              <div className="font-sans font-bold text-3xl font-light text-blue-600">82.8%</div>
               <p className="text-[10px] text-muted-foreground">AUROC 0.9088 • 100 Trees • 5-Fold CV</p>
             </div>
             <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
               <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">Classical Logistic Regression</span>
-              <div className="font-serif text-3xl font-light text-foreground">83.8%</div>
+              <div className="font-sans font-bold text-3xl font-light text-foreground">83.8%</div>
               <p className="text-[10px] text-muted-foreground">AUROC 0.8899 • L2 Regularization • 5-Fold CV</p>
             </div>
             <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
               <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">4-Qubit Hybrid VQC (Quantum)</span>
-              <div className="font-serif text-3xl font-light text-quantum">80.8%</div>
+              <div className="font-sans font-bold text-3xl font-light text-quantum">80.8%</div>
               <p className="text-[10px] text-muted-foreground">AUROC 0.8813 • 36 Trainable Gates • 5-Fold CV</p>
             </div>
           </div>
@@ -921,7 +921,7 @@ export default function BenchmarksPage() {
           <div className="p-5 rounded-2xl bg-card border border-border shadow-xs space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-serif text-base font-medium text-foreground">Cleveland Cohort Model Benchmark (5-Fold Stratified CV, N=303)</h3>
+                <h3 className="font-sans font-bold text-base font-medium text-foreground">Cleveland Cohort Model Benchmark (5-Fold Stratified CV, N=303)</h3>
                 <p className="text-xs text-muted-foreground">Direct head-to-head comparison between classical estimators and 4-qubit parameterized quantum circuits</p>
               </div>
               <span className="text-[10px] font-mono px-2 py-1 rounded-lg bg-muted text-muted-foreground border border-border">Protocol: Stratified K-Fold (K=5)</span>
@@ -970,7 +970,7 @@ export default function BenchmarksPage() {
 
           {/* 4-Qubit Manifold & Clinical Sensitivities */}
           <div className="p-5 rounded-2xl bg-card border border-border shadow-xs space-y-4">
-            <h3 className="font-serif text-base font-medium text-foreground">Biomarker Sensitivity Analysis</h3>
+            <h3 className="font-sans font-bold text-base font-medium text-foreground">Biomarker Sensitivity Analysis</h3>
             <p className="text-xs text-muted-foreground">How 13 clinical features project into PennyLane quantum circuit wires and drive individual qubit expectations</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
@@ -1026,17 +1026,17 @@ export default function BenchmarksPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
               <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">Classical DenseNet-121</span>
-              <div className="font-serif text-3xl font-light text-blue-600">86.5%</div>
+              <div className="font-sans font-bold text-3xl font-light text-blue-600">86.5%</div>
               <p className="text-[10px] text-muted-foreground">AUROC 0.9250 • 7.0M Weights • CheXpert Test Set</p>
             </div>
             <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
               <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">DenseNet-121 + 6-Qubit VQC (PennyLane)</span>
-              <div className="font-serif text-3xl font-light text-quantum">87.0%</div>
+              <div className="font-sans font-bold text-3xl font-light text-quantum">87.0%</div>
               <p className="text-[10px] text-muted-foreground font-bold text-quantum">AUROC 0.9300 • 36 Quantum Params (+0.005 AUROC)</p>
             </div>
             <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
               <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">ResNet-18 + 4-Qubit VQC</span>
-              <div className="font-serif text-3xl font-light text-foreground">85.2%</div>
+              <div className="font-sans font-bold text-3xl font-light text-foreground">85.2%</div>
               <p className="text-[10px] text-muted-foreground">AUROC 0.9180 • 24 Quantum Params (L=4)</p>
             </div>
           </div>
@@ -1045,7 +1045,7 @@ export default function BenchmarksPage() {
           <div className="p-5 rounded-2xl bg-card border border-border shadow-xs space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-serif text-base font-medium text-foreground">CheXpert Radiography Cohort Benchmark (N=1,200)</h3>
+                <h3 className="font-sans font-bold text-base font-medium text-foreground">CheXpert Radiography Cohort Benchmark (N=1,200)</h3>
                 <p className="text-xs text-muted-foreground">Head-to-head empirical metrics on frontal chest radiographs for cardiomegaly diagnosis</p>
               </div>
               <span className="text-[10px] font-mono px-2 py-1 rounded-lg bg-muted text-muted-foreground border border-border">CheXpert Dataset</span>
@@ -1110,7 +1110,7 @@ export default function BenchmarksPage() {
 
           {/* Cardiothoracic Anatomy & Wire Sensitivities */}
           <div className="p-5 rounded-2xl bg-card border border-border shadow-xs space-y-4">
-            <h3 className="font-serif text-base font-medium text-foreground">6-Qubit Latent Radiographic Mapping & Cardiothoracic Markers</h3>
+            <h3 className="font-sans font-bold text-base font-medium text-foreground">6-Qubit Latent Radiographic Mapping & Cardiothoracic Markers</h3>
             <p className="text-xs text-muted-foreground">Projection of anatomical radiographic features into PennyLane quantum circuit wires and expectation values</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
@@ -1168,17 +1168,17 @@ export default function BenchmarksPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
               <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">Classical Random Forest</span>
-              <div className="font-serif text-3xl font-light text-blue-600">75.4%</div>
+              <div className="font-sans font-bold text-3xl font-light text-blue-600">75.4%</div>
               <p className="text-[10px] text-muted-foreground">AUROC 0.7850 • 100 Trees • ILPD 5-Fold CV</p>
             </div>
             <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
               <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">2-Qubit Minimal VQC</span>
-              <div className="font-serif text-3xl font-light text-quantum">73.8%</div>
+              <div className="font-sans font-bold text-3xl font-light text-quantum">73.8%</div>
               <p className="text-[10px] text-muted-foreground font-bold text-quantum">AUROC 0.7720 • 2 Qubits • 12 Parameters</p>
             </div>
             <div className="p-5 rounded-2xl bg-card border border-border space-y-1.5 shadow-xs">
               <span className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground font-semibold">4-Qubit Hybrid VQC</span>
-              <div className="font-serif text-3xl font-light text-teal-600">75.2%</div>
+              <div className="font-sans font-bold text-3xl font-light text-teal-600">75.2%</div>
               <p className="text-[10px] text-muted-foreground">AUROC 0.7840 • 24 Parameters • L=3</p>
             </div>
           </div>
@@ -1187,7 +1187,7 @@ export default function BenchmarksPage() {
           <div className="p-5 rounded-2xl bg-card border border-border shadow-xs space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-serif text-base font-medium text-foreground">ILPD Cohort Model Benchmark (N=583)</h3>
+                <h3 className="font-sans font-bold text-base font-medium text-foreground">ILPD Cohort Model Benchmark (N=583)</h3>
                 <p className="text-xs text-muted-foreground">Head-to-head empirical evaluation on 10 hepatic serum biomarkers comparing classical baselines with compact quantum circuits</p>
               </div>
               <span className="text-[10px] font-mono px-2 py-1 rounded-lg bg-muted text-muted-foreground border border-border">ILPD Cohort</span>
@@ -1252,7 +1252,7 @@ export default function BenchmarksPage() {
 
           {/* 4-Qubit Latent Hepatic Biomarker Mapping */}
           <div className="p-5 rounded-2xl bg-card border border-border shadow-xs space-y-4">
-            <h3 className="font-serif text-base font-medium text-foreground">Latent Hepatic Circuit Mapping & Serum Biomarkers</h3>
+            <h3 className="font-sans font-bold text-base font-medium text-foreground">Latent Hepatic Circuit Mapping & Serum Biomarkers</h3>
             <p className="text-xs text-muted-foreground">Projection of 10 clinical serum chemistry features into parameterized quantum circuit wires and expectation values</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[

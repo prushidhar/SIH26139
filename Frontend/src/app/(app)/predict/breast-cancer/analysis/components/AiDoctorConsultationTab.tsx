@@ -204,15 +204,15 @@ ${recommendationText}`;
   };
 
   return (
-    <div className="w-full bg-white rounded-2xl border border-hairline shadow-xs flex flex-col h-[650px] overflow-hidden">
+    <div className="w-full bg-white rounded-2xl border border-[#DFEBE8] shadow-xs flex flex-col h-[650px] overflow-hidden">
       {/* Header: Strictly "QureSight AI" with Website Logo */}
-      <div className="px-5 py-3.5 border-b border-hairline/80 flex items-center gap-2.5 bg-cream/15">
+      <div className="px-5 py-3.5 border-b border-[#DFEBE8]/80 flex items-center gap-2.5 bg-[#F7FAF9]/15">
         <QureSightLogo size={26} />
-        <h3 className="text-sm font-bold text-ink tracking-tight font-serif">QureSight AI</h3>
+        <h3 className="text-sm font-bold text-[#082827] tracking-tight font-sans font-bold">QureSight AI</h3>
       </div>
 
       {/* Conversation Stream Container (Clean & Centered) */}
-      <div className="flex-1 p-5 overflow-y-auto space-y-4 bg-cream/5">
+      <div className="flex-1 p-5 overflow-y-auto space-y-4 bg-[#F7FAF9]/5">
         <div className="max-w-3xl mx-auto space-y-4">
           {messages.map((msg, index) => {
             const isAssistant = msg.role === "assistant";
@@ -230,8 +230,8 @@ ${recommendationText}`;
                 <div
                   className={`rounded-2xl p-4 shadow-2xs ${
                     isAssistant
-                      ? "w-fit max-w-[480px] sm:max-w-[500px] bg-white border border-hairline text-ink"
-                      : "w-fit max-w-[380px] sm:max-w-[420px] bg-ink text-parchment font-medium"
+                      ? "w-fit max-w-[480px] sm:max-w-[500px] bg-white border border-[#DFEBE8] text-[#082827]"
+                      : "w-fit max-w-[380px] sm:max-w-[420px] bg-[#082827] text-white font-medium"
                   }`}
                 >
                   {isAssistant ? (
@@ -241,7 +241,7 @@ ${recommendationText}`;
                   )}
                   <span
                     className={`text-[9px] font-mono block mt-1.5 text-right ${
-                      isAssistant ? "text-ink-muted" : "text-parchment/60"
+                      isAssistant ? "text-[#082827]-muted" : "text-white/60"
                     }`}
                   >
                     {msg.timestamp}
@@ -250,7 +250,7 @@ ${recommendationText}`;
 
                 {/* Right Side: User Profile Avatar */}
                 {!isAssistant && (
-                  <div className="w-6 h-6 rounded-full overflow-hidden bg-ink text-parchment flex items-center justify-center shrink-0 text-xs shadow-2xs border border-hairline mt-0.5">
+                  <div className="w-6 h-6 rounded-full overflow-hidden bg-[#082827] text-white flex items-center justify-center shrink-0 text-xs shadow-2xs border border-[#DFEBE8] mt-0.5">
                     {userAvatar ? (
                       <img
                         src={userAvatar}
@@ -258,7 +258,7 @@ ${recommendationText}`;
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <UserIcon size={13} className="text-parchment" />
+                      <UserIcon size={13} className="text-white" />
                     )}
                   </div>
                 )}
@@ -270,9 +270,9 @@ ${recommendationText}`;
           {isLoading && (
             <div className="flex items-center gap-2.5">
               <QureSightLogo size={24} />
-              <div className="bg-white border border-hairline rounded-2xl px-3.5 py-2 text-xs text-ink-soft flex items-center gap-2 shadow-2xs">
+              <div className="bg-white border border-[#DFEBE8] rounded-2xl px-3.5 py-2 text-xs text-[#5A7470] flex items-center gap-2 shadow-2xs">
                 <span className="w-1.5 h-1.5 rounded-full bg-quantum animate-pulse" />
-                <span className="font-mono text-xs text-ink-soft">thinking...</span>
+                <span className="font-mono text-xs text-[#5A7470]">thinking...</span>
               </div>
             </div>
           )}
@@ -283,7 +283,7 @@ ${recommendationText}`;
       {/* Floating Centered Typing Bar */}
       <div className="p-3 bg-white">
         <div className="max-w-lg mx-auto space-y-1.5">
-          <div className="flex items-center gap-2 bg-cream/40 border border-hairline rounded-xl px-3 py-2 focus-within:border-quantum focus-within:ring-2 focus-within:ring-quantum/10 transition-all shadow-2xs">
+          <div className="flex items-center gap-2 bg-[#F7FAF9]/40 border border-[#DFEBE8] rounded-xl px-3 py-2 focus-within:border-quantum focus-within:ring-2 focus-within:ring-quantum/10 transition-all shadow-2xs">
             <input
               type="text"
               value={inputValue}
@@ -291,18 +291,18 @@ ${recommendationText}`;
               onKeyDown={handleKeyDown}
               placeholder="Ask QureSight AI about these findings..."
               disabled={isLoading}
-              className="flex-1 bg-transparent border-none outline-none text-xs text-ink placeholder:text-ink-muted"
+              className="flex-1 bg-transparent border-none outline-none text-xs text-[#082827] placeholder:text-[#082827]-muted"
             />
             <button
               onClick={handleSendMessage}
               disabled={!inputValue.trim() || isLoading}
-              className="w-7 h-7 rounded-lg bg-ink hover:bg-ink/90 text-parchment flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shadow-xs shrink-0"
+              className="w-7 h-7 rounded-lg bg-[#082827] hover:bg-[#082827]/90 text-white flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shadow-xs shrink-0"
             >
               <Send size={12} />
             </button>
           </div>
 
-          <p className="text-[10px] text-ink-muted text-center leading-relaxed">
+          <p className="text-[10px] text-[#082827]-muted text-center leading-relaxed">
             <ShieldAlert size={10} className="inline mr-1 text-amber-600 align-sub" />
             AI interpretations are for reference only. Please verify diagnostic decisions with a qualified healthcare professional.
           </p>

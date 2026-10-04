@@ -356,81 +356,81 @@ export default function ModelAnalysisPage() {
       </div>
 
       {/* Main Grid: Confusion Matrix & Real Dynamic Convergence Graph */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         {/* LEFT: Live Confusion Matrix (5 cols) */}
-        <div className="lg:col-span-5 p-5 rounded-2xl bg-white border border-hairline shadow-xs space-y-4">
-          <div className="flex items-center justify-between border-b border-hairline pb-2.5">
+        <div className="lg:col-span-5 p-6 rounded-3xl bg-white border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.06)] space-y-4">
+          <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
             <div>
-              <h2 className="font-serif text-base font-medium text-ink">Live Confusion Matrix</h2>
-              <p className="text-[11px] text-ink-soft">Updated in real-time as feedback is registered</p>
+              <h2 className="font-sans text-base font-bold text-[#082827]">Live Confusion Matrix</h2>
+              <p className="text-[11px] text-[#5A7470]">Updated in real-time as feedback is registered</p>
             </div>
             <HelpTooltip text="Shows exact breakdown of True Positives, False Positives, True Negatives, and False Negatives." />
           </div>
 
-          <div className="grid grid-cols-2 gap-2.5 font-mono text-center">
+          <div className="grid grid-cols-2 gap-3 font-mono text-center">
             {/* TP */}
-            <div className="p-3 rounded-xl bg-emerald-50/80 border border-emerald-200/80 space-y-1">
-              <span className="text-[9px] uppercase tracking-wider text-emerald-800 font-semibold block">
+            <div className="p-3.5 rounded-2xl bg-emerald-50/80 border border-emerald-200/80 space-y-1">
+              <span className="text-[9px] uppercase tracking-wider text-emerald-800 font-bold block">
                 True Positive (TP)
               </span>
-              <div className="font-serif text-2xl font-semibold text-emerald-900">{tp}</div>
-              <span className="text-[10px] text-emerald-700 font-light block">High Risk Confirmed</span>
+              <div className="font-sans text-2xl font-bold text-emerald-900">{tp}</div>
+              <span className="text-[10px] text-emerald-700 font-medium block">High Risk Confirmed</span>
             </div>
 
             {/* FP */}
-            <div className="p-3 rounded-xl bg-amber-50/80 border border-amber-200/80 space-y-1">
-              <span className="text-[9px] uppercase tracking-wider text-amber-800 font-semibold block">
+            <div className="p-3.5 rounded-2xl bg-amber-50/80 border border-amber-200/80 space-y-1">
+              <span className="text-[9px] uppercase tracking-wider text-amber-800 font-bold block">
                 False Positive (FP)
               </span>
-              <div className="font-serif text-2xl font-semibold text-amber-900">{fp}</div>
-              <span className="text-[10px] text-amber-700 font-light block">False Alarm Flagged</span>
+              <div className="font-sans text-2xl font-bold text-amber-900">{fp}</div>
+              <span className="text-[10px] text-amber-700 font-medium block">False Alarm Flagged</span>
             </div>
 
             {/* FN */}
-            <div className="p-3 rounded-xl bg-red-50/80 border border-red-200/80 space-y-1">
-              <span className="text-[9px] uppercase tracking-wider text-red-800 font-semibold block">
+            <div className="p-3.5 rounded-2xl bg-red-50/80 border border-red-200/80 space-y-1">
+              <span className="text-[9px] uppercase tracking-wider text-red-800 font-bold block">
                 False Negative (FN)
               </span>
-              <div className="font-serif text-2xl font-semibold text-red-900">{fn}</div>
-              <span className="text-[10px] text-red-700 font-light block">Missed High Risk</span>
+              <div className="font-sans text-2xl font-bold text-red-900">{fn}</div>
+              <span className="text-[10px] text-red-700 font-medium block">Missed High Risk</span>
             </div>
 
             {/* TN */}
-            <div className="p-3 rounded-xl bg-blue-50/80 border border-blue-200/80 space-y-1">
-              <span className="text-[9px] uppercase tracking-wider text-blue-800 font-semibold block">
+            <div className="p-3.5 rounded-2xl bg-blue-50/80 border border-blue-200/80 space-y-1">
+              <span className="text-[9px] uppercase tracking-wider text-blue-800 font-bold block">
                 True Negative (TN)
               </span>
-              <div className="font-serif text-2xl font-semibold text-blue-900">{tn}</div>
-              <span className="text-[10px] text-blue-700 font-light block">Healthy Confirmed</span>
+              <div className="font-sans text-2xl font-bold text-blue-900">{tn}</div>
+              <span className="text-[10px] text-blue-700 font-medium block">Healthy Confirmed</span>
             </div>
           </div>
 
-          <div className="p-3 rounded-xl bg-cream/40 border border-hairline text-[11px] text-ink-soft space-y-1 font-mono">
-            <div className="flex justify-between">
+          <div className="p-3.5 rounded-2xl bg-[#F7FAF9] border border-[#DFEBE8] text-[11px] text-[#5A7470] space-y-1.5 font-mono">
+            <div className="flex justify-between items-center">
               <span>Diagnostic Accuracy Rate:</span>
-              <span className="font-semibold text-quantum">{accuracy !== "—" ? `${accuracy}%` : "—"}</span>
+              <span className="font-bold text-[#006766]">{accuracy !== "—" ? `${accuracy}%` : "—"}</span>
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
               <span>Error Resilience:</span>
-              <span className="font-semibold text-ink">98.4%</span>
+              <span className="font-bold text-[#082827]">98.4%</span>
             </div>
           </div>
         </div>
 
         {/* RIGHT: Real Dynamic SVG Convergence Graph (7 cols) */}
-        <div className="lg:col-span-7 p-5 rounded-2xl bg-white border border-hairline shadow-xs space-y-4 flex flex-col justify-between relative">
-          <div className="flex items-center justify-between border-b border-hairline pb-2.5">
+        <div className="lg:col-span-7 p-6 rounded-3xl bg-white border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.06)] space-y-4 flex flex-col justify-between relative">
+          <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
             <div>
-              <h2 className="font-serif text-base font-medium text-ink">Accuracy Over Time</h2>
-              <p className="text-[11px] text-ink-soft">Real-time tracking of sequential prediction convergence</p>
+              <h2 className="font-sans text-base font-bold text-[#082827]">Accuracy Over Time</h2>
+              <p className="text-[11px] text-[#5A7470]">Real-time tracking of sequential prediction convergence</p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono text-ink-soft">
+              <span className="text-[10px] font-mono text-[#5A7470] bg-[#F2F7F6] px-2 py-0.5 rounded-md border border-[#DFEBE8]">
                 {totalEvaluated > 0 ? `${totalEvaluated}-Trial Matrix` : "0-Trial Initial"}
               </span>
               <Link
                 href="/analysis/charts"
-                className="text-[11px] font-medium text-quantum hover:underline flex items-center gap-1 shrink-0"
+                className="text-[11px] font-semibold text-[#006766] hover:text-[#084E4D] hover:underline flex items-center gap-1 shrink-0"
               >
                 <span>View More Analysis</span>
                 <ArrowRight size={11} />
@@ -443,20 +443,20 @@ export default function ModelAnalysisPage() {
             <svg className="w-full h-full overflow-visible" viewBox="0 0 400 120">
               <defs>
                 <linearGradient id="quantumGlow" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#1B4D3E" stopOpacity="0.22" />
-                  <stop offset="100%" stopColor="#1B4D3E" stopOpacity="0.00" />
+                  <stop offset="0%" stopColor="#006766" stopOpacity="0.25" />
+                  <stop offset="100%" stopColor="#006766" stopOpacity="0.00" />
                 </linearGradient>
               </defs>
 
               {/* Grid Y Guidelines */}
-              <line x1="15" y1="20" x2="385" y2="20" stroke="#f1f1f4" strokeDasharray="3 3" />
-              <line x1="15" y1="57" x2="385" y2="57" stroke="#f1f1f4" strokeDasharray="3 3" />
-              <line x1="15" y1="95" x2="385" y2="95" stroke="#f1f1f4" strokeDasharray="3 3" />
+              <line x1="15" y1="20" x2="385" y2="20" stroke="#DFEBE8" strokeDasharray="3 3" />
+              <line x1="15" y1="57" x2="385" y2="57" stroke="#DFEBE8" strokeDasharray="3 3" />
+              <line x1="15" y1="95" x2="385" y2="95" stroke="#DFEBE8" strokeDasharray="3 3" />
 
               {/* Y Axis Labels */}
-              <text x="5" y="23" fill="#a1a1aa" fontSize="7" fontFamily="monospace">100%</text>
-              <text x="5" y="60" fill="#a1a1aa" fontSize="7" fontFamily="monospace">50%</text>
-              <text x="10" y="98" fill="#a1a1aa" fontSize="7" fontFamily="monospace">0%</text>
+              <text x="5" y="23" fill="#5A7470" fontSize="7" fontFamily="monospace">100%</text>
+              <text x="5" y="60" fill="#5A7470" fontSize="7" fontFamily="monospace">50%</text>
+              <text x="10" y="98" fill="#5A7470" fontSize="7" fontFamily="monospace">0%</text>
 
               {/* Area Gradient under curve */}
               {areaPolygonPoints && (
@@ -467,7 +467,7 @@ export default function ModelAnalysisPage() {
               {baselinePolylinePoints && (
                 <polyline
                   fill="none"
-                  stroke="#a1a1aa"
+                  stroke="#94A3B8"
                   strokeWidth="1.5"
                   strokeDasharray="4 4"
                   points={baselinePolylinePoints}
@@ -479,7 +479,7 @@ export default function ModelAnalysisPage() {
               {polylinePoints ? (
                 <polyline
                   fill="none"
-                  stroke="#1B4D3E"
+                  stroke="#006766"
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -487,7 +487,7 @@ export default function ModelAnalysisPage() {
                   className="transition-all duration-300"
                 />
               ) : (
-                <text x="140" y="65" fill="#a1a1aa" fontSize="9" fontFamily="sans-serif">
+                <text x="140" y="65" fill="#5A7470" fontSize="9" fontFamily="sans-serif">
                   Awaiting patient evaluations...
                 </text>
               )}
@@ -502,7 +502,7 @@ export default function ModelAnalysisPage() {
                         cx={pt.x}
                         cy={pt.y}
                         r="6"
-                        fill="#1B4D3E"
+                        fill="#006766"
                         opacity="0.25"
                         className="animate-ping origin-center"
                       />
@@ -511,9 +511,9 @@ export default function ModelAnalysisPage() {
                       cx={pt.x}
                       cy={pt.y}
                       r={isLatest ? "4" : "3"}
-                      fill={pt.status === "correct" ? "#1B4D3E" : "#dc2626"}
+                      fill={pt.status === "correct" ? "#006766" : "#dc2626"}
                       stroke="#FFFFFF"
-                      strokeWidth="1"
+                      strokeWidth="1.5"
                       className="cursor-pointer transition-transform hover:scale-150"
                       onMouseEnter={() => setHoveredPoint(pt)}
                       onMouseLeave={() => setHoveredPoint(null)}
@@ -526,32 +526,32 @@ export default function ModelAnalysisPage() {
             {/* Hover Tooltip Overlay */}
             {hoveredPoint && (
               <div
-                className="absolute -top-1 left-1/2 -translate-x-1/2 bg-ink text-white p-2.5 rounded-xl text-[11px] shadow-xl z-20 pointer-events-none border border-hairline/40 space-y-0.5"
+                className="absolute -top-1 left-1/2 -translate-x-1/2 bg-[#082827] text-white p-3 rounded-2xl text-[11px] shadow-xl z-20 pointer-events-none border border-[#00B489]/30 space-y-1"
               >
                 <div className="flex items-center gap-2">
-                  <span className="font-semibold font-mono text-emerald-400">
+                  <span className="font-semibold font-mono text-[#00B489]">
                     Trial #{hoveredPoint.trialNumber}
                   </span>
-                  <span className="text-white/80">{hoveredPoint.patientName}</span>
+                  <span className="text-white/90">{hoveredPoint.patientName}</span>
                 </div>
                 <div className="text-white/70 text-[10px]">
                   {hoveredPoint.disease} • Conf: {hoveredPoint.quantumConfidence}%
                 </div>
-                <div className="text-white/90 text-[10.5px] font-mono pt-0.5 border-t border-white/10 flex justify-between gap-3">
+                <div className="text-white/90 text-[10.5px] font-mono pt-1 border-t border-white/10 flex justify-between gap-3">
                   <span>Accuracy at trial:</span>
-                  <span className="font-semibold text-emerald-300">{hoveredPoint.cumulativeAccuracy}%</span>
+                  <span className="font-bold text-[#00B489]">{hoveredPoint.cumulativeAccuracy}%</span>
                 </div>
               </div>
             )}
           </div>
 
-          <div className="flex items-center justify-between pt-2 border-t border-hairline text-[11px] font-mono text-ink-soft">
+          <div className="flex items-center justify-between pt-3 border-t border-[#DFEBE8] text-[11px] font-mono text-[#5A7470]">
             <div className="flex items-center gap-2">
-              <span className="w-3 h-0.5 bg-quantum inline-block" />
+              <span className="w-3 h-0.5 bg-[#006766] inline-block rounded-full" />
               <span>QureSight Model ({accuracy !== "—" ? `${accuracy}%` : "Awaiting Data"})</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-3 h-0.5 bg-ink-soft/60 border-t border-dashed inline-block" />
+              <span className="w-3 h-0.5 bg-[#94A3B8] border-t border-dashed inline-block" />
               <span>Standard ML Baseline (84.4%)</span>
             </div>
           </div>
@@ -559,64 +559,68 @@ export default function ModelAnalysisPage() {
       </div>
 
       {/* Human-In-The-Loop Live Evaluation Studio */}
-      <div className="p-5 rounded-2xl bg-white border border-hairline shadow-xs space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-2.5">
+      <div className="p-6 rounded-3xl bg-white border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.06)] space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#DFEBE8] pb-3">
           <div>
             <div className="flex items-center gap-1.5">
-              <h2 className="font-serif text-base font-medium text-ink">
+              <h2 className="font-sans text-base font-bold text-[#082827]">
                 Validation Feed
               </h2>
               <HelpTooltip text="Confirm whether QureSight's predictions match real physician diagnoses. If left unverified, you can click 'Auto-Evaluate' to verify using medical benchmark thresholds." />
             </div>
-            <p className="text-[11px] text-ink-soft">
+            <p className="text-[11px] text-[#5A7470]">
               Evaluate active session screening predictions to dynamically update live metrics.
             </p>
           </div>
-          <span className="text-xs font-mono text-ink-soft">
+          <span className="text-xs font-mono text-[#5A7470] bg-[#F2F7F6] px-2.5 py-1 rounded-lg border border-[#DFEBE8]">
             {screenings.length - evaluatedCases.length} pending review
           </span>
         </div>
 
         {screenings.length === 0 ? (
-          <div className="p-8 rounded-xl bg-cream/40 border border-hairline text-center space-y-3">
-            <Inbox size={22} className="text-ink-soft mx-auto" />
+          <div className="p-8 sm:p-10 rounded-2xl bg-[#F7FAF9] border border-[#DFEBE8] text-center space-y-3">
+            <div className="w-12 h-12 rounded-2xl bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] mx-auto flex items-center justify-center">
+              <Inbox size={22} className="text-[#006766]" />
+            </div>
             <div className="space-y-1 max-w-sm mx-auto">
-              <p className="font-medium text-ink text-xs">No patient screenings found in database</p>
-              <p className="text-[11px] text-ink-soft font-light">
+              <p className="font-bold text-[#082827] text-sm">No patient screenings found in database</p>
+              <p className="text-xs text-[#5A7470] font-normal">
                 Run a screening to see live performance metrics here.
               </p>
             </div>
-            <Link
-              href="/predict"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-ink text-parchment text-xs font-medium hover:opacity-90 transition-opacity"
-            >
-              <Play size={12} className="fill-parchment" /> Start Patient Screening
-            </Link>
+            <div className="pt-1">
+              <Link
+                href="/predict"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white text-xs font-semibold shadow-md shadow-[#006766]/20 transition-all cursor-pointer"
+              >
+                <Play size={12} className="fill-white" /> Start Patient Screening
+              </Link>
+            </div>
           </div>
         ) : (
           <div className="space-y-2.5">
             {screenings.map((item) => (
               <div
                 key={item.id}
-                className={`p-3.5 rounded-xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
+                className={`p-4 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs ${
                   item.status === "correct"
                     ? "bg-emerald-50/40 border-emerald-200/80"
                     : item.status === "incorrect"
                     ? "bg-red-50/40 border-red-200/80"
-                    : "bg-cream/40 border-hairline"
+                    : "bg-[#F7FAF9] border-[#DFEBE8]"
                 }`}
               >
                 <div className="space-y-1">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="font-mono text-xs font-semibold text-quantum">{item.id}</span>
-                    <span className="text-xs font-medium text-ink">{item.patientName}</span>
-                    <span className="text-[11px] text-ink-soft">({item.disease})</span>
+                    <span className="font-mono text-xs font-bold text-[#006766]">{item.id}</span>
+                    <span className="text-xs font-bold text-[#082827]">{item.patientName}</span>
+                    <span className="text-[11px] text-[#5A7470]">({item.disease})</span>
                   </div>
                   <div className="flex items-center gap-2 text-[11px]">
-                    <span className="font-mono font-medium text-ink">
-                      Predicted: <span className={item.riskLevel === "High" ? "text-red-700" : "text-emerald-700"}>{item.quantumPrediction}</span> ({item.quantumConfidence}%)
+                    <span className="font-mono font-medium text-[#082827]">
+                      Predicted: <span className={item.riskLevel === "High" ? "text-red-700 font-bold" : "text-emerald-700 font-bold"}>{item.quantumPrediction}</span> ({item.quantumConfidence}%)
                     </span>
-                    <span className="text-ink-soft">| Key Driver: {item.topDriver}</span>
+                    <span className="text-[#5A7470]">| Key Driver: {item.topDriver}</span>
                   </div>
                 </div>
 
@@ -626,7 +630,7 @@ export default function ModelAnalysisPage() {
                       <button
                         type="button"
                         onClick={() => handleMarkFeedback(item.id, true)}
-                        className="px-2.5 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs font-medium flex items-center gap-1 transition-colors cursor-pointer"
+                        className="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
                         title="Confirm prediction was accurate"
                       >
                         <ThumbsUp size={12} /> Correct
@@ -634,7 +638,7 @@ export default function ModelAnalysisPage() {
                       <button
                         type="button"
                         onClick={() => handleMarkFeedback(item.id, false)}
-                        className="px-2.5 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 border border-red-200 text-red-800 text-xs font-medium flex items-center gap-1 transition-colors cursor-pointer"
+                        className="px-3 py-1.5 rounded-xl bg-red-50 hover:bg-red-100 border border-red-200 text-red-800 text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
                         title="Flag prediction error"
                       >
                         <ThumbsDown size={12} /> Incorrect
@@ -642,16 +646,16 @@ export default function ModelAnalysisPage() {
                       <button
                         type="button"
                         onClick={() => handleAutoEvaluate(item.id)}
-                        className="px-2.5 py-1.5 rounded-lg bg-parchment hover:bg-cream border border-hairline text-ink text-xs font-medium flex items-center gap-1 transition-colors cursor-pointer"
+                        className="px-3 py-1.5 rounded-xl bg-[#E6F7F4] hover:bg-[#d6f2ed] border border-[#00B489]/30 text-[#006766] text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
                         title="Auto-evaluate from medical thresholds"
                       >
-                        <Sparkles size={11} className="text-quantum" /> Auto-Verify
+                        <Sparkles size={11} className="text-[#00B489]" /> Auto-Verify
                       </button>
                     </>
                   ) : (
                     <div className="flex items-center gap-2">
                       <span
-                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium ${
+                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold shadow-2xs ${
                           item.status === "correct"
                             ? "bg-emerald-100 text-emerald-800 border border-emerald-300"
                             : "bg-red-100 text-red-800 border border-red-300"
@@ -673,7 +677,7 @@ export default function ModelAnalysisPage() {
                           const updated = screenings.map((s) => (s.id === item.id ? { ...s, status: "pending" as const } : s));
                           saveFeedbackMap(updated);
                         }}
-                        className="text-[10px] text-ink-soft hover:text-ink underline cursor-pointer"
+                        className="text-[10px] text-[#5A7470] hover:text-[#082827] underline cursor-pointer"
                       >
                         Re-evaluate
                       </button>

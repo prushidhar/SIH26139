@@ -85,7 +85,7 @@ export default function EvidenceMatrixPage() {
       )}
 
       {loading && !data ? (
-        <div className="p-16 text-center text-xs font-mono text-ink-soft">
+        <div className="p-16 text-center text-xs font-mono text-[#5A7470]">
           <RefreshCw className="w-5 h-5 animate-spin mx-auto text-quantum mb-2" />
           Loading comparison data...
         </div>

@@ -162,7 +162,7 @@ export default function ChronicKidneyStudioPage() {
               <ArrowLeft size={13} /> Back to Screening Terminals
             </Link>
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-2xl bg-teal-50 border border-teal-200 text-teal-700 flex items-center justify-center shadow-xs">
+              <div className="w-11 h-11 rounded-2xl bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] flex items-center justify-center shadow-xs">
                 <Activity size={22} />
               </div>
               <div>
@@ -170,7 +170,7 @@ export default function ChronicKidneyStudioPage() {
                   <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#082827] tracking-tight">
                     Chronic Kidney Disease (CKD) Studio
                   </h1>
-                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-teal-50 border border-teal-200 text-teal-700 font-bold">
+                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] font-bold">
                     ACTIVE • 4-QUBIT VQC
                   </span>
                 </div>
@@ -262,20 +262,20 @@ export default function ChronicKidneyStudioPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Left: Input Form (5 cols) */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="bg-white rounded-2xl border border-hairline p-6 shadow-xs space-y-5">
-            <div className="flex items-center justify-between border-b border-hairline pb-3">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-ink flex items-center gap-2">
+          <div className="bg-white rounded-2xl border border-[#DFEBE8] p-6 shadow-xs space-y-5">
+            <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-[#082827] flex items-center gap-2">
                 <Sliders size={16} className="text-quantum" />
                 Renal Biomarker Panel (8 Inputs)
               </h2>
-              <span className="text-[11px] font-mono text-ink-soft bg-cream px-2 py-0.5 rounded border border-hairline">
+              <span className="text-[11px] font-mono text-[#5A7470] bg-[#F7FAF9] px-2 py-0.5 rounded border border-[#DFEBE8]">
                 KDIGO Standard
               </span>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-medium text-ink-soft mb-1">
+                <label className="block text-xs font-medium text-[#5A7470] mb-1">
                   Age (years)
                 </label>
                 <input
@@ -284,12 +284,12 @@ export default function ChronicKidneyStudioPage() {
                   max="95"
                   value={values.age}
                   onChange={(e) => setValues({ ...values, age: parseFloat(e.target.value) || 0 })}
-                  className="w-full text-sm px-3 py-2 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
+                  className="w-full text-sm px-3 py-2 rounded-lg border border-[#DFEBE8] bg-[#F7FAF9]/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-ink-soft mb-1">
+                <label className="block text-xs font-medium text-[#5A7470] mb-1">
                   Systolic BP (mmHg)
                 </label>
                 <input
@@ -298,12 +298,12 @@ export default function ChronicKidneyStudioPage() {
                   max="200"
                   value={values.blood_pressure}
                   onChange={(e) => setValues({ ...values, blood_pressure: parseFloat(e.target.value) || 0 })}
-                  className="w-full text-sm px-3 py-2 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
+                  className="w-full text-sm px-3 py-2 rounded-lg border border-[#DFEBE8] bg-[#F7FAF9]/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-ink-soft mb-1">
+                <label className="block text-xs font-medium text-[#5A7470] mb-1">
                   Specific Gravity
                 </label>
                 <input
@@ -313,12 +313,12 @@ export default function ChronicKidneyStudioPage() {
                   max="1.035"
                   value={values.specific_gravity}
                   onChange={(e) => setValues({ ...values, specific_gravity: parseFloat(e.target.value) || 0 })}
-                  className="w-full text-sm px-3 py-2 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
+                  className="w-full text-sm px-3 py-2 rounded-lg border border-[#DFEBE8] bg-[#F7FAF9]/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-ink-soft mb-1">
+                <label className="block text-xs font-medium text-[#5A7470] mb-1">
                   Albuminuria (0-5)
                 </label>
                 <input
@@ -327,12 +327,12 @@ export default function ChronicKidneyStudioPage() {
                   max="5"
                   value={values.albumin}
                   onChange={(e) => setValues({ ...values, albumin: parseFloat(e.target.value) || 0 })}
-                  className="w-full text-sm px-3 py-2 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
+                  className="w-full text-sm px-3 py-2 rounded-lg border border-[#DFEBE8] bg-[#F7FAF9]/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-ink-soft mb-1">
+                <label className="block text-xs font-medium text-[#5A7470] mb-1">
                   Blood Glucose (mg/dL)
                 </label>
                 <input
@@ -341,12 +341,12 @@ export default function ChronicKidneyStudioPage() {
                   max="450"
                   value={values.blood_glucose_random}
                   onChange={(e) => setValues({ ...values, blood_glucose_random: parseFloat(e.target.value) || 0 })}
-                  className="w-full text-sm px-3 py-2 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
+                  className="w-full text-sm px-3 py-2 rounded-lg border border-[#DFEBE8] bg-[#F7FAF9]/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-ink-soft mb-1">
+                <label className="block text-xs font-medium text-[#5A7470] mb-1">
                   Blood Urea (mg/dL)
                 </label>
                 <input
@@ -355,12 +355,12 @@ export default function ChronicKidneyStudioPage() {
                   max="250"
                   value={values.blood_urea}
                   onChange={(e) => setValues({ ...values, blood_urea: parseFloat(e.target.value) || 0 })}
-                  className="w-full text-sm px-3 py-2 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
+                  className="w-full text-sm px-3 py-2 rounded-lg border border-[#DFEBE8] bg-[#F7FAF9]/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-ink-soft mb-1">
+                <label className="block text-xs font-medium text-[#5A7470] mb-1">
                   Serum Creatinine (mg/dL)
                 </label>
                 <input
@@ -370,12 +370,12 @@ export default function ChronicKidneyStudioPage() {
                   max="15.0"
                   value={values.serum_creatinine}
                   onChange={(e) => setValues({ ...values, serum_creatinine: parseFloat(e.target.value) || 0 })}
-                  className="w-full text-sm px-3 py-2 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
+                  className="w-full text-sm px-3 py-2 rounded-lg border border-[#DFEBE8] bg-[#F7FAF9]/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-ink-soft mb-1">
+                <label className="block text-xs font-medium text-[#5A7470] mb-1">
                   Hemoglobin (g/dL)
                 </label>
                 <input
@@ -385,7 +385,7 @@ export default function ChronicKidneyStudioPage() {
                   max="20.0"
                   value={values.hemoglobin}
                   onChange={(e) => setValues({ ...values, hemoglobin: parseFloat(e.target.value) || 0 })}
-                  className="w-full text-sm px-3 py-2 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
+                  className="w-full text-sm px-3 py-2 rounded-lg border border-[#DFEBE8] bg-[#F7FAF9]/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
                 />
               </div>
             </div>
@@ -438,77 +438,77 @@ export default function ChronicKidneyStudioPage() {
                     >
                       {telemetry.risk_category}
                     </span>
-                    <h3 className="text-xl font-serif text-ink mt-2 font-medium">
+                    <h3 className="text-xl font-sans font-bold text-[#082827] mt-2 font-medium">
                       {telemetry.prediction_label}
                     </h3>
-                    <p className="text-xs font-mono text-ink-soft mt-1">
+                    <p className="text-xs font-mono text-[#5A7470] mt-1">
                       {telemetry.kdigo_stage} • {telemetry.proteinuria_tier}
                     </p>
                   </div>
 
                   <div className="text-right">
-                    <div className="text-3xl font-serif text-ink font-light">
+                    <div className="text-3xl font-sans font-bold text-[#082827] font-light">
                       {telemetry.risk_score}
-                      <span className="text-sm font-sans text-ink-soft"> / 100</span>
+                      <span className="text-sm font-sans text-[#5A7470]"> / 100</span>
                     </div>
-                    <span className="text-[11px] font-mono text-ink-soft">
+                    <span className="text-[11px] font-mono text-[#5A7470]">
                       Confidence: {telemetry.confidence_percentage}%
                     </span>
                   </div>
                 </div>
 
                 {/* eGFR Callout */}
-                <div className="bg-white/80 p-3.5 rounded-xl border border-hairline flex items-center justify-between">
+                <div className="bg-white/80 p-3.5 rounded-xl border border-[#DFEBE8] flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <HeartPulse size={18} className="text-quantum" />
                     <div>
-                      <div className="text-xs font-semibold text-ink">Estimated GFR (CKD-EPI 2021)</div>
-                      <div className="text-[11px] text-ink-soft">Standardized filtration index</div>
+                      <div className="text-xs font-semibold text-[#082827]">Estimated GFR (CKD-EPI 2021)</div>
+                      <div className="text-[11px] text-[#5A7470]">Standardized filtration index</div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-mono font-bold text-ink">
+                    <div className="text-lg font-mono font-bold text-[#082827]">
                       {telemetry.egfr_value}{" "}
-                      <span className="text-xs font-normal text-ink-soft">{telemetry.egfr_unit}</span>
+                      <span className="text-xs font-normal text-[#5A7470]">{telemetry.egfr_unit}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Clinical Guidance */}
-                <div className="bg-cream/60 p-3.5 rounded-xl border border-hairline text-xs text-ink space-y-1">
-                  <div className="font-semibold text-ink flex items-center gap-1.5">
+                <div className="bg-[#F7FAF9]/60 p-3.5 rounded-xl border border-[#DFEBE8] text-xs text-[#082827] space-y-1">
+                  <div className="font-semibold text-[#082827] flex items-center gap-1.5">
                     <ShieldCheck size={14} className="text-quantum" />
                     Clinical Recommendation:
                   </div>
-                  <p className="text-ink-soft leading-relaxed">{telemetry.clinical_action}</p>
+                  <p className="text-[#5A7470] leading-relaxed">{telemetry.clinical_action}</p>
                 </div>
               </div>
 
               {/* Dual-Engine Comparison */}
-              <div className="bg-white rounded-2xl border border-hairline p-6 shadow-xs space-y-4">
-                <div className="flex items-center justify-between border-b border-hairline pb-3">
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-ink flex items-center gap-2">
+              <div className="bg-white rounded-2xl border border-[#DFEBE8] p-6 shadow-xs space-y-4">
+                <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-[#082827] flex items-center gap-2">
                     <Layers size={16} className="text-quantum" />
                     Dual-Engine Comparison
                   </h3>
-                  <span className="text-xs font-mono text-ink-soft">
+                  <span className="text-xs font-mono text-[#5A7470]">
                     Consensus: <span className="font-bold text-quantum">{telemetry.consensus_status}</span>
                   </span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   {/* Classical Card */}
-                  <div className="p-4 rounded-xl border border-hairline bg-cream/30 space-y-2">
-                    <div className="text-[11px] font-mono text-ink-soft uppercase tracking-wider">
+                  <div className="p-4 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9]/30 space-y-2">
+                    <div className="text-[11px] font-mono text-[#5A7470] uppercase tracking-wider">
                       Classical Baseline
                     </div>
-                    <div className="text-base font-semibold text-ink">
+                    <div className="text-base font-semibold text-[#082827]">
                       {telemetry.classical_results?.prediction}
                     </div>
-                    <div className="text-xs font-mono text-ink-soft">
+                    <div className="text-xs font-mono text-[#5A7470]">
                       Probability: {(telemetry.classical_results?.probability * 100).toFixed(1)}%
                     </div>
-                    <div className="text-[11px] font-mono text-ink-soft">
+                    <div className="text-[11px] font-mono text-[#5A7470]">
                       Latency: {telemetry.classical_results?.latency_ms} ms
                     </div>
                   </div>
@@ -521,10 +521,10 @@ export default function ChronicKidneyStudioPage() {
                     <div className="text-base font-semibold text-quantum">
                       {telemetry.quantum_results?.prediction}
                     </div>
-                    <div className="text-xs font-mono text-ink-soft">
+                    <div className="text-xs font-mono text-[#5A7470]">
                       Probability: {(telemetry.quantum_results?.probability * 100).toFixed(1)}%
                     </div>
-                    <div className="text-[11px] font-mono text-ink-soft">
+                    <div className="text-[11px] font-mono text-[#5A7470]">
                       Latency: {telemetry.quantum_results?.latency_ms} ms
                     </div>
                   </div>
@@ -532,18 +532,18 @@ export default function ChronicKidneyStudioPage() {
 
                 {/* Pauli-Z Expectation Telemetry */}
                 {telemetry.quantum_results?.pauli_z_expvals && (
-                  <div className="bg-cream/40 p-3.5 rounded-xl border border-hairline space-y-2">
-                    <div className="text-xs font-medium text-ink flex items-center justify-between">
+                  <div className="bg-[#F7FAF9]/40 p-3.5 rounded-xl border border-[#DFEBE8] space-y-2">
+                    <div className="text-xs font-medium text-[#082827] flex items-center justify-between">
                       <span className="flex items-center gap-1.5">
                         <Cpu size={14} className="text-quantum" />
                         4-Qubit Expectation Telemetry ⟨Z_i⟩
                       </span>
-                      <span className="font-mono text-[11px] text-ink-soft">Hilbert Space: 2⁴ = 16</span>
+                      <span className="font-mono text-[11px] text-[#5A7470]">Hilbert Space: 2⁴ = 16</span>
                     </div>
                     <div className="grid grid-cols-4 gap-2">
                       {telemetry.quantum_results.pauli_z_expvals.map((v: number, idx: number) => (
-                        <div key={idx} className="bg-white p-2 rounded-lg border border-hairline text-center">
-                          <div className="text-[10px] font-mono text-ink-soft">q[{idx}]</div>
+                        <div key={idx} className="bg-white p-2 rounded-lg border border-[#DFEBE8] text-center">
+                          <div className="text-[10px] font-mono text-[#5A7470]">q[{idx}]</div>
                           <div className="text-xs font-mono font-bold text-quantum">{v.toFixed(3)}</div>
                         </div>
                       ))}
@@ -554,8 +554,8 @@ export default function ChronicKidneyStudioPage() {
 
               {/* Feature Attributions */}
               {telemetry.feature_attributions && (
-                <div className="bg-white rounded-2xl border border-hairline p-6 shadow-xs space-y-4">
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-ink flex items-center gap-2">
+                <div className="bg-white rounded-2xl border border-[#DFEBE8] p-6 shadow-xs space-y-4">
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-[#082827] flex items-center gap-2">
                     <FlaskConical size={16} className="text-quantum" />
                     Biomarker Risk Drivers & Attributions
                   </h3>
@@ -563,14 +563,14 @@ export default function ChronicKidneyStudioPage() {
                     {telemetry.feature_attributions.map((attr: any, idx: number) => (
                       <div
                         key={idx}
-                        className="flex items-center justify-between p-2.5 rounded-xl border border-hairline bg-cream/20 text-xs"
+                        className="flex items-center justify-between p-2.5 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9]/20 text-xs"
                       >
                         <div>
-                          <span className="font-medium text-ink">{attr.feature}</span>
-                          <span className="text-ink-soft font-mono ml-2">({attr.measured})</span>
+                          <span className="font-medium text-[#082827]">{attr.feature}</span>
+                          <span className="text-[#5A7470] font-mono ml-2">({attr.measured})</span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <span className="font-mono text-ink-soft">{attr.status}</span>
+                          <span className="font-mono text-[#5A7470]">{attr.status}</span>
                           <span className="font-mono font-bold text-quantum">
                             +{attr.impact_pct}%
                           </span>
@@ -583,13 +583,13 @@ export default function ChronicKidneyStudioPage() {
             </motion.div>
           ) : (
             /* Empty State */
-            <div className="bg-white rounded-2xl border border-hairline p-12 text-center space-y-4 shadow-xs">
+            <div className="bg-white rounded-2xl border border-[#DFEBE8] p-12 text-center space-y-4 shadow-xs">
               <div className="w-14 h-14 rounded-2xl bg-quantum/10 text-quantum flex items-center justify-center mx-auto border border-quantum/20">
                 <Activity size={28} />
               </div>
               <div>
-                <h3 className="text-lg font-serif text-ink font-light">Renal Telemetry Awaiting Input</h3>
-                <p className="text-xs text-ink-soft max-w-md mx-auto mt-1">
+                <h3 className="text-lg font-sans font-bold text-[#082827] font-light">Renal Telemetry Awaiting Input</h3>
+                <p className="text-xs text-[#5A7470] max-w-md mx-auto mt-1">
                   Adjust patient biomarker levels on the left panel or click any preset profile above, then click &quot;Evaluate Renal Panel&quot; to execute quantum-classical screening.
                 </p>
               </div>

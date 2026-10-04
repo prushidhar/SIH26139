@@ -219,7 +219,7 @@ export default function RealTimeGraphsTab({
   return (
     <div className="space-y-6">
       {/* 1. TOP HEADER BANNER DISPLAYING ACTIVE ARCHITECTURE TYPE */}
-      <div className="bg-white rounded-2xl border border-hairline p-5 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white rounded-2xl border border-[#DFEBE8] p-5 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
           <div
             className={`w-10 h-10 rounded-xl flex items-center justify-center ${
@@ -232,7 +232,7 @@ export default function RealTimeGraphsTab({
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="font-serif text-base font-medium text-ink">
+              <h3 className="font-sans font-bold text-base font-medium text-[#082827]">
                 {isHybrid
                   ? "8-Qubit Variational Quantum Circuit (VQC) Telemetry"
                   : "ResNet-34 Deep Convolutional Architecture & Feature Flow"}
@@ -247,7 +247,7 @@ export default function RealTimeGraphsTab({
                 {isHybrid ? "Quantum Model (8-Qubit VQC)" : "Classical Baseline (ResNet-34)"}
               </span>
             </div>
-            <p className="text-xs text-ink-soft">
+            <p className="text-xs text-[#5A7470]">
               {isHybrid
                 ? "Live quantum gate executions, non-local CNOT entanglement topology, and Pauli-Z expectation values."
                 : "Layer-by-layer spatial receptive field propagation, residual skip connections, and Grad-CAM feature map activations."}
@@ -256,8 +256,8 @@ export default function RealTimeGraphsTab({
         </div>
 
         <div className="flex items-center gap-2 text-xs font-mono">
-          <span className="text-ink-soft">Engine Mode:</span>
-          <strong className="text-ink font-semibold">
+          <span className="text-[#5A7470]">Engine Mode:</span>
+          <strong className="text-[#082827] font-semibold">
             {isHybrid ? "PennyLane Statevector" : "PyTorch CUDA/CPU"}
           </strong>
         </div>
@@ -268,21 +268,21 @@ export default function RealTimeGraphsTab({
         /* ================= QUANTUM CIRCUIT VIEW ================= */
         <div className="space-y-6">
           {/* Visual Quantum Circuit Diagram Card */}
-          <div className="bg-white rounded-2xl border border-hairline p-6 shadow-xs space-y-5">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
+          <div className="bg-white rounded-2xl border border-[#DFEBE8] p-6 shadow-xs space-y-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#DFEBE8] pb-4">
               <div>
                 <div className="flex items-center gap-2">
                   <Sparkles size={16} className="text-quantum" />
-                  <h4 className="text-sm font-bold text-ink">
+                  <h4 className="text-sm font-bold text-[#082827]">
                     QureSight-VQC: 8-Qubit Universal Data Re-Uploading PQC
                   </h4>
                 </div>
-                <p className="text-xs text-ink-soft mt-0.5 font-mono">
+                <p className="text-xs text-[#5A7470] mt-0.5 font-mono">
                   AngleEmbedding |x⟩ = ⨂(i=0..7) Ry(π·x_i)|0⟩ → 3 Layers [Rot(φ,θ,ω) + Periodic CNOT Ring] → 16 ⟨Z_i⟩ &amp; ⟨Z_i Z_{'{'}i+1{'}'}⟩ Readouts
                 </p>
               </div>
 
-              <div className="flex items-center gap-2 text-xs font-mono text-ink-soft">
+              <div className="flex items-center gap-2 text-xs font-mono text-[#5A7470]">
                 <span>Variational Depth: <strong>3 Layers (Re-Uploading)</strong></span>
                 <span>•</span>
                 <span>Parameters: <strong>72 Weights (3×8×3)</strong></span>
@@ -292,7 +292,7 @@ export default function RealTimeGraphsTab({
             </div>
 
             {/* Circuit Wire Rendering Canvas / SVG */}
-            <div className="relative rounded-2xl border border-hairline bg-[#faf8f5] p-4 overflow-x-auto">
+            <div className="relative rounded-2xl border border-[#DFEBE8] bg-[#faf8f5] p-4 overflow-x-auto">
               <div className="min-w-[980px] space-y-3">
                 {QUBIT_CHANNELS.map((q) => {
                   const isSelected = activeQubit === q.wire;
@@ -308,7 +308,7 @@ export default function RealTimeGraphsTab({
                     >
                       {/* Qubit Wire Identifier */}
                       <div className="w-14 shrink-0 flex items-center gap-1.5 font-mono">
-                        <span className={`text-xs font-bold ${isSelected ? "text-quantum" : "text-ink"}`}>
+                        <span className={`text-xs font-bold ${isSelected ? "text-quantum" : "text-[#082827]"}`}>
                           |0⟩_{q.label}
                         </span>
                       </div>
@@ -329,7 +329,7 @@ export default function RealTimeGraphsTab({
                           <div className="w-3.5 h-3.5 rounded-full bg-quantum flex items-center justify-center text-white text-[9px] shadow-2xs">
                             •
                           </div>
-                          <span className="text-[8px] font-mono text-ink-soft">
+                          <span className="text-[8px] font-mono text-[#5A7470]">
                             →q{q.entangledWith}
                           </span>
                         </div>
@@ -345,7 +345,7 @@ export default function RealTimeGraphsTab({
                           <div className="w-3.5 h-3.5 rounded-full bg-purple-700 flex items-center justify-center text-white text-[9px] shadow-2xs">
                             •
                           </div>
-                          <span className="text-[8px] font-mono text-ink-soft">
+                          <span className="text-[8px] font-mono text-[#5A7470]">
                             →q{q.entangledWith}
                           </span>
                         </div>
@@ -361,15 +361,15 @@ export default function RealTimeGraphsTab({
                           <div className="w-3.5 h-3.5 rounded-full bg-amber-600 flex items-center justify-center text-white text-[9px] shadow-2xs">
                             •
                           </div>
-                          <span className="text-[8px] font-mono text-ink-soft">
+                          <span className="text-[8px] font-mono text-[#5A7470]">
                             →q{q.entangledWith}
                           </span>
                         </div>
 
                         {/* Stage 5: Measurement Operator Barrier & Dual Pauli-Z Readout */}
                         <div className="relative z-10 ml-auto flex items-center gap-2 pr-2">
-                          <div className="w-px h-6 bg-ink-soft/40" />
-                          <div className="px-2 py-1 rounded-md bg-ink text-parchment text-[10px] font-mono font-bold flex items-center gap-1 shadow-xs">
+                          <div className="w-px h-6 bg-[#082827]-soft/40" />
+                          <div className="px-2 py-1 rounded-md bg-[#082827] text-white text-[10px] font-mono font-bold flex items-center gap-1 shadow-xs">
                             <span>⟨Z_{q.wire}⟩</span>
                             <span className={q.expectation < 0 ? "text-red-400" : "text-emerald-400"}>
                               {q.expectation > 0 ? "+" : ""}{q.expectation.toFixed(3)}
@@ -377,7 +377,7 @@ export default function RealTimeGraphsTab({
                           </div>
                           <div className="px-2 py-1 rounded-md bg-quantum/15 text-quantum border border-quantum/30 text-[10px] font-mono font-bold flex items-center gap-1 shadow-xs">
                             <span>⟨Z_{q.wire}Z_{q.entangledWith}⟩</span>
-                            <span className="text-ink">
+                            <span className="text-[#082827]">
                               {(q.expectation * 0.73).toFixed(3)}
                             </span>
                           </div>
@@ -391,29 +391,29 @@ export default function RealTimeGraphsTab({
 
             {/* Active Selected Qubit Telemetry Breakdown */}
             {QUBIT_CHANNELS[activeQubit] && (
-              <div className="p-4 rounded-xl bg-cream/30 border border-hairline flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="p-4 rounded-xl bg-[#F7FAF9]/30 border border-[#DFEBE8] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
                     <span className="font-mono font-bold text-xs text-quantum bg-quantum/10 px-2 py-0.5 rounded border border-quantum/20">
                       Active Qubit: q{QUBIT_CHANNELS[activeQubit].wire}
                     </span>
-                    <strong className="text-xs text-ink font-semibold">
+                    <strong className="text-xs text-[#082827] font-semibold">
                       {QUBIT_CHANNELS[activeQubit].feature} ({QUBIT_CHANNELS[activeQubit].lead})
                     </strong>
                   </div>
-                  <p className="text-xs text-ink-soft">
+                  <p className="text-xs text-[#5A7470]">
                     {QUBIT_CHANNELS[activeQubit].role}. Entangled non-locally with wire |0⟩_q{QUBIT_CHANNELS[activeQubit].entangledWith} via StronglyEntanglingLayers CNOT ring across all 3 data re-uploading stages.
                   </p>
                 </div>
 
                 <div className="flex items-center gap-4 text-xs font-mono shrink-0">
                   <div>
-                    <span className="text-[10px] text-ink-soft block uppercase">Encoding Rotation Ry</span>
-                    <strong className="text-ink">{QUBIT_CHANNELS[activeQubit].angle}</strong>
+                    <span className="text-[10px] text-[#5A7470] block uppercase">Encoding Rotation Ry</span>
+                    <strong className="text-[#082827]">{QUBIT_CHANNELS[activeQubit].angle}</strong>
                   </div>
                   <div className="h-6 w-px bg-hairline" />
                   <div>
-                    <span className="text-[10px] text-ink-soft block uppercase">⟨Z_{activeQubit}⟩ Polarization</span>
+                    <span className="text-[10px] text-[#5A7470] block uppercase">⟨Z_{activeQubit}⟩ Polarization</span>
                     <strong
                       className={
                         QUBIT_CHANNELS[activeQubit].expectation < 0
@@ -427,7 +427,7 @@ export default function RealTimeGraphsTab({
                   </div>
                   <div className="h-6 w-px bg-hairline" />
                   <div>
-                    <span className="text-[10px] text-ink-soft block uppercase">⟨Z_{activeQubit}Z_{QUBIT_CHANNELS[activeQubit].entangledWith}⟩ Correlation</span>
+                    <span className="text-[10px] text-[#5A7470] block uppercase">⟨Z_{activeQubit}Z_{QUBIT_CHANNELS[activeQubit].entangledWith}⟩ Correlation</span>
                     <strong className="text-quantum font-bold">
                       {(QUBIT_CHANNELS[activeQubit].expectation * 0.73).toFixed(3)}
                     </strong>
@@ -437,12 +437,12 @@ export default function RealTimeGraphsTab({
             )}
 
             {/* Authentic PennyLane Circuit Code Drawer */}
-            <div className="p-4 rounded-xl bg-ink text-parchment font-mono text-xs space-y-2 border border-ink/20">
-              <div className="flex items-center justify-between border-b border-hairline/20 pb-2 text-[11px] text-parchment/70">
+            <div className="p-4 rounded-xl bg-[#082827] text-white font-mono text-xs space-y-2 border border-ink/20">
+              <div className="flex items-center justify-between border-b border-[#DFEBE8]/20 pb-2 text-[11px] text-white/70">
                 <span>Authentic PennyLane QNode Source Code (8-Qubit VQC)</span>
                 <span className="text-emerald-400">● 100% Authentic Runtime Circuit</span>
               </div>
-              <pre className="text-[11px] text-parchment/90 overflow-x-auto whitespace-pre font-mono p-1">
+              <pre className="text-[11px] text-white/90 overflow-x-auto whitespace-pre font-mono p-1">
 {`dev = qml.device("default.qubit", wires=8)
 
 @qml.qnode(dev, interface="torch", diff_method="backprop")
@@ -462,39 +462,39 @@ def ideal_cardiac_circuit(inputs, weights):
 
           {/* Quantum State Space & Telemetry Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-2xl border border-hairline p-5 shadow-xs space-y-2">
+            <div className="bg-white rounded-2xl border border-[#DFEBE8] p-5 shadow-xs space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono text-ink-soft uppercase font-bold">
+                <span className="text-xs font-mono text-[#5A7470] uppercase font-bold">
                   Hilbert Space Dimension
                 </span>
                 <Binary size={14} className="text-quantum" />
               </div>
-              <div className="text-2xl font-mono font-bold text-ink">
+              <div className="text-2xl font-mono font-bold text-[#082827]">
                 256 States
               </div>
-              <p className="text-[11px] text-ink-soft">
+              <p className="text-[11px] text-[#5A7470]">
                 Complex Hilbert space $\mathbb&#123;C&#125;^&#123;2^8&#125;$ spanned by 8 entangled qubits with full unitary density matrix representation.
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl border border-hairline p-5 shadow-xs space-y-2">
+            <div className="bg-white rounded-2xl border border-[#DFEBE8] p-5 shadow-xs space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono text-ink-soft uppercase font-bold">
+                <span className="text-xs font-mono text-[#5A7470] uppercase font-bold">
                   State Purity Tr(ρ²)
                 </span>
                 <CheckCircle2 size={14} className="text-emerald-600" />
               </div>
               <div className="text-2xl font-mono font-bold text-emerald-700">
-                0.998 <span className="text-xs font-normal text-ink-soft">(Pure State)</span>
+                0.998 <span className="text-xs font-normal text-[#5A7470]">(Pure State)</span>
               </div>
-              <p className="text-[11px] text-ink-soft">
+              <p className="text-[11px] text-[#5A7470]">
                 Negligible decoherence in statevector simulation; state fidelity maintained across both entangling layer cycles.
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl border border-hairline p-5 shadow-xs space-y-2">
+            <div className="bg-white rounded-2xl border border-[#DFEBE8] p-5 shadow-xs space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono text-ink-soft uppercase font-bold">
+                <span className="text-xs font-mono text-[#5A7470] uppercase font-bold">
                   Trainable Parameters
                 </span>
                 <Zap size={14} className="text-quantum" />
@@ -502,7 +502,7 @@ def ideal_cardiac_circuit(inputs, weights):
               <div className="text-2xl font-mono font-bold text-quantum">
                 72 Weights
               </div>
-              <p className="text-[11px] text-ink-soft">
+              <p className="text-[11px] text-[#5A7470]">
                 3 Layers × 8 Qubits × 3 Euler Angles (φ, θ, ω) with 16 Readout Observables. 299,177× parameter compression compared to the classical 21.5M ResNet-34 model.
               </p>
             </div>
@@ -512,22 +512,22 @@ def ideal_cardiac_circuit(inputs, weights):
         /* ================= CLASSICAL RESNET-18 ARCHITECTURE VIEW ================= */
         <div className="space-y-6">
           {/* Classical Pipeline Stages Selector */}
-          <div className="bg-white rounded-2xl border border-hairline p-6 shadow-xs space-y-5">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
+          <div className="bg-white rounded-2xl border border-[#DFEBE8] p-6 shadow-xs space-y-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#DFEBE8] pb-4">
               <div>
                 <div className="flex items-center gap-2">
                   <Network size={16} className="text-blue-600" />
-                  <h4 className="text-sm font-bold text-ink">
+                  <h4 className="text-sm font-bold text-[#082827]">
                     ResNet-34 Deep Convolutional Network Stage Hierarchy
                   </h4>
                 </div>
-                <p className="text-xs text-ink-soft mt-0.5">
+                <p className="text-xs text-[#5A7470] mt-0.5">
                   34-layer residual architecture processing 12-lead ECG strips across hierarchical spatial receptive fields.
                 </p>
               </div>
 
-              <div className="text-xs font-mono text-ink-soft">
-                Total Parameters: <strong className="text-ink">11,178,564</strong> (44.7 MB)
+              <div className="text-xs font-mono text-[#5A7470]">
+                Total Parameters: <strong className="text-[#082827]">11,178,564</strong> (44.7 MB)
               </div>
             </div>
 
@@ -542,21 +542,21 @@ def ideal_cardiac_circuit(inputs, weights):
                     className={`p-3 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between min-h-[96px] ${
                       isCurrent
                         ? "bg-blue-50/70 border-blue-300 shadow-2xs ring-1 ring-blue-300"
-                        : "bg-cream/20 border-hairline hover:bg-cream/50"
+                        : "bg-[#F7FAF9]/20 border-[#DFEBE8] hover:bg-[#F7FAF9]/50"
                     }`}
                   >
                     <div>
-                      <span className="text-[10px] font-mono text-ink-soft block uppercase font-bold">
+                      <span className="text-[10px] font-mono text-[#5A7470] block uppercase font-bold">
                         Stage {sIdx}
                       </span>
                       <strong className={`text-xs font-bold block mt-0.5 leading-snug ${
-                        isCurrent ? "text-blue-700" : "text-ink"
+                        isCurrent ? "text-blue-700" : "text-[#082827]"
                       }`}>
                         {stg.title.split(" (")[0]}
                       </strong>
                     </div>
 
-                    <div className="mt-2 text-[10px] font-mono text-ink-soft">
+                    <div className="mt-2 text-[10px] font-mono text-[#5A7470]">
                       {stg.shape}
                     </div>
                   </button>
@@ -572,21 +572,21 @@ def ideal_cardiac_circuit(inputs, weights):
                     <span className="px-2 py-0.5 rounded bg-blue-600 text-white font-mono text-[10px] font-bold">
                       ACTIVE LAYER
                     </span>
-                    <h5 className="font-serif text-base font-bold text-ink">
+                    <h5 className="font-sans font-bold text-base font-bold text-[#082827]">
                       {currentStage.title}
                     </h5>
                   </div>
-                  <p className="text-xs text-ink-soft">{currentStage.desc}</p>
+                  <p className="text-xs text-[#5A7470]">{currentStage.desc}</p>
                 </div>
 
                 <div className="flex items-center gap-4 text-xs font-mono shrink-0">
                   <div>
-                    <span className="text-[10px] text-ink-soft uppercase block">Output Tensor</span>
-                    <strong className="text-ink font-bold">{currentStage.shape}</strong>
+                    <span className="text-[10px] text-[#5A7470] uppercase block">Output Tensor</span>
+                    <strong className="text-[#082827] font-bold">{currentStage.shape}</strong>
                   </div>
                   <div className="h-6 w-px bg-blue-200" />
                   <div>
-                    <span className="text-[10px] text-ink-soft uppercase block">Receptive Field</span>
+                    <span className="text-[10px] text-[#5A7470] uppercase block">Receptive Field</span>
                     <strong className="text-blue-700 font-bold">{currentStage.receptiveField}</strong>
                   </div>
                 </div>
@@ -594,19 +594,19 @@ def ideal_cardiac_circuit(inputs, weights):
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
                 <div className="p-3 rounded-lg bg-white border border-blue-200/80">
-                  <span className="text-[10px] font-mono text-ink-soft uppercase block">Layer FLOPs</span>
-                  <strong className="text-sm font-mono text-ink">{currentStage.flops}</strong>
-                  <span className="text-[10px] text-ink-soft block mt-0.5">Floating-point operations</span>
+                  <span className="text-[10px] font-mono text-[#5A7470] uppercase block">Layer FLOPs</span>
+                  <strong className="text-sm font-mono text-[#082827]">{currentStage.flops}</strong>
+                  <span className="text-[10px] text-[#5A7470] block mt-0.5">Floating-point operations</span>
                 </div>
                 <div className="p-3 rounded-lg bg-white border border-blue-200/80">
-                  <span className="text-[10px] font-mono text-ink-soft uppercase block">Parameters</span>
-                  <strong className="text-sm font-mono text-ink">{currentStage.params.toLocaleString()}</strong>
-                  <span className="text-[10px] text-ink-soft block mt-0.5">Trained kernel weights + biases</span>
+                  <span className="text-[10px] font-mono text-[#5A7470] uppercase block">Parameters</span>
+                  <strong className="text-sm font-mono text-[#082827]">{currentStage.params.toLocaleString()}</strong>
+                  <span className="text-[10px] text-[#5A7470] block mt-0.5">Trained kernel weights + biases</span>
                 </div>
                 <div className="p-3 rounded-lg bg-white border border-blue-200/80">
-                  <span className="text-[10px] font-mono text-ink-soft uppercase block">Activation Function</span>
-                  <strong className="text-sm text-ink">{currentStage.activation}</strong>
-                  <span className="text-[10px] text-ink-soft block mt-0.5">Non-linear feature mapping</span>
+                  <span className="text-[10px] font-mono text-[#5A7470] uppercase block">Activation Function</span>
+                  <strong className="text-sm text-[#082827]">{currentStage.activation}</strong>
+                  <span className="text-[10px] text-[#5A7470] block mt-0.5">Non-linear feature mapping</span>
                 </div>
               </div>
             </div>
@@ -614,24 +614,24 @@ def ideal_cardiac_circuit(inputs, weights):
 
           {/* Classical Metrics & Feature Map Distribution */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-2xl border border-hairline p-5 shadow-xs space-y-2">
+            <div className="bg-white rounded-2xl border border-[#DFEBE8] p-5 shadow-xs space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono text-ink-soft uppercase font-bold">
+                <span className="text-xs font-mono text-[#5A7470] uppercase font-bold">
                   Total FLOPs Execution
                 </span>
                 <Activity size={14} className="text-blue-600" />
               </div>
-              <div className="text-2xl font-mono font-bold text-ink">
+              <div className="text-2xl font-mono font-bold text-[#082827]">
                 1.82 GFLOPs
               </div>
-              <p className="text-[11px] text-ink-soft">
+              <p className="text-[11px] text-[#5A7470]">
                 Full forward-pass computational cost across 18 residual convolutional layers evaluated in 35.31 ms.
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl border border-hairline p-5 shadow-xs space-y-2">
+            <div className="bg-white rounded-2xl border border-[#DFEBE8] p-5 shadow-xs space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono text-ink-soft uppercase font-bold">
+                <span className="text-xs font-mono text-[#5A7470] uppercase font-bold">
                   Grad-CAM Receptive Target
                 </span>
                 <CheckCircle2 size={14} className="text-quantum" />
@@ -639,22 +639,22 @@ def ideal_cardiac_circuit(inputs, weights):
               <div className="text-2xl font-mono font-bold text-quantum">
                 Layer 4 Conv2
               </div>
-              <p className="text-[11px] text-ink-soft">
+              <p className="text-[11px] text-[#5A7470]">
                 Targeted gradient backpropagation layer yielding 95×95 pixel effective receptive field over 12-lead waveforms.
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl border border-hairline p-5 shadow-xs space-y-2">
+            <div className="bg-white rounded-2xl border border-[#DFEBE8] p-5 shadow-xs space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono text-ink-soft uppercase font-bold">
+                <span className="text-xs font-mono text-[#5A7470] uppercase font-bold">
                   Model Weight Size
                 </span>
                 <Cpu size={14} className="text-blue-600" />
               </div>
-              <div className="text-2xl font-mono font-bold text-ink">
-                44.7 MB <span className="text-xs font-normal text-ink-soft">(FP32)</span>
+              <div className="text-2xl font-mono font-bold text-[#082827]">
+                44.7 MB <span className="text-xs font-normal text-[#5A7470]">(FP32)</span>
               </div>
-              <p className="text-[11px] text-ink-soft">
+              <p className="text-[11px] text-[#5A7470]">
                 Standard PyTorch deep convolutional checkpoint trained on verified 4,000+ Kaggle 12-lead ECG cohorts.
               </p>
             </div>

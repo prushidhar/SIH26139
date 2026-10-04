@@ -99,12 +99,12 @@ export default function ModelComparisonTab({
 
   return (
     /* 1 SINGLE UNIFIED WHITE CARD */
-    <div className="bg-white rounded-2xl border border-hairline shadow-xs overflow-hidden">
+    <div className="bg-white rounded-2xl border border-[#DFEBE8] shadow-xs overflow-hidden">
       {/* Header */}
-      <div className="p-5 border-b border-hairline/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-cream/15">
+      <div className="p-5 border-b border-[#DFEBE8]/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#F7FAF9]/15">
         <div className="space-y-0.5">
           <div className="flex items-center gap-2">
-            <h3 className="text-sm font-bold text-ink">
+            <h3 className="text-sm font-bold text-[#082827]">
               Genuine Model Comparison: Classical Baseline vs. Quantum VQC
             </h3>
             <HelpTooltip
@@ -112,7 +112,7 @@ export default function ModelComparisonTab({
               text="Side-by-side empirical performance metrics directly evaluated on the patient's verified laboratory biopsy vector."
             />
           </div>
-          <p className="text-xs text-ink-soft">
+          <p className="text-xs text-[#5A7470]">
             Independent evaluation metrics comparing the classical CPU ensemble against the 8-qubit variational quantum simulator for {patientName}&apos;s biopsy.
           </p>
         </div>
@@ -152,7 +152,7 @@ export default function ModelComparisonTab({
       )}
 
       {/* Middle: 2 Side-by-Side Model Summaries Separated by Hairline Divider */}
-      <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-hairline border-b border-hairline">
+      <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-hairline border-b border-[#DFEBE8]">
         {/* Left Column: Classical Baseline */}
         <div className={`p-6 space-y-4 ${!isHybrid ? "bg-blue-50/20" : ""}`}>
           <div className="flex items-center justify-between">
@@ -164,35 +164,35 @@ export default function ModelComparisonTab({
                 Classical Baseline
               </span>
             </div>
-            <span className="text-xs text-ink-soft font-mono font-semibold">~{cxLatency} ms</span>
+            <span className="text-xs text-[#5A7470] font-mono font-semibold">~{cxLatency} ms</span>
           </div>
 
           <div>
-            <span className="text-xs text-ink-soft">Calculated Risk Score:</span>
+            <span className="text-xs text-[#5A7470]">Calculated Risk Score:</span>
             <div className="flex items-baseline gap-2 mt-1">
               <span className="text-3xl font-black font-mono text-blue-700">{cxRisk}%</span>
-              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-white border border-hairline text-ink">
+              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-white border border-[#DFEBE8] text-[#082827]">
                 {cxPrediction} ({cxConfidence}% certainty)
               </span>
             </div>
           </div>
 
-          <div className="space-y-2 text-xs border-t border-hairline/70 pt-3 text-ink">
+          <div className="space-y-2 text-xs border-t border-[#DFEBE8]/70 pt-3 text-[#082827]">
             <div className="flex justify-between">
-              <span className="text-ink-soft">Architecture:</span>
+              <span className="text-[#5A7470]">Architecture:</span>
               <strong className="font-semibold">SVM-RBF + XGBoost Ensemble</strong>
             </div>
             <div className="flex justify-between">
-              <span className="text-ink-soft">Historical Accuracy:</span>
+              <span className="text-[#5A7470]">Historical Accuracy:</span>
               <strong className="text-emerald-600 font-bold">98.24%</strong>
             </div>
             <div className="flex justify-between">
-              <span className="text-ink-soft">Execution Stack:</span>
+              <span className="text-[#5A7470]">Execution Stack:</span>
               <strong className="font-semibold">Classical CPU SIMD Ensembles</strong>
             </div>
             <div className="flex justify-between">
-              <span className="text-ink-soft">Algorithmic Strength:</span>
-              <strong className="font-semibold text-ink">High Throughput &amp; Rapid Inference</strong>
+              <span className="text-[#5A7470]">Algorithmic Strength:</span>
+              <strong className="font-semibold text-[#082827]">High Throughput &amp; Rapid Inference</strong>
             </div>
           </div>
         </div>
@@ -208,34 +208,34 @@ export default function ModelComparisonTab({
                 Quantum Simulator (8-Qubit VQC)
               </span>
             </div>
-            <span className="text-xs text-ink-soft font-mono font-semibold">~{tfLatency} ms</span>
+            <span className="text-xs text-[#5A7470] font-mono font-semibold">~{tfLatency} ms</span>
           </div>
 
           <div>
-            <span className="text-xs text-ink-soft">Calculated Risk Score:</span>
+            <span className="text-xs text-[#5A7470]">Calculated Risk Score:</span>
             <div className="flex items-baseline gap-2 mt-1">
               <span className="text-3xl font-black font-mono text-purple-700">{tfRisk}%</span>
-              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-white border border-hairline text-ink">
+              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-white border border-[#DFEBE8] text-[#082827]">
                 {tfPrediction} ({tfConfidence}% certainty)
               </span>
             </div>
           </div>
 
-          <div className="space-y-2 text-xs border-t border-hairline/70 pt-3 text-ink">
+          <div className="space-y-2 text-xs border-t border-[#DFEBE8]/70 pt-3 text-[#082827]">
             <div className="flex justify-between">
-              <span className="text-ink-soft">Architecture:</span>
+              <span className="text-[#5A7470]">Architecture:</span>
               <strong className="font-semibold">8-Qubit ZZ Feature Map + VQC</strong>
             </div>
             <div className="flex justify-between">
-              <span className="text-ink-soft">Historical Accuracy:</span>
+              <span className="text-[#5A7470]">Historical Accuracy:</span>
               <strong className="text-purple-700 font-bold">97.80%</strong>
             </div>
             <div className="flex justify-between">
-              <span className="text-ink-soft">Execution Stack:</span>
+              <span className="text-[#5A7470]">Execution Stack:</span>
               <strong className="font-semibold">Quantum Statevector Simulator</strong>
             </div>
             <div className="flex justify-between">
-              <span className="text-ink-soft">Algorithmic Strength:</span>
+              <span className="text-[#5A7470]">Algorithmic Strength:</span>
               <strong className="font-semibold text-quantum">High-Order Entanglement Sensitivity</strong>
             </div>
           </div>
@@ -244,14 +244,14 @@ export default function ModelComparisonTab({
 
       {/* Bottom: Detailed Factor Comparison Table */}
       <div>
-        <div className="p-4 border-b border-hairline bg-cream/20">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-ink">
+        <div className="p-4 border-b border-[#DFEBE8] bg-[#F7FAF9]/20">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-[#082827]">
             Detailed Performance, Efficiency &amp; Algorithmic Comparison
           </h4>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-xs text-left">
-            <thead className="bg-cream/40 text-ink-soft font-mono uppercase text-[10px] border-b border-hairline">
+            <thead className="bg-[#F7FAF9]/40 text-[#5A7470] font-mono uppercase text-[10px] border-b border-[#DFEBE8]">
               <tr>
                 <th className="py-3 px-4 font-semibold">Evaluation Factor</th>
                 <th className="py-3 px-4 font-semibold text-blue-700">Classical Baseline</th>
@@ -261,11 +261,11 @@ export default function ModelComparisonTab({
             </thead>
             <tbody className="divide-y divide-hairline">
               {comparisonFactors.map((row, idx) => (
-                <tr key={idx} className="hover:bg-cream/5 transition-colors">
-                  <td className="py-3 px-4 font-semibold text-ink">{row.factor}</td>
+                <tr key={idx} className="hover:bg-[#F7FAF9]/5 transition-colors">
+                  <td className="py-3 px-4 font-semibold text-[#082827]">{row.factor}</td>
                   <td className="py-3 px-4 font-mono font-bold text-blue-800">{row.cx}</td>
                   <td className="py-3 px-4 font-mono font-bold text-purple-800">{row.tf}</td>
-                  <td className="py-3 px-4 text-ink-soft leading-relaxed">{row.takeaway}</td>
+                  <td className="py-3 px-4 text-[#5A7470] leading-relaxed">{row.takeaway}</td>
                 </tr>
               ))}
             </tbody>

@@ -56,7 +56,7 @@ export default function RealTimeGraphsTab({
 
   if (!mounted) {
     return (
-      <div className="p-8 text-center text-xs text-ink-soft bg-white rounded-2xl border border-hairline shadow-xs">
+      <div className="p-8 text-center text-xs text-[#5A7470] bg-white rounded-2xl border border-[#DFEBE8] shadow-xs">
         Loading real-time model graphs...
       </div>
     );
@@ -242,7 +242,7 @@ export default function RealTimeGraphsTab({
   return (
     <div className="space-y-6">
       {/* Top Overview Banner with Model Switch Indicator */}
-      <div className="p-5 rounded-2xl bg-white border border-hairline shadow-xs">
+      <div className="p-5 rounded-2xl bg-white border border-[#DFEBE8] shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="space-y-0.5">
             <div className="flex items-center gap-2">
@@ -251,7 +251,7 @@ export default function RealTimeGraphsTab({
               ) : (
                 <Cpu size={16} className="text-blue-600" />
               )}
-              <h3 className="text-sm font-bold text-ink">
+              <h3 className="text-sm font-bold text-[#082827]">
                 Real-Time Model Telemetry &amp; Decision Geometry
               </h3>
               <HelpTooltip
@@ -259,7 +259,7 @@ export default function RealTimeGraphsTab({
                 text={`Continuous mathematical plots computed directly from ${patientName || "the patient"}'s biomarker inputs, ${isHybrid ? "PennyLane quantum Pauli-Z statevectors" : "classical SVM-RBF decision hyperplanes"}, and dual classification manifolds.`}
               />
             </div>
-            <p className="text-xs text-ink-soft">
+            <p className="text-xs text-[#5A7470]">
               {isHybrid
                 ? `Active Architecture: 8-Qubit VQC Simulator · Visualizing Pauli-Z quantum rotations and non-linear boundary manifolds for ${patientName}.`
                 : `Active Architecture: Classical Ensemble (SVM + XGBoost) · Visualizing Euclidean hyperplane distance and Gini decision tree splits for ${patientName}.`}
@@ -289,7 +289,7 @@ export default function RealTimeGraphsTab({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-1">
           <div className="flex items-center gap-2">
             <Microscope size={15} className="text-emerald-700" />
-            <h4 className="text-xs font-bold uppercase tracking-wider text-ink">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#082827]">
               Part 1: Patient Biological Baseline (Physical Biopsy Inputs)
             </h4>
           </div>
@@ -299,18 +299,18 @@ export default function RealTimeGraphsTab({
         </div>
 
         {/* GRAPH 1: Cytology Radar Deviation Profile */}
-        <div className="bg-white rounded-2xl border border-hairline shadow-xs p-5 space-y-3">
-          <div className="flex items-center justify-between border-b border-hairline pb-3">
+        <div className="bg-white rounded-2xl border border-[#DFEBE8] shadow-xs p-5 space-y-3">
+          <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
             <div>
-              <h4 className="text-xs font-bold text-ink flex items-center gap-1.5">
+              <h4 className="text-xs font-bold text-[#082827] flex items-center gap-1.5">
                 <BarChart2 size={14} className="text-quantum" />
                 <span>1. Multi-Dimensional Biomarker Radar</span>
               </h4>
-              <p className="text-[11px] text-ink-soft">
+              <p className="text-[11px] text-[#5A7470]">
                 {patientName}&apos;s 8 cellular features normalized against the healthy benign baseline (1.0x).
               </p>
             </div>
-            <span className="text-[10px] font-mono bg-cream px-2 py-0.5 rounded border border-hairline text-ink-soft">
+            <span className="text-[10px] font-mono bg-[#F7FAF9] px-2 py-0.5 rounded border border-[#DFEBE8] text-[#5A7470]">
               Peak Deviation: {radarDomainMax}x
             </span>
           </div>
@@ -330,15 +330,15 @@ export default function RealTimeGraphsTab({
                     if (!payload || payload.length === 0) return null;
                     const data = payload[0].payload;
                     return (
-                      <div className="bg-white p-2.5 rounded-xl border border-hairline shadow-md text-xs space-y-1">
-                        <strong className="text-ink font-bold block">{data.feature}</strong>
-                        <div className="text-ink-soft">
-                          Measured: <strong className="text-ink">{data.rawMeasured} {data.unit}</strong>
+                      <div className="bg-white p-2.5 rounded-xl border border-[#DFEBE8] shadow-md text-xs space-y-1">
+                        <strong className="text-[#082827] font-bold block">{data.feature}</strong>
+                        <div className="text-[#5A7470]">
+                          Measured: <strong className="text-[#082827]">{data.rawMeasured} {data.unit}</strong>
                         </div>
                         <div className="text-quantum font-mono">
                           Patient Ratio: <strong>{data.patient}x</strong> baseline
                         </div>
-                        <div className="text-ink-muted text-[10px]">
+                        <div className="text-[#082827]-muted text-[10px]">
                           Normal Limit: {data.normalLimit}x baseline
                         </div>
                       </div>
@@ -364,7 +364,7 @@ export default function RealTimeGraphsTab({
               </RadarChart>
             </ResponsiveContainer>
           </div>
-          <p className="text-[11px] text-ink-soft font-light bg-cream/50 p-2.5 rounded-xl border border-hairline/80 leading-relaxed">
+          <p className="text-[11px] text-[#5A7470] font-light bg-[#F7FAF9]/50 p-2.5 rounded-xl border border-[#DFEBE8]/80 leading-relaxed">
             ℹ️ <strong>Clinical Note:</strong> This radar chart represents {patientName}&apos;s physical cytopathology metrics (cell nucleus diameter, perimeter, area, concavity). Because these represent the patient&apos;s physical tissue sample, they remain constant as ground-truth inputs to both AI models.
           </p>
         </div>
@@ -375,7 +375,7 @@ export default function RealTimeGraphsTab({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-1">
           <div className="flex items-center gap-2">
             <Split size={15} className="text-quantum" />
-            <h4 className="text-xs font-bold uppercase tracking-wider text-ink">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#082827]">
               Part 2: Model Mathematical Inference ({isHybrid ? "Quantum VQC" : "Classical Baseline"})
             </h4>
           </div>
@@ -397,10 +397,10 @@ export default function RealTimeGraphsTab({
         {/* Grid: Charts 2, 3, 4 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* GRAPH 2: Model Architecture Telemetry (Quantum Pauli-Z vs Classical Margin) */}
-          <div className="bg-white rounded-2xl border border-hairline shadow-xs p-5 space-y-3">
-            <div className="flex items-center justify-between border-b border-hairline pb-3">
+          <div className="bg-white rounded-2xl border border-[#DFEBE8] shadow-xs p-5 space-y-3">
+            <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
               <div>
-                <h4 className="text-xs font-bold text-ink flex items-center gap-1.5">
+                <h4 className="text-xs font-bold text-[#082827] flex items-center gap-1.5">
                   {isHybrid ? (
                     <Sparkles size={14} className="text-purple-600" />
                   ) : (
@@ -412,7 +412,7 @@ export default function RealTimeGraphsTab({
                       : "2. Classical Hyperplane Margins & Tree Splits"}
                   </span>
                 </h4>
-                <p className="text-[11px] text-ink-soft">
+                <p className="text-[11px] text-[#5A7470]">
                   {isHybrid
                     ? "Pauli-Z quantum spin projection across 8-qubit variational circuit wires."
                     : "SVM decision hyperplane margin distance and XGBoost split weights."}
@@ -443,8 +443,8 @@ export default function RealTimeGraphsTab({
                       if (!payload || payload.length === 0) return null;
                       const data = payload[0].payload;
                       return (
-                        <div className="bg-white p-2.5 rounded-xl border border-hairline shadow-md text-xs space-y-1">
-                          <strong className="text-ink font-bold block">
+                        <div className="bg-white p-2.5 rounded-xl border border-[#DFEBE8] shadow-md text-xs space-y-1">
+                          <strong className="text-[#082827] font-bold block">
                             {data.name} ({data.id})
                           </strong>
                           <div
@@ -454,7 +454,7 @@ export default function RealTimeGraphsTab({
                           >
                             {data.metricLabel}: <strong>{data.metricValue}</strong>
                           </div>
-                          <div className="text-ink-soft font-mono">
+                          <div className="text-[#5A7470] font-mono">
                             {data.secondaryLabel}: <strong>{data.secondaryMetric}%</strong>
                           </div>
                         </div>
@@ -488,20 +488,20 @@ export default function RealTimeGraphsTab({
           </div>
 
           {/* GRAPH 3: SHAP / Saliency Diverging Waterfall Chart */}
-          <div className="bg-white rounded-2xl border border-hairline shadow-xs p-5 space-y-3">
-            <div className="flex items-center justify-between border-b border-hairline pb-3">
+          <div className="bg-white rounded-2xl border border-[#DFEBE8] shadow-xs p-5 space-y-3">
+            <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
               <div>
-                <h4 className="text-xs font-bold text-ink flex items-center gap-1.5">
+                <h4 className="text-xs font-bold text-[#082827] flex items-center gap-1.5">
                   <Activity size={14} className="text-red-500" />
                   <span>
                     3. Feature Risk Attributions ({isHybrid ? "Quantum Saliency" : "Tree SHAP"})
                   </span>
                 </h4>
-                <p className="text-[11px] text-ink-soft">
+                <p className="text-[11px] text-[#5A7470]">
                   Impact % shifting risk calculation toward Malignant (+) vs Benign (-).
                 </p>
               </div>
-              <span className="text-[10px] font-mono bg-cream px-2 py-0.5 rounded border border-hairline text-ink-soft">
+              <span className="text-[10px] font-mono bg-[#F7FAF9] px-2 py-0.5 rounded border border-[#DFEBE8] text-[#5A7470]">
                 Diverging Impact
               </span>
             </div>
@@ -526,9 +526,9 @@ export default function RealTimeGraphsTab({
                       const data = payload[0].payload;
                       const isRisk = data.impact > 0;
                       return (
-                        <div className="bg-white p-2.5 rounded-xl border border-hairline shadow-md text-xs space-y-1">
-                          <strong className="text-ink font-bold block">{data.feature}</strong>
-                          <div className="text-ink-soft">Measured: {data.measured}</div>
+                        <div className="bg-white p-2.5 rounded-xl border border-[#DFEBE8] shadow-md text-xs space-y-1">
+                          <strong className="text-[#082827] font-bold block">{data.feature}</strong>
+                          <div className="text-[#5A7470]">Measured: {data.measured}</div>
                           <div
                             className={`font-mono font-bold ${
                               isRisk ? "text-red-600" : "text-emerald-600"
@@ -536,7 +536,7 @@ export default function RealTimeGraphsTab({
                           >
                             Impact: {isRisk ? `+${data.impact}%` : `${data.impact}%`}
                           </div>
-                          <div className="text-[10px] text-ink-muted">
+                          <div className="text-[10px] text-[#082827]-muted">
                             {isRisk ? "Elevates overall risk calculation" : "Protective (Reduces risk)"}
                           </div>
                         </div>
@@ -559,14 +559,14 @@ export default function RealTimeGraphsTab({
         </div>
 
         {/* GRAPH 4: Decision Manifold & Probability Continuum with Dual Operating Points */}
-        <div className="bg-white rounded-2xl border border-hairline shadow-xs p-5 space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-hairline pb-3 gap-2">
+        <div className="bg-white rounded-2xl border border-[#DFEBE8] shadow-xs p-5 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#DFEBE8] pb-3 gap-2">
             <div>
-              <h4 className="text-xs font-bold text-ink flex items-center gap-1.5">
+              <h4 className="text-xs font-bold text-[#082827] flex items-center gap-1.5">
                 <BarChart2 size={14} className="text-blue-600" />
                 <span>4. Dual Model Classification Continuum &amp; Operating Points</span>
               </h4>
-              <p className="text-[11px] text-ink-soft">
+              <p className="text-[11px] text-[#5A7470]">
                 Classical Sigmoid vs. Quantum Hilbert decision manifolds with {patientName}&apos;s operating position.
               </p>
             </div>
@@ -603,8 +603,8 @@ export default function RealTimeGraphsTab({
                     if (!payload || payload.length === 0) return null;
                     const data = payload[0].payload;
                     return (
-                      <div className="bg-white p-2.5 rounded-xl border border-hairline shadow-md text-xs space-y-1">
-                        <span className="text-ink-soft block font-mono">
+                      <div className="bg-white p-2.5 rounded-xl border border-[#DFEBE8] shadow-md text-xs space-y-1">
+                        <span className="text-[#5A7470] block font-mono">
                           Atypia Level: {data.atypiaIndex}
                         </span>
                         <div className="text-blue-700 font-mono">
@@ -652,16 +652,16 @@ export default function RealTimeGraphsTab({
               </AreaChart>
             </ResponsiveContainer>
           </div>
-          <div className="p-3 rounded-xl bg-parchment border border-hairline text-xs space-y-1">
+          <div className="p-3 rounded-xl bg-white border border-[#DFEBE8] text-xs space-y-1">
             <div className="flex items-center justify-between">
-              <span className="font-semibold text-ink">
+              <span className="font-semibold text-[#082827]">
                 🎯 Concordance Discrepancy Insight for {patientName}:
               </span>
               <span className="font-mono text-quantum font-bold">
                 Δ = {(cxRiskScore - tfRiskScore).toFixed(1)}% Risk Shift
               </span>
             </div>
-            <p className="text-ink-soft text-[11px] font-light leading-relaxed">
+            <p className="text-[#5A7470] text-[11px] font-light leading-relaxed">
               Classical baseline scored <strong>{cxRiskScore.toFixed(1)}% (Mild Suspicion / Malignant)</strong> due to linear Euclidean surface metrics. Hybrid Quantum VQC evaluated non-linear qubit entanglement across chromatin concavities, correctly identifying the sample as <strong>{tfRiskScore.toFixed(1)}% (Benign)</strong>.
             </p>
           </div>

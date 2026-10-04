@@ -821,11 +821,11 @@ export default function BreastCancerDetailPage() {
 
       {/* ── SCREENING MODE TOGGLE ── */}
       <div className="flex items-center gap-2">
-        <div className="inline-flex p-1 rounded-xl bg-white border border-hairline shadow-2xs">
+        <div className="inline-flex p-1 rounded-xl bg-white border border-[#DFEBE8] shadow-2xs">
           <button
             onClick={() => { setScreeningMode("single"); setBatchSession(null); setBatchParseResult(null); }}
             className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer ${
-              screeningMode === "single" ? "bg-ink text-parchment shadow-xs" : "text-ink-soft hover:text-ink"
+              screeningMode === "single" ? "bg-[#082827] text-white shadow-xs" : "text-[#5A7470] hover:text-[#082827]"
             }`}
           >
             <User size={14} />
@@ -834,7 +834,7 @@ export default function BreastCancerDetailPage() {
           <button
             onClick={() => setScreeningMode("batch")}
             className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer ${
-              screeningMode === "batch" ? "bg-ink text-parchment shadow-xs" : "text-ink-soft hover:text-ink"
+              screeningMode === "batch" ? "bg-[#082827] text-white shadow-xs" : "text-[#5A7470] hover:text-[#082827]"
             }`}
           >
             <Users size={14} />
@@ -863,14 +863,14 @@ export default function BreastCancerDetailPage() {
 
           {/* Batch Progress Bar */}
           {isBatchExecuting && batchSession && (
-            <div className="rounded-2xl bg-white border border-hairline shadow-xs p-5">
+            <div className="rounded-2xl bg-white border border-[#DFEBE8] shadow-xs p-5">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-semibold text-ink">Processing Batch...</span>
-                <span className="text-xs font-mono text-ink-soft">
+                <span className="text-xs font-semibold text-[#082827]">Processing Batch...</span>
+                <span className="text-xs font-mono text-[#5A7470]">
                   {batchSession.processedCount} / {batchSession.totalRecords}
                 </span>
               </div>
-              <div className="w-full h-2 rounded-full bg-cream overflow-hidden">
+              <div className="w-full h-2 rounded-full bg-[#F7FAF9] overflow-hidden">
                 <motion.div
                   className="h-full bg-quantum rounded-full"
                   initial={{ width: 0 }}
@@ -895,21 +895,21 @@ export default function BreastCancerDetailPage() {
       {screeningMode === "single" && (
       <>
       {/* PATIENT INTAKE ACCORDION (INPUTABLE, NOT PRE-FILLED, CLEAN WHITE CARD) */}
-      <div className="bg-white rounded-2xl border border-hairline shadow-xs overflow-hidden">
+      <div className="bg-white rounded-2xl border border-[#DFEBE8] shadow-xs overflow-hidden">
         <button
           type="button"
           onClick={() => setIsPatientIntakeOpen(!isPatientIntakeOpen)}
-          className="w-full px-5 py-3.5 bg-white hover:bg-cream/40 flex items-center justify-between text-left transition-colors cursor-pointer border-b border-hairline"
+          className="w-full px-5 py-3.5 bg-white hover:bg-[#F7FAF9]/40 flex items-center justify-between text-left transition-colors cursor-pointer border-b border-[#DFEBE8]"
         >
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-quantum/10 border border-quantum/20 flex items-center justify-center text-quantum">
               <User size={15} />
             </div>
             <div>
-              <h3 className="font-serif text-sm font-medium text-ink">
+              <h3 className="font-sans font-bold text-sm font-medium text-[#082827]">
                 Patient Information &amp; Intake Details
               </h3>
-              <p className="text-[11px] font-mono text-ink-soft">
+              <p className="text-[11px] font-mono text-[#5A7470]">
                 {patientName ? `${patientName} (${patientId})` : "Not Specified"} • {patientAge ? `Age: ${patientAge}` : "Age: Not Specified"} • Gender: Female
               </p>
             </div>
@@ -923,7 +923,7 @@ export default function BreastCancerDetailPage() {
           <div className="p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 bg-white">
             {/* 1. Patient Name (Inputable) */}
             <div className="space-y-1">
-              <label className="text-[11px] font-mono text-ink-soft font-medium block">
+              <label className="text-[11px] font-mono text-[#5A7470] font-medium block">
                 Patient Full Name <span className="text-red-500 font-bold">*</span>
               </label>
               <input
@@ -932,8 +932,8 @@ export default function BreastCancerDetailPage() {
                 placeholder="e.g. Elena Vance"
                 value={patientName}
                 onChange={(e) => setPatientName(e.target.value)}
-                className={`w-full px-3 py-1.5 rounded-xl border border-hairline bg-cream/20 hover:bg-cream/30 text-ink text-xs font-medium focus:bg-white focus:outline-none focus:border-quantum ${
-                  hasInferred ? "opacity-75 cursor-not-allowed bg-cream/30" : ""
+                className={`w-full px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9]/20 hover:bg-[#F7FAF9]/30 text-[#082827] text-xs font-medium focus:bg-white focus:outline-none focus:border-quantum ${
+                  hasInferred ? "opacity-75 cursor-not-allowed bg-[#F7FAF9]/30" : ""
                 }`}
               />
             </div>
@@ -941,20 +941,20 @@ export default function BreastCancerDetailPage() {
             {/* 2. Patient ID (Auto-Generated, Read-Only) */}
             <div className="space-y-1">
               <div className="flex justify-between items-center">
-                <label className="text-[11px] font-mono text-ink-soft font-medium">Patient ID</label>
-                <span className="text-[9px] font-mono text-ink-soft bg-cream px-1.5 py-0.5 rounded border border-hairline">Auto-Assigned</span>
+                <label className="text-[11px] font-mono text-[#5A7470] font-medium">Patient ID</label>
+                <span className="text-[9px] font-mono text-[#5A7470] bg-[#F7FAF9] px-1.5 py-0.5 rounded border border-[#DFEBE8]">Auto-Assigned</span>
               </div>
               <input
                 type="text"
                 value={patientId}
                 readOnly
-                className="w-full px-3 py-1.5 rounded-xl border border-hairline bg-cream/40 text-ink text-xs font-mono font-bold cursor-not-allowed select-all"
+                className="w-full px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9]/40 text-[#082827] text-xs font-mono font-bold cursor-not-allowed select-all"
               />
             </div>
 
             {/* 3. Age (Inputable) */}
             <div className="space-y-1">
-              <label className="text-[11px] font-mono text-ink-soft font-medium block">
+              <label className="text-[11px] font-mono text-[#5A7470] font-medium block">
                 Age (Years) <span className="text-red-500 font-bold">*</span>
               </label>
               <input
@@ -965,16 +965,16 @@ export default function BreastCancerDetailPage() {
                 max="110"
                 value={patientAge}
                 onChange={(e) => setPatientAge(e.target.value ? parseInt(e.target.value) : "")}
-                className={`w-full px-3 py-1.5 rounded-xl border border-hairline bg-cream/20 hover:bg-cream/30 text-ink text-xs font-mono focus:bg-white focus:outline-none focus:border-quantum ${
-                  hasInferred ? "opacity-75 cursor-not-allowed bg-cream/30" : ""
+                className={`w-full px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9]/20 hover:bg-[#F7FAF9]/30 text-[#082827] text-xs font-mono focus:bg-white focus:outline-none focus:border-quantum ${
+                  hasInferred ? "opacity-75 cursor-not-allowed bg-[#F7FAF9]/30" : ""
                 }`}
               />
             </div>
 
             {/* 4. Gender */}
             <div className="space-y-1">
-              <label className="text-[11px] font-mono text-ink-soft font-medium">Gender</label>
-              <div className="w-full px-3 py-1.5 rounded-xl border border-hairline bg-cream/20 text-ink text-xs font-medium flex items-center justify-between">
+              <label className="text-[11px] font-mono text-[#5A7470] font-medium">Gender</label>
+              <div className="w-full px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9]/20 text-[#082827] text-xs font-medium flex items-center justify-between">
                 <span>Female</span>
                 <span className="text-[9px] font-mono text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">Female</span>
               </div>
@@ -986,17 +986,17 @@ export default function BreastCancerDetailPage() {
       {/* MAIN SCREENING WORKSPACE */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* LEFT: Parameter Sliders */}
-        <div className="lg:col-span-6 bg-parchment rounded-2xl border border-hairline p-5 space-y-5 shadow-xs">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-3">
+        <div className="lg:col-span-6 bg-white rounded-2xl border border-[#DFEBE8] p-5 space-y-5 shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#DFEBE8] pb-3">
             <div>
               <div className="flex items-center gap-1.5">
-                <h2 className="font-serif text-lg font-medium text-ink">Cell Measurements</h2>
+                <h2 className="font-sans font-bold text-lg font-medium text-[#082827]">Cell Measurements</h2>
                 <HelpTooltip
                   title="Cell Measurements"
                   text="These 8 microscopic metrics evaluate cell shape, size, border smoothness, and surface texture under the microscope."
                 />
               </div>
-              <p className="text-xs text-ink-soft">Adjust measured values or upload lab report</p>
+              <p className="text-xs text-[#5A7470]">Adjust measured values or upload lab report</p>
             </div>
             
             <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
@@ -1004,7 +1004,7 @@ export default function BreastCancerDetailPage() {
                 type="button"
                 onClick={() => setIsUploadModalOpen(true)}
                 disabled={hasInferred}
-                className="px-2.5 py-1.5 rounded-xl bg-white hover:bg-cream border border-hairline text-ink text-xs font-medium flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer disabled:opacity-50"
+                className="px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#F7FAF9] border border-[#DFEBE8] text-[#082827] text-xs font-medium flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer disabled:opacity-50"
               >
                 <UploadCloud size={13} className="text-quantum" />
                 <span>Upload Report</span>
@@ -1014,7 +1014,7 @@ export default function BreastCancerDetailPage() {
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="px-2.5 py-1.5 rounded-xl hover:bg-cream text-xs font-mono text-ink-soft hover:text-ink flex items-center gap-1 transition-colors cursor-pointer border border-transparent hover:border-hairline"
+                  className="px-2.5 py-1.5 rounded-xl hover:bg-[#F7FAF9] text-xs font-mono text-[#5A7470] hover:text-[#082827] flex items-center gap-1 transition-colors cursor-pointer border border-transparent hover:border-[#DFEBE8]"
                 >
                   <RotateCcw size={12} />
                   <span>Reset</span>
@@ -1032,7 +1032,7 @@ export default function BreastCancerDetailPage() {
               </div>
               <button
                 onClick={handleStartNewScreening}
-                className="px-2.5 py-1 rounded-lg bg-ink text-parchment text-[11px] font-semibold hover:bg-ink/90 transition-all cursor-pointer"
+                className="px-2.5 py-1 rounded-lg bg-[#082827] text-white text-[11px] font-semibold hover:bg-[#082827]/90 transition-all cursor-pointer"
               >
                 Start New
               </button>
@@ -1046,17 +1046,17 @@ export default function BreastCancerDetailPage() {
               return (
                 <div
                   key={field.key}
-                  className={`p-3 rounded-xl border border-hairline space-y-2 transition-all ${
-                    hasInferred ? "bg-cream/20 opacity-70" : "bg-cream/30"
+                  className={`p-3 rounded-xl border border-[#DFEBE8] space-y-2 transition-all ${
+                    hasInferred ? "bg-[#F7FAF9]/20 opacity-70" : "bg-[#F7FAF9]/30"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-1">
-                      <span className="text-xs font-semibold text-ink">{field.label}</span>
+                      <span className="text-xs font-semibold text-[#082827]">{field.label}</span>
                       <HelpTooltip title={field.label} text={field.simpleExplanation} />
                     </div>
                     <span className="text-xs font-mono font-bold text-quantum">
-                      {val} <span className="text-[10px] text-ink-soft">{field.unit}</span>
+                      {val} <span className="text-[10px] text-[#5A7470]">{field.unit}</span>
                     </span>
                   </div>
                   <input
@@ -1069,7 +1069,7 @@ export default function BreastCancerDetailPage() {
                     onChange={(e) => handleValueChange(field.key, parseFloat(e.target.value))}
                     className={`w-full accent-quantum ${hasInferred ? "cursor-not-allowed" : "cursor-pointer"}`}
                   />
-                  <p className="text-[10px] text-ink-soft leading-tight">{field.simpleExplanation}</p>
+                  <p className="text-[10px] text-[#5A7470] leading-tight">{field.simpleExplanation}</p>
                 </div>
               );
             })}
@@ -1127,17 +1127,17 @@ export default function BreastCancerDetailPage() {
                 </div>
 
                 <div className="space-y-1.5 max-w-sm mx-auto">
-                  <h3 className="font-serif text-xl text-ink font-semibold">
+                  <h3 className="font-sans font-bold text-xl text-[#082827] font-semibold">
                     Analyzing Biopsy Sample...
                   </h3>
-                  <p className="text-xs text-ink-soft leading-relaxed">
+                  <p className="text-xs text-[#5A7470] leading-relaxed">
                     Evaluating cell measurements across classical and quantum models for{" "}
-                    <strong className="text-ink">{patientName || "Patient"}</strong>
+                    <strong className="text-[#082827]">{patientName || "Patient"}</strong>
                   </p>
                 </div>
 
                 {/* Subtle pulsing progress indicator */}
-                <div className="w-44 mx-auto bg-cream h-1.5 rounded-full overflow-hidden">
+                <div className="w-44 mx-auto bg-[#F7FAF9] h-1.5 rounded-full overflow-hidden">
                   <div className="h-full bg-quantum rounded-full animate-pulse w-full" />
                 </div>
               </motion.div>
@@ -1150,13 +1150,13 @@ export default function BreastCancerDetailPage() {
                 className="space-y-4"
               >
                 {/* Result Header - Clean & Essential */}
-                <div className="flex items-center justify-between border-b border-hairline pb-3">
+                <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
                   <div>
                     <span className="text-[10px] font-mono uppercase tracking-wider text-quantum font-bold">
                       Screening Assessment
                     </span>
-                    <h3 className="font-serif text-xl font-medium text-ink">
-                      {patientName || "Patient"} <span className="text-xs font-mono text-ink-soft">({patientId})</span>
+                    <h3 className="font-sans font-bold text-xl font-medium text-[#082827]">
+                      {patientName || "Patient"} <span className="text-xs font-mono text-[#5A7470]">({patientId})</span>
                     </h3>
                   </div>
                   <span className={`text-xs px-3 py-1 rounded-full font-bold border shadow-2xs ${getRiskColor(screeningResult)}`}>
@@ -1170,12 +1170,12 @@ export default function BreastCancerDetailPage() {
                   <div className="p-4.5 rounded-2xl bg-white border border-quantum/30 shadow-xs space-y-3.5 relative overflow-hidden flex flex-col justify-between">
                     <div>
                       {/* Card Header */}
-                      <div className="flex items-center justify-between border-b border-hairline pb-2.5">
+                      <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-2.5">
                         <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-quantum/10 text-quantum border border-quantum/20 flex items-center gap-1.5">
                           <Sparkles size={12} />
                           <span>Quantum Model (8-Qubit VQC)</span>
                         </span>
-                        <span className="text-[10px] font-mono text-ink-soft font-semibold">
+                        <span className="text-[10px] font-mono text-[#5A7470] font-semibold">
                           {screeningResult.dual_comparison?.transfinite_1?.latency_ms || "14.2"} ms
                         </span>
                       </div>
@@ -1216,13 +1216,13 @@ export default function BreastCancerDetailPage() {
                                   />
                                 </svg>
                                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                                  <span className="text-base font-black font-mono text-ink leading-none">
+                                  <span className="text-base font-black font-mono text-[#082827] leading-none">
                                     {score.toFixed(1)}
                                   </span>
-                                  <span className="text-[8px] font-mono text-ink-soft mt-0.5">/ 100</span>
+                                  <span className="text-[8px] font-mono text-[#5A7470] mt-0.5">/ 100</span>
                                 </div>
                               </div>
-                              <span className="text-[9px] font-mono text-ink-soft font-semibold mt-1">Risk Score</span>
+                              <span className="text-[9px] font-mono text-[#5A7470] font-semibold mt-1">Risk Score</span>
                             </div>
                           );
                         })()}
@@ -1271,8 +1271,8 @@ export default function BreastCancerDetailPage() {
                                 </span>
                               </div>
 
-                              <div className="text-[11px] font-mono text-ink-soft">
-                                Confidence: <strong className="text-ink">{tf?.confidence || screeningResult.confidence}%</strong>
+                              <div className="text-[11px] font-mono text-[#5A7470]">
+                                Confidence: <strong className="text-[#082827]">{tf?.confidence || screeningResult.confidence}%</strong>
                               </div>
                             </div>
                           );
@@ -1280,16 +1280,16 @@ export default function BreastCancerDetailPage() {
                       </div>
 
                       {/* Model-Specific Key Factors (Quantum SHAP) */}
-                      <div className="pt-2.5 border-t border-hairline space-y-1.5">
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-ink-soft block">
+                      <div className="pt-2.5 border-t border-[#DFEBE8] space-y-1.5">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#5A7470] block">
                           Quantum Key Factors (Top 3)
                         </span>
                         <div className="space-y-1">
                           {((screeningResult.dual_comparison?.transfinite_1?.shap_attributions) || screeningResult.shap_attributions || []).slice(0, 3).map((attr: any, idx: number) => {
                             const isRisk = attr.direction === "risk_elevating";
                             return (
-                              <div key={idx} className="p-1.5 px-2 rounded-lg bg-cream/40 border border-hairline/60 text-[11px] flex items-center justify-between">
-                                <span className="text-ink font-medium truncate max-w-[140px]">{attr.featureName}</span>
+                              <div key={idx} className="p-1.5 px-2 rounded-lg bg-[#F7FAF9]/40 border border-[#DFEBE8]/60 text-[11px] flex items-center justify-between">
+                                <span className="text-[#082827] font-medium truncate max-w-[140px]">{attr.featureName}</span>
                                 <span className={`font-mono font-bold text-[10px] ${isRisk ? "text-red-600" : "text-emerald-700"}`}>
                                   {isRisk ? "+" : "-"}{attr.impactPercentage?.toFixed(1)}%
                                 </span>
@@ -1300,7 +1300,7 @@ export default function BreastCancerDetailPage() {
                       </div>
                     </div>
 
-                    <div className="pt-2 border-t border-hairline flex justify-between items-center text-[10px] font-mono text-ink-soft">
+                    <div className="pt-2 border-t border-[#DFEBE8] flex justify-between items-center text-[10px] font-mono text-[#5A7470]">
                       <span>Engine: 8-Qubit ZZ VQC</span>
                       <span className="text-emerald-700 font-bold">Simulator Active</span>
                     </div>
@@ -1310,12 +1310,12 @@ export default function BreastCancerDetailPage() {
                   <div className="p-4.5 rounded-2xl bg-white border border-blue-200 shadow-xs space-y-3.5 relative overflow-hidden flex flex-col justify-between">
                     <div>
                       {/* Card Header */}
-                      <div className="flex items-center justify-between border-b border-hairline pb-2.5">
+                      <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-2.5">
                         <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 flex items-center gap-1.5">
                           <Activity size={12} />
                           <span>Classical Baseline Ensemble</span>
                         </span>
-                        <span className="text-[10px] font-mono text-ink-soft font-semibold">
+                        <span className="text-[10px] font-mono text-[#5A7470] font-semibold">
                           {screeningResult.dual_comparison?.cx_01?.latency_ms || "2.4"} ms
                         </span>
                       </div>
@@ -1356,13 +1356,13 @@ export default function BreastCancerDetailPage() {
                                   />
                                 </svg>
                                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                                  <span className="text-base font-black font-mono text-ink leading-none">
+                                  <span className="text-base font-black font-mono text-[#082827] leading-none">
                                     {score.toFixed(1)}
                                   </span>
-                                  <span className="text-[8px] font-mono text-ink-soft mt-0.5">/ 100</span>
+                                  <span className="text-[8px] font-mono text-[#5A7470] mt-0.5">/ 100</span>
                                 </div>
                               </div>
-                              <span className="text-[9px] font-mono text-ink-soft font-semibold mt-1">Risk Score</span>
+                              <span className="text-[9px] font-mono text-[#5A7470] font-semibold mt-1">Risk Score</span>
                             </div>
                           );
                         })()}
@@ -1411,8 +1411,8 @@ export default function BreastCancerDetailPage() {
                                 </span>
                               </div>
 
-                              <div className="text-[11px] font-mono text-ink-soft">
-                                Confidence: <strong className="text-ink">{cx?.confidence || screeningResult.confidence}%</strong>
+                              <div className="text-[11px] font-mono text-[#5A7470]">
+                                Confidence: <strong className="text-[#082827]">{cx?.confidence || screeningResult.confidence}%</strong>
                               </div>
                             </div>
                           );
@@ -1420,16 +1420,16 @@ export default function BreastCancerDetailPage() {
                       </div>
 
                       {/* Model-Specific Key Factors (Classical SHAP) */}
-                      <div className="pt-2.5 border-t border-hairline space-y-1.5">
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-ink-soft block">
+                      <div className="pt-2.5 border-t border-[#DFEBE8] space-y-1.5">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#5A7470] block">
                           Classical Key Factors (Top 3)
                         </span>
                         <div className="space-y-1">
                           {((screeningResult.dual_comparison?.cx_01?.shap_attributions) || screeningResult.shap_attributions || []).slice(0, 3).map((attr: any, idx: number) => {
                             const isRisk = attr.direction === "risk_elevating";
                             return (
-                              <div key={idx} className="p-1.5 px-2 rounded-lg bg-cream/40 border border-hairline/60 text-[11px] flex items-center justify-between">
-                                <span className="text-ink font-medium truncate max-w-[140px]">{attr.featureName}</span>
+                              <div key={idx} className="p-1.5 px-2 rounded-lg bg-[#F7FAF9]/40 border border-[#DFEBE8]/60 text-[11px] flex items-center justify-between">
+                                <span className="text-[#082827] font-medium truncate max-w-[140px]">{attr.featureName}</span>
                                 <span className={`font-mono font-bold text-[10px] ${isRisk ? "text-red-600" : "text-emerald-700"}`}>
                                   {isRisk ? "+" : "-"}{attr.impactPercentage?.toFixed(1)}%
                                 </span>
@@ -1440,7 +1440,7 @@ export default function BreastCancerDetailPage() {
                       </div>
                     </div>
 
-                    <div className="pt-2 border-t border-hairline flex justify-between items-center text-[10px] font-mono text-ink-soft">
+                    <div className="pt-2 border-t border-[#DFEBE8] flex justify-between items-center text-[10px] font-mono text-[#5A7470]">
                       <span>Engine: SVM-RBF + XGBoost</span>
                       <span className="text-blue-700 font-bold">Classical Baseline</span>
                     </div>
@@ -1448,18 +1448,18 @@ export default function BreastCancerDetailPage() {
                 </div>
 
                 {/* QURESIGHT AI SUMMARY (PARAGRAPH FORMAT WITH TYPEWRITER ANIMATION & AI TRANSLATION) */}
-                <div className="p-4 sm:p-5 rounded-2xl bg-white border border-hairline shadow-xs space-y-3.5 relative overflow-hidden">
+                <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#DFEBE8] shadow-xs space-y-3.5 relative overflow-hidden">
                   {/* Header Row - Clean & Medical */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-hairline pb-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-[#DFEBE8] pb-3">
                     <div className="flex items-center gap-2.5">
                       <div className="w-8 h-8 rounded-lg bg-quantum/10 border border-quantum/20 flex items-center justify-center text-quantum shadow-2xs">
                         <FileText size={15} />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold text-ink uppercase tracking-wider">
+                        <h4 className="text-xs font-bold text-[#082827] uppercase tracking-wider">
                           QureSight AI Summary
                         </h4>
-                        <p className="text-[11px] text-ink-soft">
+                        <p className="text-[11px] text-[#5A7470]">
                           Evaluation for {patientName || "Patient"} ({patientId})
                         </p>
                       </div>
@@ -1483,7 +1483,7 @@ export default function BreastCancerDetailPage() {
                           handleTranslateSummary(lang);
                         }}
                         disabled={isLoadingAi || isTranslating}
-                        className="px-2.5 py-1 rounded-lg border border-hairline bg-cream/30 hover:bg-cream/60 text-ink text-xs font-medium focus:outline-none focus:border-quantum cursor-pointer"
+                        className="px-2.5 py-1 rounded-lg border border-[#DFEBE8] bg-[#F7FAF9]/30 hover:bg-[#F7FAF9]/60 text-[#082827] text-xs font-medium focus:outline-none focus:border-quantum cursor-pointer"
                       >
                         {LANGUAGES.map((lang) => (
                           <option key={lang.code} value={lang.code}>
@@ -1497,7 +1497,7 @@ export default function BreastCancerDetailPage() {
                         type="button"
                         onClick={() => handleTranslateSummary(selectedLanguage)}
                         disabled={isLoadingAi || isTranslating}
-                        className="px-2.5 py-1 rounded-lg bg-ink hover:bg-ink/90 text-parchment text-xs font-medium flex items-center gap-1 transition-all cursor-pointer disabled:opacity-50 shadow-2xs"
+                        className="px-2.5 py-1 rounded-lg bg-[#082827] hover:bg-[#082827]/90 text-white text-xs font-medium flex items-center gap-1 transition-all cursor-pointer disabled:opacity-50 shadow-2xs"
                         title="AI rewrite and translate summary"
                       >
                         <Languages size={12} className="text-quantum" />
@@ -1508,7 +1508,7 @@ export default function BreastCancerDetailPage() {
 
                   {/* Body: Thinking State or Typed Paragraph */}
                   {isLoadingAi && !typedSummaryText ? (
-                    <div className="py-3 px-3.5 rounded-xl bg-parchment/40 border border-hairline flex items-center gap-2.5 text-xs text-ink-soft font-mono">
+                    <div className="py-3 px-3.5 rounded-xl bg-white/40 border border-[#DFEBE8] flex items-center gap-2.5 text-xs text-[#5A7470] font-mono">
                       <div className="flex items-center gap-1 text-quantum shrink-0">
                         <span className="w-1.5 h-1.5 rounded-full bg-quantum animate-bounce [animation-delay:-0.3s]" />
                         <span className="w-1.5 h-1.5 rounded-full bg-quantum animate-bounce [animation-delay:-0.15s]" />
@@ -1517,13 +1517,13 @@ export default function BreastCancerDetailPage() {
                       <span className="italic">Thinking... evaluating cell measurements and compiling clear summary</span>
                     </div>
                   ) : isTranslating ? (
-                    <div className="py-3 px-3.5 rounded-xl bg-parchment/40 border border-hairline flex items-center gap-2.5 text-xs text-ink-soft font-mono">
+                    <div className="py-3 px-3.5 rounded-xl bg-white/40 border border-[#DFEBE8] flex items-center gap-2.5 text-xs text-[#5A7470] font-mono">
                       <Loader2 size={13} className="animate-spin text-quantum shrink-0" />
                       <span>Rewriting summary in {LANGUAGES.find(l => l.code === selectedLanguage)?.name}...</span>
                     </div>
                   ) : (
-                    <div className="p-3.5 rounded-xl bg-parchment/50 border border-hairline">
-                      <p className="text-xs sm:text-[13px] text-ink leading-relaxed whitespace-pre-line font-normal">
+                    <div className="p-3.5 rounded-xl bg-white/50 border border-[#DFEBE8]">
+                      <p className="text-xs sm:text-[13px] text-[#082827] leading-relaxed whitespace-pre-line font-normal">
                         {typedSummaryText}
                         {isTypingSummary && (
                           <span className="inline-block w-1.5 h-3.5 ml-1 bg-quantum animate-pulse align-middle" />
@@ -1578,28 +1578,28 @@ export default function BreastCancerDetailPage() {
       {/* REAL IBM QUANTUM HARDWARE MODAL (ADMIN ACCESS NOTICE) */}
       <AnimatePresence>
         {isIbmModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 backdrop-blur-xs p-4">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#082827]/40 backdrop-blur-xs p-4">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 12 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 12 }}
               transition={{ duration: 0.22, ease: "easeOut" }}
-              className="bg-white border border-hairline rounded-2xl p-6 max-w-lg w-full text-ink space-y-4 shadow-2xl"
+              className="bg-white border border-[#DFEBE8] rounded-2xl p-6 max-w-lg w-full text-[#082827] space-y-4 shadow-2xl"
             >
-              <div className="flex items-center justify-between border-b border-hairline pb-4">
+              <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-4">
                 <div className="flex items-center gap-3">
                   <div className="h-10 w-10 rounded-xl bg-amber-500/10 border border-amber-200/60 flex items-center justify-center text-amber-600">
                     <Cpu size={20} />
                   </div>
                   <div>
-                    <h3 className="font-serif text-lg font-medium text-ink">Real IBM Quantum QPU Engine</h3>
-                    <p className="text-xs text-ink-soft">127-Qubit Superconducting Transmon Gateway</p>
+                    <h3 className="font-sans font-bold text-lg font-medium text-[#082827]">Real IBM Quantum QPU Engine</h3>
+                    <p className="text-xs text-[#5A7470]">127-Qubit Superconducting Transmon Gateway</p>
                   </div>
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsIbmModalOpen(false)}
-                  className="h-8 w-8 rounded-full bg-cream hover:bg-cream-deep border border-hairline flex items-center justify-center text-ink-soft hover:text-ink transition-colors cursor-pointer"
+                  className="h-8 w-8 rounded-full bg-[#F7FAF9] hover:bg-[#F2F7F6] border border-[#DFEBE8] flex items-center justify-center text-[#5A7470] hover:text-[#082827] transition-colors cursor-pointer"
                 >
                   <X size={15} />
                 </button>
@@ -1607,34 +1607,34 @@ export default function BreastCancerDetailPage() {
 
               {/* Hardware KPI Cards */}
               <div className="grid grid-cols-3 gap-2 text-center">
-                <div className="p-2.5 rounded-xl bg-cream/60 border border-hairline space-y-0.5">
-                  <span className="text-[10px] font-mono uppercase text-ink-soft block font-bold">Target</span>
-                  <span className="font-serif text-sm font-light text-ink">ibm_brisbane</span>
+                <div className="p-2.5 rounded-xl bg-[#F7FAF9]/60 border border-[#DFEBE8] space-y-0.5">
+                  <span className="text-[10px] font-mono uppercase text-[#5A7470] block font-bold">Target</span>
+                  <span className="font-sans font-bold text-sm font-light text-[#082827]">ibm_brisbane</span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-cream/60 border border-hairline space-y-0.5">
-                  <span className="text-[10px] font-mono uppercase text-ink-soft block font-bold">Qubits</span>
-                  <span className="font-serif text-sm font-light text-ink">127 Physical</span>
+                <div className="p-2.5 rounded-xl bg-[#F7FAF9]/60 border border-[#DFEBE8] space-y-0.5">
+                  <span className="text-[10px] font-mono uppercase text-[#5A7470] block font-bold">Qubits</span>
+                  <span className="font-sans font-bold text-sm font-light text-[#082827]">127 Physical</span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-cream/60 border border-hairline space-y-0.5">
-                  <span className="text-[10px] font-mono uppercase text-ink-soft block font-bold">Coupling</span>
-                  <span className="font-serif text-sm font-light text-emerald-600">Heavy-Hex</span>
+                <div className="p-2.5 rounded-xl bg-[#F7FAF9]/60 border border-[#DFEBE8] space-y-0.5">
+                  <span className="text-[10px] font-mono uppercase text-[#5A7470] block font-bold">Coupling</span>
+                  <span className="font-sans font-bold text-sm font-light text-emerald-600">Heavy-Hex</span>
                 </div>
               </div>
 
-              <div className="space-y-3 text-xs text-ink-soft leading-relaxed">
-                <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-200 text-ink flex items-start gap-2.5">
+              <div className="space-y-3 text-xs text-[#5A7470] leading-relaxed">
+                <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-200 text-[#082827] flex items-start gap-2.5">
                   <Lock size={16} className="text-amber-700 shrink-0 mt-0.5" />
                   <div className="space-y-1">
                     <strong className="block font-semibold text-amber-900">Enterprise / Clinical Deployment Notice</strong>
-                    <span className="text-[11px] text-ink-soft leading-relaxed block">
+                    <span className="text-[11px] text-[#5A7470] leading-relaxed block">
                       Live IBM Quantum Hardware execution routes circuits to 127-qubit superconducting processors. Due to physical cryogenic queue times (1-8 mins), live hardware runs require authenticated clinical partner credentials.
                     </span>
                   </div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-cream/40 border border-hairline space-y-1.5">
-                  <h4 className="font-bold text-ink uppercase tracking-wider text-[10px]">Active Transpilation Specs</h4>
-                  <ul className="space-y-1 font-mono text-[11px] text-ink-soft">
+                <div className="p-3 rounded-xl bg-[#F7FAF9]/40 border border-[#DFEBE8] space-y-1.5">
+                  <h4 className="font-bold text-[#082827] uppercase tracking-wider text-[10px]">Active Transpilation Specs</h4>
+                  <ul className="space-y-1 font-mono text-[11px] text-[#5A7470]">
                     <li>• Topology: 8 Physical Transmon Coupling</li>
                     <li>• Readout Error Mitigation: M3 (Matrix Inversion)</li>
                     <li>• Dynamical Decoupling: XY4 Microwave Pulses</li>
@@ -1643,11 +1643,11 @@ export default function BreastCancerDetailPage() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-2 border-t border-hairline">
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#DFEBE8]">
                 <button
                   type="button"
                   onClick={() => setIsIbmModalOpen(false)}
-                  className="px-4 py-2 rounded-xl bg-cream hover:bg-cream-deep border border-hairline text-ink-soft hover:text-ink text-xs font-medium cursor-pointer transition-colors"
+                  className="px-4 py-2 rounded-xl bg-[#F7FAF9] hover:bg-[#F2F7F6] border border-[#DFEBE8] text-[#5A7470] hover:text-[#082827] text-xs font-medium cursor-pointer transition-colors"
                 >
                   Use High-Speed Simulator
                 </button>
@@ -1662,7 +1662,7 @@ export default function BreastCancerDetailPage() {
                       type: "quantum",
                     });
                   }}
-                  className="px-4 py-2 rounded-xl bg-ink hover:bg-ink/90 text-parchment text-xs font-semibold cursor-pointer transition-colors"
+                  className="px-4 py-2 rounded-xl bg-[#082827] hover:bg-[#082827]/90 text-white text-xs font-semibold cursor-pointer transition-colors"
                 >
                   Enable QPU Verification
                 </button>

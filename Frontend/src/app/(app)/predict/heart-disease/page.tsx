@@ -890,11 +890,11 @@ export default function HeartDiseaseStudioPage() {
 
       {/* ── SCREENING MODE TOGGLE ── */}
       <div className="flex items-center gap-2">
-        <div className="inline-flex p-1 rounded-xl bg-white border border-hairline shadow-2xs">
+        <div className="inline-flex p-1 rounded-xl bg-white border border-[#DFEBE8] shadow-2xs">
           <button
             onClick={() => { setScreeningMode("single"); setBatchSession(null); setBatchParseResult(null); }}
             className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer ${
-              screeningMode === "single" ? "bg-ink text-parchment shadow-xs" : "text-ink-soft hover:text-ink"
+              screeningMode === "single" ? "bg-[#082827] text-white shadow-xs" : "text-[#5A7470] hover:text-[#082827]"
             }`}
           >
             <User size={14} />
@@ -903,7 +903,7 @@ export default function HeartDiseaseStudioPage() {
           <button
             onClick={() => setScreeningMode("batch")}
             className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer ${
-              screeningMode === "batch" ? "bg-ink text-parchment shadow-xs" : "text-ink-soft hover:text-ink"
+              screeningMode === "batch" ? "bg-[#082827] text-white shadow-xs" : "text-[#5A7470] hover:text-[#082827]"
             }`}
           >
             <Users size={14} />
@@ -930,14 +930,14 @@ export default function HeartDiseaseStudioPage() {
           )}
 
           {isBatchExecuting && batchSession && (
-            <div className="rounded-2xl bg-white border border-hairline shadow-xs p-6 space-y-3">
+            <div className="rounded-2xl bg-white border border-[#DFEBE8] shadow-xs p-6 space-y-3">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-semibold text-ink">Processing 12-Lead ECG Batch...</span>
-                <span className="font-mono text-ink-soft">
+                <span className="font-semibold text-[#082827]">Processing 12-Lead ECG Batch...</span>
+                <span className="font-mono text-[#5A7470]">
                   {batchSession.processedCount} / {batchSession.totalRecords}
                 </span>
               </div>
-              <div className="h-2 rounded-full bg-cream overflow-hidden">
+              <div className="h-2 rounded-full bg-[#F7FAF9] overflow-hidden">
                 <motion.div
                   className="h-full bg-quantum rounded-full"
                   animate={{ width: `${batchProgress}%` }}
@@ -960,21 +960,21 @@ export default function HeartDiseaseStudioPage() {
       {screeningMode === "single" && (
         <div className="space-y-6">
           {/* PATIENT INTAKE ACCORDION (Clean White Card, Inputable) */}
-      <div className="bg-white rounded-2xl border border-hairline shadow-xs overflow-hidden">
+      <div className="bg-white rounded-2xl border border-[#DFEBE8] shadow-xs overflow-hidden">
         <button
           type="button"
           onClick={() => setIsPatientIntakeOpen(!isPatientIntakeOpen)}
-          className="w-full px-5 py-3.5 bg-white hover:bg-cream/40 flex items-center justify-between text-left transition-colors cursor-pointer border-b border-hairline"
+          className="w-full px-5 py-3.5 bg-white hover:bg-[#F7FAF9]/40 flex items-center justify-between text-left transition-colors cursor-pointer border-b border-[#DFEBE8]"
         >
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-600 dark:text-red-400">
               <User size={15} />
             </div>
             <div>
-              <h3 className="font-serif text-sm font-medium text-ink">
+              <h3 className="font-sans font-bold text-sm font-medium text-[#082827]">
                 Patient Demographics &amp; Clinical Context
               </h3>
-              <p className="text-[11px] font-mono text-ink-soft">
+              <p className="text-[11px] font-mono text-[#5A7470]">
                 {patientName ? `${patientName} (${patientId})` : "Patient Not Specified"} •{" "}
                 {patientAge ? `Age: ${patientAge}` : "Age: Not Specified"} • Gender: {patientGender}
               </p>
@@ -989,7 +989,7 @@ export default function HeartDiseaseStudioPage() {
           <div className="p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 bg-white">
             {/* 1. Patient Name */}
             <div className="space-y-1">
-              <label className="text-[11px] font-mono text-ink-soft font-medium block">
+              <label className="text-[11px] font-mono text-[#5A7470] font-medium block">
                 Patient Full Name <span className="text-red-500 font-bold">*</span>
               </label>
               <input
@@ -998,7 +998,7 @@ export default function HeartDiseaseStudioPage() {
                 placeholder="e.g. Ramesh Patel"
                 value={patientName}
                 onChange={(e) => setPatientName(e.target.value)}
-                className={`w-full px-3 py-1.5 rounded-xl border border-hairline bg-cream/20 hover:bg-cream/30 text-ink text-xs font-medium focus:bg-white focus:outline-none focus:border-quantum ${telemetry ? "opacity-75 cursor-not-allowed bg-cream/30" : ""
+                className={`w-full px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9]/20 hover:bg-[#F7FAF9]/30 text-[#082827] text-xs font-medium focus:bg-white focus:outline-none focus:border-quantum ${telemetry ? "opacity-75 cursor-not-allowed bg-[#F7FAF9]/30" : ""
                   }`}
               />
             </div>
@@ -1006,8 +1006,8 @@ export default function HeartDiseaseStudioPage() {
             {/* 2. Patient ID */}
             <div className="space-y-1">
               <div className="flex justify-between items-center">
-                <label className="text-[11px] font-mono text-ink-soft font-medium">Patient ID</label>
-                <span className="text-[9px] font-mono text-ink-soft bg-cream px-1.5 py-0.5 rounded border border-hairline">
+                <label className="text-[11px] font-mono text-[#5A7470] font-medium">Patient ID</label>
+                <span className="text-[9px] font-mono text-[#5A7470] bg-[#F7FAF9] px-1.5 py-0.5 rounded border border-[#DFEBE8]">
                   Auto-Assigned
                 </span>
               </div>
@@ -1015,13 +1015,13 @@ export default function HeartDiseaseStudioPage() {
                 type="text"
                 value={patientId}
                 readOnly
-                className="w-full px-3 py-1.5 rounded-xl border border-hairline bg-cream/40 text-ink text-xs font-mono font-bold cursor-not-allowed select-all"
+                className="w-full px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9]/40 text-[#082827] text-xs font-mono font-bold cursor-not-allowed select-all"
               />
             </div>
 
             {/* 3. Age */}
             <div className="space-y-1">
-              <label className="text-[11px] font-mono text-ink-soft font-medium block">
+              <label className="text-[11px] font-mono text-[#5A7470] font-medium block">
                 Age (Years) <span className="text-red-500 font-bold">*</span>
               </label>
               <input
@@ -1032,19 +1032,19 @@ export default function HeartDiseaseStudioPage() {
                 max="105"
                 value={patientAge}
                 onChange={(e) => setPatientAge(e.target.value ? parseInt(e.target.value) : "")}
-                className={`w-full px-3 py-1.5 rounded-xl border border-hairline bg-cream/20 hover:bg-cream/30 text-ink text-xs font-mono focus:bg-white focus:outline-none focus:border-quantum ${telemetry ? "opacity-75 cursor-not-allowed bg-cream/30" : ""
+                className={`w-full px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9]/20 hover:bg-[#F7FAF9]/30 text-[#082827] text-xs font-mono focus:bg-white focus:outline-none focus:border-quantum ${telemetry ? "opacity-75 cursor-not-allowed bg-[#F7FAF9]/30" : ""
                   }`}
               />
             </div>
 
             {/* 4. Gender */}
             <div className="space-y-1">
-              <label className="text-[11px] font-mono text-ink-soft font-medium block">Gender</label>
+              <label className="text-[11px] font-mono text-[#5A7470] font-medium block">Gender</label>
               <select
                 disabled={Boolean(telemetry)}
                 value={patientGender}
                 onChange={(e) => setPatientGender(e.target.value)}
-                className={`w-full px-3 py-1.5 rounded-xl border border-hairline bg-cream/20 hover:bg-cream/30 text-ink text-xs font-medium focus:bg-white focus:outline-none focus:border-quantum ${telemetry ? "opacity-75 cursor-not-allowed bg-cream/30" : ""
+                className={`w-full px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9]/20 hover:bg-[#F7FAF9]/30 text-[#082827] text-xs font-medium focus:bg-white focus:outline-none focus:border-quantum ${telemetry ? "opacity-75 cursor-not-allowed bg-[#F7FAF9]/30" : ""
                   }`}
               >
                 <option value="Male">Male</option>
@@ -1058,20 +1058,20 @@ export default function HeartDiseaseStudioPage() {
       {/* MAIN CLINICAL ECG WORKSPACE */}
       <div className="space-y-6">
         {/* Upload & Workspace Card */}
-        <div className="bg-parchment rounded-2xl border border-hairline p-6 space-y-6 shadow-xs">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
+        <div className="bg-white rounded-2xl border border-[#DFEBE8] p-6 space-y-6 shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#DFEBE8] pb-4">
             <div>
-              <h2 className="font-serif text-lg font-medium text-ink">
+              <h2 className="font-sans font-bold text-lg font-medium text-[#082827]">
                 12-Lead ECG Acquisition &amp; Ingestion
               </h2>
-              <p className="text-xs text-ink-soft">
+              <p className="text-xs text-[#5A7470]">
                 Upload your patient&apos;s physical paper ECG rhythm strip or digital image scan
               </p>
             </div>
 
             {/* Optional reference dropdown (subtle, non-excessive) */}
             <div className="flex items-center gap-2">
-              <span className="text-[11px] font-mono text-ink-soft">Reference Benchmark:</span>
+              <span className="text-[11px] font-mono text-[#5A7470]">Reference Benchmark:</span>
               <select
                 disabled={Boolean(telemetry)}
                 value={selectedReferenceKey || ""}
@@ -1086,7 +1086,7 @@ export default function HeartDiseaseStudioPage() {
                     if (match) handleSelectReferenceCase(match);
                   }
                 }}
-                className="px-2.5 py-1.5 rounded-xl border border-hairline bg-white text-ink text-xs font-medium focus:outline-none cursor-pointer"
+                className="px-2.5 py-1.5 rounded-xl border border-[#DFEBE8] bg-white text-[#082827] text-xs font-medium focus:outline-none cursor-pointer"
               >
                 <option value="">Upload Custom Patient ECG (Default)</option>
                 {REFERENCE_CASES.map((rc) => (
@@ -1103,7 +1103,7 @@ export default function HeartDiseaseStudioPage() {
             <motion.div
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
-              className="p-4 rounded-2xl bg-amber-50 border-2 border-amber-300 text-ink space-y-2 relative overflow-hidden shadow-xs"
+              className="p-4 rounded-2xl bg-amber-50 border-2 border-amber-300 text-[#082827] space-y-2 relative overflow-hidden shadow-xs"
             >
               <div className="flex items-start gap-3">
                 <div className="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-800 flex items-center justify-center shrink-0 mt-0.5">
@@ -1116,8 +1116,8 @@ export default function HeartDiseaseStudioPage() {
                   <p className="text-amber-900 leading-relaxed font-sans">
                     {validationError}
                   </p>
-                  <p className="text-ink-soft text-[11px] pt-1">
-                    To maintain strict medical safety and regulatory standards, the QureSight dual-engine pipeline only executes diagnostic inference on verified 12-lead electrocardiograms matching our trained clinical distribution. Please select a verified test case from the <strong className="text-ink font-mono text-[10px]">Test Cases/Heart_Disease_ECG</strong> folder or upload a standard horizontal 12-lead ECG printout.
+                  <p className="text-[#5A7470] text-[11px] pt-1">
+                    To maintain strict medical safety and regulatory standards, the QureSight dual-engine pipeline only executes diagnostic inference on verified 12-lead electrocardiograms matching our trained clinical distribution. Please select a verified test case from the <strong className="text-[#082827] font-mono text-[10px]">Test Cases/Heart_Disease_ECG</strong> folder or upload a standard horizontal 12-lead ECG printout.
                   </p>
                 </div>
               </div>
@@ -1136,7 +1136,7 @@ export default function HeartDiseaseStudioPage() {
               onClick={() => fileInputRef.current?.click()}
               className={`rounded-2xl border-2 border-dashed p-10 text-center cursor-pointer transition-all ${isDragging
                   ? "border-quantum bg-quantum/5"
-                  : "border-hairline hover:border-quantum/50 hover:bg-cream/40 bg-white"
+                  : "border-[#DFEBE8] hover:border-quantum/50 hover:bg-[#F7FAF9]/40 bg-white"
                 }`}
             >
               <input
@@ -1153,10 +1153,10 @@ export default function HeartDiseaseStudioPage() {
               <div className="w-14 h-14 rounded-2xl bg-quantum/10 border border-quantum/20 text-quantum mx-auto flex items-center justify-center mb-3">
                 <UploadCloud size={28} />
               </div>
-              <h3 className="text-base font-serif font-medium text-ink">
+              <h3 className="text-base font-sans font-bold text-[#082827]">
                 Upload Patient ECG Paper Strip or Scanned Image
               </h3>
-              <p className="text-xs text-ink-soft mt-1.5 max-w-md mx-auto">
+              <p className="text-xs text-[#5A7470] mt-1.5 max-w-md mx-auto">
                 Drag and drop your standard 12-lead ECG printout (.png, .jpg, .jpeg) here, or browse your files.
               </p>
               <div className="mt-4 inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-quantum bg-quantum/10 px-3 py-1.5 rounded-xl border border-quantum/20">
@@ -1167,16 +1167,16 @@ export default function HeartDiseaseStudioPage() {
           ) : (
             <div className="space-y-4">
               {/* Image Details Bar */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-xl bg-white border border-hairline">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-xl bg-white border border-[#DFEBE8]">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-quantum/10 border border-quantum/20 text-quantum flex items-center justify-center">
                     <FileCheck2 size={16} />
                   </div>
                   <div>
-                    <span className="text-xs font-semibold text-ink block">
+                    <span className="text-xs font-semibold text-[#082827] block">
                       {imageMeta?.name || "Patient_12Lead_ECG.jpg"}
                     </span>
-                    <span className="text-[11px] font-mono text-ink-soft">
+                    <span className="text-[11px] font-mono text-[#5A7470]">
                       {imageMeta?.size || "695 KB"} • {imageMeta?.dimensions || "2200 × 1200 px"}
                     </span>
                   </div>
@@ -1184,12 +1184,12 @@ export default function HeartDiseaseStudioPage() {
 
                 <div className="flex items-center gap-2 self-end sm:self-auto">
                   {telemetry && (
-                    <div className="flex items-center gap-1 border border-hairline rounded-lg p-0.5 bg-cream/40">
+                    <div className="flex items-center gap-1 border border-[#DFEBE8] rounded-lg p-0.5 bg-[#F7FAF9]/40">
                       <button
                         onClick={() => setViewMode("heatmap")}
                         className={`text-[11px] font-medium px-2.5 py-1 rounded-md transition-all cursor-pointer ${viewMode === "heatmap"
-                            ? "bg-white text-ink shadow-2xs font-semibold"
-                            : "text-ink-soft hover:text-ink"
+                            ? "bg-white text-[#082827] shadow-2xs font-semibold"
+                            : "text-[#5A7470] hover:text-[#082827]"
                           }`}
                       >
                         Grad-CAM Heatmap
@@ -1197,8 +1197,8 @@ export default function HeartDiseaseStudioPage() {
                       <button
                         onClick={() => setViewMode("raw")}
                         className={`text-[11px] font-medium px-2.5 py-1 rounded-md transition-all cursor-pointer ${viewMode === "raw"
-                            ? "bg-white text-ink shadow-2xs font-semibold"
-                            : "text-ink-soft hover:text-ink"
+                            ? "bg-white text-[#082827] shadow-2xs font-semibold"
+                            : "text-[#5A7470] hover:text-[#082827]"
                           }`}
                       >
                         Raw ECG Strip
@@ -1212,7 +1212,7 @@ export default function HeartDiseaseStudioPage() {
                         type="button"
                         onClick={handleRotateImage}
                         title="Rotate ECG 90° Clockwise"
-                        className="text-xs font-mono text-ink-soft hover:text-ink px-2.5 py-1 rounded-lg border border-hairline hover:bg-cream flex items-center gap-1 cursor-pointer transition-colors"
+                        className="text-xs font-mono text-[#5A7470] hover:text-[#082827] px-2.5 py-1 rounded-lg border border-[#DFEBE8] hover:bg-[#F7FAF9] flex items-center gap-1 cursor-pointer transition-colors"
                       >
                         <RotateCw size={13} className="text-quantum" />
                         <span>Rotate 90°</span>
@@ -1225,7 +1225,7 @@ export default function HeartDiseaseStudioPage() {
                           setSelectedReferenceKey(null);
                           setValidationError(null);
                         }}
-                        className="text-xs font-mono text-ink-soft hover:text-red-600 px-2.5 py-1 rounded-lg border border-hairline hover:bg-red-50 cursor-pointer"
+                        className="text-xs font-mono text-[#5A7470] hover:text-red-600 px-2.5 py-1 rounded-lg border border-[#DFEBE8] hover:bg-red-50 cursor-pointer"
                       >
                         Remove File
                       </button>
@@ -1235,7 +1235,7 @@ export default function HeartDiseaseStudioPage() {
               </div>
 
               {/* Viewport Display */}
-              <div className="relative rounded-2xl overflow-hidden border border-hairline bg-black/5 aspect-[16/8] flex items-center justify-center">
+              <div className="relative rounded-2xl overflow-hidden border border-[#DFEBE8] bg-black/5 aspect-[16/8] flex items-center justify-center">
                 {telemetry && viewMode === "heatmap" ? (
                   <img
                     src={telemetry.pinpointing_gradcam.heatmap_image_base64}
@@ -1254,10 +1254,10 @@ export default function HeartDiseaseStudioPage() {
                   <div className="absolute inset-0 bg-white/85 backdrop-blur-xs flex flex-col items-center justify-center space-y-3 z-10">
                     <div className="w-10 h-10 rounded-full border-2 border-quantum border-t-transparent animate-spin" />
                     <div className="text-center space-y-1">
-                      <p className="text-sm font-serif font-medium text-ink">
+                      <p className="text-sm font-sans font-bold text-[#082827]">
                         Executing Dual-Engine Hilbert Space Inference
                       </p>
-                      <p className="text-xs font-mono text-ink-soft">
+                      <p className="text-xs font-mono text-[#5A7470]">
                         QureSight ECGConVT (ResNet-34) &amp; PennyLane 8-Qubit Universal PQC...
                       </p>
                     </div>
@@ -1267,21 +1267,21 @@ export default function HeartDiseaseStudioPage() {
 
               {/* Pinpoint Attribution Bar */}
               {telemetry && (
-                <div className="p-4 rounded-xl bg-white border border-hairline flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                <div className="p-4 rounded-xl bg-white border border-[#DFEBE8] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                   <div className="flex items-center gap-2.5">
                     <div className="w-7 h-7 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-600 flex items-center justify-center">
                       <Crosshair size={15} />
                     </div>
                     <div>
-                      <span className="font-semibold text-ink">
+                      <span className="font-semibold text-[#082827]">
                         {telemetry.pinpointing_gradcam.lead_detected}
                       </span>
-                      <span className="text-ink-soft ml-1.5">
+                      <span className="text-[#5A7470] ml-1.5">
                         ({telemetry.pinpointing_gradcam.anatomical_region})
                       </span>
                     </div>
                   </div>
-                  <span className="font-mono text-[11px] text-ink-soft bg-cream px-2.5 py-1 rounded-md border border-hairline self-start sm:self-auto">
+                  <span className="font-mono text-[11px] text-[#5A7470] bg-[#F7FAF9] px-2.5 py-1 rounded-md border border-[#DFEBE8] self-start sm:self-auto">
                     Peak Activation: {(telemetry.pinpointing_gradcam.activation_peak_score * 100).toFixed(1)}%
                   </span>
                 </div>
@@ -1313,7 +1313,7 @@ export default function HeartDiseaseStudioPage() {
             className="space-y-4"
           >
             {/* 1. DUAL-ENGINE CONSENSUS BANNER */}
-            <div className="p-3.5 rounded-2xl bg-white border border-hairline shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+            <div className="p-3.5 rounded-2xl bg-white border border-[#DFEBE8] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
               <div className="flex items-center gap-2">
                 <span className={`inline-flex items-center gap-1.5 text-xs font-mono font-bold px-2.5 py-1 rounded-lg border ${
                   telemetry.dual_engine_consensus.is_concordant
@@ -1323,20 +1323,20 @@ export default function HeartDiseaseStudioPage() {
                   <span className={`w-2 h-2 rounded-full ${telemetry.dual_engine_consensus.is_concordant ? "bg-emerald-600" : "bg-amber-600 animate-pulse"}`} />
                   {telemetry.dual_engine_consensus.status}
                 </span>
-                <span className="text-xs text-ink-soft hidden md:inline">
+                <span className="text-xs text-[#5A7470] hidden md:inline">
                   (60% Quantum VQC + 40% Classical Ensemble)
                 </span>
               </div>
               <div className="flex items-center gap-3 text-xs font-mono">
                 <span>
-                  Consensus Conf: <strong className="text-ink font-bold">{telemetry.dual_engine_consensus.consensus_confidence}%</strong>
+                  Consensus Conf: <strong className="text-[#082827] font-bold">{telemetry.dual_engine_consensus.consensus_confidence}%</strong>
                 </span>
                 <span className="text-hairline">|</span>
                 <span>
                   Cardiac Risk: <strong className="text-quantum font-bold">{telemetry.risk_stratification.cardiac_risk_score} / 100</strong>
                 </span>
                 <span className="text-hairline">|</span>
-                <span className="text-ink-soft">{telemetry.dual_engine_consensus.total_latency_ms} ms</span>
+                <span className="text-[#5A7470]">{telemetry.dual_engine_consensus.total_latency_ms} ms</span>
               </div>
             </div>
 
@@ -1346,12 +1346,12 @@ export default function HeartDiseaseStudioPage() {
               <div className="p-4.5 rounded-2xl bg-white border border-quantum/40 shadow-xs space-y-3.5 relative overflow-hidden flex flex-col justify-between">
                 <div>
                   {/* Card Header */}
-                  <div className="flex items-center justify-between border-b border-hairline pb-2.5">
+                  <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-2.5">
                     <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-quantum/15 text-quantum border border-quantum/30 flex items-center gap-1.5">
                       <Sparkles size={12} />
                       <span>{telemetry.quantum_engine.signature || "QureSight-VQC (Hybrid Quantum)"}</span>
                     </span>
-                    <span className="text-[10px] font-mono text-ink-soft font-semibold">
+                    <span className="text-[10px] font-mono text-[#5A7470] font-semibold">
                       {telemetry.quantum_engine.latency_ms} ms
                     </span>
                   </div>
@@ -1392,13 +1392,13 @@ export default function HeartDiseaseStudioPage() {
                               />
                             </svg>
                             <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                              <span className="text-base font-black font-mono text-ink leading-none">
+                              <span className="text-base font-black font-mono text-[#082827] leading-none">
                                 {score.toFixed(1)}
                               </span>
-                              <span className="text-[8px] font-mono text-ink-soft mt-0.5">/ 100</span>
+                              <span className="text-[8px] font-mono text-[#5A7470] mt-0.5">/ 100</span>
                             </div>
                           </div>
-                          <span className="text-[9px] font-mono text-ink-soft font-semibold mt-1">Quantum Risk</span>
+                          <span className="text-[9px] font-mono text-[#5A7470] font-semibold mt-1">Quantum Risk</span>
                         </div>
                       );
                     })()}
@@ -1449,7 +1449,7 @@ export default function HeartDiseaseStudioPage() {
                             </span>
                           </div>
 
-                          <div className="text-[11px] font-mono text-ink-soft">
+                          <div className="text-[11px] font-mono text-[#5A7470]">
                             Confidence: <strong className="text-quantum font-bold">{telemetry.quantum_engine.quantum_confidence_pct}%</strong>
                           </div>
                         </div>
@@ -1458,12 +1458,12 @@ export default function HeartDiseaseStudioPage() {
                   </div>
 
                   {/* Grad-CAM Lead Pinpointing */}
-                  <div className="pt-2.5 border-t border-hairline space-y-1">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-ink-soft block">
+                  <div className="pt-2.5 border-t border-[#DFEBE8] space-y-1">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#5A7470] block">
                       VQC Statevector & Lead Attribution
                     </span>
-                    <div className="p-2 rounded-lg bg-cream/40 border border-hairline/60 text-[11px] flex items-center justify-between">
-                      <span className="text-ink font-medium truncate">
+                    <div className="p-2 rounded-lg bg-[#F7FAF9]/40 border border-[#DFEBE8]/60 text-[11px] flex items-center justify-between">
+                      <span className="text-[#082827] font-medium truncate">
                         {telemetry.quantum_engine?.lead_detected || telemetry.pinpointing_gradcam.lead_detected}
                       </span>
                       <span className="font-mono font-bold text-[10px] text-quantum">
@@ -1473,7 +1473,7 @@ export default function HeartDiseaseStudioPage() {
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-hairline flex justify-between items-center text-[10px] font-mono text-ink-soft">
+                <div className="pt-2 border-t border-[#DFEBE8] flex justify-between items-center text-[10px] font-mono text-[#5A7470]">
                   <span>Engine: QureSight-VQC (8-Qubit Universal VQC)</span>
                   <span className="text-emerald-700 font-bold">98.57% SOTA Acc</span>
                 </div>
@@ -1483,12 +1483,12 @@ export default function HeartDiseaseStudioPage() {
               <div className="p-4.5 rounded-2xl bg-white border border-blue-200 shadow-xs space-y-3.5 relative overflow-hidden flex flex-col justify-between">
                 <div>
                   {/* Card Header */}
-                  <div className="flex items-center justify-between border-b border-hairline pb-2.5">
+                  <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-2.5">
                     <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 flex items-center gap-1.5">
                       <Activity size={12} />
                       <span>{telemetry.classical_engine.name || "QureSight-Classical (ResNet-34 Ensemble)"}</span>
                     </span>
-                    <span className="text-[10px] font-mono text-ink-soft font-semibold">
+                    <span className="text-[10px] font-mono text-[#5A7470] font-semibold">
                       {telemetry.classical_engine.latency_ms} ms
                     </span>
                   </div>
@@ -1529,13 +1529,13 @@ export default function HeartDiseaseStudioPage() {
                               />
                             </svg>
                             <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                              <span className="text-base font-black font-mono text-ink leading-none">
+                              <span className="text-base font-black font-mono text-[#082827] leading-none">
                                 {score.toFixed(1)}
                               </span>
-                              <span className="text-[8px] font-mono text-ink-soft mt-0.5">/ 100</span>
+                              <span className="text-[8px] font-mono text-[#5A7470] mt-0.5">/ 100</span>
                             </div>
                           </div>
-                          <span className="text-[9px] font-mono text-ink-soft font-semibold mt-1">Classical Risk</span>
+                          <span className="text-[9px] font-mono text-[#5A7470] font-semibold mt-1">Classical Risk</span>
                         </div>
                       );
                     })()}
@@ -1586,8 +1586,8 @@ export default function HeartDiseaseStudioPage() {
                             </span>
                           </div>
 
-                          <div className="text-[11px] font-mono text-ink-soft">
-                            Confidence: <strong className="text-ink font-bold">{telemetry.classical_engine.confidence_pct}%</strong>
+                          <div className="text-[11px] font-mono text-[#5A7470]">
+                            Confidence: <strong className="text-[#082827] font-bold">{telemetry.classical_engine.confidence_pct}%</strong>
                           </div>
                         </div>
                       );
@@ -1595,12 +1595,12 @@ export default function HeartDiseaseStudioPage() {
                   </div>
 
                   {/* Feature Extractor & Grad-CAM Lead Pinpointing */}
-                  <div className="pt-2.5 border-t border-hairline space-y-1">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-ink-soft block">
+                  <div className="pt-2.5 border-t border-[#DFEBE8] space-y-1">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#5A7470] block">
                       ECGConVT Lead &amp; Vascular Territory
                     </span>
-                    <div className="p-2 rounded-lg bg-cream/40 border border-hairline/60 text-[11px] flex items-center justify-between">
-                      <span className="text-ink font-medium truncate">
+                    <div className="p-2 rounded-lg bg-[#F7FAF9]/40 border border-[#DFEBE8]/60 text-[11px] flex items-center justify-between">
+                      <span className="text-[#082827] font-medium truncate">
                         {telemetry.classical_engine?.lead_detected || telemetry.pinpointing_gradcam.lead_detected}
                       </span>
                       <span className="font-mono font-bold text-[10px] text-blue-700">
@@ -1610,7 +1610,7 @@ export default function HeartDiseaseStudioPage() {
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-hairline flex justify-between items-center text-[10px] font-mono text-ink-soft">
+                <div className="pt-2 border-t border-[#DFEBE8] flex justify-between items-center text-[10px] font-mono text-[#5A7470]">
                   <span>Engine: QureSight-Classical (ResNet-34 ECGConVT)</span>
                   <span className="text-blue-700 font-bold">97.13% SOTA Acc</span>
                 </div>
@@ -1618,8 +1618,8 @@ export default function HeartDiseaseStudioPage() {
             </div>
 
             {/* 2. COMPACT MULTI-CLASS LIKELIHOOD SPECTRUM */}
-            <div className="p-3.5 rounded-2xl bg-white border border-hairline shadow-xs space-y-2">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-ink-soft font-bold block">
+            <div className="p-3.5 rounded-2xl bg-white border border-[#DFEBE8] shadow-xs space-y-2">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#5A7470] font-bold block">
                 Multi-Class Likelihood Spectrum
               </span>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -1629,17 +1629,17 @@ export default function HeartDiseaseStudioPage() {
                     <div
                       key={cls}
                       className={`p-2 rounded-xl border text-xs ${isSelected
-                          ? "border-quantum/50 bg-quantum/5 text-ink font-bold"
-                          : "border-hairline bg-cream/20 text-ink-soft"
+                          ? "border-quantum/50 bg-quantum/5 text-[#082827] font-bold"
+                          : "border-[#DFEBE8] bg-[#F7FAF9]/20 text-[#5A7470]"
                         }`}
                     >
                       <div className="flex justify-between items-center">
                         <span className="truncate pr-1">{cls}</span>
                         <span className="font-mono">{(prob * 100).toFixed(1)}%</span>
                       </div>
-                      <div className="h-1 w-full bg-cream rounded-full overflow-hidden mt-1.5">
+                      <div className="h-1 w-full bg-[#F7FAF9] rounded-full overflow-hidden mt-1.5">
                         <div
-                          className={`h-full ${isSelected ? "bg-quantum" : "bg-ink-soft/30"}`}
+                          className={`h-full ${isSelected ? "bg-quantum" : "bg-[#082827]-soft/30"}`}
                           style={{ width: `${prob * 100}%` }}
                         />
                       </div>
@@ -1650,18 +1650,18 @@ export default function HeartDiseaseStudioPage() {
             </div>
 
             {/* 3. QURESIGHT AI SUMMARY (TYPEWRITER & TRANSLATION) */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-white border border-hairline shadow-xs space-y-3.5 relative overflow-hidden">
+            <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#DFEBE8] shadow-xs space-y-3.5 relative overflow-hidden">
               {/* Header Row */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-hairline pb-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-[#DFEBE8] pb-3">
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-lg bg-quantum/10 border border-quantum/20 flex items-center justify-center text-quantum shadow-2xs">
                     <FileText size={15} />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-ink uppercase tracking-wider">
+                    <h4 className="text-xs font-bold text-[#082827] uppercase tracking-wider">
                       QureSight AI Summary
                     </h4>
-                    <p className="text-[11px] text-ink-soft">
+                    <p className="text-[11px] text-[#5A7470]">
                       Evaluation for {patientName || "Patient"} ({patientId})
                     </p>
                   </div>
@@ -1685,7 +1685,7 @@ export default function HeartDiseaseStudioPage() {
                       handleTranslateSummary(lang);
                     }}
                     disabled={isLoadingAi || isTranslating}
-                    className="px-2.5 py-1 rounded-lg border border-hairline bg-cream/30 hover:bg-cream/60 text-ink text-xs font-medium focus:outline-none focus:border-quantum cursor-pointer"
+                    className="px-2.5 py-1 rounded-lg border border-[#DFEBE8] bg-[#F7FAF9]/30 hover:bg-[#F7FAF9]/60 text-[#082827] text-xs font-medium focus:outline-none focus:border-quantum cursor-pointer"
                   >
                     {LANGUAGES.map((lang) => (
                       <option key={lang.code} value={lang.code}>
@@ -1699,7 +1699,7 @@ export default function HeartDiseaseStudioPage() {
                     type="button"
                     onClick={() => handleTranslateSummary(selectedLanguage)}
                     disabled={isLoadingAi || isTranslating}
-                    className="px-2.5 py-1 rounded-lg bg-ink hover:bg-ink/90 text-parchment text-xs font-medium flex items-center gap-1 transition-all cursor-pointer disabled:opacity-50 shadow-2xs"
+                    className="px-2.5 py-1 rounded-lg bg-[#082827] hover:bg-[#082827]/90 text-white text-xs font-medium flex items-center gap-1 transition-all cursor-pointer disabled:opacity-50 shadow-2xs"
                     title="AI rewrite and translate summary"
                   >
                     <Languages size={12} className="text-quantum" />
@@ -1710,7 +1710,7 @@ export default function HeartDiseaseStudioPage() {
 
               {/* Body: Thinking State or Typed Paragraph */}
               {isLoadingAi && !typedSummaryText ? (
-                <div className="py-3 px-3.5 rounded-xl bg-parchment/40 border border-hairline flex items-center gap-2.5 text-xs text-ink-soft font-mono">
+                <div className="py-3 px-3.5 rounded-xl bg-white/40 border border-[#DFEBE8] flex items-center gap-2.5 text-xs text-[#5A7470] font-mono">
                   <div className="flex items-center gap-1 text-quantum shrink-0">
                     <span className="w-1.5 h-1.5 rounded-full bg-quantum animate-bounce [animation-delay:-0.3s]" />
                     <span className="w-1.5 h-1.5 rounded-full bg-quantum animate-bounce [animation-delay:-0.15s]" />
@@ -1719,13 +1719,13 @@ export default function HeartDiseaseStudioPage() {
                   <span className="italic">Thinking... evaluating ECG leads and compiling clinical cardiac summary</span>
                 </div>
               ) : isTranslating ? (
-                <div className="py-3 px-3.5 rounded-xl bg-parchment/40 border border-hairline flex items-center gap-2.5 text-xs text-ink-soft font-mono">
+                <div className="py-3 px-3.5 rounded-xl bg-white/40 border border-[#DFEBE8] flex items-center gap-2.5 text-xs text-[#5A7470] font-mono">
                   <Loader2 size={13} className="animate-spin text-quantum shrink-0" />
                   <span>Rewriting summary in {LANGUAGES.find(l => l.code === selectedLanguage)?.name}...</span>
                 </div>
               ) : (
-                <div className="p-3.5 rounded-xl bg-parchment/50 border border-hairline">
-                  <p className="text-xs sm:text-[13px] text-ink leading-relaxed whitespace-pre-line font-normal">
+                <div className="p-3.5 rounded-xl bg-white/50 border border-[#DFEBE8]">
+                  <p className="text-xs sm:text-[13px] text-[#082827] leading-relaxed whitespace-pre-line font-normal">
                     {typedSummaryText}
                     {isTypingSummary && (
                       <span className="inline-block w-1.5 h-3.5 ml-1 bg-quantum animate-pulse align-middle" />
@@ -1767,28 +1767,28 @@ export default function HeartDiseaseStudioPage() {
       {/* IBM MODAL (White Center Card) */}
       <AnimatePresence>
         {isIbmModalOpen && (
-          <div className="fixed inset-0 bg-ink/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
+          <div className="fixed inset-0 bg-[#082827]/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 12 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 12 }}
               transition={{ duration: 0.22, ease: "easeOut" }}
-              className="bg-white text-ink rounded-2xl border border-hairline p-6 max-w-lg w-full space-y-4 shadow-2xl"
+              className="bg-white text-[#082827] rounded-2xl border border-[#DFEBE8] p-6 max-w-lg w-full space-y-4 shadow-2xl"
             >
-              <div className="flex items-center justify-between pb-3 border-b border-hairline">
+              <div className="flex items-center justify-between pb-3 border-b border-[#DFEBE8]">
                 <div className="flex items-center gap-2.5">
                   <div className="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-600 border border-amber-200/60 flex items-center justify-center">
                     <Cpu size={18} />
                   </div>
                   <div>
-                    <h3 className="font-serif text-lg font-medium text-ink">Real IBM Quantum QPU Engine</h3>
-                    <p className="text-xs text-ink-soft">127-Qubit Superconducting Transmon Processor</p>
+                    <h3 className="font-sans font-bold text-lg font-medium text-[#082827]">Real IBM Quantum QPU Engine</h3>
+                    <p className="text-xs text-[#5A7470]">127-Qubit Superconducting Transmon Processor</p>
                   </div>
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsIbmModalOpen(false)}
-                  className="h-8 w-8 rounded-full bg-cream hover:bg-cream-deep border border-hairline flex items-center justify-center text-ink-soft hover:text-ink cursor-pointer transition-colors"
+                  className="h-8 w-8 rounded-full bg-[#F7FAF9] hover:bg-[#F2F7F6] border border-[#DFEBE8] flex items-center justify-center text-[#5A7470] hover:text-[#082827] cursor-pointer transition-colors"
                 >
                   <X size={15} />
                 </button>
@@ -1796,37 +1796,37 @@ export default function HeartDiseaseStudioPage() {
 
               {/* Hardware KPI Cards */}
               <div className="grid grid-cols-3 gap-2 text-center">
-                <div className="p-2.5 rounded-xl bg-cream/60 border border-hairline space-y-0.5">
-                  <span className="text-[10px] font-mono uppercase text-ink-soft block font-bold">Target</span>
-                  <span className="font-serif text-sm font-light text-ink">ibm_brisbane</span>
+                <div className="p-2.5 rounded-xl bg-[#F7FAF9]/60 border border-[#DFEBE8] space-y-0.5">
+                  <span className="text-[10px] font-mono uppercase text-[#5A7470] block font-bold">Target</span>
+                  <span className="font-sans font-bold text-sm font-light text-[#082827]">ibm_brisbane</span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-cream/60 border border-hairline space-y-0.5">
-                  <span className="text-[10px] font-mono uppercase text-ink-soft block font-bold">Topology</span>
-                  <span className="font-serif text-sm font-light text-ink">127 Transmons</span>
+                <div className="p-2.5 rounded-xl bg-[#F7FAF9]/60 border border-[#DFEBE8] space-y-0.5">
+                  <span className="text-[10px] font-mono uppercase text-[#5A7470] block font-bold">Topology</span>
+                  <span className="font-sans font-bold text-sm font-light text-[#082827]">127 Transmons</span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-cream/60 border border-hairline space-y-0.5">
-                  <span className="text-[10px] font-mono uppercase text-ink-soft block font-bold">Mitigation</span>
-                  <span className="font-serif text-sm font-light text-emerald-600">ZNE + M3</span>
+                <div className="p-2.5 rounded-xl bg-[#F7FAF9]/60 border border-[#DFEBE8] space-y-0.5">
+                  <span className="text-[10px] font-mono uppercase text-[#5A7470] block font-bold">Mitigation</span>
+                  <span className="font-sans font-bold text-sm font-light text-emerald-600">ZNE + M3</span>
                 </div>
               </div>
 
-              <div className="space-y-3 text-xs text-ink-soft leading-relaxed">
-                <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-200 text-ink flex items-start gap-2.5">
+              <div className="space-y-3 text-xs text-[#5A7470] leading-relaxed">
+                <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-200 text-[#082827] flex items-start gap-2.5">
                   <Lock size={16} className="text-amber-700 shrink-0 mt-0.5" />
                   <div className="space-y-1">
                     <strong className="block font-semibold text-amber-900">Enterprise Hardware Queue Notice</strong>
-                    <span className="text-[11px] text-ink-soft leading-relaxed block">
+                    <span className="text-[11px] text-[#5A7470] leading-relaxed block">
                       Physical cryogenic IBM Quantum QPU runs execute through the IBM Qiskit cloud queue (typical latency 1-8 minutes). Active clinical screening is recommended on our high-speed quantum simulator for immediate sub-second results.
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-2 border-t border-hairline">
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#DFEBE8]">
                 <button
                   type="button"
                   onClick={() => setIsIbmModalOpen(false)}
-                  className="px-4 py-2 rounded-xl bg-cream hover:bg-cream-deep border border-hairline text-ink-soft hover:text-ink text-xs font-medium cursor-pointer transition-colors"
+                  className="px-4 py-2 rounded-xl bg-[#F7FAF9] hover:bg-[#F2F7F6] border border-[#DFEBE8] text-[#5A7470] hover:text-[#082827] text-xs font-medium cursor-pointer transition-colors"
                 >
                   Use High-Speed Simulator
                 </button>
@@ -1841,7 +1841,7 @@ export default function HeartDiseaseStudioPage() {
                       type: "quantum",
                     });
                   }}
-                  className="px-4 py-2 rounded-xl bg-ink hover:bg-ink/90 text-parchment text-xs font-semibold cursor-pointer transition-colors"
+                  className="px-4 py-2 rounded-xl bg-[#082827] hover:bg-[#082827]/90 text-white text-xs font-semibold cursor-pointer transition-colors"
                 >
                   Enable Hardware Target
                 </button>

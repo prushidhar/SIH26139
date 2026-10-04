@@ -88,7 +88,7 @@ export default function ComprehensiveResultModal({
 
   const getStatusBadge = (key: string, val: number) => {
     const meta = BIOMARKER_META[key];
-    if (!meta) return { text: "MEASURED", color: "bg-cream text-ink-soft border-hairline" };
+    if (!meta) return { text: "MEASURED", color: "bg-[#F7FAF9] text-[#5A7470] border-[#DFEBE8]" };
     if (val > meta.normalMax * 1.25) return { text: "HIGH RISK", color: "bg-rose-500/10 text-rose-700 dark:text-rose-300 border-rose-500/30" };
     if (val > meta.normalMax) return { text: "ELEVATED", color: "bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30" };
     if (val < meta.normalMin) return { text: "LOW", color: "bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-500/30" };

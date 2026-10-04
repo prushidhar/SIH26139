@@ -279,7 +279,7 @@ export default function HepatitisStudioPage() {
               <ArrowLeft size={13} /> Back to Screening Terminals
             </Link>
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-2xl bg-teal-50 border border-teal-200 text-teal-700 flex items-center justify-center shadow-xs">
+              <div className="w-11 h-11 rounded-2xl bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] flex items-center justify-center shadow-xs">
                 <Droplets size={22} />
               </div>
               <div>
@@ -287,7 +287,7 @@ export default function HepatitisStudioPage() {
                   <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#082827] tracking-tight">
                     Hepatitis C & Liver Health
                   </h1>
-                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-teal-50 border border-teal-200 text-teal-700 font-bold">
+                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] font-bold">
                     ACTIVE • 4-QUBIT VQC
                   </span>
                 </div>
@@ -473,7 +473,7 @@ export default function HepatitisStudioPage() {
                   </div>
 
                   <div>
-                    <h3 className="text-lg font-serif font-light text-foreground">
+                    <h3 className="text-lg font-sans font-semibold text-foreground">
                       {telemetry.router_decision.selected_engine}
                     </h3>
                     <p className="text-xs text-muted-foreground pt-1 leading-relaxed">

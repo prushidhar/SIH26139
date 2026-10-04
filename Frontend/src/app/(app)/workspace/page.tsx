@@ -81,10 +81,10 @@ export default function ResearchWorkspacePage() {
               <Compass className="w-3.5 h-3.5 text-[#00B489]" />
               <span>CLINICAL RESEARCH &amp; INVESTIGATION HUB</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#082827] tracking-tight">
               Physician Investigation Station
             </h1>
-            <p className="text-sm text-gray-600 max-w-2xl leading-relaxed">
+            <p className="text-sm text-[#5A7470] max-w-2xl leading-relaxed">
               Evidence-driven biomedical intelligence: evaluating quantum representation on complex clinical cohorts.
             </p>
           </div>
@@ -93,9 +93,9 @@ export default function ResearchWorkspacePage() {
             <button
               onClick={fetchOverview}
               disabled={loading}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl border border-[#DFEBE8] bg-white hover:bg-slate-50 text-gray-700 text-xs font-semibold shadow-xs transition-all cursor-pointer active:scale-98 disabled:opacity-50"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl border border-[#DFEBE8] bg-white hover:bg-[#E6F7F4] hover:border-[#006766]/40 text-[#082827] text-xs font-semibold shadow-2xs transition-all cursor-pointer active:scale-98 disabled:opacity-50"
             >
-              <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin text-[#006766]" : "text-gray-500"}`} />
+              <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin text-[#006766]" : "text-[#5A7470]"}`} />
               <span>Sync Telemetry</span>
             </button>
 

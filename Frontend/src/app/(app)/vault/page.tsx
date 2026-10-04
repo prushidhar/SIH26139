@@ -168,7 +168,7 @@ export default function ExperimentVaultPage() {
       )}
 
       {loading && experiments.length === 0 ? (
-        <div className="p-16 text-center text-xs font-mono text-ink-soft">
+        <div className="p-16 text-center text-xs font-mono text-[#5A7470]">
           <RefreshCw className="w-5 h-5 animate-spin mx-auto text-quantum mb-2" />
           Loading verified experiment vault records...
         </div>
@@ -179,7 +179,7 @@ export default function ExperimentVaultPage() {
           ))}
 
           {filtered.length === 0 && (
-            <div className="p-12 text-center text-xs font-mono text-ink-soft rounded-xl border border-hairline bg-parchment">
+            <div className="p-12 text-center text-xs font-mono text-[#5A7470] rounded-xl border border-[#DFEBE8] bg-white">
               No matching experiments found for "{searchTerm}".
             </div>
           )}

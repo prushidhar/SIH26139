@@ -303,7 +303,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
-    <div className="min-h-screen w-full bg-cream text-ink font-sans selection:bg-ink selection:text-parchment flex flex-col">
+    <div className="min-h-screen w-full bg-[#F2F7F6] text-[#082827] font-sans selection:bg-[#006766] selection:text-white flex flex-col">
       {/* Hidden File Input for Avatar Upload */}
       <input
         type="file"
@@ -448,9 +448,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
                       <div className="space-y-1.5 max-h-64 overflow-y-auto">
                         {unreadCount === 0 ? (
-                          <div className="py-6 text-center text-xs text-ink-soft space-y-1">
-                            <p className="font-medium text-ink">No unread notifications</p>
-                            <p className="text-[10px] text-ink-soft">You are all caught up. Patient reports will appear here.</p>
+                          <div className="py-6 text-center text-xs text-[#5A7470] space-y-1">
+                            <p className="font-bold text-[#082827]">No unread notifications</p>
+                            <p className="text-[10px] text-[#5A7470]">You are all caught up. Patient reports will appear here.</p>
                           </div>
                         ) : (
                           notifications
@@ -466,26 +466,26 @@ export default function AppLayout({ children }: AppLayoutProps) {
                                   );
                                   setNotificationsOpen(false);
                                 }}
-                                className="block p-2.5 rounded-xl text-xs space-y-0.5 transition-colors cursor-pointer bg-quantum/10 border border-quantum/20 shadow-2xs hover:bg-quantum/15"
+                                className="block p-2.5 rounded-xl text-xs space-y-0.5 transition-colors cursor-pointer bg-[#E6F7F4] border border-[#00B489]/30 shadow-2xs hover:bg-[#d8f4ee]"
                               >
                                 <div className="flex items-center justify-between">
-                                  <span className="text-[11px] font-bold text-ink flex items-center gap-1.5">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-quantum shrink-0" />
+                                  <span className="text-[11px] font-bold text-[#082827] flex items-center gap-1.5">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#00B489] shrink-0" />
                                     {n.title}
                                   </span>
-                                  <span className="text-[9px] text-ink-soft font-mono">{n.time}</span>
+                                  <span className="text-[9px] text-[#5A7470] font-mono">{n.time}</span>
                                 </div>
-                                <p className="text-[11px] text-ink-soft font-light leading-snug">{n.message}</p>
+                                <p className="text-[11px] text-[#5A7470] font-normal leading-snug">{n.message}</p>
                               </Link>
                             ))
                         )}
                       </div>
 
-                      <div className="pt-2 border-t border-hairline text-center">
+                      <div className="pt-2 border-t border-[#DFEBE8] text-center">
                         <Link
                           href="/notifications"
                           onClick={() => setNotificationsOpen(false)}
-                          className="text-xs font-medium text-quantum hover:underline"
+                          className="text-xs font-semibold text-[#006766] hover:text-[#084E4D] hover:underline"
                         >
                           Open Notification Center →
                         </Link>
@@ -526,7 +526,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle navigation sidebar"
               title="Toggle Menu"
-              className="w-8 h-8 rounded-lg bg-cream-deep/60 hover:bg-cream border border-hairline flex items-center justify-center text-ink-soft hover:text-ink cursor-pointer transition-colors shrink-0"
+              className="w-8 h-8 rounded-xl bg-white hover:bg-[#E6F7F4] border border-[#DFEBE8] flex items-center justify-center text-[#5A7470] hover:text-[#006766] cursor-pointer transition-colors shrink-0 shadow-2xs"
             >
               <Menu size={16} />
             </motion.button>
@@ -539,19 +539,19 @@ export default function AppLayout({ children }: AppLayoutProps) {
           {/* Right: Toggleable Model Selector (Simulator / IBM QPU) + Notifications + Account */}
           <div className="flex items-center gap-1.5 sm:gap-2">
             {/* Mobile Model Toggle Selector */}
-            <div className="flex items-center p-0.5 bg-cream-deep/60 rounded-lg border border-hairline text-[10px] font-mono shrink-0">
+            <div className="flex items-center p-0.5 bg-[#F2F7F6] rounded-xl border border-[#DFEBE8] text-[10px] font-mono shrink-0">
               {/* Quantum Simulator Active */}
               <button
                 type="button"
                 onClick={() => handleBackendChange("gpu_simulator")}
-                className={`px-1.5 py-0.5 rounded-md transition-all flex items-center gap-1 font-semibold cursor-pointer ${
+                className={`px-2 py-0.5 rounded-lg transition-all flex items-center gap-1 font-semibold cursor-pointer ${
                   quantumBackend === "gpu_simulator"
-                    ? "bg-parchment text-quantum shadow-2xs border border-hairline/80 font-bold"
-                    : "text-ink-soft hover:text-ink"
+                    ? "bg-white text-[#006766] shadow-2xs border border-[#DFEBE8] font-bold"
+                    : "text-[#5A7470] hover:text-[#082827]"
                 }`}
                 title="Quantum Simulator (PennyLane Active)"
               >
-                <Sparkles size={10} className="text-quantum shrink-0" />
+                <Sparkles size={10} className="text-[#00B489] shrink-0" />
                 <span className="hidden xs:inline">Simulator</span>
                 <span className="xs:hidden">Sim</span>
               </button>
@@ -566,7 +566,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     type: "warning",
                   });
                 }}
-                className="px-1.5 py-0.5 rounded-md transition-all flex items-center gap-1 font-medium cursor-pointer text-ink-soft hover:text-ink opacity-80"
+                className="px-1.5 py-0.5 rounded-lg transition-all flex items-center gap-1 font-medium cursor-pointer text-[#5A7470] hover:text-[#082827] opacity-80"
                 title="IBM Quantum Eagle QPU — Hardware Locked"
               >
                 <Cpu size={10} className="text-amber-500 shrink-0" />
@@ -586,11 +586,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 onClick={handleToggleNotifications}
                 aria-label="Notifications"
                 title="Notifications"
-                className="w-8 h-8 rounded-full bg-cream-deep/60 hover:bg-cream border border-hairline flex items-center justify-center text-ink-soft hover:text-ink cursor-pointer transition-colors relative shrink-0"
+                className="w-8 h-8 rounded-full bg-white hover:bg-[#E6F7F4] border border-[#DFEBE8] flex items-center justify-center text-[#5A7470] hover:text-[#006766] cursor-pointer transition-colors relative shrink-0 shadow-2xs"
               >
                 <Bell size={14} />
                 {unreadCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-quantum text-parchment rounded-full text-[8px] font-mono flex items-center justify-center font-bold">
+                  <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-[#006766] text-white rounded-full text-[8px] font-mono flex items-center justify-center font-bold">
                     {unreadCount}
                   </span>
                 )}
@@ -609,13 +609,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.96 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute right-0 top-11 w-72 max-w-[calc(100vw-1.5rem)] bg-parchment rounded-2xl border border-hairline shadow-xl z-50 p-3 space-y-2"
+                      className="absolute right-0 top-11 w-72 max-w-[calc(100vw-1.5rem)] bg-white rounded-2xl border border-[#DFEBE8] shadow-xl z-50 p-3 space-y-2"
                     >
-                      <div className="flex items-center justify-between border-b border-hairline pb-2">
+                      <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-2">
                         <div className="flex items-center gap-1.5">
-                          <span className="text-xs font-serif font-medium text-ink">Notifications</span>
+                          <span className="text-xs font-sans font-bold text-[#082827]">Notifications</span>
                           {notifications.length > 0 && (
-                            <span className="text-[10px] font-mono text-ink-soft">({notifications.length})</span>
+                            <span className="text-[10px] font-mono text-[#5A7470]">({notifications.length})</span>
                           )}
                         </div>
                         <div className="flex items-center gap-2">
@@ -623,7 +623,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                             <button
                               type="button"
                               onClick={markAllNotificationsAsRead}
-                              className="text-[10px] text-quantum hover:underline cursor-pointer font-medium"
+                              className="text-[10px] text-[#006766] hover:underline cursor-pointer font-semibold"
                             >
                               Mark all read
                             </button>
@@ -635,7 +635,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                           <Link
                             href="/notifications"
                             onClick={() => setNotificationsOpen(false)}
-                            className="text-[10px] text-ink hover:underline cursor-pointer font-medium"
+                            className="text-[10px] text-[#082827] hover:underline cursor-pointer font-medium"
                           >
                             View all
                           </Link>
@@ -644,9 +644,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
                       <div className="space-y-1.5 max-h-56 overflow-y-auto">
                         {unreadCount === 0 ? (
-                          <div className="py-6 text-center text-xs text-ink-soft space-y-1">
-                            <p className="font-medium text-ink">No unread notifications</p>
-                            <p className="text-[10px] text-ink-soft">You are all caught up. Patient reports will appear here.</p>
+                          <div className="py-6 text-center text-xs text-[#5A7470] space-y-1">
+                            <p className="font-bold text-[#082827]">No unread notifications</p>
+                            <p className="text-[10px] text-[#5A7470]">You are all caught up. Patient reports will appear here.</p>
                           </div>
                         ) : (
                           notifications
@@ -662,26 +662,26 @@ export default function AppLayout({ children }: AppLayoutProps) {
                                   );
                                   setNotificationsOpen(false);
                                 }}
-                                className="block p-2 rounded-xl text-xs space-y-0.5 transition-colors cursor-pointer bg-quantum/10 border border-quantum/20 shadow-2xs hover:bg-quantum/15"
+                                className="block p-2 rounded-xl text-xs space-y-0.5 transition-colors cursor-pointer bg-[#E6F7F4] border border-[#00B489]/30 shadow-2xs hover:bg-[#d8f4ee]"
                               >
                                 <div className="flex items-center justify-between">
-                                  <span className="text-[11px] font-bold text-ink flex items-center gap-1.5">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-quantum shrink-0" />
+                                  <span className="text-[11px] font-bold text-[#082827] flex items-center gap-1.5">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#00B489] shrink-0" />
                                     {n.title}
                                   </span>
-                                  <span className="text-[9px] text-ink-soft font-mono">{n.time}</span>
+                                  <span className="text-[9px] text-[#5A7470] font-mono">{n.time}</span>
                                 </div>
-                                <p className="text-[10px] text-ink-soft font-light leading-snug">{n.message}</p>
+                                <p className="text-[10px] text-[#5A7470] font-normal leading-snug">{n.message}</p>
                               </Link>
                             ))
                         )}
                       </div>
 
-                      <div className="pt-2 border-t border-hairline text-center">
+                      <div className="pt-2 border-t border-[#DFEBE8] text-center">
                         <Link
                           href="/notifications"
                           onClick={() => setNotificationsOpen(false)}
-                          className="text-xs font-medium text-quantum hover:underline"
+                          className="text-xs font-semibold text-[#006766] hover:text-[#084E4D] hover:underline"
                         >
                           Open Notification Center →
                         </Link>
@@ -697,7 +697,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
               href="/account"
               aria-label="User Account Settings"
               title={`Account: ${userName}`}
-              className="w-8 h-8 rounded-full bg-ink text-parchment border border-hairline flex items-center justify-center cursor-pointer overflow-hidden shadow-2xs hover:ring-2 hover:ring-quantum/40 transition-all shrink-0"
+              className="w-8 h-8 rounded-full bg-[#006766] text-white border border-[#00B489]/40 flex items-center justify-center cursor-pointer overflow-hidden shadow-2xs hover:ring-2 hover:ring-[#00B489]/40 transition-all shrink-0"
             >
               {userAvatar ? (
                 <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
@@ -927,7 +927,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setMobileMenuOpen(false)}
-                className="fixed inset-0 bg-ink/30 backdrop-blur-xs z-40 md:hidden"
+                className="fixed inset-0 bg-[#082827]/40 backdrop-blur-xs z-40 md:hidden"
               />
 
               <motion.aside
@@ -935,13 +935,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 animate={{ x: 0 }}
                 exit={{ x: -280 }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
-                className="fixed top-14 bottom-0 left-0 w-64 bg-parchment border-r border-hairline z-50 p-4 flex flex-col justify-between md:hidden shadow-xl"
+                className="fixed top-14 bottom-0 left-0 w-64 bg-white border-r border-[#DFEBE8] z-50 p-4 flex flex-col justify-between md:hidden shadow-2xl"
               >
                 <div className="space-y-4 overflow-y-auto">
                   {NAV_SECTIONS.map((section, sIdx) => (
                     <div key={sIdx} className="space-y-1">
                       <div className="px-3 py-1">
-                        <span className="text-[9px] font-mono uppercase tracking-wider text-ink-soft font-semibold">
+                        <span className="text-[9px] font-mono uppercase tracking-wider text-[#5A7470] font-bold">
                           {section.title}
                         </span>
                       </div>
@@ -956,17 +956,17 @@ export default function AppLayout({ children }: AppLayoutProps) {
                             href={item.href}
                             onClick={() => setMobileMenuOpen(false)}
                             className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-medium transition-all ${isActive
-                              ? "bg-primary text-primary-foreground shadow-xs font-semibold"
-                              : "text-ink-soft hover:text-ink hover:bg-cream-deep/40"
+                              ? "bg-gradient-to-r from-[#006766] to-[#0A4F46] text-white shadow-xs font-semibold"
+                              : "text-[#5A7470] hover:text-[#082827] hover:bg-[#F2F7F6]"
                               }`}
                           >
                             <div className="flex items-center gap-3">
-                              <div className={`relative flex items-center justify-center shrink-0 ${isActive ? "w-6 h-6 rounded-lg bg-white/15" : ""}`}>
-                                <Icon size={15} className={isActive ? "text-white" : "text-ink-soft"} />
+                              <div className={`relative flex items-center justify-center shrink-0 ${isActive ? "w-6 h-6 rounded-lg bg-white/20" : ""}`}>
+                                <Icon size={15} className={isActive ? "text-white" : "text-[#5A7470]"} />
                               </div>
                               <span>{item.label}</span>
                             </div>
-                            {isActive && <ChevronRight size={14} className="text-quantum" />}
+                            {isActive && <ChevronRight size={14} className="text-[#00B489]" />}
                           </Link>
                         );
                       })}
@@ -975,17 +975,17 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 </div>
 
                 {/* Mobile Bottom: Clean Account & Settings & Red Sign Out */}
-                <div className="space-y-1 pt-3 border-t border-hairline">
+                <div className="space-y-1 pt-3 border-t border-[#DFEBE8]">
                   <Link
                     href="/account"
                     onClick={() => setMobileMenuOpen(false)}
                     className={`p-2.5 rounded-xl flex items-center gap-2.5 cursor-pointer transition-colors ${pathname === "/account"
-                      ? "bg-primary text-primary-foreground shadow-xs font-semibold"
-                      : "hover:bg-cream-deep/50 text-ink"
+                      ? "bg-gradient-to-r from-[#006766] to-[#0A4F46] text-white shadow-xs font-semibold"
+                      : "hover:bg-[#F2F7F6] text-[#082827]"
                       }`}
                   >
                     <div className="relative flex items-center justify-center shrink-0">
-                      <div className="relative w-8 h-8 rounded-full bg-parchment text-ink flex items-center justify-center font-sans font-bold text-xs overflow-hidden shrink-0 border border-hairline">
+                      <div className="relative w-8 h-8 rounded-full bg-[#E6F7F4] text-[#006766] flex items-center justify-center font-sans font-bold text-xs overflow-hidden shrink-0 border border-[#00B489]/30">
                         {userAvatar ? (
                           <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
                         ) : (
@@ -995,13 +995,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     </div>
                     <div className="overflow-hidden">
                       <span
-                        className={`text-xs font-semibold block truncate ${pathname === "/account" ? "text-primary-foreground" : "text-ink"
+                        className={`text-xs font-semibold block truncate ${pathname === "/account" ? "text-white" : "text-[#082827]"
                           }`}
                       >
                         {userName}
                       </span>
                       <span
-                        className={`text-[10px] block truncate ${pathname === "/account" ? "text-primary-foreground/80" : "text-ink-soft"
+                        className={`text-[10px] block truncate ${pathname === "/account" ? "text-white/80" : "text-[#5A7470]"
                           }`}
                       >
                         {userEmail}
@@ -1013,13 +1013,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     href="/settings"
                     onClick={() => setMobileMenuOpen(false)}
                     className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium transition-colors ${pathname === "/settings"
-                      ? "bg-primary text-primary-foreground shadow-xs font-semibold"
-                      : "text-ink-soft hover:text-ink hover:bg-cream-deep/40"
+                      ? "bg-gradient-to-r from-[#006766] to-[#0A4F46] text-white shadow-xs font-semibold"
+                      : "text-[#5A7470] hover:text-[#082827] hover:bg-[#F2F7F6]"
                       }`}
                   >
                     <div className="relative flex items-center justify-center shrink-0">
-                      <div className={`relative flex items-center justify-center ${pathname === "/settings" ? "w-6 h-6 rounded-lg bg-white/15" : ""}`}>
-                        <Settings size={15} className={pathname === "/settings" ? "text-white" : "text-ink-soft"} />
+                      <div className={`relative flex items-center justify-center ${pathname === "/settings" ? "w-6 h-6 rounded-lg bg-white/20" : ""}`}>
+                        <Settings size={15} className={pathname === "/settings" ? "text-white" : "text-[#5A7470]"} />
                       </div>
                     </div>
                     <span>Settings</span>
@@ -1061,24 +1061,26 @@ export default function AppLayout({ children }: AppLayoutProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setAccountModalOpen(false)}
-              className="fixed inset-0 bg-ink/30 backdrop-blur-xs z-50"
+              className="fixed inset-0 bg-[#082827]/40 backdrop-blur-md z-50"
             />
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-parchment rounded-2xl border border-hairline shadow-2xl z-50 p-5 space-y-4"
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-white rounded-3xl border border-[#DFEBE8] shadow-[0_24px_60px_-12px_rgba(0,103,102,0.25)] z-50 p-6 space-y-4"
             >
-              <div className="flex items-center justify-between border-b border-hairline pb-3">
-                <div className="flex items-center gap-2">
-                  <User size={16} className="text-quantum" />
-                  <h3 className="font-serif text-lg font-medium text-ink">User Account</h3>
+              <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3.5">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-[#E6F7F4] border border-[#00B489]/30 flex items-center justify-center text-[#006766]">
+                    <User size={16} />
+                  </div>
+                  <h3 className="font-sans text-lg font-bold text-[#082827]">User Account</h3>
                 </div>
                 <button
                   type="button"
                   onClick={() => setAccountModalOpen(false)}
-                  className="w-7 h-7 rounded-full bg-cream-deep/60 border border-hairline flex items-center justify-center text-ink-soft hover:text-ink cursor-pointer"
+                  className="w-7 h-7 rounded-full bg-[#F2F7F6] hover:bg-[#E6F7F4] border border-[#DFEBE8] flex items-center justify-center text-[#5A7470] hover:text-[#082827] cursor-pointer transition-colors"
                 >
                   <X size={14} />
                 </button>
@@ -1086,9 +1088,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
               <div className="space-y-4 text-xs">
                 {/* Avatar with Click to Upload Image */}
-                <div className="flex items-center gap-4 p-3.5 rounded-xl bg-cream/50 border border-hairline">
+                <div className="flex items-center gap-4 p-3.5 rounded-2xl bg-[#F7FAF9] border border-[#DFEBE8]">
                   <div className="relative group">
-                    <div className="w-14 h-14 rounded-full bg-ink text-parchment flex items-center justify-center font-serif text-xl font-light shrink-0 overflow-hidden shadow-xs">
+                    <div className="w-14 h-14 rounded-full bg-[#006766] text-white flex items-center justify-center font-sans text-xl font-bold shrink-0 overflow-hidden shadow-xs border-2 border-[#00B489]/40">
                       {userAvatar ? (
                         <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
                       ) : (
@@ -1099,7 +1101,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                       type="button"
                       onClick={() => fileInputRef.current?.click()}
                       title="Upload Profile Picture"
-                      className="absolute inset-0 bg-ink/60 rounded-full flex items-center justify-center text-parchment opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                      className="absolute inset-0 bg-[#082827]/70 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
                     >
                       <Camera size={16} />
                     </button>
@@ -1107,25 +1109,25 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
                   <div className="space-y-1 overflow-hidden flex-1">
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold text-ink text-sm block truncate">{userName}</span>
+                      <span className="font-bold text-[#082827] text-sm block truncate">{userName}</span>
                       <button
                         type="button"
                         onClick={() => fileInputRef.current?.click()}
-                        className="text-[10px] text-quantum font-medium hover:underline cursor-pointer flex items-center gap-1"
+                        className="text-[10px] text-[#006766] font-semibold hover:underline cursor-pointer flex items-center gap-1"
                       >
                         <Camera size={11} /> Upload Photo
                       </button>
                     </div>
-                    <span className="text-ink-soft block truncate">{userEmail}</span>
-                    <span className="text-[10px] font-mono text-emerald-700 font-medium flex items-center gap-1">
-                      <CheckCircle2 size={11} /> Active Account
+                    <span className="text-[#5A7470] block truncate">{userEmail}</span>
+                    <span className="text-[10px] font-mono text-emerald-700 font-bold flex items-center gap-1">
+                      <CheckCircle2 size={11} className="text-[#00B489]" /> Active Account
                     </span>
                   </div>
                 </div>
 
                 {/* Account Details Form */}
-                <div className="space-y-2">
-                  <label className="text-[11px] font-medium text-ink-soft">Display Name</label>
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-semibold text-[#5A7470]">Display Name</label>
                   <input
                     type="text"
                     value={userName}
@@ -1136,36 +1138,36 @@ export default function AppLayout({ children }: AppLayoutProps) {
                       }
                     }}
                     placeholder="Enter your name"
-                    className="w-full h-9 px-3 rounded-lg bg-parchment border border-hairline text-xs text-ink focus:outline-none focus:border-quantum font-sans shadow-2xs"
+                    className="w-full h-9.5 px-3 rounded-xl bg-white border border-[#DFEBE8] text-xs text-[#082827] focus:outline-none focus:border-[#006766] font-sans shadow-2xs"
                   />
                 </div>
 
-                <div className="p-3 rounded-xl bg-cream-deep/30 border border-hairline space-y-1.5 font-mono text-[11px]">
-                  <div className="flex justify-between">
-                    <span className="text-ink-soft">Processing Mode:</span>
-                    <span className="text-quantum font-semibold">
+                <div className="p-3.5 rounded-2xl bg-[#F7FAF9] border border-[#DFEBE8] space-y-1.5 font-mono text-[11px]">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#5A7470]">Processing Mode:</span>
+                    <span className="text-[#006766] font-bold">
                       {quantumBackend === "ibmq_eagle" ? "IBM Quantum Cloud" : "GPU Simulator"}
                     </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-ink-soft">Access Status:</span>
-                    <span className="text-emerald-700 font-semibold">Ready for Screening</span>
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#5A7470]">Access Status:</span>
+                    <span className="text-emerald-700 font-bold">Ready for Screening</span>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-hairline flex items-center justify-between">
+              <div className="pt-3 border-t border-[#DFEBE8] flex items-center justify-between">
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="px-3.5 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                  className="px-3.5 py-2 rounded-xl bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <LogOut size={13} /> Sign Out
                 </button>
                 <button
                   type="button"
                   onClick={() => setAccountModalOpen(false)}
-                  className="px-4 py-1.5 rounded-lg bg-ink text-parchment text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white text-xs font-semibold transition-all shadow-md shadow-[#006766]/20 cursor-pointer active:scale-98"
                 >
                   Save &amp; Close
                 </button>
@@ -1186,29 +1188,29 @@ export default function AppLayout({ children }: AppLayoutProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowAlephCard(false)}
-              className="fixed inset-0 bg-ink/35 backdrop-blur-xs z-50"
+              className="fixed inset-0 bg-[#082827]/40 backdrop-blur-md z-50"
             />
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
               transition={{ duration: 0.22, ease: "easeOut" }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-white rounded-2xl border border-hairline shadow-2xl z-50 p-6 space-y-4"
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-white rounded-3xl border border-[#DFEBE8] shadow-[0_24px_60px_-12px_rgba(0,103,102,0.25)] z-50 p-6 space-y-4"
             >
               {/* Header */}
-              <div className="flex items-start justify-between border-b border-hairline pb-4">
+              <div className="flex items-start justify-between border-b border-[#DFEBE8] pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 border border-amber-200/60 flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-600 border border-amber-200/60 flex items-center justify-center shrink-0">
                     <Cpu size={20} />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className="font-serif text-lg font-medium text-ink">IBM Quantum Eagle QPU</h3>
+                      <h3 className="font-sans text-lg font-bold text-[#082827]">IBM Quantum Eagle QPU</h3>
                       <span className="text-[10px] font-mono text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded-full border border-amber-300 font-bold">
                         Physical Hardware
                       </span>
                     </div>
-                    <p className="text-xs text-ink-soft">
+                    <p className="text-xs text-[#5A7470]">
                       127-Qubit Eagle r3 Superconducting Transmon Processor
                     </p>
                   </div>
@@ -1216,7 +1218,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 <button
                   type="button"
                   onClick={() => setShowAlephCard(false)}
-                  className="w-8 h-8 rounded-full bg-cream hover:bg-cream-deep border border-hairline flex items-center justify-center text-ink-soft hover:text-ink transition-colors cursor-pointer"
+                  className="w-8 h-8 rounded-full bg-[#F2F7F6] hover:bg-[#E6F7F4] border border-[#DFEBE8] flex items-center justify-center text-[#5A7470] hover:text-[#082827] transition-colors cursor-pointer"
                   aria-label="Close"
                 >
                   <X size={15} />
@@ -1225,61 +1227,61 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
               {/* Hardware KPI Badges */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                <div className="p-3 rounded-xl bg-cream/60 border border-hairline text-center space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-ink-soft block font-bold">Qubits</span>
-                  <span className="font-serif text-xl font-light text-ink">127</span>
-                  <span className="text-[9px] font-mono text-ink-soft block">Eagle r3 Transmon</span>
+                <div className="p-3 rounded-2xl bg-[#F7FAF9] border border-[#DFEBE8] text-center space-y-1 shadow-2xs">
+                  <span className="text-[10px] font-mono uppercase text-[#5A7470] block font-bold">Qubits</span>
+                  <span className="font-sans text-xl font-bold text-[#082827]">127</span>
+                  <span className="text-[9px] font-mono text-[#5A7470] block">Eagle r3 Transmon</span>
                 </div>
-                <div className="p-3 rounded-xl bg-cream/60 border border-hairline text-center space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-ink-soft block font-bold">Cryo Temp</span>
-                  <span className="font-serif text-xl font-light text-ink">15 mK</span>
-                  <span className="text-[9px] font-mono text-ink-soft block">Dilution Cryostat</span>
+                <div className="p-3 rounded-2xl bg-[#F7FAF9] border border-[#DFEBE8] text-center space-y-1 shadow-2xs">
+                  <span className="text-[10px] font-mono uppercase text-[#5A7470] block font-bold">Cryo Temp</span>
+                  <span className="font-sans text-xl font-bold text-[#082827]">15 mK</span>
+                  <span className="text-[9px] font-mono text-[#5A7470] block">Dilution Cryostat</span>
                 </div>
-                <div className="p-3 rounded-xl bg-cream/60 border border-hairline text-center space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-ink-soft block font-bold">Gate Fidelity</span>
-                  <span className="font-serif text-xl font-light text-emerald-600">99.1%</span>
-                  <span className="text-[9px] font-mono text-ink-soft block">T1 ≈ 300 μs</span>
+                <div className="p-3 rounded-2xl bg-[#F7FAF9] border border-[#DFEBE8] text-center space-y-1 shadow-2xs">
+                  <span className="text-[10px] font-mono uppercase text-[#5A7470] block font-bold">Gate Fidelity</span>
+                  <span className="font-sans text-xl font-bold text-emerald-700">99.1%</span>
+                  <span className="text-[9px] font-mono text-[#5A7470] block">T1 ≈ 300 μs</span>
                 </div>
-                <div className="p-3 rounded-xl bg-cream/60 border border-hairline text-center space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-ink-soft block font-bold">Mitigation</span>
-                  <span className="font-serif text-sm font-semibold text-quantum">ZNE + M3</span>
-                  <span className="text-[9px] font-mono text-ink-soft block">Qiskit Runtime</span>
+                <div className="p-3 rounded-2xl bg-[#F7FAF9] border border-[#DFEBE8] text-center space-y-1 shadow-2xs">
+                  <span className="text-[10px] font-mono uppercase text-[#5A7470] block font-bold">Mitigation</span>
+                  <span className="font-sans text-sm font-bold text-[#006766]">ZNE + M3</span>
+                  <span className="text-[9px] font-mono text-[#5A7470] block">Qiskit Runtime</span>
                 </div>
               </div>
 
               {/* Technical Architecture Details */}
-              <div className="p-3.5 rounded-xl bg-cream/40 border border-hairline space-y-2 text-xs text-ink-soft leading-relaxed">
+              <div className="p-4 rounded-2xl bg-[#F7FAF9] border border-[#DFEBE8] space-y-2 text-xs text-[#5A7470] leading-relaxed shadow-2xs">
                 <p>
-                  <strong className="text-ink">Physical System Architecture:</strong> Real superconducting circuits housed inside a Bluefors LD400 dilution refrigerator at IBM Quantum datacenter. Supports parameterized quantum circuits (PQC) executed via IBM Qiskit Runtime Sampler &amp; Estimator primitives.
+                  <strong className="text-[#082827] font-semibold">Physical System Architecture:</strong> Real superconducting circuits housed inside a Bluefors LD400 dilution refrigerator at IBM Quantum datacenter. Supports parameterized quantum circuits (PQC) executed via IBM Qiskit Runtime Sampler &amp; Estimator primitives.
                 </p>
                 <p>
-                  <strong className="text-ink">Active Noise Suppression:</strong> Quantum circuits employ Matrix-free Measurement Mitigation (M3) for readout calibration, Zero-Noise Extrapolation (ZNE) for unitary gate error scaling, and Dynamical Decoupling (DD) pulse sequences during idle qubit delays.
+                  <strong className="text-[#082827] font-semibold">Active Noise Suppression:</strong> Quantum circuits employ Matrix-free Measurement Mitigation (M3) for readout calibration, Zero-Noise Extrapolation (ZNE) for unitary gate error scaling, and Dynamical Decoupling (DD) pulse sequences during idle qubit delays.
                 </p>
               </div>
 
               {/* Clinical Deployment Status Notice */}
-              <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-200 flex items-start gap-3 text-xs">
-                <Sparkles size={16} className="text-emerald-700 shrink-0 mt-0.5" />
-                <div className="space-y-1 text-ink">
-                  <p className="font-semibold text-emerald-900">
+              <div className="p-4 rounded-2xl bg-[#E6F7F4] border border-[#00B489]/30 flex items-start gap-3 text-xs shadow-2xs">
+                <Sparkles size={16} className="text-[#00B489] shrink-0 mt-0.5" />
+                <div className="space-y-1 text-[#082827]">
+                  <p className="font-bold text-[#006766]">
                     Physical Quantum Hardware Execution Ready
                   </p>
-                  <p className="text-[11px] text-ink-soft leading-relaxed">
+                  <p className="text-[11px] text-[#5A7470] leading-relaxed">
                     Physical IBM Quantum Eagle superconducting circuit execution is active. Patient screenings executed under physical QPU generate cryptographic hardware receipts, calibration telemetry, and zero-noise extrapolation (ZNE) error mitigation.
                   </p>
                 </div>
               </div>
 
               {/* Footer */}
-              <div className="pt-2 flex items-center justify-between gap-3 border-t border-hairline">
-                <span className="text-[11px] text-ink-soft font-mono">
+              <div className="pt-3 flex items-center justify-between gap-3 border-t border-[#DFEBE8]">
+                <span className="text-[11px] text-[#5A7470] font-mono">
                   IBM Qiskit Runtime Service • 127-Qubit Eagle
                 </span>
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
                     onClick={() => setShowAlephCard(false)}
-                    className="px-4 py-2 rounded-xl bg-cream hover:bg-cream-deep border border-hairline font-medium text-xs transition-colors cursor-pointer text-ink"
+                    className="px-4 py-2 rounded-xl bg-[#F2F7F6] hover:bg-[#E6F7F4] border border-[#DFEBE8] font-semibold text-xs transition-colors cursor-pointer text-[#082827]"
                   >
                     Close
                   </button>

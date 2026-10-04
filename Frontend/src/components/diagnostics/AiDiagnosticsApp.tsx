@@ -179,8 +179,8 @@ export default function AiDiagnosticsApp({
   return (
     <div className="w-full max-w-6xl mx-auto my-4 transition-all">
       {/* OUTER SHOT FRAME CONTAINER */}
-      <div className="relative overflow-hidden rounded-3xl border border-hairline/80 bg-parchment shadow-xl transition-all">
-        <header className="flex items-center justify-between px-6 sm:px-10 py-4 border-b border-hairline/60 bg-parchment/90 backdrop-blur-md">
+      <div className="relative overflow-hidden rounded-3xl border border-[#DFEBE8]/80 bg-white shadow-xl transition-all">
+        <header className="flex items-center justify-between px-6 sm:px-10 py-4 border-b border-[#DFEBE8]/60 bg-white/90 backdrop-blur-md">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
             <span className="text-xs font-mono font-bold text-[#006766] uppercase tracking-wider">
@@ -197,7 +197,7 @@ export default function AiDiagnosticsApp({
               className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all ${
                 currentStep === "patient"
                   ? "bg-accent text-accent-foreground font-semibold shadow-xs"
-                  : "text-ink-soft hover:text-ink"
+                  : "text-[#5A7470] hover:text-[#082827]"
               }`}
             >
               <User className="h-3.5 w-3.5" />
@@ -213,7 +213,7 @@ export default function AiDiagnosticsApp({
               className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all ${
                 currentStep === "demo"
                   ? "bg-accent text-accent-foreground font-semibold shadow-xs"
-                  : "text-ink-soft hover:text-ink"
+                  : "text-[#5A7470] hover:text-[#082827]"
               }`}
             >
               <Play className="h-3.5 w-3.5" />
@@ -229,7 +229,7 @@ export default function AiDiagnosticsApp({
               className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all ${
                 currentStep === "screening" || currentStep === "visualizer"
                   ? "bg-accent text-accent-foreground font-semibold shadow-xs"
-                  : "text-ink-soft hover:text-ink"
+                  : "text-[#5A7470] hover:text-[#082827]"
               }`}
             >
               <Stethoscope className="h-3.5 w-3.5" />
@@ -245,7 +245,7 @@ export default function AiDiagnosticsApp({
               className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all ${
                 currentStep === "results"
                   ? "bg-accent text-accent-foreground font-semibold shadow-xs"
-                  : "text-ink-soft hover:text-ink"
+                  : "text-[#5A7470] hover:text-[#082827]"
               }`}
             >
               <FileCheck2 className="h-3.5 w-3.5" />
@@ -257,7 +257,7 @@ export default function AiDiagnosticsApp({
         {/* ========================================================================= */}
         {/* MAIN BODY: Screen 1 to 5 */}
         {/* ========================================================================= */}
-        <main className="p-6 sm:p-12 min-h-[520px] flex flex-col justify-between bg-cream/40">
+        <main className="p-6 sm:p-12 min-h-[520px] flex flex-col justify-between bg-[#F7FAF9]/40">
           <div className="w-full">
             {/* --------------------------------------------------------------------- */}
             {/* SCREEN 1: Patient Symptoms */}
@@ -272,10 +272,10 @@ export default function AiDiagnosticsApp({
                 className="space-y-8 max-w-3xl mx-auto w-full"
               >
                 <div>
-                  <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink">
+                  <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#082827]">
                     Patient symptoms
                   </h1>
-                  <p className="text-xs sm:text-sm text-ink-soft mt-1">
+                  <p className="text-xs sm:text-sm text-[#5A7470] mt-1">
                     Record clinical presentation and symptom chronicity prior to auscultation.
                   </p>
                 </div>
@@ -283,8 +283,8 @@ export default function AiDiagnosticsApp({
                 <div className="space-y-6">
                   {/* Question 1: Cough */}
                   <div className="space-y-3">
-                    <label className="text-sm font-semibold text-ink block">Cough</label>
-                    <div className="inline-flex rounded-xl border border-hairline bg-parchment p-1 shadow-xs">
+                    <label className="text-sm font-semibold text-[#082827] block">Cough</label>
+                    <div className="inline-flex rounded-xl border border-[#DFEBE8] bg-white p-1 shadow-xs">
                       {(["no", "yes", "unknown"] as const).map((opt) => (
                         <button
                           key={opt}
@@ -293,7 +293,7 @@ export default function AiDiagnosticsApp({
                           className={`px-6 py-2 rounded-lg text-xs font-semibold capitalize transition-all cursor-pointer ${
                             symptoms.cough === opt
                               ? "bg-quantum text-white shadow-xs"
-                              : "text-ink-soft hover:text-ink"
+                              : "text-[#5A7470] hover:text-[#082827]"
                           }`}
                         >
                           {opt}
@@ -307,7 +307,7 @@ export default function AiDiagnosticsApp({
                         animate={{ opacity: 1, height: "auto" }}
                         className="pt-2 pl-1 space-y-2"
                       >
-                        <span className="text-xs text-ink-soft font-medium block">
+                        <span className="text-xs text-[#5A7470] font-medium block">
                           Select the duration in weeks
                         </span>
                         <div className="inline-flex gap-2">
@@ -319,7 +319,7 @@ export default function AiDiagnosticsApp({
                               className={`h-9 w-12 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
                                 symptoms.coughWeeks === num
                                   ? "bg-accent border-quantum text-primary font-bold shadow-xs"
-                                  : "border-hairline bg-parchment text-ink hover:border-quantum/50"
+                                  : "border-[#DFEBE8] bg-white text-[#082827] hover:border-quantum/50"
                               }`}
                             >
                               {num === 3 ? "3+" : num}
@@ -332,8 +332,8 @@ export default function AiDiagnosticsApp({
 
                   {/* Question 2: Fever */}
                   <div className="space-y-3 pt-2">
-                    <label className="text-sm font-semibold text-ink block">Fever</label>
-                    <div className="inline-flex rounded-xl border border-hairline bg-parchment p-1 shadow-xs">
+                    <label className="text-sm font-semibold text-[#082827] block">Fever</label>
+                    <div className="inline-flex rounded-xl border border-[#DFEBE8] bg-white p-1 shadow-xs">
                       {(["no", "yes", "unknown"] as const).map((opt) => (
                         <button
                           key={opt}
@@ -342,7 +342,7 @@ export default function AiDiagnosticsApp({
                           className={`px-6 py-2 rounded-lg text-xs font-semibold capitalize transition-all cursor-pointer ${
                             symptoms.fever === opt
                               ? "bg-quantum text-white shadow-xs"
-                              : "text-ink-soft hover:text-ink"
+                              : "text-[#5A7470] hover:text-[#082827]"
                           }`}
                         >
                           {opt}
@@ -356,7 +356,7 @@ export default function AiDiagnosticsApp({
                         animate={{ opacity: 1, height: "auto" }}
                         className="pt-2 pl-1 space-y-2"
                       >
-                        <span className="text-xs text-ink-soft font-medium block">
+                        <span className="text-xs text-[#5A7470] font-medium block">
                           Select the duration in weeks
                         </span>
                         <div className="inline-flex gap-2">
@@ -368,7 +368,7 @@ export default function AiDiagnosticsApp({
                               className={`h-9 w-12 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
                                 symptoms.feverWeeks === num
                                   ? "bg-accent border-quantum text-primary font-bold shadow-xs"
-                                  : "border-hairline bg-parchment text-ink hover:border-quantum/50"
+                                  : "border-[#DFEBE8] bg-white text-[#082827] hover:border-quantum/50"
                               }`}
                             >
                               {num === 3 ? "3+" : num}
@@ -381,8 +381,8 @@ export default function AiDiagnosticsApp({
 
                   {/* Question 3: Night Sweats */}
                   <div className="space-y-3 pt-2">
-                    <label className="text-sm font-semibold text-ink block">Night sweats</label>
-                    <div className="inline-flex rounded-xl border border-hairline bg-parchment p-1 shadow-xs">
+                    <label className="text-sm font-semibold text-[#082827] block">Night sweats</label>
+                    <div className="inline-flex rounded-xl border border-[#DFEBE8] bg-white p-1 shadow-xs">
                       {(["no", "yes", "unknown"] as const).map((opt) => (
                         <button
                           key={opt}
@@ -391,7 +391,7 @@ export default function AiDiagnosticsApp({
                           className={`px-6 py-2 rounded-lg text-xs font-semibold capitalize transition-all cursor-pointer ${
                             symptoms.nightSweats === opt
                               ? "bg-quantum text-white shadow-xs"
-                              : "text-ink-soft hover:text-ink"
+                              : "text-[#5A7470] hover:text-[#082827]"
                           }`}
                         >
                           {opt}
@@ -402,10 +402,10 @@ export default function AiDiagnosticsApp({
 
                   {/* Question 4: Unexplained Weight Loss */}
                   <div className="space-y-3 pt-2">
-                    <label className="text-sm font-semibold text-ink block">
+                    <label className="text-sm font-semibold text-[#082827] block">
                       Unexplained weight loss
                     </label>
-                    <div className="inline-flex rounded-xl border border-hairline bg-parchment p-1 shadow-xs">
+                    <div className="inline-flex rounded-xl border border-[#DFEBE8] bg-white p-1 shadow-xs">
                       {(["no", "yes", "unknown"] as const).map((opt) => (
                         <button
                           key={opt}
@@ -414,7 +414,7 @@ export default function AiDiagnosticsApp({
                           className={`px-6 py-2 rounded-lg text-xs font-semibold capitalize transition-all cursor-pointer ${
                             symptoms.weightLoss === opt
                               ? "bg-quantum text-white shadow-xs"
-                              : "text-ink-soft hover:text-ink"
+                              : "text-[#5A7470] hover:text-[#082827]"
                           }`}
                         >
                           {opt}
@@ -439,10 +439,10 @@ export default function AiDiagnosticsApp({
                 className="space-y-8 max-w-3xl mx-auto w-full"
               >
                 <div>
-                  <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink">
+                  <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#082827]">
                     Breathing demo
                   </h1>
-                  <p className="text-xs sm:text-sm text-ink-soft mt-1">
+                  <p className="text-xs sm:text-sm text-[#5A7470] mt-1">
                     Please explain these simple instructions to your patient:
                   </p>
                 </div>
@@ -450,52 +450,52 @@ export default function AiDiagnosticsApp({
                 {/* 2x2 Grid of Instructions matching Dribbble shot */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Card 1: 5x breaths per position */}
-                  <div className="flex items-center gap-4 p-5 rounded-2xl border border-hairline bg-parchment shadow-xs hover:border-quantum/40 transition-all">
+                  <div className="flex items-center gap-4 p-5 rounded-2xl border border-[#DFEBE8] bg-white shadow-xs hover:border-quantum/40 transition-all">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-primary">
                       <RotateCcw className="h-5 w-5" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-semibold text-ink">5x breaths per position</h4>
-                      <p className="text-xs text-ink-soft mt-0.5">
+                      <h4 className="text-sm font-semibold text-[#082827]">5x breaths per position</h4>
+                      <p className="text-xs text-[#5A7470] mt-0.5">
                         Patient must complete five steady breaths at each chest node.
                       </p>
                     </div>
                   </div>
 
                   {/* Card 2: Inhale first */}
-                  <div className="flex items-center gap-4 p-5 rounded-2xl border border-hairline bg-parchment shadow-xs hover:border-quantum/40 transition-all">
+                  <div className="flex items-center gap-4 p-5 rounded-2xl border border-[#DFEBE8] bg-white shadow-xs hover:border-quantum/40 transition-all">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-primary">
                       <Wind className="h-5 w-5" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-semibold text-ink">Inhale first</h4>
-                      <p className="text-xs text-ink-soft mt-0.5">
+                      <h4 className="text-sm font-semibold text-[#082827]">Inhale first</h4>
+                      <p className="text-xs text-[#5A7470] mt-0.5">
                         Begin recording as the patient takes their initial breath inward.
                       </p>
                     </div>
                   </div>
 
                   {/* Card 3: Breathe deeply */}
-                  <div className="flex items-center gap-4 p-5 rounded-2xl border border-hairline bg-parchment shadow-xs hover:border-quantum/40 transition-all">
+                  <div className="flex items-center gap-4 p-5 rounded-2xl border border-[#DFEBE8] bg-white shadow-xs hover:border-quantum/40 transition-all">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-primary">
                       <Activity className="h-5 w-5" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-semibold text-ink">Breathe deeply</h4>
-                      <p className="text-xs text-ink-soft mt-0.5">
+                      <h4 className="text-sm font-semibold text-[#082827]">Breathe deeply</h4>
+                      <p className="text-xs text-[#5A7470] mt-0.5">
                         Full tidal volume breaths through the open mouth for acoustic clarity.
                       </p>
                     </div>
                   </div>
 
                   {/* Card 4: Don't speak */}
-                  <div className="flex items-center gap-4 p-5 rounded-2xl border border-hairline bg-parchment shadow-xs hover:border-quantum/40 transition-all">
+                  <div className="flex items-center gap-4 p-5 rounded-2xl border border-[#DFEBE8] bg-white shadow-xs hover:border-quantum/40 transition-all">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-primary">
                       <MicOff className="h-5 w-5" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-semibold text-ink">Don't speak</h4>
-                      <p className="text-xs text-ink-soft mt-0.5">
+                      <h4 className="text-sm font-semibold text-[#082827]">Don't speak</h4>
+                      <p className="text-xs text-[#5A7470] mt-0.5">
                         Maintain absolute silence to avoid speech vocal resonance artifacts.
                       </p>
                     </div>
@@ -503,10 +503,10 @@ export default function AiDiagnosticsApp({
                 </div>
 
                 {/* Patient Guidance Demo Preview */}
-                <div className="p-4 rounded-2xl border border-hairline bg-cream/70 flex items-center justify-between">
+                <div className="p-4 rounded-2xl border border-[#DFEBE8] bg-[#F7FAF9]/70 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="h-2 w-2 rounded-full bg-quantum animate-pulse" />
-                    <span className="text-xs font-semibold text-ink">
+                    <span className="text-xs font-semibold text-[#082827]">
                       Audio Cadence Metronome Ready
                     </span>
                   </div>
@@ -537,10 +537,10 @@ export default function AiDiagnosticsApp({
                 {/* Header info bar */}
                 <div className="flex items-center justify-between">
                   <div>
-                    <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-ink">
-                      Position {activePosition} <span className="text-ink-soft font-normal">of 6</span>
+                    <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-[#082827]">
+                      Position {activePosition} <span className="text-[#5A7470] font-normal">of 6</span>
                     </h1>
-                    <p className="text-xs text-ink-soft">
+                    <p className="text-xs text-[#5A7470]">
                       {positions[activePosition - 1]?.location} ({positions[activePosition - 1]?.lobe})
                     </p>
                   </div>
@@ -558,7 +558,7 @@ export default function AiDiagnosticsApp({
                           type: "info",
                         });
                       }}
-                      className="text-xs font-medium text-ink-soft hover:text-ink px-3 py-1.5 rounded-lg border border-hairline bg-parchment cursor-pointer"
+                      className="text-xs font-medium text-[#5A7470] hover:text-[#082827] px-3 py-1.5 rounded-lg border border-[#DFEBE8] bg-white cursor-pointer"
                     >
                       Redo position {activePosition}
                     </button>
@@ -574,7 +574,7 @@ export default function AiDiagnosticsApp({
                 </div>
 
                 {/* ANATOMICAL VISUALIZER CANVAS */}
-                <div className="relative rounded-2xl border border-hairline bg-parchment p-6 flex flex-col items-center justify-center min-h-[360px] overflow-hidden shadow-xs">
+                <div className="relative rounded-2xl border border-[#DFEBE8] bg-white p-6 flex flex-col items-center justify-center min-h-[360px] overflow-hidden shadow-xs">
                   {/* Orientation Switcher */}
                   <div className="absolute top-4 left-4 flex gap-1 bg-secondary p-1 rounded-lg">
                     <button
@@ -582,8 +582,8 @@ export default function AiDiagnosticsApp({
                       onClick={() => setViewOrientation("front")}
                       className={`px-3 py-1 text-xs font-semibold rounded-md transition-all cursor-pointer ${
                         viewOrientation === "front"
-                          ? "bg-parchment text-ink shadow-xs"
-                          : "text-ink-soft"
+                          ? "bg-white text-[#082827] shadow-xs"
+                          : "text-[#5A7470]"
                       }`}
                     >
                       Anterior (Front)
@@ -593,8 +593,8 @@ export default function AiDiagnosticsApp({
                       onClick={() => setViewOrientation("back")}
                       className={`px-3 py-1 text-xs font-semibold rounded-md transition-all cursor-pointer ${
                         viewOrientation === "back"
-                          ? "bg-parchment text-ink shadow-xs"
-                          : "text-ink-soft"
+                          ? "bg-white text-[#082827] shadow-xs"
+                          : "text-[#5A7470]"
                       }`}
                     >
                       Posterior (Back)
@@ -652,7 +652,7 @@ export default function AiDiagnosticsApp({
                             ? "bg-primary text-white scale-125 ring-4 ring-quantum/30"
                             : positions[0].recorded
                             ? "bg-quantum text-white"
-                            : "bg-parchment text-ink border border-hairline hover:bg-accent"
+                            : "bg-white text-[#082827] border border-[#DFEBE8] hover:bg-accent"
                         }`}
                       >
                         {positions[0].recorded ? <Check className="h-4 w-4" /> : "1"}
@@ -671,7 +671,7 @@ export default function AiDiagnosticsApp({
                             ? "bg-primary text-white scale-125 ring-4 ring-quantum/30"
                             : positions[1].recorded
                             ? "bg-quantum text-white"
-                            : "bg-parchment text-ink border border-hairline hover:bg-accent"
+                            : "bg-white text-[#082827] border border-[#DFEBE8] hover:bg-accent"
                         }`}
                       >
                         {positions[1].recorded ? <Check className="h-4 w-4" /> : "2"}
@@ -690,7 +690,7 @@ export default function AiDiagnosticsApp({
                             ? "bg-primary text-white scale-125 ring-4 ring-quantum/30"
                             : positions[2].recorded
                             ? "bg-quantum text-white"
-                            : "bg-parchment text-ink border border-hairline hover:bg-accent"
+                            : "bg-white text-[#082827] border border-[#DFEBE8] hover:bg-accent"
                         }`}
                       >
                         {positions[2].recorded ? <Check className="h-4 w-4" /> : "3"}
@@ -709,7 +709,7 @@ export default function AiDiagnosticsApp({
                             ? "bg-primary text-white scale-125 ring-4 ring-quantum/30"
                             : positions[3].recorded
                             ? "bg-quantum text-white"
-                            : "bg-parchment text-ink border border-hairline hover:bg-accent"
+                            : "bg-white text-[#082827] border border-[#DFEBE8] hover:bg-accent"
                         }`}
                       >
                         {positions[3].recorded ? <Check className="h-4 w-4" /> : "4"}
@@ -728,7 +728,7 @@ export default function AiDiagnosticsApp({
                             ? "bg-primary text-white scale-125 ring-4 ring-quantum/30"
                             : positions[4].recorded
                             ? "bg-quantum text-white"
-                            : "bg-parchment text-ink border border-hairline hover:bg-accent"
+                            : "bg-white text-[#082827] border border-[#DFEBE8] hover:bg-accent"
                         }`}
                       >
                         {positions[4].recorded ? <Check className="h-4 w-4" /> : "5"}
@@ -747,7 +747,7 @@ export default function AiDiagnosticsApp({
                             ? "bg-primary text-white scale-125 ring-4 ring-quantum/30"
                             : positions[5].recorded
                             ? "bg-quantum text-white"
-                            : "bg-parchment text-ink border border-hairline hover:bg-accent"
+                            : "bg-white text-[#082827] border border-[#DFEBE8] hover:bg-accent"
                         }`}
                       >
                         {positions[5].recorded ? <Check className="h-4 w-4" /> : "6"}
@@ -756,24 +756,24 @@ export default function AiDiagnosticsApp({
                   </div>
 
                   {/* Anatomical Label matching Dribbble shot */}
-                  <div className="flex items-center gap-12 font-mono text-[10px] tracking-widest text-ink-soft uppercase mt-2">
+                  <div className="flex items-center gap-12 font-mono text-[10px] tracking-widest text-[#5A7470] uppercase mt-2">
                     <span>R</span>
-                    <span className="font-semibold text-ink">PATIENT'S FRONT</span>
+                    <span className="font-semibold text-[#082827]">PATIENT'S FRONT</span>
                     <span>L</span>
                   </div>
                 </div>
 
                 {/* Bottom Trigger Action Banner matching Dribbble */}
-                <div className="rounded-2xl border border-hairline bg-parchment p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="rounded-2xl border border-[#DFEBE8] bg-white p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-primary">
                       <Stethoscope className="h-5 w-5" />
                     </div>
                     <div>
-                      <span className="text-xs font-semibold text-ink block">
+                      <span className="text-xs font-semibold text-[#082827] block">
                         Press stethoscope button to start position {activePosition}
                       </span>
-                      <span className="text-[11px] text-ink-soft">
+                      <span className="text-[11px] text-[#5A7470]">
                         Digital auscultation sensor calibrated & ready.
                       </span>
                     </div>
@@ -804,12 +804,12 @@ export default function AiDiagnosticsApp({
                 className="space-y-6 max-w-2xl mx-auto w-full text-center flex flex-col items-center justify-center"
               >
                 {/* Top Auscultation Position Banner */}
-                <div className="flex items-center gap-2 bg-parchment px-4 py-1.5 rounded-full border border-hairline text-xs">
+                <div className="flex items-center gap-2 bg-white px-4 py-1.5 rounded-full border border-[#DFEBE8] text-xs">
                   <span className="h-2 w-2 rounded-full bg-red-500 animate-pulse" />
-                  <span className="font-semibold text-ink">
+                  <span className="font-semibold text-[#082827]">
                     Position {activePosition} Auscultation Active
                   </span>
-                  <span className="text-ink-soft font-mono text-[11px]">
+                  <span className="text-[#5A7470] font-mono text-[11px]">
                     ({positions[activePosition - 1]?.location})
                   </span>
                 </div>
@@ -878,16 +878,16 @@ export default function AiDiagnosticsApp({
 
                 {/* Subtitle matching Dribbble */}
                 <div>
-                  <h3 className="text-xl font-bold text-ink capitalize">
+                  <h3 className="text-xl font-bold text-[#082827] capitalize">
                     Breathe {breathPhase}
                   </h3>
-                  <p className="text-xs text-ink-soft mt-0.5">
-                    Breath <span className="font-semibold text-ink">{breathCount}</span> of 5
+                  <p className="text-xs text-[#5A7470] mt-0.5">
+                    Breath <span className="font-semibold text-[#082827]">{breathCount}</span> of 5
                   </p>
                 </div>
 
                 {/* Audio Waveform Simulator */}
-                <div className="w-full max-w-md bg-parchment rounded-xl border border-hairline p-3 flex items-center justify-between">
+                <div className="w-full max-w-md bg-white rounded-xl border border-[#DFEBE8] p-3 flex items-center justify-between">
                   <div className="flex items-center gap-1.5 h-6">
                     {[35, 60, 85, 45, 95, 70, 30, 90, 50, 65, 80, 40, 75, 55, 90].map((h, i) => (
                       <motion.div
@@ -928,10 +928,10 @@ export default function AiDiagnosticsApp({
                 className="space-y-6 max-w-4xl mx-auto w-full"
               >
                 <div>
-                  <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink">
+                  <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#082827]">
                     AI Diagnostic Screening Report
                   </h1>
-                  <p className="text-xs sm:text-sm text-ink-soft mt-1">
+                  <p className="text-xs sm:text-sm text-[#5A7470] mt-1">
                     Multi-modal consensus evaluation combining patient symptoms, 6-point auscultation acoustics, and 8-qubit quantum classifier.
                   </p>
                 </div>
@@ -939,8 +939,8 @@ export default function AiDiagnosticsApp({
                 {/* Summary Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {/* Consensus Risk Score */}
-                  <div className="p-5 rounded-2xl border border-hairline bg-parchment shadow-xs space-y-3">
-                    <span className="text-xs font-semibold text-ink-soft uppercase tracking-wider">
+                  <div className="p-5 rounded-2xl border border-[#DFEBE8] bg-white shadow-xs space-y-3">
+                    <span className="text-xs font-semibold text-[#5A7470] uppercase tracking-wider">
                       Consensus Risk
                     </span>
                     <div className="flex items-baseline gap-2">
@@ -950,61 +950,61 @@ export default function AiDiagnosticsApp({
                     <div className="h-2 w-full rounded-full bg-secondary overflow-hidden">
                       <div className="h-full bg-quantum rounded-full w-[96.4%]" />
                     </div>
-                    <p className="text-[11px] text-ink-soft">
+                    <p className="text-[11px] text-[#5A7470]">
                       No acute adventitious sounds or classical symptoms indicating active pulmonary tuberculosis.
                     </p>
                   </div>
 
                   {/* Acoustic Auscultation Score */}
-                  <div className="p-5 rounded-2xl border border-hairline bg-parchment shadow-xs space-y-3">
-                    <span className="text-xs font-semibold text-ink-soft uppercase tracking-wider">
+                  <div className="p-5 rounded-2xl border border-[#DFEBE8] bg-white shadow-xs space-y-3">
+                    <span className="text-xs font-semibold text-[#5A7470] uppercase tracking-wider">
                       Auscultation Status
                     </span>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-3xl font-extrabold text-ink">Vesicular</span>
-                      <span className="text-xs font-semibold text-ink-soft">6/6 clear</span>
+                      <span className="text-3xl font-extrabold text-[#082827]">Vesicular</span>
+                      <span className="text-xs font-semibold text-[#5A7470]">6/6 clear</span>
                     </div>
                     <div className="flex items-center gap-1.5 text-xs text-quantum font-semibold">
                       <CheckCircle2 className="h-4 w-4" />
                       <span>Zero Crackles or Wheezes Detected</span>
                     </div>
-                    <p className="text-[11px] text-ink-soft">
+                    <p className="text-[11px] text-[#5A7470]">
                       Normal symmetric airflow across upper, middle, and basal lung lobes.
                     </p>
                   </div>
 
                   {/* Quantum Engine Attribution */}
-                  <div className="p-5 rounded-2xl border border-hairline bg-parchment shadow-xs space-y-3">
-                    <span className="text-xs font-semibold text-ink-soft uppercase tracking-wider">
+                  <div className="p-5 rounded-2xl border border-[#DFEBE8] bg-white shadow-xs space-y-3">
+                    <span className="text-xs font-semibold text-[#5A7470] uppercase tracking-wider">
                       Quantum Engine
                     </span>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-3xl font-extrabold text-ink">Transfinite-1</span>
+                      <span className="text-3xl font-extrabold text-[#082827]">Transfinite-1</span>
                     </div>
                     <div className="flex items-center gap-1.5 text-xs text-primary font-semibold">
                       <Cpu className="h-4 w-4" />
                       <span>8-Qubit Hilbert Space Entangled</span>
                     </div>
-                    <p className="text-[11px] text-ink-soft">
+                    <p className="text-[11px] text-[#5A7470]">
                       Cross-entropy kernel advantage: +4.2% separability over classical baseline SVM.
                     </p>
                   </div>
                 </div>
 
                 {/* 6 Positions Summary List */}
-                <div className="rounded-2xl border border-hairline bg-parchment p-5 shadow-xs space-y-3">
-                  <h3 className="text-sm font-semibold text-ink">
+                <div className="rounded-2xl border border-[#DFEBE8] bg-white p-5 shadow-xs space-y-3">
+                  <h3 className="text-sm font-semibold text-[#082827]">
                     6-Node Auscultation Recording Audit
                   </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                     {positions.map((pos) => (
                       <div
                         key={pos.id}
-                        className="p-3 rounded-xl border border-hairline bg-cream/30 flex items-center justify-between"
+                        className="p-3 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9]/30 flex items-center justify-between"
                       >
                         <div>
-                          <span className="text-xs font-semibold text-ink block">{pos.label}</span>
-                          <span className="text-[10px] text-ink-soft">{pos.lobe}</span>
+                          <span className="text-xs font-semibold text-[#082827] block">{pos.label}</span>
+                          <span className="text-[10px] text-[#5A7470]">{pos.lobe}</span>
                         </div>
                         <span className="flex items-center gap-1 text-[11px] font-semibold text-quantum">
                           <Check className="h-3 w-3" /> Clear
@@ -1027,7 +1027,7 @@ export default function AiDiagnosticsApp({
                         type: "info",
                       });
                     }}
-                    className="px-5 py-2.5 rounded-xl border border-hairline bg-parchment text-ink text-xs font-semibold hover:bg-secondary cursor-pointer"
+                    className="px-5 py-2.5 rounded-xl border border-[#DFEBE8] bg-white text-[#082827] text-xs font-semibold hover:bg-secondary cursor-pointer"
                   >
                     Start New Screening
                   </button>
@@ -1057,12 +1057,12 @@ export default function AiDiagnosticsApp({
         {/* ========================================================================= */}
         {/* BOTTOM NAVIGATION BAR: Menu, Status & Next/Back */}
         {/* ========================================================================= */}
-        <footer className="flex items-center justify-between px-6 sm:px-10 py-4 border-t border-hairline/60 bg-parchment">
+        <footer className="flex items-center justify-between px-6 sm:px-10 py-4 border-t border-[#DFEBE8]/60 bg-white">
           {/* Bottom Left: Menu Button & Hardware Connectivity Badge */}
           <div className="flex items-center gap-4">
             <button
               type="button"
-              className="p-2 rounded-xl border border-hairline bg-parchment text-ink-soft hover:text-ink hover:bg-secondary transition-colors"
+              className="p-2 rounded-xl border border-[#DFEBE8] bg-white text-[#5A7470] hover:text-[#082827] hover:bg-secondary transition-colors"
               aria-label="Toggle clinical drawer"
             >
               <Menu className="h-4 w-4" />
@@ -1074,7 +1074,7 @@ export default function AiDiagnosticsApp({
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-quantum opacity-75" />
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-quantum" />
               </span>
-              <span className="text-xs font-semibold text-ink-soft tracking-wide">
+              <span className="text-xs font-semibold text-[#5A7470] tracking-wide">
                 Connected
               </span>
             </div>
@@ -1086,7 +1086,7 @@ export default function AiDiagnosticsApp({
               <button
                 type="button"
                 onClick={handlePrevStep}
-                className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-ink-soft hover:text-ink rounded-xl transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-[#5A7470] hover:text-[#082827] rounded-xl transition-colors cursor-pointer"
               >
                 <ChevronLeft className="h-4 w-4" />
                 <span>Back</span>

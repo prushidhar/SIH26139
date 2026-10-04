@@ -434,19 +434,19 @@ export default function LoginPage() {
 
   if (isCheckingAuth) {
     return (
-      <div className="min-h-screen w-full flex items-center justify-center bg-cream">
-        <div className="w-8 h-8 border-2 border-ink border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen w-full flex items-center justify-center bg-[#F2F7F6]">
+        <div className="w-8 h-8 border-2 border-[#082827] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen w-full bg-cream flex items-center justify-center p-4 sm:p-6 md:p-8 py-8 sm:py-12 font-sans selection:bg-ink selection:text-parchment overflow-y-auto relative">
+    <div className="min-h-screen w-full bg-[#F2F7F6] flex items-center justify-center p-4 sm:p-6 md:p-8 py-8 sm:py-12 font-sans selection:bg-[#006766] selection:text-white overflow-y-auto relative">
       {/* Top-Right Cross Button to Landing (Outside Card) */}
       <Link
         href="/"
         aria-label="Back to landing page"
-        className="fixed top-6 right-6 z-50 w-10 h-10 rounded-full bg-parchment/90 hover:bg-parchment border border-hairline/90 backdrop-blur-md flex items-center justify-center text-ink-soft hover:text-ink transition-all hover:scale-105 shadow-sm group cursor-pointer"
+        className="fixed top-6 right-6 z-50 w-10 h-10 rounded-full bg-white/90 hover:bg-white border border-[#DFEBE8] backdrop-blur-md flex items-center justify-center text-[#5A7470] hover:text-[#082827] transition-all hover:scale-105 shadow-sm group cursor-pointer"
       >
         <X size={18} className="group-hover:rotate-90 transition-transform duration-200" />
       </Link>
@@ -456,7 +456,7 @@ export default function LoginPage() {
         initial={{ opacity: 0, scale: 0.97, y: 15 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.6, ease: easeOut }}
-        className="w-full max-w-6xl min-h-[720px] bg-parchment rounded-[2.5rem] border border-hairline/90 shadow-[0_24px_60px_-30px_rgba(0,103,102,0.12)] overflow-hidden grid grid-cols-1 lg:grid-cols-12"
+        className="w-full max-w-6xl min-h-[720px] bg-white rounded-[2.5rem] border border-[#DFEBE8] shadow-[0_24px_60px_-30px_rgba(0,103,102,0.12)] overflow-hidden grid grid-cols-1 lg:grid-cols-12"
       >
         {/* LEFT COLUMN: Dribbble MedTech AI Diagnostics Presentation Card */}
         <motion.div 
@@ -517,7 +517,7 @@ export default function LoginPage() {
           initial={{ opacity: 0, x: 25 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: easeOut }}
-          className="lg:col-span-6 p-8 sm:p-12 md:p-14 flex flex-col justify-between bg-parchment"
+          className="lg:col-span-6 p-8 sm:p-12 md:p-14 flex flex-col justify-between bg-white"
         >
           
           {/* Top Header Row with Logo & Pill Switcher */}
@@ -525,7 +525,7 @@ export default function LoginPage() {
             <BrandLogo />
 
             {/* Pill Switcher */}
-            <div className="flex items-center p-1 bg-cream-deep/60 rounded-full border border-hairline text-xs font-medium">
+            <div className="flex items-center p-1 bg-[#F2F7F6] rounded-full border border-[#DFEBE8] text-xs font-medium">
               <div className="relative px-3.5 py-1.5 text-white rounded-full">
                 <motion.div
                   layoutId="auth-tab-pill"
@@ -536,7 +536,7 @@ export default function LoginPage() {
               </div>
               <Link 
                 href="/register" 
-                className="relative px-3.5 py-1.5 text-ink-soft hover:text-ink transition-colors rounded-full"
+                className="relative px-3.5 py-1.5 text-[#5A7470] hover:text-[#082827] transition-colors rounded-full"
               >
                 Sign Up
               </Link>
@@ -551,10 +551,10 @@ export default function LoginPage() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-center mb-8"
             >
-              <h2 className="font-sans text-3xl sm:text-4xl font-bold text-ink tracking-tight mb-2">
+              <h2 className="font-sans text-3xl sm:text-4xl font-bold text-[#082827] tracking-tight mb-2">
                 Welcome Back
               </h2>
-              <p className="text-ink-soft text-xs sm:text-sm font-normal">
+              <p className="text-[#5A7470] text-xs sm:text-sm font-normal">
                 Enter your credentials to access the diagnostic workbench
               </p>
               <BackendStandbyBanner />
@@ -578,7 +578,7 @@ export default function LoginPage() {
             <form onSubmit={handleLogin} className="space-y-4">
               {/* Email */}
               <div className="space-y-1.5">
-                <label className="block text-xs font-semibold text-ink">
+                <label className="block text-xs font-semibold text-[#082827]">
                   Email Address
                 </label>
                 <input
@@ -586,14 +586,14 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="w-full h-12 px-4 rounded-xl bg-cream/70 border border-hairline text-sm text-ink placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-parchment transition-all shadow-2xs font-sans"
+                  className="w-full h-12 px-4 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8] text-sm text-[#082827] placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-white transition-all shadow-2xs font-sans"
                   required
                 />
               </div>
 
               {/* Password */}
               <div className="space-y-1.5">
-                <label className="block text-xs font-semibold text-ink">
+                <label className="block text-xs font-semibold text-[#082827]">
                   Password
                 </label>
                 <div className="relative">
@@ -603,13 +603,13 @@ export default function LoginPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     maxLength={72}
                     placeholder="Enter your password"
-                    className="w-full h-12 pl-4 pr-11 rounded-xl bg-cream/70 border border-hairline text-sm text-ink placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-parchment transition-all shadow-2xs font-sans"
+                    className="w-full h-12 pl-4 pr-11 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8] text-sm text-[#082827] placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-white transition-all shadow-2xs font-sans"
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-ink cursor-pointer"
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-[#082827] cursor-pointer"
                   >
                     {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
@@ -628,12 +628,12 @@ export default function LoginPage() {
                     <motion.div 
                       layout
                       transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                      className={`w-4 h-4 rounded-full bg-parchment shadow-xs ${
+                      className={`w-4 h-4 rounded-full bg-white shadow-xs ${
                         rememberMe ? "ml-auto" : "mr-auto"
                       }`} 
                     />
                   </div>
-                  <span className="text-ink-soft font-medium">Remember me</span>
+                  <span className="text-[#5A7470] font-medium">Remember me</span>
                 </div>
 
                 <Link
@@ -665,9 +665,9 @@ export default function LoginPage() {
               {/* Divider */}
               <div className="relative my-3 flex items-center justify-center">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-hairline" />
+                  <div className="w-full border-t border-[#DFEBE8]" />
                 </div>
-                <span className="relative bg-parchment px-3 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                <span className="relative bg-white px-3 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
                   or continue with
                 </span>
               </div>
@@ -685,7 +685,7 @@ export default function LoginPage() {
                     type="button"
                     onClick={handleGoogleClick}
                     disabled={isAnyLoading}
-                    className="absolute inset-0 w-full h-12 rounded-xl border border-hairline/90 bg-cream/60 hover:bg-cream text-ink font-semibold text-sm transition-all flex items-center justify-center gap-3 shadow-2xs cursor-pointer disabled:opacity-50"
+                    className="absolute inset-0 w-full h-12 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9] hover:bg-[#F2F7F6] text-[#082827] font-semibold text-sm transition-all flex items-center justify-center gap-3 shadow-2xs cursor-pointer disabled:opacity-50"
                   >
                     {isGoogleLoading ? (
                       <>
@@ -711,11 +711,11 @@ export default function LoginPage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="absolute inset-0 bg-parchment/95 backdrop-blur-xs z-50 flex flex-col items-center justify-center p-6 text-center rounded-[2.5rem]"
+                className="absolute inset-0 bg-white/95 backdrop-blur-xs z-50 flex flex-col items-center justify-center p-6 text-center rounded-[2.5rem]"
               >
                 <Loader2 size={36} className="animate-spin text-primary mb-3" />
-                <h3 className="font-sans text-lg font-bold text-ink">Signing in...</h3>
-                <p className="text-xs text-ink-soft mt-1">Verifying Google identity & establishing secure tokens...</p>
+                <h3 className="font-sans text-lg font-bold text-[#082827]">Signing in...</h3>
+                <p className="text-xs text-[#5A7470] mt-1">Verifying Google identity & establishing secure tokens...</p>
                 {waitElapsed > 2 && (
                   <div className="mt-3 flex flex-col items-center gap-2 max-w-xs w-full">
                     <p className="text-[11px] text-amber-700 bg-amber-50/90 px-3 py-1.5 rounded-lg border border-amber-200/80 w-full animate-pulse">
@@ -737,7 +737,7 @@ export default function LoginPage() {
                     setIsGoogleLoading(false);
                     setErrorMessage("Google sign-in was cancelled.");
                   }}
-                  className="mt-4 px-4 py-2 rounded-xl border border-hairline/80 bg-cream/70 hover:bg-cream text-xs font-semibold text-ink-soft hover:text-ink transition-all cursor-pointer shadow-2xs hover:scale-105"
+                  className="mt-4 px-4 py-2 rounded-xl border border-[#DFEBE8] bg-[#F7FAF9] hover:bg-[#F2F7F6] text-xs font-semibold text-[#5A7470] hover:text-[#082827] transition-all cursor-pointer shadow-2xs hover:scale-105"
                 >
                   Cancel & Return to Form
                 </button>
@@ -746,7 +746,7 @@ export default function LoginPage() {
           </AnimatePresence>
 
           {/* Bottom Footer Switcher */}
-          <div className="text-center text-xs text-ink-soft pt-4">
+          <div className="text-center text-xs text-[#5A7470] pt-4">
             Don't have an account?{" "}
             <Link href="/register" className="font-semibold text-primary hover:underline">
               Sign Up

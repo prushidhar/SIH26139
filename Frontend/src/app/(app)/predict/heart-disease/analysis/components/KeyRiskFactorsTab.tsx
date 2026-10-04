@@ -254,14 +254,14 @@ export default function KeyRiskFactorsTab({
               {/* Point Title on Line 1 with clean bullet dot */}
               <div className="flex items-start gap-2.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-quantum shrink-0 mt-1.5" />
-                <h5 className="text-xs font-bold text-ink tracking-tight">
+                <h5 className="text-xs font-bold text-[#082827] tracking-tight">
                   {title}
                 </h5>
               </div>
 
               {/* Point Description on the NEXT line */}
               {description && (
-                <p className="text-xs text-ink/80 leading-relaxed pl-4 font-normal">
+                <p className="text-xs text-[#082827]/80 leading-relaxed pl-4 font-normal">
                   {description}
                 </p>
               )}
@@ -275,28 +275,28 @@ export default function KeyRiskFactorsTab({
   return (
     <div className="space-y-6">
       {/* 1. VISUAL GRAD-CAM ATTRIBUTION & FULL UNCROPPED HEATMAP OVERLAY */}
-      <div className="bg-white rounded-2xl border border-hairline p-6 shadow-xs space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
+      <div className="bg-white rounded-2xl border border-[#DFEBE8] p-6 shadow-xs space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#DFEBE8] pb-4">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <Sparkles size={16} className="text-quantum" />
-              <h3 className="font-serif text-lg font-medium text-ink">
+              <h3 className="font-sans font-bold text-lg font-medium text-[#082827]">
                 12-Lead Autograd Visual Pinpointing &amp; Grad-CAM Heatmap
               </h3>
             </div>
-            <p className="text-xs text-ink-soft">
+            <p className="text-xs text-[#5A7470]">
               Gradient-weighted class activation mapping (Grad-CAM) identifying the exact leads and segment deflections driving the diagnosis.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1 border border-hairline rounded-lg p-0.5 bg-cream/40">
+            <div className="flex items-center gap-1 border border-[#DFEBE8] rounded-lg p-0.5 bg-[#F7FAF9]/40">
               <button
                 onClick={() => setViewMode("heatmap")}
                 className={`text-xs px-3 py-1 rounded-md transition-all flex items-center gap-1.5 cursor-pointer ${
                   viewMode === "heatmap"
-                    ? "bg-white text-ink shadow-2xs font-bold"
-                    : "text-ink-soft hover:text-ink"
+                    ? "bg-white text-[#082827] shadow-2xs font-bold"
+                    : "text-[#5A7470] hover:text-[#082827]"
                 }`}
               >
                 <Flame size={12} className={viewMode === "heatmap" ? "text-amber-500" : ""} />
@@ -306,8 +306,8 @@ export default function KeyRiskFactorsTab({
                 onClick={() => setViewMode("raw")}
                 className={`text-xs px-3 py-1 rounded-md transition-all flex items-center gap-1.5 cursor-pointer ${
                   viewMode === "raw"
-                    ? "bg-white text-ink shadow-2xs font-bold"
-                    : "text-ink-soft hover:text-ink"
+                    ? "bg-white text-[#082827] shadow-2xs font-bold"
+                    : "text-[#5A7470] hover:text-[#082827]"
                 }`}
               >
                 <Eye size={12} />
@@ -318,9 +318,9 @@ export default function KeyRiskFactorsTab({
         </div>
 
         {/* Heatmap Viewer — Completely Uncropped to Show Full 12-Lead Image */}
-        <div className="rounded-2xl border border-hairline bg-[#fbf9f5] p-3 space-y-3">
+        <div className="rounded-2xl border border-[#DFEBE8] bg-[#fbf9f5] p-3 space-y-3">
           {uploadedImage ? (
-            <div className="relative w-full rounded-xl overflow-hidden shadow-xs flex items-center justify-center bg-white border border-hairline/60">
+            <div className="relative w-full rounded-xl overflow-hidden shadow-xs flex items-center justify-center bg-white border border-[#DFEBE8]/60">
               <img
                 src={uploadedImage}
                 alt="12-Lead ECG Strip"
@@ -358,27 +358,27 @@ export default function KeyRiskFactorsTab({
               )}
             </div>
           ) : (
-            <div className="py-12 text-center text-xs text-ink-soft space-y-2">
-              <Activity size={32} className="mx-auto text-ink-muted animate-pulse" />
+            <div className="py-12 text-center text-xs text-[#5A7470] space-y-2">
+              <Activity size={32} className="mx-auto text-[#082827]-muted animate-pulse" />
               <p>No ECG rhythm strip image loaded for this session.</p>
             </div>
           )}
 
           {/* Focal Diagnostic Pinpoint Status Bar (Underneath Image — Never Obscures Waveforms) */}
-          <div className="bg-white p-3.5 rounded-xl border border-hairline shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="bg-white p-3.5 rounded-xl border border-[#DFEBE8] shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="flex items-center gap-2.5">
               <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse shrink-0" />
               <div>
-                <span className="text-xs font-mono font-bold text-ink uppercase tracking-wide">
+                <span className="text-xs font-mono font-bold text-[#082827] uppercase tracking-wide">
                   Primary Lead Pinpointed: {leadDetected}
                 </span>
-                <p className="text-[11px] text-ink-soft mt-0.5">
-                  Vascular Territory: <strong className="text-ink font-medium">{anatomicalRegion}</strong>
+                <p className="text-[11px] text-[#5A7470] mt-0.5">
+                  Vascular Territory: <strong className="text-[#082827] font-medium">{anatomicalRegion}</strong>
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-2 text-xs font-mono shrink-0">
-              <span className="text-ink-soft">Peak Activation Gradient:</span>
+              <span className="text-[#5A7470]">Peak Activation Gradient:</span>
               <span className="px-2.5 py-0.5 rounded-md bg-quantum/10 border border-quantum/30 text-quantum font-bold">
                 {(peakScore * 100).toFixed(1)}%
               </span>
@@ -389,8 +389,8 @@ export default function KeyRiskFactorsTab({
 
       {/* 2. 12-LEAD ANATOMICAL CORRELATION MATRIX */}
       {/* 2. SHAP EXPLAINABILITY DECOMPOSITION (TRAINED PRODUCTION EXPLAINERS) */}
-      <div className="bg-white rounded-2xl border border-hairline p-6 shadow-xs space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
+      <div className="bg-white rounded-2xl border border-[#DFEBE8] p-6 shadow-xs space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#DFEBE8] pb-4">
           <div>
             <div className="flex items-center gap-2">
               {isHybrid ? (
@@ -398,7 +398,7 @@ export default function KeyRiskFactorsTab({
               ) : (
                 <Activity size={16} className="text-blue-600" />
               )}
-              <h4 className="text-sm font-bold text-ink">
+              <h4 className="text-sm font-bold text-[#082827]">
                 {isHybrid
                   ? "SHAP Explainability & Quantum Entanglement (8-Qubit VQC)"
                   : "SHAP Explainability & 12-Lead Attribution (Classical ResNet-34)"}
@@ -413,13 +413,13 @@ export default function KeyRiskFactorsTab({
                 {isHybrid ? "✓ Quantum Q-SHAP + Path-Shapley" : "✓ 100% Classical Path-Shapley (Zero Quantum Layers)"}
               </span>
             </div>
-            <p className="text-xs text-ink-soft mt-0.5">
+            <p className="text-xs text-[#5A7470] mt-0.5">
               {isHybrid
                 ? "Dual-Manifold Shapley feature attribution: Q-SHAP across 16 quantum observables and 12-lead anatomical projections."
                 : "Axiomatic Path-Shapley gradient integration across the 12-lead anatomical ECG grid (shap_explainer_classical.py). Pure classical backpropagation."}
             </p>
           </div>
-          <div className="flex items-center gap-2 text-xs font-mono text-ink-soft">
+          <div className="flex items-center gap-2 text-xs font-mono text-[#5A7470]">
             {isHybrid ? (
               <>
                 <span className="bg-quantum/10 text-quantum border border-quantum/30 px-2 py-0.5 rounded font-semibold">
@@ -441,10 +441,10 @@ export default function KeyRiskFactorsTab({
         {/* Tab-like Toggle or Dual View: Classical 12-Lead SHAP vs Quantum Q-SHAP */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-ink-soft">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#5A7470]">
               1. Classical 12-Lead Saliency Waterfall (ResNet-34 Path-Shapley)
             </span>
-            <span className="text-[10px] font-mono text-ink-soft">
+            <span className="text-[10px] font-mono text-[#5A7470]">
               shap_explainer_classical.py
             </span>
           </div>
@@ -464,27 +464,27 @@ export default function KeyRiskFactorsTab({
                   className={`p-3.5 rounded-xl border transition-all ${
                     isActive
                       ? "bg-quantum/10 border-quantum/50 shadow-xs"
-                      : "bg-cream/20 border-hairline hover:bg-cream/40"
+                      : "bg-[#F7FAF9]/20 border-[#DFEBE8] hover:bg-[#F7FAF9]/40"
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className={`text-xs font-bold ${isActive ? "text-quantum" : "text-ink"}`}>
+                    <span className={`text-xs font-bold ${isActive ? "text-quantum" : "text-[#082827]"}`}>
                       {leadName}
                     </span>
                     <span className={`font-mono text-[11px] font-bold ${isPositive ? "text-red-600" : "text-emerald-700"}`}>
                       {isPositive ? "+" : ""}{shapVal.toFixed(3)}
                     </span>
                   </div>
-                  <p className="text-[11px] text-ink-soft mt-1 leading-snug truncate">
+                  <p className="text-[11px] text-[#5A7470] mt-1 leading-snug truncate">
                     {regionName}
                   </p>
-                  <div className="h-1.5 w-full bg-cream rounded-full overflow-hidden mt-2 border border-hairline/50">
+                  <div className="h-1.5 w-full bg-[#F7FAF9] rounded-full overflow-hidden mt-2 border border-[#DFEBE8]/50">
                     <div
                       className={`h-full ${isPositive ? "bg-red-500" : "bg-emerald-500"}`}
                       style={{ width: `${Math.min(100, impactPct * 2.5)}%` }}
                     />
                   </div>
-                  <div className="flex justify-between items-center text-[9px] font-mono text-ink-soft mt-1.5">
+                  <div className="flex justify-between items-center text-[9px] font-mono text-[#5A7470] mt-1.5">
                     <span>{impactPct.toFixed(1)}% Share</span>
                     <span className={isPositive ? "text-red-600 font-semibold" : "text-emerald-700 font-semibold"}>
                       {isPositive ? "▲ RISK" : "▼ INHIBIT"}
@@ -498,12 +498,12 @@ export default function KeyRiskFactorsTab({
 
         {/* 2. Quantum Q-SHAP Observables Spectrum — STRICTLY RENDERED FOR HYBRID ONLY */}
         {isHybrid ? (
-          <div className="space-y-4 pt-3 border-t border-hairline">
+          <div className="space-y-4 pt-3 border-t border-[#DFEBE8]">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-ink-soft">
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#5A7470]">
                 2. Quantum Q-SHAP Observables &amp; Entanglement Attribution (8-Qubit VQC)
               </span>
-              <span className="text-[10px] font-mono text-ink-soft">
+              <span className="text-[10px] font-mono text-[#5A7470]">
                 shap_explainer_quantum.py
               </span>
             </div>
@@ -522,13 +522,13 @@ export default function KeyRiskFactorsTab({
                       {qItem.shap_value >= 0 ? "+" : ""}{qItem.shap_value.toFixed(4)}
                     </span>
                   </div>
-                  <div className="text-[11px] font-medium text-ink truncate">
+                  <div className="text-[11px] font-medium text-[#082827] truncate">
                     {qItem.lead_channel}
                   </div>
-                  <div className="text-[10px] text-ink-soft truncate">
+                  <div className="text-[10px] text-[#5A7470] truncate">
                     {qItem.role}
                   </div>
-                  <div className="h-1 w-full bg-cream rounded-full overflow-hidden mt-1">
+                  <div className="h-1 w-full bg-[#F7FAF9] rounded-full overflow-hidden mt-1">
                     <div
                       className="h-full bg-quantum"
                       style={{ width: `${Math.min(100, qItem.impact_pct * 3)}%` }}
@@ -540,9 +540,9 @@ export default function KeyRiskFactorsTab({
           </div>
         ) : (
           /* Pure Classical Architecture & Attention Summary (Zero Quantum) */
-          <div className="pt-3 border-t border-hairline space-y-3">
+          <div className="pt-3 border-t border-[#DFEBE8] space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-ink-soft">
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#5A7470]">
                 Classical Receptive Field &amp; CBAM Attention Topology
               </span>
               <span className="text-[10px] font-mono text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200 font-semibold">
@@ -551,26 +551,26 @@ export default function KeyRiskFactorsTab({
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div className="p-3.5 rounded-xl bg-[#faf8f5] border border-hairline space-y-1 shadow-2xs">
-                <div className="text-[11px] font-mono text-ink-soft">Backbone Convolution</div>
-                <div className="text-xs font-bold text-ink">ResNet-34 Multi-Scale Dilated</div>
-                <p className="text-[10px] text-ink-soft mt-1">
+              <div className="p-3.5 rounded-xl bg-[#faf8f5] border border-[#DFEBE8] space-y-1 shadow-2xs">
+                <div className="text-[11px] font-mono text-[#5A7470]">Backbone Convolution</div>
+                <div className="text-xs font-bold text-[#082827]">ResNet-34 Multi-Scale Dilated</div>
+                <p className="text-[10px] text-[#5A7470] mt-1">
                   Dilated convolution rates (d=1, 2, 4) expanding effective spatial receptive fields across all 12 ECG grid sectors without downsampling resolution.
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#faf8f5] border border-hairline space-y-1 shadow-2xs">
-                <div className="text-[11px] font-mono text-ink-soft">Attention Modules</div>
-                <div className="text-xs font-bold text-ink">CBAM Channel &amp; Spatial Attention</div>
-                <p className="text-[10px] text-ink-soft mt-1">
+              <div className="p-3.5 rounded-xl bg-[#faf8f5] border border-[#DFEBE8] space-y-1 shadow-2xs">
+                <div className="text-[11px] font-mono text-[#5A7470]">Attention Modules</div>
+                <div className="text-xs font-bold text-[#082827]">CBAM Channel &amp; Spatial Attention</div>
+                <p className="text-[10px] text-[#5A7470] mt-1">
                   Dual-pooling channel attention (Max + Avg) coupled with 7x7 spatial convolutions dynamically prioritizing ST-segment deflections.
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#faf8f5] border border-hairline space-y-1 shadow-2xs">
-                <div className="text-[11px] font-mono text-ink-soft">Continuous Latent Space</div>
-                <div className="text-xs font-bold text-ink">1024-Dimensional Concat-Pool</div>
-                <p className="text-[10px] text-ink-soft mt-1">
+              <div className="p-3.5 rounded-xl bg-[#faf8f5] border border-[#DFEBE8] space-y-1 shadow-2xs">
+                <div className="text-[11px] font-mono text-[#5A7470]">Continuous Latent Space</div>
+                <div className="text-xs font-bold text-[#082827]">1024-Dimensional Concat-Pool</div>
+                <p className="text-[10px] text-[#5A7470] mt-1">
                   Global average + max pooling concatenation producing dense 1024d embedding mapped directly to 4 clinical diagnostic classes.
                 </p>
               </div>
@@ -582,14 +582,14 @@ export default function KeyRiskFactorsTab({
       {/* 3. MULTI-CLASS PROBABILITY DISTRIBUTION & REAL-TIME CLINICAL ADVICE */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column: Probability Breakdown + Differential Certainty + Lead Telemetry (No Empty Space) */}
-        <div className="lg:col-span-5 bg-white rounded-2xl border border-hairline p-5 shadow-xs space-y-4 flex flex-col justify-between">
+        <div className="lg:col-span-5 bg-white rounded-2xl border border-[#DFEBE8] p-5 shadow-xs space-y-4 flex flex-col justify-between">
           <div className="space-y-4">
             <div>
               <div className="flex items-center justify-between mb-3">
-                <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-ink-soft">
+                <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#5A7470]">
                   Diagnostic Class Likelihoods
                 </h4>
-                <span className="text-[10px] font-mono text-ink-soft bg-cream/70 px-2 py-0.5 rounded border border-hairline">
+                <span className="text-[10px] font-mono text-[#5A7470] bg-[#F7FAF9]/70 px-2 py-0.5 rounded border border-[#DFEBE8]">
                   4-Way Softmax
                 </span>
               </div>
@@ -604,18 +604,18 @@ export default function KeyRiskFactorsTab({
                       className={`p-2.5 rounded-xl border transition-all ${
                         isSelected
                           ? "border-quantum/60 bg-quantum/5 shadow-2xs"
-                          : "border-hairline bg-cream/20"
+                          : "border-[#DFEBE8] bg-[#F7FAF9]/20"
                       }`}
                     >
                       <div className="flex justify-between items-center text-xs">
-                        <span className={`font-semibold ${isSelected ? "text-ink font-bold" : "text-ink-soft"}`}>
+                        <span className={`font-semibold ${isSelected ? "text-[#082827] font-bold" : "text-[#5A7470]"}`}>
                           {cls}
                         </span>
                         <span className="font-mono font-bold">{(probNum * 100).toFixed(1)}%</span>
                       </div>
-                      <div className="h-1.5 w-full bg-cream rounded-full overflow-hidden mt-1.5">
+                      <div className="h-1.5 w-full bg-[#F7FAF9] rounded-full overflow-hidden mt-1.5">
                         <div
-                          className={`h-full ${isSelected ? "bg-quantum" : "bg-ink-soft/30"}`}
+                          className={`h-full ${isSelected ? "bg-quantum" : "bg-[#082827]-soft/30"}`}
                           style={{ width: `${probNum * 100}%` }}
                         />
                       </div>
@@ -626,9 +626,9 @@ export default function KeyRiskFactorsTab({
             </div>
 
             {/* Differential Separation Confidence Card */}
-            <div className="p-3.5 rounded-xl bg-cream/30 border border-hairline space-y-2">
+            <div className="p-3.5 rounded-xl bg-[#F7FAF9]/30 border border-[#DFEBE8] space-y-2">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-semibold text-ink flex items-center gap-1.5">
+                <span className="font-semibold text-[#082827] flex items-center gap-1.5">
                   <Gauge size={13} className="text-quantum" />
                   Differential Separation Margin
                 </span>
@@ -636,16 +636,16 @@ export default function KeyRiskFactorsTab({
                   Δ {differentialMargin.toFixed(1)}%
                 </strong>
               </div>
-              <p className="text-[11px] text-ink-soft leading-relaxed">
+              <p className="text-[11px] text-[#5A7470] leading-relaxed">
                 Primary classification exceeds the secondary differential cohort by a decisive margin, establishing definitive diagnostic concordancy.
               </p>
             </div>
 
             {/* Signal Fidelity & Telemetry Verification Card */}
-            <div className="p-3.5 rounded-xl bg-cream/30 border border-hairline space-y-2">
+            <div className="p-3.5 rounded-xl bg-[#F7FAF9]/30 border border-[#DFEBE8] space-y-2">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-semibold text-ink flex items-center gap-1.5">
-                  <Radio size={13} className="text-ink-soft" />
+                <span className="font-semibold text-[#082827] flex items-center gap-1.5">
+                  <Radio size={13} className="text-[#5A7470]" />
                   Signal Fidelity &amp; Verification
                 </span>
                 <span className="text-[10px] font-mono text-emerald-700 font-bold bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
@@ -653,36 +653,36 @@ export default function KeyRiskFactorsTab({
                 </span>
               </div>
               <div className="grid grid-cols-2 gap-2 text-[11px] font-mono pt-1">
-                <div className="text-ink-soft">
-                  Bandwidth: <strong className="text-ink">0.05–150 Hz</strong>
+                <div className="text-[#5A7470]">
+                  Bandwidth: <strong className="text-[#082827]">0.05–150 Hz</strong>
                 </div>
-                <div className="text-ink-soft">
-                  Paper Speed: <strong className="text-ink">25 mm/s</strong>
+                <div className="text-[#5A7470]">
+                  Paper Speed: <strong className="text-[#082827]">25 mm/s</strong>
                 </div>
-                <div className="text-ink-soft">
-                  Voltage Scale: <strong className="text-ink">10 mm/mV</strong>
+                <div className="text-[#5A7470]">
+                  Voltage Scale: <strong className="text-[#082827]">10 mm/mV</strong>
                 </div>
-                <div className="text-ink-soft">
-                  Isoelectric: <strong className="text-ink">&lt; 0.05 mV</strong>
+                <div className="text-[#5A7470]">
+                  Isoelectric: <strong className="text-[#082827]">&lt; 0.05 mV</strong>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="pt-3 border-t border-hairline flex items-center justify-between text-[11px] font-mono text-ink-soft">
+          <div className="pt-3 border-t border-[#DFEBE8] flex items-center justify-between text-[11px] font-mono text-[#5A7470]">
             <span>Primary Driver: <strong>{leadDetected}</strong></span>
             <span>Vascular: <strong>{anatomicalRegion.split(" ")[0]}</strong></span>
           </div>
         </div>
 
         {/* Right Column: Real-Time Dynamic Clinical Protocol Card */}
-        <div className="lg:col-span-7 bg-white rounded-2xl border border-hairline p-5 shadow-xs space-y-4 flex flex-col justify-between">
+        <div className="lg:col-span-7 bg-white rounded-2xl border border-[#DFEBE8] p-5 shadow-xs space-y-4 flex flex-col justify-between">
           <div className="space-y-3.5">
             {/* Header with Title and Real-time Badge */}
-            <div className="flex items-center justify-between gap-3 border-b border-hairline pb-3">
+            <div className="flex items-center justify-between gap-3 border-b border-[#DFEBE8] pb-3">
               <div className="flex items-center gap-2">
                 <Stethoscope size={16} className="text-quantum" />
-                <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-ink">
+                <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#082827]">
                   Actionable Clinical Protocol &amp; Urgency Directives
                 </h4>
               </div>
@@ -696,7 +696,7 @@ export default function KeyRiskFactorsTab({
                 <button
                   onClick={() => fetchClinicalAdvice(true)}
                   disabled={isLoadingAdvice}
-                  className="p-1.5 rounded-lg border border-hairline hover:bg-cream/60 text-ink-soft hover:text-ink transition-colors cursor-pointer disabled:opacity-50"
+                  className="p-1.5 rounded-lg border border-[#DFEBE8] hover:bg-[#F7FAF9]/60 text-[#5A7470] hover:text-[#082827] transition-colors cursor-pointer disabled:opacity-50"
                   title="Regenerate clinical protocol directives"
                 >
                   <RefreshCw size={12} className={isLoadingAdvice ? "animate-spin text-quantum" : ""} />
@@ -712,10 +712,10 @@ export default function KeyRiskFactorsTab({
                     <Sparkles size={14} className="animate-spin" />
                     <span>Synthesizing guideline-directed clinical protocol directives...</span>
                   </div>
-                  <div className="h-3.5 bg-cream/70 rounded-full w-full" />
-                  <div className="h-3.5 bg-cream/70 rounded-full w-11/12" />
-                  <div className="h-3.5 bg-cream/70 rounded-full w-4/5" />
-                  <div className="h-3.5 bg-cream/70 rounded-full w-9/12" />
+                  <div className="h-3.5 bg-[#F7FAF9]/70 rounded-full w-full" />
+                  <div className="h-3.5 bg-[#F7FAF9]/70 rounded-full w-11/12" />
+                  <div className="h-3.5 bg-[#F7FAF9]/70 rounded-full w-4/5" />
+                  <div className="h-3.5 bg-[#F7FAF9]/70 rounded-full w-9/12" />
                 </div>
               ) : (
                 <div className="relative">
@@ -729,12 +729,12 @@ export default function KeyRiskFactorsTab({
           </div>
 
           {/* Footer with Standards & Disclaimers */}
-          <div className="pt-3 border-t border-hairline flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-ink-soft">
+          <div className="pt-3 border-t border-[#DFEBE8] flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-[#5A7470]">
             <span className="flex items-center gap-1.5">
               <CheckCircle2 size={12} className="text-emerald-600" />
               <span>Concordant with ACC / AHA / ESC Clinical Practice Guidelines</span>
             </span>
-            <span className="text-[10px] text-ink-muted">
+            <span className="text-[10px] text-[#082827]-muted">
               Intended for licensed attending cardiologist review
             </span>
           </div>

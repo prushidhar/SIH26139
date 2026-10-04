@@ -154,7 +154,7 @@ export default function NeurologicalStudioPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.35, ease: "easeOut" }}
-      className="space-y-6 pb-12 w-full max-w-6xl mx-auto font-sans text-ink"
+      className="space-y-6 pb-12 w-full max-w-6xl mx-auto font-sans text-[#082827]"
     >
       {/* Top Breadcrumb & Title */}
       {/* HEADER SECTION (Matching MedTech Workstation Design) */}
@@ -287,11 +287,11 @@ export default function NeurologicalStudioPage() {
         {/* Left Column: Clinical Anatomical Brain/EEG Panel & Sliders */}
         <div className="lg:col-span-7 space-y-6">
           {/* Digital Studio Anatomical Brain & EEG Analysis */}
-          <div className="rounded-2xl border border-hairline bg-parchment overflow-hidden shadow-xs">
-            <div className="p-4 border-b border-hairline flex items-center justify-between bg-cream-deep/40">
+          <div className="rounded-2xl border border-[#DFEBE8] bg-white overflow-hidden shadow-xs">
+            <div className="p-4 border-b border-[#DFEBE8] flex items-center justify-between bg-[#F2F7F6]/40">
               <div className="flex items-center gap-2">
                 <Brain size={16} className="text-quantum" />
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-ink">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-[#082827]">
                   Cortical Neuro-Anatomy & Spectral EEG Analysis
                 </h3>
               </div>
@@ -317,15 +317,15 @@ export default function NeurologicalStudioPage() {
           </div>
 
           {/* Sliders Input Panel */}
-          <div className="rounded-2xl border border-hairline bg-parchment p-5 sm:p-6 space-y-5 shadow-xs">
-          <div className="flex items-center justify-between border-b border-hairline pb-3">
+          <div className="rounded-2xl border border-[#DFEBE8] bg-white p-5 sm:p-6 space-y-5 shadow-xs">
+          <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
             <div className="flex items-center gap-2">
               <Sliders size={16} className="text-quantum" />
-              <h2 className="text-sm font-semibold text-ink">
+              <h2 className="text-sm font-semibold text-[#082827]">
                 Neuro-Cognitive Biomarkers (8 Metrics)
               </h2>
             </div>
-            <span className="text-[11px] font-mono text-ink-soft">
+            <span className="text-[11px] font-mono text-[#5A7470]">
               Real-time Angle Mapping ([-π, π])
             </span>
           </div>
@@ -334,9 +334,9 @@ export default function NeurologicalStudioPage() {
             {/* Cognitive MMSE */}
             <div className="space-y-1.5">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-medium text-ink flex items-center gap-1.5">
+                <span className="font-medium text-[#082827] flex items-center gap-1.5">
                   <span>Mini-Mental State Exam (MMSE)</span>
-                  <span className="text-[10px] font-mono text-ink-soft">/ 30 pts</span>
+                  <span className="text-[10px] font-mono text-[#5A7470]">/ 30 pts</span>
                 </span>
                 <span className="font-mono font-bold text-quantum">{values.cognitive_mmse}</span>
               </div>
@@ -349,7 +349,7 @@ export default function NeurologicalStudioPage() {
                 onChange={(e) => handleValueChange("cognitive_mmse", parseFloat(e.target.value))}
                 className="w-full h-1.5 bg-hairline rounded-lg appearance-none cursor-pointer accent-quantum"
               />
-              <div className="flex justify-between text-[10px] text-ink-soft font-mono">
+              <div className="flex justify-between text-[10px] text-[#5A7470] font-mono">
                 <span>Severe (10)</span>
                 <span>Cutoff: &lt;24 impaired</span>
                 <span>Normal (30)</span>
@@ -359,9 +359,9 @@ export default function NeurologicalStudioPage() {
             {/* EEG Alpha/Beta Ratio */}
             <div className="space-y-1.5">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-medium text-ink flex items-center gap-1.5">
+                <span className="font-medium text-[#082827] flex items-center gap-1.5">
                   <span>EEG Alpha/Beta Power Ratio</span>
-                  <span className="text-[10px] font-mono text-ink-soft">(Cortical Speed)</span>
+                  <span className="text-[10px] font-mono text-[#5A7470]">(Cortical Speed)</span>
                 </span>
                 <span className="font-mono font-bold text-quantum">{values.eeg_alpha_beta_ratio.toFixed(2)}</span>
               </div>
@@ -374,7 +374,7 @@ export default function NeurologicalStudioPage() {
                 onChange={(e) => handleValueChange("eeg_alpha_beta_ratio", parseFloat(e.target.value))}
                 className="w-full h-1.5 bg-hairline rounded-lg appearance-none cursor-pointer accent-quantum"
               />
-              <div className="flex justify-between text-[10px] text-ink-soft font-mono">
+              <div className="flex justify-between text-[10px] text-[#5A7470] font-mono">
                 <span>Decelerated (0.5)</span>
                 <span>Healthy: 1.8 - 2.5</span>
                 <span>Accelerated (3.5)</span>
@@ -384,9 +384,9 @@ export default function NeurologicalStudioPage() {
             {/* Motor Tremor Frequency */}
             <div className="space-y-1.5">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-medium text-ink flex items-center gap-1.5">
+                <span className="font-medium text-[#082827] flex items-center gap-1.5">
                   <span>Resting Motor Tremor Frequency</span>
-                  <span className="text-[10px] font-mono text-ink-soft">Hz</span>
+                  <span className="text-[10px] font-mono text-[#5A7470]">Hz</span>
                 </span>
                 <span className="font-mono font-bold text-quantum">{values.motor_tremor_hz.toFixed(1)} Hz</span>
               </div>
@@ -399,7 +399,7 @@ export default function NeurologicalStudioPage() {
                 onChange={(e) => handleValueChange("motor_tremor_hz", parseFloat(e.target.value))}
                 className="w-full h-1.5 bg-hairline rounded-lg appearance-none cursor-pointer accent-quantum"
               />
-              <div className="flex justify-between text-[10px] text-ink-soft font-mono">
+              <div className="flex justify-between text-[10px] text-[#5A7470] font-mono">
                 <span>Physiological (0.0 Hz)</span>
                 <span>Pathological: 4 - 6 Hz</span>
                 <span>Severe (10.0 Hz)</span>
@@ -409,9 +409,9 @@ export default function NeurologicalStudioPage() {
             {/* Reaction Time */}
             <div className="space-y-1.5">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-medium text-ink flex items-center gap-1.5">
+                <span className="font-medium text-[#082827] flex items-center gap-1.5">
                   <span>Psychomotor Reaction Latency</span>
-                  <span className="text-[10px] font-mono text-ink-soft">ms</span>
+                  <span className="text-[10px] font-mono text-[#5A7470]">ms</span>
                 </span>
                 <span className="font-mono font-bold text-quantum">{values.reaction_time_ms} ms</span>
               </div>
@@ -424,7 +424,7 @@ export default function NeurologicalStudioPage() {
                 onChange={(e) => handleValueChange("reaction_time_ms", parseFloat(e.target.value))}
                 className="w-full h-1.5 bg-hairline rounded-lg appearance-none cursor-pointer accent-quantum"
               />
-              <div className="flex justify-between text-[10px] text-ink-soft font-mono">
+              <div className="flex justify-between text-[10px] text-[#5A7470] font-mono">
                 <span>Prompt (160 ms)</span>
                 <span>Typical: 220 - 280 ms</span>
                 <span>Delayed (600 ms)</span>
@@ -432,11 +432,11 @@ export default function NeurologicalStudioPage() {
             </div>
 
             {/* Secondary Panel: 4 Biomarkers Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-hairline/60">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-[#DFEBE8]/60">
               {/* EEG Theta Power */}
               <div className="space-y-1">
                 <div className="flex justify-between text-xs">
-                  <span className="text-ink font-medium">Theta Power (μV²)</span>
+                  <span className="text-[#082827] font-medium">Theta Power (μV²)</span>
                   <span className="font-mono text-quantum font-semibold">{values.eeg_theta_power}</span>
                 </div>
                 <input
@@ -453,7 +453,7 @@ export default function NeurologicalStudioPage() {
               {/* Speech Jitter */}
               <div className="space-y-1">
                 <div className="flex justify-between text-xs">
-                  <span className="text-ink font-medium">Speech Jitter (%)</span>
+                  <span className="text-[#082827] font-medium">Speech Jitter (%)</span>
                   <span className="font-mono text-quantum font-semibold">{values.speech_jitter_pct.toFixed(2)}%</span>
                 </div>
                 <input
@@ -470,7 +470,7 @@ export default function NeurologicalStudioPage() {
               {/* Speech Shimmer */}
               <div className="space-y-1">
                 <div className="flex justify-between text-xs">
-                  <span className="text-ink font-medium">Speech Shimmer (dB)</span>
+                  <span className="text-[#082827] font-medium">Speech Shimmer (dB)</span>
                   <span className="font-mono text-quantum font-semibold">{values.speech_shimmer_db.toFixed(2)} dB</span>
                 </div>
                 <input
@@ -487,7 +487,7 @@ export default function NeurologicalStudioPage() {
               {/* Patient Age */}
               <div className="space-y-1">
                 <div className="flex justify-between text-xs">
-                  <span className="text-ink font-medium">Patient Age</span>
+                  <span className="text-[#082827] font-medium">Patient Age</span>
                   <span className="font-mono text-quantum font-semibold">{values.age} yrs</span>
                 </div>
                 <input
@@ -529,10 +529,10 @@ export default function NeurologicalStudioPage() {
         {/* Telemetry & Results Column */}
         <div className="lg:col-span-5 space-y-4">
           {telemetry ? (
-            <div className="rounded-2xl border border-hairline bg-parchment p-5 sm:p-6 space-y-5 shadow-xs">
+            <div className="rounded-2xl border border-[#DFEBE8] bg-white p-5 sm:p-6 space-y-5 shadow-xs">
               {/* Header Badge */}
-              <div className="flex items-center justify-between border-b border-hairline pb-3">
-                <span className="text-[11px] font-mono text-ink-soft uppercase tracking-wider">
+              <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-3">
+                <span className="text-[11px] font-mono text-[#5A7470] uppercase tracking-wider">
                   Diagnostic Telemetry
                 </span>
                 <span
@@ -550,23 +550,23 @@ export default function NeurologicalStudioPage() {
 
               {/* Diagnosis Callout */}
               <div className="space-y-1">
-                <span className="text-[10px] font-mono uppercase text-ink-soft">
+                <span className="text-[10px] font-mono uppercase text-[#5A7470]">
                   Classification Assessment
                 </span>
-                <div className="text-lg font-serif font-medium text-ink">
+                <div className="text-lg font-sans font-bold text-[#082827]">
                   {telemetry.diagnosis}
                 </div>
               </div>
 
               {/* Composite Risk Score Gauge */}
-              <div className="p-4 rounded-xl bg-cream border border-hairline space-y-2">
+              <div className="p-4 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8] space-y-2">
                 <div className="flex items-baseline justify-between">
-                  <span className="text-xs font-semibold text-ink">
+                  <span className="text-xs font-semibold text-[#082827]">
                     Composite Risk Score
                   </span>
-                  <span className="text-2xl font-serif font-bold text-ink">
+                  <span className="text-2xl font-sans font-bold font-bold text-[#082827]">
                     {telemetry.risk_score}
-                    <span className="text-xs font-mono text-ink-soft font-normal"> / 100</span>
+                    <span className="text-xs font-mono text-[#5A7470] font-normal"> / 100</span>
                   </span>
                 </div>
                 <div className="w-full h-2 rounded-full bg-hairline overflow-hidden">
@@ -581,7 +581,7 @@ export default function NeurologicalStudioPage() {
                     style={{ width: `${Math.min(100, Math.max(5, telemetry.risk_score))}%` }}
                   />
                 </div>
-                <div className="flex justify-between text-[10px] font-mono text-ink-soft pt-0.5">
+                <div className="flex justify-between text-[10px] font-mono text-[#5A7470] pt-0.5">
                   <span>Confidence: {telemetry.confidence_percentage}%</span>
                   <span>Uncertainty: {telemetry.shannon_entropy_bits} bits</span>
                 </div>
@@ -589,25 +589,25 @@ export default function NeurologicalStudioPage() {
 
               {/* Dual-Engine Probabilities */}
               <div className="grid grid-cols-2 gap-2 text-xs">
-                <div className="p-3 rounded-lg border border-hairline bg-cream-deep/40 space-y-0.5">
-                  <span className="text-[10px] font-mono text-ink-soft block">
+                <div className="p-3 rounded-lg border border-[#DFEBE8] bg-[#F2F7F6]/40 space-y-0.5">
+                  <span className="text-[10px] font-mono text-[#5A7470] block">
                     Classical Ensemble
                   </span>
-                  <span className="font-mono text-sm font-semibold text-ink">
+                  <span className="font-mono text-sm font-semibold text-[#082827]">
                     {(telemetry.classical_probability * 100).toFixed(1)}%
                   </span>
-                  <span className="text-[10px] text-ink-soft block">
+                  <span className="text-[10px] text-[#5A7470] block">
                     {telemetry.latency.classical_ms} ms
                   </span>
                 </div>
-                <div className="p-3 rounded-lg border border-hairline bg-cream-deep/40 space-y-0.5">
-                  <span className="text-[10px] font-mono text-ink-soft block">
+                <div className="p-3 rounded-lg border border-[#DFEBE8] bg-[#F2F7F6]/40 space-y-0.5">
+                  <span className="text-[10px] font-mono text-[#5A7470] block">
                     4-Qubit VQC
                   </span>
                   <span className="font-mono text-sm font-semibold text-quantum">
                     {(telemetry.quantum_probability * 100).toFixed(1)}%
                   </span>
-                  <span className="text-[10px] text-ink-soft block">
+                  <span className="text-[10px] text-[#5A7470] block">
                     {telemetry.latency.quantum_ms} ms
                   </span>
                 </div>
@@ -616,17 +616,17 @@ export default function NeurologicalStudioPage() {
               {/* Quantum Observables */}
               {telemetry.quantum_observables_pauli_z && (
                 <div className="space-y-1.5 pt-1">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-ink-soft block">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#5A7470] block">
                     Pauli-Z Observables ⟨Z_i⟩
                   </span>
                   <div className="grid grid-cols-4 gap-1.5">
                     {telemetry.quantum_observables_pauli_z.map((z: number, i: number) => (
                       <div
                         key={i}
-                        className="p-1.5 rounded-md border border-hairline bg-cream text-center font-mono text-[10.5px]"
+                        className="p-1.5 rounded-md border border-[#DFEBE8] bg-[#F7FAF9] text-center font-mono text-[10.5px]"
                       >
-                        <span className="text-[9px] text-ink-soft block">q[{i}]</span>
-                        <span className={z >= 0 ? "text-ink font-semibold" : "text-amber-700 font-semibold"}>
+                        <span className="text-[9px] text-[#5A7470] block">q[{i}]</span>
+                        <span className={z >= 0 ? "text-[#082827] font-semibold" : "text-amber-700 font-semibold"}>
                           {z.toFixed(2)}
                         </span>
                       </div>
@@ -638,16 +638,16 @@ export default function NeurologicalStudioPage() {
               {/* Top Driving Factors */}
               {telemetry.feature_attributions && (
                 <div className="space-y-1.5 pt-1">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-ink-soft block">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#5A7470] block">
                     Key Biomarker Drivers
                   </span>
                   <div className="space-y-1">
                     {telemetry.feature_attributions.slice(0, 3).map((f: any) => (
                       <div
                         key={f.feature}
-                        className="flex items-center justify-between p-2 rounded-lg bg-cream border border-hairline/60 text-xs"
+                        className="flex items-center justify-between p-2 rounded-lg bg-[#F7FAF9] border border-[#DFEBE8]/60 text-xs"
                       >
-                        <span className="text-ink font-medium">{f.label}</span>
+                        <span className="text-[#082827] font-medium">{f.label}</span>
                         <span
                           className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded ${
                             f.direction === "elevating"
@@ -665,25 +665,25 @@ export default function NeurologicalStudioPage() {
               )}
 
               {/* Clinical Recommendation */}
-              <div className="p-3.5 rounded-xl border border-hairline bg-cream-deep/30 space-y-1">
-                <span className="text-[10px] font-mono uppercase text-ink-soft font-bold flex items-center gap-1">
+              <div className="p-3.5 rounded-xl border border-[#DFEBE8] bg-[#F2F7F6]/30 space-y-1">
+                <span className="text-[10px] font-mono uppercase text-[#5A7470] font-bold flex items-center gap-1">
                   <Info size={11} className="text-quantum" />
                   <span>Clinical Recommendation</span>
                 </span>
-                <p className="text-[11.5px] text-ink leading-relaxed">
+                <p className="text-[11.5px] text-[#082827] leading-relaxed">
                   {telemetry.clinical_recommendation}
                 </p>
               </div>
             </div>
           ) : (
-            <div className="rounded-2xl border border-hairline bg-parchment p-8 text-center space-y-3 shadow-xs">
-              <div className="w-12 h-12 rounded-xl bg-cream-deep text-quantum mx-auto flex items-center justify-center">
+            <div className="rounded-2xl border border-[#DFEBE8] bg-white p-8 text-center space-y-3 shadow-xs">
+              <div className="w-12 h-12 rounded-xl bg-[#F2F7F6] text-quantum mx-auto flex items-center justify-center">
                 <Activity size={24} />
               </div>
-              <h3 className="font-serif text-base text-ink font-medium">
+              <h3 className="font-sans font-bold text-base text-[#082827] font-medium">
                 Ready for Screening
               </h3>
-              <p className="text-xs text-ink-soft leading-relaxed max-w-xs mx-auto">
+              <p className="text-xs text-[#5A7470] leading-relaxed max-w-xs mx-auto">
                 Enter patient demographics, upload a clinical neuro report, or calibrate the 8 neuro-cognitive biomarker sliders, then click &ldquo;Screen Neuro-Cognitive Health&rdquo; to execute the 4-qubit quantum classifier.
               </p>
             </div>

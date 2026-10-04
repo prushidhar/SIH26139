@@ -43,7 +43,7 @@ function DisplayMath({ formula, isBot = true }: { formula: string; isBot?: boole
     <div
       className={`group relative my-2 px-3 py-2.5 rounded-xl overflow-x-auto text-center shadow-2xs transition-all ${
         isBot
-          ? "bg-cream-deep/60 border border-hairline/80 text-ink"
+          ? "bg-[#F2F7F6]/60 border border-[#DFEBE8]/80 text-[#082827]"
           : "bg-white/10 border border-white/20 text-white"
       }`}
     >
@@ -57,8 +57,8 @@ function DisplayMath({ formula, isBot = true }: { formula: string; isBot?: boole
         title="Copy LaTeX"
         className={`absolute top-1.5 right-1.5 p-1 rounded-md text-[10px] opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer flex items-center gap-1 ${
           isBot
-            ? "bg-cream/90 hover:bg-cream-deep text-ink-soft hover:text-ink border border-hairline/60"
-            : "bg-black/40 hover:bg-black/60 text-parchment border border-white/10"
+            ? "bg-[#F7FAF9]/90 hover:bg-[#F2F7F6] text-[#5A7470] hover:text-[#082827] border border-[#DFEBE8]/60"
+            : "bg-black/40 hover:bg-black/60 text-white border border-white/10"
         }`}
       >
         {copied ? (
@@ -172,7 +172,7 @@ function parseInline(text: string, isBot: boolean): React.ReactNode[] {
         <span
           key={`m-${match.index}`}
           className={`inline-block px-0.5 align-baseline ${
-            isBot ? "text-ink" : "text-white"
+            isBot ? "text-[#082827]" : "text-white"
           }`}
           dangerouslySetInnerHTML={{ __html: html }}
         />
@@ -186,7 +186,7 @@ function parseInline(text: string, isBot: boolean): React.ReactNode[] {
         <span
           key={`m-${match.index}`}
           className={`inline-block px-0.5 align-baseline ${
-            isBot ? "text-ink" : "text-white"
+            isBot ? "text-[#082827]" : "text-white"
           }`}
           dangerouslySetInnerHTML={{ __html: html }}
         />
@@ -200,7 +200,7 @@ function parseInline(text: string, isBot: boolean): React.ReactNode[] {
           key={`c-${match.index}`}
           className={`font-mono text-[11px] px-1 py-0.5 rounded font-medium ${
             isBot
-              ? "bg-cream-deep/90 text-ink border border-hairline/70"
+              ? "bg-[#F2F7F6]/90 text-[#082827] border border-[#DFEBE8]/70"
               : "bg-white/20 text-white border border-white/20"
           }`}
         >
@@ -214,7 +214,7 @@ function parseInline(text: string, isBot: boolean): React.ReactNode[] {
       nodes.push(
         <strong
           key={`bi-${match.index}`}
-          className={`font-bold italic ${isBot ? "text-ink" : "text-white"}`}
+          className={`font-bold italic ${isBot ? "text-[#082827]" : "text-white"}`}
         >
           {parseInline(content, isBot)}
         </strong>
@@ -226,7 +226,7 @@ function parseInline(text: string, isBot: boolean): React.ReactNode[] {
       nodes.push(
         <strong
           key={`b-${match.index}`}
-          className={`font-semibold ${isBot ? "text-ink drop-shadow-2xs" : "text-white"}`}
+          className={`font-semibold ${isBot ? "text-[#082827] drop-shadow-2xs" : "text-white"}`}
         >
           {parseInline(content, isBot)}
         </strong>
@@ -255,7 +255,7 @@ function parseInline(text: string, isBot: boolean): React.ReactNode[] {
             target={isExternal ? "_blank" : undefined}
             rel={isExternal ? "noopener noreferrer" : undefined}
             className={`underline underline-offset-2 font-medium hover:opacity-80 transition-opacity ${
-              isBot ? "text-quantum" : "text-parchment"
+              isBot ? "text-quantum" : "text-white"
             }`}
           >
             {linkText}
@@ -269,7 +269,7 @@ function parseInline(text: string, isBot: boolean): React.ReactNode[] {
       nodes.push(
         <strong
           key={`sb-${match.index}`}
-          className={`font-semibold ${isBot ? "text-ink" : "text-white"}`}
+          className={`font-semibold ${isBot ? "text-[#082827]" : "text-white"}`}
         >
           {content}
         </strong>
@@ -282,7 +282,7 @@ function parseInline(text: string, isBot: boolean): React.ReactNode[] {
         <code
           key={`sc-${match.index}`}
           className={`font-mono text-[11px] px-1 py-0.5 rounded font-medium ${
-            isBot ? "bg-cream-deep/90 text-ink" : "bg-white/20 text-white"
+            isBot ? "bg-[#F2F7F6]/90 text-[#082827]" : "bg-white/20 text-white"
           }`}
         >
           {content}
@@ -325,7 +325,7 @@ function MarkdownTable({ lines, isBot = true }: { lines: string[]; isBot?: boole
     <div
       className={`my-2 overflow-x-auto rounded-xl border text-[11px] ${
         isBot
-          ? "bg-cream/40 border-hairline/80 text-ink"
+          ? "bg-[#F7FAF9]/40 border-[#DFEBE8]/80 text-[#082827]"
           : "bg-white/5 border-white/20 text-white"
       }`}
     >
@@ -334,7 +334,7 @@ function MarkdownTable({ lines, isBot = true }: { lines: string[]; isBot?: boole
           <thead>
             <tr
               className={`border-b ${
-                isBot ? "bg-cream-deep/50 border-hairline" : "bg-white/10 border-white/20"
+                isBot ? "bg-[#F2F7F6]/50 border-[#DFEBE8]" : "bg-white/10 border-white/20"
               }`}
             >
               {headers.map((h, i) => (
@@ -351,7 +351,7 @@ function MarkdownTable({ lines, isBot = true }: { lines: string[]; isBot?: boole
               key={rIdx}
               className={
                 isBot
-                  ? "hover:bg-cream-deep/30 transition-colors"
+                  ? "hover:bg-[#F2F7F6]/30 transition-colors"
                   : "hover:bg-white/5 transition-colors"
               }
             >
@@ -496,7 +496,7 @@ export default function ChatMarkdownRenderer({
         <hr
           key={`hr-${i}`}
           className={`my-2 border-t ${
-            isBot ? "border-hairline/80" : "border-white/20"
+            isBot ? "border-[#DFEBE8]/80" : "border-white/20"
           }`}
         />
       );
@@ -516,8 +516,8 @@ export default function ChatMarkdownRenderer({
           elements.push(
             <h3
               key={`h1-${i}`}
-              className={`font-serif font-bold text-sm tracking-tight mt-2.5 mb-1 ${
-                isBot ? "text-ink" : "text-white"
+              className={`font-sans font-bold font-bold text-sm tracking-tight mt-2.5 mb-1 ${
+                isBot ? "text-[#082827]" : "text-white"
               }`}
             >
               {headingContent}
@@ -527,8 +527,8 @@ export default function ChatMarkdownRenderer({
           elements.push(
             <h4
               key={`h2-${i}`}
-              className={`font-serif font-bold text-[13px] mt-2 mb-0.5 ${
-                isBot ? "text-ink" : "text-white"
+              className={`font-sans font-bold font-bold text-[13px] mt-2 mb-0.5 ${
+                isBot ? "text-[#082827]" : "text-white"
               }`}
             >
               {headingContent}
@@ -538,8 +538,8 @@ export default function ChatMarkdownRenderer({
           elements.push(
             <h5
               key={`h3-${i}`}
-              className={`font-serif font-semibold text-xs mt-1.5 mb-0.5 ${
-                isBot ? "text-ink" : "text-white"
+              className={`font-sans font-bold text-xs mt-1.5 mb-0.5 ${
+                isBot ? "text-[#082827]" : "text-white"
               }`}
             >
               {headingContent}
@@ -550,7 +550,7 @@ export default function ChatMarkdownRenderer({
             <h6
               key={`h4-${i}`}
               className={`font-mono text-[11px] font-semibold uppercase tracking-wider mt-1 mb-0.5 ${
-                isBot ? "text-quantum" : "text-parchment"
+                isBot ? "text-quantum" : "text-white"
               }`}
             >
               {headingContent}
@@ -575,8 +575,8 @@ export default function ChatMarkdownRenderer({
           key={`bq-${i}`}
           className={`my-1.5 pl-2.5 py-1 border-l-2 rounded-r-lg italic text-[11.5px] ${
             isBot
-              ? "border-quantum/60 bg-cream/40 text-ink-soft"
-              : "border-parchment/60 bg-white/5 text-parchment/90"
+              ? "border-quantum/60 bg-[#F7FAF9]/40 text-[#5A7470]"
+              : "border-parchment/60 bg-white/5 text-white/90"
           }`}
         >
           {parseInline(quoteLines.join(" "), isBot)}
@@ -599,7 +599,7 @@ export default function ChatMarkdownRenderer({
             <div key={idx} className="flex items-start gap-1.5">
               <span
                 className={`text-[10px] mt-0.5 font-bold shrink-0 ${
-                  isBot ? "text-quantum" : "text-parchment"
+                  isBot ? "text-quantum" : "text-white"
                 }`}
               >
                 •

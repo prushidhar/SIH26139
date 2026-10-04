@@ -171,10 +171,10 @@ export default function AccountPage() {
               <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
               <span>PRACTITIONER IDENTITY &amp; TELEMETRY</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#082827] tracking-tight">
               Account &amp; System Settings
             </h1>
-            <p className="text-sm text-gray-600 max-w-2xl leading-relaxed">
+            <p className="text-sm text-[#5A7470] max-w-2xl leading-relaxed">
               Manage your clinical practitioner credentials, quantum hardware routing, session telemetry, and pipeline access.
             </p>
           </div>
@@ -189,8 +189,8 @@ export default function AccountPage() {
               <span>Profile and system preferences saved</span>
             </motion.div>
           ) : (
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-50 border border-slate-200 text-xs font-medium text-slate-600 self-start sm:self-center">
-              <ShieldCheck className="w-4 h-4 text-[#006766]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-xs font-semibold text-[#006766] self-start sm:self-center shadow-2xs">
+              <ShieldCheck className="w-4 h-4 text-[#00B489]" />
               <span>Verified Session</span>
             </div>
           )}

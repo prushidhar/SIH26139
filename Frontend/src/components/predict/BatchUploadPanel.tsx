@@ -258,19 +258,19 @@ export default function BatchUploadPanel({
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="rounded-2xl bg-white border border-hairline shadow-xs overflow-hidden"
+            className="rounded-2xl bg-white border border-[#DFEBE8] shadow-xs overflow-hidden"
           >
             {/* File Info Header */}
-            <div className="px-5 py-4 border-b border-hairline/70 flex items-center justify-between">
+            <div className="px-5 py-4 border-b border-[#DFEBE8]/70 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 {getFileIcon(selectedFiles[0]?.name || "file.csv")}
                 <div>
-                  <p className="text-sm font-semibold text-ink">
+                  <p className="text-sm font-semibold text-[#082827]">
                     {selectedFiles.length === 1
                       ? selectedFiles[0].name
                       : `${selectedFiles.length} files selected (${selectedFiles.slice(0, 2).map((f) => f.name).join(", ")}${selectedFiles.length > 2 ? `, +${selectedFiles.length - 2} more` : ""})`}
                   </p>
-                  <p className="text-[11px] text-ink-soft">
+                  <p className="text-[11px] text-[#5A7470]">
                     {parseResult.inputMode.toUpperCase()} •{" "}
                     {parseResult.totalRecords.toLocaleString()} records detected •{" "}
                     {parseResult.chunks.length} chunk
@@ -280,7 +280,7 @@ export default function BatchUploadPanel({
               </div>
               <button
                 onClick={resetUpload}
-                className="text-ink-soft hover:text-ink p-1.5 rounded-lg hover:bg-cream transition-colors cursor-pointer"
+                className="text-[#5A7470] hover:text-[#082827] p-1.5 rounded-lg hover:bg-[#F7FAF9] transition-colors cursor-pointer"
                 title="Remove and re-upload"
               >
                 <X size={16} />
@@ -341,8 +341,8 @@ export default function BatchUploadPanel({
             {/* Column Mappings Preview */}
             {parseResult.columnMappings &&
               parseResult.columnMappings.length > 0 && (
-                <div className="px-5 py-3 border-b border-hairline/50">
-                  <p className="text-[11px] font-semibold text-ink-soft uppercase tracking-wide mb-2">
+                <div className="px-5 py-3 border-b border-[#DFEBE8]/50">
+                  <p className="text-[11px] font-semibold text-[#5A7470] uppercase tracking-wide mb-2">
                     Column Mapping Preview
                   </p>
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
@@ -357,12 +357,12 @@ export default function BatchUploadPanel({
                             size={12}
                             className="text-emerald-500 shrink-0"
                           />
-                          <span className="text-ink-soft truncate">
+                          <span className="text-[#5A7470] truncate">
                             {m.sourceColumn}
                           </span>
                           <ChevronDown
                             size={10}
-                            className="text-ink-soft rotate-[-90deg]"
+                            className="text-[#5A7470] rotate-[-90deg]"
                           />
                           <span className="font-semibold text-emerald-700 truncate">
                             {m.canonicalField}
@@ -371,7 +371,7 @@ export default function BatchUploadPanel({
                       ))}
                     {parseResult.columnMappings.filter((m) => !m.canonicalField)
                       .length > 0 && (
-                      <div className="flex items-center gap-1.5 text-xs text-ink-soft px-2.5 py-1.5">
+                      <div className="flex items-center gap-1.5 text-xs text-[#5A7470] px-2.5 py-1.5">
                         +
                         {
                           parseResult.columnMappings.filter(
@@ -388,21 +388,21 @@ export default function BatchUploadPanel({
             {/* ZIP File Inventory */}
             {parseResult.fileInventory &&
               parseResult.fileInventory.length > 0 && (
-                <div className="px-5 py-3 border-b border-hairline/50">
-                  <p className="text-[11px] font-semibold text-ink-soft uppercase tracking-wide mb-2">
+                <div className="px-5 py-3 border-b border-[#DFEBE8]/50">
+                  <p className="text-[11px] font-semibold text-[#5A7470] uppercase tracking-wide mb-2">
                     Archive Contents ({parseResult.fileInventory.length} files)
                   </p>
                   <div className="flex flex-wrap gap-1.5">
                     {parseResult.fileInventory.slice(0, 20).map((f, i) => (
                       <span
                         key={i}
-                        className="text-[10px] px-2 py-0.5 rounded-full bg-cream border border-hairline text-ink-soft font-mono"
+                        className="text-[10px] px-2 py-0.5 rounded-full bg-[#F7FAF9] border border-[#DFEBE8] text-[#5A7470] font-mono"
                       >
                         {f.name}
                       </span>
                     ))}
                     {parseResult.fileInventory.length > 20 && (
-                      <span className="text-[10px] px-2 py-0.5 text-ink-soft">
+                      <span className="text-[10px] px-2 py-0.5 text-[#5A7470]">
                         +{parseResult.fileInventory.length - 20} more
                       </span>
                     )}
@@ -416,8 +416,8 @@ export default function BatchUploadPanel({
               !validationError &&
               parseResult.detectedDisease === diseaseTarget && (
                 <div className="px-5 py-4 flex items-center justify-between">
-                  <div className="text-xs text-ink-soft">
-                    <span className="font-semibold text-ink">
+                  <div className="text-xs text-[#5A7470]">
+                    <span className="font-semibold text-[#082827]">
                       {parseResult.totalRecords.toLocaleString()}
                     </span>{" "}
                     records ready •{" "}

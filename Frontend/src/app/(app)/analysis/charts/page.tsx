@@ -350,7 +350,7 @@ export default function DeepAnalyticsChartsPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.35, ease: "easeOut" }}
-      className="space-y-6 pb-20 w-full font-sans selection:bg-ink selection:text-parchment"
+      className="space-y-6 pb-20 w-full font-sans selection:bg-[#006766] selection:text-white"
     >
       {/* HEADER SECTION (Matching MedTech Workstation Design) */}
       <div className="rounded-3xl border border-[#DFEBE8] bg-gradient-to-br from-white via-[#FAFDFD] to-[#EBF7F5]/50 p-6 sm:p-7 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] relative overflow-hidden">
@@ -442,7 +442,7 @@ export default function DeepAnalyticsChartsPage() {
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="p-8 sm:p-12 rounded-3xl bg-white border border-hairline shadow-sm text-center max-w-3xl mx-auto space-y-5 my-8"
+          className="p-8 sm:p-12 rounded-3xl bg-white border border-[#DFEBE8] shadow-sm text-center max-w-3xl mx-auto space-y-5 my-8"
         >
           <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center mx-auto shadow-2xs">
             <Lock size={24} />
@@ -454,10 +454,10 @@ export default function DeepAnalyticsChartsPage() {
           </div>
 
           <div className="space-y-2">
-            <h2 className="font-serif text-2xl sm:text-3xl font-light text-ink">
+            <h2 className="font-sans font-bold text-2xl sm:text-3xl font-light text-[#082827]">
               Neurological Signal Model Is Not Accessible
             </h2>
-            <p className="text-xs sm:text-sm text-ink-soft leading-relaxed max-w-xl mx-auto font-light">
+            <p className="text-xs sm:text-sm text-[#5A7470] leading-relaxed max-w-xl mx-auto font-light">
               Cranial MRI voxel datasets are currently in offline cross-validation. This modality is intentionally
               locked until prospective multi-center verification is completed.
             </p>
@@ -467,7 +467,7 @@ export default function DeepAnalyticsChartsPage() {
             <button
               type="button"
               onClick={() => setSelectedModality("breast")}
-              className="px-6 py-2.5 rounded-xl bg-ink text-parchment text-xs font-medium hover:opacity-90 transition-all shadow-sm cursor-pointer"
+              className="px-6 py-2.5 rounded-xl bg-[#082827] text-white text-xs font-medium hover:opacity-90 transition-all shadow-sm cursor-pointer"
             >
               Switch to Active Breast Cancer Diagnostics
             </button>
@@ -481,7 +481,7 @@ export default function DeepAnalyticsChartsPage() {
       {selectedModality === "cardio" && (
         <div className="space-y-8">
           {/* Active Dataset Context Banner */}
-          <div className="p-5 rounded-2xl bg-white border border-hairline shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div className="p-5 rounded-2xl bg-white border border-[#DFEBE8] shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <span className="text-[10px] font-mono uppercase tracking-wider text-red-600 font-semibold">
@@ -490,14 +490,14 @@ export default function DeepAnalyticsChartsPage() {
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-red-50 text-red-800 border border-red-200 font-semibold">
                   4-Class ECG Classification
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-cream text-ink border border-hairline">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#F7FAF9] text-[#082827] border border-[#DFEBE8]">
                   8-Qubit PQC + ResNet-34 CNN
                 </span>
               </div>
-              <h2 className="font-serif text-lg font-medium text-ink">
+              <h2 className="font-sans font-bold text-lg font-medium text-[#082827]">
                 Cardiac ECG Dual-Engine SOTA Benchmarking Pipeline
               </h2>
-              <p className="text-xs text-ink-soft font-light max-w-2xl leading-relaxed">
+              <p className="text-xs text-[#5A7470] font-light max-w-2xl leading-relaxed">
                 12-lead ECG waveform analysis: Normal Sinus Rhythm, Myocardial Infarction (STEMI/NSTEMI),
                 History of MI (Prior Ischemic Scar), and Cardiac Arrhythmia mapped through dual Classical CNN
                 and Hybrid Quantum VQC engines.
@@ -548,23 +548,23 @@ export default function DeepAnalyticsChartsPage() {
           </div>
 
           {/* ══ PILLAR 1: DUAL-ENGINE ARCHITECTURE COMPARISON ══ */}
-          <div className="p-6 rounded-3xl bg-white border border-hairline shadow-xs space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
+          <div className="p-6 rounded-3xl bg-white border border-[#DFEBE8] shadow-xs space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#DFEBE8] pb-3">
               <div>
                 <span className="text-[10px] font-mono uppercase tracking-widest text-red-600 font-bold">
                   Pillar 1: Dual-Engine Architecture Comparison
                 </span>
-                <h3 className="font-serif text-lg font-medium text-ink">
+                <h3 className="font-sans font-bold text-lg font-medium text-[#082827]">
                   Quantum VQC vs Classical ML Head-to-Head
                 </h3>
               </div>
-              <span className="text-xs font-mono text-ink-soft">4-Class ECG Classification</span>
+              <span className="text-xs font-mono text-[#5A7470]">4-Class ECG Classification</span>
             </div>
 
             <div className="overflow-x-auto">
               <table className="w-full text-left font-mono text-xs">
                 <thead>
-                  <tr className="border-b border-hairline text-ink-soft text-[10px] uppercase">
+                  <tr className="border-b border-[#DFEBE8] text-[#5A7470] text-[10px] uppercase">
                     <th className="pb-3 font-semibold">Metric</th>
                     <th className="pb-3 font-semibold">Quantum VQC (8-Qubit)</th>
                     <th className="pb-3 font-semibold">Classical (ResNet-18)</th>
@@ -584,16 +584,16 @@ export default function DeepAnalyticsChartsPage() {
                     { metric: "Architecture", quantum: "8-Qubit PQC + Gated Fusion", classical: "ResNet-34 + CBAM + Lead Attention", ensemble: "Weighted Softmax", winner: "—" },
                   ].map((row, idx) => (
                     <tr key={idx} className={row.winner === "Quantum" ? "bg-teal-50/30" : row.winner === "Classical" ? "bg-blue-50/30" : ""}>
-                      <td className="py-3 text-ink font-sans font-medium">{row.metric}</td>
+                      <td className="py-3 text-[#082827] font-sans font-medium">{row.metric}</td>
                       <td className="py-3 text-teal-800 font-bold">{row.quantum}</td>
                       <td className="py-3 text-blue-700">{row.classical}</td>
-                      <td className="py-3 text-ink font-bold">{row.ensemble}</td>
+                      <td className="py-3 text-[#082827] font-bold">{row.ensemble}</td>
                       <td className="py-3">
                         <span className={`text-[9px] font-mono px-2 py-0.5 rounded font-semibold ${
                           row.winner === "Quantum" ? "bg-teal-100 text-teal-900 border border-teal-300"
                           : row.winner === "Classical" ? "bg-blue-100 text-blue-900 border border-blue-300"
                           : row.winner === "Ensemble" ? "bg-emerald-100 text-emerald-900 border border-emerald-300"
-                          : "bg-cream text-ink-soft border border-hairline"
+                          : "bg-[#F7FAF9] text-[#5A7470] border border-[#DFEBE8]"
                         }`}>
                           {row.winner}
                         </span>
@@ -607,16 +607,16 @@ export default function DeepAnalyticsChartsPage() {
 
           {/* ══ PILLAR 2: QUANTUM CIRCUIT ARCHITECTURE VISUALIZATION ══ */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div className="lg:col-span-7 p-6 rounded-3xl bg-white border border-hairline shadow-xs space-y-4">
-              <div className="flex items-center justify-between border-b border-hairline pb-2.5">
+            <div className="lg:col-span-7 p-6 rounded-3xl bg-white border border-[#DFEBE8] shadow-xs space-y-4">
+              <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-2.5">
                 <div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
-                    <h3 className="font-serif text-base font-medium text-ink">
+                    <h3 className="font-sans font-bold text-base font-medium text-[#082827]">
                       Cardiac Quantum Circuit: 8-Qubit PQC Architecture
                     </h3>
                   </div>
-                  <p className="text-[11px] text-ink-soft">
+                  <p className="text-[11px] text-[#5A7470]">
                     Quantum Engine: AngleEmbedding → StronglyEntanglingLayers (3 Layers) → Bilinear Gated Fusion
                   </p>
                 </div>
@@ -659,14 +659,14 @@ export default function DeepAnalyticsChartsPage() {
             </div>
 
             {/* Classical CNN Architecture */}
-            <div className="lg:col-span-5 p-6 rounded-3xl bg-white border border-hairline shadow-xs space-y-4 flex flex-col justify-between">
+            <div className="lg:col-span-5 p-6 rounded-3xl bg-white border border-[#DFEBE8] shadow-xs space-y-4 flex flex-col justify-between">
               <div>
-                <div className="flex items-center justify-between border-b border-hairline pb-2.5">
+                <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-2.5">
                   <div>
-                    <h3 className="font-serif text-base font-medium text-ink">
+                    <h3 className="font-sans font-bold text-base font-medium text-[#082827]">
                       Classical ResNet Architecture
                     </h3>
-                    <p className="text-[11px] text-ink-soft">
+                    <p className="text-[11px] text-[#5A7470]">
                       ResNet-18 + Multi-Scale Dilated Conv + CBAM + Lead Attention
                     </p>
                   </div>
@@ -682,10 +682,10 @@ export default function DeepAnalyticsChartsPage() {
                     { layer: "Lead Attention Pooling", detail: "12-Lead Soft Attention + Concat", params: "24K" },
                     { layer: "FC Classifier", detail: "1024d → 4-class Softmax", params: "4.1K" },
                   ].map((item, i) => (
-                    <div key={i} className="p-3 rounded-xl bg-cream/40 border border-hairline flex items-center justify-between text-xs">
+                    <div key={i} className="p-3 rounded-xl bg-[#F7FAF9]/40 border border-[#DFEBE8] flex items-center justify-between text-xs">
                       <div>
-                        <span className="font-semibold text-ink block">{item.layer}</span>
-                        <span className="text-[10px] text-ink-soft">{item.detail}</span>
+                        <span className="font-semibold text-[#082827] block">{item.layer}</span>
+                        <span className="text-[10px] text-[#5A7470]">{item.detail}</span>
                       </div>
                       <span className="font-mono text-[10px] font-bold text-blue-700 shrink-0">{item.params}</span>
                     </div>
@@ -701,16 +701,16 @@ export default function DeepAnalyticsChartsPage() {
           </div>
 
           {/* ══ PILLAR 3: 4-CLASS CONFUSION MATRIX ══ */}
-          <div className="p-6 rounded-3xl bg-white border border-hairline shadow-xs space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
+          <div className="p-6 rounded-3xl bg-white border border-[#DFEBE8] shadow-xs space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#DFEBE8] pb-3">
               <div>
                 <span className="text-[10px] font-mono uppercase tracking-widest text-red-600 font-bold">
                   Pillar 2: Diagnostic Performance
                 </span>
-                <h3 className="font-serif text-lg font-medium text-ink">
+                <h3 className="font-sans font-bold text-lg font-medium text-[#082827]">
                   4-Class ECG Confusion Matrix (Ensemble)
                 </h3>
-                <p className="text-xs text-ink-soft font-light">
+                <p className="text-xs text-[#5A7470] font-light">
                   Evaluated on held-out PTB-XL clinical ECG test partition
                 </p>
               </div>
@@ -719,12 +719,12 @@ export default function DeepAnalyticsChartsPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-center font-mono text-xs">
                 <thead>
-                  <tr className="border-b border-hairline">
-                    <th className="pb-2 text-left text-ink-soft text-[10px] uppercase font-semibold">Predicted ↓ / True →</th>
-                    <th className="pb-2 text-[10px] uppercase font-semibold text-ink-soft">Normal</th>
-                    <th className="pb-2 text-[10px] uppercase font-semibold text-ink-soft">MI</th>
-                    <th className="pb-2 text-[10px] uppercase font-semibold text-ink-soft">History MI</th>
-                    <th className="pb-2 text-[10px] uppercase font-semibold text-ink-soft">Arrhythmia</th>
+                  <tr className="border-b border-[#DFEBE8]">
+                    <th className="pb-2 text-left text-[#5A7470] text-[10px] uppercase font-semibold">Predicted ↓ / True →</th>
+                    <th className="pb-2 text-[10px] uppercase font-semibold text-[#5A7470]">Normal</th>
+                    <th className="pb-2 text-[10px] uppercase font-semibold text-[#5A7470]">MI</th>
+                    <th className="pb-2 text-[10px] uppercase font-semibold text-[#5A7470]">History MI</th>
+                    <th className="pb-2 text-[10px] uppercase font-semibold text-[#5A7470]">Arrhythmia</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-hairline">
@@ -735,7 +735,7 @@ export default function DeepAnalyticsChartsPage() {
                     { label: "Arrhythmia", vals: [3, 1, 2, 245],   diag: 3 },
                   ].map((row, rIdx) => (
                     <tr key={rIdx}>
-                      <td className="py-2.5 text-left font-semibold text-ink text-[11px]">{row.label}</td>
+                      <td className="py-2.5 text-left font-semibold text-[#082827] text-[11px]">{row.label}</td>
                       {row.vals.map((v, cIdx) => (
                         <td
                           key={cIdx}
@@ -744,7 +744,7 @@ export default function DeepAnalyticsChartsPage() {
                               ? "bg-emerald-100 text-emerald-900"
                               : v > 3
                                 ? "bg-red-50 text-red-700"
-                                : "text-ink-soft"
+                                : "text-[#5A7470]"
                           }`}
                         >
                           {v}
@@ -756,7 +756,7 @@ export default function DeepAnalyticsChartsPage() {
               </table>
             </div>
 
-            <p className="text-[11px] text-ink-soft font-light pt-2 border-t border-hairline leading-relaxed">
+            <p className="text-[11px] text-[#5A7470] font-light pt-2 border-t border-[#DFEBE8] leading-relaxed">
               * Diagonal values represent correct predictions. Off-diagonal values indicate misclassifications.
               MI sensitivity is critical — the ensemble correctly identifies 312/319 acute MI cases (97.8% recall).
             </p>
@@ -787,24 +787,24 @@ export default function DeepAnalyticsChartsPage() {
                 note: "Each engine produces independent probability surfaces and risk scores from different learned representations.",
               },
             ].map((eff, i) => (
-              <div key={i} className="p-4.5 rounded-2xl bg-white border border-hairline shadow-xs space-y-3">
-                <div className="flex items-center justify-between border-b border-hairline pb-2">
-                  <span className="font-serif text-xs font-semibold text-ink">{eff.title}</span>
-                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-white border border-hairline text-red-600">
+              <div key={i} className="p-4.5 rounded-2xl bg-white border border-[#DFEBE8] shadow-xs space-y-3">
+                <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-2">
+                  <span className="font-sans font-bold text-xs font-semibold text-[#082827]">{eff.title}</span>
+                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-white border border-[#DFEBE8] text-red-600">
                     {eff.winner}
                   </span>
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-                  <div className="p-2.5 rounded-xl bg-cream/40 border border-hairline">
+                  <div className="p-2.5 rounded-xl bg-[#F7FAF9]/40 border border-[#DFEBE8]">
                     <span className="text-[10px] text-blue-800 block font-medium">{eff.cLabel}</span>
-                    <strong className="text-ink text-sm">{eff.cVal}</strong>
+                    <strong className="text-[#082827] text-sm">{eff.cVal}</strong>
                   </div>
-                  <div className="p-2.5 rounded-xl bg-cream/40 border border-hairline">
+                  <div className="p-2.5 rounded-xl bg-[#F7FAF9]/40 border border-[#DFEBE8]">
                     <span className="text-[10px] text-teal-800 block font-medium">{eff.qLabel}</span>
                     <strong className="text-teal-900 text-sm">{eff.qVal}</strong>
                   </div>
                 </div>
-                <p className="text-[10.5px] text-ink-soft font-light leading-snug">{eff.note}</p>
+                <p className="text-[10.5px] text-[#5A7470] font-light leading-snug">{eff.note}</p>
               </div>
             ))}
           </div>
@@ -815,7 +815,7 @@ export default function DeepAnalyticsChartsPage() {
       {selectedModality === "breast" && (
         <div className="space-y-8">
           {/* Active Dataset Context Banner */}
-          <div className="p-5 rounded-2xl bg-white border border-hairline shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div className="p-5 rounded-2xl bg-white border border-[#DFEBE8] shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <span className="text-[10px] font-mono uppercase tracking-wider text-quantum font-semibold">
@@ -824,14 +824,14 @@ export default function DeepAnalyticsChartsPage() {
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold">
                   569 Verified Biopsy Samples
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-cream text-ink border border-hairline">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#F7FAF9] text-[#082827] border border-[#DFEBE8]">
                   8-Qubit Hilbert Mapping
                 </span>
               </div>
-              <h2 className="font-serif text-lg font-medium text-ink">
+              <h2 className="font-sans font-bold text-lg font-medium text-[#082827]">
                 Wisconsin Diagnostic Breast Cancer (WDBC) Cytopathology Pipeline
               </h2>
-              <p className="text-xs text-ink-soft font-light max-w-2xl leading-relaxed">
+              <p className="text-xs text-[#5A7470] font-light max-w-2xl leading-relaxed">
                 Cellular morphology analysis: cell radius, nuclear texture, perimeter, area, smoothness, compactness,
                 concave points, and symmetry mapped into 8-qubit variational quantum circuits.
               </p>
@@ -884,28 +884,28 @@ export default function DeepAnalyticsChartsPage() {
           {/* ==================================================================== */}
           {/* PILLAR 1: ACCURACY BENCHMARK (50-Trial Cross-Validation Matrix)       */}
           {/* ==================================================================== */}
-          <div className="p-6 rounded-3xl bg-white border border-hairline shadow-xs space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
+          <div className="p-6 rounded-3xl bg-white border border-[#DFEBE8] shadow-xs space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#DFEBE8] pb-3">
               <div>
                 <div className="flex items-center gap-2">
                   <span className="text-[10px] font-mono uppercase tracking-widest text-quantum font-bold">
                     Pillar 1: Diagnostic Accuracy
                   </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cream border border-hairline text-ink">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F7FAF9] border border-[#DFEBE8] text-[#082827]">
                     Stratified 5-Fold &bull; 10 Random Seeds
                   </span>
                 </div>
-                <h3 className="font-serif text-lg font-medium text-ink">
+                <h3 className="font-sans font-bold text-lg font-medium text-[#082827]">
                   50-Trial Full-Cohort Cross-Validation Leaderboard
                 </h3>
               </div>
-              <span className="text-xs font-mono text-ink-soft">Evaluated on WDBC Test Partitions</span>
+              <span className="text-xs font-mono text-[#5A7470]">Evaluated on WDBC Test Partitions</span>
             </div>
 
             <div className="overflow-x-auto">
               <table className="w-full text-left font-mono text-xs">
                 <thead>
-                  <tr className="border-b border-hairline text-ink-soft text-[10px] uppercase">
+                  <tr className="border-b border-[#DFEBE8] text-[#5A7470] text-[10px] uppercase">
                     <th className="pb-3 font-semibold">Model Architecture</th>
                     <th className="pb-3 font-semibold">Paradigm</th>
                     <th className="pb-3 font-semibold">Accuracy</th>
@@ -928,9 +928,9 @@ export default function DeepAnalyticsChartsPage() {
                             : ""
                       }
                     >
-                      <td className="py-3 text-ink flex items-center gap-2">
+                      <td className="py-3 text-[#082827] flex items-center gap-2">
                         <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: m.color }} />
-                        <span className="font-sans font-medium text-xs text-ink">{m.name}</span>
+                        <span className="font-sans font-medium text-xs text-[#082827]">{m.name}</span>
                         {idx === 0 && (
                           <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-amber-200/60 text-amber-900 ml-1">
                             Classical Win
@@ -942,18 +942,18 @@ export default function DeepAnalyticsChartsPage() {
                           </span>
                         )}
                       </td>
-                      <td className="py-3 uppercase text-[10px] font-semibold text-ink-soft">
+                      <td className="py-3 uppercase text-[10px] font-semibold text-[#5A7470]">
                         {m.type === "quantum" ? (
                           <span className="text-quantum font-bold">Hybrid QML</span>
                         ) : (
                           "Classical"
                         )}
                       </td>
-                      <td className="py-3 font-bold text-ink">{m.accuracy.toFixed(2)}%</td>
-                      <td className="py-3 text-ink-soft">{m.precision.toFixed(2)}%</td>
-                      <td className="py-3 text-ink-soft">{m.recall.toFixed(2)}%</td>
-                      <td className="py-3 text-ink-soft">{m.f1.toFixed(2)}%</td>
-                      <td className="py-3 text-ink-soft">{m.mcc.toFixed(4)}</td>
+                      <td className="py-3 font-bold text-[#082827]">{m.accuracy.toFixed(2)}%</td>
+                      <td className="py-3 text-[#5A7470]">{m.precision.toFixed(2)}%</td>
+                      <td className="py-3 text-[#5A7470]">{m.recall.toFixed(2)}%</td>
+                      <td className="py-3 text-[#5A7470]">{m.f1.toFixed(2)}%</td>
+                      <td className="py-3 text-[#5A7470]">{m.mcc.toFixed(4)}</td>
                       <td className="py-3 text-quantum font-bold">{m.aucRoc.toFixed(3)}</td>
                     </tr>
                   ))}
@@ -961,7 +961,7 @@ export default function DeepAnalyticsChartsPage() {
               </table>
             </div>
 
-            <p className="text-[11px] text-ink-soft font-light pt-2 border-t border-hairline leading-relaxed">
+            <p className="text-[11px] text-[#5A7470] font-light pt-2 border-t border-[#DFEBE8] leading-relaxed">
               * Exact metrics from 50 stratified trials. Notice that classical SVM excels when all 569 patient rows
               are present. To see where quantum computing creates true clinical value, review Pillar 3 below.
             </p>
@@ -972,14 +972,14 @@ export default function DeepAnalyticsChartsPage() {
           {/* ==================================================================== */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* PILLAR 2: COMPUTATIONAL EFFICIENCY (5 Cols) */}
-            <div className="lg:col-span-5 p-6 rounded-3xl bg-white border border-hairline shadow-xs space-y-5 flex flex-col justify-between">
+            <div className="lg:col-span-5 p-6 rounded-3xl bg-white border border-[#DFEBE8] shadow-xs space-y-5 flex flex-col justify-between">
               <div className="space-y-3">
-                <div className="border-b border-hairline pb-2.5">
+                <div className="border-b border-[#DFEBE8] pb-2.5">
                   <span className="text-[10px] font-mono uppercase tracking-widest text-quantum font-bold">
                     Pillar 2: Computational Efficiency
                   </span>
-                  <h3 className="font-serif text-lg font-medium text-ink">Hardware &amp; Latency Scaling</h3>
-                  <p className="text-xs text-ink-soft font-light">
+                  <h3 className="font-sans font-bold text-lg font-medium text-[#082827]">Hardware &amp; Latency Scaling</h3>
+                  <p className="text-xs text-[#5A7470] font-light">
                     Inference runtime, memory footprint, and QPU circuit depth
                   </p>
                 </div>
@@ -987,26 +987,26 @@ export default function DeepAnalyticsChartsPage() {
                 {/* Efficiency Cards */}
                 <div className="space-y-3">
                   {EFFICIENCY_METRICS.map((eff, i) => (
-                    <div key={i} className="p-3.5 rounded-2xl bg-cream/40 border border-hairline space-y-2">
+                    <div key={i} className="p-3.5 rounded-2xl bg-[#F7FAF9]/40 border border-[#DFEBE8] space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="font-serif text-xs font-semibold text-ink">{eff.title}</span>
-                        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-white border border-hairline text-quantum">
+                        <span className="font-sans font-bold text-xs font-semibold text-[#082827]">{eff.title}</span>
+                        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-white border border-[#DFEBE8] text-quantum">
                           {eff.winner}
                         </span>
                       </div>
 
                       <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-                        <div className="p-2 rounded-xl bg-white border border-hairline">
-                          <span className="text-[10px] text-ink-soft block">{eff.classicalLabel}</span>
-                          <strong className="text-ink text-sm">{eff.classicalVal}</strong>
+                        <div className="p-2 rounded-xl bg-white border border-[#DFEBE8]">
+                          <span className="text-[10px] text-[#5A7470] block">{eff.classicalLabel}</span>
+                          <strong className="text-[#082827] text-sm">{eff.classicalVal}</strong>
                         </div>
-                        <div className="p-2 rounded-xl bg-white border border-hairline">
+                        <div className="p-2 rounded-xl bg-white border border-[#DFEBE8]">
                           <span className="text-[10px] text-teal-800 block">{eff.quantumLabel}</span>
                           <strong className="text-quantum text-sm">{eff.quantumVal}</strong>
                         </div>
                       </div>
 
-                      <p className="text-[10.5px] text-ink-soft font-light leading-snug">{eff.advantageText}</p>
+                      <p className="text-[10.5px] text-[#5A7470] font-light leading-snug">{eff.advantageText}</p>
                     </div>
                   ))}
                 </div>
@@ -1020,17 +1020,17 @@ export default function DeepAnalyticsChartsPage() {
             </div>
 
             {/* PILLAR 3: GENERALIZATION PERFORMANCE (The Scarce-Data Curve) (7 Cols) */}
-            <div className="lg:col-span-7 p-6 rounded-3xl bg-white border border-hairline shadow-xs space-y-5 flex flex-col justify-between">
+            <div className="lg:col-span-7 p-6 rounded-3xl bg-white border border-[#DFEBE8] shadow-xs space-y-5 flex flex-col justify-between">
               <div className="space-y-2">
-                <div className="flex items-center justify-between border-b border-hairline pb-2.5">
+                <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-2.5">
                   <div>
                     <span className="text-[10px] font-mono uppercase tracking-widest text-quantum font-bold">
                       Pillar 3: Generalization Performance
                     </span>
-                    <h3 className="font-serif text-lg font-medium text-ink">
+                    <h3 className="font-sans font-bold text-lg font-medium text-[#082827]">
                       The Scarce-Data Quantum Advantage Curve
                     </h3>
-                    <p className="text-xs text-ink-soft font-light">
+                    <p className="text-xs text-[#5A7470] font-light">
                       Test Accuracy (%) as training sample drops from 100% to 10%
                     </p>
                   </div>
@@ -1122,7 +1122,7 @@ export default function DeepAnalyticsChartsPage() {
                           : `Classical Win: ${hoveredGeneralization.delta}`}
                       </span>
                     </div>
-                    <div className="grid grid-cols-2 gap-2 font-mono text-[11px] text-ink-soft">
+                    <div className="grid grid-cols-2 gap-2 font-mono text-[11px] text-[#5A7470]">
                       <div>Classical SVM: <strong className="text-blue-700">{hoveredGeneralization.classicalAcc}%</strong></div>
                       <div>Quantum VQC: <strong className="text-teal-700 font-bold">{hoveredGeneralization.quantumAcc}%</strong></div>
                     </div>
@@ -1131,12 +1131,12 @@ export default function DeepAnalyticsChartsPage() {
               </div>
 
               {/* Generalization Scientific Insight Box */}
-              <div className="p-3.5 rounded-2xl bg-cream/40 border border-hairline text-xs space-y-1">
-                <div className="flex items-center gap-1.5 font-semibold text-ink">
+              <div className="p-3.5 rounded-2xl bg-[#F7FAF9]/40 border border-[#DFEBE8] text-xs space-y-1">
+                <div className="flex items-center gap-1.5 font-semibold text-[#082827]">
                   <Flame size={14} className="text-amber-600" />
                   <span>Why Quantum Generalizes on Small Data:</span>
                 </div>
-                <p className="text-[11px] text-ink-soft font-light leading-relaxed">
+                <p className="text-[11px] text-[#5A7470] font-light leading-relaxed">
                   In small-cohort regimes (&le;15% sample), classical empirical risk minimization catastrophically overfits
                   the training subset, dropping to 75.8%. Quantum Hilbert space kernels map inputs into an exponentially vast
                   state space where regularized linear hyperplanes generalize accurately with only 48 rotation parameters
@@ -1151,13 +1151,13 @@ export default function DeepAnalyticsChartsPage() {
           {/* ==================================================================== */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Multi-Model ROC Overlay (7 cols) */}
-            <div className="lg:col-span-7 p-6 rounded-3xl bg-white border border-hairline shadow-xs space-y-4">
-              <div className="flex items-center justify-between border-b border-hairline pb-2.5">
+            <div className="lg:col-span-7 p-6 rounded-3xl bg-white border border-[#DFEBE8] shadow-xs space-y-4">
+              <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-2.5">
                 <div>
-                  <h3 className="font-serif text-base font-medium text-ink">
+                  <h3 className="font-sans font-bold text-base font-medium text-[#082827]">
                     Multi-Model Receiver Operating Characteristic (ROC)
                   </h3>
-                  <p className="text-[11px] text-ink-soft">
+                  <p className="text-[11px] text-[#5A7470]">
                     True Positive Rate vs. False Positive Rate on WDBC cytopathology
                   </p>
                 </div>
@@ -1207,25 +1207,25 @@ export default function DeepAnalyticsChartsPage() {
               </div>
 
               {/* ROC Score Legend */}
-              <div className="grid grid-cols-3 gap-2 pt-2 border-t border-hairline text-xs font-mono">
-                <div className="p-2 rounded-lg bg-cream/30 border border-hairline space-y-0.5">
+              <div className="grid grid-cols-3 gap-2 pt-2 border-t border-[#DFEBE8] text-xs font-mono">
+                <div className="p-2 rounded-lg bg-[#F7FAF9]/30 border border-[#DFEBE8] space-y-0.5">
                   <div className="flex items-center gap-1.5">
                     <span className="w-2.5 h-2.5 rounded-full bg-amber-600" />
-                    <span className="font-semibold text-[11px] text-ink">Classical SVM</span>
+                    <span className="font-semibold text-[11px] text-[#082827]">Classical SVM</span>
                   </div>
-                  <div className="text-[10.5px] text-ink-soft">AUC: <strong className="text-ink">0.994</strong></div>
+                  <div className="text-[10.5px] text-[#5A7470]">AUC: <strong className="text-[#082827]">0.994</strong></div>
                 </div>
-                <div className="p-2 rounded-lg bg-cream/30 border border-hairline space-y-0.5">
+                <div className="p-2 rounded-lg bg-[#F7FAF9]/30 border border-[#DFEBE8] space-y-0.5">
                   <div className="flex items-center gap-1.5">
                     <span className="w-2.5 h-2.5 rounded-full bg-blue-600" />
-                    <span className="font-semibold text-[11px] text-ink">XGBoost</span>
+                    <span className="font-semibold text-[11px] text-[#082827]">XGBoost</span>
                   </div>
-                  <div className="text-[10.5px] text-ink-soft">AUC: <strong className="text-ink">0.988</strong></div>
+                  <div className="text-[10.5px] text-[#5A7470]">AUC: <strong className="text-[#082827]">0.988</strong></div>
                 </div>
-                <div className="p-2 rounded-lg bg-cream/30 border border-hairline space-y-0.5">
+                <div className="p-2 rounded-lg bg-[#F7FAF9]/30 border border-[#DFEBE8] space-y-0.5">
                   <div className="flex items-center gap-1.5">
                     <span className="w-2.5 h-2.5 rounded-full bg-teal-600" />
-                    <span className="font-semibold text-[11px] text-ink">Quantum VQC</span>
+                    <span className="font-semibold text-[11px] text-[#082827]">Quantum VQC</span>
                   </div>
                   <div className="text-[10.5px] text-teal-800">AUC: <strong className="text-teal-900 font-bold">0.921</strong></div>
                 </div>
@@ -1233,11 +1233,11 @@ export default function DeepAnalyticsChartsPage() {
             </div>
 
             {/* Precision-Recall (PR) Curve (5 cols) */}
-            <div className="lg:col-span-5 p-6 rounded-3xl bg-white border border-hairline shadow-xs space-y-4">
-              <div className="flex items-center justify-between border-b border-hairline pb-2.5">
+            <div className="lg:col-span-5 p-6 rounded-3xl bg-white border border-[#DFEBE8] shadow-xs space-y-4">
+              <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-2.5">
                 <div>
-                  <h3 className="font-serif text-base font-medium text-ink">Precision-Recall Curve</h3>
-                  <p className="text-[11px] text-ink-soft">Sensitivity vs. False Alarm Rate</p>
+                  <h3 className="font-sans font-bold text-base font-medium text-[#082827]">Precision-Recall Curve</h3>
+                  <p className="text-[11px] text-[#5A7470]">Sensitivity vs. False Alarm Rate</p>
                 </div>
                 <HelpTooltip text="Crucial for oncology where false negatives risk missing early malignant lesions." />
               </div>
@@ -1272,10 +1272,10 @@ export default function DeepAnalyticsChartsPage() {
                 </svg>
               </div>
 
-              <div className="flex items-center justify-between pt-2 border-t border-hairline text-xs font-mono text-ink-soft">
+              <div className="flex items-center justify-between pt-2 border-t border-[#DFEBE8] text-xs font-mono text-[#5A7470]">
                 <div className="flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-amber-600" />
-                  <span className="text-ink font-medium">SVM (F1: 98.6%)</span>
+                  <span className="text-[#082827] font-medium">SVM (F1: 98.6%)</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-teal-600" />
@@ -1290,16 +1290,16 @@ export default function DeepAnalyticsChartsPage() {
           {/* ==================================================================== */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Quantum Gate Attribution Heatmap (7 cols) */}
-            <div className="lg:col-span-7 p-6 rounded-3xl bg-white border border-hairline shadow-xs space-y-4">
-              <div className="flex items-center justify-between border-b border-hairline pb-2.5">
+            <div className="lg:col-span-7 p-6 rounded-3xl bg-white border border-[#DFEBE8] shadow-xs space-y-4">
+              <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-2.5">
                 <div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-quantum" />
-                    <h3 className="font-serif text-base font-medium text-ink">
+                    <h3 className="font-sans font-bold text-base font-medium text-[#082827]">
                       QureExplain: Quantum Gate Attribution &amp; Entanglement Heatmap
                     </h3>
                   </div>
-                  <p className="text-[11px] text-ink-soft">
+                  <p className="text-[11px] text-[#5A7470]">
                     Attribution density: 8 WDBC cellular features mapped to 8 superconducting qubits
                   </p>
                 </div>
@@ -1310,7 +1310,7 @@ export default function DeepAnalyticsChartsPage() {
               <div className="overflow-x-auto pt-1">
                 <div className="min-w-[480px]">
                   {/* Gate Stage Headers */}
-                  <div className="grid grid-cols-7 gap-1.5 mb-2 text-[10px] font-mono text-ink-soft text-center font-medium">
+                  <div className="grid grid-cols-7 gap-1.5 mb-2 text-[10px] font-mono text-[#5A7470] text-center font-medium">
                     <div className="text-left pl-1">Qubit / Feature</div>
                     {GATE_LABELS.map((g, idx) => (
                       <div key={idx} className="truncate px-1" title={g}>
@@ -1323,7 +1323,7 @@ export default function DeepAnalyticsChartsPage() {
                   <div className="space-y-1.5">
                     {WDBC_QUBIT_FEATURES.map((q, qIdx) => (
                       <div key={qIdx} className="grid grid-cols-7 gap-1.5 items-center">
-                        <div className="text-[11px] font-mono truncate text-ink pr-1" title={`${q.qubit}: ${q.name}`}>
+                        <div className="text-[11px] font-mono truncate text-[#082827] pr-1" title={`${q.qubit}: ${q.name}`}>
                           <strong className="text-quantum">{q.qubit}</strong> {q.name.split(" ")[1] || q.name}
                         </div>
                         {GATE_MATRIX[qIdx].map((val, gIdx) => {
@@ -1355,31 +1355,31 @@ export default function DeepAnalyticsChartsPage() {
               </div>
 
               {/* Hover Status Bar */}
-              <div className="p-2.5 rounded-xl bg-cream/40 border border-hairline flex items-center justify-between text-xs font-mono">
+              <div className="p-2.5 rounded-xl bg-[#F7FAF9]/40 border border-[#DFEBE8] flex items-center justify-between text-xs font-mono">
                 {hoveredQubit ? (
-                  <div className="text-ink">
+                  <div className="text-[#082827]">
                     <strong>{WDBC_QUBIT_FEATURES[hoveredQubit.qubit].qubit} ({WDBC_QUBIT_FEATURES[hoveredQubit.qubit].name}):</strong>{" "}
                     Stage <em>{hoveredQubit.gate}</em> contributes{" "}
                     <span className="font-bold text-quantum">{Math.round(hoveredQubit.value * 100)}%</span> gradient impact.
                   </div>
                 ) : (
-                  <span className="text-ink-soft text-[11px]">
+                  <span className="text-[#5A7470] text-[11px]">
                     Hover over any matrix cell to inspect quantum gate attribution.
                   </span>
                 )}
-                <span className="text-[10px] text-ink-soft shrink-0">8 Qubits &bull; 48 Parameterized Gates</span>
+                <span className="text-[10px] text-[#5A7470] shrink-0">8 Qubits &bull; 48 Parameterized Gates</span>
               </div>
             </div>
 
             {/* Barren Plateau Gradient Variance Stability (5 cols) */}
-            <div className="lg:col-span-5 p-6 rounded-3xl bg-white border border-hairline shadow-xs space-y-4 flex flex-col justify-between">
+            <div className="lg:col-span-5 p-6 rounded-3xl bg-white border border-[#DFEBE8] shadow-xs space-y-4 flex flex-col justify-between">
               <div>
-                <div className="flex items-center justify-between border-b border-hairline pb-2.5">
+                <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-2.5">
                   <div>
-                    <h3 className="font-serif text-base font-medium text-ink">
+                    <h3 className="font-sans font-bold text-base font-medium text-[#082827]">
                       Barren Plateau Analysis: Gradient Variance
                     </h3>
-                    <p className="text-[11px] text-ink-soft">
+                    <p className="text-[11px] text-[#5A7470]">
                       Var[&part;L/&part;&theta;] across parameterized circuit depth (L = 1 to 12)
                     </p>
                   </div>
@@ -1436,21 +1436,21 @@ export default function DeepAnalyticsChartsPage() {
           {/* ==================================================================== */}
           {/* SECTION 4: 100-CIRCUIT QUANTUM ARCHITECTURE SEARCH (QAS) LEADERBOARD */}
           {/* ==================================================================== */}
-          <div className="p-6 rounded-3xl bg-white border border-hairline shadow-xs space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
+          <div className="p-6 rounded-3xl bg-white border border-[#DFEBE8] shadow-xs space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#DFEBE8] pb-3">
               <div>
                 <div className="flex items-center gap-2">
                   <span className="text-[10px] font-mono uppercase tracking-widest text-quantum font-bold">
                     Empirical Circuit Exploration
                   </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cream border border-hairline text-ink">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F7FAF9] border border-[#DFEBE8] text-[#082827]">
                     100 Topologies Evaluated
                   </span>
                 </div>
-                <h3 className="font-serif text-lg font-medium text-ink">
+                <h3 className="font-sans font-bold text-lg font-medium text-[#082827]">
                   Quantum Architecture Search (QAS) Empirical Leaderboard
                 </h3>
-                <p className="text-xs text-ink-soft font-light">
+                <p className="text-xs text-[#5A7470] font-light">
                   Systematic exploration across 5 ansatz families, layer depths (1 to 4), and entanglement topologies on WDBC.
                 </p>
               </div>
@@ -1462,7 +1462,7 @@ export default function DeepAnalyticsChartsPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left font-mono text-xs">
                 <thead>
-                  <tr className="border-b border-hairline text-ink-soft text-[10px] uppercase">
+                  <tr className="border-b border-[#DFEBE8] text-[#5A7470] text-[10px] uppercase">
                     <th className="pb-3 font-semibold">Rank</th>
                     <th className="pb-3 font-semibold">Ansatz Architecture</th>
                     <th className="pb-3 font-semibold">Layers</th>
@@ -1484,31 +1484,31 @@ export default function DeepAnalyticsChartsPage() {
                       className={`cursor-pointer transition-colors ${item.rank === 1
                           ? "bg-teal-50/50 font-semibold"
                           : selectedAnsatz === item.ansatz
-                            ? "bg-cream/60"
-                            : "hover:bg-cream/30"
+                            ? "bg-[#F7FAF9]/60"
+                            : "hover:bg-[#F7FAF9]/30"
                         }`}
                     >
-                      <td className="py-3 text-ink">
-                        <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold ${item.rank === 1 ? "bg-quantum text-white" : "bg-cream-deep text-ink-soft"
+                      <td className="py-3 text-[#082827]">
+                        <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold ${item.rank === 1 ? "bg-quantum text-white" : "bg-[#F2F7F6] text-[#5A7470]"
                           }`}>
                           {item.rank}
                         </span>
                       </td>
-                      <td className="py-3 text-ink font-sans font-medium">
+                      <td className="py-3 text-[#082827] font-sans font-medium">
                         {item.ansatz}
                       </td>
-                      <td className="py-3 text-ink-soft">{item.layers}</td>
-                      <td className="py-3 text-ink-soft">{item.qubits}Q</td>
-                      <td className="py-3 text-ink-soft">{item.topology}</td>
-                      <td className="py-3 text-ink">{item.gateCount}</td>
-                      <td className="py-3 text-ink">{item.cnotCount}</td>
+                      <td className="py-3 text-[#5A7470]">{item.layers}</td>
+                      <td className="py-3 text-[#5A7470]">{item.qubits}Q</td>
+                      <td className="py-3 text-[#5A7470]">{item.topology}</td>
+                      <td className="py-3 text-[#082827]">{item.gateCount}</td>
+                      <td className="py-3 text-[#082827]">{item.cnotCount}</td>
                       <td className="py-3 text-quantum font-bold">{item.valAuc.toFixed(4)}</td>
-                      <td className="py-3 text-ink font-bold">{item.accuracy.toFixed(2)}%</td>
-                      <td className="py-3 text-ink-soft">{item.latencyMs} ms</td>
+                      <td className="py-3 text-[#082827] font-bold">{item.accuracy.toFixed(2)}%</td>
+                      <td className="py-3 text-[#5A7470]">{item.latencyMs} ms</td>
                       <td className="py-3">
                         <span className={`text-[9px] font-mono px-2 py-0.5 rounded ${item.rank === 1
                             ? "bg-emerald-100 text-emerald-900 border border-emerald-300 font-bold"
-                            : "bg-cream text-ink-soft border border-hairline"
+                            : "bg-[#F7FAF9] text-[#5A7470] border border-[#DFEBE8]"
                           }`}>
                           {item.status}
                         </span>
@@ -1519,7 +1519,7 @@ export default function DeepAnalyticsChartsPage() {
               </table>
             </div>
 
-            <div className="p-3 rounded-xl bg-cream/40 border border-hairline text-xs text-ink-soft flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="p-3 rounded-xl bg-[#F7FAF9]/40 border border-[#DFEBE8] text-xs text-[#5A7470] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <p className="text-[11px] font-light">
                 * The optimal configuration utilizes <strong>StronglyEntanglingLayers</strong> with circular CX topology to achieve maximum Hilbert expressibility while maintaining a shallow two-layer depth (48 gates) to prevent thermal decoherence on physical QPUs.
               </p>
@@ -1533,8 +1533,8 @@ export default function DeepAnalyticsChartsPage() {
           {/* SECTION 5: INTERACTIVE HARDWARE NOISE DEGRADATION & ZNE ENGINE       */}
           {/* ==================================================================== */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div className="lg:col-span-12 p-6 rounded-3xl bg-white border border-hairline shadow-xs space-y-5">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-3">
+            <div className="lg:col-span-12 p-6 rounded-3xl bg-white border border-[#DFEBE8] shadow-xs space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#DFEBE8] pb-3">
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="text-[10px] font-mono uppercase tracking-widest text-quantum font-bold">
@@ -1544,19 +1544,19 @@ export default function DeepAnalyticsChartsPage() {
                       Noise Mitigation Protocol
                     </span>
                   </div>
-                  <h3 className="font-serif text-lg font-medium text-ink">
+                  <h3 className="font-sans font-bold text-lg font-medium text-[#082827]">
                     Interactive Quantum Hardware Noise Degradation &amp; Zero-Noise Extrapolation (ZNE)
                   </h3>
-                  <p className="text-xs text-ink-soft font-light">
+                  <p className="text-xs text-[#5A7470] font-light">
                     Drag the slider to inject physical depolarizing hardware noise &epsilon; and inspect real-time degradation versus error mitigation.
                   </p>
                 </div>
 
                 {/* Noise Rate Display */}
-                <div className="flex items-center gap-3 bg-cream/50 p-2.5 rounded-2xl border border-hairline self-start sm:self-center">
+                <div className="flex items-center gap-3 bg-[#F7FAF9]/50 p-2.5 rounded-2xl border border-[#DFEBE8] self-start sm:self-center">
                   <div className="text-right">
-                    <span className="text-[10px] font-mono uppercase block text-ink-soft">Depolarizing Noise (&epsilon;)</span>
-                    <strong className="font-mono text-base text-ink">{noiseRate.toFixed(1)}%</strong>
+                    <span className="text-[10px] font-mono uppercase block text-[#5A7470]">Depolarizing Noise (&epsilon;)</span>
+                    <strong className="font-mono text-base text-[#082827]">{noiseRate.toFixed(1)}%</strong>
                   </div>
                   <input
                     type="range"
@@ -1573,10 +1573,10 @@ export default function DeepAnalyticsChartsPage() {
               {/* Real-time Math Summary Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
                 {/* Classical Reference */}
-                <div className="p-3.5 rounded-2xl bg-cream/30 border border-hairline space-y-1">
-                  <span className="text-[10px] text-ink-soft uppercase block">Classical SVM Baseline</span>
-                  <div className="font-serif text-2xl font-bold text-amber-700">98.24%</div>
-                  <p className="text-[10.5px] text-ink-soft font-sans font-light">
+                <div className="p-3.5 rounded-2xl bg-[#F7FAF9]/30 border border-[#DFEBE8] space-y-1">
+                  <span className="text-[10px] text-[#5A7470] uppercase block">Classical SVM Baseline</span>
+                  <div className="font-sans font-bold text-2xl font-bold text-amber-700">98.24%</div>
+                  <p className="text-[10.5px] text-[#5A7470] font-sans font-light">
                     Classical silicon CPU is immune to quantum decoherence.
                   </p>
                 </div>
@@ -1586,7 +1586,7 @@ export default function DeepAnalyticsChartsPage() {
                   <span className="text-[10px] text-red-800 uppercase block font-semibold">
                     Raw QPU (Unmitigated)
                   </span>
-                  <div className="font-serif text-2xl font-bold text-red-800">
+                  <div className="font-sans font-bold text-2xl font-bold text-red-800">
                     {Math.max(50.0, 87.87 * Math.exp(-0.16 * noiseRate) - noiseRate * 1.8).toFixed(1)}%
                   </div>
                   <p className="text-[10.5px] text-red-700/80 font-sans font-light">
@@ -1599,7 +1599,7 @@ export default function DeepAnalyticsChartsPage() {
                   <span className="text-[10px] text-teal-900 uppercase block font-semibold">
                     QureSight ZNE Mitigated
                   </span>
-                  <div className="font-serif text-2xl font-bold text-teal-900">
+                  <div className="font-sans font-bold text-2xl font-bold text-teal-900">
                     {Math.max(76.0, 87.87 * Math.exp(-0.035 * noiseRate)).toFixed(1)}%
                   </div>
                   <p className="text-[10.5px] text-teal-800 font-sans font-light">
@@ -1660,12 +1660,12 @@ export default function DeepAnalyticsChartsPage() {
               </div>
 
               {/* Explanation of Noise Honesty */}
-              <div className="p-3.5 rounded-2xl bg-cream/40 border border-hairline text-xs space-y-1">
-                <div className="flex items-center gap-1.5 font-semibold text-ink">
+              <div className="p-3.5 rounded-2xl bg-[#F7FAF9]/40 border border-[#DFEBE8] text-xs space-y-1">
+                <div className="flex items-center gap-1.5 font-semibold text-[#082827]">
                   <ShieldCheck size={14} className="text-quantum" />
                   <span>Why Physical Hardware Noise Matters for SIH26139:</span>
                 </div>
-                <p className="text-[11px] text-ink-soft font-light leading-relaxed">
+                <p className="text-[11px] text-[#5A7470] font-light leading-relaxed">
                   Competitors frequently run simulations with zero noise and claim 99% accuracy on theoretical statevectors. QureSight models real physical depolarizing channels (&epsilon; = 0.5% to 2.5% on IBM Quantum Eagle/Brisbane) and incorporates Zero-Noise Extrapolation (ZNE) with Richardson polynomial curve fitting to recover true noiseless clinical expectations.
                 </p>
               </div>
@@ -1675,8 +1675,8 @@ export default function DeepAnalyticsChartsPage() {
           {/* ==================================================================== */}
           {/* SECTION 6: BORDERLINE DISCORDANCE & EARLY CLINICAL RESOLUTION        */}
           {/* ==================================================================== */}
-          <div className="p-6 rounded-3xl bg-white border border-hairline shadow-xs space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
+          <div className="p-6 rounded-3xl bg-white border border-[#DFEBE8] shadow-xs space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#DFEBE8] pb-3">
               <div>
                 <div className="flex items-center gap-2">
                   <span className="text-[10px] font-mono uppercase tracking-widest text-quantum font-bold">
@@ -1686,22 +1686,22 @@ export default function DeepAnalyticsChartsPage() {
                     Discordance Analysis
                   </span>
                 </div>
-                <h3 className="font-serif text-lg font-medium text-ink">
+                <h3 className="font-sans font-bold text-lg font-medium text-[#082827]">
                   Where Quantum Outperforms Classical: Resolving Ambiguous Biopsies
                 </h3>
-                <p className="text-xs text-ink-soft font-light">
+                <p className="text-xs text-[#5A7470] font-light">
                   Direct inspection of patient biopsy samples where classical models struggled or produced false negatives, but Quantum VQC detected malignant tissue.
                 </p>
               </div>
-              <span className="text-xs font-mono text-ink-soft">IAC Yokohama Cytopathology Tiers</span>
+              <span className="text-xs font-mono text-[#5A7470]">IAC Yokohama Cytopathology Tiers</span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {BORDERLINE_DISCORDANCE_CASES.map((item, idx) => (
-                <div key={idx} className="p-4 rounded-2xl bg-cream/40 border border-hairline space-y-3 flex flex-col justify-between">
+                <div key={idx} className="p-4 rounded-2xl bg-[#F7FAF9]/40 border border-[#DFEBE8] space-y-3 flex flex-col justify-between">
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between border-b border-hairline pb-2">
-                      <span className="font-mono text-xs font-bold text-ink">{item.caseId}</span>
+                    <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-2">
+                      <span className="font-mono text-xs font-bold text-[#082827]">{item.caseId}</span>
                       <span className={`text-[9px] font-mono px-2 py-0.5 rounded font-semibold ${item.winner.includes("Quantum")
                           ? "bg-emerald-100 text-emerald-900 border border-emerald-300"
                           : "bg-blue-100 text-blue-900 border border-blue-300"
@@ -1711,27 +1711,27 @@ export default function DeepAnalyticsChartsPage() {
                     </div>
 
                     <div className="space-y-1 text-[11px] font-mono">
-                      <div className="text-ink-soft text-[10px] truncate">{item.features}</div>
+                      <div className="text-[#5A7470] text-[10px] truncate">{item.features}</div>
                       <div className="flex justify-between pt-1">
-                        <span className="text-ink-soft">Classical SVM:</span>
+                        <span className="text-[#5A7470]">Classical SVM:</span>
                         <strong className="text-amber-800">{item.classicalPrediction}</strong>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-ink-soft">Quantum VQC:</span>
+                        <span className="text-[#5A7470]">Quantum VQC:</span>
                         <strong className="text-teal-800">{item.quantumPrediction}</strong>
                       </div>
-                      <div className="flex justify-between border-t border-hairline/60 pt-1">
-                        <span className="text-ink-soft">Biopsy Truth:</span>
-                        <strong className="text-ink">{item.groundTruth}</strong>
+                      <div className="flex justify-between border-t border-[#DFEBE8]/60 pt-1">
+                        <span className="text-[#5A7470]">Biopsy Truth:</span>
+                        <strong className="text-[#082827]">{item.groundTruth}</strong>
                       </div>
                     </div>
                   </div>
 
-                  <div className="p-2.5 rounded-xl bg-white border border-hairline space-y-1 text-[11px]">
+                  <div className="p-2.5 rounded-xl bg-white border border-[#DFEBE8] space-y-1 text-[11px]">
                     <span className="text-[10px] font-mono text-purple-800 font-semibold block">
                       {item.yokohamaTier}
                     </span>
-                    <p className="text-ink-soft font-light text-[10.5px] leading-snug">
+                    <p className="text-[#5A7470] font-light text-[10.5px] leading-snug">
                       {item.clinicalImpact}
                     </p>
                   </div>

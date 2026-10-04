@@ -177,13 +177,13 @@ export default function KeyRiskFactorsTab({
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-hairline shadow-xs overflow-hidden">
+    <div className="bg-white rounded-2xl border border-[#DFEBE8] shadow-xs overflow-hidden">
       {/* Header */}
-      <div className="p-5 border-b border-hairline/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-cream/15">
+      <div className="p-5 border-b border-[#DFEBE8]/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#F7FAF9]/15">
         <div className="space-y-0.5">
           <div className="flex items-center gap-2">
             <Activity size={16} className="text-quantum" />
-            <h3 className="text-sm font-bold text-ink">
+            <h3 className="text-sm font-bold text-[#082827]">
               Biopsy Cell Measurements &amp; Key Risk Factors ({activeEngineName})
             </h3>
             <HelpTooltip
@@ -195,7 +195,7 @@ export default function KeyRiskFactorsTab({
               }
             />
           </div>
-          <p className="text-xs text-ink-soft">
+          <p className="text-xs text-[#5A7470]">
             Features in <strong className="text-red-600">Red</strong> elevated the risk calculation, while features in <strong className="text-emerald-700">Green</strong> were healthy and reduced the risk score.
           </p>
         </div>
@@ -220,15 +220,15 @@ export default function KeyRiskFactorsTab({
               );
 
               return (
-                <div key={key} className="p-5 space-y-3 hover:bg-cream/5 transition-colors">
+                <div key={key} className="p-5 space-y-3 hover:bg-[#F7FAF9]/5 transition-colors">
                   {/* Title & Status Badges */}
                   <div className="flex items-start justify-between gap-2">
                     <div>
                       <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-bold text-ink">{ref.label}</span>
+                        <span className="text-xs font-bold text-[#082827]">{ref.label}</span>
                         <HelpTooltip title={ref.label} text={ref.tooltip} />
                       </div>
-                      <p className="text-[11px] text-ink-soft leading-tight mt-0.5">{ref.simpleDesc}</p>
+                      <p className="text-[11px] text-[#5A7470] leading-tight mt-0.5">{ref.simpleDesc}</p>
                     </div>
                     <div className="flex flex-col items-end gap-1 shrink-0">
                       <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${details.statusColor}`}>
@@ -258,10 +258,10 @@ export default function KeyRiskFactorsTab({
                       >
                         {val}
                       </span>
-                      <span className="text-xs font-mono text-ink-soft">{ref.unit}</span>
+                      <span className="text-xs font-mono text-[#5A7470]">{ref.unit}</span>
                     </div>
                     <div className="flex items-center gap-2 text-xs font-mono">
-                      <span className="text-ink-soft">Deviation:</span>
+                      <span className="text-[#5A7470]">Deviation:</span>
                       <strong className={details.pctDev > 0 ? "text-red-600" : "text-emerald-600"}>
                         {details.pctDev > 0 ? `+${details.pctDev.toFixed(1)}%` : `${details.pctDev.toFixed(1)}%`}
                       </strong>
@@ -270,7 +270,7 @@ export default function KeyRiskFactorsTab({
 
                   {/* Distribution Gauge */}
                   <div className="space-y-1">
-                    <div className="w-full bg-cream-deep h-1.5 rounded-full overflow-hidden flex">
+                    <div className="w-full bg-[#F2F7F6] h-1.5 rounded-full overflow-hidden flex">
                       <div
                         className={`h-full rounded-full transition-all ${
                           details.isSevere
@@ -282,7 +282,7 @@ export default function KeyRiskFactorsTab({
                         style={{ width: `${pctWidth}%` }}
                       />
                     </div>
-                    <div className="flex justify-between text-[10px] font-mono text-ink-muted">
+                    <div className="flex justify-between text-[10px] font-mono text-[#082827]-muted">
                       <span>Healthy: {ref.benignMed}</span>
                       <span>Limit: {ref.normalMax}</span>
                       <span>High-Risk: {ref.maligMed}</span>
@@ -306,15 +306,15 @@ export default function KeyRiskFactorsTab({
               );
 
               return (
-                <div key={key} className="p-5 space-y-3 hover:bg-cream/5 transition-colors">
+                <div key={key} className="p-5 space-y-3 hover:bg-[#F7FAF9]/5 transition-colors">
                   {/* Title & Status Badges */}
                   <div className="flex items-start justify-between gap-2">
                     <div>
                       <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-bold text-ink">{ref.label}</span>
+                        <span className="text-xs font-bold text-[#082827]">{ref.label}</span>
                         <HelpTooltip title={ref.label} text={ref.tooltip} />
                       </div>
-                      <p className="text-[11px] text-ink-soft leading-tight mt-0.5">{ref.simpleDesc}</p>
+                      <p className="text-[11px] text-[#5A7470] leading-tight mt-0.5">{ref.simpleDesc}</p>
                     </div>
                     <div className="flex flex-col items-end gap-1 shrink-0">
                       <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${details.statusColor}`}>
@@ -344,10 +344,10 @@ export default function KeyRiskFactorsTab({
                       >
                         {val}
                       </span>
-                      <span className="text-xs font-mono text-ink-soft">{ref.unit}</span>
+                      <span className="text-xs font-mono text-[#5A7470]">{ref.unit}</span>
                     </div>
                     <div className="flex items-center gap-2 text-xs font-mono">
-                      <span className="text-ink-soft">Deviation:</span>
+                      <span className="text-[#5A7470]">Deviation:</span>
                       <strong className={details.pctDev > 0 ? "text-red-600" : "text-emerald-600"}>
                         {details.pctDev > 0 ? `+${details.pctDev.toFixed(1)}%` : `${details.pctDev.toFixed(1)}%`}
                       </strong>
@@ -356,7 +356,7 @@ export default function KeyRiskFactorsTab({
 
                   {/* Distribution Gauge */}
                   <div className="space-y-1">
-                    <div className="w-full bg-cream-deep h-1.5 rounded-full overflow-hidden flex">
+                    <div className="w-full bg-[#F2F7F6] h-1.5 rounded-full overflow-hidden flex">
                       <div
                         className={`h-full rounded-full transition-all ${
                           details.isSevere
@@ -368,7 +368,7 @@ export default function KeyRiskFactorsTab({
                         style={{ width: `${pctWidth}%` }}
                       />
                     </div>
-                    <div className="flex justify-between text-[10px] font-mono text-ink-muted">
+                    <div className="flex justify-between text-[10px] font-mono text-[#082827]-muted">
                       <span>Healthy: {ref.benignMed}</span>
                       <span>Limit: {ref.normalMax}</span>
                       <span>High-Risk: {ref.maligMed}</span>

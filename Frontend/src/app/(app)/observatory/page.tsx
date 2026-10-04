@@ -293,12 +293,12 @@ export default function DatasetObservatoryPage() {
               onClick={() => setSelectedId(d.id)}
               className={`p-5 rounded-xl border cursor-pointer transition-all ${
                 isSelected
-                  ? "border-quantum ring-2 ring-quantum/30 bg-parchment shadow-xs"
-                  : "border-hairline bg-parchment hover:border-ink/30 hover:bg-cream-deep/30"
+                  ? "border-quantum ring-2 ring-quantum/30 bg-white shadow-xs"
+                  : "border-[#DFEBE8] bg-white hover:border-ink/30 hover:bg-[#F2F7F6]/30"
               }`}
             >
               <div className="flex items-center justify-between mb-2">
-                <span className="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-cream-deep border border-hairline text-ink">
+                <span className="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-[#F2F7F6] border border-[#DFEBE8] text-[#082827]">
                   {d.id}
                 </span>
                 <span className="inline-flex items-center gap-1 font-mono text-[11px] text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
@@ -307,14 +307,14 @@ export default function DatasetObservatoryPage() {
                 </span>
               </div>
 
-              <h4 className="text-base font-serif font-bold text-ink leading-snug">
+              <h4 className="text-base font-sans font-bold font-bold text-[#082827] leading-snug">
                 {d.name}
               </h4>
-              <p className="text-xs text-ink-soft mt-1 line-clamp-2">
+              <p className="text-xs text-[#5A7470] mt-1 line-clamp-2">
                 {d.description}
               </p>
 
-              <div className="mt-3 pt-3 border-t border-hairline/60 flex items-center justify-between text-xs font-mono text-ink-soft">
+              <div className="mt-3 pt-3 border-t border-[#DFEBE8]/60 flex items-center justify-between text-xs font-mono text-[#5A7470]">
                 <span>{d.sample_count} Samples • {d.feature_count} Features</span>
                 <span className="text-quantum font-semibold">Ready</span>
               </div>
@@ -325,7 +325,7 @@ export default function DatasetObservatoryPage() {
 
       {/* Detailed Health & Exploratory Statistics Panel */}
       {detailLoading ? (
-        <div className="p-12 text-center text-xs font-mono text-ink-soft">
+        <div className="p-12 text-center text-xs font-mono text-[#5A7470]">
           <RefreshCw className="w-5 h-5 animate-spin mx-auto text-quantum mb-2" />
           Loading dataset profiles...
         </div>

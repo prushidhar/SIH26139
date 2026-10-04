@@ -23,7 +23,7 @@ export default function HelpTooltip({ text, title, className = "" }: HelpTooltip
       <button
         type="button"
         aria-label="Help information"
-        className="w-4 h-4 rounded-full text-ink-soft hover:text-quantum hover:bg-quantum/10 flex items-center justify-center transition-colors cursor-pointer"
+        className="w-4 h-4 rounded-full text-[#5A7470] hover:text-quantum hover:bg-quantum/10 flex items-center justify-center transition-colors cursor-pointer"
       >
         <HelpCircle size={12} />
       </button>
@@ -35,10 +35,10 @@ export default function HelpTooltip({ text, title, className = "" }: HelpTooltip
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 4, scale: 0.95 }}
             transition={{ duration: 0.15 }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-ink text-parchment text-[11px] font-sans font-normal rounded-xl shadow-xl border border-hairline/30 z-[100] pointer-events-none leading-relaxed text-left"
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-[#082827] text-white text-[11px] font-sans font-normal rounded-xl shadow-xl border border-[#DFEBE8]/30 z-[100] pointer-events-none leading-relaxed text-left"
           >
             {title && <span className="font-bold block mb-1 text-quantum">{title}</span>}
-            <span className="text-parchment/95">{text}</span>
+            <span className="text-white/95">{text}</span>
             {/* Arrow */}
             <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-ink" />
           </motion.span>
