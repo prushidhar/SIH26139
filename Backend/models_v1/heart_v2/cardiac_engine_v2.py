@@ -86,7 +86,10 @@ class AdaptiveConcatPool2d(nn.Module):
 class CardiacFeatureExtractor(nn.Module):
     def __init__(self):
         super().__init__()
-        base = models.resnet34(weights=models.ResNet34_Weights.DEFAULT)
+        try:
+            base = models.resnet34(weights=models.ResNet34_Weights.DEFAULT)
+        except Exception:
+            base = models.resnet34(weights=None)
         self.conv1 = base.conv1
         self.bn1 = base.bn1
         self.relu = base.relu
@@ -574,6 +577,13 @@ class CardiacDualEngineV2:
                 "filename": filename,
                 "details": "Uploaded file failed clinical ECG domain guardrail checks."
             }
+
+        # Cap maximum resolution to prevent high-res memory spikes
+        h_orig, w_orig = oriented_bgr.shape[:2]
+        if w_orig > 1200 or h_orig > 800:
+            scale = min(1200.0 / w_orig, 800.0 / h_orig)
+            new_w, new_h = int(w_orig * scale), int(h_orig * scale)
+            oriented_bgr = cv2.resize(oriented_bgr, (new_w, new_h), interpolation=cv2.INTER_AREA)
 
         # 2. Preprocess: Grid suppression + Contrast + ImageNet Normalize
         oriented_rgb = cv2.cvtColor(oriented_bgr, cv2.COLOR_BGR2RGB)
