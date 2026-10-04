@@ -84,7 +84,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     badgeBg: "bg-pink-100/80",
     badgeText: "text-pink-800",
     group: "oncology",
-    image: "/images/disease-breast-cancer.jpg",
+    image: "/images/studios/breast-cytopathology-biopsy.jpg",
   },
   {
     key: "heart_tabular",
@@ -135,7 +135,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     badgeBg: "bg-cyan-100/80",
     badgeText: "text-cyan-800",
     group: "metabolic",
-    image: "/images/disease-kidney-neural.jpg",
+    image: "/images/studios/renal-glomerular-nephron.jpg",
   },
   {
     key: "cardiomegaly",
@@ -169,7 +169,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     badgeBg: "bg-emerald-100/80",
     badgeText: "text-emerald-800",
     group: "metabolic",
-    image: "/images/studios/liver-function-panel-analysis.png",
+    image: "/images/studios/hepatitis-c-fibrosis.jpg",
   },
   {
     key: "neurological",
