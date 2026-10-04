@@ -103,19 +103,14 @@ export function getUserData(): Record<string, unknown> | null {
 
 export function clearAuth(): void {
   if (typeof window === 'undefined') return;
-  const userEmail = localStorage.getItem(TOKEN_KEYS.USER_EMAIL);
-  if (userEmail) {
-    localStorage.removeItem(`quresight_screenings_${userEmail}`);
-    localStorage.removeItem(`quresight_notifications_${userEmail}`);
-  }
+  // Note: Patient screening records are immutable medical audit logs and are intentionally
+  // preserved across sessions unless explicitly cleared by the user in Settings.
   localStorage.removeItem(TOKEN_KEYS.ACCESS_TOKEN);
   localStorage.removeItem(TOKEN_KEYS.REFRESH_TOKEN);
   localStorage.removeItem(TOKEN_KEYS.USER_DATA);
   localStorage.removeItem(TOKEN_KEYS.USER_EMAIL);
   localStorage.removeItem(TOKEN_KEYS.USER_NAME);
   localStorage.removeItem(TOKEN_KEYS.USER_AVATAR);
-  localStorage.removeItem('quresight_prediction_history');
-  localStorage.removeItem('quresight_notifications');
   localStorage.removeItem('quresight_is_new_registration');
 }
 

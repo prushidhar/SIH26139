@@ -402,6 +402,8 @@ function saveBatchSession(session: BatchSession): void {
     // Keep max 50 batch sessions
     if (sessions.length > 50) sessions.length = 50;
     localStorage.setItem(key, JSON.stringify(sessions));
+    localStorage.setItem("quresight_all_batch_sessions", JSON.stringify(sessions));
+    localStorage.setItem("quresight_batch_sessions_default", JSON.stringify(sessions));
   } catch (err) {
     console.warn("[BatchService] Could not save batch session:", err);
   }
@@ -411,9 +413,19 @@ export function getBatchSessions(): BatchSession[] {
   if (typeof window === "undefined") return [];
   try {
     const email = localStorage.getItem("quresight_user_email") || "default";
-    const key = `quresight_batch_sessions_${email}`;
-    const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : [];
+    const candidateKeys = [
+      `quresight_batch_sessions_${email}`,
+      "quresight_all_batch_sessions",
+      "quresight_batch_sessions_default",
+    ];
+    for (const key of candidateKeys) {
+      const raw = localStorage.getItem(key);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    }
+    return [];
   } catch {
     return [];
   }

@@ -177,10 +177,15 @@ export default function HistoryPage() {
   const handleViewAnalysis = (pred: StoredPrediction, e: React.MouseEvent) => {
     e.stopPropagation();
     try {
+      const diseaseLower = (pred.diseaseType || pred.disease || "").toLowerCase();
+      const cohortLower = (pred.cohort || "").toLowerCase();
+
       const isCardiac =
-        (pred.diseaseType && (pred.diseaseType.toLowerCase().includes("cardiac") || pred.diseaseType.toLowerCase().includes("ecg"))) ||
-        (pred.disease && pred.disease.toLowerCase().includes("heart")) ||
-        (pred.cohort && pred.cohort.toLowerCase().includes("ecg"));
+        diseaseLower.includes("cardiac") ||
+        diseaseLower.includes("ecg") ||
+        diseaseLower.includes("heart attack") ||
+        cohortLower.includes("ecg") ||
+        /^(Normal|MI|PMI|HB)\(/.test(pred.patientName || "");
 
       if (isCardiac) {
         let fallbackImage = "/samples/ecg/sample-normal.jpg";
@@ -282,50 +287,90 @@ export default function HistoryPage() {
         return;
       }
 
-      // Default: Breast cancer cytopathology
-      const activePayload = {
-        patientInfo: {
-          name: pred.patientName,
-          patient_id: pred.id,
-          age: pred.patientAge || 55,
-          gender: pred.patientGender || "Female",
-        },
-        biomarkers: pred.inputFeatures && Object.keys(pred.inputFeatures).length > 0 ? pred.inputFeatures : {
-          radius_mean: 12.2,
-          texture_mean: 17.39,
-          perimeter_mean: 78.18,
-          area_mean: 458.7,
-          smoothness_mean: 0.0908,
-          compactness_mean: 0.0645,
-          concavity_mean: 0.0371,
-          concave_points_mean: 0.0234,
-        },
-        screeningResult: {
-          engine: "Quantum VQC",
-          prediction_label: pred.quantumPrediction,
-          confidence: pred.quantumConfidence,
-          composite_risk_score: pred.quantumRiskScore ?? 42.4,
-          dual_comparison: {
-            transfinite_1: {
-              prediction_label: pred.quantumPrediction,
-              risk_score: pred.quantumRiskScore ?? 42.4,
-              confidence: pred.quantumConfidence,
-              latency_ms: pred.quantumExecutionTimeMs ?? 700.4,
-            },
-            cx_01: {
-              prediction_label: pred.classicalPrediction,
-              risk_score: pred.classicalRiskScore ?? 44.1,
-              confidence: pred.classicalConfidence,
-              latency_ms: pred.classicalExecutionTimeMs ?? 104.4,
+      const isBreastCancer =
+        diseaseLower.includes("breast") ||
+        cohortLower.includes("wdbc") ||
+        cohortLower.includes("fine needle");
+
+      if (isBreastCancer) {
+        const activePayload = {
+          patientInfo: {
+            name: pred.patientName,
+            patient_id: pred.id,
+            age: pred.patientAge || 55,
+            gender: pred.patientGender || "Female",
+          },
+          biomarkers: pred.inputFeatures && Object.keys(pred.inputFeatures).length > 0 ? pred.inputFeatures : {
+            radius_mean: 12.2,
+            texture_mean: 17.39,
+            perimeter_mean: 78.18,
+            area_mean: 458.7,
+            smoothness_mean: 0.0908,
+            compactness_mean: 0.0645,
+            concavity_mean: 0.0371,
+            concave_points_mean: 0.0234,
+          },
+          screeningResult: {
+            engine: "Quantum VQC",
+            prediction_label: pred.quantumPrediction,
+            confidence: pred.quantumConfidence,
+            composite_risk_score: pred.quantumRiskScore ?? 42.4,
+            dual_comparison: {
+              transfinite_1: {
+                prediction_label: pred.quantumPrediction,
+                risk_score: pred.quantumRiskScore ?? 42.4,
+                confidence: pred.quantumConfidence,
+                latency_ms: pred.quantumExecutionTimeMs ?? 700.4,
+              },
+              cx_01: {
+                prediction_label: pred.classicalPrediction,
+                risk_score: pred.classicalRiskScore ?? 44.1,
+                confidence: pred.classicalConfidence,
+                latency_ms: pred.classicalExecutionTimeMs ?? 104.4,
+              },
             },
           },
-        },
-      };
-      sessionStorage.setItem("quresight_active_analysis", JSON.stringify(activePayload));
-      router.push("/predict/breast-cancer/analysis");
+        };
+        sessionStorage.setItem("quresight_active_analysis", JSON.stringify(activePayload));
+        router.push("/predict/breast-cancer/analysis");
+        return;
+      }
+
+      if (diseaseLower.includes("liver") || cohortLower.includes("ilpd")) {
+        router.push("/predict/liver-ilpd");
+        return;
+      }
+
+      if (diseaseLower.includes("kidney") || cohortLower.includes("kdigo") || cohortLower.includes("renal")) {
+        router.push("/predict/chronic-kidney");
+        return;
+      }
+
+      if (diseaseLower.includes("coronary") || diseaseLower.includes("cad") || cohortLower.includes("cleveland")) {
+        router.push("/predict/heart-tabular");
+        return;
+      }
+
+      if (diseaseLower.includes("hepatitis") || cohortLower.includes("hcv")) {
+        router.push("/predict/hepatitis-c");
+        return;
+      }
+
+      if (diseaseLower.includes("radiograph") || diseaseLower.includes("cardiomegaly") || cohortLower.includes("chexpert")) {
+        router.push("/predict/cardiomegaly");
+        return;
+      }
+
+      if (diseaseLower.includes("neuro") || cohortLower.includes("eeg") || cohortLower.includes("bonn")) {
+        router.push("/predict/neurological");
+        return;
+      }
+
+      // Default: Open detailed clinical modal
+      setSelectedCase(pred);
     } catch (err) {
       console.warn("Could not route to analysis:", err);
-      router.push("/history");
+      setSelectedCase(pred);
     }
   };
 
@@ -864,14 +909,24 @@ export default function HistoryPage() {
                     <p className="font-medium text-[#082827]">{selectedCase.patientGender || "Female"} • Age {selectedCase.patientAge || 55}</p>
                   </div>
                   <div>
-                    <span className="text-[10px] text-[#5A7470] uppercase font-mono font-semibold">Biopsy Cohort</span>
-                    <p className="font-medium text-[#082827]">{selectedCase.diseaseType}</p>
+                    <span className="text-[10px] text-[#5A7470] uppercase font-mono font-semibold">Clinical Cohort</span>
+                    <p className="font-medium text-[#082827]">{selectedCase.cohort || selectedCase.diseaseType}</p>
                   </div>
                   <div>
                     <span className="text-[10px] text-[#5A7470] uppercase font-mono font-semibold">Timestamp</span>
                     <p className="font-mono text-[#082827]">{selectedCase.timestamp}</p>
                   </div>
                 </div>
+
+                {/* Clinical Diagnostic Note if Available */}
+                {selectedCase.clinicalNote && (
+                  <div className="p-3 rounded-xl bg-[#F7FAF9] border border-[#DFEBE8] text-xs">
+                    <span className="text-[10px] text-[#5A7470] block font-mono uppercase font-semibold mb-1">
+                      Clinical Diagnostic Summary
+                    </span>
+                    <p className="text-[#082827] font-normal leading-relaxed">{selectedCase.clinicalNote}</p>
+                  </div>
+                )}
 
                 {/* Dual Model Results Grid */}
                 <div className="grid grid-cols-2 gap-3">
