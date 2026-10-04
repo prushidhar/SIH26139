@@ -74,14 +74,14 @@ export default function ToastContainer() {
   const getIcon = (type?: string) => {
     switch (type) {
       case "success":
-        return <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />;
+        return <CheckCircle2 size={16} className="text-[#00B489] shrink-0" />;
       case "quantum":
-        return <Sparkles size={16} className="text-quantum shrink-0" />;
+        return <Sparkles size={16} className="text-[#006766] shrink-0" />;
       case "warning":
-        return <AlertTriangle size={16} className="text-amber-600 shrink-0" />;
+        return <AlertTriangle size={16} className="text-amber-500 shrink-0" />;
       case "info":
       default:
-        return <Cpu size={16} className="text-quantum shrink-0" />;
+        return <Cpu size={16} className="text-[#006766] shrink-0" />;
     }
   };
 
@@ -95,16 +95,16 @@ export default function ToastContainer() {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 40, scale: 0.94 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="pointer-events-auto w-full bg-parchment/95 backdrop-blur-md rounded-2xl border border-hairline/90 shadow-[0_12px_40px_-10px_rgba(40,30,20,0.3)] p-3.5 pr-4 flex items-start gap-3 relative overflow-hidden"
+            className="pointer-events-auto w-full bg-white/95 backdrop-blur-xl rounded-2xl border border-[#DFEBE8] shadow-[0_12px_40px_-10px_rgba(0,103,102,0.18)] p-3.5 pr-4 flex items-start gap-3 relative overflow-hidden"
           >
             {/* Left Accent Bar */}
             <div
               className={`w-1 self-stretch rounded-full shrink-0 ${
                 toast.type === "success"
-                  ? "bg-emerald-500"
+                  ? "bg-[#00B489]"
                   : toast.type === "warning"
                   ? "bg-amber-500"
-                  : "bg-quantum"
+                  : "bg-[#006766]"
               }`}
             />
 
@@ -113,10 +113,10 @@ export default function ToastContainer() {
 
             {/* Body */}
             <div className="flex-1 min-w-0 pr-2">
-              <h4 className="font-serif text-xs font-semibold text-ink tracking-tight truncate">
+              <h4 className="font-sans text-xs font-bold text-[#082827] tracking-tight truncate">
                 {toast.title}
               </h4>
-              <p className="text-[11.5px] text-ink-soft leading-snug mt-0.5 break-words">
+              <p className="text-[11.5px] text-[#5A7470] leading-snug mt-0.5 break-words">
                 {toast.message}
               </p>
 
@@ -124,7 +124,7 @@ export default function ToastContainer() {
                 <Link
                   href={toast.actionUrl}
                   onClick={() => removeToast(toast.id)}
-                  className="inline-flex items-center gap-1 text-[10.5px] font-mono text-quantum hover:underline font-semibold mt-1.5 cursor-pointer"
+                  className="inline-flex items-center gap-1 text-[10.5px] font-mono text-[#006766] hover:underline font-semibold mt-1.5 cursor-pointer"
                 >
                   <span>{toast.actionLabel || "View Details"}</span>
                   <ArrowRight size={10} />
@@ -137,7 +137,7 @@ export default function ToastContainer() {
               type="button"
               onClick={() => removeToast(toast.id)}
               aria-label="Dismiss alert"
-              className="p-1 rounded-lg hover:bg-cream-deep/80 text-ink-soft hover:text-ink transition-colors cursor-pointer shrink-0 -mr-1 -mt-0.5 group"
+              className="p-1 rounded-lg hover:bg-[#E6F7F4] text-[#5A7470] hover:text-[#082827] transition-colors cursor-pointer shrink-0 -mr-1 -mt-0.5 group"
             >
               <X size={14} className="group-hover:rotate-90 transition-transform duration-150" />
             </button>

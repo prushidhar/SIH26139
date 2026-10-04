@@ -109,21 +109,21 @@ export default function ExperimentTimeline({ currentStageId }: ExperimentTimelin
   const pathname = usePathname();
 
   return (
-    <div className="rounded-xl border border-hairline bg-parchment p-5">
+    <div className="rounded-2xl border border-[#DFEBE8] bg-white p-6 shadow-2xs font-sans">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
         <div>
-          <span className="text-xs font-mono uppercase tracking-wider text-ink-soft">
+          <span className="text-[10px] font-mono uppercase font-bold tracking-widest text-[#5A7470]">
             Research Workflow Protocol
           </span>
-          <h3 className="text-base font-serif font-bold text-ink">9-Stage Scientific Progression</h3>
+          <h3 className="text-base font-bold text-[#082827]">9-Stage Scientific Progression</h3>
         </div>
-        <div className="text-xs font-mono text-ink-soft">
-          Phase 9 of 9 Grounded & Operational
+        <div className="text-xs font-mono text-[#006766] font-bold bg-[#E6F7F4] px-2.5 py-0.5 rounded-full border border-[#00B489]/25">
+          Phase 9 of 9 Grounded &amp; Operational
         </div>
       </div>
 
       {/* Progress pipeline pills */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-9 gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-9 gap-2.5">
         {WORKFLOW_STAGES.map((st, idx) => {
           const Icon = st.icon;
           const isActive = pathname === st.href || currentStageId === st.id;
@@ -132,23 +132,23 @@ export default function ExperimentTimeline({ currentStageId }: ExperimentTimelin
             <Link
               key={st.id}
               href={st.href}
-              className={`group flex flex-col justify-between p-3 rounded-lg border transition-all ${
+              className={`group flex flex-col justify-between p-3 rounded-xl border transition-all ${
                 isActive
-                  ? "bg-ink text-parchment border-ink shadow-sm"
-                  : "bg-cream-deep/40 text-ink border-hairline/80 hover:border-ink/40 hover:bg-cream-deep"
+                  ? "bg-gradient-to-r from-[#006766] to-[#0A4F46] text-white border-[#006766] shadow-sm"
+                  : "bg-[#FAFDFD] text-[#082827] border-[#DFEBE8] hover:border-[#006766]/30 hover:bg-white"
               }`}
             >
               <div className="flex items-center justify-between gap-1 mb-2">
                 <span
-                  className={`text-[10px] font-mono ${
-                    isActive ? "text-parchment/70" : "text-ink-soft"
+                  className={`text-[10px] font-mono font-bold ${
+                    isActive ? "text-white/80" : "text-[#5A7470]"
                   }`}
                 >
                   0{idx + 1}
                 </span>
                 <span
                   className={`inline-block w-1.5 h-1.5 rounded-full ${
-                    isActive ? "bg-quantum-soft" : "bg-emerald-500"
+                    isActive ? "bg-[#00B489]" : "bg-[#00B489]"
                   }`}
                 />
               </div>
@@ -157,12 +157,12 @@ export default function ExperimentTimeline({ currentStageId }: ExperimentTimelin
                 <div className="flex items-center gap-1.5">
                   <Icon
                     className={`w-3.5 h-3.5 ${
-                      isActive ? "text-quantum-soft" : "text-quantum"
+                      isActive ? "text-[#00B489]" : "text-[#006766]"
                     }`}
                   />
                   <div
-                    className={`text-xs font-semibold truncate ${
-                      isActive ? "text-parchment" : "text-ink"
+                    className={`text-xs font-bold truncate ${
+                      isActive ? "text-white" : "text-[#082827]"
                     }`}
                   >
                     {st.name}
@@ -170,7 +170,7 @@ export default function ExperimentTimeline({ currentStageId }: ExperimentTimelin
                 </div>
                 <p
                   className={`text-[11px] leading-tight line-clamp-2 ${
-                    isActive ? "text-parchment/80" : "text-ink-soft"
+                    isActive ? "text-white/80" : "text-[#5A7470]"
                   }`}
                 >
                   {st.details}

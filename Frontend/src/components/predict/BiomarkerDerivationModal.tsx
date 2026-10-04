@@ -44,7 +44,7 @@ export const DERIVATION_REGISTRY: Record<string, BiomarkerDerivationConfig> = {
     label: "Cell Size (Radius)",
     unit: "μm",
     defaultValue: 17.99,
-    cohortMedianExplanation: "Standard WDBC non-pathological reference radius (17.99 μm). Preserves mathematical neutrality in the 8-qubit Pauli-Z phase space.",
+    cohortMedianExplanation: "Standard clinical non-pathological reference radius (17.99 μm). Preserves normalized baseline feature scaling.",
     options: [
       {
         id: "from_area",
@@ -329,39 +329,47 @@ export default function BiomarkerDerivationModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm font-sans">
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 15 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 15 }}
-        className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-border bg-card p-5 sm:p-6 shadow-2xl space-y-4"
+        className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-[#DFEBE8] bg-white p-6 sm:p-7 shadow-2xl space-y-4"
       >
+        {/* Ambient Radial Accent */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[#00B489]/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
+
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-border pb-3">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400">
+        <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-4 relative z-10">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#E6F7F4] text-[#006766] border border-[#00B489]/25 shadow-xs">
               <Calculator className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-foreground">
-                Derive {config.label}
-              </h3>
-              <p className="text-[11px] text-muted-foreground">
-                Calculate with 100% mathematical accuracy using proxy measurements
+              <div className="flex items-center gap-2">
+                <h3 className="text-base font-bold text-[#082827] tracking-tight">
+                  Derive {config.label}
+                </h3>
+                <span className="text-[9.5px] font-mono uppercase tracking-wider text-[#006766] bg-[#E6F7F4] border border-[#00B489]/30 px-2 py-0.5 rounded-full font-bold">
+                  Clinical Math
+                </span>
+              </div>
+              <p className="text-xs text-[#5A7470] mt-0.5">
+                Calculate with verified clinical formulas using proxy measurements
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="rounded-lg p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground cursor-pointer"
+            className="rounded-xl p-1.5 text-[#5A7470] hover:bg-[#F2F7F6] hover:text-[#082827] border border-[#DFEBE8] transition-colors cursor-pointer"
           >
             <X className="h-4 w-4" />
           </button>
         </div>
 
         {/* Options Tabs */}
-        <div className="space-y-3">
-          <label className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+        <div className="space-y-3 relative z-10">
+          <label className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#5A7470]">
             Available Derivation Methods
           </label>
 
@@ -372,19 +380,19 @@ export default function BiomarkerDerivationModal({
                 <div
                   key={opt.id}
                   onClick={() => handleSelectOption(opt)}
-                  className={`p-3 rounded-xl border transition-all cursor-pointer ${
+                  className={`p-3.5 rounded-2xl border transition-all cursor-pointer ${
                     isSelected
-                      ? "border-purple-500/60 bg-purple-500/10 ring-1 ring-purple-500/30 text-foreground"
-                      : "border-border bg-muted/20 hover:bg-muted/40 text-muted-foreground hover:text-foreground"
+                      ? "border-[#006766] bg-[#E6F7F4]/50 ring-1 ring-[#006766]/30 text-[#082827] shadow-xs"
+                      : "border-[#DFEBE8] bg-[#FAFDFD] hover:bg-[#E6F7F4]/20 text-[#5A7470] hover:text-[#082827]"
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold">{opt.name}</span>
-                    <span className="text-[10px] font-mono font-bold text-purple-600 dark:text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded">
+                    <span className="text-xs font-bold text-[#082827]">{opt.name}</span>
+                    <span className="text-[10.5px] font-mono font-bold text-[#006766] bg-[#E6F7F4] border border-[#00B489]/30 px-2 py-0.5 rounded-lg">
                       {opt.formulaDisplay}
                     </span>
                   </div>
-                  <p className="text-[11px] text-muted-foreground mt-1 leading-snug">
+                  <p className="text-xs text-[#5A7470] mt-1 leading-snug">
                     {opt.description}
                   </p>
                 </div>
@@ -394,10 +402,10 @@ export default function BiomarkerDerivationModal({
 
           {/* Active Formula Input Form */}
           {activeOption && (
-            <div className="p-4 rounded-xl border border-border bg-muted/30 space-y-3">
-              <div className="text-xs font-medium text-foreground flex items-center justify-between">
+            <div className="p-4 rounded-2xl border border-[#DFEBE8] bg-[#F8FBFA] space-y-3 shadow-2xs">
+              <div className="text-xs font-semibold text-[#082827] flex items-center justify-between">
                 <span>Enter Proxy Readings:</span>
-                <span className="text-[10px] font-mono text-purple-600 dark:text-purple-400">
+                <span className="text-[10px] font-mono font-bold text-[#006766] bg-[#E6F7F4] px-2 py-0.5 rounded-md border border-[#00B489]/20">
                   {activeOption.formulaDisplay}
                 </span>
               </div>
@@ -405,7 +413,7 @@ export default function BiomarkerDerivationModal({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {activeOption.inputs.map((inp) => (
                   <div key={inp.key} className="space-y-1">
-                    <label className="text-[11px] text-muted-foreground font-medium block">
+                    <label className="text-[11px] text-[#5A7470] font-semibold block">
                       {inp.label} ({inp.unit})
                     </label>
                     <div className="flex items-center gap-1.5">
@@ -414,9 +422,9 @@ export default function BiomarkerDerivationModal({
                         step="any"
                         value={inputValues[inp.key] ?? inp.defaultValue ?? 0}
                         onChange={(e) => handleInputChange(inp.key, e.target.value)}
-                        className="w-full h-8 px-2.5 rounded-lg border border-border bg-card text-xs font-semibold font-mono text-foreground focus:border-purple-500 focus:outline-none"
+                        className="w-full h-9 px-3 rounded-xl border border-[#DFEBE8] bg-white text-xs font-semibold font-mono text-[#082827] focus:border-[#006766] focus:ring-1 focus:ring-[#006766] focus:outline-none shadow-xs"
                       />
-                      <span className="text-[11px] text-muted-foreground shrink-0 w-8">
+                      <span className="text-xs font-mono text-[#5A7470] shrink-0 w-8">
                         {inp.unit}
                       </span>
                     </div>
@@ -425,21 +433,21 @@ export default function BiomarkerDerivationModal({
               </div>
 
               {/* Live Computed Value Display */}
-              <div className="pt-2 flex items-center justify-between border-t border-border/60">
-                <span className="text-xs font-semibold text-foreground">
+              <div className="pt-2.5 flex items-center justify-between border-t border-[#DFEBE8]">
+                <span className="text-xs font-bold text-[#082827]">
                   Calculated {config.label}:
                 </span>
-                <div className="flex items-center gap-1.5 font-mono text-base font-bold text-purple-600 dark:text-purple-400">
-                  <Zap className="h-4 w-4" />
+                <div className="flex items-center gap-1.5 font-mono text-base font-bold text-[#006766]">
+                  <Zap className="h-4 w-4 text-[#00B489]" />
                   <span>{calculatedValue !== null ? calculatedValue : "--"}</span>
-                  <span className="text-xs font-normal text-muted-foreground">{config.unit}</span>
+                  <span className="text-xs font-normal text-[#5A7470]">{config.unit}</span>
                 </div>
               </div>
 
               <button
                 type="button"
                 onClick={handleApply}
-                className="w-full h-9 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-medium text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm"
+                className="w-full h-10 rounded-2xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white font-semibold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md shadow-[#006766]/20 active:scale-98"
               >
                 <Check className="h-3.5 w-3.5" />
                 <span>Apply Calculated Value ({calculatedValue} {config.unit})</span>
@@ -447,26 +455,26 @@ export default function BiomarkerDerivationModal({
             </div>
           )}
 
-          {/* Ultimate Fallback: Cohort Baseline */}
-          <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 p-3.5 space-y-2">
+          {/* Fallback: Cohort Baseline */}
+          <div className="rounded-2xl border border-amber-200/80 bg-amber-50/40 p-4 space-y-2">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1.5 text-xs font-semibold text-amber-700 dark:text-amber-400">
-                <AlertCircle className="h-4 w-4" />
-                <span>Don&apos;t have any proxy data either?</span>
+              <div className="flex items-center gap-1.5 text-xs font-bold text-amber-900">
+                <AlertCircle className="h-4 w-4 text-amber-600" />
+                <span>Need a clinically calibrated baseline?</span>
               </div>
-              <span className="text-[10px] font-mono text-amber-600 dark:text-amber-400 font-bold">
+              <span className="text-[10px] font-mono text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded-md font-bold border border-amber-200">
                 {config.defaultValue} {config.unit}
               </span>
             </div>
-            <p className="text-[11px] text-muted-foreground leading-relaxed">
+            <p className="text-xs text-[#5A7470] leading-relaxed">
               {config.cohortMedianExplanation}
             </p>
             <button
               type="button"
               onClick={handleApplyCohortMedian}
-              className="w-full h-8 rounded-lg border border-amber-500/30 bg-card hover:bg-amber-500/10 text-amber-700 dark:text-amber-300 font-medium text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-2xs"
+              className="w-full h-8 rounded-xl border border-amber-300 bg-white hover:bg-amber-100/40 text-amber-900 font-semibold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-2xs"
             >
-              <ShieldCheck className="h-3.5 w-3.5" />
+              <ShieldCheck className="h-3.5 w-3.5 text-amber-700" />
               <span>Apply Calibrated Cohort Baseline ({config.defaultValue} {config.unit})</span>
             </button>
           </div>
