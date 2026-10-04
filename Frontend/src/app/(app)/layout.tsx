@@ -66,7 +66,7 @@ const NAV_SECTIONS: NavSection[] = [
         description: "Specialty terminal launcher & triage overview",
       },
       {
-        label: "Patient Intake",
+        label: "Patient Intake Hub",
         href: "/predict",
         icon: Stethoscope,
         description: "Point-of-care patient intake & diagnostic screening",
@@ -80,13 +80,54 @@ const NAV_SECTIONS: NavSection[] = [
     ],
   },
   {
-    title: "Intelligence & Analytics",
+    title: "Intelligence & Research",
     items: [
       {
         label: "Performance Tracking",
         href: "/analysis",
         icon: Activity,
         description: "Live model accuracy & clinical concordance metrics",
+      },
+      {
+        label: "Model Arena",
+        href: "/model-arena",
+        icon: Swords,
+        description: "Head-to-head quantum and classical comparisons",
+      },
+      {
+        label: "Dataset Explorer",
+        href: "/observatory",
+        icon: Database,
+        description: "Clinical cohorts, distributions & biomarker panel",
+      },
+      {
+        label: "Performance Matrix",
+        href: "/evidence-matrix",
+        icon: TableProperties,
+        description: "Multidimensional evidence & validation telemetry",
+      },
+      {
+        label: "Model Benchmarks",
+        href: "/benchmarks",
+        icon: Gauge,
+        description: "Cross-validated runs & hardware execution telemetry",
+      },
+    ],
+  },
+  {
+    title: "Safety & Compute",
+    items: [
+      {
+        label: "Decision Console",
+        href: "/decision-console",
+        icon: Sliders,
+        description: "Adaptive confidence routing & safety thresholds",
+      },
+      {
+        label: "Compute & Hardware",
+        href: "/hardware",
+        icon: Cpu,
+        description: "Quantum processor status & simulator backends",
       },
     ],
   },

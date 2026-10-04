@@ -251,27 +251,28 @@ export default function PatientIntakePage() {
       {/* ========================================================================= */}
       {/* 1. CLINICAL INTAKE HEADER */}
       {/* ========================================================================= */}
-      <div className="rounded-3xl border border-[#DFEBE8] bg-white p-6 sm:p-8 shadow-[0_4px_20px_-8px_rgba(0,103,102,0.06)] space-y-6">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          <div className="space-y-1.5 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E6F4F1] text-[#006766] text-xs font-semibold">
-              <ClipboardList size={13} />
+      <div className="rounded-3xl border border-[#DFEBE8] bg-gradient-to-br from-white via-[#FAFDFD] to-[#EBF7F5]/50 p-6 sm:p-8 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] space-y-6 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#00B489]/10 via-[#006766]/5 to-transparent pointer-events-none rounded-full blur-3xl" />
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+          <div className="space-y-2 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] text-xs font-semibold shadow-2xs">
+              <ClipboardList size={13} className="text-[#00B489]" />
               <span>Point-of-Care Patient Intake</span>
             </div>
-            <h1 className="font-sans text-2xl sm:text-3xl font-bold tracking-tight text-[#082827]">
+            <h1 className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight text-[#082827]">
               Clinical Screening Terminals
             </h1>
-            <p className="text-xs sm:text-sm text-[#5A7470]">
+            <p className="text-xs sm:text-sm text-[#5A7470] font-normal leading-relaxed">
               Register patient intake demographics and select an active diagnostic studio for hybrid quantum-classical algorithmic evaluation.
             </p>
           </div>
 
           {/* Quick Demographics Intake Capsule */}
-          <div className="flex flex-wrap items-center gap-3 p-3.5 rounded-2xl bg-[#F7FAF9] border border-[#DFEBE8] text-xs">
+          <div className="flex flex-wrap items-center gap-3.5 p-4 rounded-2xl bg-white/90 border border-[#DFEBE8] shadow-2xs text-xs backdrop-blur-xs">
             <div className="space-y-1">
               <label className="text-[10px] font-semibold uppercase tracking-wider text-[#5A7470]">Case Identifier</label>
               <div className="flex items-center gap-1.5">
-                <span className="font-mono font-bold text-[#006766] bg-white px-2.5 py-1 rounded-lg border border-[#DFEBE8]">
+                <span className="font-mono font-bold text-[#006766] bg-[#F2F7F6] px-2.5 py-1 rounded-lg border border-[#DFEBE8]">
                   {patientId}
                 </span>
                 <button
@@ -455,11 +456,11 @@ export default function PatientIntakePage() {
           return (
             <div
               key={term.key}
-              className="group flex flex-col justify-between rounded-3xl border border-[#DFEBE8] bg-white overflow-hidden shadow-[0_4px_20px_-8px_rgba(0,103,102,0.06)] hover:shadow-[0_12px_28px_-6px_rgba(0,103,102,0.12)] hover:border-[#006766]/40 transition-all duration-300"
+              className="group flex flex-col justify-between rounded-3xl border border-[#DFEBE8] bg-white overflow-hidden shadow-[0_2px_16px_-4px_rgba(0,103,102,0.05)] hover:shadow-[0_16px_36px_-6px_rgba(0,103,102,0.16)] hover:border-[#00B489]/50 hover:-translate-y-1 transition-all duration-300"
             >
               <div>
                 {/* Clinical Problem Image Preview */}
-                <div className="relative h-44 w-full bg-[#082827]/5 overflow-hidden border-b border-[#DFEBE8]/60">
+                <div className="relative h-44 w-full bg-[#082827]/5 overflow-hidden border-b border-[#DFEBE8]">
                   <Image
                     src={term.image}
                     alt={term.title}
@@ -467,21 +468,21 @@ export default function PatientIntakePage() {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#082827]/70 via-[#082827]/15 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#082827]/85 via-black/30 to-transparent pointer-events-none" />
 
                   {/* Modality Pill on top-right of image */}
-                  <div className="absolute top-3 right-3">
-                    <span className="px-2.5 py-1 rounded-full text-[11px] font-bold tracking-tight bg-white/95 text-[#082827] shadow-sm backdrop-blur-xs">
+                  <div className="absolute top-3 right-3 pointer-events-none">
+                    <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-black/60 text-white border border-white/20 backdrop-blur-md">
                       {term.modalityBadge}
                     </span>
                   </div>
 
                   {/* Specialty Pill on bottom-left of image */}
-                  <div className="absolute bottom-3 left-3 flex items-center gap-1.5 text-white text-xs font-semibold drop-shadow-sm">
-                    <div className="p-1 rounded-md bg-[#006766]/90 backdrop-blur-xs text-white">
-                      <Icon size={12} />
+                  <div className="absolute bottom-3 left-3 flex items-center gap-1.5 text-white text-xs font-semibold drop-shadow-sm pointer-events-none">
+                    <div className="px-2 py-0.5 rounded-full bg-white/95 text-[#006766] border border-white/60 backdrop-blur-md text-[10px] font-mono font-bold flex items-center gap-1 shadow-xs">
+                      <Icon size={12} className="text-[#00B489]" />
+                      <span>{term.specialty}</span>
                     </div>
-                    <span>{term.specialty}</span>
                   </div>
                 </div>
 
@@ -491,8 +492,9 @@ export default function PatientIntakePage() {
                     <h3 className="font-sans text-base font-bold text-[#082827] group-hover:text-[#006766] transition-colors leading-snug">
                       {term.title}
                     </h3>
-                    <p className="text-xs font-medium text-[#006766] mt-0.5">
-                      {term.targetCondition}
+                    <p className="text-xs font-semibold text-[#006766] mt-0.5 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#00B489] animate-pulse shrink-0" />
+                      <span>{term.targetCondition}</span>
                     </p>
                   </div>
 
@@ -502,10 +504,10 @@ export default function PatientIntakePage() {
 
                   {/* Technical Provenance tags */}
                   <div className="flex flex-wrap items-center gap-1.5 pt-1 text-[11px]">
-                    <span className="px-2 py-0.5 rounded-md bg-[#F2F7F6] text-[#5A7470] font-mono">
+                    <span className="px-2 py-0.5 rounded-md bg-[#F2F7F6] text-[#006766] font-mono font-semibold border border-[#DFEBE8]">
                       {term.engine}
                     </span>
-                    <span className="px-2 py-0.5 rounded-md bg-[#F2F7F6] text-[#5A7470]">
+                    <span className="px-2 py-0.5 rounded-md bg-[#F2F7F6] text-[#5A7470] border border-[#DFEBE8]">
                       {term.dataset}
                     </span>
                   </div>
@@ -517,10 +519,10 @@ export default function PatientIntakePage() {
                 <button
                   type="button"
                   onClick={() => handleLaunchTerminal(term.route)}
-                  className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#E6F4F1] hover:bg-[#006766] text-[#006766] hover:text-white font-semibold text-xs transition-all duration-200 cursor-pointer shadow-xs group/btn"
+                  className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#F2F7F6] group-hover:bg-gradient-to-r group-hover:from-[#006766] group-hover:to-[#0A4F46] text-[#006766] group-hover:text-white font-semibold text-xs transition-all duration-200 cursor-pointer shadow-2xs group-hover:shadow-md group-hover:shadow-[#006766]/20 active:scale-98"
                 >
                   <span>Launch Diagnostic Studio</span>
-                  <ArrowRight size={14} className="group-hover/btn:translate-x-0.5 transition-transform" />
+                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
             </div>

@@ -59,6 +59,68 @@ export default function HistoryPage() {
     setBatchSessions(getBatchSessions());
   }, []);
 
+  const highRiskCount = predictions.filter((p) => p.riskLevel === "High").length;
+  const lowRiskCount = predictions.filter((p) => p.riskLevel === "Low").length;
+  const concordantCount = predictions.filter((p) => p.consensusStatus !== "Discordant").length;
+  const concordanceRate = predictions.length > 0 ? Math.round((concordantCount / predictions.length) * 100) : 100;
+
+  const handleExportAllCSV = () => {
+    if (predictions.length === 0) {
+      showToast({
+        title: "No Records",
+        message: "There are no screening records to export.",
+        type: "warning",
+      });
+      return;
+    }
+    const headers = [
+      "Case ID",
+      "Patient Name",
+      "Age",
+      "Gender",
+      "Clinical Specialization",
+      "Cohort",
+      "Quantum Prediction",
+      "Quantum Risk Score",
+      "Classical Prediction",
+      "Classical Risk Score",
+      "Risk Level",
+      "Consensus",
+      "Primary Risk Factor",
+      "Date",
+    ];
+    const rows = filteredPredictions.map((p) => [
+      `"${p.id}"`,
+      `"${p.patientName || "Patient"}"`,
+      p.patientAge || "",
+      `"${p.patientGender || ""}"`,
+      `"${p.disease || p.diseaseType || ""}"`,
+      `"${p.cohort || ""}"`,
+      `"${p.quantumPrediction || ""}"`,
+      p.quantumRiskScore ?? "",
+      `"${p.classicalPrediction || ""}"`,
+      p.classicalRiskScore ?? "",
+      `"${p.riskLevel || ""}"`,
+      `"${p.consensusStatus || ""}"`,
+      `"${p.topDriver || ""}"`,
+      `"${p.timestamp || ""}"`,
+    ]);
+    const csvContent = [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `QureSight_Clinical_Ledger_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast({
+      title: "Ledger Exported",
+      message: `Exported ${filteredPredictions.length} clinical records to CSV.`,
+      type: "quantum",
+    });
+  };
+
   const handleExportBatchPdf = async (session: BatchSession) => {
     setExportingBatchId(session.batchId);
     setBatchPdfProgress({ current: 0, total: session.successCount });
@@ -396,29 +458,92 @@ export default function HistoryPage() {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="space-y-4 w-full min-w-0 max-w-full pb-4"
+      className="space-y-5 w-full min-w-0 max-w-full pb-8"
     >
-      {/* Header with Non-Deletable Compliance Badge */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DFEBE8] pb-4">
-        <div>
-          <div className="flex items-center gap-1.5 mb-1">
-            <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
-            <span className="text-[11px] font-mono uppercase tracking-wider text-[#006766] font-bold">
-              Permanent Medical Records
-            </span>
+      {/* ── TOP HERO HEADER ── */}
+      <div className="w-full bg-white rounded-3xl border border-[#DFEBE8] p-5 sm:p-6 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.06)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-[#E6F7F4] via-transparent to-transparent pointer-events-none rounded-full blur-3xl opacity-70" />
+
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 relative z-10">
+          <div className="space-y-1">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-xs font-semibold text-[#006766]">
+              <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
+              <span>Permanent Medical Records · Certified Audit Log</span>
+            </div>
+            <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#082827] tracking-tight">
+              Patient Screening History
+            </h1>
+            <p className="text-xs sm:text-sm text-[#5A7470] font-normal leading-relaxed">
+              Certified immutable clinical ledger of dual-engine quantum and classical diagnostic evaluations.
+            </p>
           </div>
-          <h1 className="font-sans text-2xl sm:text-3xl font-bold text-[#082827] tracking-tight">
-            Patient Screening History
-          </h1>
-          <p className="text-xs text-[#5A7470] font-normal">
-            Immutable clinical audit log of multi-model patient screenings.
-          </p>
+
+          {/* Quick Action Navigation Buttons */}
+          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+            <button
+              type="button"
+              onClick={handleExportAllCSV}
+              className="px-3.5 py-2 rounded-xl bg-[#F7FAF9] hover:bg-[#E6F7F4] border border-[#DFEBE8] hover:border-[#006766]/40 text-[#082827] font-semibold text-xs transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs"
+              title="Download entire screening ledger as CSV"
+            >
+              <Download size={13} className="text-[#006766]" />
+              <span>Export Ledger (CSV)</span>
+            </button>
+            <Link
+              href="/predict"
+              className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#006766] to-[#0D4F46] hover:from-[#084E4D] hover:to-[#0A3D36] text-white font-semibold text-xs tracking-wider transition-all shadow-md shadow-[#006766]/20 flex items-center gap-1.5 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <Sparkles size={13} className="text-[#00B489]" />
+              <span>Start New Screening</span>
+            </Link>
+          </div>
         </div>
 
-        {/* Permanent Audit Trail Seal (Non-Deletable Record Lock) */}
-        <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30 text-xs font-mono font-bold shadow-2xs self-start sm:self-auto shrink-0 whitespace-nowrap">
-          <Lock size={13} className="text-[#006766] shrink-0" />
-          <span>Immutable Audit Log · Non-Deletable</span>
+        {/* ── INTELLIGENCE SUMMARY METRICS RIBBON ── */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 pt-5 mt-5 border-t border-[#DFEBE8]/80">
+          <div className="p-3.5 rounded-2xl bg-[#F7FAF9]/90 border border-[#DFEBE8]/70 space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-[#5A7470]">
+              <History size={14} className="text-[#006766]" />
+              <span>Certified Screenings</span>
+            </div>
+            <div className="font-sans text-xl font-bold text-[#082827]">
+              {predictions.length} Patients
+            </div>
+            <p className="text-[11px] text-[#5A7470]">Permanent historical records</p>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-red-50/70 border border-red-200/70 space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-red-700">
+              <AlertTriangle size={14} className="text-red-600" />
+              <span>High Risk Cases</span>
+            </div>
+            <div className="font-sans text-xl font-bold text-red-800">
+              {highRiskCount} ({predictions.length > 0 ? Math.round((highRiskCount / predictions.length) * 100) : 0}%)
+            </div>
+            <p className="text-[11px] text-red-600/80">Immediate clinical triage</p>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-emerald-50/70 border border-emerald-200/70 space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-700">
+              <ShieldCheck size={14} className="text-emerald-600" />
+              <span>Low Risk Cases</span>
+            </div>
+            <div className="font-sans text-xl font-bold text-emerald-800">
+              {lowRiskCount} ({predictions.length > 0 ? Math.round((lowRiskCount / predictions.length) * 100) : 0}%)
+            </div>
+            <p className="text-[11px] text-emerald-600/80">Physiological baseline</p>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-[#E6F7F4]/70 border border-[#00B489]/30 space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-[#006766]">
+              <Sparkles size={14} className="text-[#00B489]" />
+              <span>Algorithmic Concordance</span>
+            </div>
+            <div className="font-sans text-xl font-bold text-[#006766]">
+              {concordanceRate}% Agreement
+            </div>
+            <p className="text-[11px] text-[#5A7470]">Dual-engine verification</p>
+          </div>
         </div>
       </div>
 
@@ -462,8 +587,17 @@ export default function HistoryPage() {
                 placeholder="Search by Patient Name, Case ID, Cohort..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full h-10 pl-9 pr-3 rounded-xl bg-white border border-[#DFEBE8] text-xs text-[#082827] placeholder:text-[#5A7470]/60 focus:outline-none focus:border-[#006766] shadow-2xs font-sans"
+                className="w-full h-10 pl-9 pr-8 rounded-xl bg-white border border-[#DFEBE8] text-xs text-[#082827] placeholder:text-[#5A7470]/60 focus:outline-none focus:border-[#006766] shadow-2xs font-sans transition-all"
               />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-[#5A7470] hover:text-[#082827] cursor-pointer"
+                >
+                  <X size={13} />
+                </button>
+              )}
             </div>
 
             {/* Risk Filter Buttons */}
@@ -477,7 +611,7 @@ export default function HistoryPage() {
                     : "text-[#5A7470] hover:text-[#082827]"
                 }`}
               >
-                All Screenings ({predictions.length})
+                All Cases ({predictions.length})
               </button>
               <button
                 type="button"
@@ -488,7 +622,7 @@ export default function HistoryPage() {
                     : "text-[#5A7470] hover:text-[#082827]"
                 }`}
               >
-                High Risk ({predictions.filter((p) => p.riskLevel === "High").length})
+                High Risk ({highRiskCount})
               </button>
               <button
                 type="button"
@@ -499,7 +633,7 @@ export default function HistoryPage() {
                     : "text-[#5A7470] hover:text-[#082827]"
                 }`}
               >
-                Low Risk ({predictions.filter((p) => p.riskLevel === "Low").length})
+                Low Risk ({lowRiskCount})
               </button>
             </div>
           </div>
@@ -603,58 +737,75 @@ export default function HistoryPage() {
                       ? 58
                       : 50;
 
-                  return (
+                    return (
                     <tr
                       key={pred.id}
                       onClick={() => setSelectedCase(pred)}
-                      className="hover:bg-[#F2F7F6]/60 transition-colors cursor-pointer"
+                      className="group hover:bg-[#F2F7F6]/80 transition-all cursor-pointer"
                     >
                       {/* 1. Case ID */}
-                      <td className="py-3 px-3.5 font-mono text-xs font-bold text-[#006766] whitespace-nowrap">
-                        {pred.id}
+                      <td className="py-3.5 px-3.5 font-mono text-xs whitespace-nowrap">
+                        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#F2F7F6] group-hover:bg-white border border-[#DFEBE8] text-[#006766] font-bold shadow-2xs transition-colors">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#00B489] animate-pulse"></span>
+                          <span>{pred.id}</span>
+                        </div>
                       </td>
 
-                      {/* 2. Patient Name */}
-                      <td className="py-3 px-3.5 font-bold text-xs text-[#082827] whitespace-nowrap">
-                        {pred.patientName || "Not specified"}
+                      {/* 2. Patient Name & Avatar */}
+                      <td className="py-3.5 px-3.5 whitespace-nowrap">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-full bg-[#E6F7F4] text-[#006766] font-bold text-xs flex items-center justify-center border border-[#00B489]/30 shrink-0 shadow-2xs">
+                            {(pred.patientName || "PT")
+                              .split(" ")
+                              .map((n) => n[0])
+                              .join("")
+                              .slice(0, 2)
+                              .toUpperCase()}
+                          </div>
+                          <span className="font-bold text-xs text-[#082827] group-hover:text-[#006766] transition-colors">
+                            {pred.patientName || "Not specified"}
+                          </span>
+                        </div>
                       </td>
 
                       {/* 3. Demographics */}
-                      <td className="py-3 px-3.5 text-xs text-[#5A7470] whitespace-nowrap">
-                        {genderLabel} • Age {ageLabel}
+                      <td className="py-3.5 px-3.5 text-xs text-[#5A7470] whitespace-nowrap">
+                        <span className="px-2 py-0.5 rounded-md bg-[#F2F7F6] border border-[#DFEBE8] text-[11px] font-medium text-[#5A7470]">
+                          {genderLabel} • Age {ageLabel}
+                        </span>
                       </td>
 
                       {/* 4. Clinical Cohort */}
-                      <td className="py-3 px-3.5 text-xs text-[#5A7470] whitespace-nowrap">
-                        <span className="max-w-[190px] truncate block" title={cohortLabel}>
+                      <td className="py-3.5 px-3.5 text-xs text-[#5A7470] whitespace-nowrap">
+                        <span className="max-w-[190px] truncate block font-medium" title={cohortLabel}>
                           {cohortLabel}
                         </span>
                       </td>
 
                       {/* 5. Hybrid Quantum (VQC) */}
-                      <td className="py-3 px-3.5 whitespace-nowrap">
+                      <td className="py-3.5 px-3.5 whitespace-nowrap">
                         <span
-                          className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold border ${
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold border transition-colors ${
                             isMalignant
-                              ? "bg-red-50 text-red-700 border-red-200"
-                              : "bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30"
+                              ? "bg-red-50 text-red-700 border-red-200 shadow-2xs"
+                              : "bg-[#E6F7F4] text-[#006766] border-[#00B489]/30 shadow-2xs"
                           }`}
                         >
-                          <Sparkles size={11} className="shrink-0" />
+                          <Sparkles size={11} className={isMalignant ? "text-red-500 shrink-0" : "text-[#00B489] shrink-0"} />
                           <span>{pred.quantumPrediction} ({qRisk}%)</span>
                         </span>
                       </td>
 
                       {/* 6. Classical Baseline */}
-                      <td className="py-3 px-3.5 whitespace-nowrap">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-blue-50 text-blue-700 border border-blue-200">
-                          <Activity size={11} className="shrink-0" />
+                      <td className="py-3.5 px-3.5 whitespace-nowrap">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-mono font-semibold bg-blue-50 text-blue-700 border border-blue-200 shadow-2xs">
+                          <Activity size={11} className="text-blue-500 shrink-0" />
                           <span>{pred.classicalPrediction} ({cRisk}%)</span>
                         </span>
                       </td>
 
                       {/* 7. Key Risk Factor */}
-                      <td className="py-3 px-3.5 text-xs whitespace-nowrap font-medium text-[#082827]">
+                      <td className="py-3.5 px-3.5 text-xs whitespace-nowrap font-medium text-[#082827]">
                         <div className="max-w-[190px] truncate" title={`${pred.topDriver || (isCardiac ? "Lead V2 (Septal)" : "Cell Size (Radius)")}`}>
                           <span>{pred.topDriver || (isCardiac ? "Lead V2 (Septal)" : "Cell Size (Radius)")}</span>
                           {pred.topDriverImpact !== undefined && pred.topDriverImpact !== null && Number(pred.topDriverImpact) > 0 ? (
@@ -670,9 +821,9 @@ export default function HistoryPage() {
                       </td>
 
                       {/* 8. Consensus */}
-                      <td className="py-3 px-3.5 whitespace-nowrap">
+                      <td className="py-3.5 px-3.5 whitespace-nowrap">
                         <span
-                          className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold uppercase ${
+                          className={`text-[10px] font-mono px-2.5 py-1 rounded-md font-bold uppercase ${
                             pred.consensusStatus === "Discordant"
                               ? "bg-amber-50 text-amber-700 border border-amber-200"
                               : "bg-emerald-50 text-emerald-700 border border-emerald-200"
@@ -683,16 +834,16 @@ export default function HistoryPage() {
                       </td>
 
                       {/* 9. Test Date */}
-                      <td className="py-3 px-3.5 text-xs text-[#5A7470] font-mono whitespace-nowrap">
+                      <td className="py-3.5 px-3.5 text-xs text-[#5A7470] font-mono whitespace-nowrap">
                         {pred.timestamp}
                       </td>
 
                       {/* 10. Actions */}
-                      <td className="py-3 px-3.5 text-right space-x-1.5 whitespace-nowrap">
+                      <td className="py-3.5 px-3.5 text-right space-x-1.5 whitespace-nowrap">
                         <button
                           type="button"
                           onClick={(e) => handleViewAnalysis(pred, e)}
-                          className="px-2.5 py-1.5 rounded-lg bg-[#006766] hover:bg-[#0D4F46] text-white font-semibold text-[11px] inline-flex items-center gap-1 transition-colors cursor-pointer shadow-xs shadow-[#006766]/15"
+                          className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white font-semibold text-[11px] inline-flex items-center gap-1.5 transition-all cursor-pointer shadow-xs shadow-[#006766]/20 active:scale-95"
                           title="Open Full Analysis Page"
                         >
                           <Eye size={12} className="text-[#74D0D2]" />
@@ -701,7 +852,7 @@ export default function HistoryPage() {
                         <button
                           type="button"
                           onClick={(e) => handleExportReport(pred, e)}
-                          className="p-1.5 rounded-lg bg-[#F2F7F6] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#5A7470] hover:text-[#082827] transition-colors cursor-pointer shadow-2xs"
+                          className="p-1.5 rounded-lg bg-[#F2F7F6] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#5A7470] hover:text-[#006766] transition-all cursor-pointer shadow-2xs active:scale-95"
                           title="Download Clinical Report (.pdf)"
                         >
                           <Download size={13} />

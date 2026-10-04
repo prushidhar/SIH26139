@@ -381,22 +381,24 @@ export default function HomePage() {
   return (
     <div className="space-y-6 pb-12 w-full max-w-7xl mx-auto">
       {/* ========================================================================= */}
+      {/* ========================================================================= */}
       {/* 1. CLINICIAN WORKSTATION COMMAND HEADER */}
       {/* ========================================================================= */}
-      <div className="w-full bg-white rounded-3xl border border-[#DFEBE8] p-6 sm:p-7 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.06)] relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-bl from-[#E6F7F4] via-transparent to-transparent pointer-events-none rounded-full blur-2xl" />
+      <div className="w-full bg-gradient-to-br from-white via-[#FAFDFD] to-[#EBF7F5]/50 rounded-3xl border border-[#DFEBE8] p-6 sm:p-8 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#00B489]/10 via-[#006766]/5 to-transparent pointer-events-none rounded-full blur-3xl" />
+        <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-gradient-to-tr from-[#006766]/5 to-transparent pointer-events-none rounded-full blur-2xl" />
 
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 relative z-10">
-          <div className="space-y-1.5 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-xs font-semibold text-[#006766]">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+          <div className="space-y-2 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-xs font-semibold text-[#006766] shadow-2xs">
               <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
-              <span>Clinical Triage Workstation · Active Shift</span>
+              <span>Clinical Triage Workstation • Active Diagnostic Shift</span>
             </div>
             <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#082827] tracking-tight">
-              Welcome back, <span className="text-[#006766]">{userName}</span>
+              Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#006766] to-[#009688]">{userName}</span>
             </h1>
             <p className="text-xs sm:text-sm text-[#5A7470] font-normal leading-relaxed">
-              Point-of-care multimodal screening console. Select an active specialty terminal to initiate intake, or review verified case dossiers in the clinical activity ledger.
+              Point-of-care multimodal clinical console. Select an active specialty terminal below to initiate patient screening, or review verified diagnostic dossiers in the clinical ledger.
             </p>
           </div>
 
@@ -404,21 +406,21 @@ export default function HomePage() {
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <Link
               href="/predict"
-              className="px-4 py-2.5 rounded-xl bg-[#006766] hover:bg-[#084E4D] text-white font-semibold text-xs tracking-wider transition-all shadow-md shadow-[#006766]/20 flex items-center gap-2 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+              className="px-4.5 py-2.5 rounded-xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white font-semibold text-xs tracking-wider transition-all shadow-md shadow-[#006766]/25 flex items-center gap-2 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
             >
               <Sparkles size={14} className="text-[#00B489]" />
               <span>Start Patient Intake</span>
             </Link>
             <Link
               href="/history"
-              className="px-4 py-2.5 rounded-xl bg-[#F7FAF9] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#082827] font-semibold text-xs tracking-wider transition-all flex items-center gap-1.5 cursor-pointer hover:border-[#006766]/40"
+              className="px-4 py-2.5 rounded-xl bg-white hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#082827] font-semibold text-xs tracking-wider transition-all flex items-center gap-1.5 cursor-pointer hover:border-[#006766]/40 shadow-2xs"
             >
               <History size={14} className="text-[#006766]" />
               <span>Case Dossiers ({recentPredictions.length})</span>
             </Link>
             <Link
               href="/analysis"
-              className="px-4 py-2.5 rounded-xl bg-[#F7FAF9] hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#082827] font-semibold text-xs tracking-wider transition-all flex items-center gap-1.5 cursor-pointer hover:border-[#006766]/40"
+              className="px-4 py-2.5 rounded-xl bg-white hover:bg-[#E6F7F4] border border-[#DFEBE8] text-[#082827] font-semibold text-xs tracking-wider transition-all flex items-center gap-1.5 cursor-pointer hover:border-[#006766]/40 shadow-2xs"
             >
               <Activity size={14} className="text-[#006766]" />
               <span>Performance Analytics</span>
@@ -426,47 +428,55 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Real Operational Workstation Metrics (Zero Mock/Fake Numbers) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-5 mt-5 border-t border-[#DFEBE8]/80">
-          <div className="p-3.5 rounded-2xl bg-[#F7FAF9]/80 border border-[#DFEBE8]/60 space-y-1">
+        {/* Real Operational Workstation Metrics */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 pt-6 mt-6 border-t border-[#DFEBE8]/80 relative z-10">
+          <div className="p-4 rounded-2xl bg-white/80 hover:bg-white border border-[#DFEBE8] hover:border-[#00B489]/40 space-y-1.5 transition-all shadow-2xs group">
             <div className="flex items-center gap-1.5 text-xs font-semibold text-[#5A7470]">
-              <CheckCircle2 size={14} className="text-[#00B489]" />
+              <div className="w-5 h-5 rounded-md bg-[#E6F7F4] flex items-center justify-center text-[#00B489]">
+                <CheckCircle2 size={13} />
+              </div>
               <span>Diagnostic Coverage</span>
             </div>
-            <div className="font-sans text-xl font-bold text-[#082827]">
+            <div className="font-sans text-xl font-bold text-[#082827] group-hover:text-[#006766] transition-colors">
               8 Terminals
             </div>
             <p className="text-[11px] text-[#5A7470]">Active screening pipelines</p>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-[#F7FAF9]/80 border border-[#DFEBE8]/60 space-y-1">
+          <div className="p-4 rounded-2xl bg-white/80 hover:bg-white border border-[#DFEBE8] hover:border-[#00B489]/40 space-y-1.5 transition-all shadow-2xs group">
             <div className="flex items-center gap-1.5 text-xs font-semibold text-[#5A7470]">
-              <Layers size={14} className="text-[#006766]" />
+              <div className="w-5 h-5 rounded-md bg-[#E6F7F4] flex items-center justify-center text-[#006766]">
+                <Layers size={13} />
+              </div>
               <span>Input Modalities</span>
             </div>
-            <div className="font-sans text-xl font-bold text-[#082827]">
+            <div className="font-sans text-xl font-bold text-[#082827] group-hover:text-[#006766] transition-colors">
               Multimodal
             </div>
             <p className="text-[11px] text-[#5A7470]">ECG • Biopsy • CXR • Lab • EEG</p>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-[#F7FAF9]/80 border border-[#DFEBE8]/60 space-y-1">
+          <div className="p-4 rounded-2xl bg-white/80 hover:bg-white border border-[#DFEBE8] hover:border-[#00B489]/40 space-y-1.5 transition-all shadow-2xs group">
             <div className="flex items-center gap-1.5 text-xs font-semibold text-[#5A7470]">
-              <ShieldCheck size={14} className="text-[#00B489]" />
+              <div className="w-5 h-5 rounded-md bg-[#E6F7F4] flex items-center justify-center text-[#00B489]">
+                <ShieldCheck size={13} />
+              </div>
               <span>Inference Protocol</span>
             </div>
-            <div className="font-sans text-xl font-bold text-[#082827]">
+            <div className="font-sans text-xl font-bold text-[#082827] group-hover:text-[#006766] transition-colors">
               Dual Hybrid
             </div>
             <p className="text-[11px] text-[#5A7470]">Quantum VQC + Deep Learning</p>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-[#F7FAF9]/80 border border-[#DFEBE8]/60 space-y-1">
+          <div className="p-4 rounded-2xl bg-white/80 hover:bg-white border border-[#DFEBE8] hover:border-[#00B489]/40 space-y-1.5 transition-all shadow-2xs group">
             <div className="flex items-center gap-1.5 text-xs font-semibold text-[#5A7470]">
-              <Clock size={14} className="text-[#006766]" />
+              <div className="w-5 h-5 rounded-md bg-[#E6F7F4] flex items-center justify-center text-[#006766]">
+                <Clock size={13} />
+              </div>
               <span>Session Screenings</span>
             </div>
-            <div className="font-sans text-xl font-bold text-[#082827]">
+            <div className="font-sans text-xl font-bold text-[#082827] group-hover:text-[#006766] transition-colors">
               {recentPredictions.length} Logged
             </div>
             <p className="text-[11px] text-[#5A7470]">Recorded in current session</p>
@@ -556,7 +566,7 @@ export default function HomePage() {
             return (
               <div
                 key={disease.key}
-                className="bg-white rounded-3xl border border-[#DFEBE8] overflow-hidden flex flex-col justify-between shadow-[0_2px_16px_-4px_rgba(0,103,102,0.05)] hover:shadow-[0_12px_32px_-6px_rgba(0,103,102,0.14)] hover:border-[#006766]/50 transition-all group"
+                className="bg-white rounded-3xl border border-[#DFEBE8] overflow-hidden flex flex-col justify-between shadow-[0_2px_16px_-4px_rgba(0,103,102,0.05)] hover:shadow-[0_16px_36px_-6px_rgba(0,103,102,0.16)] hover:border-[#00B489]/50 hover:-translate-y-1 transition-all duration-300 group"
               >
                 <div>
                   {/* High-Resolution Medical Preview Picture */}
@@ -567,22 +577,22 @@ export default function HomePage() {
                       alt={disease.title}
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#082827]/85 via-black/30 to-transparent pointer-events-none" />
 
                     {/* Top Overlay Specialty & Modality Badges */}
                     <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-                      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold font-mono bg-white/95 text-[#006766] shadow-sm border border-white/60 backdrop-blur-xs flex items-center gap-1.5">
+                      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold font-mono bg-white/95 text-[#006766] shadow-xs border border-white/60 backdrop-blur-md flex items-center gap-1.5">
                         <Icon size={12} className="text-[#00B489]" />
                         <span>{disease.specialty}</span>
                       </span>
-                      <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-black/60 text-white border border-white/20 backdrop-blur-xs">
+                      <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-black/60 text-white border border-white/20 backdrop-blur-md">
                         {disease.modalityBadge}
                       </span>
                     </div>
 
                     {/* Bottom Image Overlay: Target Condition */}
                     <div className="absolute bottom-2.5 left-3 right-3 flex items-center gap-1.5 text-white text-[11px] font-medium drop-shadow-sm truncate pointer-events-none">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#00B489] shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#00B489] animate-pulse shrink-0" />
                       <span className="truncate">{disease.targetCondition}</span>
                     </div>
                   </div>
@@ -602,7 +612,7 @@ export default function HomePage() {
                 <div className="p-5 pt-0">
                   <Link
                     href={disease.route}
-                    className="w-full py-2.5 px-4 rounded-xl bg-[#F7FAF9] group-hover:bg-[#006766] text-[#006766] group-hover:text-white font-semibold text-xs transition-all flex items-center justify-center gap-2 shadow-2xs group-hover:shadow-md group-hover:shadow-[#006766]/20 cursor-pointer"
+                    className="w-full py-2.5 px-4 rounded-xl bg-[#F2F7F6] group-hover:bg-gradient-to-r group-hover:from-[#006766] group-hover:to-[#0A4F46] text-[#006766] group-hover:text-white font-semibold text-xs transition-all flex items-center justify-center gap-2 shadow-2xs group-hover:shadow-md group-hover:shadow-[#006766]/20 cursor-pointer active:scale-98"
                   >
                     <span>Launch Screening Suite</span>
                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -656,7 +666,7 @@ export default function HomePage() {
             <div className="pt-2">
               <Link
                 href="/predict"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#006766] hover:bg-[#084E4D] text-white font-semibold text-xs tracking-wider transition-all shadow-md shadow-[#006766]/20 cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white font-semibold text-xs tracking-wider transition-all shadow-md shadow-[#006766]/20 cursor-pointer"
               >
                 <Sparkles size={14} className="text-[#00B489]" />
                 <span>Start First Patient Screening</span>
@@ -665,10 +675,10 @@ export default function HomePage() {
           </div>
         ) : (
           /* POPULATED ACTIVITY TABLE */
-          <div className="bg-white rounded-3xl border border-[#DFEBE8] shadow-[0_2px_16px_-4px_rgba(0,103,102,0.04)] overflow-hidden">
+          <div className="bg-white rounded-3xl border border-[#DFEBE8] shadow-[0_4px_20px_-8px_rgba(0,103,102,0.06)] overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-sans">
-                <thead className="bg-[#F7FAF9] border-b border-[#DFEBE8] text-[11px] font-semibold uppercase tracking-wider text-[#5A7470]">
+                <thead className="bg-[#F7FAF9] border-b border-[#DFEBE8] text-[10px] font-mono uppercase tracking-wider text-[#5A7470]">
                   <tr>
                     <th className="py-3.5 px-5 font-semibold">Patient Case</th>
                     <th className="py-3.5 px-5 font-semibold">Diagnostic Specialty</th>
@@ -683,16 +693,24 @@ export default function HomePage() {
                     <tr
                       key={i}
                       onClick={() => handleViewScreening(pred)}
-                      className="hover:bg-[#F2F7F6]/70 transition-colors cursor-pointer group"
+                      className="hover:bg-[#F2F7F6]/80 transition-colors cursor-pointer group"
                     >
                       <td className="py-3.5 px-5">
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-full bg-[#E6F7F4] border border-[#00B489]/20 text-[#006766] font-bold text-xs flex items-center justify-center shrink-0">
-                            {(pred.patientName || "P").charAt(0).toUpperCase()}
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-[#E6F7F4] border border-[#00B489]/25 text-[#006766] font-bold text-xs flex items-center justify-center shrink-0 shadow-2xs">
+                            {(pred.patientName || "PT")
+                              .split(" ")
+                              .map((n) => n[0])
+                              .join("")
+                              .slice(0, 2)
+                              .toUpperCase()}
                           </div>
                           <div>
-                            <div className="font-semibold text-[#082827]">{pred.patientName || "Patient"}</div>
-                            <div className="text-[10px] text-[#5A7470] font-mono">{pred.id}</div>
+                            <div className="font-bold text-xs text-[#082827] group-hover:text-[#006766] transition-colors">{pred.patientName || "Patient"}</div>
+                            <div className="text-[10px] text-[#5A7470] font-mono flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#00B489] inline-block animate-pulse"></span>
+                              <span>{pred.id}</span>
+                            </div>
                           </div>
                         </div>
                       </td>
@@ -701,19 +719,22 @@ export default function HomePage() {
                       </td>
                       <td className="py-3.5 px-5 font-medium">
                         <span
-                          className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-semibold ${
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold border ${
                             pred.riskLevel === "High" || pred.quantumPrediction?.includes("Malignant") || pred.quantumPrediction?.includes("Infarction")
-                              ? "bg-red-50 text-red-700 border border-red-200"
-                              : "bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30"
+                              ? "bg-red-50 text-red-700 border-red-200 shadow-2xs"
+                              : "bg-[#E6F7F4] text-[#006766] border-[#00B489]/30 shadow-2xs"
                           }`}
                         >
-                          {pred.quantumPrediction || "Physiological Baseline"}
-                          {pred.quantumConfidence ? ` (${Math.round(pred.quantumConfidence)}%)` : ""}
+                          <Sparkles size={11} className={pred.riskLevel === "High" ? "text-red-500 shrink-0" : "text-[#00B489] shrink-0"} />
+                          <span>
+                            {pred.quantumPrediction || "Physiological Baseline"}
+                            {pred.quantumConfidence ? ` (${Math.round(pred.quantumConfidence)}%)` : ""}
+                          </span>
                         </span>
                       </td>
                       <td className="py-3.5 px-5 text-[#5A7470]">
-                        <span className="inline-flex items-center gap-1.5 text-xs text-[#006766] font-medium">
-                          <ShieldCheck size={13} className="text-[#00B489]" />
+                        <span className="inline-flex items-center gap-1.5 text-xs text-[#006766] font-semibold px-2 py-0.5 rounded-md bg-[#E6F7F4] border border-[#00B489]/25">
+                          <ShieldCheck size={12} className="text-[#00B489]" />
                           <span>{pred.consensusStatus || "Dual-Verified"}</span>
                         </span>
                       </td>
@@ -721,7 +742,7 @@ export default function HomePage() {
                         {pred.timestamp || "Recent"}
                       </td>
                       <td className="py-3.5 px-5 text-right">
-                        <span className="text-xs font-semibold text-[#006766] group-hover:underline inline-flex items-center gap-1">
+                        <span className="text-xs font-semibold text-[#006766] group-hover:text-[#084E4D] inline-flex items-center gap-1 group-hover:underline">
                           <span>Open Dossier</span>
                           <ChevronRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
                         </span>
