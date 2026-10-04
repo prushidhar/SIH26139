@@ -223,27 +223,29 @@ export default function SettingsPage() {
       transition={{ duration: 0.35, ease: "easeOut" }}
       className="space-y-5 pb-12 w-full"
     >
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#DFEBE8] pb-4">
-        <div>
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
-            <span className="text-[11px] font-mono uppercase tracking-wider text-[#006766] font-bold">
-              Preferences &amp; System Configuration
-            </span>
-          </div>
-          <h1 className="font-sans text-2xl sm:text-3xl font-bold text-[#082827] tracking-tight">
-            Application Settings
-          </h1>
-          <p className="text-xs text-[#5A7470] font-normal">
-            Configure screening automation, diagnostic display preferences, and local data retention.
-          </p>
-        </div>
+      {/* HEADER SECTION (Matching MedTech Workstation Design) */}
+      <div className="rounded-3xl border border-[#DFEBE8] bg-gradient-to-br from-white via-[#FAFDFD] to-[#EBF7F5]/50 p-6 sm:p-7 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-[#00B489]/10 via-[#006766]/5 to-transparent pointer-events-none rounded-full blur-3xl" />
 
-        <div className="flex items-center gap-2">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] text-[11px] font-mono font-semibold">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00B489] animate-pulse" />
-            <span>Auto-saving active {lastSavedTime ? `· ${lastSavedTime}` : ""}</span>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
+          <div className="space-y-1.5">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-xs font-semibold text-[#006766]">
+              <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
+              <span>Preferences &amp; System Configuration</span>
+            </div>
+            <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#082827] tracking-tight">
+              Application Settings
+            </h1>
+            <p className="text-xs sm:text-sm text-[#5A7470] font-normal leading-relaxed">
+              Configure screening automation, diagnostic display preferences, and local data retention.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-white border border-[#DFEBE8] text-[#006766] text-xs font-mono font-semibold shadow-2xs">
+              <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
+              <span>Auto-saving active {lastSavedTime ? `· ${lastSavedTime}` : ""}</span>
+            </div>
           </div>
         </div>
       </div>

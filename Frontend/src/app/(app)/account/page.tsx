@@ -162,33 +162,39 @@ export default function AccountPage() {
         className="hidden"
       />
 
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#DFEBE8] pb-4">
-        <div>
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
-            <span className="text-[11px] font-mono uppercase tracking-wider text-[#006766] font-bold">
-              Practitioner Identity & Telemetry
-            </span>
+      {/* Frosted-Glass Hero Header */}
+      <div className="rounded-3xl border border-[#DFEBE8] bg-gradient-to-br from-white via-[#FAFDFD] to-[#EBF7F5]/50 p-6 sm:p-7 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-[#00B489]/10 via-[#006766]/5 to-transparent pointer-events-none rounded-full blur-3xl -mr-20 -mt-20" />
+        <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30 shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
+              <span>PRACTITIONER IDENTITY &amp; TELEMETRY</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+              Account &amp; System Settings
+            </h1>
+            <p className="text-sm text-gray-600 max-w-2xl leading-relaxed">
+              Manage your clinical practitioner credentials, quantum hardware routing, session telemetry, and pipeline access.
+            </p>
           </div>
-          <h1 className="font-sans text-2xl sm:text-3xl font-bold text-[#082827] tracking-tight">
-            Account & System Settings
-          </h1>
-          <p className="text-xs text-[#5A7470] font-normal">
-            Manage your clinical practitioner credentials, quantum hardware routing, session telemetry, and pipeline access.
-          </p>
-        </div>
 
-        {saveSuccess && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30 text-xs font-semibold"
-          >
-            <CheckCircle2 size={14} className="text-[#00B489]" />
-            <span>Profile and system preferences saved</span>
-          </motion.div>
-        )}
+          {saveSuccess ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30 text-xs font-semibold shadow-xs"
+            >
+              <CheckCircle2 size={16} className="text-[#00B489]" />
+              <span>Profile and system preferences saved</span>
+            </motion.div>
+          ) : (
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-50 border border-slate-200 text-xs font-medium text-slate-600 self-start sm:self-center">
+              <ShieldCheck className="w-4 h-4 text-[#006766]" />
+              <span>Verified Session</span>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Profile Overview Card with Photo Upload */}

@@ -71,45 +71,49 @@ export default function SignalStudioPage() {
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto px-4 sm:px-6 py-6 font-sans">
-      {/* Stage Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-hairline/70 pb-5">
-        <div>
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-ink-soft">
-            <Sliders className="w-3.5 h-3.5 text-quantum" />
-            <span>Biomarker Signal Decomposition</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1 tracking-tight">
-            Biomarker Signal Processing &amp; Hilbert Embedding
-          </h1>
-          <p className="text-xs sm:text-sm text-ink-soft mt-1">
-            Dimensionality reduction, PCA latent space projection, and quantum Bloch sphere rotation angle encoding.
-          </p>
-        </div>
+      {/* HEADER SECTION (Matching MedTech Workstation Design) */}
+      <div className="rounded-3xl border border-[#DFEBE8] bg-gradient-to-br from-white via-[#FAFDFD] to-[#EBF7F5]/50 p-6 sm:p-7 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-[#00B489]/10 via-[#006766]/5 to-transparent pointer-events-none rounded-full blur-3xl" />
 
-        <div className="flex items-center gap-2 self-start sm:self-center">
-          <Link
-            href="/benchmarks"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-ink text-parchment hover:bg-ink/90 text-xs font-medium transition-colors"
-          >
-            <span>View Benchmarks</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
+          <div className="space-y-1.5">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-xs font-semibold text-[#006766]">
+              <Sliders className="w-3.5 h-3.5 text-[#006766]" />
+              <span>Biomarker Signal Decomposition</span>
+            </div>
+            <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#082827] tracking-tight">
+              Biomarker Signal Processing &amp; Hilbert Embedding
+            </h1>
+            <p className="text-xs sm:text-sm text-[#5A7470] font-normal leading-relaxed">
+              Dimensionality reduction, PCA latent space projection, and quantum Bloch sphere rotation angle encoding.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2.5">
+            <Link
+              href="/benchmarks"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white font-semibold text-xs shadow-md shadow-[#006766]/25 transition-all cursor-pointer active:scale-98"
+            >
+              <span>View Benchmarks</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[#00B489]" />
+            </Link>
+          </div>
         </div>
       </div>
 
       {/* Interactive Controls Strip */}
-      <div className="rounded-xl border border-hairline bg-parchment p-5">
+      <div className="rounded-2xl border border-[#DFEBE8] bg-white p-5 shadow-2xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
             {/* Dataset Picker */}
             <div className="space-y-1">
-              <label className="text-ink-soft uppercase text-[10px] tracking-wider font-semibold">
+              <label className="text-[#5A7470] uppercase text-[10px] tracking-wider font-semibold">
                 Target Dataset
               </label>
               <select
                 value={datasetId}
                 onChange={(e) => setDatasetId(e.target.value)}
-                className="block px-3 py-1.5 rounded-md border border-hairline bg-cream-deep/60 text-ink text-xs font-mono focus:outline-none focus:ring-1 focus:ring-quantum"
+                className="block px-3.5 py-2 rounded-xl border border-[#DFEBE8] bg-[#F7FCFB] text-[#082827] text-xs font-mono focus:outline-none focus:ring-1 focus:ring-[#006766]"
               >
                 <option value="breast_cancer">Wisconsin Diagnostic Breast Cancer (WDBC)</option>
                 <option value="heart_disease">Cleveland Heart Disease Cohort</option>

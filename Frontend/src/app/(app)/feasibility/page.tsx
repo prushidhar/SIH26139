@@ -127,29 +127,33 @@ export default function QuantumFeasibilityPage() {
 
   return (
     <div className="space-y-8 max-w-7xl mx-auto px-4 sm:px-6 py-6 font-sans">
-      {/* Stage Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/40 pb-5">
-        <div>
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-muted-foreground">
-            <Gauge className="w-3.5 h-3.5 text-indigo-500" />
-            <span>Hardware Feasibility & Profiling</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-serif font-light text-foreground mt-1 tracking-tight">
-            Quantum Feasibility & Hardware Profiler
-          </h1>
-          <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-            Circuit depth scaling, noise vulnerability, and IBM Eagle 127Q transpilation.
-          </p>
-        </div>
+      {/* HEADER SECTION (Matching MedTech Workstation Design) */}
+      <div className="rounded-3xl border border-[#DFEBE8] bg-gradient-to-br from-white via-[#FAFDFD] to-[#EBF7F5]/50 p-6 sm:p-7 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-[#00B489]/10 via-[#006766]/5 to-transparent pointer-events-none rounded-full blur-3xl" />
 
-        <div className="flex items-center gap-2 self-start sm:self-center">
-          <Link
-            href="/hardware"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-foreground text-background hover:bg-foreground/90 text-xs font-medium transition-colors"
-          >
-            <span>View Hardware Telemetry</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
+          <div className="space-y-1.5">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-xs font-semibold text-[#006766]">
+              <Gauge className="w-3.5 h-3.5 text-[#006766]" />
+              <span>Hardware Feasibility &amp; Profiling</span>
+            </div>
+            <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#082827] tracking-tight">
+              Quantum Feasibility &amp; Hardware Profiler
+            </h1>
+            <p className="text-xs sm:text-sm text-[#5A7470] font-normal leading-relaxed">
+              Circuit depth scaling, noise vulnerability, and IBM Eagle 127Q transpilation.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2.5">
+            <Link
+              href="/hardware"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white font-semibold text-xs shadow-md shadow-[#006766]/25 transition-all cursor-pointer active:scale-98"
+            >
+              <span>View Hardware Telemetry</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[#00B489]" />
+            </Link>
+          </div>
         </div>
       </div>
 

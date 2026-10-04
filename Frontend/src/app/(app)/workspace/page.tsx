@@ -73,37 +73,40 @@ export default function ResearchWorkspacePage() {
   return (
     <div className="space-y-6 max-w-7xl mx-auto px-4 sm:px-6 py-6 font-sans">
       {/* Page Title & Status Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-hairline/70 pb-5">
-        <div>
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-ink-soft">
-            <Compass className="w-3.5 h-3.5 text-quantum" />
-            <span>Clinical Research &amp; Investigation Hub</span>
+      <div className="rounded-3xl border border-[#DFEBE8] bg-gradient-to-br from-white via-[#FAFDFD] to-[#EBF7F5]/50 p-6 sm:p-7 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-[#00B489]/10 via-[#006766]/5 to-transparent pointer-events-none rounded-full blur-3xl -mr-20 -mt-20" />
+        <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30 shadow-xs">
+              <Compass className="w-3.5 h-3.5 text-[#00B489]" />
+              <span>CLINICAL RESEARCH &amp; INVESTIGATION HUB</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+              Physician Investigation Station
+            </h1>
+            <p className="text-sm text-gray-600 max-w-2xl leading-relaxed">
+              Evidence-driven biomedical intelligence: evaluating quantum representation on complex clinical cohorts.
+            </p>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1 tracking-tight">
-            Physician Investigation Station
-          </h1>
-          <p className="text-xs sm:text-sm text-ink-soft mt-1">
-            Evidence-driven biomedical intelligence: evaluating quantum representation on complex clinical cohorts.
-          </p>
-        </div>
 
-        <div className="flex items-center gap-2 self-start sm:self-center">
-          <button
-            onClick={fetchOverview}
-            disabled={loading}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-hairline bg-parchment text-ink hover:bg-cream-deep text-xs font-mono font-medium transition-colors"
-          >
-            <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin text-quantum" : "text-ink-soft"}`} />
-            <span>Sync Telemetry</span>
-          </button>
+          <div className="flex items-center gap-2.5 self-start sm:self-center shrink-0">
+            <button
+              onClick={fetchOverview}
+              disabled={loading}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl border border-[#DFEBE8] bg-white hover:bg-slate-50 text-gray-700 text-xs font-semibold shadow-xs transition-all cursor-pointer active:scale-98 disabled:opacity-50"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin text-[#006766]" : "text-gray-500"}`} />
+              <span>Sync Telemetry</span>
+            </button>
 
-          <Link
-            href="/benchmarks"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-ink text-parchment hover:bg-ink/90 text-xs font-medium transition-colors"
-          >
-            <span>View Benchmarks</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+            <Link
+              href="/benchmarks"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white text-xs font-semibold shadow-md shadow-[#006766]/25 transition-all cursor-pointer active:scale-98"
+            >
+              <span>View Benchmarks</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </div>
       </div>
 
