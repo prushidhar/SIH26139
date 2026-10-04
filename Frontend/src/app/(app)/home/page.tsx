@@ -67,7 +67,7 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     badgeBg: "bg-rose-100/80",
     badgeText: "text-rose-800",
     group: "cardiopulmonary",
-    image: "/samples/ecg/sample-mi.jpg",
+    image: "/images/studios/cardiac-ecg-electrophysiology.jpg",
   },
   {
     key: "breast_cancer",

@@ -66,7 +66,7 @@ const TERMINALS: DiagnosticTerminal[] = [
     badgeBg: "bg-rose-100/80",
     badgeText: "text-rose-800",
     group: "cardiopulmonary",
-    image: "/samples/ecg/sample-mi.jpg",
+    image: "/images/studios/cardiac-ecg-electrophysiology.jpg",
     engine: "ResNet-18 + 8Q VQC",
     dataset: "PTB-XL 12-Lead Strips",
   },
