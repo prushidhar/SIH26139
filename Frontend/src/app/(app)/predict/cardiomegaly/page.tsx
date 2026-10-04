@@ -154,133 +154,142 @@ export default function CardiomegalyStudioPage() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-8 pb-16">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/40 pb-6">
-        <div className="space-y-1">
-          <Link
-            href="/predict"
-            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors font-medium cursor-pointer mb-2"
-          >
-            <ArrowLeft size={13} /> Back to Screening Hub
-          </Link>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-600 dark:text-teal-400">
-              <Layers size={22} />
-            </div>
-            <div>
-              <h1 className="font-serif text-2xl sm:text-3xl font-light text-foreground tracking-tight">
-                Cardiomegaly Chest Radiography
-              </h1>
-              <p className="text-xs text-muted-foreground">
-                CheXpert frontal radiographs · 6-Qubit transfer learning · 0.930 ROC-AUC
-              </p>
+      {/* HEADER SECTION (Matching MedTech Workstation Design) */}
+      <div className="rounded-3xl border border-[#DFEBE8] bg-gradient-to-br from-white via-[#FAFDFD] to-[#EBF7F5]/50 p-6 sm:p-7 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-teal-500/10 via-[#006766]/5 to-transparent pointer-events-none rounded-full blur-3xl" />
+
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
+          <div className="space-y-1.5">
+            <Link
+              href="/predict"
+              className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5A7470] hover:text-[#006766] transition-colors mb-1 cursor-pointer"
+            >
+              <ArrowLeft size={13} /> Back to Screening Terminals
+            </Link>
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-2xl bg-teal-50 border border-teal-200 text-teal-700 flex items-center justify-center shadow-xs">
+                <Layers size={22} />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#082827] tracking-tight">
+                    Cardiomegaly Chest Radiography
+                  </h1>
+                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-teal-50 border border-teal-200 text-teal-700 font-bold">
+                    ACTIVE • 6-QUBIT TRANSFER VQC
+                  </span>
+                </div>
+                <p className="text-xs text-[#5A7470]">
+                  CheXpert Frontal Radiographs · DenseNet-121 Hybrid Transfer · 0.930 ROC-AUC
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Action Buttons */}
-        <div className="flex items-center gap-2.5">
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*,.dcm,.dicom,.png,.jpg,.jpeg"
-            onChange={handleCxrFileChange}
-            className="hidden"
-          />
-          <button
-            type="button"
-            onClick={() => fileInputRef.current?.click()}
-            className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-teal-200 dark:border-teal-800/60 bg-white dark:bg-card text-teal-700 dark:text-teal-300 hover:bg-teal-50 dark:hover:bg-teal-950/40 font-medium text-xs transition-all shadow-xs cursor-pointer"
-          >
-            <UploadCloud size={14} /> Upload Chest X-Ray
-          </button>
-          <button
-            onClick={runEvaluation}
-            disabled={isEvaluating}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-medium text-xs shadow-md shadow-teal-600/20 disabled:opacity-50 transition-all cursor-pointer"
-          >
-            {isEvaluating ? (
-              <>
-                <Loader2 size={15} className="animate-spin" /> Analyzing Radiograph...
-              </>
-            ) : (
-              <>
-                <Zap size={15} /> Analyze Radiograph
-              </>
-            )}
-          </button>
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2.5">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*,.dcm,.dicom,.png,.jpg,.jpeg"
+              onChange={handleCxrFileChange}
+              className="hidden"
+            />
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-2xl border border-[#DFEBE8] bg-white text-[#082827] hover:bg-[#F2F7F6] font-semibold text-xs transition-all shadow-2xs hover:border-[#006766]/40 cursor-pointer"
+            >
+              <UploadCloud size={14} className="text-[#006766]" /> Upload Chest X-Ray
+            </button>
+            <button
+              onClick={runEvaluation}
+              disabled={isEvaluating}
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white font-semibold text-xs shadow-md shadow-[#006766]/25 disabled:opacity-50 transition-all cursor-pointer active:scale-98"
+            >
+              {isEvaluating ? (
+                <>
+                  <Loader2 size={15} className="animate-spin text-[#00B489]" /> Analyzing Radiograph...
+                </>
+              ) : (
+                <>
+                  <Zap size={15} className="text-[#00B489]" /> Analyze Radiograph
+                </>
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Active Certified Studio Status Banner */}
-      <div className="p-3.5 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-900 dark:text-teal-200 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2 font-mono">
+      <div className="p-3.5 rounded-2xl bg-[#E6F7F4]/60 border border-[#00B489]/25 text-[#006766] text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2 font-mono shadow-2xs">
         <div className="flex items-center gap-2">
-          <span className="px-2 py-0.5 rounded-md bg-teal-500/20 text-teal-800 dark:text-teal-300 font-bold text-[10px] uppercase shrink-0">
+          <span className="px-2 py-0.5 rounded-md bg-[#006766]/10 text-[#006766] font-bold text-[10px] uppercase shrink-0">
             Certified Clinical Studio • 6-Qubit Transfer VQC
           </span>
-          <span>
+          <span className="text-[#082827]/80">
             Connected to DenseNet-121 + PennyLane hybrid quantum engine evaluating cardiothoracic ratio (CTR) from CheXpert chest radiographs.
           </span>
         </div>
-        <div className="flex items-center gap-1.5 text-[11px] text-teal-700 dark:text-teal-300 font-medium shrink-0">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+        <div className="flex items-center gap-1.5 text-[11px] text-[#006766] font-medium shrink-0">
+          <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
           <span>Online &amp; Verified</span>
         </div>
       </div>
 
       {/* Patient Clinical Intake Profile */}
-      <div className="p-4 rounded-2xl border border-border bg-card/60 backdrop-blur-xs shadow-xs space-y-3">
+      <div className="p-5 rounded-3xl border border-[#DFEBE8] bg-white shadow-[0_4px_24px_-8px_rgba(0,103,102,0.06)] space-y-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs font-semibold text-foreground">
-            <User size={14} className="text-teal-600 dark:text-teal-400" />
+          <div className="flex items-center gap-2 text-xs font-semibold text-[#082827]">
+            <User size={15} className="text-[#006766]" />
             <span>Patient Radiographic Intake Profile</span>
           </div>
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
-            className="text-[11px] font-medium text-teal-600 dark:text-teal-400 hover:underline flex items-center gap-1 cursor-pointer"
+            className="text-[11px] font-medium text-[#006766] hover:underline flex items-center gap-1 cursor-pointer"
           >
             <UploadCloud size={12} /> {cxrFileName ? `Loaded: ${cxrFileName}` : "Upload Patient CXR Scan (.PNG, .JPG, .DCM)"}
           </button>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
           <div>
-            <label className="text-[11px] font-mono text-muted-foreground block mb-1">Patient Full Name</label>
+            <label className="text-[11px] font-mono text-[#5A7470] block mb-1">Patient Full Name</label>
             <input
               type="text"
               placeholder="e.g. Samuel K. Thorne"
               value={patientName}
               onChange={(e) => setPatientName(e.target.value)}
-              className="w-full px-3 py-1.5 rounded-xl border border-border bg-background text-xs text-foreground focus:ring-1 focus:ring-teal-500 outline-none"
+              className="w-full px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FCFB] text-xs text-[#082827] focus:ring-1 focus:ring-[#006766] outline-none"
             />
           </div>
           <div>
-            <label className="text-[11px] font-mono text-muted-foreground block mb-1">Accession / Study ID</label>
+            <label className="text-[11px] font-mono text-[#5A7470] block mb-1">Accession / Study ID</label>
             <input
               type="text"
               placeholder="e.g. CXR-48912"
               value={patientId}
               onChange={(e) => setPatientId(e.target.value)}
-              className="w-full px-3 py-1.5 rounded-xl border border-border bg-background text-xs text-foreground focus:ring-1 focus:ring-teal-500 outline-none"
+              className="w-full px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FCFB] text-xs text-[#082827] focus:ring-1 focus:ring-[#006766] outline-none"
             />
           </div>
           <div>
-            <label className="text-[11px] font-mono text-muted-foreground block mb-1">Patient Age (Years)</label>
+            <label className="text-[11px] font-mono text-[#5A7470] block mb-1">Patient Age (Years)</label>
             <input
               type="number"
               min={1}
               max={110}
               value={patientAge}
               onChange={(e) => setPatientAge(parseInt(e.target.value) || 0)}
-              className="w-full px-3 py-1.5 rounded-xl border border-border bg-background text-xs text-foreground focus:ring-1 focus:ring-teal-500 outline-none"
+              className="w-full px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FCFB] text-xs text-[#082827] focus:ring-1 focus:ring-[#006766] outline-none"
             />
           </div>
           <div>
-            <label className="text-[11px] font-mono text-muted-foreground block mb-1">Biological Gender</label>
+            <label className="text-[11px] font-mono text-[#5A7470] block mb-1">Biological Gender</label>
             <select
               value={patientGender}
               onChange={(e) => setPatientGender(e.target.value)}
-              className="w-full px-3 py-1.5 rounded-xl border border-border bg-background text-xs text-foreground focus:ring-1 focus:ring-teal-500 outline-none"
+              className="w-full px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FCFB] text-xs text-[#082827] focus:ring-1 focus:ring-[#006766] outline-none"
             >
               <option value="Male">Male</option>
               <option value="Female">Female</option>

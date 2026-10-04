@@ -149,98 +149,111 @@ export default function ChronicKidneyStudioPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-hairline pb-6">
-        <div>
-          <div className="flex items-center gap-2 text-xs font-mono text-ink-soft mb-1">
-            <Link href="/predict" className="hover:text-quantum transition-colors flex items-center gap-1">
-              <ArrowLeft size={12} /> Screening Studios
-            </Link>
-            <span>/</span>
-            <span className="text-quantum font-semibold">Nephrology & Renal Health</span>
-          </div>
-          <h1 className="text-2xl md:text-3xl font-serif text-ink font-light">
-            Chronic Kidney Disease (CKD) Studio
-          </h1>
-          <p className="text-sm text-ink-soft mt-1">
-            4-Qubit Variational Quantum Classifier (VQC) with KDIGO 2024 Glomerular Staging and eGFR estimation.
-          </p>
-        </div>
+      {/* HEADER SECTION (Matching MedTech Workstation Design) */}
+      <div className="rounded-3xl border border-[#DFEBE8] bg-gradient-to-br from-white via-[#FAFDFD] to-[#EBF7F5]/50 p-6 sm:p-7 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-teal-500/10 via-[#006766]/5 to-transparent pointer-events-none rounded-full blur-3xl" />
 
-        {/* Document Ingestion & Action Panel */}
-        <div className="flex flex-wrap items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setIsUploadModalOpen(true)}
-            className="text-xs font-mono px-3.5 py-1.5 rounded-lg border border-teal-600/30 bg-teal-50 text-teal-800 hover:bg-teal-100 transition-colors cursor-pointer flex items-center gap-1.5 shadow-2xs font-semibold"
-          >
-            <UploadCloud size={13} className="text-teal-600" />
-            Upload Lab Report
-          </button>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
+          <div className="space-y-1.5">
+            <Link
+              href="/predict"
+              className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5A7470] hover:text-[#006766] transition-colors mb-1 cursor-pointer"
+            >
+              <ArrowLeft size={13} /> Back to Screening Terminals
+            </Link>
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-2xl bg-teal-50 border border-teal-200 text-teal-700 flex items-center justify-center shadow-xs">
+                <Activity size={22} />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#082827] tracking-tight">
+                    Chronic Kidney Disease (CKD) Studio
+                  </h1>
+                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-teal-50 border border-teal-200 text-teal-700 font-bold">
+                    ACTIVE • 4-QUBIT VQC
+                  </span>
+                </div>
+                <p className="text-xs text-[#5A7470]">
+                  4-Qubit Variational Quantum Classifier (VQC) with KDIGO 2024 Glomerular Staging and eGFR estimation.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2.5">
+            <button
+              type="button"
+              onClick={() => setIsUploadModalOpen(true)}
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-2xl border border-[#DFEBE8] bg-white text-[#082827] hover:bg-[#F2F7F6] font-semibold text-xs transition-all shadow-2xs hover:border-[#006766]/40 cursor-pointer"
+            >
+              <UploadCloud size={14} className="text-[#006766]" /> Upload Lab Report
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Active Certified Studio Status Banner */}
-      <div className="p-3.5 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-900 dark:text-teal-200 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2 font-mono">
+      <div className="p-3.5 rounded-2xl bg-[#E6F7F4]/60 border border-[#00B489]/25 text-[#006766] text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2 font-mono shadow-2xs">
         <div className="flex items-center gap-2">
-          <span className="px-2 py-0.5 rounded-md bg-teal-500/20 text-teal-800 dark:text-teal-300 font-bold text-[10px] uppercase shrink-0">
+          <span className="px-2 py-0.5 rounded-md bg-[#006766]/10 text-[#006766] font-bold text-[10px] uppercase shrink-0">
             Certified Clinical Studio • 4-Qubit VQC
           </span>
-          <span>
+          <span className="text-[#082827]/80">
             Connected to PennyLane hybrid quantum engine with KDIGO 2024 Glomerular Staging and CKD-EPI eGFR estimation.
           </span>
         </div>
-        <div className="flex items-center gap-1.5 text-[11px] text-teal-700 dark:text-teal-300 font-medium shrink-0">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+        <div className="flex items-center gap-1.5 text-[11px] text-[#006766] font-medium shrink-0">
+          <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
           <span>Online &amp; Verified</span>
         </div>
       </div>
 
       {/* Patient Clinical Intake Profile */}
-      <div className="p-4 rounded-2xl border border-hairline bg-white shadow-xs space-y-3">
+      <div className="p-5 rounded-3xl border border-[#DFEBE8] bg-white shadow-[0_4px_24px_-8px_rgba(0,103,102,0.06)] space-y-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs font-semibold text-ink">
-            <User size={14} className="text-quantum" />
+          <div className="flex items-center gap-2 text-xs font-semibold text-[#082827]">
+            <User size={15} className="text-[#006766]" />
             <span>Patient Clinical Intake Profile</span>
           </div>
           <button
             type="button"
             onClick={() => setIsUploadModalOpen(true)}
-            className="text-[11px] font-medium text-quantum hover:underline flex items-center gap-1 cursor-pointer"
+            className="text-[11px] font-medium text-[#006766] hover:underline flex items-center gap-1 cursor-pointer"
           >
             <UploadCloud size={12} /> Auto-fill from Lab Report (.PDF, .CSV, .JSON)
           </button>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
-            <label className="text-[11px] font-mono text-ink-soft block mb-1">Patient Full Name</label>
+            <label className="text-[11px] font-mono text-[#5A7470] block mb-1">Patient Full Name</label>
             <input
               type="text"
               placeholder="e.g. Anand Sharma"
               value={patientName}
               onChange={(e) => setPatientName(e.target.value)}
-              className="w-full text-xs px-3 py-1.5 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
+              className="w-full text-xs px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FCFB] text-[#082827] focus:ring-1 focus:ring-[#006766] outline-none font-mono"
             />
           </div>
           <div>
-            <label className="text-[11px] font-mono text-ink-soft block mb-1">Patient ID / MRN</label>
+            <label className="text-[11px] font-mono text-[#5A7470] block mb-1">Patient ID / MRN</label>
             <input
               type="text"
               placeholder="e.g. MRN-39104"
               value={patientId}
               onChange={(e) => setPatientId(e.target.value)}
-              className="w-full text-xs px-3 py-1.5 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
+              className="w-full text-xs px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FCFB] text-[#082827] focus:ring-1 focus:ring-[#006766] outline-none font-mono"
             />
           </div>
           <div>
-            <label className="text-[11px] font-mono text-ink-soft block mb-1">Patient Age (Years)</label>
+            <label className="text-[11px] font-mono text-[#5A7470] block mb-1">Patient Age (Years)</label>
             <input
               type="number"
               min={18}
               max={95}
               value={values.age}
               onChange={(e) => setValues({ ...values, age: parseFloat(e.target.value) || 0 })}
-              className="w-full text-xs px-3 py-1.5 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono"
+              className="w-full text-xs px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FCFB] text-[#082827] focus:ring-1 focus:ring-[#006766] outline-none font-mono"
             />
           </div>
         </div>
@@ -381,17 +394,17 @@ export default function ChronicKidneyStudioPage() {
               type="button"
               onClick={handleEvaluate}
               disabled={isEvaluating}
-              className="w-full mt-4 py-3 rounded-xl bg-quantum hover:bg-quantum-deep text-white font-medium text-sm transition-all shadow-md hover:shadow-lg disabled:opacity-60 flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full mt-4 py-3.5 rounded-2xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white font-semibold text-xs transition-all shadow-md shadow-[#006766]/25 disabled:opacity-60 flex items-center justify-center gap-2 cursor-pointer active:scale-98"
             >
               {isEvaluating ? (
                 <>
-                  <Loader2 size={16} className="animate-spin" />
-                  Running 4-Qubit Quantum & Classical Analysis...
+                  <Loader2 size={16} className="animate-spin text-[#00B489]" />
+                  <span>Running 4-Qubit Quantum & Classical Analysis...</span>
                 </>
               ) : (
                 <>
-                  <Zap size={16} />
-                  Evaluate Renal Panel
+                  <Zap size={16} className="text-[#00B489]" />
+                  <span>Evaluate Renal Panel</span>
                 </>
               )}
             </button>

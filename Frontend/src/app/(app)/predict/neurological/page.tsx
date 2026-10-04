@@ -157,112 +157,123 @@ export default function NeurologicalStudioPage() {
       className="space-y-6 pb-12 w-full max-w-6xl mx-auto font-sans text-ink"
     >
       {/* Top Breadcrumb & Title */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-hairline pb-4">
-        <div>
-          <Link
-            href="/predict"
-            className="inline-flex items-center gap-1.5 text-xs text-ink-soft hover:text-ink transition-colors font-medium cursor-pointer mb-1"
-          >
-            <ArrowLeft size={13} /> Back to Screening Hub
-          </Link>
-          <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-700">
-              <Brain size={16} />
-            </span>
-            <h1 className="font-serif text-2xl sm:text-3xl font-light text-ink tracking-tight">
-              Brain Health & Neurological Screening
-            </h1>
-          </div>
-          <p className="text-xs text-ink-soft mt-0.5">
-            4-Qubit Variational Quantum Classification across EEG spectral rhythms, motor tremor, and psychomotor speed.
-          </p>
-        </div>
+      {/* HEADER SECTION (Matching MedTech Workstation Design) */}
+      <div className="rounded-3xl border border-[#DFEBE8] bg-gradient-to-br from-white via-[#FAFDFD] to-[#EBF7F5]/50 p-6 sm:p-7 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-indigo-500/10 via-[#006766]/5 to-transparent pointer-events-none rounded-full blur-3xl" />
 
-        <div className="flex items-center gap-2.5">
-          <button
-            type="button"
-            onClick={() => setIsUploadModalOpen(true)}
-            className="text-xs font-mono px-3.5 py-1.5 rounded-lg border border-indigo-600/30 bg-indigo-50 text-indigo-800 hover:bg-indigo-100 transition-colors cursor-pointer flex items-center gap-1.5 shadow-2xs font-semibold"
-          >
-            <UploadCloud size={13} className="text-indigo-600" />
-            Upload Neuro Report
-          </button>
-          <span className="px-3 py-1 rounded-full text-[11px] font-mono font-medium bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span>PennyLane 4-Qubit VQC Certified</span>
-          </span>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
+          <div className="space-y-1.5">
+            <Link
+              href="/predict"
+              className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5A7470] hover:text-[#006766] transition-colors mb-1 cursor-pointer"
+            >
+              <ArrowLeft size={13} /> Back to Screening Terminals
+            </Link>
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-2xl bg-indigo-50 border border-indigo-200 text-indigo-700 flex items-center justify-center shadow-xs">
+                <Brain size={22} />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#082827] tracking-tight">
+                    Brain Health & Neurological Screening
+                  </h1>
+                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 font-bold">
+                    ACTIVE • 4-QUBIT VQC
+                  </span>
+                </div>
+                <p className="text-xs text-[#5A7470]">
+                  4-Qubit Variational Quantum Classification across EEG spectral rhythms, motor tremor, and psychomotor speed.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2.5">
+            <button
+              type="button"
+              onClick={() => setIsUploadModalOpen(true)}
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-2xl border border-[#DFEBE8] bg-white text-[#082827] hover:bg-[#F2F7F6] font-semibold text-xs transition-all shadow-2xs hover:border-[#006766]/40 cursor-pointer"
+            >
+              <UploadCloud size={14} className="text-[#006766]" /> Upload Neuro Report
+            </button>
+            <span className="px-3.5 py-2 rounded-2xl text-[11px] font-mono font-bold bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30 flex items-center gap-1.5 shadow-2xs">
+              <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
+              <span>PennyLane 4-Qubit VQC Certified</span>
+            </span>
+          </div>
         </div>
       </div>
 
       {/* Active Certified Studio Status Banner */}
-      <div className="p-3.5 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-900 dark:text-indigo-200 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2 font-mono">
+      <div className="p-3.5 rounded-2xl bg-[#E6F7F4]/60 border border-[#00B489]/25 text-[#006766] text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2 font-mono shadow-2xs">
         <div className="flex items-center gap-2">
-          <span className="px-2 py-0.5 rounded-md bg-indigo-500/20 text-indigo-800 dark:text-indigo-300 font-bold text-[10px] uppercase shrink-0">
+          <span className="px-2 py-0.5 rounded-md bg-[#006766]/10 text-[#006766] font-bold text-[10px] uppercase shrink-0">
             Certified Clinical Studio • 4-Qubit VQC
           </span>
-          <span>
+          <span className="text-[#082827]/80">
             Connected to PennyLane hybrid quantum engine evaluating EEG spectral ratios, resting tremor, and cognitive latency.
           </span>
         </div>
-        <div className="flex items-center gap-1.5 text-[11px] text-indigo-700 dark:text-indigo-300 font-medium shrink-0">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+        <div className="flex items-center gap-1.5 text-[11px] text-[#006766] font-medium shrink-0">
+          <span className="w-2 h-2 rounded-full bg-[#00B489] animate-pulse" />
           <span>Online &amp; Verified</span>
         </div>
       </div>
 
       {/* Patient Clinical Intake Profile */}
-      <div className="p-4 rounded-2xl border border-hairline bg-white shadow-xs space-y-3">
+      <div className="p-5 rounded-3xl border border-[#DFEBE8] bg-white shadow-[0_4px_24px_-8px_rgba(0,103,102,0.06)] space-y-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs font-semibold text-ink">
-            <User size={14} className="text-quantum" />
+          <div className="flex items-center gap-2 text-xs font-semibold text-[#082827]">
+            <User size={15} className="text-[#006766]" />
             <span>Patient Clinical Intake Profile</span>
           </div>
           <button
             type="button"
             onClick={() => setIsUploadModalOpen(true)}
-            className="text-[11px] font-medium text-quantum hover:underline flex items-center gap-1 cursor-pointer"
+            className="text-[11px] font-medium text-[#006766] hover:underline flex items-center gap-1 cursor-pointer"
           >
             <UploadCloud size={12} /> Auto-fill from Neuro Lab Report (.PDF, .CSV, .JSON, .TXT)
           </button>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
           <div>
-            <label className="text-[11px] font-mono text-ink-soft block mb-1">Patient Full Name</label>
+            <label className="text-[11px] font-mono text-[#5A7470] block mb-1">Patient Full Name</label>
             <input
               type="text"
               placeholder="e.g. Sumanth Rao"
               value={patientName}
               onChange={(e) => setPatientName(e.target.value)}
-              className="w-full text-xs px-3 py-1.5 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono text-ink"
+              className="w-full text-xs px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FCFB] text-[#082827] focus:ring-1 focus:ring-[#006766] outline-none font-mono"
             />
           </div>
           <div>
-            <label className="text-[11px] font-mono text-ink-soft block mb-1">Patient ID / MRN</label>
+            <label className="text-[11px] font-mono text-[#5A7470] block mb-1">Patient ID / MRN</label>
             <input
               type="text"
               placeholder="e.g. MRN-70491"
               value={patientId}
               onChange={(e) => setPatientId(e.target.value)}
-              className="w-full text-xs px-3 py-1.5 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono text-ink"
+              className="w-full text-xs px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FCFB] text-[#082827] focus:ring-1 focus:ring-[#006766] outline-none font-mono"
             />
           </div>
           <div>
-            <label className="text-[11px] font-mono text-ink-soft block mb-1">Patient Age (Years)</label>
+            <label className="text-[11px] font-mono text-[#5A7470] block mb-1">Patient Age (Years)</label>
             <input
               type="number"
               min={18}
               max={95}
               value={values.age}
               onChange={(e) => handleValueChange("age", parseInt(e.target.value) || 0)}
-              className="w-full text-xs px-3 py-1.5 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono text-ink"
+              className="w-full text-xs px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FCFB] text-[#082827] focus:ring-1 focus:ring-[#006766] outline-none font-mono"
             />
           </div>
           <div>
-            <label className="text-[11px] font-mono text-ink-soft block mb-1">Biological Sex</label>
+            <label className="text-[11px] font-mono text-[#5A7470] block mb-1">Biological Sex</label>
             <select
               value={patientGender}
               onChange={(e) => setPatientGender(e.target.value)}
-              className="w-full text-xs px-3 py-1.5 rounded-lg border border-hairline bg-cream/40 focus:bg-white focus:outline-none focus:ring-1 focus:ring-quantum font-mono text-ink"
+              className="w-full text-xs px-3 py-1.5 rounded-xl border border-[#DFEBE8] bg-[#F7FCFB] text-[#082827] focus:ring-1 focus:ring-[#006766] outline-none font-mono"
             >
               <option value="Female">Female</option>
               <option value="Male">Male</option>
@@ -497,16 +508,16 @@ export default function NeurologicalStudioPage() {
             type="button"
             onClick={runEvaluation}
             disabled={isEvaluating}
-            className="w-full py-3 px-4 rounded-xl bg-ink text-parchment text-xs font-semibold hover:opacity-90 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md disabled:opacity-50"
+            className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white text-xs font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-[#006766]/25 disabled:opacity-50 active:scale-98"
           >
             {isEvaluating ? (
               <>
-                <Loader2 size={14} className="animate-spin text-quantum" />
+                <Loader2 size={14} className="animate-spin text-[#00B489]" />
                 <span>Executing 4-Qubit VQC & Multi-Domain Classifier...</span>
               </>
             ) : (
               <>
-                <Zap size={14} className="text-quantum" />
+                <Zap size={14} className="text-[#00B489]" />
                 <span>Screen Neuro-Cognitive Health</span>
                 <ArrowRight size={14} />
               </>

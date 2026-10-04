@@ -352,74 +352,88 @@ export default function DeepAnalyticsChartsPage() {
       transition={{ duration: 0.35, ease: "easeOut" }}
       className="space-y-6 pb-20 w-full font-sans selection:bg-ink selection:text-parchment"
     >
-      {/* Top Breadcrumb Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-hairline pb-4">
-        <div>
-          <Link
-            href="/analysis"
-            className="inline-flex items-center gap-1.5 text-xs text-ink-soft hover:text-ink transition-colors mb-1.5"
-          >
-            <ArrowLeft size={13} /> Back to Live Model Auditing
-          </Link>
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-quantum" />
-            <h1 className="font-serif text-2xl sm:text-3xl font-light text-ink tracking-tight">
-              Model Analysis &amp; Rigorous Scientific Benchmarking
-            </h1>
+      {/* HEADER SECTION (Matching MedTech Workstation Design) */}
+      <div className="rounded-3xl border border-[#DFEBE8] bg-gradient-to-br from-white via-[#FAFDFD] to-[#EBF7F5]/50 p-6 sm:p-7 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-[#00B489]/10 via-[#006766]/5 to-transparent pointer-events-none rounded-full blur-3xl" />
+
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
+          <div className="space-y-1.5">
+            <Link
+              href="/analysis"
+              className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5A7470] hover:text-[#006766] transition-colors mb-1 cursor-pointer"
+            >
+              <ArrowLeft size={13} /> Back to Telemetry Console
+            </Link>
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-2xl bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] flex items-center justify-center shadow-xs">
+                <BarChart3 size={22} />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#082827] tracking-tight">
+                    Model Analysis &amp; Scientific Benchmarking
+                  </h1>
+                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] font-bold">
+                    OBJECTIVE 6 COMPLIANT
+                  </span>
+                </div>
+                <p className="text-xs text-[#5A7470]">
+                  Cross-validated evaluations across Accuracy, Computational Efficiency, and Scarce-Data Generalization.
+                </p>
+              </div>
+            </div>
           </div>
-          <p className="text-xs text-ink-soft font-light mt-0.5">
-            SIH26139 Objective 6 Compliance: Benchmarking hybrid quantum vs. classical baselines across Accuracy,
-            Computational Efficiency, and Generalization Performance.
-          </p>
-        </div>
 
-        {/* Modality Filter Tabs */}
-        <div className="flex items-center gap-1 p-1 bg-white rounded-xl border border-hairline shadow-2xs">
-          <button
-            type="button"
-            onClick={() => setSelectedModality("breast")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${selectedModality === "breast"
-                ? "bg-ink text-parchment shadow-xs font-semibold"
-                : "text-ink-soft hover:text-ink"
+          {/* Modality Filter Tabs */}
+          <div className="flex items-center gap-1.5 p-1 bg-white rounded-2xl border border-[#DFEBE8] shadow-2xs">
+            <button
+              type="button"
+              onClick={() => setSelectedModality("breast")}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedModality === "breast"
+                  ? "bg-[#006766] text-white shadow-xs font-bold"
+                  : "text-[#5A7470] hover:text-[#082827]"
               }`}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-            <span>Breast Cytology</span>
-            <span className="text-[9px] font-mono uppercase px-1 py-0.2 rounded bg-emerald-500/20 text-emerald-700">
-              Active
-            </span>
-          </button>
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#00B489]" />
+              <span>Breast Cytology</span>
+              <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded-md bg-white/20 text-white font-bold">
+                Active
+              </span>
+            </button>
 
-
-          <button
-            type="button"
-            onClick={() => setSelectedModality("cardio")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${selectedModality === "cardio"
-                ? "bg-ink text-parchment shadow-xs font-semibold"
-                : "text-ink-soft hover:text-ink"
+            <button
+              type="button"
+              onClick={() => setSelectedModality("cardio")}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedModality === "cardio"
+                  ? "bg-[#006766] text-white shadow-xs font-bold"
+                  : "text-[#5A7470] hover:text-[#082827]"
               }`}
-          >
-            <Activity size={11} className="text-red-500" />
-            <span>Cardiovascular</span>
-            <span className="text-[9px] font-mono uppercase px-1 py-0.2 rounded bg-emerald-500/20 text-emerald-700">
-              Active
-            </span>
-          </button>
+            >
+              <Activity size={12} className={selectedModality === "cardio" ? "text-white" : "text-rose-500"} />
+              <span>Cardiovascular</span>
+              <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded-md bg-white/20 text-white font-bold">
+                Active
+              </span>
+            </button>
 
-          <button
-            type="button"
-            onClick={() => setSelectedModality("neuro")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${selectedModality === "neuro"
-                ? "bg-ink text-parchment shadow-xs font-semibold"
-                : "text-ink-soft hover:text-ink"
+            <button
+              type="button"
+              onClick={() => setSelectedModality("neuro")}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedModality === "neuro"
+                  ? "bg-[#006766] text-white shadow-xs font-bold"
+                  : "text-[#5A7470] hover:text-[#082827]"
               }`}
-          >
-            <Lock size={11} className="text-purple-600" />
-            <span>Neurological</span>
-            <span className="text-[9px] font-mono uppercase px-1 py-0.2 rounded bg-purple-500/10 text-purple-700">
-              Phase 2
-            </span>
-          </button>
+            >
+              <Lock size={12} className={selectedModality === "neuro" ? "text-white" : "text-purple-600"} />
+              <span>Neurological</span>
+              <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded-md bg-purple-500/10 text-purple-700 font-bold">
+                Phase 2
+              </span>
+            </button>
+          </div>
         </div>
       </div>
 

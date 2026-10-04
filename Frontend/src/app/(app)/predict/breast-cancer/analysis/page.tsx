@@ -331,101 +331,105 @@ export default function BreastCancerAnalysisPage() {
       transition={{ duration: 0.3 }}
       className="space-y-6 pb-12 w-full"
     >
-      {/* 1. TOP BREADCRUMB & HEADER */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-hairline pb-4">
-        <div className="space-y-1">
-          <Link
-            href="/predict/breast-cancer"
-            className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-soft hover:text-ink transition-colors mb-1 cursor-pointer"
-          >
-            <ArrowLeft size={13} /> Back to Screening Studio
-          </Link>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-quantum/10 border border-quantum/30 text-quantum flex items-center justify-center shadow-xs">
-              <Microscope size={20} />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="font-serif text-2xl sm:text-3xl font-light text-ink tracking-tight">
-                  Detailed Patient Health Report
-                </h1>
-                <span className="text-[10px] px-2 py-0.5 rounded-full font-mono bg-emerald-50 border border-emerald-200 text-emerald-700 font-bold uppercase">
-                  Verified Clinical Data
-                </span>
+      {/* 1. TOP BREADCRUMB & FROSTED GLASS HERO HEADER */}
+      <div className="rounded-3xl border border-[#DFEBE8] bg-gradient-to-br from-white via-[#FAFDFD] to-[#EBF7F5]/50 p-6 sm:p-7 shadow-[0_4px_24px_-8px_rgba(0,103,102,0.08)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-[#00B489]/10 via-[#006766]/5 to-transparent pointer-events-none rounded-full blur-3xl" />
+
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
+          <div className="space-y-1.5">
+            <Link
+              href="/predict/breast-cancer"
+              className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5A7470] hover:text-[#006766] transition-colors mb-1 cursor-pointer"
+            >
+              <ArrowLeft size={13} /> Back to Screening Studio
+            </Link>
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-2xl bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] flex items-center justify-center shadow-xs">
+                <Microscope size={22} />
               </div>
-              <p className="text-xs text-ink-soft font-light">
-                Comprehensive biopsy cell analysis, QureSight AI summary, and multi-engine diagnostic comparison.
-              </p>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#082827] tracking-tight">
+                    Detailed Patient Health Report
+                  </h1>
+                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] font-bold uppercase">
+                    Verified Clinical Data
+                  </span>
+                </div>
+                <p className="text-xs text-[#5A7470]">
+                  Comprehensive biopsy cell analysis, QureSight AI summary, and multi-engine diagnostic comparison.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            onClick={handleDownloadFullReport}
-            disabled={isDownloading}
-            className="px-4 py-2 rounded-xl bg-ink hover:bg-ink/90 text-parchment font-semibold text-xs flex items-center gap-2 transition-all shadow-md cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
-          >
-            {isDownloading ? (
-              <Loader2 size={14} className="text-quantum animate-spin" />
-            ) : (
-              <Download size={14} className="text-quantum" />
-            )}
-            <span>{isDownloading ? "Generating PDF..." : "Download Report (.pdf)"}</span>
-          </button>
+          <div className="flex items-center gap-2.5">
+            <button
+              onClick={handleDownloadFullReport}
+              disabled={isDownloading}
+              className="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white font-semibold text-xs flex items-center gap-2 transition-all shadow-md shadow-[#006766]/25 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed active:scale-98"
+            >
+              {isDownloading ? (
+                <Loader2 size={14} className="text-[#00B489] animate-spin" />
+              ) : (
+                <Download size={14} className="text-[#00B489]" />
+              )}
+              <span>{isDownloading ? "Generating PDF..." : "Download Report (.pdf)"}</span>
+            </button>
+          </div>
         </div>
       </div>
 
       {/* 2. UNIFIED WHITE EXECUTIVE CARD (WITH CIRCULAR DIAL, MODEL SWITCHER & DIRECTLY ATTACHED TABS) */}
-      <div className="bg-white rounded-2xl border border-hairline shadow-xs overflow-hidden">
+      <div className="bg-white rounded-3xl border border-[#DFEBE8] shadow-[0_4px_24px_-8px_rgba(0,103,102,0.06)] overflow-hidden">
         {/* Top Section: Patient Identity & Engine Switch Button */}
-        <div className="p-5 border-b border-hairline/70 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="p-5 sm:p-6 border-b border-[#DFEBE8]/80 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-white to-[#F7FCFB]">
           {/* Patient Details */}
           <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-cream border border-hairline flex items-center justify-center text-ink shrink-0 shadow-2xs">
-              <User size={18} />
+            <div className="w-11 h-11 rounded-2xl bg-[#E6F7F4] border border-[#00B489]/20 flex items-center justify-center text-[#006766] shrink-0 shadow-2xs">
+              <User size={20} />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-sm font-bold text-ink">
-                  Patient: <span className="font-semibold text-ink">{patientInfo.name || "Yuki"}</span>
+                <span className="text-sm font-bold text-[#082827]">
+                  Patient: <span className="font-semibold text-[#082827]">{patientInfo.name || "Yuki"}</span>
                 </span>
-                <span className="text-[11px] font-mono px-2 py-0.2 rounded bg-cream border border-hairline text-ink-soft font-medium">
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-[#F2F7F6] border border-[#DFEBE8] text-[#5A7470] font-medium">
                   {patientInfo.patient_id || "QS-BC-5279"}
                 </span>
-                <span className="text-[10px] font-mono uppercase px-2 py-0.2 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold">
+                <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold">
                   Intake Verified
                 </span>
               </div>
-              <p className="text-xs text-ink-soft mt-0.5">
-                Demographics: <strong className="text-ink font-medium">{patientInfo.gender || "Female"}</strong> • Age: <strong className="text-ink font-medium">{patientInfo.age || 55}</strong> • Biopsy Cohort: <strong className="text-ink font-medium">Fine Needle Aspirate</strong>
+              <p className="text-xs text-[#5A7470] mt-0.5">
+                Demographics: <strong className="text-[#082827] font-medium">{patientInfo.gender || "Female"}</strong> • Age: <strong className="text-[#082827] font-medium">{patientInfo.age || 55}</strong> • Biopsy Cohort: <strong className="text-[#082827] font-medium">Fine Needle Aspirate</strong>
               </p>
             </div>
           </div>
 
           {/* Model Switch Button: Hybrid Quantum vs Classical Baseline */}
-          <div className="flex items-center gap-1.5 p-1 bg-cream/70 border border-hairline rounded-xl shrink-0">
+          <div className="flex items-center gap-1.5 p-1 bg-[#F2F7F6] border border-[#DFEBE8] rounded-2xl shrink-0">
             <button
               onClick={() => setSelectedModel("transfinite_1")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
                 isHybrid
-                  ? "bg-white text-ink shadow-xs border border-hairline font-bold"
-                  : "text-ink-soft hover:text-ink"
+                  ? "bg-white text-[#082827] shadow-xs border border-[#DFEBE8] font-bold"
+                  : "text-[#5A7470] hover:text-[#082827]"
               }`}
             >
-              <Sparkles size={13} className={isHybrid ? "text-quantum" : "text-ink-soft"} />
+              <Sparkles size={13} className={isHybrid ? "text-[#006766]" : "text-[#5A7470]"} />
               <span>Hybrid Quantum (8-Qubit VQC)</span>
-              {isHybrid && <span className="w-1.5 h-1.5 rounded-full bg-quantum" />}
+              {isHybrid && <span className="w-1.5 h-1.5 rounded-full bg-[#00B489]" />}
             </button>
             <button
               onClick={() => setSelectedModel("cx_01")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
                 !isHybrid
-                  ? "bg-white text-ink shadow-xs border border-hairline font-bold"
-                  : "text-ink-soft hover:text-ink"
+                  ? "bg-white text-[#082827] shadow-xs border border-[#DFEBE8] font-bold"
+                  : "text-[#5A7470] hover:text-[#082827]"
               }`}
             >
-              <Activity size={13} className={!isHybrid ? "text-blue-600" : "text-ink-soft"} />
+              <Activity size={13} className={!isHybrid ? "text-blue-600" : "text-[#5A7470]"} />
               <span>Classical Baseline Ensemble</span>
               {!isHybrid && <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />}
             </button>
@@ -433,7 +437,7 @@ export default function BreastCancerAnalysisPage() {
         </div>
 
         {/* Middle Section: Circular Risk Dial, Assessment Tier & Active Telemetry */}
-        <div className="p-5 bg-cream/10 flex flex-wrap items-center justify-between gap-6">
+        <div className="p-5 sm:p-6 bg-[#FAFDFD] flex flex-wrap items-center justify-between gap-6 border-b border-[#DFEBE8]/60">
           <div className="flex items-center gap-5">
             {/* High-Contrast Circular Risk Score Dial */}
             <div className="relative w-18 h-18 shrink-0 flex items-center justify-center">
@@ -445,7 +449,7 @@ export default function BreastCancerAnalysisPage() {
                   stroke="currentColor"
                   strokeWidth="5.5"
                   fill="transparent"
-                  className="text-hairline/80"
+                  className="text-stone-200"
                 />
                 <circle
                   cx="36"
@@ -461,10 +465,10 @@ export default function BreastCancerAnalysisPage() {
                 />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                <span className="text-xl font-bold font-mono text-ink tracking-tight leading-none">
+                <span className="text-xl font-bold font-mono text-[#082827] tracking-tight leading-none">
                   {activeRiskScore.toFixed(0)}
                 </span>
-                <span className="text-[9px] uppercase tracking-wider text-ink-soft font-semibold mt-0.5">
+                <span className="text-[9px] uppercase tracking-wider text-[#5A7470] font-semibold mt-0.5">
                   / 100
                 </span>
               </div>
@@ -476,26 +480,26 @@ export default function BreastCancerAnalysisPage() {
                 <span className={`text-xs px-2.5 py-0.5 rounded-full font-bold border ${currentBadge.color}`}>
                   {currentBadge.label}
                 </span>
-                <div className="flex items-center gap-1 text-xs text-ink-soft font-mono">
+                <div className="flex items-center gap-1 text-xs text-[#5A7470] font-mono">
                   <span>
-                    Engine: <strong className="text-ink font-semibold">{activeEngineName}</strong>
+                    Engine: <strong className="text-[#082827] font-semibold">{activeEngineName}</strong>
                   </span>
-                  <span className="text-[11px] text-ink-muted">({activeLatency} ms)</span>
+                  <span className="text-[11px] text-[#5A7470]/70">({activeLatency} ms)</span>
                   <HelpTooltip title={activeEngineName} text={activeEngineSpecs} />
                 </div>
               </div>
-              <p className="text-xs text-ink font-medium">
-                Active Assessment: <strong className="text-ink">{activePrediction}</strong> ({activeConfidence.toFixed(1)}% Confidence)
+              <p className="text-xs text-[#082827] font-medium">
+                Active Assessment: <strong className="text-[#082827]">{activePrediction}</strong> ({activeConfidence.toFixed(1)}% Confidence)
               </p>
-              <p className="text-xs text-ink-soft leading-relaxed">{activeEngineDesc}</p>
+              <p className="text-xs text-[#5A7470] leading-relaxed">{activeEngineDesc}</p>
             </div>
           </div>
 
           {/* Right Metrics: Cell Abnormality & System Certainty */}
-          <div className="flex items-center gap-4 bg-white px-4 py-3 rounded-xl border border-hairline shadow-2xs">
+          <div className="flex items-center gap-4 bg-white px-5 py-3.5 rounded-2xl border border-[#DFEBE8] shadow-2xs">
             <div className="text-right">
               <div className="flex items-center justify-end gap-1">
-                <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft block font-semibold">
+                <span className="text-[10px] uppercase font-mono tracking-wider text-[#5A7470] block font-semibold">
                   Cell Abnormality
                 </span>
                 <HelpTooltip
@@ -503,14 +507,14 @@ export default function BreastCancerAnalysisPage() {
                   text="A 0-100 metric measuring how much cell dimensions, area, and borders deviate from healthy normal standards."
                 />
               </div>
-              <span className="text-base font-bold font-mono text-quantum">
+              <span className="text-base font-bold font-mono text-[#006766]">
                 {screeningResult.morphometric_index?.toFixed(1) ?? "0.0"} / 100
               </span>
             </div>
-            <div className="h-8 w-px bg-hairline" />
+            <div className="h-8 w-px bg-[#DFEBE8]" />
             <div className="text-right">
               <div className="flex items-center justify-end gap-1">
-                <span className="text-[10px] uppercase font-mono tracking-wider text-ink-soft block font-semibold">
+                <span className="text-[10px] uppercase font-mono tracking-wider text-[#5A7470] block font-semibold">
                   System Certainty
                 </span>
                 <HelpTooltip
@@ -518,7 +522,7 @@ export default function BreastCancerAnalysisPage() {
                   text="Model statistical confidence derived from clinical validation against standard histological datasets."
                 />
               </div>
-              <span className="text-base font-bold font-mono text-ink">
+              <span className="text-base font-bold font-mono text-[#082827]">
                 {activeConfidence.toFixed(1)}%
               </span>
             </div>
@@ -526,17 +530,17 @@ export default function BreastCancerAnalysisPage() {
         </div>
 
         {/* Bottom Section: Attached Navigation Tabs (Consolidated to 3 Genuine Tabs) */}
-        <div className="border-t border-hairline bg-cream/30 px-3 py-2 flex flex-wrap items-center gap-2">
+        <div className="bg-[#F7FCFB] px-3.5 py-2.5 flex flex-wrap items-center gap-2">
           {/* Tab 1: Key Risk Factors & Cell Measurements */}
           <button
             onClick={() => setActiveTab("key_risk_factors")}
             className={`py-2 px-4 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
               activeTab === "key_risk_factors"
-                ? "bg-white text-ink font-bold shadow-xs border border-hairline"
-                : "text-ink-soft hover:text-ink"
+                ? "bg-white text-[#006766] font-bold shadow-xs border border-[#DFEBE8]"
+                : "text-[#5A7470] hover:text-[#082827]"
             }`}
           >
-            <BarChart3 size={14} className={activeTab === "key_risk_factors" ? "text-quantum" : ""} />
+            <BarChart3 size={14} className={activeTab === "key_risk_factors" ? "text-[#006766]" : ""} />
             <span>📊 1. Key Risk Factors</span>
           </button>
 
@@ -545,11 +549,11 @@ export default function BreastCancerAnalysisPage() {
             onClick={() => setActiveTab("quresight_ai")}
             className={`py-2 px-4 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
               activeTab === "quresight_ai"
-                ? "bg-white text-ink font-bold shadow-xs border border-hairline"
-                : "text-ink-soft hover:text-ink"
+                ? "bg-white text-[#006766] font-bold shadow-xs border border-[#DFEBE8]"
+                : "text-[#5A7470] hover:text-[#082827]"
             }`}
           >
-            <Sparkles size={14} className={activeTab === "quresight_ai" ? "text-quantum" : ""} />
+            <Sparkles size={14} className={activeTab === "quresight_ai" ? "text-[#006766]" : ""} />
             <span>✨ 2. QureSight AI</span>
           </button>
 
@@ -558,11 +562,11 @@ export default function BreastCancerAnalysisPage() {
             onClick={() => setActiveTab("model_comparison")}
             className={`py-2 px-4 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
               activeTab === "model_comparison"
-                ? "bg-white text-ink font-bold shadow-xs border border-hairline"
-                : "text-ink-soft hover:text-ink"
+                ? "bg-white text-[#006766] font-bold shadow-xs border border-[#DFEBE8]"
+                : "text-[#5A7470] hover:text-[#082827]"
             }`}
           >
-            <Layers size={14} className={activeTab === "model_comparison" ? "text-quantum" : ""} />
+            <Layers size={14} className={activeTab === "model_comparison" ? "text-[#006766]" : ""} />
             <span>⚖️ 3. Model Comparison</span>
           </button>
 
@@ -571,11 +575,11 @@ export default function BreastCancerAnalysisPage() {
             onClick={() => setActiveTab("realtime_graphs")}
             className={`py-2 px-4 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
               activeTab === "realtime_graphs"
-                ? "bg-white text-ink font-bold shadow-xs border border-hairline"
-                : "text-ink-soft hover:text-ink"
+                ? "bg-white text-[#006766] font-bold shadow-xs border border-[#DFEBE8]"
+                : "text-[#5A7470] hover:text-[#082827]"
             }`}
           >
-            <BarChart2 size={14} className={activeTab === "realtime_graphs" ? "text-quantum" : ""} />
+            <BarChart2 size={14} className={activeTab === "realtime_graphs" ? "text-[#006766]" : ""} />
             <span>📈 4. Real-Time Graphs</span>
           </button>
         </div>
