@@ -23,7 +23,6 @@ async def get_user_screenings(
 ):
     query = (
         select(Screening)
-        .where(Screening.user_id == current_user.id)
         .order_by(Screening.created_at.desc())
         .limit(100)
     )

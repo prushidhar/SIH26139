@@ -35,99 +35,60 @@ export interface StoredPrediction {
 }
 
 /**
- * Institutional baseline clinical history cohort across all 8 diagnostic specialties.
- * Serves as certified reference audit trail and guarantees permanent clinical records.
+ * Filter set of any synthetic baseline IDs to proactively purge from localStorage.
  */
-export const BASE_CLINICAL_SCREENINGS: StoredPrediction[] = [
+const FAKE_SAMPLE_IDS = new Set([
+  "QS-ECG-9024",
+  "QS-ECG-7811",
+  "QS-ECG-6394",
+  "QS-BC-8120",
+  "QS-BC-3491",
+  "QS-CAD-5108",
+  "QS-CAD-2947",
+  "QS-LIV-4419",
+  "QS-LIV-1802",
+  "QS-CKD-6231",
+  "QS-CKD-3180",
+  "QS-HCV-7345",
+  "QS-CXR-8902",
+  "QS-NEU-5623",
+  "QS-NEU-2194",
+]);
+
+const FAKE_SAMPLE_NAMES = new Set([
+  "Arthur Henderson",
+  "Miriam Al-Mansoor",
+  "Carlos Mendoza",
+  "Eleanor Vance",
+  "Sophia Dubois",
+  "David K. O'Connor",
+  "Grace Tanaka",
+  "Rajesh Patel",
+  "Ananya Sen",
+  "Evelyn Wright",
+  "Thomas Bradley",
+  "Viktor Rostov",
+  "Beatrice Gomez",
+  "Jonathan Sterling",
+  "Hanna Lindqvist",
+]);
+
+function isFakeSample(r: any): boolean {
+  if (!r) return true;
+  if (FAKE_SAMPLE_IDS.has(r.id) || FAKE_SAMPLE_IDS.has(r.patientId)) return true;
+  if (FAKE_SAMPLE_NAMES.has(r.patientName)) return true;
+  return false;
+}
+
+/**
+ * Real historical screening records from the persistent clinical database.
+ */
+export const REAL_HISTORICAL_SCREENINGS: StoredPrediction[] = [
   {
-    id: "QS-ECG-9024",
-    patientId: "PT-9024",
-    patientName: "Arthur Henderson",
-    patientAge: 62,
-    patientGender: "Male",
-    diseaseType: "Cardiac 12-Lead Electrocardiogram",
-    disease: "Heart Attack & Cardiac ECG",
-    cohort: "12-Lead Electrocardiogram (PTB-XL)",
-    modelFamily: "aegis_quantum_ecg_v2",
-    executionMode: "hybrid_quantum_simulator",
-    quantumPrediction: "Myocardial Infarction",
-    quantumRiskScore: 94.2,
-    quantumConfidence: 96.8,
-    classicalPrediction: "Myocardial Infarction",
-    classicalRiskScore: 90.0,
-    classicalConfidence: 91.4,
-    riskLevel: "High",
-    topDriver: "Lead V2 (Septal ST Elevation)",
-    topDriverImpact: 24.2,
-    consensusStatus: "Concordant",
-    quantumExecutionTimeMs: 54.3,
-    classicalExecutionTimeMs: 35.1,
-    inputFeatures: { heart_rate: 98, pr_interval_ms: 182, qrs_duration_ms: 114, qt_corrected_ms: 462 },
-    clinicalNote: "Significant ST-segment elevation in leads V1-V3 with reciprocal depression in inferior leads. Acute anteroseptal myocardial injury.",
-    createdAt: "2026-10-03T06:12:00.000Z",
-    timestamp: "Oct 3, 2026, 11:42 AM",
-  },
-  {
-    id: "QS-ECG-7811",
-    patientId: "PT-7811",
-    patientName: "Miriam Al-Mansoor",
-    patientAge: 48,
-    patientGender: "Female",
-    diseaseType: "Cardiac 12-Lead Electrocardiogram",
-    disease: "Heart Attack & Cardiac ECG",
-    cohort: "12-Lead Electrocardiogram (PTB-XL)",
-    modelFamily: "aegis_quantum_ecg_v2",
-    executionMode: "hybrid_quantum_simulator",
-    quantumPrediction: "Normal",
-    quantumRiskScore: 8.6,
-    quantumConfidence: 98.4,
-    classicalPrediction: "Normal",
-    classicalRiskScore: 9.6,
-    classicalConfidence: 97.1,
-    riskLevel: "Low",
-    topDriver: "Lead II (Rhythm Regularity)",
-    topDriverImpact: -14.5,
-    consensusStatus: "Concordant",
-    quantumExecutionTimeMs: 52.1,
-    classicalExecutionTimeMs: 34.8,
-    inputFeatures: { heart_rate: 72, pr_interval_ms: 156, qrs_duration_ms: 88, qt_corrected_ms: 412 },
-    clinicalNote: "Normal sinus rhythm at 72 bpm. PR interval 156ms, QRS duration 88ms. Physiological baseline preserved.",
-    createdAt: "2026-10-03T04:45:00.000Z",
-    timestamp: "Oct 3, 2026, 10:15 AM",
-  },
-  {
-    id: "QS-ECG-6394",
-    patientId: "PT-6394",
-    patientName: "Carlos Mendoza",
-    patientAge: 71,
-    patientGender: "Male",
-    diseaseType: "Cardiac 12-Lead Electrocardiogram",
-    disease: "Heart Attack & Cardiac ECG",
-    cohort: "12-Lead Electrocardiogram (PTB-XL)",
-    modelFamily: "aegis_quantum_ecg_v2",
-    executionMode: "hybrid_quantum_simulator",
-    quantumPrediction: "Abnormal Heartbeat",
-    quantumRiskScore: 81.4,
-    quantumConfidence: 91.2,
-    classicalPrediction: "Abnormal Heartbeat",
-    classicalRiskScore: 76.4,
-    classicalConfidence: 86.7,
-    riskLevel: "High",
-    topDriver: "Lead V5 (Lateral Repolarization)",
-    topDriverImpact: 19.1,
-    consensusStatus: "Concordant",
-    quantumExecutionTimeMs: 55.7,
-    classicalExecutionTimeMs: 36.2,
-    inputFeatures: { heart_rate: 104, pr_interval_ms: 210, qrs_duration_ms: 128, qt_corrected_ms: 478 },
-    clinicalNote: "Frequent premature ventricular contractions with prolonged QTc (478ms). Conduction delay observed.",
-    createdAt: "2026-10-02T11:00:00.000Z",
-    timestamp: "Oct 2, 2026, 04:30 PM",
-  },
-  {
-    id: "QS-BC-8120",
-    patientId: "PT-8120",
-    patientName: "Eleanor Vance",
-    patientAge: 54,
+    id: "QS-BC-5582",
+    patientId: "QS-BC-5582",
+    patientName: "rwerw",
+    patientAge: 34,
     patientGender: "Female",
     diseaseType: "Breast Cytology (Fine Needle Aspirate)",
     disease: "Breast Cancer Screening",
@@ -135,27 +96,94 @@ export const BASE_CLINICAL_SCREENINGS: StoredPrediction[] = [
     modelFamily: "aegis_classical_v1",
     executionMode: "hybrid_quantum_simulator",
     quantumPrediction: "Malignant",
-    quantumRiskScore: 96.4,
-    quantumConfidence: 97.9,
+    quantumRiskScore: 49.9,
+    quantumConfidence: 61.0,
     classicalPrediction: "Malignant",
-    classicalRiskScore: 92.2,
-    classicalConfidence: 95.1,
+    classicalRiskScore: 49.9,
+    classicalConfidence: 54.8,
     riskLevel: "High",
-    topDriver: "Perimeter Mean / Nuclear Pleomorphism",
-    topDriverImpact: 31.8,
+    topDriver: "Cell Perimeter",
+    topDriverImpact: 8.3,
     consensusStatus: "Concordant",
-    quantumExecutionTimeMs: 704.2,
-    classicalExecutionTimeMs: 102.5,
-    inputFeatures: { radius_mean: 17.99, texture_mean: 21.64, perimeter_mean: 118.8, area_mean: 987.4, concavity_mean: 0.1607 },
-    clinicalNote: "Marked nuclear atypia, irregular chromatin distribution, and elevated perimeter metric in fine-needle biopsy.",
-    createdAt: "2026-10-02T08:48:00.000Z",
-    timestamp: "Oct 2, 2026, 02:18 PM",
+    quantumExecutionTimeMs: 92.95,
+    classicalExecutionTimeMs: 15.97,
+    inputFeatures: {
+      radius_mean: 18,
+      texture_mean: 26.5,
+      perimeter_mean: 78.2,
+      area_mean: 458.7,
+      smoothness_mean: 0.091,
+      compactness_mean: 0.065,
+      concavity_mean: 0.037,
+      concave_points_mean: 0.023,
+    },
+    clinicalNote: "",
+    createdAt: "2026-09-30 20:00:29",
+    timestamp: "Sep 30, 2026, 08:00 PM",
   },
   {
-    id: "QS-BC-3491",
-    patientId: "PT-3491",
-    patientName: "Sophia Dubois",
-    patientAge: 42,
+    id: "QS-ECG-9562",
+    patientId: "QS-ECG-9562",
+    patientName: "Devendra Rao",
+    patientAge: 62,
+    patientGender: "Male",
+    diseaseType: "Cardiac 12-Lead Electrocardiogram",
+    disease: "Heart Attack & Cardiac ECG",
+    cohort: "12-Lead Electrocardiogram (PTB-XL)",
+    modelFamily: "cardiac_dual_engine_v1",
+    executionMode: "simulator",
+    quantumPrediction: "Myocardial Infarction",
+    quantumRiskScore: 99.4,
+    quantumConfidence: 93.86,
+    classicalPrediction: "Myocardial Infarction",
+    classicalRiskScore: 95.2,
+    classicalConfidence: 97.01,
+    riskLevel: "High",
+    topDriver: "Lead V6 (Lateral) (Low Lateral Wall (LCx))",
+    topDriverImpact: 24.2,
+    consensusStatus: "Concordant",
+    quantumExecutionTimeMs: 90.34,
+    classicalExecutionTimeMs: 34.27,
+    inputFeatures: {},
+    clinicalNote:
+      "Immediate STAT Percutaneous Coronary Intervention (PCI) / Cath Lab activation, dual antiplatelet therapy (Aspirin + P2Y12 inhibitor), and continuous telemetric ICU monitoring.",
+    createdAt: "2026-09-22 13:43:46",
+    timestamp: "Sep 22, 2026, 01:43 PM",
+  },
+  {
+    id: "QS-ECG-3468",
+    patientId: "QS-ECG-3468",
+    patientName: "Patient",
+    patientAge: 55,
+    patientGender: "Male",
+    diseaseType: "Cardiac 12-Lead Electrocardiogram",
+    disease: "Heart Attack & Cardiac ECG",
+    cohort: "12-Lead Electrocardiogram (PTB-XL)",
+    modelFamily: "cardiac_dual_engine_v1",
+    executionMode: "simulator",
+    quantumPrediction: "Abnormal Heartbeat",
+    quantumRiskScore: 84.0,
+    quantumConfidence: 96.21,
+    classicalPrediction: "Abnormal Heartbeat",
+    classicalRiskScore: 79.0,
+    classicalConfidence: 98.12,
+    riskLevel: "High",
+    topDriver: "Lead V2 (Septal) (Anteroseptal Junction (LAD))",
+    topDriverImpact: 18.5,
+    consensusStatus: "Concordant",
+    quantumExecutionTimeMs: 155.96,
+    classicalExecutionTimeMs: 877.78,
+    inputFeatures: {},
+    clinicalNote:
+      "Urgent continuous 24-hour Holter or telemetry monitoring, serum electrolyte panel (K+, Mg++), troponin serial re-check, and electrophysiology consult.",
+    createdAt: "2026-09-22 13:38:31",
+    timestamp: "Sep 22, 2026, 01:38 PM",
+  },
+  {
+    id: "QS-BC-2628",
+    patientId: "QS-BC-2628",
+    patientName: "Elena",
+    patientAge: 20,
     patientGender: "Female",
     diseaseType: "Breast Cytology (Fine Needle Aspirate)",
     disease: "Breast Cancer Screening",
@@ -163,301 +191,104 @@ export const BASE_CLINICAL_SCREENINGS: StoredPrediction[] = [
     modelFamily: "aegis_classical_v1",
     executionMode: "hybrid_quantum_simulator",
     quantumPrediction: "Benign",
-    quantumRiskScore: 11.3,
-    quantumConfidence: 96.5,
+    quantumRiskScore: 25.9,
+    quantumConfidence: 72.1,
+    classicalPrediction: "Malignant",
+    classicalRiskScore: 54.7,
+    classicalConfidence: 54.7,
+    riskLevel: "Low",
+    topDriver: "Indentation Count",
+    topDriverImpact: 12.0,
+    consensusStatus: "Discordant",
+    quantumExecutionTimeMs: 272.58,
+    classicalExecutionTimeMs: 95.58,
+    inputFeatures: {
+      radius_mean: 11.1,
+      texture_mean: 17.4,
+      perimeter_mean: 97,
+      area_mean: 458.7,
+      smoothness_mean: 0.091,
+      compactness_mean: 0.065,
+      concavity_mean: 0.037,
+      concave_points_mean: 0.08,
+    },
+    clinicalNote: "",
+    createdAt: "2026-09-22 11:28:26",
+    timestamp: "Sep 22, 2026, 11:28 AM",
+  },
+  {
+    id: "Patient-BC-102",
+    patientId: "Patient-BC-102",
+    patientName: "DEMOGRAPHICS",
+    patientAge: 31,
+    patientGender: "Female",
+    diseaseType: "Breast Cytology (Fine Needle Aspirate)",
+    disease: "Breast Cancer Screening",
+    cohort: "Fine Needle Aspirate (WDBC)",
+    modelFamily: "aegis_classical_v1",
+    executionMode: "hybrid_quantum_simulator",
+    quantumPrediction: "Benign",
+    quantumRiskScore: 9.9,
+    quantumConfidence: 84.7,
     classicalPrediction: "Benign",
-    classicalRiskScore: 12.7,
-    classicalConfidence: 94.8,
+    classicalRiskScore: 10.7,
+    classicalConfidence: 89.3,
     riskLevel: "Low",
-    topDriver: "Smoothness Index / Uniformity",
-    topDriverImpact: -18.2,
+    topDriver: "Indentation Depth",
+    topDriverImpact: -14.2,
     consensusStatus: "Concordant",
-    quantumExecutionTimeMs: 688.0,
-    classicalExecutionTimeMs: 98.4,
-    inputFeatures: { radius_mean: 11.42, texture_mean: 16.85, perimeter_mean: 73.18, area_mean: 402.5, concavity_mean: 0.0243 },
-    clinicalNote: "Uniform cytomorphology with cohesive sheets and absence of nuclear hyperchromasia. Consistent with benign fibroadenoma.",
-    createdAt: "2026-10-02T05:35:00.000Z",
-    timestamp: "Oct 2, 2026, 11:05 AM",
+    quantumExecutionTimeMs: 231.49,
+    classicalExecutionTimeMs: 50.65,
+    inputFeatures: {
+      radius_mean: 11.42,
+      texture_mean: 13.25,
+      perimeter_mean: 73.34,
+      area_mean: 399.8,
+      smoothness_mean: 0.0785,
+      compactness_mean: 0.0402,
+      concavity_mean: 0.0135,
+      concave_points_mean: 0.0112,
+    },
+    clinicalNote: "",
+    createdAt: "2026-09-22 10:02:58",
+    timestamp: "Sep 22, 2026, 10:02 AM",
   },
   {
-    id: "QS-CAD-5108",
-    patientId: "PT-5108",
-    patientName: "David K. O'Connor",
-    patientAge: 59,
-    patientGender: "Male",
-    diseaseType: "Cardiovascular Hemodynamics (CAD)",
-    disease: "Coronary Artery Disease Risk",
-    cohort: "Cleveland Clinic CAD Panel",
-    modelFamily: "aegis_vqc_cad_v1",
-    executionMode: "hybrid_quantum_simulator",
-    quantumPrediction: "High CAD Risk",
-    quantumRiskScore: 88.7,
-    quantumConfidence: 93.4,
-    classicalPrediction: "High CAD Risk",
-    classicalRiskScore: 83.7,
-    classicalConfidence: 89.1,
-    riskLevel: "High",
-    topDriver: "Exercise ST Depression (ST_Dep = 2.8mm)",
-    topDriverImpact: 26.4,
-    consensusStatus: "Concordant",
-    quantumExecutionTimeMs: 84.1,
-    classicalExecutionTimeMs: 18.5,
-    inputFeatures: { cp: 3, trestbps: 154, chol: 286, thalach: 124, oldpeak: 2.8, ca: 2 },
-    clinicalNote: "Exertional angina with downsloping ST-segment depression of 2.8mm on treadmill stress testing. Obstructive coronary ischemia probable.",
-    createdAt: "2026-10-01T10:20:00.000Z",
-    timestamp: "Oct 1, 2026, 03:50 PM",
-  },
-  {
-    id: "QS-CAD-2947",
-    patientId: "PT-2947",
-    patientName: "Grace Tanaka",
-    patientAge: 63,
+    id: "QS-BC-6810",
+    patientId: "QS-BC-6810",
+    patientName: "Elena",
+    patientAge: 55,
     patientGender: "Female",
-    diseaseType: "Cardiovascular Hemodynamics (CAD)",
-    disease: "Coronary Artery Disease Risk",
-    cohort: "Cleveland Clinic CAD Panel",
-    modelFamily: "aegis_vqc_cad_v1",
+    diseaseType: "Breast Cytology (Fine Needle Aspirate)",
+    disease: "Breast Cancer Screening",
+    cohort: "Fine Needle Aspirate (WDBC)",
+    modelFamily: "aegis_classical_v1",
     executionMode: "hybrid_quantum_simulator",
-    quantumPrediction: "Low CAD Risk",
-    quantumRiskScore: 14.2,
-    quantumConfidence: 95.0,
-    classicalPrediction: "Low CAD Risk",
-    classicalRiskScore: 15.9,
-    classicalConfidence: 92.3,
+    quantumPrediction: "Benign",
+    quantumRiskScore: 2.9,
+    quantumConfidence: 95.6,
+    classicalPrediction: "Benign",
+    classicalRiskScore: 4.1,
+    classicalConfidence: 70.6,
     riskLevel: "Low",
-    topDriver: "Resting Hemodynamics (BP 118/76)",
-    topDriverImpact: -12.0,
+    topDriver: "Indentation Depth",
+    topDriverImpact: -18.5,
     consensusStatus: "Concordant",
-    quantumExecutionTimeMs: 81.3,
-    classicalExecutionTimeMs: 17.2,
-    inputFeatures: { cp: 0, trestbps: 118, chol: 198, thalach: 168, oldpeak: 0.2, ca: 0 },
-    clinicalNote: "Normal resting hemodynamic profile, no exercise-induced repolarization abnormalities. Low probability of coronary artery disease.",
-    createdAt: "2026-10-01T07:55:00.000Z",
-    timestamp: "Oct 1, 2026, 01:25 PM",
-  },
-  {
-    id: "QS-LIV-4419",
-    patientId: "PT-4419",
-    patientName: "Rajesh Patel",
-    patientAge: 51,
-    patientGender: "Male",
-    diseaseType: "Hepatic Functional Panel",
-    disease: "Hepatic Dysregulation & Impairment",
-    cohort: "Indian Liver Patient Dataset (ILPD)",
-    modelFamily: "aegis_vqc_liver_v1",
-    executionMode: "hybrid_quantum_simulator",
-    quantumPrediction: "Hepatic Dysfunction",
-    quantumRiskScore: 86.1,
-    quantumConfidence: 92.6,
-    classicalPrediction: "Hepatic Dysfunction",
-    classicalRiskScore: 81.1,
-    classicalConfidence: 88.4,
-    riskLevel: "High",
-    topDriver: "Total Bilirubin & SGPT/ALT Elevation",
-    topDriverImpact: 22.9,
-    consensusStatus: "Concordant",
-    quantumExecutionTimeMs: 79.4,
-    classicalExecutionTimeMs: 16.8,
-    inputFeatures: { Total_Bilirubin: 3.8, Direct_Bilirubin: 1.9, Alkaline_Phosphotase: 340, Alamine_Aminotransferase: 98, Aspartate_Aminotransferase: 112 },
-    clinicalNote: "Serum total bilirubin 3.8 mg/dL and ALT 98 U/L indicating hepatocellular inflammatory damage.",
-    createdAt: "2026-10-01T04:10:00.000Z",
-    timestamp: "Oct 1, 2026, 09:40 AM",
-  },
-  {
-    id: "QS-LIV-1802",
-    patientId: "PT-1802",
-    patientName: "Ananya Sen",
-    patientAge: 39,
-    patientGender: "Female",
-    diseaseType: "Hepatic Functional Panel",
-    disease: "Hepatic Dysregulation & Impairment",
-    cohort: "Indian Liver Patient Dataset (ILPD)",
-    modelFamily: "aegis_vqc_liver_v1",
-    executionMode: "hybrid_quantum_simulator",
-    quantumPrediction: "Normal Liver Function",
-    quantumRiskScore: 9.8,
-    quantumConfidence: 97.1,
-    classicalPrediction: "Normal Liver Function",
-    classicalRiskScore: 11.0,
-    classicalConfidence: 94.5,
-    riskLevel: "Low",
-    topDriver: "Albumin-Globulin Ratio (A/G 1.25)",
-    topDriverImpact: -15.4,
-    consensusStatus: "Concordant",
-    quantumExecutionTimeMs: 76.2,
-    classicalExecutionTimeMs: 15.9,
-    inputFeatures: { Total_Bilirubin: 0.8, Direct_Bilirubin: 0.2, Alkaline_Phosphotase: 160, Alamine_Aminotransferase: 22, Aspartate_Aminotransferase: 24 },
-    clinicalNote: "All transaminases, bilirubin, and alkaline phosphatase within physiological limits. Normal hepatic function.",
-    createdAt: "2026-09-30T10:45:00.000Z",
-    timestamp: "Sep 30, 2026, 04:15 PM",
-  },
-  {
-    id: "QS-CKD-6231",
-    patientId: "PT-6231",
-    patientName: "Evelyn Wright",
-    patientAge: 67,
-    patientGender: "Female",
-    diseaseType: "Nephrology & Renal Function",
-    disease: "Glomerular Impairment & KDIGO Risk",
-    cohort: "KDIGO Renal Panel & eGFR",
-    modelFamily: "aegis_vqc_renal_v1",
-    executionMode: "hybrid_quantum_simulator",
-    quantumPrediction: "Glomerular Impairment",
-    quantumRiskScore: 89.5,
-    quantumConfidence: 94.7,
-    classicalPrediction: "Glomerular Impairment",
-    classicalRiskScore: 85.3,
-    classicalConfidence: 91.0,
-    riskLevel: "High",
-    topDriver: "Serum Creatinine & eGFR 38 mL/min",
-    topDriverImpact: 28.3,
-    consensusStatus: "Concordant",
-    quantumExecutionTimeMs: 82.5,
-    classicalExecutionTimeMs: 19.1,
-    inputFeatures: { sc: 2.1, bu: 64, bgr: 178, al: 2, hemo: 10.2, pot: 5.4 },
-    clinicalNote: "Estimated GFR 38 mL/min/1.73m² corresponds to KDIGO Stage G3b moderately-to-severely decreased kidney function.",
-    createdAt: "2026-09-30T08:20:00.000Z",
-    timestamp: "Sep 30, 2026, 01:50 PM",
-  },
-  {
-    id: "QS-CKD-3180",
-    patientId: "PT-3180",
-    patientName: "Thomas Bradley",
-    patientAge: 45,
-    patientGender: "Male",
-    diseaseType: "Nephrology & Renal Function",
-    disease: "Glomerular Impairment & KDIGO Risk",
-    cohort: "KDIGO Renal Panel & eGFR",
-    modelFamily: "aegis_vqc_renal_v1",
-    executionMode: "hybrid_quantum_simulator",
-    quantumPrediction: "Normal Glomerular Function",
-    quantumRiskScore: 12.1,
-    quantumConfidence: 98.0,
-    classicalPrediction: "Normal Glomerular Function",
-    classicalRiskScore: 13.5,
-    classicalConfidence: 96.2,
-    riskLevel: "Low",
-    topDriver: "Serum Creatinine (0.89 mg/dL)",
-    topDriverImpact: -11.2,
-    consensusStatus: "Concordant",
-    quantumExecutionTimeMs: 78.1,
-    classicalExecutionTimeMs: 17.0,
-    inputFeatures: { sc: 0.89, bu: 24, bgr: 96, al: 0, hemo: 14.8, pot: 4.2 },
-    clinicalNote: "eGFR > 95 mL/min/1.73m², normal urine albumin-to-creatinine ratio. Normal glomerular filtration.",
-    createdAt: "2026-09-30T04:50:00.000Z",
-    timestamp: "Sep 30, 2026, 10:20 AM",
-  },
-  {
-    id: "QS-HCV-7345",
-    patientId: "PT-7345",
-    patientName: "Viktor Rostov",
-    patientAge: 56,
-    patientGender: "Male",
-    diseaseType: "Hepatitis C & Liver Fibrosis",
-    disease: "Hepatitis C & Fibrosis Staging",
-    cohort: "UCI HCV Serological Biomarkers",
-    modelFamily: "aegis_vqc_hcv_v1",
-    executionMode: "hybrid_quantum_simulator",
-    quantumPrediction: "Active HCV Fibrosis (F3/F4)",
-    quantumRiskScore: 91.0,
-    quantumConfidence: 95.3,
-    classicalPrediction: "Active HCV Fibrosis (F3/F4)",
-    classicalRiskScore: 86.8,
-    classicalConfidence: 90.8,
-    riskLevel: "High",
-    topDriver: "AST to Platelet Ratio Index (APRI)",
-    topDriverImpact: 25.7,
-    consensusStatus: "Concordant",
-    quantumExecutionTimeMs: 85.0,
-    classicalExecutionTimeMs: 18.2,
-    inputFeatures: { AST: 145, ALT: 88, CHE: 4.8, GGT: 198, PROT: 78 },
-    clinicalNote: "Marked elevation in AST and GGT with thrombocytopenia indicative of advanced bridging hepatic fibrosis (F3/F4).",
-    createdAt: "2026-09-29T09:40:00.000Z",
-    timestamp: "Sep 29, 2026, 03:10 PM",
-  },
-  {
-    id: "QS-CXR-8902",
-    patientId: "PT-8902",
-    patientName: "Beatrice Gomez",
-    patientAge: 72,
-    patientGender: "Female",
-    diseaseType: "Thoracic Radiography & Cardiomegaly",
-    disease: "Thoracic Radiography & Cardiomegaly",
-    cohort: "CheXpert Digital Radiograph (CXR)",
-    modelFamily: "aegis_quantum_vision_cxr",
-    executionMode: "hybrid_quantum_simulator",
-    quantumPrediction: "Cardiomegaly Detected",
-    quantumRiskScore: 93.8,
-    quantumConfidence: 95.8,
-    classicalPrediction: "Cardiomegaly Detected",
-    classicalRiskScore: 89.6,
-    classicalConfidence: 92.4,
-    riskLevel: "High",
-    topDriver: "Cardiothoracic Ratio (CTR 0.65)",
-    topDriverImpact: 33.1,
-    consensusStatus: "Concordant",
-    quantumExecutionTimeMs: 142.0,
-    classicalExecutionTimeMs: 58.4,
-    inputFeatures: { ctr_ratio: 0.65, thoracic_width_px: 1420, cardiac_silhouette_px: 923 },
-    clinicalNote: "Marked enlargement of cardiac cardiac silhouette with CTR 0.65. Pulmonary vascular congestion noted.",
-    createdAt: "2026-09-29T06:00:00.000Z",
-    timestamp: "Sep 29, 2026, 11:30 AM",
-  },
-  {
-    id: "QS-NEU-5623",
-    patientId: "PT-5623",
-    patientName: "Jonathan Sterling",
-    patientAge: 64,
-    patientGender: "Male",
-    diseaseType: "Neuro-Cognitive Spectral Dynamics",
-    disease: "Neuro-Cognitive & Spectral EEG",
-    cohort: "Bonn Neurological EEG Dynamics",
-    modelFamily: "aegis_vqc_neurological_v1",
-    executionMode: "hybrid_quantum_simulator",
-    quantumPrediction: "Paroxysmal Seizure Activity",
-    quantumRiskScore: 87.4,
-    quantumConfidence: 93.1,
-    classicalPrediction: "Paroxysmal Seizure Activity",
-    classicalRiskScore: 82.4,
-    classicalConfidence: 88.9,
-    riskLevel: "High",
-    topDriver: "Temporal Theta / Spike-Wave Burst",
-    topDriverImpact: 27.6,
-    consensusStatus: "Concordant",
-    quantumExecutionTimeMs: 88.6,
-    classicalExecutionTimeMs: 21.0,
-    inputFeatures: { delta_power: 0.42, theta_power: 0.38, alpha_power: 0.12, spectral_entropy: 0.78 },
-    clinicalNote: "High-voltage sharp-and-slow wave complexes in the temporal leads consistent with partial paroxysmal discharge.",
-    createdAt: "2026-09-28T09:15:00.000Z",
-    timestamp: "Sep 28, 2026, 02:45 PM",
-  },
-  {
-    id: "QS-NEU-2194",
-    patientId: "PT-2194",
-    patientName: "Hanna Lindqvist",
-    patientAge: 29,
-    patientGender: "Female",
-    diseaseType: "Neuro-Cognitive Spectral Dynamics",
-    disease: "Neuro-Cognitive & Spectral EEG",
-    cohort: "Bonn Neurological EEG Dynamics",
-    modelFamily: "aegis_vqc_neurological_v1",
-    executionMode: "hybrid_quantum_simulator",
-    quantumPrediction: "Physiological Baseline",
-    quantumRiskScore: 7.5,
-    quantumConfidence: 98.2,
-    classicalPrediction: "Physiological Baseline",
-    classicalRiskScore: 8.4,
-    classicalConfidence: 96.5,
-    riskLevel: "Low",
-    topDriver: "Posterior Dominant Alpha Rhythm",
-    topDriverImpact: -16.8,
-    consensusStatus: "Concordant",
-    quantumExecutionTimeMs: 83.2,
-    classicalExecutionTimeMs: 19.5,
-    inputFeatures: { delta_power: 0.14, theta_power: 0.18, alpha_power: 0.58, spectral_entropy: 0.91 },
-    clinicalNote: "Continuous 10 Hz posterior dominant rhythm attenuating with eye opening. Normal physiological EEG recording.",
-    createdAt: "2026-09-28T04:40:00.000Z",
-    timestamp: "Sep 28, 2026, 10:10 AM",
+    quantumExecutionTimeMs: 354.74,
+    classicalExecutionTimeMs: 48.77,
+    inputFeatures: {
+      radius_mean: 12.2,
+      texture_mean: 17.4,
+      perimeter_mean: 78.2,
+      area_mean: 458.7,
+      smoothness_mean: 0.091,
+      compactness_mean: 0.065,
+      concavity_mean: 0.037,
+      concave_points_mean: 0.023,
+    },
+    clinicalNote: "",
+    createdAt: "2026-09-21 12:29:11",
+    timestamp: "Sep 21, 2026, 12:29 PM",
   },
 ];
 
@@ -468,8 +299,7 @@ function getUserScreeningKey(): string {
 }
 
 /**
- * Normalizes screening records from various schemas (backend snake_case, frontend camelCase, legacy)
- * into the canonical StoredPrediction contract.
+ * Normalizes screening records into the canonical StoredPrediction contract.
  */
 function normalizeScreeningRecord(s: any): StoredPrediction {
   const isCardiac =
@@ -544,17 +374,17 @@ function normalizeScreeningRecord(s: any): StoredPrediction {
 
 export class ScreeningService {
   /**
-   * Synchronously returns consolidated user screening records and baseline clinical audit history
-   * for instant 0ms initial render without blank or flickering states.
+   * Synchronously returns real user screening records and authentic historical cases
+   * for instant 0ms initial render. Proactively purges any fake/mock items.
    */
   static getCachedScreenings(): StoredPrediction[] {
-    if (typeof window === "undefined") return BASE_CLINICAL_SCREENINGS;
+    if (typeof window === "undefined") return REAL_HISTORICAL_SCREENINGS;
 
     try {
-      const allFoundUserRecords: StoredPrediction[] = [];
+      const allFoundRecords: StoredPrediction[] = [];
       const seenIds = new Set<string>();
 
-      // 1. Gather all user-created records from all relevant localStorage keys
+      // 1. Gather real user records from all relevant localStorage keys
       const candidateKeys: string[] = [
         getUserScreeningKey(),
         "quresight_all_screenings",
@@ -563,7 +393,6 @@ export class ScreeningService {
         "quresight_prediction_history",
       ];
 
-      // Also scan localStorage for any keys matching quresight_screenings_
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         if (key && (key.startsWith("quresight_screenings_") || key.startsWith("quresight_user_screenings"))) {
@@ -580,8 +409,8 @@ export class ScreeningService {
           const parsed = JSON.parse(item);
           if (Array.isArray(parsed)) {
             for (const raw of parsed) {
-              if (raw && raw.id && !seenIds.has(raw.id)) {
-                allFoundUserRecords.push(normalizeScreeningRecord(raw));
+              if (raw && raw.id && !seenIds.has(raw.id) && !isFakeSample(raw)) {
+                allFoundRecords.push(normalizeScreeningRecord(raw));
                 seenIds.add(raw.id);
               }
             }
@@ -591,44 +420,39 @@ export class ScreeningService {
         }
       }
 
-      // Identify baseline IDs
-      const baseIds = new Set(BASE_CLINICAL_SCREENINGS.map((b) => b.id));
-
-      // Separate newly created user records from default baseline cases
-      const userCreatedRecords = allFoundUserRecords.filter((r) => !baseIds.has(r.id));
-      const userModifiedBaseline = allFoundUserRecords.filter((r) => baseIds.has(r.id));
-
-      // Build master list: User's fresh screenings FIRST, followed by baseline historical records
-      const consolidatedList: StoredPrediction[] = [...userCreatedRecords];
-      const consolidatedIdSet = new Set(userCreatedRecords.map((r) => r.id));
-
-      for (const baseCase of BASE_CLINICAL_SCREENINGS) {
-        if (!consolidatedIdSet.has(baseCase.id)) {
-          const updatedVer = userModifiedBaseline.find((u) => u.id === baseCase.id);
-          consolidatedList.push(updatedVer || baseCase);
-          consolidatedIdSet.add(baseCase.id);
+      // 2. Ensure all verified real historical records from the DB are present
+      for (const realRecord of REAL_HISTORICAL_SCREENINGS) {
+        if (!seenIds.has(realRecord.id)) {
+          allFoundRecords.push(realRecord);
+          seenIds.add(realRecord.id);
         }
       }
 
-      // Persist the consolidated list into the current user's storage key and universal key
+      // Sort by createdAt descending (newest first)
+      allFoundRecords.sort((a, b) => {
+        const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+        const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+        return timeB - timeA;
+      });
+
+      // Persist cleaned list (without any fake data)
       try {
         const activeKey = getUserScreeningKey();
-        localStorage.setItem(activeKey, JSON.stringify(consolidatedList));
-        localStorage.setItem("quresight_all_screenings", JSON.stringify(consolidatedList));
+        localStorage.setItem(activeKey, JSON.stringify(allFoundRecords));
+        localStorage.setItem("quresight_all_screenings", JSON.stringify(allFoundRecords));
       } catch {
-        // quota ignore
+        // ignore storage quota
       }
 
-      return consolidatedList;
+      return allFoundRecords;
     } catch {
-      return BASE_CLINICAL_SCREENINGS;
+      return REAL_HISTORICAL_SCREENINGS;
     }
   }
 
   /**
-   * Fetch persistent screening records from the remote backend database (Supabase/PostgreSQL)
-   * and intelligently merge them with local screenings and institutional baseline audit history.
-   * Leverages fast Stale-While-Revalidate pattern with zero data loss.
+   * Fetch persistent screening records from the remote backend database
+   * and merge them with local real records.
    */
   static async getScreenings(): Promise<StoredPrediction[]> {
     const cached = ScreeningService.getCachedScreenings();
@@ -639,13 +463,14 @@ export class ScreeningService {
       });
 
       if (response.data && Array.isArray(response.data) && response.data.length > 0) {
-        const backendRecords = response.data.map((s: any) => normalizeScreeningRecord(s));
+        const backendRecords = response.data
+          .filter((s) => !isFakeSample(s))
+          .map((s: any) => normalizeScreeningRecord(s));
 
-        // Intelligently merge: backend records first, then cached records (which includes user's tests & baseline)
         const merged: StoredPrediction[] = [];
         const seen = new Set<string>();
 
-        // 1. Remote backend records
+        // 1. Remote backend records first
         for (const r of backendRecords) {
           if (r.id && !seen.has(r.id)) {
             merged.push(r);
@@ -653,13 +478,27 @@ export class ScreeningService {
           }
         }
 
-        // 2. Cached records (user local screenings + institutional baseline history)
+        // 2. Cached local records next
         for (const r of cached) {
-          if (r.id && !seen.has(r.id)) {
+          if (r.id && !seen.has(r.id) && !isFakeSample(r)) {
             merged.push(r);
             seen.add(r.id);
           }
         }
+
+        // 3. Ensure all real historical DB records are present
+        for (const realRecord of REAL_HISTORICAL_SCREENINGS) {
+          if (!seen.has(realRecord.id)) {
+            merged.push(realRecord);
+            seen.add(realRecord.id);
+          }
+        }
+
+        merged.sort((a, b) => {
+          const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+          const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+          return timeB - timeA;
+        });
 
         if (typeof window !== "undefined") {
           const activeKey = getUserScreeningKey();
@@ -679,7 +518,6 @@ export class ScreeningService {
 
   /**
    * Save a new screening record to local storage and remote backend database.
-   * The new screening is prepended to the top of the patient history.
    */
   static async createScreening(payload: Partial<StoredPrediction>): Promise<StoredPrediction> {
     const defaultPrefix = payload.diseaseType?.toLowerCase().includes("ecg")
@@ -758,7 +596,7 @@ export class ScreeningService {
       }
     }
 
-    // Persist to backend database (Supabase / FastAPI)
+    // Persist to backend database (FastAPI / Supabase)
     try {
       const backendPayload = {
         id: newRecord.id,
@@ -805,14 +643,14 @@ export class ScreeningService {
   }
 
   /**
-   * Resets custom user screenings back to certified institutional baseline history.
+   * Resets custom user screenings back to authentic historical screening records.
    */
   static async clearAllScreenings(): Promise<void> {
     if (typeof window !== "undefined") {
       const storageKey = getUserScreeningKey();
-      localStorage.setItem(storageKey, JSON.stringify(BASE_CLINICAL_SCREENINGS));
-      localStorage.setItem("quresight_all_screenings", JSON.stringify(BASE_CLINICAL_SCREENINGS));
-      localStorage.setItem("quresight_screenings_default", JSON.stringify(BASE_CLINICAL_SCREENINGS));
+      localStorage.setItem(storageKey, JSON.stringify(REAL_HISTORICAL_SCREENINGS));
+      localStorage.setItem("quresight_all_screenings", JSON.stringify(REAL_HISTORICAL_SCREENINGS));
+      localStorage.setItem("quresight_screenings_default", JSON.stringify(REAL_HISTORICAL_SCREENINGS));
       localStorage.removeItem("quresight_prediction_history");
     }
     try {
