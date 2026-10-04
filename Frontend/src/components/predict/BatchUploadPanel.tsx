@@ -168,10 +168,10 @@ export default function BatchUploadPanel({
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`relative rounded-2xl border-2 border-dashed transition-all duration-200 ${
+          className={`relative rounded-3xl border-2 border-dashed transition-all duration-200 ${
             dragActive
-              ? "border-quantum bg-quantum/5 scale-[1.01]"
-              : "border-hairline hover:border-ink/30 bg-cream/50"
+              ? "border-[#006766] bg-[#E6F7F4]/30 scale-[1.01]"
+              : "border-[#DFEBE8] hover:border-[#006766]/50 bg-[#FAFDFD] hover:bg-[#E6F7F4]/20"
           } ${isParsing ? "pointer-events-none opacity-60" : "cursor-pointer"}`}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
@@ -193,29 +193,29 @@ export default function BatchUploadPanel({
               <>
                 <Loader2
                   size={36}
-                  className="text-quantum animate-spin mb-3"
+                  className="text-[#006766] animate-spin mb-3"
                 />
-                <p className="text-sm font-semibold text-ink">
+                <p className="text-sm font-bold text-[#082827]">
                   Parsing uploaded files...
                 </p>
-                <p className="text-xs text-ink-soft mt-1">
+                <p className="text-xs text-[#5A7470] mt-1">
                   Detecting columns, mapping fields, and validating data.
                 </p>
               </>
             ) : (
               <>
-                <div className="w-14 h-14 rounded-2xl bg-quantum/10 border border-quantum/20 flex items-center justify-center mb-4">
-                  <UploadCloud size={24} className="text-quantum" />
+                <div className="w-14 h-14 rounded-2xl bg-[#E6F7F4] border border-[#00B489]/25 flex items-center justify-center mb-4 text-[#006766] shadow-xs">
+                  <UploadCloud size={26} className="text-[#006766]" />
                 </div>
-                <p className="text-sm font-semibold text-ink mb-1">
+                <p className="text-sm font-bold text-[#082827] mb-1">
                   Drop batch files here, or click to browse
                 </p>
-                <p className="text-xs text-ink-soft max-w-md">
+                <p className="text-xs text-[#5A7470] max-w-md">
                   {diseaseTarget === "cardiac_ecg"
                     ? "Accepts: .JPG, .PNG, .WEBP images or .ZIP containing ECG images"
                     : "Accepts: .CSV, .TSV, .JSON, .ZIP, .PDF, .TXT containing patient biomarker data"}
                 </p>
-                <p className="text-[10px] text-ink-soft/60 mt-2 font-mono">
+                <p className="text-[11px] text-[#5A7470]/70 mt-2 font-mono">
                   Max 50,000 records per session • Auto-chunks at 1,000 per
                   batch
                 </p>
@@ -431,12 +431,12 @@ export default function BatchUploadPanel({
                   <button
                     onClick={() => onExecute(parseResult)}
                     disabled={isExecuting}
-                    className="px-5 py-2.5 rounded-xl bg-ink hover:bg-ink/90 text-parchment font-semibold text-xs flex items-center gap-2 transition-all shadow-md cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-6 py-2.5 rounded-2xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white font-semibold text-xs flex items-center gap-2 transition-all shadow-md shadow-[#006766]/25 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed active:scale-98"
                   >
                     {isExecuting ? (
-                      <Loader2 size={14} className="animate-spin" />
+                      <Loader2 size={14} className="animate-spin text-white" />
                     ) : (
-                      <Play size={14} className="text-quantum" />
+                      <Play size={14} className="text-[#00B489]" />
                     )}
                     <span>
                       {isExecuting

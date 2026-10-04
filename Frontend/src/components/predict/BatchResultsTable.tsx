@@ -274,73 +274,73 @@ export default function BatchResultsTable({
   return (
     <div className="space-y-4">
       {/* Summary Stats Bar */}
-      <div className="rounded-2xl bg-white border border-hairline shadow-xs p-4">
-        <div className="flex flex-wrap items-center gap-4 text-xs">
-          <div className="flex items-center gap-2 px-3 py-2 bg-cream rounded-xl border border-hairline">
-            <BarChart3 size={14} className="text-quantum" />
-            <span className="text-ink-soft">Total:</span>
-            <span className="font-bold text-ink">{session.totalRecords.toLocaleString()}</span>
+      <div className="rounded-3xl bg-white border border-[#DFEBE8] shadow-[0_2px_12px_-4px_rgba(0,103,102,0.06)] p-5">
+        <div className="flex flex-wrap items-center gap-3 text-xs">
+          <div className="flex items-center gap-2 px-3.5 py-2 bg-[#F8FBFA] rounded-2xl border border-[#DFEBE8]">
+            <BarChart3 size={15} className="text-[#006766]" />
+            <span className="text-[#5A7470]">Total:</span>
+            <span className="font-bold text-[#082827]">{session.totalRecords.toLocaleString()}</span>
           </div>
-          <div className="flex items-center gap-2 px-3 py-2 bg-emerald-50 rounded-xl border border-emerald-200">
-            <CheckCircle2 size={14} className="text-emerald-500" />
-            <span className="text-emerald-600">Success:</span>
-            <span className="font-bold text-emerald-700">{session.successCount}</span>
+          <div className="flex items-center gap-2 px-3.5 py-2 bg-emerald-50 rounded-2xl border border-emerald-200">
+            <CheckCircle2 size={15} className="text-emerald-600" />
+            <span className="text-emerald-700 font-medium">Success:</span>
+            <span className="font-bold text-emerald-800">{session.successCount}</span>
           </div>
           {session.errorCount > 0 && (
-            <div className="flex items-center gap-2 px-3 py-2 bg-red-50 rounded-xl border border-red-200">
-              <XCircle size={14} className="text-red-500" />
-              <span className="text-red-600">Errors:</span>
-              <span className="font-bold text-red-700">{session.errorCount}</span>
+            <div className="flex items-center gap-2 px-3.5 py-2 bg-red-50 rounded-2xl border border-red-200">
+              <XCircle size={15} className="text-red-500" />
+              <span className="text-red-700 font-medium">Errors:</span>
+              <span className="font-bold text-red-800">{session.errorCount}</span>
             </div>
           )}
-          <div className="flex items-center gap-2 px-3 py-2 bg-red-50 rounded-xl border border-red-200">
-            <AlertTriangle size={14} className="text-red-500" />
-            <span className="text-red-600">High Risk:</span>
-            <span className="font-bold text-red-700">{session.highRiskCount}</span>
+          <div className="flex items-center gap-2 px-3.5 py-2 bg-rose-50 rounded-2xl border border-rose-200">
+            <AlertTriangle size={15} className="text-rose-600" />
+            <span className="text-rose-700 font-medium">High Risk:</span>
+            <span className="font-bold text-rose-800">{session.highRiskCount}</span>
           </div>
-          <div className="flex items-center gap-2 px-3 py-2 bg-blue-50 rounded-xl border border-blue-200">
-            <Activity size={14} className="text-blue-500" />
-            <span className="text-blue-600">Concordant:</span>
-            <span className="font-bold text-blue-700">
+          <div className="flex items-center gap-2 px-3.5 py-2 bg-[#E6F7F4] rounded-2xl border border-[#00B489]/30">
+            <Activity size={15} className="text-[#006766]" />
+            <span className="text-[#006766] font-medium">Concordant:</span>
+            <span className="font-bold text-[#006766]">
               {session.concordantCount} ({session.successCount > 0 ? ((session.concordantCount / session.successCount) * 100).toFixed(1) : 0}%)
             </span>
           </div>
-          <div className="flex items-center gap-2 px-3 py-2 bg-purple-50 rounded-xl border border-purple-200">
-            <Clock size={14} className="text-purple-500" />
-            <span className="text-purple-600">Time:</span>
-            <span className="font-bold text-purple-700">
+          <div className="flex items-center gap-2 px-3.5 py-2 bg-purple-50 rounded-2xl border border-purple-200">
+            <Clock size={15} className="text-purple-600" />
+            <span className="text-purple-700 font-medium">Time:</span>
+            <span className="font-bold text-purple-800">
               {(session.executionTimeMs / 1000).toFixed(1)}s
             </span>
           </div>
-          <div className="flex items-center gap-2 px-3 py-2 bg-cream rounded-xl border border-hairline">
-            <span className="text-ink-soft">Avg Risk:</span>
-            <span className="font-bold text-ink">{session.averageRiskScore.toFixed(1)}</span>
+          <div className="flex items-center gap-2 px-3.5 py-2 bg-[#F8FBFA] rounded-2xl border border-[#DFEBE8]">
+            <span className="text-[#5A7470]">Avg Risk:</span>
+            <span className="font-bold text-[#082827]">{session.averageRiskScore.toFixed(1)}</span>
           </div>
         </div>
       </div>
 
       {/* Controls Bar */}
-      <div className="rounded-2xl bg-white border border-hairline shadow-xs p-4 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+      <div className="rounded-2xl bg-white border border-[#DFEBE8] shadow-xs p-4 flex flex-col sm:flex-row items-start sm:items-center gap-3">
         {/* Search */}
         <div className="relative flex-1 min-w-[200px]">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-soft" />
+          <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#5A7470]" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by ID, name, or prediction..."
-            className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-hairline bg-cream/50 text-ink placeholder:text-ink-soft/50 focus:outline-none focus:ring-1 focus:ring-quantum/30 focus:border-quantum/30"
+            className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#DFEBE8] bg-[#FAFDFD] text-[#082827] placeholder:text-[#5A7470]/60 focus:outline-none focus:ring-1 focus:ring-[#006766] focus:border-[#006766]"
           />
         </div>
 
         {/* Filters */}
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1">
-            <Filter size={12} className="text-ink-soft" />
+            <Filter size={13} className="text-[#5A7470]" />
             <select
               value={riskFilter}
               onChange={(e) => setRiskFilter(e.target.value as RiskFilter)}
-              className="text-xs rounded-lg border border-hairline bg-cream/50 px-2 py-1.5 text-ink cursor-pointer focus:outline-none"
+              className="text-xs rounded-xl border border-[#DFEBE8] bg-[#FAFDFD] px-2.5 py-2 text-[#082827] font-medium cursor-pointer focus:outline-none"
             >
               <option value="ALL">All Risk</option>
               <option value="High">High Risk</option>
@@ -352,7 +352,7 @@ export default function BatchResultsTable({
           <select
             value={consensusFilter}
             onChange={(e) => setConsensusFilter(e.target.value as ConsensusFilter)}
-            className="text-xs rounded-lg border border-hairline bg-cream/50 px-2 py-1.5 text-ink cursor-pointer focus:outline-none"
+            className="text-xs rounded-xl border border-[#DFEBE8] bg-[#FAFDFD] px-2.5 py-2 text-[#082827] font-medium cursor-pointer focus:outline-none"
           >
             <option value="ALL">All Consensus</option>
             <option value="Concordant">Concordant</option>
@@ -362,7 +362,7 @@ export default function BatchResultsTable({
           <select
             value={String(pageSize)}
             onChange={(e) => setPageSize(e.target.value === "ALL" ? "ALL" : (Number(e.target.value) as PageSize))}
-            className="text-xs rounded-lg border border-hairline bg-cream/50 px-2 py-1.5 text-ink cursor-pointer focus:outline-none"
+            className="text-xs rounded-xl border border-[#DFEBE8] bg-[#FAFDFD] px-2.5 py-2 text-[#082827] font-medium cursor-pointer focus:outline-none"
           >
             <option value="30">Top 30</option>
             <option value="50">Top 50</option>
@@ -383,9 +383,9 @@ export default function BatchResultsTable({
                 type: "quantum",
               });
             }}
-            className="px-3 py-1.5 rounded-lg bg-cream border border-hairline text-xs font-medium text-ink hover:bg-cream/80 flex items-center gap-1.5 cursor-pointer transition-colors"
+            className="px-3.5 py-2 rounded-xl bg-white border border-[#DFEBE8] text-xs font-semibold text-[#082827] hover:bg-slate-50 flex items-center gap-1.5 cursor-pointer transition-colors shadow-xs"
           >
-            <FileText size={12} />
+            <FileText size={13} className="text-[#006766]" />
             CSV
           </button>
           <button
@@ -397,24 +397,24 @@ export default function BatchResultsTable({
                 type: "quantum",
               });
             }}
-            className="px-3 py-1.5 rounded-lg bg-cream border border-hairline text-xs font-medium text-ink hover:bg-cream/80 flex items-center gap-1.5 cursor-pointer transition-colors"
+            className="px-3.5 py-2 rounded-xl bg-white border border-[#DFEBE8] text-xs font-semibold text-[#082827] hover:bg-slate-50 flex items-center gap-1.5 cursor-pointer transition-colors shadow-xs"
           >
-            <FileJson size={12} />
+            <FileJson size={13} className="text-[#006766]" />
             JSON
           </button>
           <button
             onClick={handleExportPdf}
             disabled={isExportingPdf}
-            className="px-3 py-1.5 rounded-lg bg-ink text-parchment text-xs font-semibold hover:bg-ink/90 flex items-center gap-1.5 cursor-pointer transition-colors disabled:opacity-50"
+            className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-all shadow-md shadow-[#006766]/20 disabled:opacity-50 active:scale-98"
           >
             {isExportingPdf ? (
               <>
-                <Loader2 size={12} className="animate-spin" />
+                <Loader2 size={13} className="animate-spin text-white" />
                 {pdfProgress.current}/{pdfProgress.total}
               </>
             ) : (
               <>
-                <Archive size={12} />
+                <Archive size={13} className="text-[#00B489]" />
                 PDF ZIP
               </>
             )}

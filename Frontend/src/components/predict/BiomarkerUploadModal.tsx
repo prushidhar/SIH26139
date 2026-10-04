@@ -162,26 +162,26 @@ export default function BiomarkerUploadModal({
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 15 }}
         transition={{ duration: 0.2 }}
-        className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-border bg-card shadow-2xl my-auto"
+        className="relative w-full max-w-2xl overflow-hidden rounded-3xl border border-[#DFEBE8] bg-white shadow-2xl my-auto"
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-border px-6 py-4 bg-muted/30">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
-              <Sparkles className="h-5 w-5" />
+        <div className="flex items-center justify-between border-b border-[#DFEBE8] px-6 py-5 bg-gradient-to-r from-white via-[#FAFDFD] to-[#EBF7F5]/40">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30 shadow-xs">
+              <Sparkles className="h-5 w-5 text-[#00B489]" />
             </div>
             <div>
-              <h2 className="text-base font-semibold text-foreground">
+              <h2 className="text-base font-bold text-[#082827]">
                 {diseaseTitle ? `Import ${diseaseTitle} Report` : "Import Patient Medical Report"}
               </h2>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-[#5A7470]">
                 Automated extraction for CSV, PDF, JSON, and clinical lab sheets
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="rounded-lg p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+            className="rounded-full p-2 text-[#5A7470] hover:bg-slate-100 hover:text-[#082827] transition-colors"
           >
             <X className="h-5 w-5" />
           </button>
@@ -197,10 +197,10 @@ export default function BiomarkerUploadModal({
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
                 onClick={() => fileInputRef.current?.click()}
-                className={`flex flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed p-8 text-center cursor-pointer transition-all ${
+                className={`flex flex-col items-center justify-center gap-3 rounded-3xl border-2 border-dashed p-8 text-center cursor-pointer transition-all ${
                   isDragging
-                    ? "border-primary bg-primary/5 scale-[0.99]"
-                    : "border-border hover:border-primary/50 hover:bg-muted/30"
+                    ? "border-[#006766] bg-[#E6F7F4]/30 scale-[0.99]"
+                    : "border-[#DFEBE8] hover:border-[#006766]/50 bg-[#FAFDFD] hover:bg-[#E6F7F4]/20"
                 }`}
               >
                 <input
@@ -211,22 +211,22 @@ export default function BiomarkerUploadModal({
                   className="hidden"
                 />
 
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary shadow-inner">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#E6F7F4] text-[#006766] border border-[#00B489]/25 shadow-xs">
                   {isProcessing ? (
-                    <RefreshCw className="h-7 w-7 animate-spin" />
+                    <RefreshCw className="h-7 w-7 animate-spin text-[#006766]" />
                   ) : (
-                    <UploadCloud className="h-7 w-7" />
+                    <UploadCloud className="h-7 w-7 text-[#006766]" />
                   )}
                 </div>
 
                 <div>
-                  <p className="text-sm font-semibold text-foreground">
+                  <p className="text-sm font-bold text-[#082827]">
                     {isProcessing
                       ? "Analyzing report & resolving medical aliases..."
                       : "Click to upload or drag & drop patient report"}
                   </p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Supports <span className="font-medium text-foreground">.CSV, .PDF, .JSON, .TXT, .TSV</span>
+                  <p className="text-xs text-[#5A7470] mt-1">
+                    Supports <span className="font-semibold text-[#082827]">.CSV, .PDF, .JSON, .TXT, .TSV</span>
                   </p>
                 </div>
 
@@ -372,17 +372,17 @@ export default function BiomarkerUploadModal({
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-end gap-3 border-t border-border px-6 py-4 bg-muted/20">
+        <div className="flex items-center justify-end gap-3 border-t border-[#DFEBE8] px-6 py-4.5 bg-[#FAFDFD]">
           <button
             onClick={onClose}
-            className="rounded-xl border border-border px-4 py-2 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+            className="rounded-2xl border border-[#DFEBE8] bg-white px-4 py-2.5 text-xs font-semibold text-[#5A7470] hover:bg-slate-50 hover:text-[#082827] transition-colors cursor-pointer"
           >
             Cancel
           </button>
           {parseResult && (
             <button
               onClick={handleApply}
-              className="flex items-center gap-1.5 rounded-xl bg-primary px-5 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90 transition-opacity shadow-md"
+              className="flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[#006766] to-[#0A4F46] hover:from-[#005756] hover:to-[#083E37] px-5 py-2.5 text-xs font-semibold text-white transition-all shadow-md shadow-[#006766]/25 cursor-pointer active:scale-98"
             >
               <span>Apply to Screening Form</span>
               <ArrowRight className="h-3.5 w-3.5" />

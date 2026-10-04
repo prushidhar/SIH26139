@@ -316,7 +316,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
       {/* ========================================================================= */}
       {/* FIXED TOP HEADER */}
       {/* ========================================================================= */}
-      <header className="fixed top-0 left-0 right-0 h-14 z-50 bg-parchment/95 backdrop-blur-md border-b border-hairline px-3 sm:px-6 lg:px-8">
+      <header className="fixed top-0 left-0 right-0 h-14 z-50 bg-white/90 backdrop-blur-md border-b border-[#DFEBE8] px-3 sm:px-6 lg:px-8">
         {/* --------------------------------------------------------------------- */}
         {/* DESKTOP HEADER (MD AND ABOVE - 100% UNTOUCHED PC EXPERIENCE) */}
         {/* --------------------------------------------------------------------- */}
@@ -330,15 +330,15 @@ export default function AppLayout({ children }: AppLayoutProps) {
               onClick={toggleSidebar}
               aria-label="Toggle navigation sidebar"
               title="Toggle Sidebar Menu"
-              className="w-8 h-8 rounded-lg bg-cream-deep/60 hover:bg-cream border border-hairline flex items-center justify-center text-ink-soft hover:text-ink cursor-pointer transition-colors"
+              className="w-8 h-8 rounded-xl bg-white hover:bg-slate-50 border border-[#DFEBE8] flex items-center justify-center text-[#5A7470] hover:text-[#082827] cursor-pointer transition-colors shadow-2xs"
             >
               <Menu size={16} />
             </motion.button>
 
             <Link href="/home" className="cursor-pointer hover:opacity-85 transition-opacity flex items-center gap-3">
               <BrandLogo href={false} />
-              <div className="h-4 w-[1px] bg-hairline" />
-              <span className="text-xs font-sans tracking-tight text-ink-soft font-semibold">
+              <div className="h-4 w-[1px] bg-[#DFEBE8]" />
+              <span className="text-xs font-sans tracking-tight text-[#5A7470] font-semibold">
                 Clinical Intelligence Suite
               </span>
             </Link>
@@ -347,16 +347,16 @@ export default function AppLayout({ children }: AppLayoutProps) {
           {/* Right: Quantum System Selector + Notification Icon + Account Icon */}
           <div className="flex items-center gap-2 sm:gap-3">
             {/* Quantum Processing System Selector (Active Simulator + Locked Hardware) */}
-            <div className="flex items-center p-0.5 bg-cream-deep/60 rounded-xl border border-hairline text-xs font-sans">
+            <div className="flex items-center p-0.5 bg-[#FAFDFD] rounded-2xl border border-[#DFEBE8] text-xs font-sans shadow-2xs">
               <button
                 type="button"
                 onClick={() => handleBackendChange("gpu_simulator")}
-                className="px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer text-[11px] font-medium bg-parchment text-ink shadow-2xs border border-hairline/80 font-bold text-quantum"
+                className="px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer text-[11px] font-semibold bg-white text-[#006766] shadow-xs border border-[#00B489]/30"
                 title="PennyLane Statevector Simulator — Verified & Active"
               >
-                <Sparkles size={12} className="text-quantum" />
+                <Sparkles size={12} className="text-[#00B489]" />
                 <span>Quantum Simulator</span>
-                <span className="text-[9px] font-mono px-1 py-0.2 rounded border bg-teal-50 text-teal-800 border-teal-300 font-bold">
+                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-[#E6F7F4] text-[#006766] border border-[#00B489]/30 font-bold">
                   Active
                 </span>
               </button>
@@ -369,13 +369,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     type: "warning",
                   });
                 }}
-                className="px-2.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer text-ink-soft hover:text-ink opacity-80 hover:opacity-100"
+                className="px-2.5 py-1.5 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer text-[#5A7470] hover:text-[#082827] opacity-80 hover:opacity-100"
                 title="IBM Quantum (QPU) — Hardware Locked (API Token Required)"
               >
                 <Cpu size={12} className="text-amber-500" />
                 <span className="hidden sm:inline">IBM Quantum (QPU)</span>
                 <span className="sm:hidden">IBM QPU</span>
-                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-300 font-semibold flex items-center gap-0.5">
+                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-300 font-semibold flex items-center gap-0.5">
                   <Lock size={8} />
                   Locked
                 </span>
@@ -390,11 +390,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 onClick={handleToggleNotifications}
                 aria-label="Notifications"
                 title="Notifications"
-                className="w-8 h-8 rounded-full bg-cream-deep/60 hover:bg-cream border border-hairline flex items-center justify-center text-ink-soft hover:text-ink cursor-pointer transition-colors relative"
+                className="w-8 h-8 rounded-full bg-white hover:bg-slate-50 border border-[#DFEBE8] flex items-center justify-center text-[#5A7470] hover:text-[#082827] cursor-pointer transition-colors relative shadow-2xs"
               >
                 <Bell size={14} />
                 {unreadCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-quantum text-parchment rounded-full text-[9px] font-mono flex items-center justify-center font-bold">
+                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#006766] text-white rounded-full text-[9px] font-mono flex items-center justify-center font-bold shadow-xs">
                     {unreadCount}
                   </span>
                 )}
@@ -413,13 +413,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.96 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute right-0 top-10 w-80 bg-parchment rounded-2xl border border-hairline shadow-xl z-50 p-3.5 space-y-2.5"
+                      className="absolute right-0 top-10 w-80 bg-white rounded-3xl border border-[#DFEBE8] shadow-2xl z-50 p-4 space-y-3"
                     >
-                      <div className="flex items-center justify-between border-b border-hairline pb-2">
+                      <div className="flex items-center justify-between border-b border-[#DFEBE8] pb-2.5">
                         <div className="flex items-center gap-1.5">
-                          <span className="text-xs font-serif font-medium text-ink">Notifications</span>
+                          <span className="text-xs font-bold text-[#082827]">Notifications</span>
                           {notifications.length > 0 && (
-                            <span className="text-[10px] font-mono text-ink-soft">({notifications.length})</span>
+                            <span className="text-[10px] font-mono text-[#5A7470]">({notifications.length})</span>
                           )}
                         </div>
                         <div className="flex items-center gap-2">
@@ -427,7 +427,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                             <button
                               type="button"
                               onClick={markAllNotificationsAsRead}
-                              className="text-[10px] text-quantum hover:underline cursor-pointer font-medium"
+                              className="text-[10px] text-[#006766] hover:underline cursor-pointer font-bold"
                             >
                               Mark all read
                             </button>
@@ -439,7 +439,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                           <Link
                             href="/notifications"
                             onClick={() => setNotificationsOpen(false)}
-                            className="text-[10px] text-ink hover:underline cursor-pointer font-medium"
+                            className="text-[10px] text-[#5A7470] hover:text-[#082827] hover:underline cursor-pointer font-medium"
                           >
                             View all
                           </Link>
@@ -501,12 +501,14 @@ export default function AppLayout({ children }: AppLayoutProps) {
               href="/account"
               aria-label="User Account Settings"
               title={`Account Settings: ${userName}`}
-              className="w-8 h-8 rounded-full bg-ink text-parchment border border-hairline flex items-center justify-center cursor-pointer overflow-hidden shadow-2xs hover:ring-2 hover:ring-quantum/40 transition-all shrink-0"
+              className="w-8 h-8 rounded-full bg-[#006766] text-white border border-[#00B489]/40 flex items-center justify-center cursor-pointer overflow-hidden shadow-xs hover:ring-2 hover:ring-[#00B489]/40 transition-all shrink-0"
             >
               {userAvatar ? (
                 <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
               ) : (
-                <User size={14} className="text-parchment" />
+                <span className="font-sans font-bold text-xs">
+                  {userName.charAt(0).toUpperCase() || "U"}
+                </span>
               )}
             </Link>
           </div>
@@ -718,7 +720,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
           initial={false}
           animate={{ width: sidebarOpen ? 240 : 64 }}
           transition={sidebarTransition}
-          className="hidden md:flex flex-col fixed top-14 bottom-0 left-0 bg-parchment/85 backdrop-blur-md border-r border-hairline z-40 p-3 justify-between overflow-hidden"
+          className="hidden md:flex flex-col fixed top-14 bottom-0 left-0 bg-white/90 backdrop-blur-md border-r border-[#DFEBE8] z-40 p-3 justify-between overflow-hidden"
         >
           {/* Top Nav Sections */}
           <div className="space-y-4 overflow-y-auto no-scrollbar">
@@ -735,7 +737,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                         transition={{ duration: 0.2, delay: sIdx * 0.12, ease: "easeOut" }}
                         className="px-3 py-1"
                       >
-                        <span className="text-[9px] font-mono uppercase tracking-wider text-ink-soft font-semibold">
+                        <span className="text-[9px] font-mono uppercase tracking-wider text-[#5A7470] font-bold">
                           {section.title}
                         </span>
                       </motion.div>
@@ -761,8 +763,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
                             sidebarOpen ? "justify-between px-3 py-2.5" : "justify-center p-2.5"
                           } rounded-xl text-xs transition-all ${
                             isActive
-                              ? "bg-primary text-primary-foreground shadow-xs font-semibold"
-                              : "text-[#082827]/80 hover:text-[#006766] hover:bg-[#E6F7F4]/60 font-medium"
+                              ? "bg-gradient-to-r from-[#006766] to-[#0A4F46] text-white shadow-xs font-semibold"
+                              : "text-[#5A7470] hover:text-[#006766] hover:bg-[#E6F7F4]/60 font-medium"
                           }`}
                         >
                           <div className="flex items-center gap-2.5">
@@ -793,7 +795,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
           </div>
 
           {/* Bottom Sidebar: Clean borderless Account row + Settings + Red Sign Out row */}
-          <div className="space-y-1 pt-2 border-t border-hairline">
+          <div className="space-y-1 pt-2 border-t border-[#DFEBE8]">
             {/* Account Row (Unbordered, sleek) */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
@@ -805,12 +807,12 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 title={!sidebarOpen ? `Account: ${userName}` : undefined}
                 className={`w-full flex items-center ${sidebarOpen ? "justify-start gap-2.5 px-3 py-2" : "justify-center p-2.5"
                   } rounded-xl text-xs font-medium ${pathname === "/account"
-                    ? "bg-primary text-primary-foreground shadow-xs font-semibold"
-                    : "text-ink hover:bg-cream-deep/60"
+                    ? "bg-gradient-to-r from-[#006766] to-[#0A4F46] text-white shadow-xs font-semibold"
+                    : "text-[#082827] hover:bg-slate-50"
                   } transition-all cursor-pointer`}
               >
                 <div className="relative flex items-center justify-center shrink-0">
-                  <div className="relative w-6 h-6 rounded-full bg-parchment text-ink flex items-center justify-center font-sans font-bold text-[10px] overflow-hidden shrink-0 border border-hairline">
+                  <div className="relative w-6 h-6 rounded-full bg-white text-[#006766] flex items-center justify-center font-sans font-bold text-[10px] overflow-hidden shrink-0 border border-[#DFEBE8]">
                     {userAvatar ? (
                       <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
                     ) : (
@@ -828,13 +830,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
                       className="flex flex-col text-left overflow-hidden"
                     >
                       <span
-                        className={`text-xs font-semibold leading-tight truncate ${pathname === "/account" ? "text-primary-foreground" : "text-ink"
+                        className={`text-xs font-semibold leading-tight truncate ${pathname === "/account" ? "text-white" : "text-[#082827]"
                           }`}
                       >
                         {userName}
                       </span>
                       <span
-                        className={`text-[10px] truncate ${pathname === "/account" ? "text-primary-foreground/80 font-light" : "text-ink-soft"
+                        className={`text-[10px] truncate ${pathname === "/account" ? "text-white/80 font-light" : "text-[#5A7470]"
                           }`}
                       >
                         {userEmail}
@@ -856,15 +858,15 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 title={!sidebarOpen ? "Settings" : undefined}
                 className={`w-full flex items-center ${sidebarOpen ? "justify-start gap-2.5 px-3 py-2" : "justify-center p-2.5"
                   } rounded-xl text-xs font-medium ${pathname === "/settings"
-                    ? "bg-primary text-primary-foreground shadow-xs font-semibold"
-                    : "text-ink-soft hover:text-ink hover:bg-cream-deep/60"
+                    ? "bg-gradient-to-r from-[#006766] to-[#0A4F46] text-white shadow-xs font-semibold"
+                    : "text-[#5A7470] hover:text-[#082827] hover:bg-slate-50"
                   } transition-all cursor-pointer`}
               >
                 <div className="relative flex items-center justify-center shrink-0">
                   <div className={`relative flex items-center justify-center ${pathname === "/settings" ? "w-6 h-6 rounded-lg bg-white/15" : ""}`}>
                     <Settings
                       size={15}
-                      className={pathname === "/settings" ? "text-white" : "text-ink-soft shrink-0"}
+                      className={pathname === "/settings" ? "text-white" : "text-[#5A7470] shrink-0"}
                     />
                   </div>
                 </div>
@@ -875,7 +877,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -8 }}
                       transition={{ duration: 0.22, delay: 0.4, ease: "easeOut" }}
-                      className={pathname === "/settings" ? "text-primary-foreground font-semibold" : "text-ink"}
+                      className={pathname === "/settings" ? "text-white font-semibold" : "text-[#082827]"}
                     >
                       Settings
                     </motion.span>
