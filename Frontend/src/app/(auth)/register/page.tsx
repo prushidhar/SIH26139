@@ -321,10 +321,6 @@ export default function RegisterPage() {
     }
   }, [decodedGoogleProfile]);
 
-  const handleInstantDemoRegister = () => {
-    enterWorkstationImmediately("doctor@quresight.ai", "Dr. Clinical Specialist", null);
-  };
-
   const handleGoogleCredentialResponse = useCallback(async (response: { credential: string }) => {
     setIsGoogleLoading(true);
     setErrorMessage("");
@@ -740,18 +736,6 @@ export default function RegisterPage() {
                     )}
                   </motion.button>
                 )}
-              </div>
-
-              {/* Quick Clinician Demo Access Button */}
-              <div className="pt-2">
-                <button
-                  type="button"
-                  onClick={handleInstantDemoRegister}
-                  className="w-full h-11 rounded-xl border border-[#00B489]/40 bg-[#E6F7F4]/60 hover:bg-[#E6F7F4] text-[#006766] font-semibold text-xs transition-all flex items-center justify-center gap-2 shadow-2xs cursor-pointer hover:border-[#00B489]"
-                >
-                  <Sparkles size={14} className="text-[#00B489]" />
-                  <span>Instant Clinician Access (One-Click Sign Up)</span>
-                </button>
               </div>
             </form>
           </div>
