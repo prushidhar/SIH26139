@@ -1,3 +1,14 @@
+import os
+import gc
+
+# Strict single-thread memory limits to prevent OpenBLAS/PyTorch thread pool bloat on cloud containers (512MB RAM)
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+os.environ["NUMEXPR_NUM_THREADS"] = "1"
+os.environ["TORCH_NUM_THREADS"] = "1"
+
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
@@ -69,6 +80,14 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan,
 )
+
+# Active memory collection middleware to ensure memory is instantly recycled on cloud instances
+@app.middleware("http")
+async def memory_cleanup_middleware(request: Request, call_next):
+    response = await call_next(request)
+    if request.url.path.startswith("/inference"):
+        gc.collect()
+    return response
 
 # Custom validation error handler for simple, human-friendly messages
 @app.exception_handler(RequestValidationError)

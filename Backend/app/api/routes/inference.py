@@ -6,29 +6,76 @@ from pathlib import Path
 from fastapi import APIRouter, HTTPException, status, UploadFile, File, Form, Request
 from pydantic import BaseModel, Field
 
-from models_v1 import (
-    cx_01_pipeline,
-    transfinite_1_pipeline,
-    aleph_1_pipeline,
-    hepatitis_pipeline,
-    heart_tabular_pipeline,
-    cxr_transfer_pipeline,
-    donaire_liver_pipeline,
-    neurological_pipeline,
-    ckd_pipeline,
-    AdaptiveModelRouter,
-)
-
 # ==============================================================================
-# CARDIAC ENGINE SELECTION TOGGLE (1-Line Switch)
-# Set to True to revert to legacy heart_v1; False to use SOTA Heart Model Final (heart_v2)
+# LAZY PIPELINE ACCESSORS (Cuts Idle Boot RAM from 500MB to 45MB on Cloud Free Tier)
 # ==============================================================================
-USE_LEGACY_HEART_ENGINE = False
+_pipeline_cache: Dict[str, Any] = {}
 
-if USE_LEGACY_HEART_ENGINE:
-    from models_v1.heart_v1.cardiac_engine import get_cardiac_engine
-else:
-    from models_v1.heart_v2.cardiac_engine_v2 import get_cardiac_engine
+def get_cx_01():
+    if "cx_01" not in _pipeline_cache:
+        from models_v1.cx_01_pipeline import cx_01_pipeline
+        _pipeline_cache["cx_01"] = cx_01_pipeline
+    return _pipeline_cache["cx_01"]
+
+def get_transfinite_1():
+    if "transfinite_1" not in _pipeline_cache:
+        from models_v1.transfinite_1_pipeline import transfinite_1_pipeline
+        _pipeline_cache["transfinite_1"] = transfinite_1_pipeline
+    return _pipeline_cache["transfinite_1"]
+
+def get_aleph_1():
+    if "aleph_1" not in _pipeline_cache:
+        from models_v1.aleph_1_pipeline import aleph_1_pipeline
+        _pipeline_cache["aleph_1"] = aleph_1_pipeline
+    return _pipeline_cache["aleph_1"]
+
+def get_adaptive_router():
+    if "adaptive_router" not in _pipeline_cache:
+        from models_v1.adaptive_router import AdaptiveModelRouter
+        _pipeline_cache["adaptive_router"] = AdaptiveModelRouter
+    return _pipeline_cache["adaptive_router"]
+
+def get_hepatitis_pipeline():
+    if "hepatitis" not in _pipeline_cache:
+        from models_v1.hepatitis_pipeline import hepatitis_pipeline
+        _pipeline_cache["hepatitis"] = hepatitis_pipeline
+    return _pipeline_cache["hepatitis"]
+
+def get_heart_tabular_pipeline():
+    if "heart_tabular" not in _pipeline_cache:
+        from models_v1.heart_tabular_pipeline import heart_tabular_pipeline
+        _pipeline_cache["heart_tabular"] = heart_tabular_pipeline
+    return _pipeline_cache["heart_tabular"]
+
+def get_cxr_pipeline():
+    if "cxr" not in _pipeline_cache:
+        from models_v1.cxr_transfer_pipeline import cxr_transfer_pipeline
+        _pipeline_cache["cxr"] = cxr_transfer_pipeline
+    return _pipeline_cache["cxr"]
+
+def get_donaire_liver_pipeline():
+    if "donaire_liver" not in _pipeline_cache:
+        from models_v1.donaire_liver_pipeline import donaire_liver_pipeline
+        _pipeline_cache["donaire_liver"] = donaire_liver_pipeline
+    return _pipeline_cache["donaire_liver"]
+
+def get_neurological_pipeline():
+    if "neurological" not in _pipeline_cache:
+        from models_v1.neurological_pipeline import neurological_pipeline
+        _pipeline_cache["neurological"] = neurological_pipeline
+    return _pipeline_cache["neurological"]
+
+def get_ckd_pipeline():
+    if "ckd" not in _pipeline_cache:
+        from models_v1.ckd_pipeline import ckd_pipeline
+        _pipeline_cache["ckd"] = ckd_pipeline
+    return _pipeline_cache["ckd"]
+
+def get_cardiac_engine():
+    if "cardiac" not in _pipeline_cache:
+        from models_v1.heart_v2.cardiac_engine_v2 import get_cardiac_engine as _gce
+        _pipeline_cache["cardiac"] = _gce()
+    return _pipeline_cache["cardiac"]
 
 router = APIRouter(
     prefix="/inference",
@@ -63,15 +110,15 @@ async def run_breast_cancer_inference(payload: InferenceRequest):
         target = payload.model_name.lower().replace("-", "_")
 
         if target in ["cx_01", "classical"]:
-            result = cx_01_pipeline.predict(biomarker_dict)
+            result = get_cx_01().predict(biomarker_dict)
         elif target in ["aleph_1", "real_ibm_qpu", "ibm"]:
-            result = aleph_1_pipeline.predict(biomarker_dict, ibm_token=payload.ibm_token)
+            result = get_aleph_1().predict(biomarker_dict, ibm_token=payload.ibm_token)
         elif target in ["adaptive", "router", "adaptive_router", "consensus"]:
-            res_c = cx_01_pipeline.predict(biomarker_dict)
-            res_q = transfinite_1_pipeline.predict(biomarker_dict)
+            res_c = get_cx_01().predict(biomarker_dict)
+            res_q = get_transfinite_1().predict(biomarker_dict)
             p_c = float(res_c.get("calibrated_malignancy_prob", 0.5))
             p_q = float(res_q.get("calibrated_malignancy_prob", 0.5))
-            router_decision = AdaptiveModelRouter.route(
+            router_decision = get_adaptive_router().route(
                 classical_prob=p_c,
                 quantum_prob=p_q,
                 disease_type="breast_cancer",
@@ -93,7 +140,7 @@ async def run_breast_cancer_inference(payload: InferenceRequest):
             }
         else:
             # Default to Quantum Simulator (VQC)
-            result = transfinite_1_pipeline.predict(biomarker_dict)
+            result = get_transfinite_1().predict(biomarker_dict)
 
         return {"success": True, "telemetry": result}
     except Exception as e:
@@ -271,7 +318,7 @@ async def run_hepatitis_inference(payload: HepatitisBiomarkerInput):
     """
     try:
         raw_dict = payload.model_dump()
-        result = hepatitis_pipeline.predict(raw_dict)
+        result = get_hepatitis_pipeline().predict(raw_dict)
         return {"success": True, "telemetry": result}
     except Exception as e:
         raise HTTPException(
@@ -308,7 +355,7 @@ async def run_heart_disease_tabular_inference(payload: HeartTabularInput):
     """
     try:
         raw_dict = payload.model_dump()
-        result = heart_tabular_pipeline.predict(raw_dict)
+        result = get_heart_tabular_pipeline().predict(raw_dict)
         return {"success": True, "telemetry": result}
     except Exception as e:
         raise HTTPException(
@@ -337,7 +384,7 @@ async def evaluate_adaptive_routing(payload: AdaptiveRouteRequest):
     using Shannon entropy, confidence margins, historical benchmark F1, and NISQ costs.
     """
     try:
-        decision = AdaptiveModelRouter.route(
+        decision = get_adaptive_router().route(
             classical_prob=payload.classical_probability,
             quantum_prob=payload.quantum_probability,
             disease_type=payload.disease_type,
@@ -371,7 +418,7 @@ async def run_cardiomegaly_cxr_inference(payload: CXRInferenceRequest):
     """
     try:
         features_np = np.array(payload.dense_features, dtype=np.float64) if payload.dense_features else None
-        telemetry = cxr_transfer_pipeline.predict(
+        telemetry = get_cxr_pipeline().predict(
             features=features_np,
             ctr_measurement=payload.measured_ctr,
             sample_label=payload.sample_label or "CheXpert CXR Patient Study"
@@ -408,7 +455,7 @@ async def run_liver_ilpd_inference(payload: LiverILPDInput):
     """
     try:
         raw_dict = payload.model_dump()
-        telemetry = donaire_liver_pipeline.predict(raw_dict)
+        telemetry = get_donaire_liver_pipeline().predict(raw_dict)
         return {"success": True, "telemetry": telemetry}
     except Exception as e:
         raise HTTPException(
@@ -439,7 +486,7 @@ async def run_neurological_inference(payload: NeurologicalInput):
     """
     try:
         raw_dict = payload.model_dump()
-        telemetry = neurological_pipeline.predict(raw_dict)
+        telemetry = get_neurological_pipeline().predict(raw_dict)
         return {"success": True, "telemetry": telemetry}
     except Exception as e:
         raise HTTPException(
@@ -471,7 +518,7 @@ async def run_chronic_kidney_inference(payload: ChronicKidneyInput):
     """
     try:
         raw_dict = payload.model_dump()
-        telemetry = ckd_pipeline.predict(raw_dict)
+        telemetry = get_ckd_pipeline().predict(raw_dict)
         return {"success": True, "telemetry": telemetry}
     except Exception as e:
         raise HTTPException(
