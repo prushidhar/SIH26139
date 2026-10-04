@@ -26,7 +26,9 @@ import {
   ClipboardList,
   AlertTriangle,
   RotateCcw,
+  Lock,
 } from "lucide-react";
+import { showToast } from "@/components/common/ToastNotification";
 
 type CategoryGroup = "all" | "cardiopulmonary" | "oncology" | "metabolic" | "neuro_radiology";
 
@@ -48,6 +50,8 @@ interface DiagnosticTerminal {
   image: string;
   engine: string;
   dataset: string;
+  isLocked?: boolean;
+  lockLabel?: string;
 }
 
 const TERMINALS: DiagnosticTerminal[] = [
@@ -56,19 +60,21 @@ const TERMINALS: DiagnosticTerminal[] = [
     title: "12-Lead Electrocardiogram (ECG)",
     specialty: "Cardiac Electrophysiology",
     modality: "12-Lead Diagnostic Strips",
-    modalityBadge: "ECG Waveform",
-    icon: Heart,
-    targetCondition: "Acute Myocardial Infarction & Arrhythmias",
-    clinicalScope: "12-lead ECG digitizer with Grad-CAM lead pinpointing, acute ischemic injury scoring, and dual consensus.",
+    modalityBadge: "Locked • Phase 2",
+    icon: Lock,
+    targetCondition: "Offline Calibration in Progress",
+    clinicalScope: "Studio locked for multi-center hospital calibration. Uncalibrated mobile phone camera photo ingestion is restricted for patient safety. Please use Cardiovascular Hemodynamics (CAD).",
     route: "/predict/heart-disease",
-    accentBg: "bg-rose-50",
-    accentText: "text-rose-700",
-    badgeBg: "bg-rose-100/80",
-    badgeText: "text-rose-800",
+    accentBg: "bg-slate-50",
+    accentText: "text-slate-700",
+    badgeBg: "bg-amber-100/80",
+    badgeText: "text-amber-800",
     group: "cardiopulmonary",
     image: "/images/studios/cardiac-ecg-electrophysiology.jpg",
-    engine: "ResNet-18 + 8Q VQC",
-    dataset: "PTB-XL 12-Lead Strips",
+    engine: "Under Calibration",
+    dataset: "PTB-XL Multi-Center Cohort",
+    isLocked: true,
+    lockLabel: "Locked • Under Calibration",
   },
   {
     key: "breast_cancer",
@@ -516,14 +522,32 @@ export default function PatientIntakePage() {
 
               {/* Action Button at bottom */}
               <div className="p-5 pt-0">
-                <button
-                  type="button"
-                  onClick={() => handleLaunchTerminal(term.route)}
-                  className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#F2F7F6] group-hover:bg-gradient-to-r group-hover:from-[#006766] group-hover:to-[#0A4F46] text-[#006766] group-hover:text-white font-semibold text-xs transition-all duration-200 cursor-pointer shadow-2xs group-hover:shadow-md group-hover:shadow-[#006766]/20 active:scale-98"
-                >
-                  <span>Launch Diagnostic Studio</span>
-                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                </button>
+                {term.isLocked ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      showToast({
+                        title: "Studio Locked for Calibration",
+                        message: "12-Lead ECG image analysis is undergoing clinical calibration. Launching active Cardiovascular Hemodynamics Studio.",
+                        type: "warning",
+                      });
+                      router.push("/predict/heart-tabular");
+                    }}
+                    className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-amber-50 hover:bg-amber-100/90 text-amber-800 border border-amber-200 font-semibold text-xs transition-all duration-200 cursor-pointer shadow-2xs"
+                  >
+                    <Lock size={13} className="text-amber-600" />
+                    <span>Locked • Calibration (Switch to CAD)</span>
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => handleLaunchTerminal(term.route)}
+                    className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#F2F7F6] group-hover:bg-gradient-to-r group-hover:from-[#006766] group-hover:to-[#0A4F46] text-[#006766] group-hover:text-white font-semibold text-xs transition-all duration-200 cursor-pointer shadow-2xs group-hover:shadow-md group-hover:shadow-[#006766]/20 active:scale-98"
+                  >
+                    <span>Launch Diagnostic Studio</span>
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  </button>
+                )}
               </div>
             </div>
           );

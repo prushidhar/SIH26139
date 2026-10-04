@@ -27,6 +27,7 @@ import {
   ShieldAlert,
   Dna,
   Zap,
+  Lock,
 } from "lucide-react";
 import { AuthService } from "@/services/auth.service";
 import { ScreeningService, type StoredPrediction } from "@/services/screening.service";
@@ -49,6 +50,8 @@ interface DiseaseModuleItem {
   badgeText: string;
   group: CategoryGroup;
   image: string;
+  isLocked?: boolean;
+  lockLabel?: string;
 }
 
 const DISEASE_MODULES: DiseaseModuleItem[] = [
@@ -57,17 +60,19 @@ const DISEASE_MODULES: DiseaseModuleItem[] = [
     title: "12-Lead Electrocardiogram (ECG)",
     specialty: "Cardiac Electrophysiology",
     modality: "12-Lead Diagnostic Strips",
-    modalityBadge: "ECG Waveform",
-    icon: Heart,
-    targetCondition: "Acute Myocardial Infarction & Arrhythmias",
-    clinicalScope: "12-lead ECG digitizer with Grad-CAM lead pinpointing, acute ischemic injury scoring, and dual consensus.",
-    route: "/predict/heart-disease",
-    accentBg: "bg-rose-50",
-    accentText: "text-rose-700",
-    badgeBg: "bg-rose-100/80",
-    badgeText: "text-rose-800",
+    modalityBadge: "Locked • Phase 2",
+    icon: Lock,
+    targetCondition: "Offline Calibration in Progress",
+    clinicalScope: "Studio locked for multi-center hospital calibration. Uncalibrated mobile phone camera photo ingestion is restricted for patient safety. Please use Cardiovascular Hemodynamics (CAD).",
+    route: "/predict/heart-tabular",
+    accentBg: "bg-amber-50",
+    accentText: "text-amber-700",
+    badgeBg: "bg-amber-100/80",
+    badgeText: "text-amber-800",
     group: "cardiopulmonary",
     image: "/images/studios/cardiac-ecg-electrophysiology.jpg",
+    isLocked: true,
+    lockLabel: "Locked • Calibration (Switch to CAD)",
   },
   {
     key: "breast_cancer",
@@ -581,18 +586,26 @@ export default function HomePage() {
 
                     {/* Top Overlay Specialty & Modality Badges */}
                     <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-                      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold font-mono bg-white/95 text-[#006766] shadow-xs border border-white/60 backdrop-blur-md flex items-center gap-1.5">
-                        <Icon size={12} className="text-[#00B489]" />
+                      <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold font-mono shadow-xs border backdrop-blur-md flex items-center gap-1.5 ${
+                        disease.isLocked
+                          ? "bg-amber-500/95 text-white border-amber-300"
+                          : "bg-white/95 text-[#006766] border-white/60"
+                      }`}>
+                        <Icon size={12} className={disease.isLocked ? "text-white" : "text-[#00B489]"} />
                         <span>{disease.specialty}</span>
                       </span>
-                      <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-black/60 text-white border border-white/20 backdrop-blur-md">
+                      <span className={`px-2.5 py-1 rounded-full text-[10px] font-semibold backdrop-blur-md ${
+                        disease.isLocked
+                          ? "bg-amber-700/90 text-white border border-amber-400"
+                          : "bg-black/60 text-white border border-white/20"
+                      }`}>
                         {disease.modalityBadge}
                       </span>
                     </div>
 
                     {/* Bottom Image Overlay: Target Condition */}
                     <div className="absolute bottom-2.5 left-3 right-3 flex items-center gap-1.5 text-white text-[11px] font-medium drop-shadow-sm truncate pointer-events-none">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#00B489] animate-pulse shrink-0" />
+                      <span className={`w-1.5 h-1.5 rounded-full ${disease.isLocked ? "bg-amber-400" : "bg-[#00B489] animate-pulse"} shrink-0`} />
                       <span className="truncate">{disease.targetCondition}</span>
                     </div>
                   </div>
@@ -610,13 +623,23 @@ export default function HomePage() {
 
                 {/* Card Action Button */}
                 <div className="p-5 pt-0">
-                  <Link
-                    href={disease.route}
-                    className="w-full py-2.5 px-4 rounded-xl bg-[#F2F7F6] group-hover:bg-gradient-to-r group-hover:from-[#006766] group-hover:to-[#0A4F46] text-[#006766] group-hover:text-white font-semibold text-xs transition-all flex items-center justify-center gap-2 shadow-2xs group-hover:shadow-md group-hover:shadow-[#006766]/20 cursor-pointer active:scale-98"
-                  >
-                    <span>Launch Screening Suite</span>
-                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  {disease.isLocked ? (
+                    <Link
+                      href={disease.route}
+                      className="w-full py-2.5 px-4 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 font-semibold text-xs transition-all flex items-center justify-center gap-2 shadow-2xs cursor-pointer active:scale-98"
+                    >
+                      <Lock size={13} className="text-amber-700" />
+                      <span>{disease.lockLabel || "Locked • Phase 2 Calibration"}</span>
+                    </Link>
+                  ) : (
+                    <Link
+                      href={disease.route}
+                      className="w-full py-2.5 px-4 rounded-xl bg-[#F2F7F6] group-hover:bg-gradient-to-r group-hover:from-[#006766] group-hover:to-[#0A4F46] text-[#006766] group-hover:text-white font-semibold text-xs transition-all flex items-center justify-center gap-2 shadow-2xs group-hover:shadow-md group-hover:shadow-[#006766]/20 cursor-pointer active:scale-98"
+                    >
+                      <span>Launch Screening Suite</span>
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  )}
                 </div>
               </div>
             );

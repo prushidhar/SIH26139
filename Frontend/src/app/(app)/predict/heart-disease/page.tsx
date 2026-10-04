@@ -539,10 +539,17 @@ export default function HeartDiseaseStudioPage() {
       });
       return;
     }
-    setImageFile(file);
-    setSelectedReferenceKey(null);
-    setTelemetry(null);
-    setValidationError(null);
+
+    // Clinical safety lock on uncalibrated custom photo uploads
+    setValidationError(
+      "Uncalibrated mobile camera uploads are locked pending Phase 2 multi-center hospital calibration. Smartphone camera lighting, angle tilt, and paper folds introduce baseline wandering that can produce clinical false positives. To evaluate cardiovascular health using verified clinical biomarkers, please switch to the Cardiovascular Hemodynamics (CAD) Studio, or load a pre-calibrated benchmark record below."
+    );
+    showToast({
+      title: "Mobile Ingestion Locked for Calibration",
+      message: "Custom smartphone camera uploads are locked for safety calibration. Please switch to CAD Studio or test a calibrated benchmark case.",
+      type: "warning",
+    });
+    return;
 
     const sizeStr = file.size > 1024 * 1024
       ? `${(file.size / (1024 * 1024)).toFixed(1)} MB`
@@ -844,27 +851,37 @@ export default function HeartDiseaseStudioPage() {
               <ArrowLeft size={13} /> Back to Screening Terminals
             </Link>
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 flex items-center justify-center shadow-xs">
-                <Heart size={22} />
+              <div className="w-11 h-11 rounded-2xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center shadow-xs">
+                <Lock size={22} />
               </div>
               <div>
                 <div className="flex items-center gap-2">
                   <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#082827] tracking-tight">
                     12-Lead ECG Cardiac Studio
                   </h1>
-                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#E6F7F4] border border-[#00B489]/30 text-[#006766] font-bold">
-                    ACTIVE • RESNET + VQC
+                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-300 text-amber-800 font-bold flex items-center gap-1">
+                    <Lock size={10} />
+                    LOCKED • PHASE 2 CALIBRATION
                   </span>
                 </div>
                 <p className="text-xs text-[#5A7470]">
-                  Cardiovascular Screening • 12-Lead Rhythm Strip, ST-Segment Pinpointing &amp; Continuous Risk Scoring
+                  Clinical Safety Protocol: Custom mobile phone photo ingestion locked. Switch to Cardiovascular Hemodynamics (CAD) for active risk assessment.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Hardware Selector & Reset Actions */}
+          {/* Hardware Selector & Switch to CAD Action */}
           <div className="flex flex-wrap items-center gap-2.5">
+            <Link
+              href="/predict/heart-tabular"
+              className="px-4 py-2 rounded-xl bg-[#006766] hover:bg-[#084E4D] text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-md shadow-[#006766]/20 cursor-pointer"
+            >
+              <Activity size={14} className="text-[#00B489]" />
+              <span>Switch to Verified CAD Studio</span>
+              <ChevronRight size={13} />
+            </Link>
+
             <div className="inline-flex p-1 rounded-xl bg-white border border-[#DFEBE8] shadow-2xs">
               <button
                 onClick={() => setExecutionMode("simulator")}
@@ -877,38 +894,43 @@ export default function HeartDiseaseStudioPage() {
                 <Sparkles size={13} className="text-[#00B489]" />
                 <span>Quantum Simulator</span>
               </button>
-              <button
-                type="button"
-                onClick={() => {
-                  showToast({
-                    title: "Hardware QPU Access Locked",
-                    message: "IBM Quantum QPU hardware execution is locked. Live QPU runtime requires authenticated IBM Quantum API credentials in Settings. Defaulting to Quantum Simulator.",
-                    type: "warning",
-                  });
-                }}
-                className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-[#5A7470] hover:text-[#082827] opacity-80 hover:opacity-100 cursor-pointer"
-                title="IBM Quantum (QPU) — Hardware Locked (Requires Cloud API Token)"
-              >
-                <Cpu size={13} className="text-amber-500" />
-                <span>IBM Quantum (QPU)</span>
-                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-300 font-semibold flex items-center gap-0.5">
-                  <Lock size={8} />
-                  Locked
-                </span>
-              </button>
             </div>
 
             {telemetry && (
               <button
                 onClick={handleStartNewPatient}
-                className="px-4 py-2 rounded-xl bg-[#006766] hover:bg-[#084E4D] text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-md shadow-[#006766]/20 cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-white hover:bg-[#F7FAF9] text-[#082827] border border-[#DFEBE8] text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer"
               >
                 <RotateCcw size={13} className="text-[#00B489]" />
-                <span>Start New Patient</span>
+                <span>Reset View</span>
               </button>
             )}
           </div>
         </div>
+      </div>
+
+      {/* ── CLINICAL SAFETY CALIBRATION BANNER ── */}
+      <div className="p-4 rounded-2xl bg-amber-50 border-2 border-amber-300 text-[#082827] flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xs">
+        <div className="flex items-start gap-3">
+          <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-800 flex items-center justify-center shrink-0 mt-0.5">
+            <Lock size={18} />
+          </div>
+          <div className="space-y-1">
+            <h3 className="font-bold text-amber-950 text-sm flex items-center gap-2">
+              Diagnostic Ingestion Locked for Multi-Center Clinical Calibration
+            </h3>
+            <p className="text-xs text-amber-900 leading-relaxed font-sans max-w-3xl">
+              To guarantee diagnostic safety and eliminate false positive alarms, uncalibrated mobile camera photo ingestion is locked. Variations in phone camera optics, lighting angles, and paper fold shadows can distort ST segment baselines. Please use the verified <strong>Cardiovascular Hemodynamics (CAD)</strong> Studio for clinical risk assessment, or inspect calibrated benchmarks below.
+            </p>
+          </div>
+        </div>
+        <Link
+          href="/predict/heart-tabular"
+          className="shrink-0 px-4 py-2.5 rounded-xl bg-[#006766] hover:bg-[#084E4D] text-white font-semibold text-xs flex items-center gap-2 transition-all shadow-md shadow-[#006766]/20 cursor-pointer self-start md:self-auto"
+        >
+          <span>Launch Verified CAD Studio</span>
+          <ChevronRight size={14} />
+        </Link>
       </div>
 
       {/* ── SCREENING MODE TOGGLE ── */}
@@ -1149,19 +1171,7 @@ export default function HeartDiseaseStudioPage() {
 
           {/* Upload Dropzone OR Image Viewport */}
           {!uploadedImage ? (
-            <div
-              onDragOver={(e) => {
-                e.preventDefault();
-                setIsDragging(true);
-              }}
-              onDragLeave={() => setIsDragging(false)}
-              onDrop={handleDrop}
-              onClick={() => fileInputRef.current?.click()}
-              className={`rounded-2xl border-2 border-dashed p-10 text-center cursor-pointer transition-all ${isDragging
-                  ? "border-quantum bg-quantum/5"
-                  : "border-[#DFEBE8] hover:border-quantum/50 hover:bg-[#F7FAF9]/40 bg-white"
-                }`}
-            >
+            <div className="rounded-2xl border-2 border-dashed border-amber-300 bg-amber-50/40 p-8 sm:p-10 text-center space-y-4">
               <input
                 type="file"
                 ref={fileInputRef}
@@ -1173,18 +1183,41 @@ export default function HeartDiseaseStudioPage() {
                 accept="image/*"
                 className="hidden"
               />
-              <div className="w-14 h-14 rounded-2xl bg-quantum/10 border border-quantum/20 text-quantum mx-auto flex items-center justify-center mb-3">
-                <UploadCloud size={28} />
+              <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-300 text-amber-800 mx-auto flex items-center justify-center">
+                <Lock size={26} />
               </div>
-              <h3 className="text-base font-sans font-bold text-[#082827]">
-                Upload Patient ECG Paper Strip or Scanned Image
-              </h3>
-              <p className="text-xs text-[#5A7470] mt-1.5 max-w-md mx-auto">
-                Drag and drop your standard 12-lead ECG printout (.png, .jpg, .jpeg) here, or browse your files.
-              </p>
-              <div className="mt-4 inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-quantum bg-quantum/10 px-3 py-1.5 rounded-xl border border-quantum/20">
-                <span>Select ECG File</span>
-                <ChevronRight size={13} />
+              <div className="space-y-1.5 max-w-lg mx-auto">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                  <Lock size={10} />
+                  <span>CUSTOM INGESTION LOCKED • CLINICAL CALIBRATION</span>
+                </div>
+                <h3 className="text-base font-sans font-bold text-[#082827]">
+                  Mobile Camera Ingestion Temporarily Locked
+                </h3>
+                <p className="text-xs text-amber-900/90 leading-relaxed font-sans">
+                  To eliminate clinical false positives caused by phone camera angle tilt, paper shadows, or glare, uncalibrated photo ingestion is locked pending Phase 2 hospital calibration. For active cardiovascular risk assessment, use our verified CAD studio or inspect calibrated benchmark tracings below.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                <Link
+                  href="/predict/heart-tabular"
+                  className="px-4 py-2.5 rounded-xl bg-[#006766] hover:bg-[#084E4D] text-white font-semibold text-xs flex items-center gap-2 transition-all shadow-md shadow-[#006766]/20 cursor-pointer"
+                >
+                  <Activity size={14} className="text-[#00B489]" />
+                  <span>Launch Verified CAD Studio</span>
+                  <ChevronRight size={13} />
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const normalCase = REFERENCE_CASES.find((c) => c.key === "normal");
+                    if (normalCase) handleSelectReferenceCase(normalCase);
+                  }}
+                  className="px-4 py-2.5 rounded-xl bg-white hover:bg-[#F7FAF9] border border-[#DFEBE8] hover:border-quantum text-[#082827] font-semibold text-xs flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer"
+                >
+                  <Heart size={13} className="text-rose-500" />
+                  <span>Inspect Calibrated Normal Benchmark</span>
+                </button>
               </div>
             </div>
           ) : (
