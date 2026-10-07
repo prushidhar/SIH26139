@@ -263,5 +263,5 @@ This project is licensed under the **Apache License 2.0**. This allows for permi
 
 ---
 
-*Built by Team QureSight for SIH26139.*
+*Built by Team Confidential for SIH26139.*
 
