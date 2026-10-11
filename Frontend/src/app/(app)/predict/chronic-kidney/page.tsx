@@ -103,6 +103,28 @@ export default function ChronicKidneyStudioPage() {
 
         // Persist screening to patient database
         try {
+          const cConfRaw =
+            data.telemetry.classical_confidence_pct ??
+            (data.telemetry.classical_results?.confidence != null
+              ? data.telemetry.classical_results.confidence * (data.telemetry.classical_results.confidence <= 1 ? 100 : 1)
+              : data.telemetry.classical_results?.probability != null
+                ? Math.abs(data.telemetry.classical_results.probability - 0.5) * 200
+                : data.telemetry.confidence_percentage ?? 97.8);
+          const classicalConfidence = Number(Number(cConfRaw).toFixed(1));
+
+          const topFeature = data.telemetry.feature_attributions?.[0];
+          const topDriver =
+            topFeature?.label ||
+            topFeature?.feature ||
+            "Serum Creatinine / eGFR";
+          const rawImpact =
+            topFeature?.weight ??
+            topFeature?.impact ??
+            0.12;
+          const topDriverImpact = Number(
+            (Math.abs(rawImpact) <= 1 ? Math.abs(rawImpact) * 100 : Math.abs(rawImpact)).toFixed(1)
+          );
+
           await ScreeningService.createScreening({
             id: patientId || `QS-CKD-${Math.floor(1000 + Math.random() * 9000)}`,
             patientName: patientName || "Renal Function Patient",
@@ -116,10 +138,10 @@ export default function ChronicKidneyStudioPage() {
             quantumConfidence: Number(data.telemetry.confidence_percentage ?? 81.2),
             classicalPrediction: isCKD ? "CKD Indicated" : "Normal Kidney Function",
             classicalRiskScore: Number(((data.telemetry.classical_results?.probability ?? 0.15) * 100).toFixed(1)),
-            classicalConfidence: 97.8,
+            classicalConfidence,
             riskLevel: isCKD ? "High" : "Low",
-            topDriver: "Serum Creatinine / eGFR",
-            topDriverImpact: 12.0,
+            topDriver,
+            topDriverImpact,
             consensusStatus: "Concordant",
             inputFeatures: values,
             telemetryJson: data.telemetry,

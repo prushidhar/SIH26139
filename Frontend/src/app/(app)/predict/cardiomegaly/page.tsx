@@ -108,6 +108,33 @@ export default function CardiomegalyStudioPage() {
 
         // Persist screening to patient database
         try {
+          const qConfRaw =
+            data.telemetry.quantum_confidence_pct ??
+            (data.telemetry.quantum_probability != null
+              ? Math.abs(data.telemetry.quantum_probability - 0.5) * 200
+              : data.telemetry.transfer_learning_telemetry?.quantum_auroc != null
+                ? data.telemetry.transfer_learning_telemetry.quantum_auroc * 100
+                : data.telemetry.confidence_percentage ?? 93.0);
+          const quantumConfidence = Number(Number(qConfRaw).toFixed(1));
+
+          const cConfRaw =
+            data.telemetry.classical_confidence_pct ??
+            (data.telemetry.classical_probability != null
+              ? Math.abs(data.telemetry.classical_probability - 0.5) * 200
+              : data.telemetry.transfer_learning_telemetry?.classical_auroc != null
+                ? data.telemetry.transfer_learning_telemetry.classical_auroc * 100
+                : data.telemetry.confidence_percentage ?? 89.2);
+          const classicalConfidence = Number(Number(cConfRaw).toFixed(1));
+
+          const topGrad = data.telemetry.parameter_shift_gradients?.[0] || data.telemetry.quantum_gradients?.[0];
+          const rawImpact =
+            topGrad?.gradient_shift != null
+              ? Math.abs(topGrad.gradient_shift)
+              : Math.abs(ctr - 0.50);
+          const topDriverImpact = Number(
+            (rawImpact <= 1 ? rawImpact * 100 : rawImpact).toFixed(1)
+          );
+
           await ScreeningService.createScreening({
             id: patientId || `QS-CXR-${Math.floor(1000 + Math.random() * 9000)}`,
             patientName: patientName || "CXR Patient Study",
@@ -118,13 +145,13 @@ export default function CardiomegalyStudioPage() {
             cohort: "CheXpert CXR Benchmark (1,200 Radiographs)",
             quantumPrediction: isCardiomegaly ? "Cardiomegaly Detected" : "Normal Cardiac Silhouette",
             quantumRiskScore: Number(((data.telemetry.cardiomegaly_probability ?? 0.3) * 100).toFixed(1)),
-            quantumConfidence: 93.0,
+            quantumConfidence,
             classicalPrediction: isCardiomegaly ? "Cardiomegaly Detected" : "Normal Cardiac Silhouette",
             classicalRiskScore: Number(((data.telemetry.classical_probability ?? 0.28) * 100).toFixed(1)),
-            classicalConfidence: 89.2,
+            classicalConfidence,
             riskLevel: isCardiomegaly ? "High" : "Low",
             topDriver: `Cardiothoracic Ratio (CTR: ${ctr})`,
-            topDriverImpact: 18.2,
+            topDriverImpact,
             consensusStatus: "Concordant",
             inputFeatures: { measured_ctr: ctr },
             telemetryJson: data.telemetry,

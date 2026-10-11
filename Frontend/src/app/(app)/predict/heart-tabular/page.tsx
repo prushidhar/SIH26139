@@ -110,6 +110,38 @@ export default function HeartTabularStudioPage() {
 
         // Persist screening to patient database
         try {
+          const qConfRaw =
+            data.telemetry.quantum_confidence_pct ??
+            (data.telemetry.quantum_results?.confidence != null
+              ? data.telemetry.quantum_results.confidence * (data.telemetry.quantum_results.confidence <= 1 ? 100 : 1)
+              : data.telemetry.confidence_percentage ??
+                (data.telemetry.heart_disease_probability != null
+                  ? Math.abs(data.telemetry.heart_disease_probability - 0.5) * 200
+                  : 91.8));
+          const quantumConfidence = Number(Number(qConfRaw).toFixed(1));
+
+          const cConfRaw =
+            data.telemetry.classical_confidence_pct ??
+            (data.telemetry.classical_results?.confidence != null
+              ? data.telemetry.classical_results.confidence * (data.telemetry.classical_results.confidence <= 1 ? 100 : 1)
+              : data.telemetry.classical_probability != null
+                ? Math.abs(data.telemetry.classical_probability - 0.5) * 200
+                : data.telemetry.confidence_percentage ?? 88.5);
+          const classicalConfidence = Number(Number(cConfRaw).toFixed(1));
+
+          const topFeatEntry = data.telemetry.classical_results?.feature_importances
+            ? Object.entries(data.telemetry.classical_results.feature_importances).sort((a: any, b: any) => b[1] - a[1])[0]
+            : null;
+          const topSensitivity = data.telemetry.quantum_results?.qml_sensitivity_analysis?.[0];
+          const topDriverName =
+            data.telemetry.risk_stratification?.primary_driver ||
+            (topFeatEntry ? `Biomarker: ${topFeatEntry[0].toUpperCase()}` : "Chest Pain / Resting ST Depression");
+          const rawImpact =
+            topFeatEntry?.[1] ??
+            topSensitivity?.sensitivity_gradient ??
+            0.158;
+          const topDriverImpact = Number((rawImpact <= 1 ? rawImpact * 100 : rawImpact).toFixed(1));
+
           await ScreeningService.createScreening({
             id: patientId || `QS-CAD-${Math.floor(1000 + Math.random() * 9000)}`,
             patientName: patientName || "Cardiovascular Patient",
@@ -120,13 +152,13 @@ export default function HeartTabularStudioPage() {
             cohort: "UCI Cleveland Clinic Cohort (303 Cases)",
             quantumPrediction: isCAD ? "Coronary Artery Disease Risk" : "Normal Hemodynamic Baseline",
             quantumRiskScore: Number(((data.telemetry.heart_disease_probability ?? 0.3) * 100).toFixed(1)),
-            quantumConfidence: 91.8,
+            quantumConfidence,
             classicalPrediction: isCAD ? "Coronary Artery Disease Risk" : "Normal Hemodynamic Baseline",
             classicalRiskScore: Number(((data.telemetry.classical_probability ?? 0.28) * 100).toFixed(1)),
-            classicalConfidence: 88.5,
+            classicalConfidence,
             riskLevel: isCAD ? "High" : "Low",
-            topDriver: "Chest Pain / Resting ST Depression",
-            topDriverImpact: 15.8,
+            topDriver: topDriverName,
+            topDriverImpact,
             consensusStatus: "Concordant",
             inputFeatures: values,
             telemetryJson: data.telemetry,

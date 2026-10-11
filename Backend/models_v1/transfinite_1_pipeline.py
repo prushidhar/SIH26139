@@ -81,15 +81,23 @@ class Transfinite1Pipeline:
         self.weights = np.load(weights_path)
         self.weights_hash = hashlib.sha256(self.weights.tobytes()).hexdigest()[:16]
 
+        readout_path = os.path.join(ARTIFACTS_DIR, "vqc_readout.joblib")
+        if os.path.exists(readout_path):
+            self.readout = joblib.load(readout_path)
+        else:
+            self.readout = None
+
     def _execute_statevector_simulation(self, x_q: np.ndarray, morph_index: float = 50.0) -> Tuple[float, float, List[float]]:
         """Executes PennyLane CPU statevector simulation with calibrated clinical readout."""
         if HAVE_PENNYLANE:
             all_expvals = [float(v) for v in vqc_circuit(self.weights, x_q)]
             expval = all_expvals[0]
-            # Multi-wire quantum evidence logit:
-            # Amplifies true quantum state across wires + aligned morphometric evidence
-            z_q = (expval * 30.0) + (float(np.mean(all_expvals)) * 12.0) + ((morph_index - 50.0) * 0.045)
-            p_mal = float(np.clip(1.0 / (1.0 + np.exp(-z_q)), 0.01, 0.99))
+            if self.readout is not None:
+                probs = self.readout.predict_proba(np.array(all_expvals).reshape(1, -1))[0]
+                p_mal = float(np.clip(probs[1], 0.01, 0.99))
+            else:
+                # Aligned quantum convention: p_mal = (1 - expval) / 2
+                p_mal = float(np.clip((1.0 - expval) / 2.0, 0.01, 0.99))
             return p_mal, expval, all_expvals
         else:
             z = float(np.sum(np.sin(x_q) * self.weights[0, :, 0]) + np.sum(np.cos(x_q) * self.weights[1, :, 1]))

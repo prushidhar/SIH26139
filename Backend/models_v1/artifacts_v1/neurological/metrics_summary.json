@@ -1,0 +1,9 @@
+{
+  "module": "neurological",
+  "architecture": "4-qubit RY AngleEmbedding + StronglyEntanglingLayers(2)",
+  "n_samples": 300,
+  "accuracy": 0.9733333333333334,
+  "sensitivity": 0.98,
+  "specificity": 0.9666666666666667,
+  "auroc": 0.9966222222222222
+}

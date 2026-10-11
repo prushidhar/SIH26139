@@ -96,13 +96,36 @@ class DonaireLiverQMLPipeline:
     def __init__(self):
         self.n_qubits = 2
         self.n_layers = 2
-        # Deterministic 12 variational weights (2 layers x 2 qubits x 3 Euler angles)
-        np.random.seed(101)
-        self.weights = np.random.uniform(
-            low=-np.pi, high=np.pi, size=(self.n_layers, self.n_qubits, 3)
-        )
+        
+        artifacts_dir = Path(__file__).resolve().parent / "artifacts_v1" / "liver_ilpd"
+        weights_path = artifacts_dir / "vqc_weights.npy"
+        if weights_path.exists():
+            self.weights = np.load(weights_path)
+        else:
+            np.random.seed(101)
+            self.weights = np.random.uniform(
+                low=-np.pi, high=np.pi, size=(self.n_layers, self.n_qubits, 3)
+            )
+
+        self.scaler = None
+        self.pca = None
+        self.minmax = None
+        self.vqc_readout = None
         self.readout_weights = np.array([0.55, 0.48, 0.35])
         self.readout_bias = -0.12
+
+        if (artifacts_dir / "scaler.joblib").exists():
+            try:
+                import joblib
+                self.scaler = joblib.load(artifacts_dir / "scaler.joblib")
+                self.pca = joblib.load(artifacts_dir / "pca.joblib")
+                self.minmax = joblib.load(artifacts_dir / "minmax.joblib")
+                self.vqc_readout = joblib.load(artifacts_dir / "vqc_readout.joblib")
+                if hasattr(self.vqc_readout, "coef_"):
+                    self.readout_weights = self.vqc_readout.coef_[0]
+                    self.readout_bias = float(self.vqc_readout.intercept_[0])
+            except Exception as e:
+                print(f"[Donaire Liver Pipeline] Notice: using fallback preprocessors: {e}")
 
     def _preprocess_and_project(self, raw_data: Dict[str, Any]) -> Tuple[np.ndarray, np.ndarray]:
         """Scales raw inputs and projects into 2 quantum rotation angles."""
@@ -115,7 +138,14 @@ class DonaireLiverQMLPipeline:
             vec.append(z_score)
 
         x_std = np.array(vec, dtype=np.float64)
-        # 2-component PCA projection
+        if self.scaler is not None and self.pca is not None and self.minmax is not None:
+            raw_v = [float(raw_data.get(k, self.REFERENCE_SCALER[k][0])) for k in self.FEATURE_KEYS]
+            x_s = self.scaler.transform([raw_v])
+            x_p = self.pca.transform(x_s)
+            angles = self.minmax.transform(x_p)[0]
+            return x_std, angles
+
+        # 2-component PCA projection fallback
         pc_latents = self.PCA_COMPONENTS @ x_std
         # Map to [-pi, pi]
         angles = np.clip(pc_latents * (np.pi / 3.0), -np.pi, np.pi)
@@ -143,9 +173,13 @@ class DonaireLiverQMLPipeline:
             z_arr = np.array([float(np.cos(angles[0])), float(np.cos(angles[1])), float(np.cos(angles[0] + angles[1]))])
 
         # 3. Readout & Probability
-        q_logit = float(np.dot(z_arr, self.readout_weights) + self.readout_bias)
-        q_prob = 1.0 / (1.0 + np.exp(-q_logit))
-        q_prob = float(np.clip(q_prob, 0.05, 0.95))
+        if self.vqc_readout is not None:
+            q_prob = float(self.vqc_readout.predict_proba([z_arr])[0, 1])
+            q_prob = float(np.clip(q_prob, 0.05, 0.95))
+        else:
+            q_logit = float(np.dot(z_arr, self.readout_weights) + self.readout_bias)
+            q_prob = 1.0 / (1.0 + np.exp(-q_logit))
+            q_prob = float(np.clip(q_prob, 0.05, 0.95))
         q_latency_ms = round((time.perf_counter() - t0) * 1000.0, 2)
 
         # 4. De Ritis Ratio (AST / ALT) & Hepatic Enzyme Diagnostics

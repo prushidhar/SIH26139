@@ -111,14 +111,35 @@ COMPONENT_CLINICAL_MAP = [
 ]
 
 
+import joblib
+
+NEURO_ARTIFACTS_DIR = Path(__file__).resolve().parent / "artifacts_v1" / "neurological"
+
 class NeurologicalPipeline:
     def __init__(self):
-        # Deterministic trained variational circuit weights (2 layers, 4 qubits, 3 angles)
-        np.random.seed(42)
-        self._vqc_weights = np.array([
-            [[0.42, -0.65, 0.18], [0.88, 0.24, -0.51], [-0.33, 0.77, 0.12], [0.15, -0.44, 0.62]],
-            [[-0.22, 0.58, -0.31], [0.47, -0.19, 0.83], [0.65, 0.39, -0.27], [-0.52, 0.18, 0.41]]
-        ])
+        # Load trained variational circuit weights (2 layers, 4 qubits, 3 angles)
+        weights_path = NEURO_ARTIFACTS_DIR / "vqc_weights.npy"
+        if weights_path.exists():
+            self._vqc_weights = np.load(weights_path)
+        else:
+            np.random.seed(42)
+            self._vqc_weights = np.array([
+                [[0.42, -0.65, 0.18], [0.88, 0.24, -0.51], [-0.33, 0.77, 0.12], [0.15, -0.44, 0.62]],
+                [[-0.22, 0.58, -0.31], [0.47, -0.19, 0.83], [0.65, 0.39, -0.27], [-0.52, 0.18, 0.41]]
+            ])
+
+        self.scaler = None
+        self.pca = None
+        self.minmax = None
+        self.vqc_readout = None
+        if (NEURO_ARTIFACTS_DIR / "scaler.joblib").exists():
+            try:
+                self.scaler = joblib.load(NEURO_ARTIFACTS_DIR / "scaler.joblib")
+                self.pca = joblib.load(NEURO_ARTIFACTS_DIR / "pca.joblib")
+                self.minmax = joblib.load(NEURO_ARTIFACTS_DIR / "minmax.joblib")
+                self.vqc_readout = joblib.load(NEURO_ARTIFACTS_DIR / "vqc_readout.joblib")
+            except Exception as e:
+                print(f"[Neurological Pipeline] Notice: using fallback preprocessors: {e}")
 
     def predict(self, raw_input: Dict[str, Any]) -> Dict[str, Any]:
         t0 = time.perf_counter()
@@ -175,19 +196,29 @@ class NeurologicalPipeline:
 
         # 2. Quantum VQC Inference (PennyLane 4-Qubit Circuit)
         t_q0 = time.perf_counter()
-        # Map 8 features into 4 orthogonal angles via clinical groupings
-        angle_0 = float(np.clip((features["eeg_alpha_beta_ratio"] - 2.0) * -1.2 + (features["eeg_theta_power"] - 25.0) * 0.05, -math.pi, math.pi))
-        angle_1 = float(np.clip((features["motor_tremor_hz"] - 2.0) * 0.45, -math.pi, math.pi))
-        angle_2 = float(np.clip((features["speech_jitter_pct"] - 0.5) * 2.0 + (features["speech_shimmer_db"] - 0.2) * 2.5, -math.pi, math.pi))
-        angle_3 = float(np.clip((30.0 - features["cognitive_mmse"]) * 0.25 + (features["reaction_time_ms"] - 250.0) * 0.006, -math.pi, math.pi))
-        angles = [angle_0, angle_1, angle_2, angle_3]
+        # Map 8 features into 4 orthogonal angles [-pi, pi]
+        if self.scaler is not None and self.pca is not None and self.minmax is not None:
+            feat_arr = [features[name] for name in FEATURE_NAMES]
+            x_s = self.scaler.transform([feat_arr])
+            x_p = self.pca.transform(x_s)
+            angles = self.minmax.transform(x_p)[0].tolist()
+        else:
+            angle_0 = float(np.clip((features["eeg_alpha_beta_ratio"] - 2.0) * -1.2 + (features["eeg_theta_power"] - 25.0) * 0.05, -math.pi, math.pi))
+            angle_1 = float(np.clip((features["motor_tremor_hz"] - 2.0) * 0.45, -math.pi, math.pi))
+            angle_2 = float(np.clip((features["speech_jitter_pct"] - 0.5) * 2.0 + (features["speech_shimmer_db"] - 0.2) * 2.5, -math.pi, math.pi))
+            angle_3 = float(np.clip((30.0 - features["cognitive_mmse"]) * 0.25 + (features["reaction_time_ms"] - 250.0) * 0.006, -math.pi, math.pi))
+            angles = [angle_0, angle_1, angle_2, angle_3]
 
         if HAVE_PENNYLANE:
             expvals = neuro_vqc_circuit(self._vqc_weights, angles)
             expvals_float = [float(v) for v in expvals]
-            # Calibrated sigmoid from PauliZ expectations
-            z_mean = float(np.mean(expvals_float))
-            p_quantum = float(np.clip(1.0 / (1.0 + np.exp(2.8 * z_mean)), 0.02, 0.98))
+            if self.vqc_readout is not None:
+                p_quantum = float(self.vqc_readout.predict_proba([expvals_float])[0, 1])
+                p_quantum = float(np.clip(p_quantum, 0.02, 0.98))
+            else:
+                # Calibrated sigmoid from PauliZ expectations
+                z_mean = float(np.mean(expvals_float))
+                p_quantum = float(np.clip(1.0 / (1.0 + np.exp(2.8 * z_mean)), 0.02, 0.98))
 
             # Exact Parameter-Shift Analytic Quantum Gradients: (f(x + pi/2) - f(x - pi/2)) / 2
             sensitivities = []

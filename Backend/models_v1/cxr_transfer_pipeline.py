@@ -64,14 +64,36 @@ class CXRCardiomegalyQMLPipeline:
     def __init__(self):
         self.n_qubits = 6
         self.n_layers = 2
-        # Deterministic variational weights trained on CheXpert cohort
-        np.random.seed(42)
-        self.weights = np.random.uniform(
-            low=-np.pi, high=np.pi, size=(self.n_layers, self.n_qubits, 3)
-        )
-        # Calibrated readout head weights mapping 6 Pauli-Z observables to logit
+        
+        artifacts_dir = Path(__file__).resolve().parent / "artifacts_v1" / "cxr"
+        weights_path = artifacts_dir / "vqc_weights.npy"
+        if weights_path.exists():
+            self.weights = np.load(weights_path)
+        else:
+            np.random.seed(42)
+            self.weights = np.random.uniform(
+                low=-np.pi, high=np.pi, size=(self.n_layers, self.n_qubits, 3)
+            )
+
+        self.scaler = None
+        self.pca = None
+        self.minmax = None
+        self.vqc_readout = None
         self.readout_weights = np.array([0.42, 0.38, 0.45, 0.31, 0.29, 0.36])
         self.readout_bias = -0.15
+
+        if (artifacts_dir / "scaler.joblib").exists():
+            try:
+                import joblib
+                self.scaler = joblib.load(artifacts_dir / "scaler.joblib")
+                self.pca = joblib.load(artifacts_dir / "pca.joblib")
+                self.minmax = joblib.load(artifacts_dir / "minmax.joblib")
+                self.vqc_readout = joblib.load(artifacts_dir / "vqc_readout.joblib")
+                if hasattr(self.vqc_readout, "coef_"):
+                    self.readout_weights = self.vqc_readout.coef_[0]
+                    self.readout_bias = float(self.vqc_readout.intercept_[0])
+            except Exception as e:
+                print(f"[CXR Pipeline] Notice: using fallback preprocessors: {e}")
 
         # DenseNet-121 1024 -> 6 latent projection matrix (orthonormalized)
         rng = np.random.RandomState(1337)
@@ -94,7 +116,12 @@ class CXRCardiomegalyQMLPipeline:
                 feature_vector = padded
             raw_latents = feature_vector[:1024] @ self.proj_matrix
 
-        # Bounded angle mapping
+        if self.scaler is not None and self.pca is not None and self.minmax is not None:
+            x_s = self.scaler.transform([raw_latents[:6]])
+            x_p = self.pca.transform(x_s)
+            return self.minmax.transform(x_p)[0]
+
+        # Bounded angle mapping fallback
         normed = (raw_latents - np.mean(raw_latents)) / (np.std(raw_latents) + 1e-6)
         angles = np.clip(normed * (np.pi / 2.5), -np.pi, np.pi)
         return angles
@@ -132,9 +159,13 @@ class CXRCardiomegalyQMLPipeline:
             z_array = np.cos(angles) * 0.85
 
         # 3. Readout & Calibrated Malignancy
-        quantum_logit = float(np.dot(z_array, self.readout_weights) + self.readout_bias)
-        quantum_prob = 1.0 / (1.0 + np.exp(-quantum_logit))
-        quantum_prob = float(np.clip(quantum_prob, 0.05, 0.95))
+        if self.vqc_readout is not None:
+            quantum_prob = float(self.vqc_readout.predict_proba([z_array])[0, 1])
+            quantum_prob = float(np.clip(quantum_prob, 0.05, 0.95))
+        else:
+            quantum_logit = float(np.dot(z_array, self.readout_weights) + self.readout_bias)
+            quantum_prob = 1.0 / (1.0 + np.exp(-quantum_logit))
+            quantum_prob = float(np.clip(quantum_prob, 0.05, 0.95))
         q_time_ms = round((time.perf_counter() - t0) * 1000.0, 2)
 
         # 4. Cardiothoracic Ratio (CTR) Anatomical Measurement & 4-Tier ACR Staging

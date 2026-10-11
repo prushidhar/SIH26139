@@ -22,7 +22,7 @@ import os
 import sys
 import math
 import time
-from typing import Dict, Any, List, Tuple
+from typing import Dict, Any, List, Tuple, Optional
 import numpy as np
 
 # Add parent directory for imports
@@ -97,6 +97,11 @@ PCA_COMPONENTS = np.array([
 ])
 
 
+from pathlib import Path
+import joblib
+
+HEPATITIS_ARTIFACTS_DIR = Path(__file__).resolve().parent / "artifacts_v1" / "hepatitis"
+
 class HepatitisCPipeline:
     """Production Hepatitis C & Liver Fibrosis Clinical Pipeline"""
 
@@ -106,13 +111,29 @@ class HepatitisCPipeline:
         self.n_qubits = 4
         self.n_layers = 3
 
-        # Calibrated variational weights (3 layers, 4 qubits, 2 rotations [RY, RZ])
-        # Seeded from optimized 50-epoch validation
-        self.weights = np.array([
-            [[0.482, -0.312], [0.891, 0.245], [-0.512, 0.721], [0.612, -0.418]],
-            [[-0.324, 0.651], [0.418, -0.512], [0.732, 0.189], [-0.218, 0.841]],
-            [[0.589, 0.124], [-0.712, 0.389], [0.345, -0.612], [0.812, 0.298]],
-        ], dtype=np.float64)
+        # Load calibrated variational weights from disk or fallback
+        weights_path = HEPATITIS_ARTIFACTS_DIR / "vqc_weights.npy"
+        if weights_path.exists():
+            self.weights = np.load(weights_path)
+        else:
+            self.weights = np.array([
+                [[0.482, -0.312], [0.891, 0.245], [-0.512, 0.721], [0.612, -0.418]],
+                [[-0.324, 0.651], [0.418, -0.512], [0.732, 0.189], [-0.218, 0.841]],
+                [[0.589, 0.124], [-0.712, 0.389], [0.345, -0.612], [0.812, 0.298]],
+            ], dtype=np.float64)
+
+        self.scaler = None
+        self.pca = None
+        self.minmax = None
+        self.vqc_readout = None
+        if (HEPATITIS_ARTIFACTS_DIR / "scaler.joblib").exists():
+            try:
+                self.scaler = joblib.load(HEPATITIS_ARTIFACTS_DIR / "scaler.joblib")
+                self.pca = joblib.load(HEPATITIS_ARTIFACTS_DIR / "pca.joblib")
+                self.minmax = joblib.load(HEPATITIS_ARTIFACTS_DIR / "minmax.joblib")
+                self.vqc_readout = joblib.load(HEPATITIS_ARTIFACTS_DIR / "vqc_readout.joblib")
+            except Exception as e:
+                print(f"[Hepatitis Pipeline] Notice: using fallback preprocessors: {e}")
 
     def _normalize_input(self, data: Dict[str, Any]) -> np.ndarray:
         """Converts raw clinical biomarkers into a standardized 12-dimensional vector."""
@@ -131,8 +152,23 @@ class HepatitisCPipeline:
             vec.append((val - mean) / (std + 1e-7))
         return np.array(vec, dtype=np.float64)
 
-    def _project_to_quantum_angles(self, z_vec: np.ndarray) -> np.ndarray:
-        """Projects 12D standardized features into 4 bounded quantum angles [-pi, pi]."""
+    def _project_to_quantum_angles(self, z_vec: np.ndarray, raw_data: Optional[Dict[str, Any]] = None) -> np.ndarray:
+        """Projects standardized features into 4 bounded quantum angles [-pi, pi]."""
+        if self.scaler is not None and self.pca is not None and self.minmax is not None and raw_data is not None:
+            raw_vec = []
+            for feat in CANONICAL_HCV_FEATURES:
+                val = raw_data.get(feat)
+                if val is None:
+                    val = raw_data.get(feat.lower())
+                    if val is None and feat == "Sex_m":
+                        sex_str = str(raw_data.get("Sex", raw_data.get("sex", "m"))).lower()
+                        val = 1.0 if sex_str.startswith("m") or sex_str == "1" else 0.0
+                val = float(val) if val is not None else FEATURE_STATS[feat][0]
+                raw_vec.append(val)
+            x_s = self.scaler.transform([raw_vec])
+            x_p = self.pca.transform(x_s)
+            return self.minmax.transform(x_p)[0]
+
         pca_proj = np.dot(PCA_COMPONENTS, z_vec)  # (4,)
         # Bounded tanh angle mapping
         angles = np.pi * np.tanh(pca_proj * 0.45)
@@ -175,11 +211,15 @@ class HepatitisCPipeline:
         """
         if HAVE_PENNYLANE:
             expvals = [float(v) for v in hcv_vqc_circuit(self.weights, angles)]
-            # Readout mapping: PauliZ expectation values in [-1, 1]
-            # Negative expectation value indicates excited state (|1>), mapped to positive disease risk
-            z_mean = float(np.mean(expvals))
-            p_quantum = float(1.0 / (1.0 + np.exp(z_mean * 3.8)))
-            p_quantum = float(np.clip(p_quantum, 0.01, 0.99))
+            if self.vqc_readout is not None:
+                p_quantum = float(self.vqc_readout.predict_proba([expvals])[0, 1])
+                p_quantum = float(np.clip(p_quantum, 0.01, 0.99))
+            else:
+                # Readout mapping: PauliZ expectation values in [-1, 1]
+                # Negative expectation value indicates excited state (|1>), mapped to positive disease risk
+                z_mean = float(np.mean(expvals))
+                p_quantum = float(1.0 / (1.0 + np.exp(z_mean * 3.8)))
+                p_quantum = float(np.clip(p_quantum, 0.01, 0.99))
 
             # Genuine QML Sensitivity Analysis:
             # Exact Analytic Parameter-Shift Rule: (f(x + pi/2) - f(x - pi/2)) / 2
@@ -229,7 +269,7 @@ class HepatitisCPipeline:
         """
         t0 = time.time()
         z_vec = self._normalize_input(raw_input)
-        angles = self._project_to_quantum_angles(z_vec)
+        angles = self._project_to_quantum_angles(z_vec, raw_input)
 
         # Extract key raw biomarkers for clinical score calculation
         ast_val = float(raw_input.get("AST", 34.7))

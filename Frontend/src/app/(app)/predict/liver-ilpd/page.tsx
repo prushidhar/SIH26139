@@ -110,6 +110,28 @@ export default function LiverILPDStudioPage() {
 
         // Save screening to local & remote history so it displays in Screening History & Chatbot
         try {
+          const cConfRaw =
+            data.telemetry.classical_confidence_pct ??
+            (data.telemetry.classical_results?.confidence != null
+              ? data.telemetry.classical_results.confidence * (data.telemetry.classical_results.confidence <= 1 ? 100 : 1)
+              : data.telemetry.classical_probability != null
+                ? Math.abs(data.telemetry.classical_probability - 0.5) * 200
+                : data.telemetry.confidence_percentage ?? 74.2);
+          const classicalConfidence = Number(Number(cConfRaw).toFixed(1));
+
+          const topGradient = data.telemetry.latent_gradients?.[0];
+          const topDriver =
+            topGradient?.latent_axis ||
+            data.telemetry.de_ritis_clinical_marker?.interpretation ||
+            "Total Bilirubin / Transaminase";
+          const rawImpact =
+            topGradient?.sensitivity ??
+            topGradient?.gradient_magnitude ??
+            0.142;
+          const topDriverImpact = Number(
+            (Math.abs(rawImpact) <= 1 ? Math.abs(rawImpact) * 100 : Math.abs(rawImpact)).toFixed(1)
+          );
+
           await ScreeningService.createScreening({
             id: patientId || `QS-LIV-${Math.floor(1000 + Math.random() * 9000)}`,
             patientName: patientName || "Hepatic Panel Patient",
@@ -123,10 +145,10 @@ export default function LiverILPDStudioPage() {
             quantumConfidence: Number(((data.telemetry.quantum_probability ?? 0.73) * 100).toFixed(1)),
             classicalPrediction: isElevated ? "Hepatic Dysfunction" : "Normal Liver Biomarkers",
             classicalRiskScore: Number(((data.telemetry.classical_probability ?? 0.48) * 100).toFixed(1)),
-            classicalConfidence: 74.2,
+            classicalConfidence,
             riskLevel: isElevated ? "High" : "Low",
-            topDriver: "Total Bilirubin / Transaminase",
-            topDriverImpact: 14.2,
+            topDriver,
+            topDriverImpact,
             consensusStatus: "Concordant",
             inputFeatures: values,
             telemetryJson: data.telemetry,

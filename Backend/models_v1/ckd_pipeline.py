@@ -59,15 +59,24 @@ except ImportError:
     HAVE_PENNYLANE = False
 
 
+import joblib
+
+# Artifacts Directory
+CKD_ARTIFACTS_DIR = Path(__file__).resolve().parent / "artifacts_v1" / "ckd"
+
 # Empirical Normalization Means & Scales (Derived from UCI 400-patient CKD Cohort)
 CKD_MEANS = np.array([51.48, 76.47, 1.017, 1.017, 148.04, 57.43, 3.07, 12.53], dtype=np.float32)
 CKD_STDS  = np.array([17.17, 13.68, 0.0057, 1.35,  79.28, 50.50, 5.74,  2.91], dtype=np.float32)
 
-# Calibrated Variational Weights (2 layers x 4 qubits x 3 Euler angles = 24 parameters)
-CALIBRATED_WEIGHTS = np.array([
-    [[ 0.412, -0.285,  0.841], [ 0.198,  0.512, -0.634], [-0.341,  0.722,  0.119], [ 0.655, -0.411,  0.302]],
-    [[-0.201,  0.449, -0.518], [ 0.732, -0.193,  0.428], [ 0.312,  0.641, -0.288], [-0.514,  0.339,  0.691]],
-], dtype=np.float64)
+# Load Trained Variational Weights (2 layers x 4 qubits x 3 Euler angles = 24 parameters)
+VQC_WEIGHTS_PATH = CKD_ARTIFACTS_DIR / "vqc_weights.npy"
+if VQC_WEIGHTS_PATH.exists():
+    CALIBRATED_WEIGHTS = np.load(VQC_WEIGHTS_PATH)
+else:
+    CALIBRATED_WEIGHTS = np.array([
+        [[ 0.412, -0.285,  0.841], [ 0.198,  0.512, -0.634], [-0.341,  0.722,  0.119], [ 0.655, -0.411,  0.302]],
+        [[-0.201,  0.449, -0.518], [ 0.732, -0.193,  0.428], [ 0.312,  0.641, -0.288], [-0.514,  0.339,  0.691]],
+    ], dtype=np.float64)
 
 # Classical Logistic Weights for Baseline Ensemble
 CLASSICAL_LOGISTIC_WEIGHTS = np.array([0.18, 0.22, -0.45, 0.85, 0.31, 0.62, 1.15, -0.78], dtype=np.float32)
@@ -90,6 +99,20 @@ class ChronicKidneyPipeline:
             "serum_creatinine",
             "hemoglobin"
         ]
+        self.scaler = None
+        self.pca = None
+        self.minmax = None
+        self.vqc_readout = None
+        
+        # Load artifacts if available
+        if (CKD_ARTIFACTS_DIR / "scaler.joblib").exists():
+            try:
+                self.scaler = joblib.load(CKD_ARTIFACTS_DIR / "scaler.joblib")
+                self.pca = joblib.load(CKD_ARTIFACTS_DIR / "pca.joblib")
+                self.minmax = joblib.load(CKD_ARTIFACTS_DIR / "minmax.joblib")
+                self.vqc_readout = joblib.load(CKD_ARTIFACTS_DIR / "vqc_readout.joblib")
+            except Exception as e:
+                print(f"[CKD Pipeline] Notice: using fallback preprocessors: {e}")
 
     def _calculate_egfr(self, age: float, serum_creatinine: float, is_female: bool = False) -> float:
         """
@@ -175,19 +198,27 @@ class ChronicKidneyPipeline:
 
         # 4. Quantum VQC Inference (PennyLane 4-Qubit Circuit)
         t_q0 = time.perf_counter()
-        # Compress 8 features into 4 rotation angles [-pi, pi] via orthogonal pair folding
-        angles = np.zeros(4, dtype=np.float64)
-        angles[0] = np.clip((normalized[0] * 0.4 + normalized[1] * 0.6) * 0.75, -np.pi, np.pi) # Vascular (Age+BP)
-        angles[1] = np.clip((normalized[2] * -0.6 + normalized[3] * 0.8) * 0.75, -np.pi, np.pi) # Glomerular (SG+Albumin)
-        angles[2] = np.clip((normalized[4] * 0.5 + normalized[5] * 0.7) * 0.75, -np.pi, np.pi) # Metabolic (BGR+Urea)
-        angles[3] = np.clip((normalized[6] * 0.8 - normalized[7] * 0.6) * 0.75, -np.pi, np.pi) # Filtration (Creatinine-Hemo)
+        # Map 8 features into 4 rotation angles [-pi, pi]
+        if self.scaler is not None and self.pca is not None and self.minmax is not None:
+            x_s = self.scaler.transform([feature_vector])
+            x_p = self.pca.transform(x_s)
+            angles = self.minmax.transform(x_p)[0]
+        else:
+            angles = np.zeros(4, dtype=np.float64)
+            angles[0] = np.clip((normalized[0] * 0.4 + normalized[1] * 0.6) * 0.75, -np.pi, np.pi) # Vascular (Age+BP)
+            angles[1] = np.clip((normalized[2] * -0.6 + normalized[3] * 0.8) * 0.75, -np.pi, np.pi) # Glomerular (SG+Albumin)
+            angles[2] = np.clip((normalized[4] * 0.5 + normalized[5] * 0.7) * 0.75, -np.pi, np.pi) # Metabolic (BGR+Urea)
+            angles[3] = np.clip((normalized[6] * 0.8 - normalized[7] * 0.6) * 0.75, -np.pi, np.pi) # Filtration (Creatinine-Hemo)
 
         if HAVE_PENNYLANE:
             expvals = ckd_4q_circuit(CALIBRATED_WEIGHTS, angles)
             expvals_float = [float(e) for e in expvals]
-            # Parity and expectation combination
-            q_score = (1.0 - np.mean(expvals_float)) / 2.0
-            p_quantum = float(np.clip(q_score, 0.01, 0.99))
+            if self.vqc_readout is not None:
+                p_quantum = float(self.vqc_readout.predict_proba([expvals_float])[0, 1])
+                p_quantum = float(np.clip(p_quantum, 0.01, 0.99))
+            else:
+                q_score = (1.0 - np.mean(expvals_float)) / 2.0
+                p_quantum = float(np.clip(q_score, 0.01, 0.99))
         else:
             expvals_float = [float(np.cos(a)) for a in angles]
             p_quantum = float(p_classical)

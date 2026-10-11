@@ -104,6 +104,35 @@ export default function NeurologicalStudioPage() {
 
         // Persist screening to patient database
         try {
+          const qConfRaw =
+            data.telemetry.quantum_confidence_pct ??
+            (data.telemetry.quantum_probability != null
+              ? Math.abs(data.telemetry.quantum_probability - 0.5) * 200
+              : data.telemetry.confidence_percentage ?? 92.4);
+          const quantumConfidence = Number(Number(qConfRaw).toFixed(1));
+
+          const cConfRaw =
+            data.telemetry.classical_confidence_pct ??
+            (data.telemetry.classical_probability != null
+              ? Math.abs(data.telemetry.classical_probability - 0.5) * 200
+              : data.telemetry.confidence_percentage ?? 89.6);
+          const classicalConfidence = Number(Number(cConfRaw).toFixed(1));
+
+          const topFeature = data.telemetry.feature_attributions?.[0];
+          const topSensitivity = data.telemetry.sensitivities?.[0];
+          const topDriver =
+            topFeature?.label ||
+            topSensitivity?.component ||
+            topSensitivity?.marker ||
+            "EEG Alpha/Beta Dynamics";
+          const rawImpact =
+            topFeature?.weight ??
+            topSensitivity?.sensitivity_gradient ??
+            0.165;
+          const topDriverImpact = Number(
+            (Math.abs(rawImpact) <= 1 ? Math.abs(rawImpact) * 100 : Math.abs(rawImpact)).toFixed(1)
+          );
+
           await ScreeningService.createScreening({
             id: patientId || `QS-NEU-${Math.floor(1000 + Math.random() * 9000)}`,
             patientId: patientId || `QS-NEU-${Math.floor(1000 + Math.random() * 9000)}`,
@@ -115,13 +144,13 @@ export default function NeurologicalStudioPage() {
             cohort: "EEG Spectral & Psychomotor Cohort",
             quantumPrediction: isHigh ? "High Neurological Risk" : "Physiological Baseline",
             quantumRiskScore: Number((prob * 100).toFixed(1)),
-            quantumConfidence: 92.4,
+            quantumConfidence,
             classicalPrediction: isHigh ? "High Neurological Risk" : "Physiological Baseline",
             classicalRiskScore: Number((prob * 100).toFixed(1)),
-            classicalConfidence: 89.6,
+            classicalConfidence,
             riskLevel: isHigh ? "High" : "Low",
-            topDriver: "EEG Alpha/Beta Dynamics",
-            topDriverImpact: 16.5,
+            topDriver,
+            topDriverImpact,
             consensusStatus: "Concordant",
             inputFeatures: values,
             telemetryJson: data.telemetry,

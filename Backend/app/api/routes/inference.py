@@ -230,14 +230,14 @@ class LightweightCardiacEngine:
 
 def get_cardiac_engine():
     if "cardiac" not in _pipeline_cache:
-        import os
-        if os.environ.get("USE_FULL_PYTORCH_CARDIAC", "false").lower() == "true":
-            try:
-                from models_v1.heart_v2.cardiac_engine_v2 import get_cardiac_engine as _gce
-                _pipeline_cache["cardiac"] = _gce()
-            except Exception:
-                _pipeline_cache["cardiac"] = LightweightCardiacEngine()
-        else:
+        import logging
+        logger = logging.getLogger("quresight.cardiac")
+        try:
+            from models_v1.heart_v2.cardiac_engine_v2 import get_cardiac_engine as _gce
+            _pipeline_cache["cardiac"] = _gce()
+            logger.info("Loaded CardiacDualEngineV2 (real trained hybrid quantum model)")
+        except Exception as e:
+            logger.warning(f"CardiacDualEngineV2 failed to load ({e}), falling back to LightweightCardiacEngine")
             _pipeline_cache["cardiac"] = LightweightCardiacEngine()
     return _pipeline_cache["cardiac"]
 

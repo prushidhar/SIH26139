@@ -1,0 +1,9 @@
+{
+  "module": "ckd",
+  "architecture": "4-qubit RX+RZ + StronglyEntanglingLayers(2)",
+  "n_samples": 350,
+  "accuracy": 0.9514285714285714,
+  "sensitivity": 0.9428571428571428,
+  "specificity": 0.96,
+  "auroc": 0.9878204081632653
+}

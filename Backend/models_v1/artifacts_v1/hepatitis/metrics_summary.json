@@ -1,0 +1,9 @@
+{
+  "module": "hepatitis",
+  "architecture": "4-qubit RY+RZ Ring-CNOT + 3 Layers",
+  "n_samples": 615,
+  "accuracy": 0.9333333333333333,
+  "sensitivity": 0.56,
+  "specificity": 0.9851851851851852,
+  "auroc": 0.9001481481481481
+}

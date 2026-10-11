@@ -1,0 +1,9 @@
+{
+  "module": "liver_ilpd",
+  "architecture": "2-qubit Minimal VQC (StronglyEntangling 2 layers)",
+  "n_samples": 583,
+  "accuracy": 0.8902229845626072,
+  "sensitivity": 0.16901408450704225,
+  "specificity": 0.990234375,
+  "auroc": 0.7354478433098592
+}

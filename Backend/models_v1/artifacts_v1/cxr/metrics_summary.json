@@ -1,0 +1,9 @@
+{
+  "module": "cxr",
+  "architecture": "6-qubit RX AngleEmbedding + StronglyEntanglingLayers(2)",
+  "n_samples": 350,
+  "accuracy": 0.7514285714285714,
+  "sensitivity": 0.7371428571428571,
+  "specificity": 0.7657142857142857,
+  "auroc": 0.8212571428571429
+}

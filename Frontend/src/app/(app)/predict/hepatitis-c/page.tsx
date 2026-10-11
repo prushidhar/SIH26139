@@ -220,6 +220,23 @@ export default function HepatitisStudioPage() {
 
         // Persist screening to patient database
         try {
+          const cConfRaw =
+            data.telemetry.classical_confidence_pct ??
+            (data.telemetry.classical_results?.confidence != null
+              ? data.telemetry.classical_results.confidence * (data.telemetry.classical_results.confidence <= 1 ? 100 : 1)
+              : data.telemetry.classical_probability != null
+                ? Math.abs(data.telemetry.classical_probability - 0.5) * 200
+                : 96.6);
+          const classicalConfidence = Number(Number(cConfRaw).toFixed(1));
+
+          const rawDriverImpact =
+            data.telemetry.classical_results?.top_driver_impact ??
+            data.telemetry.quantum_results?.qml_sensitivity_analysis?.[0]?.sensitivity_gradient ??
+            0.145;
+          const topDriverImpact = Number(
+            (Math.abs(rawDriverImpact) <= 1 ? Math.abs(rawDriverImpact) * 100 : Math.abs(rawDriverImpact)).toFixed(1)
+          );
+
           await ScreeningService.createScreening({
             id: patientId || `QS-HCV-${Math.floor(1000 + Math.random() * 9000)}`,
             patientName: patientName || "Hepatology Patient",
@@ -233,10 +250,10 @@ export default function HepatitisStudioPage() {
             quantumConfidence: Number(((data.telemetry.quantum_results?.confidence ?? 0.8) * 100).toFixed(1)),
             classicalPrediction: data.telemetry.classical_results?.prediction || (isDisease ? "Fibrosis Indicated" : "Normal Liver Panel"),
             classicalRiskScore: Number(((data.telemetry.classical_results?.probability ?? 0.1) * 100).toFixed(1)),
-            classicalConfidence: 96.6,
+            classicalConfidence,
             riskLevel: isDisease ? "High" : "Low",
-            topDriver: data.telemetry.clinical_summary?.top_classical_driver || "AST / ALT Ratio",
-            topDriverImpact: 14.5,
+            topDriver: data.telemetry.classical_results?.top_driver || data.telemetry.clinical_summary?.top_classical_driver || "AST / ALT Ratio",
+            topDriverImpact,
             consensusStatus: data.telemetry.router_decision?.consensus_status || "Concordant",
             inputFeatures: { ...values, Sex: sex === "m" ? 1 : 0 },
             telemetryJson: data.telemetry,
